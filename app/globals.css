@@ -1,0 +1,185 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --surface: 7 9 22;
+  --surface-2: 15 17 36;
+  --ink: 248 250 255;
+  --ink-soft: 158 165 198;
+  --accent: 147 97 255;
+  --accent-2: 45 212 224;
+  --accent-warm: 251 191 36;
+  --accent-coral: 251 113 133;
+  --accent-magenta: 232 121 249;
+  --accent-dim: 196 181 255;
+  --glow: 167 139 250;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6.5rem;
+}
+
+body {
+  @apply min-h-screen antialiased;
+  color: rgb(var(--ink));
+  background-color: rgb(var(--surface));
+  background-image:
+    radial-gradient(1100px 520px at 82% -6%, rgb(147 97 255 / 0.26), transparent 52%),
+    radial-gradient(880px 480px at 6% 10%, rgb(45 212 224 / 0.16), transparent 48%),
+    radial-gradient(760px 420px at 70% 98%, rgb(232 121 249 / 0.12), transparent 46%),
+    radial-gradient(600px 360px at 18% 88%, rgb(251 191 36 / 0.06), transparent 50%),
+    linear-gradient(165deg, rgb(6 8 20) 0%, rgb(10 12 28) 38%, rgb(8 10 22) 100%);
+}
+
+/* subtle grid — common on modern SaaS marketing pages */
+.grid-view {
+  background-image:
+    linear-gradient(rgb(255 255 255 / 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, black 20%, transparent 100%);
+}
+
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* subtle grain */
+body::before {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+.glass {
+  @apply border border-white/[0.1] bg-white/[0.045] shadow-[0_0_0_1px_rgba(255,255,255,0.06)_inset] backdrop-blur-xl;
+}
+
+.card-glow {
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.08) inset,
+    0 28px 90px -36px rgb(147 97 255 / 0.38),
+    0 14px 48px -28px rgb(45 212 224 / 0.2),
+    0 10px 36px -22px rgb(232 121 249 / 0.12);
+}
+
+/* Hero & marketing panels — warmer rim */
+.panel-hero {
+  @apply relative overflow-hidden rounded-[1.75rem] border border-white/[0.12] bg-gradient-to-br from-white/[0.09] via-white/[0.03] to-transparent p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.06)_inset] backdrop-blur-xl sm:p-8;
+}
+
+.panel-hero::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgb(var(--accent) / 0.48),
+    rgb(var(--accent-2) / 0.34),
+    rgb(var(--accent-magenta) / 0.28)
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.trust-card {
+  @apply rounded-2xl border border-white/[0.1] bg-gradient-to-b from-white/[0.07] to-white/[0.02] p-4 shadow-lg transition hover:border-[rgb(var(--accent))]/30 hover:shadow-[0_12px_40px_-16px_rgb(var(--accent)/0.35)] sm:p-5;
+}
+
+.step-card {
+  @apply relative rounded-2xl border border-white/[0.08] bg-black/25 px-4 py-4 sm:px-5 sm:py-5;
+}
+
+.step-num {
+  @apply mb-2 inline-flex size-8 items-center justify-center rounded-xl bg-gradient-to-br from-[rgb(var(--accent))]/35 to-[rgb(var(--accent-2))]/25 text-xs font-bold text-white shadow-inner;
+}
+
+.text-gradient {
+  @apply bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] bg-clip-text text-transparent;
+}
+
+.score-ring {
+  background: conic-gradient(
+    from 210deg,
+    rgb(var(--accent)) 0%,
+    rgb(var(--accent-2)) calc(var(--score, 0) * 1%),
+    rgb(255 255 255 / 0.08) 0
+  );
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.55s ease-out both;
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.75;
+  }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 5s ease-in-out infinite;
+}
+
+/* How it works — vertical spine */
+.how-timeline {
+  position: relative;
+}
+.how-timeline::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 15px;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 2px;
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    rgb(var(--accent) / 0.5),
+    rgb(var(--accent-2) / 0.25),
+    rgb(255 255 255 / 0.06)
+  );
+}
+@media (min-width: 640px) {
+  .how-timeline-item {
+    padding-bottom: 1.25rem;
+  }
+  .how-timeline-item:last-child {
+    padding-bottom: 0;
+  }
+}

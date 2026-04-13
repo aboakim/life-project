@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum ExpertRole {
+  PSYCHOLOGIST
+  LAWYER
+  FINANCIAL
+}
+
+model Expert {
+  id             String           @id @default(cuid())
+  createdAt      DateTime         @default(now())
+  name           String
+  role           ExpertRole
+  country        String
+  city           String?
+  languages      String
+  bio            String
+  email          String
+  website        String?
+  contactRequests ContactRequest[]
+}
+
+model ContactRequest {
+  id           String   @id @default(cuid())
+  createdAt    DateTime @default(now())
+  expertId     String
+  expert       Expert   @relation(fields: [expertId], references: [id], onDelete: Cascade)
+  clientName   String
+  clientEmail  String
+  message      String
+  locale       String?
+}
+
+/// Idempotency: Stripe may retry webhooks; same event id must not apply twice.
+model StripeProcessedEvent {
+  id        String   @id
+  createdAt DateTime @default(now())
+}
+
+/// Premium subscription state — source of truth after Stripe webhooks (not client-side flags).
+model PremiumSubscription {
+  id                   String    @id @default(cuid())
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+  email                String
+  stripeCustomerId     String    @unique
+  stripeSubscriptionId String    @unique
+  status               String
+  currentPeriodEnd     DateTime?
+  cancelAtPeriodEnd    Boolean   @default(false)
+
+  @@index([email])
+}
+
+/// Public Q&A — text only (no HTML); moderate via DB or future admin tools.
+model CommunityQuestion {
+  id          String            @id @default(cuid())
+  createdAt   DateTime          @default(now())
+  authorName  String
+  authorEmail String?
+  title       String
+  body        String
+  locale      String?
+  status      String            @default("visible")
+  answers     CommunityAnswer[]
+
+  @@index([createdAt])
+  @@index([status])
+}
+
+model CommunityAnswer {
+  id          String            @id @default(cuid())
+  createdAt   DateTime          @default(now())
+  questionId  String
+  question    CommunityQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  authorName  String
+  authorEmail String?
+  body        String
+
+  @@index([questionId])
+}

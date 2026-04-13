@@ -1,0 +1,840 @@
+import type { AppLocale } from "./locale";
+
+export type UIStrings = {
+  brand: string;
+  heroLine1: string;
+  heroAccent: string;
+  subtitle: string;
+  disclaimerTitle: string;
+  disclaimerBody: string;
+  decision: string;
+  decisionPh: string;
+  context: string;
+  contextPh: string;
+  constraints: string;
+  constraintsPh: string;
+  analyze: string;
+  analyzing: string;
+  sectionSummary: string;
+  sectionDimensions: string;
+  sectionScenarios: string;
+  sectionTimeline: string;
+  sectionScore: string;
+  sectionTwin: string;
+  dimFinances: string;
+  dimPsychology: string;
+  dimRisks: string;
+  dimOpportunities: string;
+  scenBest: string;
+  scenWorst: string;
+  scenLikely: string;
+  timeM6: string;
+  timeY2: string;
+  timeY5: string;
+  badgeLive: string;
+  badgeDemo: string;
+  badgeFallback: string;
+  scoreSublabel: string;
+  footerPremium: string;
+  networkError: string;
+  features: [string, string, string];
+  accessLocal: string;
+  langLabel: string;
+  apiHintDemo: string;
+  apiWarningFallback: (msg: string) => string;
+  securityTitle: string;
+  securityIntro: string;
+  securityPoints: [string, string, string];
+  /** Short stats line under hero */
+  heroRibbon: string;
+  trustSectionTitle: string;
+  trustCards: ReadonlyArray<{
+    emoji: string;
+    title: string;
+    body: string;
+  }>;
+  howSectionTitle: string;
+  howSteps: ReadonlyArray<{ title: string; body: string }>;
+  /** Sticky section jump links (home page) */
+  sectionNavProduct: string;
+  sectionNavTrust: string;
+  sectionNavHow: string;
+  sectionNavAnalyzer: string;
+  sectionNavLanguage: string;
+  sectionNavPrivacy: string;
+  productSectionTitle: string;
+  productSectionSubtitle: string;
+  bentoCards: ReadonlyArray<{ pill: string; title: string; body: string }>;
+  heroCtaPrimary: string;
+  heroCtaSecondary: string;
+  previewCardTitle: string;
+  previewRows: ReadonlyArray<{
+    label: string;
+    value: string;
+    section: "workspace" | "product" | "language";
+  }>;
+  workspaceTitle: string;
+  /** Hero image carousel — same length as `HERO_SLIDE_IMAGE_URLS` */
+  heroSlides: ReadonlyArray<{ alt: string; caption: string }>;
+  productStripEyebrow: string;
+  productStripAria: string;
+  productStripAlts: readonly [string, string, string, string];
+};
+
+/** English trust/how blocks — reused as fallback for locales without custom copy */
+const trustHowEn: Pick<
+  UIStrings,
+  | "heroRibbon"
+  | "trustSectionTitle"
+  | "trustCards"
+  | "howSectionTitle"
+  | "howSteps"
+  | "sectionNavProduct"
+  | "sectionNavTrust"
+  | "sectionNavHow"
+  | "sectionNavAnalyzer"
+  | "sectionNavLanguage"
+  | "sectionNavPrivacy"
+  | "productSectionTitle"
+  | "productSectionSubtitle"
+  | "bentoCards"
+  | "heroCtaPrimary"
+  | "heroCtaSecondary"
+  | "previewCardTitle"
+  | "previewRows"
+  | "workspaceTitle"
+  | "heroSlides"
+  | "productStripEyebrow"
+  | "productStripAria"
+  | "productStripAlts"
+> = {
+  heroRibbon: "8+ languages · Scenario engine · Privacy-first design",
+  trustSectionTitle: "Why people use this framework",
+  trustCards: [
+    {
+      emoji: "🧭",
+      title: "Structured, not random",
+      body: "Best / worst / likely paths, four lenses, and a timeline—so you compare options side by side.",
+    },
+    {
+      emoji: "🔐",
+      title: "Respect for your story",
+      body: "No public feed or voting wall. Your text stays in your session; AI (if enabled) only generates your answer.",
+    },
+    {
+      emoji: "🌍",
+      title: "Humans when you need them",
+      body: "Multilingual UI plus a growing directory of psychologists, lawyers, and financial pros.",
+    },
+  ],
+  howSectionTitle: "How it works",
+  howSteps: [
+    {
+      title: "Describe",
+      body: "Write the decision and optional context—numbers, fears, values, deadlines.",
+    },
+    {
+      title: "Analyze",
+      body: "The engine maps finances, psychology, risks, and upside across 6 months → 5 years.",
+    },
+    {
+      title: "Decide",
+      body: "Use the score and rationale as a compass—then talk to a professional if you need one.",
+    },
+  ],
+  sectionNavProduct: "Product",
+  sectionNavTrust: "Trust",
+  sectionNavHow: "How it works",
+  sectionNavAnalyzer: "Analyzer",
+  sectionNavLanguage: "Language",
+  sectionNavPrivacy: "Privacy",
+  productSectionTitle: "Everything in one structured flow",
+  productSectionSubtitle:
+    "A calm workspace for major choices—scenarios, lenses, timelines, and a score. Modeled after how leading product teams review decisions.",
+  bentoCards: [
+    {
+      pill: "Scenarios",
+      title: "Best · worst · likely",
+      body: "Three explicit paths so you are not guessing in the dark.",
+    },
+    {
+      pill: "Lenses",
+      title: "Finance · mind · risk · upside",
+      body: "Four angles that mirror how coaches and advisors think.",
+    },
+    {
+      pill: "Timeline",
+      title: "6 months → 5 years",
+      body: "Short- and long-term consequences in one glance.",
+    },
+    {
+      pill: "Score",
+      title: "Alignment & feasibility",
+      body: "A percentage with rationale—not a magic answer.",
+    },
+  ],
+  heroCtaPrimary: "Open analyzer",
+  heroCtaSecondary: "Browse experts",
+  previewCardTitle: "Workspace preview",
+  previewRows: [
+    { label: "Output", value: "Structured report", section: "workspace" },
+    { label: "Paths modeled", value: "3 scenarios", section: "product" },
+    { label: "Interface", value: "9 languages", section: "language" },
+  ],
+  workspaceTitle: "Your analysis workspace",
+  heroSlides: [
+    {
+      alt: "Mountain ridge above clouds at sunrise",
+      caption: "See farther—map scenarios before you commit.",
+    },
+    {
+      alt: "Architectural blueprints and planning drawings on a desk",
+      caption: "Big moves deserve a structured lens, not guesswork.",
+    },
+    {
+      alt: "Team collaborating at a table",
+      caption: "Humans in the loop when you want expertise, not noise.",
+    },
+    {
+      alt: "Bright modern workspace with desk and seating",
+      caption: "One calm workspace for career, move, and life forks.",
+    },
+    {
+      alt: "Analytics charts and metrics on a laptop screen",
+      caption: "A score and timeline—clarity without pretending to be fate.",
+    },
+  ],
+  productStripEyebrow: "Moments",
+  productStripAria: "Illustrative scenes for the product flow",
+  productStripAlts: [
+    "Open road toward distant mountains",
+    "Team learning and collaboration at a shared desk",
+    "Team planning together in an office",
+    "Workshop with people around a table",
+  ],
+};
+
+const trustHowHy: Pick<
+  UIStrings,
+  | "heroRibbon"
+  | "trustSectionTitle"
+  | "trustCards"
+  | "howSectionTitle"
+  | "howSteps"
+  | "sectionNavProduct"
+  | "sectionNavTrust"
+  | "sectionNavHow"
+  | "sectionNavAnalyzer"
+  | "sectionNavLanguage"
+  | "sectionNavPrivacy"
+  | "productSectionTitle"
+  | "productSectionSubtitle"
+  | "bentoCards"
+  | "heroCtaPrimary"
+  | "heroCtaSecondary"
+  | "previewCardTitle"
+  | "previewRows"
+  | "workspaceTitle"
+  | "heroSlides"
+  | "productStripEyebrow"
+  | "productStripAria"
+  | "productStripAlts"
+> = {
+  heroRibbon:
+    "8+ լեզու · Սցենարների շարժիչ · Գաղտնիության առաջնահերթություն",
+  trustSectionTitle: "Ինչու են ընտրում այս գործիքը",
+  trustCards: [
+    {
+      emoji: "🧭",
+      title: "Կառուցված, ոչ պատահական",
+      body: "Լավագույն / վատ / հավանական սցենարներ, չորս հարթակ, ժամանակացույց՝ տարբերակները կողք կողքի համեմատելու համար։",
+    },
+    {
+      emoji: "🔐",
+      title: "Հարգանք ձեր պատմության նկատմամբ",
+      body: "Հրապարակային ժապավեն չկա։ Ձեր տեքստը մնում է սեանսի մեջ․ AI-ն (եթե միացված է) միայն պատասխան է գեներացնում։",
+    },
+    {
+      emoji: "🌍",
+      title: "Մարդիկ, երբ պետք է",
+      body: "Բազմալեզու միջերես և մասնագետների ցանց՝ հոգեբաններ, իրավաբաններ, ֆինանսիստներ։",
+    },
+  ],
+  howSectionTitle: "Ինչպես է աշխատում",
+  howSteps: [
+    {
+      title: "1 · Նկարագրել",
+      body: "Գրեք որոշումը և կոնտեքստը՝ թվեր, վախեր, արժեքներ, ժամկետներ։",
+    },
+    {
+      title: "2 · Վերլուծել",
+      body: "Շարժիչը քարտեզագրում է ֆինանսները, հոգեբանությունը, ռիսկերը և շանսերը՝ 6 ամիսից մինչև 5 տարի։",
+    },
+    {
+      title: "3 · Որոշել",
+      body: "Օգտագործեք միավորը որպես կողմնացույց․ անհրաժեշտության դեպքում դիմեք մասնագետի։",
+    },
+  ],
+  sectionNavProduct: "Արտադրանք",
+  sectionNavTrust: "Վստահություն",
+  sectionNavHow: "Ինչպես է աշխատում",
+  sectionNavAnalyzer: "Վերլուծիչ",
+  sectionNavLanguage: "Լեզու",
+  sectionNavPrivacy: "Գաղտնիություն",
+  productSectionTitle: "Բոլորը մեկ կառուցված հոսքում",
+  productSectionSubtitle:
+    "Հանգիստ աշխատատարածք մեծ որոշումների համար՝ սցենարներ, հարթակներ, ժամանակացույց և միավոր։ Նման է այն գործիքներին, որոնցով արդյունաբերությունում են վերլուծում որոշումները։",
+  bentoCards: [
+    {
+      pill: "Սցենարներ",
+      title: "Լավագույն · վատ · հավանական",
+      body: "Երեք հստակ ուղի՝ առանց կռահումների։",
+    },
+    {
+      pill: "Հարթակներ",
+      title: "Ֆինանս · միտք · ռիսկ · շանս",
+      body: "Չորս անկյուն, ինչպես մասնագետների մոտ։",
+    },
+    {
+      pill: "Ժամանակացույց",
+      title: "6 ամիս → 5 տարի",
+      body: "Կարճ և երկարաժամկետ հետևանքներ մեկ հայացքով։",
+    },
+    {
+      pill: "Միավոր",
+      title: "Համապատասխանություն",
+      body: "Տոկոս բացատրությամբ՝ ոչ թե «կախարդական պատասխան»։",
+    },
+  ],
+  heroCtaPrimary: "Բացել վերլուծիչը",
+  heroCtaSecondary: "Մասնագետներ",
+  previewCardTitle: "Աշխատատարածքի նախադիտում",
+  previewRows: [
+    { label: "Ելք", value: "Կառուցված հաշվետվություն", section: "workspace" },
+    { label: "Սցենարներ", value: "3 ուղի", section: "product" },
+    { label: "Ինտերֆեյս", value: "9 լեզու", section: "language" },
+  ],
+  workspaceTitle: "Ձեր վերլուծության աշխատատարածք",
+  heroSlides: [
+    {
+      alt: "Լեռնային շղթա ամպերի վերևում՝ արևածագ",
+      caption: "Տեսնել ավելի հեռու՝ մոդելավորիր սցենարները մինչ կփոխես կյանքը։",
+    },
+    {
+      alt: "Ճարտարապետական գծագիրներ և չափագրություններ սեղանի վրա",
+      caption: "Մեծ քայլերը պահանջում են կառուցված հայացք, ոչ թե կռահում։",
+    },
+    {
+      alt: "Թիմը համագործակցում է սեղանի շուրջ",
+      caption: "Մարդիկ շղթայում, երբ ուզում ես փորձ, ոչ թե աղմուկ։",
+    },
+    {
+      alt: "Լուսավոր ժամանակակից աշխատասենյակ՝ սեղան և նստատեղեր",
+      caption: "Մեկ հանգիստ աշխատատարածք՝ կարիերա, տեղափոխություն, կյանքի ընտրություններ։",
+    },
+    {
+      alt: "Վերլուծական գծապատկերներ և ցուցանիշներ լապտոպի էկրանին",
+      caption: "Միավոր և ժամանակացույց՝ պարզություն առանց կախարդական պատասխանի։",
+    },
+  ],
+  productStripEyebrow: "Պահեր",
+  productStripAria: "Նկարագրական տեսարաններ արտադրանքի հոսքի համար",
+  productStripAlts: [
+    "Բաց ճանապարհ դեպի հեռու լեռներ",
+    "Թիմային ուսուցում ու համագործակցություն ընդհանուր սեղանի շուրջ",
+    "Թիմը պլանավորում է գրասենյակում",
+    "Վարպետաց դաս՝ մարդիկ սեղանի շուրջ",
+  ],
+};
+
+const uiHy: Partial<UIStrings> = {
+  brand: "Կյանքի որոշումների AI",
+  heroLine1: "Մեծ որոշումների համար՝",
+  heroAccent: "կառուցված վերլուծություն",
+  subtitle:
+    "Տեղափոխություն, աշխատանք, հարաբերություններ․ գրիր հարցը — ստացիր ֆինանս/հոգեբանական հարթակներ, լավագույն–վատագույն սցենարներ, 6 ամիսից մինչև 5 տարի հորիզոն և որոշման միավոր։ Սա խորհրդատու գործիք է, ոչ թե պատահական chat։",
+  disclaimerTitle: "Պարտադիր հիշեցում",
+  disclaimerBody:
+    "Այս գործիքը աջակցություն է, ոչ թե վերջնական իշխանություն։ Ճգնաժամային իրավիճակներում դիմեք մասնագետի։ Սա բժշկական, իրավական կամ թերապևտիկ խորհուրդ չէ։",
+  decision: "Ձեր հարցը / որոշումը",
+  decisionPh:
+    "Օրինակ՝ «Արժե՞ տեղափոխվել Գերմանիա», «Արժե՞ թողնել աշխատանքը»…",
+  context: "Կոնտեքստ (ընտրովի)",
+  contextPh: "Թվեր, ժամկետ, ընտանիք, առողջություն…",
+  constraints: "Արժեքներ և սահմանափակումներ (ընտրովի)",
+  constraintsPh: "Ինչն է չբացարձակել, ինչից եք վախենում…",
+  analyze: "Վերլուծել",
+  analyzing: "Վերլուծում…",
+  sectionSummary: "Ամփոփում",
+  sectionDimensions: "Չորս հարթակ",
+  sectionScenarios: "Սցենարներ",
+  sectionTimeline: "Ապագայի սիմուլյացիա",
+  sectionScore: "Որոշման միավոր",
+  sectionTwin: "Թվային երկվորյակ (տեսակետ)",
+  dimFinances: "Ֆինանսներ",
+  dimPsychology: "Հոգեբանություն",
+  dimRisks: "Ռիսկեր",
+  dimOpportunities: "Շանսեր",
+  scenBest: "Լավագույն",
+  scenWorst: "Վատագույն",
+  scenLikely: "Ամենահավանական",
+  timeM6: "6 ամիս հետո",
+  timeY2: "2 տարի հետո",
+  timeY5: "5 տարի հետո",
+  badgeLive: "AI վերլուծություն",
+  badgeDemo: "Ցուցադրական ռեժիմ",
+  badgeFallback: "Կրկնակի ռեժիմ",
+  scoreSublabel: "համապատասխանություն / իրականացվողություն",
+  footerPremium:
+    "Հետագայում կարելի է միացնել վճարային շերտ (օրինակ՝ անսահմանափակ վերլուծություններ)՝ Stripe/Paddle և նման համակարգերով։ Premium-ը կարող է ներառել նաև իրական coach/հոգեբանի շերտ։ Այժմ՝ անվճար MVP։",
+  networkError: "Ցանցի սխալ",
+  features: ["Սցենարներ", "Ռիսկեր և ֆինանսներ", "Որոշման միավոր %"],
+  accessLocal:
+    "Տեղային հասցե՝ http://localhost:3000 — գործարկեք `npm run dev` ձեր համակարգչում։",
+  langLabel: "Լեզու",
+  apiHintDemo: "Սահմանեք OPENAI_API_KEY իրական խորը վերլուծության համար։",
+  apiWarningFallback: (msg) =>
+    `AI մոդելը ժամանակավորապես անհասանելի է։ Ցուցադրական արդյունք։ Մանրամասն՝ ${msg}`,
+  securityTitle: "Անվտանգ և գաղտնի հարթակ",
+  securityIntro:
+    "Այս հարթակը նախագծված է գաղտնիության և անվտանգության սկզբունքներով․ ձեր խնդիրը, հարցը կամ պատմությունը ուրիշ այցելուներին չի երևում, և այն չի հրապարակվում որպես բոլորին տեսանելի գրառում։",
+  securityPoints: [
+    "Չկա հրապարակային ժապավեն, քվեարկություն կամ «ուրիշների պատմություններ»․ ձեր տեքստը մնում է ձեր սեանսի շրջանակում։",
+    "Այս տարբերակում տեքստը չի պահվում բազայում որպես հրապարակային post, որպեսզի երրորդ անձինք կարդան այն։",
+    "Եթե միացված է AI վերլուծությունը, տեքստը փոխանցվում է միայն պատասխան պատրաստելու նպատակով (ըստ մատակարարի պայմանների)։",
+  ],
+};
+
+const uiEn: Partial<UIStrings> = {
+  brand: "Life Decision Engine",
+  heroLine1: "Big life decisions →",
+  heroAccent: "structured AI analysis",
+  subtitle:
+    "Moving, job, relationships: describe your question—get finance/psychology lenses, best/worst/likely scenarios, a 6‑month→5‑year view, and a decision score. A support tool—not random chat.",
+  disclaimerTitle: "Important",
+  disclaimerBody:
+    "This is a support tool—not final authority. In a crisis, contact a professional. Not medical, legal, or therapeutic advice.",
+  decision: "Your decision / question",
+  decisionPh: 'e.g. “Should I move to Germany?”, “Should I quit my job?”…',
+  context: "Context (optional)",
+  contextPh: "Numbers, timeline, family, health…",
+  constraints: "Values & constraints (optional)",
+  constraintsPh: "Lines you won’t cross, what you fear losing…",
+  analyze: "Run analysis",
+  analyzing: "Analyzing…",
+  sectionSummary: "Summary",
+  sectionDimensions: "Four lenses",
+  sectionScenarios: "Scenarios",
+  sectionTimeline: "Future simulation",
+  sectionScore: "Decision score",
+  sectionTwin: "Digital twin (perspective)",
+  dimFinances: "Finances",
+  dimPsychology: "Psychology",
+  dimRisks: "Risks",
+  dimOpportunities: "Upside",
+  scenBest: "Best case",
+  scenWorst: "Worst case",
+  scenLikely: "Most likely",
+  timeM6: "6 months later",
+  timeY2: "2 years later",
+  timeY5: "5 years later",
+  badgeLive: "AI analysis",
+  badgeDemo: "Demo mode",
+  badgeFallback: "Fallback mode",
+  scoreSublabel: "alignment / feasibility",
+  footerPremium:
+    "Later you can add paid tiers (e.g. unlimited analyses) with Stripe or similar. Premium may also include human coaches. This build is an MVP.",
+  networkError: "Network error",
+  features: ["Psychology", "Finance", "Structured AI"],
+  accessLocal:
+    "Local URL: http://localhost:3000 — run `npm run dev` on your machine.",
+  langLabel: "Language",
+  apiHintDemo: "Set OPENAI_API_KEY for full AI analysis.",
+  apiWarningFallback: (msg) =>
+    `AI temporarily unavailable. Showing demo. Details: ${msg}`,
+  securityTitle: "A safe, private platform",
+  securityIntro:
+    "This platform is designed to be private and secure: your question and story are not visible to other visitors, and nothing is published as a public post for everyone to see.",
+  securityPoints: [
+    "There is no public feed, voting wall, or “other people’s stories” area—your text stays within your session flow.",
+    "This build does not store your text in a database as public posts that strangers could read.",
+    "If AI analysis is on, your text is sent to the provider only to generate your answer (under their terms).",
+  ],
+};
+
+/** American English — UI copy tuned for US spelling/idiom where it differs */
+const uiEnUs: Partial<UIStrings> = {
+  ...uiEn,
+  decisionPh:
+    'e.g. "Should I move to Germany?", "Should I quit my job?"…',
+  subtitle:
+    "Scenarios, timelines, and a decision score in one structured flow—not generic chit-chat.",
+  accessLocal:
+    "Local URL: http://localhost:3000 — run `npm run dev`, then open it in your browser.",
+  footerPremium:
+    "Later you can add paid tiers with Stripe or similar. Premium may include human coaches. MVP for now.",
+};
+
+const uiRu: Partial<UIStrings> = {
+  brand: "Life Decision Engine",
+  heroLine1: "Движок",
+  heroAccent: "решений жизни",
+  subtitle:
+    "Сценарии, горизонты и оценка решения в одной структуре — не просто чат.",
+  disclaimerTitle: "Важно",
+  disclaimerBody:
+    "Это вспомогательный инструмент, а не окончательный авторитет. В кризисе обратитесь к специалисту. Не медицинский, юридический и не терапевтический совет.",
+  decision: "Ваш вопрос / решение",
+  decisionPh:
+    "Например: «Стоит ли переезжать в Германию?», «Уволиться с работы?»…",
+  context: "Контекст (необязательно)",
+  contextPh: "Цифры, сроки, семья, здоровье…",
+  constraints: "Ценности и ограничения (необязательно)",
+  constraintsPh: "Красные линии, чего боитесь лишиться…",
+  analyze: "Анализировать",
+  analyzing: "Анализ…",
+  sectionSummary: "Резюме",
+  sectionDimensions: "Четыре оси",
+  sectionScenarios: "Сценарии",
+  sectionTimeline: "Модель будущего",
+  sectionScore: "Оценка решения",
+  sectionTwin: "Цифровой двойник (взгляд)",
+  dimFinances: "Финансы",
+  dimPsychology: "Психология",
+  dimRisks: "Риски",
+  dimOpportunities: "Возможности",
+  scenBest: "Лучший случай",
+  scenWorst: "Худший случай",
+  scenLikely: "Наиболее вероятно",
+  timeM6: "Через 6 месяцев",
+  timeY2: "Через 2 года",
+  timeY5: "Через 5 лет",
+  badgeLive: "AI-анализ",
+  badgeDemo: "Демо-режим",
+  badgeFallback: "Резервный режим",
+  scoreSublabel: "соответствие / реализуемость",
+  footerPremium:
+    "В будущем Premium может добавить живых коучей — сейчас только ПО.",
+  networkError: "Ошибка сети",
+  features: ["Психология", "Финансы", "Структура AI"],
+  accessLocal:
+    "Локально: http://localhost:3000 — запустите `npm run dev` на компьютере.",
+  langLabel: "Язык",
+  apiHintDemo: "Укажите OPENAI_API_KEY для полного AI-анализа.",
+  apiWarningFallback: (msg) =>
+    `AI временно недоступен. Показано демо. Подробности: ${msg}`,
+  securityTitle: "Безопасная и приватная платформа",
+  securityIntro:
+    "Платформа создана с упором на конфиденциальность и безопасность: ваш вопрос и история не видны другим посетителям и не публикуются как открытая запись для всех.",
+  securityPoints: [
+    "Нет публичной ленты, голосований и раздела «чужие истории» — текст остаётся в рамках вашего сеанса.",
+    "В этой версии текст не хранится в базе как публичные посты, которые могли бы читать посторонние.",
+    "Если включён AI-анализ, текст передаётся поставщику только для генерации ответа (на условиях сервиса).",
+  ],
+};
+
+const uiDe: Partial<UIStrings> = {
+  brand: "Life Decision Engine",
+  heroLine1: "Life",
+  heroAccent: "Decision Engine",
+  subtitle:
+    "Szenarien, Zeitverläufe und ein Score—strukturiert, kein generischer Chat.",
+  disclaimerTitle: "Wichtig",
+  disclaimerBody:
+    "Dies ist ein Hilfsmittel, keine endgültige Instanz. In Krisen: Profis kontaktieren. Keine medizinische, rechtliche oder therapeutische Beratung.",
+  decision: "Deine Frage / Entscheidung",
+  decisionPh: "z. B. „Nach Deutschland ziehen?“, „Job kündigen?“ …",
+  context: "Kontext (optional)",
+  contextPh: "Zahlen, Zeitrahmen, Familie, Gesundheit …",
+  constraints: "Werte & Grenzen (optional)",
+  constraintsPh: "Was du nicht überschreitest, was du verlieren fürchtest …",
+  analyze: "Analyse starten",
+  analyzing: "Analysiere …",
+  sectionSummary: "Zusammenfassung",
+  sectionDimensions: "Vier Perspektiven",
+  sectionScenarios: "Szenarien",
+  sectionTimeline: "Zukunftssimulation",
+  sectionScore: "Entscheidungs-Score",
+  sectionTwin: "Digitaler Zwilling (Perspektive)",
+  dimFinances: "Finanzen",
+  dimPsychology: "Psychologie",
+  dimRisks: "Risiken",
+  dimOpportunities: "Chancen",
+  scenBest: "Bester Fall",
+  scenWorst: "Schlechtester Fall",
+  scenLikely: "Wahrscheinlichster Fall",
+  timeM6: "Nach 6 Monaten",
+  timeY2: "Nach 2 Jahren",
+  timeY5: "Nach 5 Jahren",
+  badgeLive: "KI-Analyse",
+  badgeDemo: "Demo-Modus",
+  badgeFallback: "Fallback-Modus",
+  scoreSublabel: "Passung / Machbarkeit",
+  footerPremium:
+    "Ein Premium-Tier könnte später echte Coaches hinzufügen—aktuell nur Software.",
+  networkError: "Netzwerkfehler",
+  features: ["Psychologie", "Finanzen", "Strukturierte KI"],
+  accessLocal:
+    "Lokal: http://localhost:3000 — `npm run dev` auf deinem Rechner ausführen.",
+  langLabel: "Sprache",
+  apiHintDemo: "OPENAI_API_KEY setzen für volle KI-Analyse.",
+  apiWarningFallback: (msg) =>
+    `KI vorübergehend nicht verfügbar. Demo wird gezeigt. Details: ${msg}`,
+  securityTitle: "Sichere, private Plattform",
+  securityIntro:
+    "Diese Plattform ist auf Privatsphäre und Sicherheit ausgelegt: Deine Frage und Geschichte sind für andere Besucher nicht sichtbar und werden nicht als öffentlicher Beitrag für alle veröffentlicht.",
+  securityPoints: [
+    "Es gibt keinen öffentlichen Feed, keine Abstimmungswand und keinen Bereich „Fremde Geschichten“ — dein Text bleibt in deinem Sitzungsablauf.",
+    "In dieser Version wird dein Text nicht als öffentliche Posts in einer Datenbank gespeichert, die Fremde lesen könnten.",
+    "Wenn die KI-Analyse aktiv ist, wird dein Text nur an den Anbieter übermittelt, um deine Antwort zu erzeugen (gemäß deren Bedingungen).",
+  ],
+};
+
+const uiFr: Partial<UIStrings> = {
+  brand: "Life Decision Engine",
+  heroLine1: "Life",
+  heroAccent: "Decision Engine",
+  subtitle:
+    "Scénarios, horizons et score—structuré, pas un simple chat générique.",
+  disclaimerTitle: "Important",
+  disclaimerBody:
+    "Outil d’aide, pas d’autorité finale. En crise, contactez un professionnel. Pas un avis médical, juridique ou thérapeutique.",
+  decision: "Votre question / décision",
+  decisionPh: "ex. « Déménager en Allemagne ? », « Quitter mon emploi ? » …",
+  context: "Contexte (optionnel)",
+  contextPh: "Chiffres, délais, famille, santé…",
+  constraints: "Valeurs & contraintes (optionnel)",
+  constraintsPh: "Lignes rouges, ce que vous craignez de perdre…",
+  analyze: "Lancer l’analyse",
+  analyzing: "Analyse…",
+  sectionSummary: "Synthèse",
+  sectionDimensions: "Quatre axes",
+  sectionScenarios: "Scénarios",
+  sectionTimeline: "Simulation temporelle",
+  sectionScore: "Score de décision",
+  sectionTwin: "Jumeau numérique (perspective)",
+  dimFinances: "Finances",
+  dimPsychology: "Psychologie",
+  dimRisks: "Risques",
+  dimOpportunities: "Opportunités",
+  scenBest: "Meilleur cas",
+  scenWorst: "Pire cas",
+  scenLikely: "Le plus probable",
+  timeM6: "Dans 6 mois",
+  timeY2: "Dans 2 ans",
+  timeY5: "Dans 5 ans",
+  badgeLive: "Analyse IA",
+  badgeDemo: "Mode démo",
+  badgeFallback: "Mode secours",
+  scoreSublabel: "alignement / faisabilité",
+  footerPremium:
+    "Un futur Premium pourrait ajouter des coachs humains—ici, logiciel seul.",
+  networkError: "Erreur réseau",
+  features: ["Psychologie", "Finance", "IA structurée"],
+  accessLocal:
+    "Local : http://localhost:3000 — lancez `npm run dev` sur votre machine.",
+  langLabel: "Langue",
+  apiHintDemo: "Définissez OPENAI_API_KEY pour une analyse IA complète.",
+  apiWarningFallback: (msg) =>
+    `IA indisponible temporairement. Démo affichée. Détails : ${msg}`,
+  securityTitle: "Une plateforme sûre et privée",
+  securityIntro:
+    "Cette plateforme est conçue pour la confidentialité et la sécurité : votre question et votre récit ne sont pas visibles par les autres visiteurs et ne sont pas publiés comme un message public pour tout le monde.",
+  securityPoints: [
+    "Pas de fil public, de votes ni de section « histoires des autres » — votre texte reste dans le flux de votre session.",
+    "Cette version n’enregistre pas votre texte en base comme publications publiques lisibles par des inconnus.",
+    "Si l’analyse IA est activée, votre texte est envoyé au fournisseur uniquement pour générer votre réponse (selon leurs conditions).",
+  ],
+};
+
+const uiEs: Partial<UIStrings> = {
+  brand: "Life Decision Engine",
+  heroLine1: "Life",
+  heroAccent: "Decision Engine",
+  subtitle:
+    "Escenarios, horizontes y puntuación—estructurado, no un chat genérico.",
+  disclaimerTitle: "Importante",
+  disclaimerBody:
+    "Herramienta de apoyo, no autoridad final. En crisis, contacta a un profesional. No es consejo médico, legal ni terapéutico.",
+  decision: "Tu pregunta / decisión",
+  decisionPh: "ej. «¿Mudarme a Alemania?», «¿Dejar el trabajo?»…",
+  context: "Contexto (opcional)",
+  contextPh: "Cifras, plazos, familia, salud…",
+  constraints: "Valores y límites (opcional)",
+  constraintsPh: "Líneas rojas, qué temes perder…",
+  analyze: "Analizar",
+  analyzing: "Analizando…",
+  sectionSummary: "Resumen",
+  sectionDimensions: "Cuatro ejes",
+  sectionScenarios: "Escenarios",
+  sectionTimeline: "Simulación temporal",
+  sectionScore: "Puntuación",
+  sectionTwin: "Gemelo digital (perspectiva)",
+  dimFinances: "Finanzas",
+  dimPsychology: "Psicología",
+  dimRisks: "Riesgos",
+  dimOpportunities: "Oportunidades",
+  scenBest: "Mejor caso",
+  scenWorst: "Peor caso",
+  scenLikely: "Más probable",
+  timeM6: "En 6 meses",
+  timeY2: "En 2 años",
+  timeY5: "En 5 años",
+  badgeLive: "Análisis IA",
+  badgeDemo: "Modo demo",
+  badgeFallback: "Modo alternativo",
+  scoreSublabel: "alineación / viabilidad",
+  footerPremium:
+    "Un Premium futuro podría añadir coaches humanos—ahora solo software.",
+  networkError: "Error de red",
+  features: ["Psicología", "Finanzas", "IA estructurada"],
+  accessLocal:
+    "Local: http://localhost:3000 — ejecuta `npm run dev` en tu equipo.",
+  langLabel: "Idioma",
+  apiHintDemo: "Configura OPENAI_API_KEY para análisis IA completo.",
+  apiWarningFallback: (msg) =>
+    `IA no disponible temporalmente. Mostrando demo. Detalles: ${msg}`,
+  securityTitle: "Una plataforma segura y privada",
+  securityIntro:
+    "La plataforma está pensada para la privacidad y la seguridad: tu pregunta e historia no son visibles para otros visitantes ni se publican como un post abierto para todos.",
+  securityPoints: [
+    "No hay feed público, muro de votos ni sección de «historias de otras personas» — tu texto se mantiene en el flujo de tu sesión.",
+    "Esta versión no guarda tu texto en la base de datos como publicaciones que extraños puedan leer.",
+    "Si el análisis con IA está activo, tu texto se envía al proveedor solo para generar tu respuesta (según sus términos).",
+  ],
+};
+
+const uiAr: Partial<UIStrings> = {
+  brand: "Life Decision Engine",
+  heroLine1: "محرك",
+  heroAccent: "قرارات الحياة",
+  subtitle:
+    "سيناريوهات وجداول زمنية ودرجة قرار—منظّم، وليس محادثة عامة.",
+  disclaimerTitle: "تنبيه مهم",
+  disclaimerBody:
+    "هذه أداة دعم وليست مرجعًا نهائيًا. في الأزمات تواصل مع مختص. وليست استشارة طبية أو قانونية أو علاجية.",
+  decision: "سؤالك / قرارك",
+  decisionPh: "مثل: «هل أنتقل إلى ألمانيا؟»، «هل أترك العمل؟»…",
+  context: "السياق (اختياري)",
+  contextPh: "أرقام، مواعيد، عائلة، صحة…",
+  constraints: "القيم والقيود (اختياري)",
+  constraintsPh: "خطوط حمراء، ما تخاف خسارته…",
+  analyze: "تشغيل التحليل",
+  analyzing: "جارٍ التحليل…",
+  sectionSummary: "الملخص",
+  sectionDimensions: "أربعة محاور",
+  sectionScenarios: "السيناريوهات",
+  sectionTimeline: "محاكاة المستقبل",
+  sectionScore: "درجة القرار",
+  sectionTwin: "التوأم الرقمي (زاوية نظر)",
+  dimFinances: "المالية",
+  dimPsychology: "النفسية",
+  dimRisks: "المخاطر",
+  dimOpportunities: "الفرص",
+  scenBest: "أفضل حالة",
+  scenWorst: "أسوأ حالة",
+  scenLikely: "الأرجح",
+  timeM6: "بعد 6 أشهر",
+  timeY2: "بعد سنتين",
+  timeY5: "بعد 5 سنوات",
+  badgeLive: "تحليل بالذكاء الاصطناعي",
+  badgeDemo: "وضع تجريبي",
+  badgeFallback: "وضع احتياطي",
+  scoreSublabel: "التوافق / الجدوى",
+  footerPremium:
+    "قد يضيف إصدار مدفوع لاحقًا مدربين بشرين—هذا الإصدار برمجي فقط.",
+  networkError: "خطأ في الشبكة",
+  features: ["النفسية", "المالية", "ذكاء منظم"],
+  accessLocal:
+    "محلي: http://localhost:3000 — شغّل `npm run dev` على جهازك.",
+  langLabel: "اللغة",
+  apiHintDemo: "عيّن OPENAI_API_KEY لتحليل كامل بالذكاء الاصطناعي.",
+  apiWarningFallback: (msg) =>
+    `الذكاء الاصطناعي غير متاح مؤقتًا. عرض تجريبي. التفاصيل: ${msg}`,
+  securityTitle: "منصة آمنة وخاصة",
+  securityIntro:
+    "صُممت المنصة مع مبدأ الخصوصية والأمان: سؤالك وقصتك لا يظهران للزوّار الآخرين، ولا يُنشران كمنشور عام للجميع.",
+  securityPoints: [
+    "لا يوجد شريط عام أو تصويت أو قسم «قصص الآخرين» — نصك يبقى ضمن جلسة استخدامك.",
+    "هذا الإصدار لا يخزن نصك كمنشورات عامة في قاعدة بيانات يقرؤها غرباء.",
+    "إذا كان تحليل الذكاء الاصطناعي مفعّلًا، يُرسل نصك إلى المزوّد فقط لإنشاء إجابتك (وفق شروطهم).",
+  ],
+};
+
+const uiIt: Partial<UIStrings> = {
+  brand: "Life Decision Engine",
+  heroLine1: "Life",
+  heroAccent: "Decision Engine",
+  subtitle:
+    "Scenari, orizzonti e punteggio—strutturato, non una chat generica.",
+  disclaimerTitle: "Importante",
+  disclaimerBody:
+    "Strumento di supporto, non autorità finale. In crisi, rivolgiti a un professionista. Nessun parere medico, legale o terapeutico.",
+  decision: "La tua domanda / decisione",
+  decisionPh: "es. «Trasferirmi in Germania?», «Lasciare il lavoro?»…",
+  context: "Contesto (opzionale)",
+  contextPh: "Numeri, tempi, famiglia, salute…",
+  constraints: "Valori e vincoli (opzionale)",
+  constraintsPh: "Linee rosse, cosa temi di perdere…",
+  analyze: "Avvia analisi",
+  analyzing: "Analisi in corso…",
+  sectionSummary: "Sintesi",
+  sectionDimensions: "Quattro assi",
+  sectionScenarios: "Scenari",
+  sectionTimeline: "Simulazione temporale",
+  sectionScore: "Punteggio decisione",
+  sectionTwin: "Gemello digitale (prospettiva)",
+  dimFinances: "Finanza",
+  dimPsychology: "Psicologia",
+  dimRisks: "Rischi",
+  dimOpportunities: "Opportunità",
+  scenBest: "Caso migliore",
+  scenWorst: "Caso peggiore",
+  scenLikely: "Più probabile",
+  timeM6: "Tra 6 mesi",
+  timeY2: "Tra 2 anni",
+  timeY5: "Tra 5 anni",
+  badgeLive: "Analisi IA",
+  badgeDemo: "Modalità demo",
+  badgeFallback: "Modalità fallback",
+  scoreSublabel: "allineamento / fattibilità",
+  footerPremium:
+    "Un Premium futuro potrebbe aggiungere coach umani—qui solo software.",
+  networkError: "Errore di rete",
+  features: ["Psicologia", "Finanza", "IA strutturata"],
+  accessLocal:
+    "Locale: http://localhost:3000 — esegui `npm run dev` sul tuo PC.",
+  langLabel: "Lingua",
+  apiHintDemo: "Imposta OPENAI_API_KEY per l’analisi IA completa.",
+  apiWarningFallback: (msg) =>
+    `IA temporaneamente non disponibile. Demo mostrata. Dettagli: ${msg}`,
+  securityTitle: "Una piattaforma sicura e privata",
+  securityIntro:
+    "La piattaforma è pensata per privacy e sicurezza: la tua domanda e la tua storia non sono visibili agli altri visitatori e non vengono pubblicate come post aperto a tutti.",
+  securityPoints: [
+    "Niente bacheca pubblica, votazioni o sezione «storie altrui» — il testo resta nel flusso della tua sessione.",
+    "Questa versione non salva il tuo testo nel database come post pubblici leggibili da sconosciuti.",
+    "Se l’analisi IA è attiva, il testo viene inviato al fornitore solo per generare la risposta (secondo i loro termini).",
+  ],
+};
+
+const table: Record<AppLocale, Partial<UIStrings>> = {
+  hy: uiHy,
+  en: uiEn,
+  "en-US": uiEnUs,
+  ru: uiRu,
+  de: uiDe,
+  fr: uiFr,
+  es: uiEs,
+  ar: uiAr,
+  it: uiIt,
+};
+
+export function getUi(locale: AppLocale): UIStrings {
+  const row = table[locale];
+  const merged = { ...trustHowEn, ...row };
+  if (locale === "hy") {
+    return { ...merged, ...trustHowHy } as UIStrings;
+  }
+  return merged as UIStrings;
+}
