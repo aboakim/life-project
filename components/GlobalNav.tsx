@@ -9,6 +9,7 @@ import { getPricingCopy } from "@/lib/i18n/pricing-page";
 import { DEFAULT_LOCALE } from "@/lib/locale-default";
 import { isAppLocale, type AppLocale } from "@/lib/i18n/locale";
 import { syncLocaleCookieClient } from "@/lib/locale-cookie";
+import NavRoutePrefetch from "@/components/NavRoutePrefetch";
 
 const LOCALE_KEY = "lde-locale";
 
@@ -34,6 +35,7 @@ export default function GlobalNav() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/[0.07] bg-[rgb(var(--surface))]/90 backdrop-blur-xl shadow-[0_1px_0_0_rgba(255,255,255,0.04)]">
+      <NavRoutePrefetch />
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6">
         <Link
           href="/"

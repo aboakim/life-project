@@ -10,6 +10,9 @@ import GlobalNav from "@/components/GlobalNav";
 import AnalyticsGate from "@/components/AnalyticsGate";
 import "./globals.css";
 
+/** Must match the snippet in Google AdSense → Site → Verify (same ca-pub-…). */
+const ADSENSE_CLIENT = "ca-pub-3541461663112540";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -71,6 +74,9 @@ export const metadata: Metadata = {
     description:
       "Make big decisions with scenarios, risk lenses, and optional human experts.",
   },
+  other: {
+    "google-adsense-account": ADSENSE_CLIENT,
+  },
 };
 
 export default function RootLayout({
@@ -80,6 +86,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en-US">
+      <head>
+        {/* Same as Google AdSense snippet: async + crossorigin="anonymous" */}
+        <script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
+          crossOrigin="anonymous"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${notoArmenian.variable} ${notoSans.variable} ${notoArabic.variable} font-sans`}
       >

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import DecisionBriefWizard from "@/components/home/DecisionBriefWizard";
 import HeroVisualSlider from "@/components/home/HeroVisualSlider";
 import HomeSectionNav from "@/components/home/HomeSectionNav";
 import ProductSceneStrip from "@/components/home/ProductSceneStrip";
@@ -22,7 +23,7 @@ import {
   HERO_SLIDE_IMAGE_URLS,
   PRODUCT_STRIP_IMAGE_URLS,
 } from "@/lib/home/hero-slide-images";
-
+import { getDecisionBriefCopy } from "@/lib/i18n/decision-brief";
 const LOCALE_STORAGE_KEY = "lde-locale";
 
 type ApiResponse = {
@@ -75,6 +76,7 @@ export default function DecisionStudio() {
   const t = getUi(locale);
   const exNav = getExpertsCopy(locale);
   const pr = getPricingCopy(locale);
+  const brief = getDecisionBriefCopy(locale);
   const rtl = isRtlLocale(locale);
 
   const sectionLinks = useMemo(
@@ -469,7 +471,17 @@ export default function DecisionStudio() {
                 {t.decision}
               </h3>
 
+              <DecisionBriefWizard
+                t={brief}
+                onApply={({ decision: d, context: ctx, constraints: cons }) => {
+                  setDecision(d);
+                  setContext(ctx);
+                  setConstraints(cons);
+                }}
+              />
+
               <textarea
+                id="decision-input"
                 value={decision}
                 onChange={(e) => setDecision(e.target.value)}
                 placeholder={t.decisionPh}
