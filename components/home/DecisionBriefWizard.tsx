@@ -28,7 +28,7 @@ export default function DecisionBriefWizard({ t, onApply }: Props) {
     });
   }
 
-  function useSpark(text: string) {
+  function applySpark(text: string) {
     setA(text);
     setOpen(true);
   }
@@ -111,7 +111,7 @@ export default function DecisionBriefWizard({ t, onApply }: Props) {
             <button
               key={s}
               type="button"
-              onClick={() => useSpark(s)}
+              onClick={() => applySpark(s)}
               className="rounded-full border border-white/10 bg-black/25 px-3 py-1.5 text-left text-xs leading-snug text-[rgb(var(--ink-soft))] transition hover:border-[rgb(var(--accent))]/35 hover:text-[rgb(var(--ink))]"
             >
               {s}
