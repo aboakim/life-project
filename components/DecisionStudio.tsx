@@ -81,6 +81,7 @@ export default function DecisionStudio() {
 
   const sectionLinks = useMemo(
     () => [
+      { id: "section-overview" as const, label: t.sectionNavOverview },
       { id: "section-product" as const, label: t.sectionNavProduct },
       { id: "section-trust" as const, label: t.sectionNavTrust },
       { id: "section-how" as const, label: t.sectionNavHow },
@@ -238,9 +239,6 @@ export default function DecisionStudio() {
                   {pr.navPricing}
                 </Link>
               </div>
-              <p className="mt-6 text-[11px] leading-relaxed text-[rgb(var(--ink-soft))]/80">
-                {t.accessLocal}
-              </p>
             </div>
 
             <div className="relative space-y-5">
@@ -283,6 +281,53 @@ export default function DecisionStudio() {
                   </Link>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="section-overview"
+          className="scroll-mt-36 pt-12 sm:pt-14"
+          aria-labelledby="overview-heading"
+        >
+          <div className="rounded-[1.75rem] border border-white/[0.09] bg-gradient-to-br from-white/[0.06] via-white/[0.02] to-transparent p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.04)_inset] sm:p-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[rgb(var(--accent-dim))]">
+              {t.atAGlanceEyebrow}
+            </p>
+            <h2
+              id="overview-heading"
+              className="mt-2 text-xl font-semibold tracking-tight text-[rgb(var(--ink))] sm:text-2xl [text-wrap:balance]"
+            >
+              {t.atAGlanceTitle}
+            </h2>
+            <ul className="mt-6 grid gap-4 sm:grid-cols-3">
+              {t.atAGlanceCards.map((card, i) => (
+                <li
+                  key={card.title}
+                  className="flex flex-col rounded-2xl border border-white/[0.07] bg-[rgb(var(--surface-2))]/40 p-5 ring-1 ring-white/[0.03]"
+                >
+                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[rgb(var(--accent))]/35 to-[rgb(var(--accent-2))]/20 text-xs font-bold text-white shadow-inner">
+                    {i + 1}
+                  </span>
+                  <h3 className="mt-4 text-sm font-semibold text-[rgb(var(--ink))]">
+                    {card.title}
+                  </h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
+                    {card.body}
+                  </p>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-white/[0.06] pt-6">
+              <a
+                href="#section-workspace"
+                className="inline-flex items-center justify-center rounded-xl bg-white/[0.07] px-4 py-2.5 text-sm font-semibold text-[rgb(var(--ink))] ring-1 ring-white/10 transition hover:bg-white/[0.1]"
+              >
+                {t.heroCtaPrimary}
+              </a>
+              <span className="text-xs text-[rgb(var(--ink-soft))]/90">
+                {t.sectionNavProduct} → {t.sectionNavHow} → {t.sectionNavAnalyzer}
+              </span>
             </div>
           </div>
         </section>

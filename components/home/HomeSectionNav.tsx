@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 const SECTION_IDS = [
+  "section-overview",
   "section-product",
   "section-trust",
   "section-how",

@@ -56,6 +56,7 @@ export type UIStrings = {
   howSectionTitle: string;
   howSteps: ReadonlyArray<{ title: string; body: string }>;
   /** Sticky section jump links (home page) */
+  sectionNavOverview: string;
   sectionNavProduct: string;
   sectionNavTrust: string;
   sectionNavHow: string;
@@ -79,6 +80,10 @@ export type UIStrings = {
   productStripEyebrow: string;
   productStripAria: string;
   productStripAlts: readonly [string, string, string, string];
+  /** Short “what is this?” strip below hero */
+  atAGlanceEyebrow: string;
+  atAGlanceTitle: string;
+  atAGlanceCards: ReadonlyArray<{ title: string; body: string }>;
 };
 
 /** English trust/how blocks — reused as fallback for locales without custom copy */
@@ -89,6 +94,7 @@ const trustHowEn: Pick<
   | "trustCards"
   | "howSectionTitle"
   | "howSteps"
+  | "sectionNavOverview"
   | "sectionNavProduct"
   | "sectionNavTrust"
   | "sectionNavHow"
@@ -107,8 +113,28 @@ const trustHowEn: Pick<
   | "productStripEyebrow"
   | "productStripAria"
   | "productStripAlts"
+  | "atAGlanceEyebrow"
+  | "atAGlanceTitle"
+  | "atAGlanceCards"
 > = {
   heroRibbon: "8+ languages · Scenario engine · Privacy-first design",
+  sectionNavOverview: "Overview",
+  atAGlanceEyebrow: "Start here",
+  atAGlanceTitle: "What this site is — in three lines",
+  atAGlanceCards: [
+    {
+      title: "What it is",
+      body: "A structured decision workspace for big life forks (move, career, relationships). You get scenarios, four lenses, timelines, and a score—not endless generic chat.",
+    },
+    {
+      title: "What you do",
+      body: "Write your question, add context if you want, run the analyzer, then read the report. Optionally browse experts or pricing when you’re ready.",
+    },
+    {
+      title: "What it isn’t",
+      body: "Not therapy, not legal or medical advice, and not a social feed. In an emergency, contact a real professional.",
+    },
+  ],
   trustSectionTitle: "Why people use this framework",
   trustCards: [
     {
@@ -221,6 +247,7 @@ const trustHowHy: Pick<
   | "trustCards"
   | "howSectionTitle"
   | "howSteps"
+  | "sectionNavOverview"
   | "sectionNavProduct"
   | "sectionNavTrust"
   | "sectionNavHow"
@@ -239,9 +266,29 @@ const trustHowHy: Pick<
   | "productStripEyebrow"
   | "productStripAria"
   | "productStripAlts"
+  | "atAGlanceEyebrow"
+  | "atAGlanceTitle"
+  | "atAGlanceCards"
 > = {
   heroRibbon:
     "8+ լեզու · Սցենարների շարժիչ · Գաղտնիության առաջնահերթություն",
+  sectionNavOverview: "Ընդհանուր",
+  atAGlanceEyebrow: "Սկսիր այստեղից",
+  atAGlanceTitle: "Ինչ է այս կայքը — երեք նախադասությամբ",
+  atAGlanceCards: [
+    {
+      title: "Ինչ է սա",
+      body: "Մեծ կյանքի ընտրությունների (տեղափոխություն, աշխատանք, հարաբերություններ) կառուցված աշխատատարածք է։ Ստանում ես սցենարներ, չորս հարթակ, ժամանակացույց և միավոր՝ ոչ թե անվերջ ընդհանուր chat։",
+    },
+    {
+      title: "Ինչ ես անում",
+      body: "Գրում ես հարցը, կամաց կոնտեքստ, սեղմում «Վերլուծել», կարդում հաշվետվությունը։ Ցանկության դեպքում՝ մասնագետներ կամ գներ։",
+    },
+    {
+      title: "Ինչ չէ սա",
+      body: "Ոչ թերապիա, ոչ իրավաբանական/բժշկական խորհուրդ, ոչ սոցիալ ժապավեն։ Ճգնաժամում դիմիր իրական մասնագետի։",
+    },
+  ],
   trustSectionTitle: "Ինչու են ընտրում այս գործիքը",
   trustCards: [
     {
@@ -352,7 +399,7 @@ const uiHy: Partial<UIStrings> = {
   heroLine1: "Մեծ որոշումների համար՝",
   heroAccent: "կառուցված վերլուծություն",
   subtitle:
-    "Տեղափոխություն, աշխատանք, հարաբերություններ․ գրիր հարցը — ստացիր ֆինանս/հոգեբանական հարթակներ, լավագույն–վատագույն սցենարներ, 6 ամիսից մինչև 5 տարի հորիզոն և որոշման միավոր։ Սա խորհրդատու գործիք է, ոչ թե պատահական chat։",
+    "Գրիր իրական հարցը (տեղափոխություն, աշխատանք, հարաբերություններ) — ստացիր սցենարներ, ժամանակացույց և միավոր։ Սա կառուցված վերլուծիչ է, ոչ պատահական chat։",
   disclaimerTitle: "Պարտադիր հիշեցում",
   disclaimerBody:
     "Այս գործիքը աջակցություն է, ոչ թե վերջնական իշխանություն։ Ճգնաժամային իրավիճակներում դիմեք մասնագետի։ Սա բժշկական, իրավական կամ թերապևտիկ խորհուրդ չէ։",
@@ -410,7 +457,7 @@ const uiEn: Partial<UIStrings> = {
   heroLine1: "Big life decisions →",
   heroAccent: "structured AI analysis",
   subtitle:
-    "Moving, job, relationships: describe your question—get finance/psychology lenses, best/worst/likely scenarios, a 6‑month→5‑year view, and a decision score. A support tool—not random chat.",
+    "Ask a real fork (move, job, relationship). Get scenarios, timelines, four lenses, and a score—structured analysis, not random chat.",
   disclaimerTitle: "Important",
   disclaimerBody:
     "This is a support tool—not final authority. In a crisis, contact a professional. Not medical, legal, or therapeutic advice.",
@@ -468,7 +515,7 @@ const uiEnUs: Partial<UIStrings> = {
   decisionPh:
     'e.g. "Should I move to Germany?", "Should I quit my job?"…',
   subtitle:
-    "Scenarios, timelines, and a decision score in one structured flow—not generic chit-chat.",
+    "One structured flow: scenarios, timelines, and a score—not generic chit-chat.",
   accessLocal:
     "Local URL: http://localhost:3000 — run `npm run dev`, then open it in your browser.",
   footerPremium:

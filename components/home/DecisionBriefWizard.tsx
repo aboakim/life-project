@@ -13,7 +13,7 @@ type Props = {
 };
 
 export default function DecisionBriefWizard({ t, onApply }: Props) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [a, setA] = useState("");
   const [b, setB] = useState("");
   const [c, setC] = useState("");
