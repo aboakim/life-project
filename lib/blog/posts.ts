@@ -230,6 +230,250 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
   },
   {
+    slug: "rent-vs-buy-a-home-framework",
+    title: "Rent vs buy a home: a decision framework without the hype",
+    description:
+      "Housing is the single biggest line item most people decide on. A sober framework across cash flow, optionality, identity, and life stage — beyond the slogans.",
+    tags: ["finance", "housing", "framework"],
+    readingMinutes: 7,
+    publishedAt: "2026-04-06",
+    author: "Life Decision Engine",
+    hero: {
+      eyebrow: "Finance",
+      lede: "Renting is not throwing money away, and buying is not always an investment. The right answer depends on your numbers and your life stage — not on the meme of the year.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "Housing is the single biggest recurring line item in most budgets and the single biggest non-retirement asset many people ever hold. Yet the question of whether to rent or buy is usually decided on vibes — family pressure, memes about wasted rent, or a hot market headline. A sober framework changes the answer for about a third of the people who apply it.",
+      },
+      { kind: "h2", text: "1. The cash-flow comparison — both sides, honestly" },
+      {
+        kind: "p",
+        text: "Buying looks cheap if you only count mortgage principal and interest. It stops looking cheap when you add property tax, insurance, maintenance (plan on 1–1.5% of the home’s value per year), HOA or condo fees, and the opportunity cost of your down payment. Compare monthly all-in cost of ownership to monthly rent for a comparable place, and do it honestly — not on the fantasy version of either.",
+      },
+      { kind: "h2", text: "2. The optionality tax" },
+      {
+        kind: "ul",
+        items: [
+          "Renting is expensive in dollars but cheap in optionality — you can move in 60 days.",
+          "Buying is cheap in dollars (sometimes) but expensive in optionality — selling typically costs 6–10% of the home value in fees, taxes, and time.",
+          "If there is a 30%+ chance you will want or need to move in the next 4 years (job, relationship, city), optionality tilts toward renting.",
+        ],
+      },
+      { kind: "h2", text: "3. The 5-year rule of thumb" },
+      {
+        kind: "p",
+        text: "A common heuristic: buying tends to beat renting if you stay 5+ years in the same home in a stable market. Shorter than that, transaction costs often eat the equity you build. This is a rule of thumb, not a law — but it filters out a lot of bad decisions when people are staring at a hot listing and ignoring their career reality.",
+      },
+      { kind: "h2", text: "4. Identity and life stage" },
+      {
+        kind: "p",
+        text: "Some reasons to buy are financial. Some are not — stability for kids, customisation, deep roots in a place. Those are legitimate, but they should be named, not smuggled in. If the financial case is close and the identity reasons are strong, buying can be right. If the financial case is weak and the identity reasons are thin, you are buying someone else’s idea of adulthood.",
+      },
+      { kind: "h2", text: "5. Scenarios and the worst case" },
+      {
+        kind: "p",
+        text: "Model three paths: best (you stay 10+ years, property appreciates, you save vs renting), likely (you stay 6–8 years, modest appreciation, roughly flat vs renting), worst (you need to move in 2–3 years into a soft market and eat transaction costs). If the worst case is survivable, buying can make sense. If the worst case wipes you out, you are over-levered for your life.",
+      },
+      { kind: "h2", text: "Quick self-check" },
+      {
+        kind: "ol",
+        items: [
+          "Will I likely stay 5+ years? If unsure, renting wins on optionality.",
+          "Can I afford the all-in monthly cost, not just the headline mortgage?",
+          "Do I have an emergency fund after the down payment, or am I house-poor?",
+          "Am I buying for financial reasons, identity reasons, or both — named clearly?",
+          "Can I survive the worst case (soft market + forced move)?",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "start-a-business-vs-stay-employed",
+    title: "Start a business vs stay employed: a sober comparison",
+    description:
+      "Leaving a salary to start something is romantic until it is not. A framework across runway, risk, identity, and the overlooked cost of a great job.",
+    tags: ["career", "entrepreneurship", "finance"],
+    readingMinutes: 7,
+    publishedAt: "2026-04-08",
+    author: "Life Decision Engine",
+    hero: {
+      eyebrow: "Career",
+      lede: "Starting a business is not a single decision. It is a long series of decisions that each compound — which is why the first one deserves a real framework.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "There is a cultural narrative that says quitting your job to start something is brave by default. That is not true. Bravery without structure is usually called burnout. The real question is not whether to be an entrepreneur, it is whether, given your life stage, your finances, your ideas, and your risk tolerance, the bet makes sense in the specific way you are about to make it.",
+      },
+      { kind: "h2", text: "1. What problem, for whom, at what price?" },
+      {
+        kind: "p",
+        text: "Before you model runway or ambition, answer three questions you will be asked a thousand times. What specific problem are you solving? For which specific group of people? At what price point, and why are they willing to pay it? If you cannot answer these in one plain sentence each, you are not ready to leave a salary.",
+      },
+      { kind: "h2", text: "2. The overlooked cost of a great job" },
+      {
+        kind: "p",
+        text: "A good salary is not just cash flow. It is health insurance, sick leave, predictable income that lets you plan, colleagues who push you, a brand that opens doors, and the compounding of skills under the guidance of people better than you. Leaving all of that at once, for an uncertain startup, is a bigger move than the spreadsheet suggests.",
+      },
+      { kind: "h2", text: "3. Runway math — realistic, not optimistic" },
+      {
+        kind: "ul",
+        items: [
+          "12–18 months of personal expenses covered, minimum — 24 is better.",
+          "Business capital separate from personal runway.",
+          "A plan for health insurance that does not rely on being healthy.",
+          "A pre-agreed milestone where, if it is not hit, you return to employment without shame.",
+        ],
+      },
+      { kind: "h2", text: "4. Full-time vs bridge" },
+      {
+        kind: "p",
+        text: "The cleanest mistake people make is treating the choice as binary. It is not. You can prototype nights and weekends, go part-time, take a leave, or negotiate consulting off your current employer as your first client. A bridge version reduces risk by an order of magnitude with only modest cost to speed.",
+      },
+      { kind: "h2", text: "5. Identity and the 5-year portrait" },
+      {
+        kind: "p",
+        text: "Imagine yourself 5 years from now. In one version, the startup worked. In another, it closed after 18 months and you rejoined a normal role. In both, do you like who you became? If the answer is yes in both, the decision is much cleaner. If it is yes only in the win scenario, you are betting on identity as much as on the business — which is fine, but name it.",
+      },
+      { kind: "h2", text: "Quick self-check" },
+      {
+        kind: "ol",
+        items: [
+          "Can I state the problem, user, and price point in one sentence each?",
+          "Do I have 12–24 months of personal runway separate from business capital?",
+          "Have I tried the bridge version (side, part-time, consulting)?",
+          "Who am I in the loss scenario — and is that person still okay?",
+          "Is there a named milestone at which I will return to employment without drama?",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "decision-paralysis-regret-psychology",
+    title: "Decision paralysis and the psychology of regret",
+    description:
+      "Why big decisions stall, how anticipated regret quietly drives bad choices, and a short playbook for acting calmly under uncertainty.",
+    tags: ["psychology", "decision-making"],
+    readingMinutes: 6,
+    publishedAt: "2026-04-04",
+    author: "Life Decision Engine",
+    hero: {
+      eyebrow: "Mind",
+      lede: "Most big decisions are not stuck because the facts are missing. They are stuck because the feelings are doing all the thinking.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "Decision paralysis is rarely a lack of information. It is usually a lack of permission — permission to accept that any choice will close some doors, permission to be wrong, permission to disappoint someone. When you see paralysis named this way, the fix shifts from spreadsheets to something more honest.",
+      },
+      { kind: "h2", text: "Why good decisions feel bad" },
+      {
+        kind: "p",
+        text: "Humans feel anticipated regret more strongly than anticipated joy. A decision that is 70% likely to go well still presents itself to the nervous system as a 30% threat, and the threat is louder. This is why people often reject objectively good options — not because they disagree with the analysis, but because the body will not sign the contract.",
+      },
+      { kind: "h2", text: "The two regret types" },
+      {
+        kind: "ul",
+        items: [
+          "Action regret — doing something that did not work (usually loud, short-lived).",
+          "Inaction regret — not doing something you might have done (usually quiet, long-lived).",
+        ],
+      },
+      {
+        kind: "p",
+        text: "Most people overestimate action regret and underestimate inaction regret. That is how careers stall, relationships linger past their sell-by date, and moves that were obvious at 30 become painful at 45.",
+      },
+      { kind: "h2", text: "A short playbook for unsticking" },
+      {
+        kind: "ol",
+        items: [
+          "Name the decision in one sentence, then name the feared feeling (shame, loss, guilt).",
+          "Write the two regret columns. Which regret is louder in 5 years — and which is louder today?",
+          "Shrink the first move. A decision is never ‘do the whole thing.’ It is ‘do the next 1–2 weeks.’",
+          "Set a review date. Uncertainty tolerates better when it is bounded.",
+          "Talk to one person who is calm about decisions, not a group that is emotional about you.",
+        ],
+      },
+      { kind: "h2", text: "When paralysis is a signal, not noise" },
+      {
+        kind: "p",
+        text: "Sometimes hesitation is right. If your gut is stuck, one honest pass through values is worth ten spreadsheets. Ask: does this option violate a line I don’t want to cross? If yes, that is not paralysis. That is wisdom. If no, then the work is to act calmly under uncertainty — which is what maturity looks like from the inside.",
+      },
+      {
+        kind: "quote",
+        text: "You cannot decide your way out of uncertainty. You can only act your way into smaller uncertainty.",
+      },
+    ],
+  },
+  {
+    slug: "when-to-talk-to-a-professional",
+    title: "When to talk to a therapist, lawyer, or financial advisor",
+    description:
+      "A structured tool helps you think. A professional helps you decide. A practical guide to when it is time, and how to walk in prepared.",
+    tags: ["experts", "psychology", "finance", "legal"],
+    readingMinutes: 5,
+    publishedAt: "2026-04-02",
+    author: "Life Decision Engine",
+    hero: {
+      eyebrow: "Experts",
+      lede: "Frameworks help you think clearly. People with a license help you decide wisely. Knowing which is which is the skill.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "A common mistake people make with decision tools — ours included — is treating them as a final answer. They are not. They are a way to arrive at a specific, well-shaped question. The value of that is enormous when you bring it into a session with a qualified professional. The 50-minute therapy hour, the 30-minute lawyer call, the 45-minute financial planner meeting — they all work better when you walk in with structure.",
+      },
+      { kind: "h2", text: "When to talk to a therapist" },
+      {
+        kind: "ul",
+        items: [
+          "You have been stuck in the same emotional loop for weeks and structure alone is not enough.",
+          "The decision is entangled with grief, identity, or relationship dynamics.",
+          "You are facing symptoms beyond ordinary stress — sleep, appetite, harmful thoughts.",
+          "You need someone who is not a friend to help you hear yourself.",
+        ],
+      },
+      { kind: "h2", text: "When to talk to a lawyer" },
+      {
+        kind: "ul",
+        items: [
+          "A contract, a separation, a visa, or property is involved — anything with a paper trail.",
+          "You are about to sign something you did not draft.",
+          "The cost of being wrong exceeds a few thousand dollars.",
+          "Someone tells you ‘you don’t need a lawyer for this.’ You usually do.",
+        ],
+      },
+      { kind: "h2", text: "When to talk to a financial advisor or planner" },
+      {
+        kind: "ul",
+        items: [
+          "Major cash inflow or outflow (home purchase, inheritance, equity event).",
+          "Tax structure crossing borders or income categories.",
+          "A decision whose financial consequences stretch 10+ years.",
+          "You can clearly state what you want but not how to get there tax-efficiently.",
+        ],
+      },
+      { kind: "h2", text: "How to walk in prepared" },
+      {
+        kind: "ol",
+        items: [
+          "One sentence describing the decision you are facing.",
+          "Three scenarios you have already imagined (best/worst/likely).",
+          "The single question you most want answered in this session.",
+          "The constraints you will not move on (ethics, values, non-negotiables).",
+          "A notebook. Take notes; you will forget 60% of the session by the next morning.",
+        ],
+      },
+      { kind: "h2", text: "One last thing" },
+      {
+        kind: "p",
+        text: "A framework without a human is intellectual. A human without a framework is expensive. The combination is how adults make their hardest decisions — calm, informed, and not alone.",
+      },
+    ],
+  },
+  {
     slug: "should-you-stay-or-go-relationship-framework",
     title: "Should you stay or go? A calmer relationship framework",
     description:
