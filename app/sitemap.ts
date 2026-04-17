@@ -1,22 +1,36 @@
 import type { MetadataRoute } from "next";
 import { getSiteUrlString } from "@/lib/site-url";
+import { getAllPosts } from "@/lib/blog/posts";
 
-const PATHS = [
-  "",
-  "/pricing",
-  "/experts",
-  "/experts/register",
-  "/community",
-  "/monetize",
-  "/privacy",
-] as const;
+const STATIC_PATHS: { path: string; priority: number; freq: "weekly" | "monthly" }[] = [
+  { path: "", priority: 1, freq: "weekly" },
+  { path: "/pricing", priority: 0.8, freq: "weekly" },
+  { path: "/experts", priority: 0.8, freq: "weekly" },
+  { path: "/experts/register", priority: 0.6, freq: "monthly" },
+  { path: "/community", priority: 0.7, freq: "weekly" },
+  { path: "/monetize", priority: 0.6, freq: "monthly" },
+  { path: "/blog", priority: 0.9, freq: "weekly" },
+  { path: "/faq", priority: 0.7, freq: "monthly" },
+  { path: "/privacy", priority: 0.4, freq: "monthly" },
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = getSiteUrlString();
-  return PATHS.map((path) => ({
+  const now = new Date();
+
+  const statics = STATIC_PATHS.map(({ path, priority, freq }) => ({
     url: `${base}${path}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: path === "" ? 1 : 0.75,
+    lastModified: now,
+    changeFrequency: freq,
+    priority,
   }));
+
+  const blog = getAllPosts().map((post) => ({
+    url: `${base}/blog/${post.slug}`,
+    lastModified: new Date(post.updatedAt || post.publishedAt),
+    changeFrequency: "monthly" as const,
+    priority: 0.65,
+  }));
+
+  return [...statics, ...blog];
 }

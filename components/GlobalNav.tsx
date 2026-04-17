@@ -78,6 +78,18 @@ export default function GlobalNav() {
             {mz.navLabel}
           </Link>
           <Link
+            href="/blog"
+            className="rounded-lg px-3 py-1.5 text-[rgb(var(--ink-soft))] transition hover:bg-white/5 hover:text-[rgb(var(--ink))]"
+          >
+            Blog
+          </Link>
+          <Link
+            href="/faq"
+            className="rounded-lg px-3 py-1.5 text-[rgb(var(--ink-soft))] transition hover:bg-white/5 hover:text-[rgb(var(--ink))]"
+          >
+            FAQ
+          </Link>
+          <Link
             href="/privacy"
             className="rounded-lg px-3 py-1.5 text-[rgb(var(--ink-soft))] transition hover:bg-white/5 hover:text-[rgb(var(--ink))]"
           >
