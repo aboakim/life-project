@@ -9,6 +9,7 @@ import {
 import GlobalNav from "@/components/GlobalNav";
 import GlobalFooter from "@/components/GlobalFooter";
 import AnalyticsGate from "@/components/AnalyticsGate";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import "./globals.css";
 
 /** Must match the snippet in Google AdSense → Site → Verify (same ca-pub-…). */
@@ -102,6 +103,7 @@ export default function RootLayout({
         {children}
         <GlobalFooter />
         <AnalyticsGate />
+        <GoogleAnalytics />
       </body>
     </html>
   );

@@ -524,6 +524,257 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "how-to-evaluate-a-job-offer",
+    title: "How to evaluate a job offer (without getting hypnotised by the salary)",
+    description:
+      "A structured way to read an offer — cash, equity, leverage, ceiling, and culture — so you choose the job that is actually better, not just the one that feels bigger.",
+    tags: ["career", "finance", "decision-making"],
+    readingMinutes: 7,
+    publishedAt: "2026-04-17",
+    author: "Life Decision Engine",
+    hero: {
+      eyebrow: "Career",
+      lede: "An offer letter is a marketing document. Your job is to read it like an analyst — calmly, line by line.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "Most people decide on a job offer the same way they decide what to order at a restaurant — emotionally, in under a minute, under social pressure. Then they spend the next two years living with that decision. It deserves more than that. A good evaluation has five parts: total comp, leverage, ceiling, culture, and exit optionality. Walk every offer through those five, and the winner usually stops being whichever one felt loudest.",
+      },
+      { kind: "h2", text: "1. Total comp — not just salary" },
+      {
+        kind: "p",
+        text: "Base salary is the loudest number. It is also often the least important. Add the signing bonus (annualised over the time you actually plan to stay), target bonus at realistic hit rates, equity (in reasonable expected-value terms, not a dream scenario), benefits (health, 401k match, PTO), and any obvious cost differences (commute, relocation, taxes). The number you get here is the real offer. Compare that, not the base.",
+      },
+      { kind: "h2", text: "2. Leverage — how rare is this role?" },
+      {
+        kind: "p",
+        text: "A role is leveraged when the company needs you more than you need it. Three signals: the role is new and strategic, there are few internal candidates, and there is a visible business problem that will get worse without someone doing the job. Leveraged roles grow people fast. Easy-to-fill roles, even highly paid ones, often stall careers because you are one of many.",
+      },
+      { kind: "h2", text: "3. Ceiling — who sits 2 levels above you?" },
+      {
+        kind: "p",
+        text: "Look at the two people one and two levels above you. Do they impress you? Would you trade calendars with them in 5 years? If yes, the ceiling is worth climbing. If not, the job may be a local maximum — comfortable, well-paid, and a career dead end. Ceiling is the most under-analysed variable in job offers.",
+      },
+      { kind: "h2", text: "4. Culture — evidence, not vibes" },
+      {
+        kind: "ul",
+        items: [
+          "How long has the last person in this role stayed? Why did they leave?",
+          "Who would be your manager — and what do people who report to them say?",
+          "Is there a visible rhythm (1:1s, reviews, written goals), or is it all vibes and Slack?",
+          "What happens when the company misses a quarter — do people get honest, or does it get political?",
+        ],
+      },
+      { kind: "h2", text: "5. Exit optionality" },
+      {
+        kind: "p",
+        text: "A good job should make you more employable elsewhere, not less. Ask: in 2 years, does this role open doors at companies you respect, or is it a niche that only matters internally? Roles with real exit optionality can pay less today and win anyway over a decade.",
+      },
+      { kind: "h2", text: "A five-question scorecard" },
+      {
+        kind: "ol",
+        items: [
+          "What is the honest total comp, not the advertised base?",
+          "Do I have leverage, or am I replaceable?",
+          "Do the people 2 levels above me look like a future I want?",
+          "Does the culture have evidence, not just words?",
+          "Will this role make me more or less hireable in 2 years?",
+        ],
+      },
+      {
+        kind: "quote",
+        text: "The best career moves rarely feel obvious at the time. They feel calm.",
+      },
+    ],
+  },
+  {
+    slug: "parenting-decision-framework",
+    title: "Decision-making for parents: how to choose without outsourcing your judgement",
+    description:
+      "A calm framework for parenting decisions — school, screens, moves, discipline — based on values, reversibility, and what the child will remember.",
+    tags: ["parenting", "decision-making", "values"],
+    readingMinutes: 7,
+    publishedAt: "2026-04-17",
+    author: "Life Decision Engine",
+    hero: {
+      eyebrow: "Family",
+      lede: "Parenting is not a product you can A/B test. It is a long series of small decisions, made tired, that add up to a person.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "Parents face more micro-decisions per day than most CEOs. School choice, screen time, discipline style, whether to move cities for a better district, whether your child needs help or just time. The internet will happily supply ten thousand opinions on each. The risk is not ignorance — it is outsourcing your judgement to whichever voice is loudest.",
+      },
+      { kind: "h2", text: "1. Start with values, not tactics" },
+      {
+        kind: "p",
+        text: "Before you debate tactics (phone age, sleep training, tutoring), write down your top three values as a family. Curiosity? Honesty? Resilience? Warmth? Tactics should serve values. When a parenting question feels hard, it is usually because a tactic is colliding with a value you did not name out loud.",
+      },
+      { kind: "h2", text: "2. Reversibility is your best friend" },
+      {
+        kind: "p",
+        text: "Most parenting decisions are reversible within weeks. You can change a nap schedule, a school activity, or a phone rule, and almost nothing is damaged. A few decisions are not reversible on that scale: relocation, school transfer mid-year, legal decisions about custody. For reversible decisions, act and observe. For irreversible ones, slow down and get a second human.",
+      },
+      { kind: "h2", text: "3. The ‘what will they remember?’ lens" },
+      {
+        kind: "p",
+        text: "A useful lens for parenting decisions is to ask: in 20 years, which version of me will my child remember doing this? Not the objectively correct version — the one they will carry. Sometimes the right call is the calmer one, not the more optimal one, because the emotional residue outlives the decision.",
+      },
+      { kind: "h2", text: "4. Distinguish signal from peer pressure" },
+      {
+        kind: "ul",
+        items: [
+          "Other parents are not a random sample — they are a self-selected peer group, often more anxious than average.",
+          "Advice from grandparents is a data point, not a verdict — parenting science has changed.",
+          "Online forums optimise for engagement, which means they amplify extremes.",
+          "Trust quiet professionals (pediatricians, school counsellors) over loud influencers.",
+        ],
+      },
+      { kind: "h2", text: "5. A short parental decision script" },
+      {
+        kind: "ol",
+        items: [
+          "Is this reversible, or is it long-horizon?",
+          "Which of our family values does it serve — or violate?",
+          "Am I reacting to my child, to my anxiety, or to peer comparison?",
+          "Who is the one quiet expert I should call before the noisy group?",
+          "What is the smallest version of the change I can try for two weeks?",
+        ],
+      },
+      { kind: "h2", text: "When to bring in a professional" },
+      {
+        kind: "p",
+        text: "If a decision involves sustained behavioural change, school performance that is slipping, signs of depression or anxiety, or family conflict that is not improving, a pediatrician, psychologist, or family therapist is the right next step. A tool like this engine can organise your thinking. A trained human actually helps the child.",
+      },
+    ],
+  },
+  {
+    slug: "values-vs-money-tradeoff",
+    title: "Values vs. money: how to decide when the two pull in opposite directions",
+    description:
+      "A framework for the honest trade-off between money and meaning — how much is enough, which values are real, and when to pick which.",
+    tags: ["values", "career", "finance", "psychology"],
+    readingMinutes: 6,
+    publishedAt: "2026-04-17",
+    author: "Life Decision Engine",
+    hero: {
+      eyebrow: "Values",
+      lede: "Pretending money doesn’t matter is naive. Pretending it is the only thing that matters is exhausting. The honest work is in the trade-off.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "Most adults, at some point, face a decision where the better-paying option is not the more meaningful one. Leaving a high-paying job for something smaller. Choosing a less prestigious school because it is closer to family. Turning down a promotion that would double your income but cost your evenings. This is not a rare crisis. It is the quiet background of adulthood.",
+      },
+      { kind: "h2", text: "1. Name the number that is actually enough" },
+      {
+        kind: "p",
+        text: "Most money-vs-meaning debates are contaminated by a lack of clarity about what ‘enough’ means. Enough to cover fixed costs? Enough to save at a specific rate? Enough to stop being afraid? Without a number, every offer looks both attractive and insufficient, and the debate never ends. Write down your honest ‘enough’ line — then you can tell the difference between a raise and a rescue.",
+      },
+      { kind: "h2", text: "2. Separate status from meaning" },
+      {
+        kind: "p",
+        text: "Status and meaning often dress the same. A loud, well-compensated role feels like meaning, until you try to articulate what it is for. Meaning is durable — it holds up at 6am, alone, with no audience. Status collapses the moment the room changes. When you catch yourself defending a decision, ask: would I still feel this way if nobody knew about it?",
+      },
+      { kind: "h2", text: "3. The ‘5 years, two directions’ exercise" },
+      {
+        kind: "p",
+        text: "Imagine yourself 5 years forward. In one version, you took the meaning path and money is tighter than you would like. In the other, you took the money path and your days feel hollow but your finances are calm. Which future version of you is more honest, more interesting, more someone you respect? That does not tell you the answer. But it usually tells you which regret you can actually live with.",
+      },
+      { kind: "h2", text: "4. Trade-offs that are real vs. trade-offs that are lazy" },
+      {
+        kind: "ul",
+        items: [
+          "Real: the highest-meaning option pays 30% less, and that will tighten your life visibly.",
+          "Lazy: assuming every well-paid role is soulless and every underpaid role is meaningful.",
+          "Real: your current job drains energy so much that your values are dormant.",
+          "Lazy: using ‘values’ as cover for avoiding difficult work you could grow into.",
+        ],
+      },
+      { kind: "h2", text: "5. Honest questions that cut through" },
+      {
+        kind: "ol",
+        items: [
+          "What is the ‘enough’ number — written, not felt?",
+          "Which of these options would I still pick if nobody I knew could see it?",
+          "Which regret is louder in 5 years: the money I didn’t make, or the years I didn’t spend right?",
+          "Have I consulted anyone whose life I actually respect — not just peers in my bubble?",
+          "Am I confusing status with meaning, or meaning with avoidance?",
+        ],
+      },
+      {
+        kind: "quote",
+        text: "You do not have to choose between money and meaning. You have to choose a version of each you can defend at 60.",
+      },
+    ],
+  },
+  {
+    slug: "remote-vs-in-person-job",
+    title: "Remote vs. in-person jobs: a structured way to choose, not a culture war",
+    description:
+      "Beyond the Twitter discourse: a practical framework for choosing between remote, hybrid, and in-person roles based on life stage, career stage, and personality.",
+    tags: ["career", "remote-work", "decision-making"],
+    readingMinutes: 6,
+    publishedAt: "2026-04-17",
+    author: "Life Decision Engine",
+    hero: {
+      eyebrow: "Work",
+      lede: "The right format is not the one that wins online. It is the one that matches your specific life, career stage, and temperament.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "The remote-vs-office question is treated like an ideological battle. In practice, it is almost always a personal trade-off — different for a 24-year-old first-job professional than for a 40-year-old parent in a senior role. The honest answer is: it depends, but on a small number of specific variables, which most people never actually list.",
+      },
+      { kind: "h2", text: "1. Career stage matters most" },
+      {
+        kind: "p",
+        text: "Early in a career — your first 3–5 years — proximity to smarter people usually pays. You learn how decisions get made, how meetings work, who is political, who is serious. Remote work can flatten that learning curve. Mid and late career, when you already know the language, remote work often accelerates output and quality of life.",
+      },
+      { kind: "h2", text: "2. Life stage matters second" },
+      {
+        kind: "p",
+        text: "Single, newly relocated, or new to a city? An office gives you humans. Parents of young children? Remote buys back the single scarcest resource in your life, which is minutes. Care-giving for a parent? Remote is not a luxury, it is the difference between sustainable work and quiet burnout.",
+      },
+      { kind: "h2", text: "3. Temperament is not optional" },
+      {
+        kind: "ul",
+        items: [
+          "Do you think better alone or in reaction to others?",
+          "Do you self-regulate easily, or do you need the scaffolding of a room?",
+          "Does social friction energise you, or does it cost you your weekend?",
+          "How quickly do you feel lonely without deliberate effort?",
+        ],
+      },
+      { kind: "h2", text: "4. Role type — some jobs punish remote" },
+      {
+        kind: "p",
+        text: "Certain roles — creative leadership, new-team formation, client-facing sales, apprentice-heavy work — lose something real when fully remote. Other roles — deep focus work, senior individual contributors, writing, engineering — often lose something when they are fully in-office. Be honest about which one yours is, independent of what your employer prefers.",
+      },
+      { kind: "h2", text: "5. Hybrid — the honest version" },
+      {
+        kind: "p",
+        text: "Hybrid often fails because it is accidental, not designed. The version that works is: a fixed number of days, a clear reason each day is in-office (meetings, reviews, social anchor), and the rest protected for deep work. Hybrid as ‘come in whenever’ tends to produce empty offices and resentful Tuesdays.",
+      },
+      { kind: "h2", text: "A short decision script" },
+      {
+        kind: "ol",
+        items: [
+          "Where am I in my career — apprentice, craftsman, or master?",
+          "What does my life stage need more of: proximity or time?",
+          "Am I the kind of person who compounds in a room or in silence?",
+          "Is my role the kind that loses something real without a room?",
+          "If my employer is flexible, what designed hybrid would actually work for me?",
+        ],
+      },
+      {
+        kind: "quote",
+        text: "Work format is a personal infrastructure choice. Pick it like furniture, not like a flag.",
+      },
+    ],
+  },
 ];
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
