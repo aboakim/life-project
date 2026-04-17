@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Link from "next/link";
 import MarketingPageShell from "@/components/layout/MarketingPageShell";
 
@@ -9,21 +10,29 @@ export const metadata: Metadata = {
   alternates: { canonical: "/faq" },
 };
 
-type QA = { q: string; a: React.ReactNode };
+type QA = {
+  q: string;
+  /** Rich JSX rendered on the page. */
+  a: ReactNode;
+  /** Plain-text mirror used for JSON-LD schema (keep it concise). */
+  plain: string;
+};
 
 const FAQ_GENERAL: QA[] = [
   {
     q: "What is Life Decision Engine?",
     a: (
       <>
-        Life Decision Engine is a structured decision-analysis workspace for big
-        life questions — relocation, career moves, relationships, large
+        Life Decision Engine is a structured decision-analysis workspace for
+        big life questions — relocation, career moves, relationships, large
         purchases. Instead of a generic chat, it gives you scenarios
-        (best/worst/likely), four analytical lenses (finance, psychology, risk,
-        upside), a 6-month to 5-year timeline, and an alignment score you can
-        discuss with a professional if needed.
+        (best/worst/likely), four analytical lenses (finance, psychology,
+        risk, upside), a 6-month to 5-year timeline, and an alignment score
+        you can discuss with a professional if needed.
       </>
     ),
+    plain:
+      "A structured decision-analysis workspace for big life questions. It gives you scenarios, four lenses, a timeline, and an alignment score instead of generic chat.",
   },
   {
     q: "Is it a replacement for a therapist, lawyer, or financial advisor?",
@@ -33,9 +42,18 @@ const FAQ_GENERAL: QA[] = [
         licensed professionals. It will never diagnose, prescribe, or provide
         legal/medical advice. If the question touches those areas, use the
         tool to clarify your thinking and then consult a qualified expert —
-        we list some on the <Link href="/experts" className="text-[rgb(var(--accent-2))] underline-offset-2 hover:underline">experts</Link> page.
+        we list some on the{" "}
+        <Link
+          href="/experts"
+          className="text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+        >
+          experts
+        </Link>{" "}
+        page.
       </>
     ),
+    plain:
+      "No. It is a support tool, not a substitute for licensed professionals. For clinical, legal, or financial matters, consult a qualified expert.",
   },
   {
     q: "Who is it for?",
@@ -47,6 +65,8 @@ const FAQ_GENERAL: QA[] = [
         explicitly before committing.
       </>
     ),
+    plain:
+      "Adults facing consequential life forks who prefer structure over generic conversation.",
   },
 ];
 
@@ -62,6 +82,8 @@ const FAQ_USAGE: QA[] = [
         three fields quickly.
       </>
     ),
+    plain:
+      "Describe your decision in the analyzer, add optional context and values, and click Run analysis. A 60-second brief helps fill the fields quickly.",
   },
   {
     q: "Do I need an account?",
@@ -73,6 +95,8 @@ const FAQ_USAGE: QA[] = [
         become available.
       </>
     ),
+    plain:
+      "No account is needed for the core analyzer. Accounts are used for history, Premium, or expert bookings.",
   },
   {
     q: "What languages are supported?",
@@ -83,6 +107,8 @@ const FAQ_USAGE: QA[] = [
         in the Language section at the bottom of the home page.
       </>
     ),
+    plain:
+      "8+ languages including English, Armenian, Russian, German, French, Spanish, Italian, and Arabic.",
   },
 ];
 
@@ -95,12 +121,17 @@ const FAQ_PRIVACY: QA[] = [
         session flow. If AI analysis is enabled on the server, your prompt is
         sent to the AI provider (e.g. OpenAI) <em>only</em> to generate your
         answer, under their terms. See the{" "}
-        <Link href="/privacy" className="text-[rgb(var(--accent-2))] underline-offset-2 hover:underline">
+        <Link
+          href="/privacy"
+          className="text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+        >
           Privacy Policy
         </Link>{" "}
         for details.
       </>
     ),
+    plain:
+      "There is no public feed. If AI is enabled, your prompt goes only to the AI provider to generate your answer. See the Privacy Policy for details.",
   },
   {
     q: "Do you sell my data?",
@@ -111,6 +142,8 @@ const FAQ_PRIVACY: QA[] = [
         Privacy Policy.
       </>
     ),
+    plain:
+      "No. Ads may be shown via Google AdSense, a standard ad network covered in our Privacy Policy.",
   },
   {
     q: "Can I delete my data?",
@@ -121,6 +154,8 @@ const FAQ_PRIVACY: QA[] = [
         out via the contact method on the site for deletion requests.
       </>
     ),
+    plain:
+      "The MVP does not persist analyzer input publicly. For account-linked features, contact us through the site to request deletion.",
   },
 ];
 
@@ -131,9 +166,18 @@ const FAQ_BILLING: QA[] = [
       <>
         Yes — the core analyzer is free to use. Premium (currently modelled
         around $4.99/month as an example) unlocks extra depth in future
-        versions. See <Link href="/pricing" className="text-[rgb(var(--accent-2))] underline-offset-2 hover:underline">pricing</Link>.
+        versions. See{" "}
+        <Link
+          href="/pricing"
+          className="text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+        >
+          pricing
+        </Link>
+        .
       </>
     ),
+    plain:
+      "The core analyzer is free. A Premium tier (example pricing $4.99/month) unlocks additional depth.",
   },
   {
     q: "How do payments work?",
@@ -144,13 +188,18 @@ const FAQ_BILLING: QA[] = [
         handles payment data under its policies.
       </>
     ),
+    plain:
+      "Paid features use Stripe for secure card handling. We do not store full card numbers on our servers.",
   },
   {
     q: "Can I talk to a real human expert?",
     a: (
       <>
         Yes — the{" "}
-        <Link href="/experts" className="text-[rgb(var(--accent-2))] underline-offset-2 hover:underline">
+        <Link
+          href="/experts"
+          className="text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+        >
           experts directory
         </Link>{" "}
         lists psychologists, lawyers, and financial professionals. Booking
@@ -158,6 +207,8 @@ const FAQ_BILLING: QA[] = [
         discover who works in the area you need.
       </>
     ),
+    plain:
+      "Yes. The experts directory lists psychologists, lawyers, and financial professionals. Booking flows will be added progressively.",
   },
 ];
 
@@ -170,35 +221,13 @@ const SECTIONS: { id: string; title: string; items: QA[] }[] = [
 
 const ALL_QAS: QA[] = SECTIONS.flatMap((s) => s.items);
 
-function qaToPlainText(a: React.ReactNode): string {
-  // We store plain-text mirrors for JSON-LD.
-  // Keep strings concise; the JSX version renders on the page.
-  return (
-    typeof a === "string"
-      ? a
-      : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        extractText(a as any)
-  ).replace(/\s+/g, " ").trim();
-}
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function extractText(node: any): string {
-  if (node == null || typeof node === "boolean") return "";
-  if (typeof node === "string" || typeof node === "number") return String(node);
-  if (Array.isArray(node)) return node.map(extractText).join(" ");
-  if (typeof node === "object" && "props" in node) {
-    return extractText(node.props?.children);
-  }
-  return "";
-}
-
 const FAQ_JSON_LD = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   mainEntity: ALL_QAS.map((qa) => ({
     "@type": "Question",
     name: qa.q,
-    acceptedAnswer: { "@type": "Answer", text: qaToPlainText(qa.a) },
+    acceptedAnswer: { "@type": "Answer", text: qa.plain },
   })),
 };
 
