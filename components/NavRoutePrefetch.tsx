@@ -8,6 +8,7 @@ const ROUTES = [
   "/community",
   "/pricing",
   "/monetize",
+  "/privacy",
   "/experts/register",
 ] as const;
 

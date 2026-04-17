@@ -615,6 +615,14 @@ export default function DecisionStudio() {
                     <li key={i}>{point}</li>
                   ))}
                 </ul>
+                <p className="mt-5 text-sm">
+                  <Link
+                    href="/privacy"
+                    className="font-medium text-emerald-200/95 underline-offset-2 hover:underline"
+                  >
+                    Privacy Policy →
+                  </Link>
+                </p>
               </div>
             </div>
           </div>

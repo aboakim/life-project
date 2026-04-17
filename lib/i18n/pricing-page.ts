@@ -35,8 +35,8 @@ const hy: PricingCopy = {
     "Գաղտնիության հիմնական շերտ",
   ],
   premiumTitle: "Premium",
-  premiumPrice: "—",
-  premiumDesc: "Շուտով + Stripe",
+  premiumPrice: "$4.99",
+  premiumDesc: "ամսական (օրինակ)",
   premiumBullets: [
     "Անսահմանափակ կամ ավելի շատ AI վերլուծություններ",
     "Խորը հաշվետվություններ (հետագա)",
@@ -67,8 +67,8 @@ const en: PricingCopy = {
     "Core privacy messaging",
   ],
   premiumTitle: "Premium",
-  premiumPrice: "—",
-  premiumDesc: "Coming soon + Stripe",
+  premiumPrice: "$4.99",
+  premiumDesc: "per month (example)",
   premiumBullets: [
     "More / unlimited AI analyses",
     "Deeper reports (future)",
