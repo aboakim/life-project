@@ -775,6 +775,285 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "how-to-choose-a-university",
+    title: "How to choose a university (without letting rankings do your thinking)",
+    description:
+      "A practical framework for choosing the right university — career fit, cost, cohort, city, and what the brand actually buys you.",
+    tags: ["education", "career", "decision-making"],
+    readingMinutes: 7,
+    publishedAt: "2026-04-17",
+    author: "Life Decision Engine",
+    hero: {
+      eyebrow: "Education",
+      lede: "University choice is one of the most over-ranked, under-analysed decisions in modern life. Structure it like an investment, not a trophy.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "At 17 or 18, most people decide on a university in a narrow window, with loud parental voices, peer pressure, and an industry of ranking lists all competing for attention. The result is often a decision that looks correct on paper and feels wrong on day one. The fix is not to ignore rankings — it is to put them in their proper place, behind four more important variables.",
+      },
+      { kind: "h2", text: "1. Career fit — what does this specific degree unlock?" },
+      {
+        kind: "p",
+        text: "Ask, for the exact program you are considering: which careers does it open, and which does it close? A strong engineering school opens tech hiring pipelines even when the brand is mid-tier. A generic humanities degree at a famous brand is often less career-functional than a practical degree at a smaller school. The question is not ‘is this a good university?’ but ‘is this a good pipeline to the life I can currently imagine?’",
+      },
+      { kind: "h2", text: "2. Cost — total, not sticker" },
+      {
+        kind: "p",
+        text: "Sticker price is marketing. What matters is net cost after scholarships, cost of living for the city, opportunity cost of 4 years, and loan interest over 15–25 years. A ‘cheaper’ school that puts you in debt at 8% compounded is not cheap. A ‘more expensive’ school that covers 80% of tuition may be the most affordable option. Run the real math, not the admissions math.",
+      },
+      { kind: "h2", text: "3. Cohort — who will you be sitting next to for four years?" },
+      {
+        kind: "p",
+        text: "Universities shape people less through professors than through peers. The ambition, curiosity, and work ethic of your cohort will become your default. Visit, sit in a class if possible, walk the library on a Tuesday night. Do you want to become the median of the room you are walking through? If yes, that is a better signal than any ranking.",
+      },
+      { kind: "h2", text: "4. City — where will you actually live?" },
+      {
+        kind: "ul",
+        items: [
+          "Proximity to industry you might intern in or join after.",
+          "Weather, transit, safety — lived daily for four years.",
+          "Distance from family: how often will you actually go home?",
+          "International mobility: does graduating in this city open or close doors in the country you might move to?",
+        ],
+      },
+      { kind: "h2", text: "5. Brand — what does it actually buy you?" },
+      {
+        kind: "p",
+        text: "A strong brand mainly buys you three things: a slightly higher first-job ceiling, a more trusted alumni network, and a quicker interview response for 2–3 years after graduation. It does not buy curiosity, skills, or a happy life. Weight it accordingly.",
+      },
+      { kind: "h2", text: "A short decision script" },
+      {
+        kind: "ol",
+        items: [
+          "Which careers does this specific program realistically open in 4 years?",
+          "What is the 10-year total cost of this school vs. my best alternative?",
+          "Would I be happy to become the median student in this program?",
+          "Is this city a place I can live, commute, and grow in for 4 years?",
+          "Is the brand buying me the first job — or just the Instagram?",
+        ],
+      },
+      {
+        kind: "quote",
+        text: "The best university for you is the one where you would still work hard if nobody was impressed by the name.",
+      },
+    ],
+  },
+  {
+    slug: "how-to-decide-to-have-children",
+    title: "How to decide whether to have children",
+    description:
+      "A calm framework for one of the most asymmetric decisions in life — what it actually changes, which regrets are real, and when a professional conversation is the right next step.",
+    tags: ["family", "values", "psychology", "life-stage"],
+    readingMinutes: 8,
+    publishedAt: "2026-04-17",
+    author: "Life Decision Engine",
+    hero: {
+      eyebrow: "Life stage",
+      lede: "Very few decisions are as asymmetric as this one. Which is exactly why it deserves a calm process, not a loud one.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "The decision to have children, or not to, is often treated as a matter of feeling: either you want them or you don’t. In practice, the feeling is unstable — it moves with age, partner, financial situation, and the people around you. A slightly more structured approach does not make the decision unromantic. It makes it survivable.",
+      },
+      { kind: "p", text: "This essay is explicitly not advocacy. It is a framework for thinking, intended to help people make a calm, conscious choice in either direction. If you are in a fertility-sensitive window, a partnership conflict, or a mental-health strain, please pair this with a qualified professional." },
+      { kind: "h2", text: "1. Asymmetry is the core property" },
+      {
+        kind: "p",
+        text: "Most decisions are reversible on a reasonable timeline. This one is not. Choosing to have children is a 20-year commitment to another human being; choosing not to has its own asymmetry, felt most strongly in your 40s and later. Frame the decision as permanent in both directions, and then ask which permanence you can live with.",
+      },
+      { kind: "h2", text: "2. What genuinely changes (not the Instagram version)" },
+      {
+        kind: "ul",
+        items: [
+          "Sleep, routine, and calendar — permanently reshaped for 4–6 years at minimum.",
+          "Money — honest cost is higher than most budgets admit.",
+          "Career — varies by gender, by country, by role; rarely zero.",
+          "Relationship — intensifies strengths and weaknesses; it does not ‘fix’ anything.",
+          "Identity — you become one version of yourself more strongly, and lose access to another.",
+        ],
+      },
+      { kind: "h2", text: "3. Regret, in two directions" },
+      {
+        kind: "p",
+        text: "Research on regret suggests inaction regret (‘I didn’t do it’) is usually louder over a lifetime than action regret (‘I did it, it was hard’). But this is a population-level finding, not a personal one. Your own regret geometry depends on your values, your partner, and what else you would have done with the years. Imagine, honestly, being 65 in both versions. Which elder version is more recognisable to you?",
+      },
+      { kind: "h2", text: "4. Partnership as prerequisite" },
+      {
+        kind: "p",
+        text: "For those deciding inside a relationship: the single strongest predictor of whether children feel like a gift or a crisis is the quality of the partnership beforehand. A fragile partnership rarely improves by adding a baby. A strong one usually survives, reshaped. Be honest about which you have.",
+      },
+      { kind: "h2", text: "5. When the calendar has a voice" },
+      {
+        kind: "p",
+        text: "Biology does not care about your ambivalence. If there is a fertility window, that is a real variable, and ignoring it is itself a decision. For some people, this accelerates the process; for others, it prompts exploring egg/embryo freezing or adoption, each of which is its own decision to study.",
+      },
+      { kind: "h2", text: "6. When professionals belong in the conversation" },
+      {
+        kind: "ul",
+        items: [
+          "A therapist — to separate what is yours from what is inherited from your family of origin.",
+          "A reproductive specialist — if age, medical history, or partner factors are relevant.",
+          "A financial planner — to model multi-decade cost honestly.",
+          "A couples therapist — if this decision has surfaced a partnership conflict.",
+        ],
+      },
+      { kind: "h2", text: "A short decision script" },
+      {
+        kind: "ol",
+        items: [
+          "Can I honestly picture both 65-year-old versions of myself? Which one do I recognise?",
+          "Is my decision being pushed by my values, or by the room I happen to be in?",
+          "What does my partner actually believe, when the performance stops?",
+          "Is the calendar a hard variable for me — and if so, in which direction?",
+          "Am I using ‘not ready’ to avoid a conversation I will one day wish I had sooner?",
+        ],
+      },
+      {
+        kind: "quote",
+        text: "This is not a decision you make once. It is a decision you learn to carry — in either direction.",
+      },
+    ],
+  },
+  {
+    slug: "financial-independence-decision",
+    title: "The financial independence decision: when enough is actually enough",
+    description:
+      "How to decide when to stop chasing the next level of income, how to define your ‘enough’ number, and why financial independence is more psychological than mathematical.",
+    tags: ["finance", "values", "career"],
+    readingMinutes: 7,
+    publishedAt: "2026-04-17",
+    author: "Life Decision Engine",
+    hero: {
+      eyebrow: "Finance",
+      lede: "Financial independence is not a number. It is a relationship between three numbers, and a decision about what the extra years of work are actually buying you.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "Financial independence is usually discussed as a spreadsheet problem: hit a number, live off the yield, retire. That framing misses the interesting part. The hard work is not arriving at the number; it is knowing which number, deciding how many extra years of work are worth it, and resisting the lifestyle inflation that quietly moves the goalposts.",
+      },
+      { kind: "h2", text: "1. The three numbers" },
+      {
+        kind: "ul",
+        items: [
+          "Survival number — the amount you need to meet fixed obligations plus modest food, housing, healthcare. Lower than most imagine.",
+          "Comfort number — survival plus the non-luxuries that make your life feel dignified (a good coffee shop, a trip a year, a few hobbies).",
+          "Status number — comfort plus optional luxuries (a bigger place, a newer car, global travel). Highly variable and very personal.",
+        ],
+      },
+      {
+        kind: "p",
+        text: "Write down your honest three numbers. Most people stop when they hit their status number and assume it is their comfort number. That is a 10-year mistake.",
+      },
+      { kind: "h2", text: "2. The 4%-ish rule — and its honest caveats" },
+      {
+        kind: "p",
+        text: "A common shorthand is that a portfolio can sustainably support annual withdrawals of roughly 3.5–4% of its starting value, inflation-adjusted, for 30+ years. It is a reasonable planning baseline, not a guarantee. Real life brings sequence-of-returns risk, healthcare shocks, taxes, and behavioural lapses during drawdowns. Treat 4% as ‘probably fine,’ not ‘guaranteed forever.’",
+      },
+      { kind: "h2", text: "3. The ‘one more year’ trap" },
+      {
+        kind: "p",
+        text: "Once you are close to enough, it becomes easy to keep working ‘just one more year’ for margin. Sometimes that margin matters. Often it is anxiety wearing a spreadsheet. Before the fifth ‘one more year,’ ask a harder question: what specifically am I afraid of, and what would actually settle that fear?",
+      },
+      { kind: "h2", text: "4. The identity problem" },
+      {
+        kind: "p",
+        text: "For many high-earners, the job is not just cash flow — it is identity, status, and structure. Financial independence looks thrilling until the Tuesday morning after you walk out. Design the life first, then fund it. A hobby, a part-time teaching role, or a nonprofit board often matters more to the next 30 years than the last $200k on the number.",
+      },
+      { kind: "h2", text: "5. ‘Coast FI’ and ‘Barista FI’ — softer versions" },
+      {
+        kind: "p",
+        text: "Two softer versions are worth naming. Coast FI: you have saved enough that ordinary growth gets you to the full number by retirement age, so you can lower your savings rate and work lighter jobs. Barista FI: you cover recurring costs from a smaller portfolio plus a modest part-time income, often chosen for healthcare, structure, or human contact. These are often better fits than full early retirement.",
+      },
+      { kind: "h2", text: "6. The decision, honestly" },
+      {
+        kind: "ol",
+        items: [
+          "Which of my three numbers have I actually calculated — not felt?",
+          "What ‘one more year’ is really buying me: margin, or anxiety?",
+          "Who would I be on the Tuesday after I walked out?",
+          "Am I chasing my number, or chasing a comparison?",
+          "Would Coast or Barista FI give me 80% of the freedom for 40% of the grind?",
+        ],
+      },
+      {
+        kind: "quote",
+        text: "Money is a tool for buying back your time. If it is buying you more work, it is doing its job wrong.",
+      },
+    ],
+  },
+  {
+    slug: "how-to-end-a-friendship",
+    title: "How to end a friendship — or decide not to",
+    description:
+      "Most friendship guides tell you how to make friends. Fewer talk about the harder question: when, and how, to let one go — and when to invest instead.",
+    tags: ["relationships", "psychology", "decision-making"],
+    readingMinutes: 6,
+    publishedAt: "2026-04-17",
+    author: "Life Decision Engine",
+    hero: {
+      eyebrow: "Relationships",
+      lede: "Friendships age like milk, not wine — unless you decide, consciously, to keep refrigerating them. That decision deserves more honesty than it usually gets.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "Adult friendships quietly become one of the strongest predictors of long-term wellbeing. But adults also accumulate friendships the way closets accumulate coats — most are seasonal, a few are lifetime, and a surprising number are just hanging there because nobody opened the door in ten years. Deciding which is which is real work, and most people never do it out loud.",
+      },
+      { kind: "h2", text: "1. Three categories of friendship" },
+      {
+        kind: "ul",
+        items: [
+          "Lifetime — people who would be at your hospital bed and whose presence you would want there.",
+          "Chapter — people tied to a specific phase (school, a city, a job) who were genuinely important, and for whom drifting is not betrayal.",
+          "Convenient — people you see because of circumstance (a group chat, a weekly drink) but who would not reach out if circumstance disappeared.",
+        ],
+      },
+      { kind: "h2", text: "2. The energy audit" },
+      {
+        kind: "p",
+        text: "For any friendship you are unsure about, ask: how do I feel in the hour before seeing them, and in the hour after? A friendship that drains you before and leaves you lighter after is often still worth it. A friendship that drains you both before and after is costing you something. Track that for a few weeks before deciding.",
+      },
+      { kind: "h2", text: "3. When to invest, not exit" },
+      {
+        kind: "p",
+        text: "Some friendships are not ending; they are starving. They need a call that is not about logistics, a memory that is not a meme, a weekend that is not a wedding. Before you quietly let someone go, ask whether you are measuring them at your worst investment level — because that is what you are likely to get back.",
+      },
+      { kind: "h2", text: "4. Clean endings and slow fades" },
+      {
+        kind: "p",
+        text: "Most adult friendships do not end in a conversation. They fade — sometimes respectfully, sometimes resentfully. A clean ending, where necessary, looks like one honest sentence, privately said, without a speech. Not every friendship needs one. The ones that ended badly, often do.",
+      },
+      { kind: "h2", text: "5. Toxic is a word, evidence is better" },
+      {
+        kind: "ul",
+        items: [
+          "Is there a pattern of disrespect, put-downs, or unreliability — not a single bad week?",
+          "Is there steady jealousy of your wins, or performative support?",
+          "Have you raised it honestly, and did anything change?",
+          "Would you want your child to be in this kind of friendship?",
+        ],
+      },
+      { kind: "h2", text: "6. A short script" },
+      {
+        kind: "ol",
+        items: [
+          "Which category is this friendship in today — lifetime, chapter, or convenient?",
+          "Am I measuring them at my worst investment level?",
+          "What does the evidence — not the story — say about how this friendship feels?",
+          "If I have to end it, can I do it with one honest sentence, in private?",
+          "If I want to keep it, when is the next call I will make without a reason?",
+        ],
+      },
+      {
+        kind: "quote",
+        text: "Friendship, like savings, compounds — but only if you make deposits. Most people only check the balance.",
+      },
+    ],
+  },
 ];
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
@@ -789,4 +1068,48 @@ export function getAllPosts(): BlogPost[] {
 
 export function getAllSlugs(): string[] {
   return BLOG_POSTS.map((p) => p.slug);
+}
+
+/** All unique, lowercase, URL-safe tag slugs across posts. */
+export function getAllTagSlugs(): string[] {
+  const seen = new Set<string>();
+  for (const post of BLOG_POSTS) {
+    for (const tag of post.tags) seen.add(tagToSlug(tag));
+  }
+  return [...seen].sort();
+}
+
+/** Turn a human tag ("decision-making") into a safe URL slug. */
+export function tagToSlug(tag: string): string {
+  return tag
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+}
+
+/** All posts for a given tag slug (case-insensitive). */
+export function getPostsByTagSlug(slug: string): BlogPost[] {
+  const target = slug.toLowerCase();
+  return getAllPosts().filter((p) =>
+    p.tags.some((t) => tagToSlug(t) === target),
+  );
+}
+
+/**
+ * Return up to `limit` posts most similar to the given one.
+ * Similarity = shared-tag count, tie-broken by recency.
+ */
+export function getRelatedPosts(post: BlogPost, limit = 3): BlogPost[] {
+  const others = BLOG_POSTS.filter((p) => p.slug !== post.slug);
+  const scored = others.map((p) => {
+    const shared = p.tags.filter((t) => post.tags.includes(t)).length;
+    return { post: p, shared };
+  });
+  scored.sort((a, b) => {
+    if (b.shared !== a.shared) return b.shared - a.shared;
+    return a.post.publishedAt < b.post.publishedAt ? 1 : -1;
+  });
+  return scored.slice(0, limit).map((s) => s.post);
 }

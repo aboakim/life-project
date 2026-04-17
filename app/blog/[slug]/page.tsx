@@ -2,11 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import MarketingPageShell from "@/components/layout/MarketingPageShell";
+import NewsletterCta from "@/components/blog/NewsletterCta";
 import {
   type BlogBlock,
   type BlogPost,
   getAllSlugs,
   getPostBySlug,
+  getRelatedPosts,
+  tagToSlug,
 } from "@/lib/blog/posts";
 import { getSiteUrlString } from "@/lib/site-url";
 
@@ -120,7 +123,7 @@ function renderBlock(block: BlogBlock, i: number) {
 }
 
 function buildArticleJsonLd(post: BlogPost): Record<string, unknown> {
-  const base = getSiteUrlString();
+  const base = getSiteUrlString().replace(/\/$/, "");
   return {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -132,12 +135,34 @@ function buildArticleJsonLd(post: BlogPost): Record<string, unknown> {
     publisher: {
       "@type": "Organization",
       name: "Life Decision Engine",
+      "@id": `${base}/#organization`,
     },
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": `${base}/blog/${post.slug}`,
     },
     keywords: post.tags.join(", "),
+    articleSection: post.hero?.eyebrow ?? "Decision-making",
+    wordCount: post.readingMinutes * 200,
+    inLanguage: "en-US",
+  };
+}
+
+function buildBreadcrumbJsonLd(post: BlogPost): Record<string, unknown> {
+  const base = getSiteUrlString().replace(/\/$/, "");
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${base}/` },
+      { "@type": "ListItem", position: 2, name: "Blog", item: `${base}/blog` },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.title,
+        item: `${base}/blog/${post.slug}`,
+      },
+    ],
   };
 }
 
@@ -149,6 +174,8 @@ export default async function BlogArticlePage({
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) notFound();
+
+  const related = getRelatedPosts(post, 3);
 
   return (
     <MarketingPageShell
@@ -172,6 +199,36 @@ export default async function BlogArticlePage({
           __html: JSON.stringify(buildArticleJsonLd(post)),
         }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(buildBreadcrumbJsonLd(post)),
+        }}
+      />
+
+      <nav
+        aria-label="Breadcrumb"
+        className="mb-6 flex flex-wrap items-center gap-2 text-xs text-[rgb(var(--ink-soft))]/85"
+      >
+        <Link
+          href="/"
+          className="transition hover:text-[rgb(var(--ink))]"
+        >
+          Home
+        </Link>
+        <span aria-hidden="true">/</span>
+        <Link
+          href="/blog"
+          className="transition hover:text-[rgb(var(--ink))]"
+        >
+          Blog
+        </Link>
+        <span aria-hidden="true">/</span>
+        <span className="text-[rgb(var(--ink))]/90">
+          {post.hero?.eyebrow ?? "Article"}
+        </span>
+      </nav>
+
       <article className="max-w-3xl">
         {post.body.map(renderBlock)}
 
@@ -204,16 +261,59 @@ export default async function BlogArticlePage({
           </Link>
           <div className="flex flex-wrap gap-2">
             {post.tags.map((t) => (
-              <span
+              <Link
                 key={t}
-                className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs text-[rgb(var(--ink-soft))]"
+                href={`/blog/tag/${tagToSlug(t)}`}
+                className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs text-[rgb(var(--ink-soft))] transition hover:border-[rgb(var(--accent))]/35 hover:text-[rgb(var(--ink))]"
               >
                 #{t}
-              </span>
+              </Link>
             ))}
           </div>
         </div>
       </article>
+
+      {related.length > 0 ? (
+        <section
+          aria-labelledby="related-posts-heading"
+          className="mt-20 border-t border-white/[0.07] pt-12"
+        >
+          <h2
+            id="related-posts-heading"
+            className="text-sm font-semibold uppercase tracking-[0.16em] text-[rgb(var(--accent-dim))]"
+          >
+            Keep reading
+          </h2>
+          <ul className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {related.map((r) => (
+              <li
+                key={r.slug}
+                className="flex flex-col rounded-2xl border border-white/[0.08] bg-gradient-to-b from-white/[0.04] to-transparent p-5 transition hover:-translate-y-0.5 hover:border-[rgb(var(--accent))]/25"
+              >
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[rgb(var(--accent-2))]/85">
+                  {r.hero?.eyebrow ?? "Article"}
+                </p>
+                <h3 className="mt-2 text-base font-semibold text-[rgb(var(--ink))] [text-wrap:balance]">
+                  <Link
+                    href={`/blog/${r.slug}`}
+                    className="transition hover:text-[rgb(var(--accent-2))]"
+                  >
+                    {r.title}
+                  </Link>
+                </h3>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
+                  {r.description}
+                </p>
+                <p className="mt-4 text-xs text-[rgb(var(--ink-soft))]/80">
+                  {formatDate(r.publishedAt)} · {r.readingMinutes} min read
+                </p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      <NewsletterCta className="mt-16" />
     </MarketingPageShell>
   );
 }

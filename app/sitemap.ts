@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getSiteUrlString } from "@/lib/site-url";
-import { getAllPosts } from "@/lib/blog/posts";
+import { getAllPosts, getAllTagSlugs } from "@/lib/blog/posts";
 
 const STATIC_PATHS: { path: string; priority: number; freq: "weekly" | "monthly" }[] = [
   { path: "", priority: 1, freq: "weekly" },
@@ -18,7 +18,7 @@ const STATIC_PATHS: { path: string; priority: number; freq: "weekly" | "monthly"
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = getSiteUrlString();
+  const base = getSiteUrlString().replace(/\/$/, "");
   const now = new Date();
 
   const statics = STATIC_PATHS.map(({ path, priority, freq }) => ({
@@ -35,5 +35,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.65,
   }));
 
-  return [...statics, ...blog];
+  const tags = getAllTagSlugs().map((tag) => ({
+    url: `${base}/blog/tag/${tag}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.5,
+  }));
+
+  return [...statics, ...blog, ...tags];
 }
