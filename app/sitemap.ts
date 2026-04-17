@@ -11,6 +11,9 @@ const STATIC_PATHS: { path: string; priority: number; freq: "weekly" | "monthly"
   { path: "/monetize", priority: 0.6, freq: "monthly" },
   { path: "/blog", priority: 0.9, freq: "weekly" },
   { path: "/faq", priority: 0.7, freq: "monthly" },
+  { path: "/about", priority: 0.6, freq: "monthly" },
+  { path: "/contact", priority: 0.5, freq: "monthly" },
+  { path: "/terms", priority: 0.4, freq: "monthly" },
   { path: "/privacy", priority: 0.4, freq: "monthly" },
 ];
 

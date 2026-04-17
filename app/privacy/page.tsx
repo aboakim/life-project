@@ -115,9 +115,29 @@ export default function PrivacyPage() {
             Contact
           </h2>
           <p className="mt-2">
-            For privacy-related questions, use the contact options provided on
-            the site (e.g. expert or community flows) once published, or reach
-            the operator through the domain’s administrative contact.
+            For privacy-related questions or data requests (access,
+            correction, deletion), use the{" "}
+            <Link
+              href="/contact"
+              className="font-medium text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+            >
+              contact page
+            </Link>
+            . You can also review our{" "}
+            <Link
+              href="/terms"
+              className="font-medium text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+            >
+              Terms of Service
+            </Link>{" "}
+            and the{" "}
+            <Link
+              href="/about"
+              className="font-medium text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+            >
+              About
+            </Link>{" "}
+            page to learn who operates the service.
           </p>
         </section>
 

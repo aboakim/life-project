@@ -90,10 +90,10 @@ export default function GlobalNav() {
             FAQ
           </Link>
           <Link
-            href="/privacy"
+            href="/about"
             className="rounded-lg px-3 py-1.5 text-[rgb(var(--ink-soft))] transition hover:bg-white/5 hover:text-[rgb(var(--ink))]"
           >
-            Privacy
+            About
           </Link>
           <Link
             href="/experts/register"

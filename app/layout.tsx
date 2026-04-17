@@ -7,6 +7,7 @@ import {
   Noto_Sans_Arabic,
 } from "next/font/google";
 import GlobalNav from "@/components/GlobalNav";
+import GlobalFooter from "@/components/GlobalFooter";
 import AnalyticsGate from "@/components/AnalyticsGate";
 import "./globals.css";
 
@@ -99,6 +100,7 @@ export default function RootLayout({
       >
         <GlobalNav />
         {children}
+        <GlobalFooter />
         <AnalyticsGate />
       </body>
     </html>
