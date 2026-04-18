@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 :root {
-  /* Slightly lighter slate-navy base — still a dark theme, but no longer
-     near-black. Improves readability and looks less heavy on mobile. */
-  --surface: 24 28 52;
-  --surface-2: 36 42 72;
-  --ink: 248 250 255;
-  --ink-soft: 178 185 215;
+  /* Lifted slate-navy base — clearly a dark theme, but a step lighter than
+     near-black so accents read cleanly and the page feels less heavy. */
+  --surface: 40 46 80;
+  --surface-2: 56 62 100;
+  --ink: 250 252 255;
+  --ink-soft: 196 202 226;
   --accent: 147 97 255;
   --accent-2: 45 212 224;
   --accent-warm: 251 191 36;
@@ -32,7 +32,7 @@ body {
     radial-gradient(880px 480px at 6% 10%, rgb(45 212 224 / 0.18), transparent 48%),
     radial-gradient(760px 420px at 70% 98%, rgb(232 121 249 / 0.14), transparent 46%),
     radial-gradient(600px 360px at 18% 88%, rgb(251 191 36 / 0.07), transparent 50%),
-    linear-gradient(165deg, rgb(22 26 50) 0%, rgb(32 36 64) 38%, rgb(24 28 52) 100%);
+    linear-gradient(165deg, rgb(36 42 76) 0%, rgb(48 54 92) 38%, rgb(38 44 78) 100%);
 }
 
 /* subtle grid — common on modern SaaS marketing pages */
