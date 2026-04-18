@@ -433,13 +433,14 @@ const uiHy: Partial<UIStrings> = {
   badgeFallback: "Կրկնակի ռեժիմ",
   scoreSublabel: "համապատասխանություն / իրականացվողություն",
   footerPremium:
-    "Հետագայում կարելի է միացնել վճարային շերտ (օրինակ՝ անսահմանափակ վերլուծություններ)՝ Stripe/Paddle և նման համակարգերով։ Premium-ը կարող է ներառել նաև իրական coach/հոգեբանի շերտ։ Այժմ՝ անվճար MVP։",
+    "Միջուկային վերլուծությունն անվճար է։ Premium փաթեթը (Stripe-ի միջոցով) բացում է լրացուցիչ խորություն, իսկ հետագայում՝ իրական coach/հոգեբանի շերտ։",
   networkError: "Ցանցի սխալ",
   features: ["Սցենարներ", "Ռիսկեր և ֆինանսներ", "Որոշման միավոր %"],
   accessLocal:
     "Տեղային հասցե՝ http://localhost:3000 — գործարկեք `npm run dev` ձեր համակարգչում։",
   langLabel: "Լեզու",
-  apiHintDemo: "Սահմանեք OPENAI_API_KEY իրական խորը վերլուծության համար։",
+  apiHintDemo:
+    "Ցուցադրական վերլուծություն։ Ավելի խորը AI վերլուծությունը միանում է շուտով։",
   apiWarningFallback: (msg) =>
     `AI մոդելը ժամանակավորապես անհասանելի է։ Ցուցադրական արդյունք։ Մանրամասն՝ ${msg}`,
   securityTitle: "Անվտանգ և գաղտնի հարթակ",
@@ -490,13 +491,14 @@ const uiEn: Partial<UIStrings> = {
   badgeFallback: "Fallback mode",
   scoreSublabel: "alignment / feasibility",
   footerPremium:
-    "Later you can add paid tiers (e.g. unlimited analyses) with Stripe or similar. Premium may also include human coaches. This build is an MVP.",
+    "The core analyzer is free. Premium (via Stripe) unlocks extra depth, and future releases will add a human-coach tier.",
   networkError: "Network error",
   features: ["Psychology", "Finance", "Structured AI"],
   accessLocal:
     "Local URL: http://localhost:3000 — run `npm run dev` on your machine.",
   langLabel: "Language",
-  apiHintDemo: "Set OPENAI_API_KEY for full AI analysis.",
+  apiHintDemo:
+    "Structured demo analysis. Deeper AI analysis is coming back online shortly.",
   apiWarningFallback: (msg) =>
     `AI temporarily unavailable. Showing demo. Details: ${msg}`,
   securityTitle: "A safe, private platform",
@@ -519,7 +521,7 @@ const uiEnUs: Partial<UIStrings> = {
   accessLocal:
     "Local URL: http://localhost:3000 — run `npm run dev`, then open it in your browser.",
   footerPremium:
-    "Later you can add paid tiers with Stripe or similar. Premium may include human coaches. MVP for now.",
+    "The core analyzer is free. Premium (via Stripe) unlocks extra depth, with a human-coach tier planned for future releases.",
 };
 
 const uiRu: Partial<UIStrings> = {
@@ -567,7 +569,8 @@ const uiRu: Partial<UIStrings> = {
   accessLocal:
     "Локально: http://localhost:3000 — запустите `npm run dev` на компьютере.",
   langLabel: "Язык",
-  apiHintDemo: "Укажите OPENAI_API_KEY для полного AI-анализа.",
+  apiHintDemo:
+    "Структурированный демо-анализ. Глубокий AI-анализ скоро снова будет доступен.",
   apiWarningFallback: (msg) =>
     `AI временно недоступен. Показано демо. Подробности: ${msg}`,
   securityTitle: "Безопасная и приватная платформа",
@@ -624,7 +627,8 @@ const uiDe: Partial<UIStrings> = {
   accessLocal:
     "Lokal: http://localhost:3000 — `npm run dev` auf deinem Rechner ausführen.",
   langLabel: "Sprache",
-  apiHintDemo: "OPENAI_API_KEY setzen für volle KI-Analyse.",
+  apiHintDemo:
+    "Strukturierte Demo-Analyse. Die vollständige KI-Analyse ist in Kürze wieder verfügbar.",
   apiWarningFallback: (msg) =>
     `KI vorübergehend nicht verfügbar. Demo wird gezeigt. Details: ${msg}`,
   securityTitle: "Sichere, private Plattform",
@@ -681,7 +685,8 @@ const uiFr: Partial<UIStrings> = {
   accessLocal:
     "Local : http://localhost:3000 — lancez `npm run dev` sur votre machine.",
   langLabel: "Langue",
-  apiHintDemo: "Définissez OPENAI_API_KEY pour une analyse IA complète.",
+  apiHintDemo:
+    "Analyse de démonstration structurée. L’analyse IA complète sera de nouveau disponible sous peu.",
   apiWarningFallback: (msg) =>
     `IA indisponible temporairement. Démo affichée. Détails : ${msg}`,
   securityTitle: "Une plateforme sûre et privée",
@@ -738,7 +743,8 @@ const uiEs: Partial<UIStrings> = {
   accessLocal:
     "Local: http://localhost:3000 — ejecuta `npm run dev` en tu equipo.",
   langLabel: "Idioma",
-  apiHintDemo: "Configura OPENAI_API_KEY para análisis IA completo.",
+  apiHintDemo:
+    "Análisis de demostración estructurado. El análisis de IA completo volverá a estar disponible en breve.",
   apiWarningFallback: (msg) =>
     `IA no disponible temporalmente. Mostrando demo. Detalles: ${msg}`,
   securityTitle: "Una plataforma segura y privada",
@@ -795,7 +801,8 @@ const uiAr: Partial<UIStrings> = {
   accessLocal:
     "محلي: http://localhost:3000 — شغّل `npm run dev` على جهازك.",
   langLabel: "اللغة",
-  apiHintDemo: "عيّن OPENAI_API_KEY لتحليل كامل بالذكاء الاصطناعي.",
+  apiHintDemo:
+    "تحليل تجريبي مُنظَّم. سيعود التحليل الكامل بالذكاء الاصطناعي للعمل قريبًا.",
   apiWarningFallback: (msg) =>
     `الذكاء الاصطناعي غير متاح مؤقتًا. عرض تجريبي. التفاصيل: ${msg}`,
   securityTitle: "منصة آمنة وخاصة",
@@ -852,7 +859,8 @@ const uiIt: Partial<UIStrings> = {
   accessLocal:
     "Locale: http://localhost:3000 — esegui `npm run dev` sul tuo PC.",
   langLabel: "Lingua",
-  apiHintDemo: "Imposta OPENAI_API_KEY per l’analisi IA completa.",
+  apiHintDemo:
+    "Analisi dimostrativa strutturata. L’analisi IA completa tornerà disponibile a breve.",
   apiWarningFallback: (msg) =>
     `IA temporaneamente non disponibile. Demo mostrata. Dettagli: ${msg}`,
   securityTitle: "Una piattaforma sicura e privata",

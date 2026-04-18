@@ -1054,6 +1054,509 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "how-to-decide-to-leave-a-stable-job",
+    title: "How to decide to leave a stable job for something risky",
+    description:
+      "A clear framework for evaluating a stable-to-risky career jump: financial runway, identity risk, regret math, and the three tests that separate a brave move from an impulsive one.",
+    tags: ["career", "money", "decision-making", "risk"],
+    readingMinutes: 9,
+    publishedAt: "2026-04-14",
+    updatedAt: "2026-04-18",
+    author: "Life Decision Engine",
+    hero: {
+      eyebrow: "Career",
+      lede: "Leaving a stable job is almost never about the job. It is about who you think you are if you no longer have it.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "The hardest decisions at work are rarely between a good job and a bad job. They are between a known outcome and a possible one. Staying pays a certain amount; leaving pays a distribution. Your brain, unfortunately, is not built to compare those two shapes cleanly.",
+      },
+      {
+        kind: "p",
+        text: "Most people who regret staying did not regret their skills or effort; they regretted the years they paid for stability they never actually used. Most people who regret leaving did not regret the risk itself; they regretted leaving before they had any idea what they were aiming at.",
+      },
+      { kind: "h2", text: "1. Separate the job from the identity" },
+      {
+        kind: "p",
+        text: "Before you look at numbers, look at language. Write the first three sentences you would say to a stranger about what you do. If every sentence includes your title, your employer, or your compensation, the job is carrying your identity for you. Leaving will feel existential because it will be existential. That is not a reason to stay. It is a reason to make the identity part of the project, not a side effect.",
+      },
+      { kind: "h2", text: "2. Calculate honest runway" },
+      {
+        kind: "p",
+        text: "Runway is not savings divided by spending. Runway is savings divided by real spending, including the things you quietly assume will keep flowing when they will not — help from parents, employer-linked benefits, automatic raises, bonuses, perks that look like salary and are actually contracts. Strip those out. Then ask:",
+      },
+      {
+        kind: "ul",
+        items: [
+          "How many months can I survive with zero income?",
+          "How many months can I survive with half income from the new thing?",
+          "At what point do I have to come back to a job like the one I left, and is that acceptable?",
+        ],
+      },
+      {
+        kind: "p",
+        text: "If the answer to the third question is no, you do not have enough runway yet. That is not cowardice; that is arithmetic.",
+      },
+      { kind: "h2", text: "3. Run the regret minimisation test" },
+      {
+        kind: "p",
+        text: "Project yourself forward ten years and ask two questions in order:",
+      },
+      {
+        kind: "ol",
+        items: [
+          "If I stay, and it goes well, what is the best version of this life?",
+          "If I leave, and it goes poorly, what is the worst version I can live with?",
+        ],
+      },
+      {
+        kind: "p",
+        text: "Most people asking only the first question stay forever. Most people asking only the second question leave impulsively. Both together produce a decision you can defend to your future self.",
+      },
+      { kind: "h2", text: "4. The three tests" },
+      { kind: "h3", text: "The conviction test" },
+      {
+        kind: "p",
+        text: "Can you describe what you are leaving for in one sentence, without hedging, to someone who does not know the industry? If not, you are running from, not toward. Running from can still be correct, but it is a different decision and usually needs a landing pad.",
+      },
+      { kind: "h3", text: "The reversibility test" },
+      {
+        kind: "p",
+        text: "Can you, realistically, get a job comparable to the one you left within six months if the new thing fails? If yes, your risk is mostly emotional. If no, you need a longer runway or a smaller first step.",
+      },
+      { kind: "h3", text: "The regret asymmetry test" },
+      {
+        kind: "p",
+        text: "Imagine both futures in equal detail. Stay for ten more years vs. leave and have it not work. Which one do you resent more? Resentment is a data point; it tells you which outcome your nervous system is already avoiding.",
+      },
+      { kind: "h2", text: "5. Ways to leave that are not quitting cold" },
+      {
+        kind: "ul",
+        items: [
+          "Go to part-time or four-day week while you build the next thing.",
+          "Take a sabbatical with right of return, if your employer offers one.",
+          "Leave with a three-month consulting arrangement with your current employer as a client.",
+          "Leave after you have one signed customer, one committed investor, or one written offer from the new path.",
+        ],
+      },
+      {
+        kind: "p",
+        text: "Most people treat leaving as a binary. It is not. The gradient in the middle is where almost every successful jump actually lives.",
+      },
+      { kind: "h2", text: "6. A short script" },
+      {
+        kind: "ol",
+        items: [
+          "Can I say, in one sentence, what I am leaving for?",
+          "Do I have twelve months of honest runway, not optimistic runway?",
+          "If it fails, can I re-enter a similar job within six months?",
+          "If I stay, what is the story I will tell myself in five years?",
+          "Is there a smaller first step — part-time, contract, sabbatical — that reduces the risk without killing the move?",
+        ],
+      },
+      {
+        kind: "quote",
+        text: "Stable jobs pay you money. They do not pay you time. That is the trade most people forget until it is too late to renegotiate.",
+      },
+    ],
+  },
+  {
+    slug: "buying-vs-renting-a-home",
+    title: "Buying vs renting a home: the decision nobody teaches you",
+    description:
+      "Most buy-vs-rent advice is noise. Here is the honest breakdown: true cost of ownership, mobility premium, the 5-year rule, and how to think about it when the market is expensive.",
+    tags: ["money", "housing", "decision-making", "long-term"],
+    readingMinutes: 10,
+    publishedAt: "2026-04-15",
+    author: "Life Decision Engine",
+    hero: {
+      eyebrow: "Money",
+      lede: "Buying a home is almost never the financial no-brainer your family thinks it is. Renting is almost never the waste the internet says it is.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "Few financial decisions are debated more emotionally and worse than buying a home. One camp treats rent as lighting money on fire. Another camp treats every mortgage as a trap. Both are partially right and mostly missing the real question: what is the cost of locking yourself in place for five to ten years, and is that cost worth what you get in return?",
+      },
+      { kind: "h2", text: "1. What you actually pay when you own" },
+      {
+        kind: "p",
+        text: "The sticker price is not the cost. The cost of ownership includes:",
+      },
+      {
+        kind: "ul",
+        items: [
+          "Mortgage interest — a large fraction of your first decade of payments.",
+          "Property taxes — recurring, often underestimated, sometimes reassessed upward.",
+          "Insurance — homeowner insurance is not renter insurance; it is several times larger.",
+          "Maintenance — rule of thumb 1 to 2 percent of home value per year, averaged over a decade.",
+          "Closing and transaction costs — 6 to 10 percent of the home value round-trip when you eventually sell.",
+          "Opportunity cost — the down payment, if invested, would have grown at market returns.",
+        ],
+      },
+      {
+        kind: "p",
+        text: "When you add these up honestly, the monthly cost of ownership is usually 1.3 to 1.6 times the equivalent rent. Not because rent is a scam — because owners pay all the costs landlords normally absorb.",
+      },
+      { kind: "h2", text: "2. What you actually pay when you rent" },
+      {
+        kind: "p",
+        text: "Rent is a payment for flexibility and a bounded liability. You are paying your landlord to carry the maintenance risk, the tax risk, the property-value risk, and the opportunity cost of the down payment. That is a real service. Call it the mobility premium.",
+      },
+      {
+        kind: "p",
+        text: "The honest question is not “am I throwing money away?” — you are always paying for shelter somehow — but “how much am I paying for the option to leave cheaply?”",
+      },
+      { kind: "h2", text: "3. The 5-year rule" },
+      {
+        kind: "p",
+        text: "The rough consensus across long-run data: buying usually beats renting financially if you will stay in the same home for at least five to seven years. Below that, transaction costs dominate and you lose money on the round trip.",
+      },
+      {
+        kind: "p",
+        text: "The real question therefore is not “should I buy a house?” It is “am I willing to commit to this city, this job, this relationship configuration, for at least five years?” If you cannot answer yes to all three, you are paying a mobility tax the finance math does not capture.",
+      },
+      { kind: "h2", text: "4. What buying actually gives you (beyond money)" },
+      {
+        kind: "ul",
+        items: [
+          "Forced savings — your principal payment is essentially a high-friction savings account.",
+          "Inflation hedge — your mortgage is fixed in nominal terms while rents rise.",
+          "Non-financial stability — some people genuinely need to put roots down to function.",
+          "Optionality for a family — stability of schools, neighbors, routines.",
+        ],
+      },
+      { kind: "h2", text: "5. What buying takes from you (beyond money)" },
+      {
+        kind: "ul",
+        items: [
+          "Mobility — taking a better job in another city becomes a 6-figure decision.",
+          "Liquidity — your net worth is now concentrated in one illiquid asset.",
+          "Responsibility — roofs, boilers, neighbors, and disputes are now yours.",
+          "Identity lock — owning a home subtly commits you to the idea that this is the life.",
+        ],
+      },
+      { kind: "h2", text: "6. A clean script" },
+      {
+        kind: "ol",
+        items: [
+          "Am I confident I will stay here at least five to seven years?",
+          "Can I cover a down payment without draining my emergency fund?",
+          "Will my total housing cost stay under roughly one-third of gross income?",
+          "Do I have a stable income source and a realistic job market in this city?",
+          "If the home value drops 20 percent tomorrow, can I still stay?",
+        ],
+      },
+      {
+        kind: "p",
+        text: "Five yeses: buying probably makes sense on the numbers and the life. Any no that you cannot honestly fix: rent longer, invest the difference, and revisit the question in two years. That is not weakness; that is real option value.",
+      },
+      {
+        kind: "quote",
+        text: "A house is not a good or bad investment. It is a commitment disguised as an investment. Price the commitment first.",
+      },
+    ],
+  },
+  {
+    slug: "how-to-decide-to-go-back-to-school",
+    title: "How to decide if going back to school is actually worth it",
+    description:
+      "A practical filter for graduate degrees, bootcamps, and career-change courses: signalling vs learning, the real cost of two years, and the five questions that prevent expensive mistakes.",
+    tags: ["career", "education", "money", "decision-making"],
+    readingMinutes: 8,
+    publishedAt: "2026-04-16",
+    author: "Life Decision Engine",
+    hero: {
+      eyebrow: "Career",
+      lede: "Most people thinking about going back to school are actually looking for permission to change direction. The degree is the excuse, not the reason.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "Going back to school is one of the few decisions that combines a large cash cost, a large time cost, and a large identity shift in one package. That is why it so often feels meaningful — and also why it so often disappoints two years later when the new field looks disturbingly like the old one, with debt.",
+      },
+      { kind: "h2", text: "1. Separate the two motives" },
+      {
+        kind: "p",
+        text: "There are really only two honest reasons to go back:",
+      },
+      {
+        kind: "ul",
+        items: [
+          "Signalling — you need a specific credential to open a door that is currently closed (medicine, law, regulated finance, some academic paths).",
+          "Learning — you want structured access to a field you cannot break into through self-study and side projects.",
+        ],
+      },
+      {
+        kind: "p",
+        text: "Everything else — networking, prestige, a sense of momentum, wanting a break from work — is real but not a reason to spend two years and six figures. Those motives almost always have cheaper, faster substitutes.",
+      },
+      { kind: "h2", text: "2. Compute the honest cost" },
+      {
+        kind: "p",
+        text: "Tuition is the visible part. The iceberg underneath includes:",
+      },
+      {
+        kind: "ul",
+        items: [
+          "Forgone salary — two years of what you would have earned, compounded.",
+          "Lost career progression — the promotions you will not be there to receive.",
+          "Interest on any loans — usually substantial on professional programs.",
+          "Opportunity cost of compounding on any savings you spend down.",
+        ],
+      },
+      {
+        kind: "p",
+        text: "For a typical mid-career professional in the US, a two-year full-time masters program has a total cost of roughly 200 to 400 thousand dollars once forgone income is counted. That is the real number you are comparing against the new salary.",
+      },
+      { kind: "h2", text: "3. The signalling test" },
+      {
+        kind: "p",
+        text: "Ask: if I told a hiring manager in this target field that I learned everything in the curriculum through work and self-study, but I do not have the degree, would they hire me?",
+      },
+      {
+        kind: "ul",
+        items: [
+          "Yes → you are paying for signalling you do not need. Skip it.",
+          "Maybe → you are paying for a credential-as-tiebreaker; cheaper formats may work.",
+          "No → you are paying for a mandatory credential. This may be worth it if the field pays for it.",
+        ],
+      },
+      { kind: "h2", text: "4. The learning test" },
+      {
+        kind: "p",
+        text: "Ask: have I already tried to learn this on my own for six months — books, online courses, small projects — and hit a wall I cannot get past without structured guidance?",
+      },
+      {
+        kind: "p",
+        text: "If you have not tried, you do not know if you need school or if you need a weekend and a library card. Most motivated adults learn more in six months of focused effort than they will in a watered-down introductory year of a masters program.",
+      },
+      { kind: "h2", text: "5. The five filter questions" },
+      {
+        kind: "ol",
+        items: [
+          "Is there a specific job I cannot get without this degree, and do I actually want that job?",
+          "Does the program's recent median graduate outcome match what I am hoping for, or am I looking at survivorship bias?",
+          "Can I survive two years of sharply reduced income without damaging my partner, family, or mental health?",
+          "Is the alumni network in this program actually active in the field I care about, or just historical?",
+          "Have I exhausted cheaper alternatives — certificates, bootcamps, internal transfers, apprenticeships?",
+        ],
+      },
+      { kind: "h2", text: "6. A short script" },
+      {
+        kind: "ul",
+        items: [
+          "What specific door does this open that is closed to me today?",
+          "What is the total cost including forgone income and compounding?",
+          "Have I tried the self-study version first for at least six months?",
+          "Will I regret not going more than I will regret two years of reduced income?",
+          "Is there a part-time or evening version that gets 80 percent of the value at 20 percent of the life cost?",
+        ],
+      },
+      {
+        kind: "quote",
+        text: "Degrees are powerful when they are the key to a specific door. They are dangerous when they are a way of not answering the question.",
+      },
+    ],
+  },
+  {
+    slug: "when-to-move-back-home-aging-parents",
+    title: "When to move back home to care for aging parents",
+    description:
+      "A compassionate, practical framework for one of the quietest, hardest decisions: knowing when to uproot your life for theirs — and when a different shape of support is the right answer.",
+    tags: ["family", "relationships", "caregiving", "decision-making"],
+    readingMinutes: 8,
+    publishedAt: "2026-04-16",
+    author: "Life Decision Engine",
+    hero: {
+      eyebrow: "Family",
+      lede: "Nobody teaches this decision. We make it late, in crisis, and under guilt. It deserves more structure than that.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "At some point, if you are lucky, you will watch a parent go from the person who used to help you to the person who now needs help. The question of whether to move closer or move back in is one of the most charged decisions most people will ever make — and one of the least structurally thought through.",
+      },
+      {
+        kind: "p",
+        text: "This piece is not an answer; there are too many configurations for one. It is a set of honest questions, so the decision is at least made with eyes open instead of by the loudest family member.",
+      },
+      { kind: "h2", text: "1. Separate the trigger from the decision" },
+      {
+        kind: "p",
+        text: "A hospital stay, a fall, a diagnosis — these are triggers. They are not, on their own, evidence that the long-term answer is “move back.” Many people uproot their entire life in response to a two-week emergency and discover, six months later, that the short-term crisis has ended but their career and relationships have not recovered.",
+      },
+      {
+        kind: "p",
+        text: "First ask: is this a short-term acute situation, a slow chronic decline, or the start of end-of-life care? Each has a very different right answer.",
+      },
+      { kind: "h2", text: "2. Map what care actually looks like" },
+      {
+        kind: "p",
+        text: "Before deciding anything, spend a week truly paying attention. What does your parent actually need on an average day? Split it into:",
+      },
+      {
+        kind: "ul",
+        items: [
+          "Household — cleaning, meals, laundry, bills, groceries.",
+          "Medical — appointments, medication, monitoring, mobility help.",
+          "Emotional — company, conversation, routine, not being alone.",
+          "Emergencies — falls, hospitalizations, advocacy in healthcare settings.",
+        ],
+      },
+      {
+        kind: "p",
+        text: "Different categories have different solutions. Household can often be outsourced. Medical often cannot. Emotional is the category people misestimate most — both how much is needed and how exhausting it becomes to be the only provider.",
+      },
+      { kind: "h2", text: "3. The quiet cost of moving back" },
+      {
+        kind: "p",
+        text: "Moving back is often framed as selfless. That framing hides a long list of real costs that must be named, not swallowed:",
+      },
+      {
+        kind: "ul",
+        items: [
+          "Career freeze in a place with fewer opportunities.",
+          "Pay cuts that compound over years.",
+          "Slow erosion of your romantic relationship if your partner did not choose this.",
+          "Your own children's education and social stability.",
+          "Your mental health as the primary carer with no backup.",
+          "Resentment that may leak into the very relationship you were trying to honor.",
+        ],
+      },
+      {
+        kind: "p",
+        text: "None of these are reasons not to move back. They are reasons to be honest about what is being paid, by whom, and for how long.",
+      },
+      { kind: "h2", text: "4. Alternatives that are not failures" },
+      {
+        kind: "ul",
+        items: [
+          "Hire a part-time carer and visit monthly instead of relocating.",
+          "Move your parent closer to you instead of you moving to them.",
+          "Split the care with siblings on a rotation, written down, not assumed.",
+          "Use assisted living for the medical load and visit often for the emotional load.",
+          "Fund full-time care from savings if the family can, rather than sacrificing one child's career.",
+        ],
+      },
+      {
+        kind: "p",
+        text: "Good care does not have a single shape. Often the loudest answer (“you move back”) is not the best answer — it is just the simplest sentence for the family to agree on.",
+      },
+      { kind: "h2", text: "5. If you do move back, make it structured" },
+      {
+        kind: "ul",
+        items: [
+          "Agree a review date — three months, six months, a year.",
+          "Define a bare minimum — what must be true for you to stay vs leave.",
+          "Protect work, even if it is part-time or remote. Identity erosion is real.",
+          "Build a support circle — one friend you can call, one professional who can help, one sibling who owes you time.",
+          "Name the end — this arrangement is not forever; no arrangement that you cannot describe an end to is sustainable.",
+        ],
+      },
+      { kind: "h2", text: "6. A short script" },
+      {
+        kind: "ol",
+        items: [
+          "Is this an acute event or the new baseline?",
+          "What does a typical day of care actually look like — hour by hour?",
+          "What is the cheapest, cleanest configuration that covers that day? Is it always me moving back?",
+          "If I move back, what is the explicit review date and exit condition?",
+          "Who else is in this picture — siblings, partner, parent's friends — and are they doing what they can, or am I absorbing everyone's share?",
+        ],
+      },
+      {
+        kind: "quote",
+        text: "Love is not a synonym for self-sacrifice. Love that is not sustainable is a debt, not a gift.",
+      },
+    ],
+  },
+  {
+    slug: "how-to-decide-without-regret",
+    title: "How to make any decision with minimum future regret",
+    description:
+      "Regret is not caused by bad outcomes. It is caused by bad decision processes. Here is how to choose now so future-you can defend the decision even when reality breaks in unexpected ways.",
+    tags: ["decision-making", "psychology", "framework", "regret"],
+    readingMinutes: 7,
+    publishedAt: "2026-04-17",
+    author: "Life Decision Engine",
+    hero: {
+      eyebrow: "Psychology",
+      lede: "Future regret lives in the gap between your choice and your reasons — not in the gap between your choice and the outcome.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "Most of what people call regret is not about the decision at all — it is about how they remember the decision. A good outcome with a bad process still feels hollow. A bad outcome with a good process still feels survivable. The goal of a regret-minimising process is not to guarantee a good outcome, which you cannot. It is to make sure the version of you who lives with the result can still look the past version in the eye.",
+      },
+      { kind: "h2", text: "1. Write the reasons down before you know the result" },
+      {
+        kind: "p",
+        text: "The single most effective technique for regret reduction is pre-registration. Before you act, write:",
+      },
+      {
+        kind: "ul",
+        items: [
+          "What am I choosing, in one sentence?",
+          "Why am I choosing it — the two or three actual reasons?",
+          "What do I think will happen — best, worst, likely?",
+          "What would make me admit this was wrong, and by when?",
+        ],
+      },
+      {
+        kind: "p",
+        text: "Then lock it. Date it. Save it. When the outcome arrives, the question is no longer “did it work out?” — it is “did my reasoning hold up?” That is a much fairer question to the version of you who had less information.",
+      },
+      { kind: "h2", text: "2. Distinguish process regret from outcome regret" },
+      {
+        kind: "p",
+        text: "There are two kinds of regret, and they require different treatments:",
+      },
+      {
+        kind: "ul",
+        items: [
+          "Outcome regret — the decision was reasonable, the world got unlucky. Grief, not guilt.",
+          "Process regret — you knew better, you skipped the work, you let fear or speed decide. This is the one to guard against.",
+        ],
+      },
+      {
+        kind: "p",
+        text: "Most people conflate these. They feel terrible about outcome regret and let themselves off the hook on process regret. That is exactly the wrong direction.",
+      },
+      { kind: "h2", text: "3. Use the 10/10/10 rule" },
+      {
+        kind: "p",
+        text: "Ask: how will I feel about this decision in 10 minutes, 10 months, and 10 years? Big decisions where the three answers diverge wildly need more time. Small decisions where they converge do not deserve the anxiety you are giving them.",
+      },
+      { kind: "h2", text: "4. Prefer reversible moves when uncertain" },
+      {
+        kind: "p",
+        text: "When you cannot predict the outcome well, optimise for being able to undo, not for being right. Start part-time before quitting full-time. Date longer before moving in. Rent longer before buying. Say yes to a trial run before the permanent move. Reversibility is a regret insurance premium paid in optionality.",
+      },
+      { kind: "h2", text: "5. Imagine the honest eulogy version" },
+      {
+        kind: "p",
+        text: "This sounds dramatic because it is. Imagine a version of yourself at 80 describing this chapter to a friend. What is the sentence that feels proud? What is the sentence that feels ashamed? Most daily decisions do not rise to this level, but the two or three big ones a year do, and they will be the ones you remember.",
+      },
+      { kind: "h2", text: "6. A short script" },
+      {
+        kind: "ol",
+        items: [
+          "What am I choosing, in one sentence?",
+          "What are my two or three real reasons, written down and dated?",
+          "What would make this wrong, and how soon would I know?",
+          "Is the move reversible enough to survive a surprise, or do I need a smaller first step?",
+          "In ten years, will I resent the choice — or the fact that I made it without these answers?",
+        ],
+      },
+      {
+        kind: "quote",
+        text: "You cannot control outcomes. You can control whether the future version of you had the information and courage to make a defensible call.",
+      },
+    ],
+  },
 ];
 
 export function getPostBySlug(slug: string): BlogPost | undefined {

@@ -71,7 +71,7 @@ const hy: ExpertsCopy = {
   sendRequest: "Ուղարկել",
   sending: "Ուղարկում…",
   contactSuccess:
-    "Հարցումը պահվեց։ Մասնագետը կկարողանա տեսնել այն իր վահանակում (MVP)։ Էլ. փոստով ավտոմատ ուղարկումը կարող է միացվել հետագայում։",
+    "Հարցումը ուղարկվեց։ Մասնագետը կտեսնի այն իր պրոֆիլի վահանակում և անձամբ կկապվի ձեզ հետ։",
   contactError: "Չհաջողվեց ուղարկել։ Փորձեք նորից։",
   registerTitle: "Գրանցվել որպես մասնագետ",
   registerSubtitle:
@@ -88,9 +88,9 @@ const hy: ExpertsCopy = {
   regSuccess: "Գրանցումը պահվեց։ Ձեր պրոֆիլը հասանելի է ցանցում։",
   regError: "Սխալ։ Ստուգեք դաշտերը։",
   disclaimerExperts:
-    "Մասնագետների ծառայությունները կարգավորվում են նրանց և ձեր միջև։ Հարթակը MVP է՝ կապի հարցումները պահվում են տվյալների բազայում, ավտոմատ էլ. փոստը կարող է միացվել հետո։",
+    "Մասնագետների ծառայությունները տրամադրվում են նրանց կողմից՝ անկախ։ Կայքը միացնում է ձեզ մասնագետի հետ, սակայն խորհրդատվության պայմանները, վճարները և պատասխանատվությունը կարգավորվում են ուղղակիորեն ձեր և մասնագետի միջև։",
   expertsLoadFailed:
-    "Ցանկը չբեռնվեց։ Տեղային մշակման համար ստուգեք .env-ում DATABASE_URL-ը և մեկ անգամ գործարկեք՝ npx prisma db push",
+    "Ցանկը ժամանակավորապես հասանելի չէ։ Խնդրում ենք թարմացնել էջը մի փոքր ուշ։",
   filtersSectionLabel: "Զտում և որոնում",
   loadingLabel: "Բեռնում…",
   emptyCta: "Գրանցվել որպես առաջին մասնագետ",
@@ -122,7 +122,7 @@ const en: ExpertsCopy = {
   sendRequest: "Send",
   sending: "Sending…",
   contactSuccess:
-    "Request saved. The expert can see it in their dashboard (MVP). Email notifications can be added later.",
+    "Your request has been sent. The expert will see it in their dashboard and reach out to you directly.",
   contactError: "Could not send. Try again.",
   registerTitle: "Register as a professional",
   registerSubtitle:
@@ -139,9 +139,9 @@ const en: ExpertsCopy = {
   regSuccess: "Saved. Your profile is now listed.",
   regError: "Error. Check required fields.",
   disclaimerExperts:
-    "Services are between you and the professional. This MVP stores contact requests in the database; automated email can be added later.",
+    "Professional services are provided independently by each expert. Life Decision Engine connects you with qualified professionals, but the terms, fees, and advice are agreed directly between you and the expert.",
   expertsLoadFailed:
-    "Could not load the directory. For local dev: set DATABASE_URL in .env and run: npx prisma db push",
+    "The directory is temporarily unavailable. Please refresh the page in a moment.",
   filtersSectionLabel: "Filter & search",
   loadingLabel: "Loading directory…",
   emptyCta: "Be the first expert to register",

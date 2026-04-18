@@ -149,13 +149,14 @@ const FAQ_PRIVACY: QA[] = [
     q: "Can I delete my data?",
     a: (
       <>
-        The current MVP does not persist your analyzer input in a public
-        database. For account-linked features (when enabled), you can reach
-        out via the contact method on the site for deletion requests.
+        Yes. Your analyzer input is not publicly published. For any
+        account-linked data you may have submitted (for example, an expert
+        profile or a contact request), you can reach out via the contact
+        details on the site and we will delete it on request.
       </>
     ),
     plain:
-      "The MVP does not persist analyzer input publicly. For account-linked features, contact us through the site to request deletion.",
+      "Yes. Analyzer input is never published. For any account-linked data, contact us via the site and we will delete it on request.",
   },
 ];
 

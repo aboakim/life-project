@@ -21,7 +21,7 @@ function base(decision: string, seed: number) {
 function demoEnglish(quote: string): Omit<DecisionAnalysis, "score"> {
   return {
     summary:
-      "This is a demo analysis. Set `OPENAI_API_KEY` for real AI depth. Your question: «" +
+      "This is a structured preview analysis. Deeper AI insight returns shortly. Your question: «" +
       quote +
       "».",
     dimensions: {
@@ -67,7 +67,7 @@ export function buildDemoAnalysis(
   const blocks: Record<AppLocale, Omit<DecisionAnalysis, "score">> = {
     hy: {
       summary:
-        "Սա ցուցադրական վերլուծություն է։ Լրացրեք `OPENAI_API_KEY`՝ իրական AI խորը վերլուծության համար։ Ձեր հարցը՝ «" +
+        "Սա կառուցվածքային նախնական վերլուծություն է։ Ավելի խորը AI վերլուծությունը շուտով կվերականգնվի։ Ձեր հարցը՝ «" +
         quote +
         "»։",
       dimensions: {
@@ -105,7 +105,7 @@ export function buildDemoAnalysis(
     "en-US": demoEnglish(quote),
     ru: {
       summary:
-        "Это демо-анализ. Укажите `OPENAI_API_KEY` для полноценного AI. Ваш вопрос: «" +
+        "Это структурированный предварительный анализ. Полный AI-анализ скоро снова будет доступен. Ваш вопрос: «" +
         quote +
         "».",
       dimensions: {
@@ -141,7 +141,7 @@ export function buildDemoAnalysis(
     },
     de: {
       summary:
-        "Dies ist eine Demo-Analyse. Setze `OPENAI_API_KEY` für echte KI-Tiefe. Deine Frage: «" +
+        "Dies ist eine strukturierte Vorschau-Analyse. Die vollständige KI-Analyse ist in Kürze wieder verfügbar. Deine Frage: «" +
         quote +
         "».",
       dimensions: {
@@ -177,7 +177,7 @@ export function buildDemoAnalysis(
     },
     fr: {
       summary:
-        "Ceci est une analyse démo. Définissez `OPENAI_API_KEY` pour une IA complète. Votre question : «" +
+        "Ceci est une analyse structurée d’aperçu. L’analyse IA complète sera de nouveau disponible sous peu. Votre question : «" +
         quote +
         "».",
       dimensions: {
@@ -213,7 +213,7 @@ export function buildDemoAnalysis(
     },
     es: {
       summary:
-        "Esto es un análisis demo. Configura `OPENAI_API_KEY` para IA completa. Tu pregunta: «" +
+        "Este es un análisis preliminar estructurado. El análisis de IA completo volverá a estar disponible en breve. Tu pregunta: «" +
         quote +
         "».",
       dimensions: {
@@ -249,7 +249,7 @@ export function buildDemoAnalysis(
     },
     ar: {
       summary:
-        "هذا تحليل تجريبي. عيّن `OPENAI_API_KEY` لتحليل أعمق بالذكاء الاصطناعي. سؤالك: «" +
+        "هذا تحليل تمهيدي مُنظَّم. سيعود التحليل الكامل بالذكاء الاصطناعي للعمل قريبًا. سؤالك: «" +
         quote +
         "».",
       dimensions: {
@@ -285,7 +285,7 @@ export function buildDemoAnalysis(
     },
     it: {
       summary:
-        "Questa è un’analisi demo. Imposta `OPENAI_API_KEY` per IA completa. La tua domanda: «" +
+        "Questa è un’analisi preliminare strutturata. L’analisi IA completa tornerà disponibile a breve. La tua domanda: «" +
         quote +
         "».",
       dimensions: {

@@ -45,8 +45,9 @@ export default function PrivacyPage() {
             When you use the analyzer or forms, you may enter text describing
             personal situations. That content is used to generate your session
             results. Do not submit information you are not comfortable processing
-            for this purpose. This MVP is not designed as a medical, legal, or
-            therapeutic service.
+            for this purpose. Life Decision Engine is an informational and
+            decision-support tool; it is not a medical, legal, or therapeutic
+            service.
           </p>
         </section>
 
