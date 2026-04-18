@@ -187,20 +187,20 @@ export default function DecisionStudio() {
         {/* Hero — split layout like leading SaaS landings */}
         <section
           id="section-hero"
-          className="animate-fade-up relative overflow-hidden rounded-[2rem] border border-white/[0.09] bg-gradient-to-br from-white/[0.07] via-white/[0.02] to-transparent p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.04)_inset] sm:p-10 lg:p-12"
+          className="animate-fade-up relative overflow-hidden rounded-[2rem] border border-white/[0.14] bg-gradient-to-br from-white/[0.12] via-white/[0.04] to-white/[0.02] p-6 shadow-[0_32px_100px_-48px_rgb(var(--accent)/0.45),0_0_0_1px_rgba(255,255,255,0.06)_inset] backdrop-blur-sm sm:p-10 lg:p-12"
         >
-          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(105deg,rgb(var(--accent)/0.1),transparent_42%,rgb(var(--accent-2)/0.08),transparent_70%,rgb(var(--accent-magenta)/0.06))]" />
-          <div className="grid-view pointer-events-none absolute inset-0 opacity-[0.35]" />
+          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(115deg,rgb(var(--accent)/0.14),transparent_36%,rgb(var(--accent-2)/0.1),transparent_64%,rgb(var(--accent-magenta)/0.1))]" />
+          <div className="grid-view pointer-events-none absolute inset-0 opacity-[0.45]" />
           <div className="relative grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(280px,400px)] lg:items-center">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-black/30 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[rgb(var(--ink-soft))]">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.18] bg-white/[0.1] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[rgb(var(--ink))] shadow-[0_0_24px_-8px_rgb(var(--accent)/0.4)] backdrop-blur-sm">
                 <span className="size-2 rounded-full bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] shadow-[0_0_14px_rgb(var(--accent)/0.55)]" />
                 {t.brand}
               </div>
               <p className="mt-5 text-[13px] font-medium leading-snug text-[rgb(var(--accent-2))]/95 [text-wrap:balance]">
                 {t.heroRibbon}
               </p>
-              <h1 className="mt-4 text-4xl font-semibold tracking-tight [text-wrap:balance] sm:text-5xl lg:text-[3.15rem] lg:leading-[1.08]">
+              <h1 className="font-display mt-4 text-4xl font-bold tracking-tight [text-wrap:balance] sm:text-5xl lg:text-[3.25rem] lg:leading-[1.06]">
                 <span className="text-[rgb(var(--ink))]">{t.heroLine1}</span>{" "}
                 <span className="text-gradient">{t.heroAccent}</span>
               </h1>
@@ -269,7 +269,7 @@ export default function DecisionStudio() {
                     </a>
                   ))}
                 </div>
-                <div className="border-t border-white/10 bg-black/20 px-4 py-3">
+                <div className="border-t border-white/[0.12] bg-white/[0.06] px-4 py-3">
                   <p className="text-[11px] leading-relaxed text-[rgb(var(--ink-soft))]">
                     {exNav.homePromoLink}
                   </p>
@@ -290,13 +290,13 @@ export default function DecisionStudio() {
           className="scroll-mt-36 pt-12 sm:pt-14"
           aria-labelledby="overview-heading"
         >
-          <div className="rounded-[1.75rem] border border-white/[0.09] bg-gradient-to-br from-white/[0.06] via-white/[0.02] to-transparent p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.04)_inset] sm:p-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[rgb(var(--accent-dim))]">
+          <div className="rounded-[1.75rem] border border-white/[0.12] bg-gradient-to-br from-white/[0.1] via-white/[0.04] to-transparent p-6 shadow-[0_20px_60px_-36px_rgb(var(--accent)/0.25),0_0_0_1px_rgba(255,255,255,0.05)_inset] sm:p-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[rgb(var(--accent-2))]">
               {t.atAGlanceEyebrow}
             </p>
             <h2
               id="overview-heading"
-              className="mt-2 text-xl font-semibold tracking-tight text-[rgb(var(--ink))] sm:text-2xl [text-wrap:balance]"
+              className="font-display mt-2 text-xl font-bold tracking-tight text-[rgb(var(--ink))] sm:text-2xl [text-wrap:balance]"
             >
               {t.atAGlanceTitle}
             </h2>
@@ -304,7 +304,7 @@ export default function DecisionStudio() {
               {t.atAGlanceCards.map((card, i) => (
                 <li
                   key={card.title}
-                  className="flex flex-col rounded-2xl border border-white/[0.07] bg-[rgb(var(--surface-2))]/40 p-5 ring-1 ring-white/[0.03]"
+                  className="flex flex-col rounded-2xl border border-white/[0.1] bg-[rgb(var(--surface-2))]/55 p-5 ring-1 ring-white/[0.06]"
                 >
                   <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[rgb(var(--accent))]/35 to-[rgb(var(--accent-2))]/20 text-xs font-bold text-white shadow-inner">
                     {i + 1}
@@ -339,12 +339,12 @@ export default function DecisionStudio() {
           aria-labelledby="product-heading"
         >
           <div className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[rgb(var(--accent-dim))]">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[rgb(var(--accent-2))]">
               {t.sectionNavProduct}
             </p>
             <h2
               id="product-heading"
-              className="mt-2 text-2xl font-semibold tracking-tight text-[rgb(var(--ink))] sm:text-3xl [text-wrap:balance]"
+              className="font-display mt-2 text-2xl font-bold tracking-tight text-[rgb(var(--ink))] sm:text-3xl [text-wrap:balance]"
             >
               {t.productSectionTitle}
             </h2>
@@ -362,7 +362,7 @@ export default function DecisionStudio() {
             {t.bentoCards.map((card) => (
               <li
                 key={card.title}
-                className="group list-none rounded-2xl border border-white/[0.08] bg-gradient-to-b from-white/[0.06] to-transparent p-5 transition duration-300 hover:-translate-y-0.5 hover:border-[rgb(var(--accent))]/25 hover:shadow-[0_20px_50px_-28px_rgb(var(--accent)/0.42)]"
+                className="group list-none rounded-2xl border border-white/[0.1] bg-gradient-to-b from-white/[0.09] to-white/[0.02] p-5 transition duration-300 hover:-translate-y-0.5 hover:border-[rgb(var(--accent))]/35 hover:shadow-[0_24px_56px_-28px_rgb(var(--accent)/0.45)]"
               >
                 <span className="inline-block rounded-full bg-[rgb(var(--accent))]/12 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[rgb(var(--accent-2))]">
                   {card.pill}
@@ -386,7 +386,7 @@ export default function DecisionStudio() {
         >
           <h2
             id="trust-heading"
-            className="text-2xl font-semibold tracking-tight text-[rgb(var(--ink))] sm:text-3xl [text-wrap:balance]"
+            className="font-display text-2xl font-bold tracking-tight text-[rgb(var(--ink))] sm:text-3xl [text-wrap:balance]"
           >
             {t.trustSectionTitle}
           </h2>
@@ -415,7 +415,7 @@ export default function DecisionStudio() {
         >
           <h2
             id="how-heading"
-            className="text-2xl font-semibold tracking-tight text-[rgb(var(--ink))] sm:text-3xl [text-wrap:balance]"
+            className="font-display text-2xl font-bold tracking-tight text-[rgb(var(--ink))] sm:text-3xl [text-wrap:balance]"
           >
             {t.howSectionTitle}
           </h2>
@@ -425,7 +425,7 @@ export default function DecisionStudio() {
                 <span className="how-timeline-dot absolute start-0 top-1 flex size-8 items-center justify-center rounded-full bg-gradient-to-br from-[rgb(var(--accent))]/40 to-[rgb(var(--accent-2))]/25 text-xs font-bold text-white shadow-lg ring-4 ring-[rgb(var(--surface))]">
                   {i + 1}
                 </span>
-                <div className="rounded-2xl border border-white/[0.07] bg-white/[0.03] px-5 py-4">
+                <div className="rounded-2xl border border-white/[0.1] bg-white/[0.06] px-5 py-4">
                   <h3 className="text-sm font-semibold text-[rgb(var(--ink))]">
                     {step.title}
                   </h3>
@@ -446,7 +446,7 @@ export default function DecisionStudio() {
         >
           <h2
             id="lang-heading"
-            className="text-2xl font-semibold tracking-tight text-[rgb(var(--ink))] sm:text-3xl"
+            className="font-display text-2xl font-bold tracking-tight text-[rgb(var(--ink))] sm:text-3xl"
           >
             {t.langLabel}
           </h2>
@@ -454,7 +454,7 @@ export default function DecisionStudio() {
             {t.heroRibbon}
           </p>
           <nav
-            className="mt-8 rounded-2xl border border-white/[0.1] bg-gradient-to-br from-black/40 to-black/25 p-4 shadow-xl sm:p-6"
+            className="mt-8 rounded-2xl border border-white/[0.12] bg-gradient-to-br from-white/[0.08] to-white/[0.03] p-4 shadow-[0_24px_64px_-32px_rgb(var(--accent)/0.2)] backdrop-blur-sm sm:p-6"
             aria-label={t.langLabel}
           >
             <div className="flex flex-wrap gap-2">
@@ -468,7 +468,7 @@ export default function DecisionStudio() {
                     className={
                       active
                         ? "rounded-xl border border-[rgb(var(--accent))]/50 bg-gradient-to-r from-[rgb(var(--accent))]/25 to-[rgb(var(--accent-2))]/18 px-3 py-2 text-sm font-semibold text-white shadow-[0_0_24px_-8px_rgb(var(--accent))]"
-                        : "rounded-xl border border-white/12 bg-black/35 px-3 py-2 text-sm text-[rgb(var(--ink-soft))] transition hover:border-amber-400/25 hover:bg-white/[0.05] hover:text-[rgb(var(--ink))]"
+                        : "rounded-xl border border-white/[0.12] bg-white/[0.06] px-3 py-2 text-sm text-[rgb(var(--ink-soft))] transition hover:border-[rgb(var(--accent-2))]/30 hover:bg-white/[0.1] hover:text-[rgb(var(--ink))]"
                     }
                   >
                     <span className="me-1.5 opacity-90" aria-hidden>
@@ -493,7 +493,7 @@ export default function DecisionStudio() {
         >
           <h2
             id="workspace-heading"
-            className="text-2xl font-semibold tracking-tight text-[rgb(var(--ink))] sm:text-3xl [text-wrap:balance]"
+            className="font-display text-2xl font-bold tracking-tight text-[rgb(var(--ink))] sm:text-3xl [text-wrap:balance]"
           >
             {t.workspaceTitle}
           </h2>
@@ -531,7 +531,7 @@ export default function DecisionStudio() {
                 onChange={(e) => setDecision(e.target.value)}
                 placeholder={t.decisionPh}
                 rows={4}
-                className="mt-4 w-full resize-y rounded-2xl border border-white/10 bg-black/25 px-4 py-3 text-sm leading-relaxed text-[rgb(var(--ink))] placeholder:text-[rgb(var(--ink-soft))]/65 outline-none transition focus:border-[rgb(var(--accent))]/45 focus:ring-2 focus:ring-[rgb(var(--accent))]/15"
+                className="mt-4 w-full resize-y rounded-2xl border border-white/10 bg-white/[0.07] px-4 py-3 text-sm leading-relaxed text-[rgb(var(--ink))] placeholder:text-[rgb(var(--ink-soft))]/65 outline-none transition focus:border-[rgb(var(--accent))]/45 focus:ring-2 focus:ring-[rgb(var(--accent))]/15"
               />
 
               <label className="mt-5 block text-sm font-medium text-[rgb(var(--ink))]">
@@ -542,7 +542,7 @@ export default function DecisionStudio() {
                 onChange={(e) => setContext(e.target.value)}
                 placeholder={t.contextPh}
                 rows={3}
-                className="mt-2 w-full resize-y rounded-2xl border border-white/10 bg-black/25 px-4 py-3 text-sm outline-none transition focus:border-[rgb(var(--accent))]/45"
+                className="mt-2 w-full resize-y rounded-2xl border border-white/10 bg-white/[0.07] px-4 py-3 text-sm outline-none transition focus:border-[rgb(var(--accent))]/45"
               />
 
               <label className="mt-5 block text-sm font-medium text-[rgb(var(--ink))]">
@@ -553,7 +553,7 @@ export default function DecisionStudio() {
                 onChange={(e) => setConstraints(e.target.value)}
                 placeholder={t.constraintsPh}
                 rows={2}
-                className="mt-2 w-full resize-y rounded-2xl border border-white/10 bg-black/25 px-4 py-3 text-sm outline-none transition focus:border-[rgb(var(--accent))]/45"
+                className="mt-2 w-full resize-y rounded-2xl border border-white/10 bg-white/[0.07] px-4 py-3 text-sm outline-none transition focus:border-[rgb(var(--accent))]/45"
               />
 
               {error && (

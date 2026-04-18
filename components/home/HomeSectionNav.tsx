@@ -49,7 +49,7 @@ export default function HomeSectionNav({ links }: { links: LinkItem[] }) {
 
   return (
     <nav
-      className="home-section-nav sticky top-[52px] z-40 border-b border-white/[0.07] bg-[rgb(var(--surface))]/80 backdrop-blur-xl"
+      className="home-section-nav sticky top-[52px] z-40 border-b border-white/[0.1] bg-[rgb(var(--surface))]/70 backdrop-blur-2xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]"
       aria-label="On this page"
     >
       <div className="mx-auto flex max-w-6xl items-center gap-1 overflow-x-auto px-4 py-2.5 sm:px-6 scrollbar-none">

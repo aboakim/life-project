@@ -5,6 +5,7 @@ import {
   Noto_Sans,
   Noto_Sans_Armenian,
   Noto_Sans_Arabic,
+  Plus_Jakarta_Sans,
 } from "next/font/google";
 import GlobalNav from "@/components/GlobalNav";
 import GlobalFooter from "@/components/GlobalFooter";
@@ -21,6 +22,14 @@ const ADSENSE_CLIENT = "ca-pub-3541461663112540";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+});
+
+/** Display / marketing headings — modern geometric, pairs with Geist for UI body. */
+const displaySans = Plus_Jakarta_Sans({
+  variable: "--font-display",
+  subsets: ["latin", "latin-ext"],
+  weight: ["500", "600", "700", "800"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
@@ -123,7 +132,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${notoArmenian.variable} ${notoSans.variable} ${notoArabic.variable} font-sans`}
+        className={`${displaySans.variable} ${geistSans.variable} ${geistMono.variable} ${notoArmenian.variable} ${notoSans.variable} ${notoArabic.variable} font-sans antialiased`}
       >
         <SkipToContent />
         <SiteJsonLd />

@@ -34,12 +34,12 @@ export default function GlobalNav() {
   const cq = getCommunityCopy(locale);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/[0.07] bg-[rgb(var(--surface))]/90 backdrop-blur-xl shadow-[0_1px_0_0_rgba(255,255,255,0.04)]">
+    <header className="sticky top-0 z-50 border-b border-white/[0.1] bg-[rgb(var(--surface))]/75 backdrop-blur-2xl shadow-[0_8px_32px_-12px_rgb(0_0_0/0.35),inset_0_1px_0_0_rgba(255,255,255,0.06)]">
       <NavRoutePrefetch />
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6">
         <Link
           href="/"
-          className="text-sm font-semibold text-[rgb(var(--ink))] transition hover:text-[rgb(var(--accent))]"
+          className="font-display text-[15px] font-bold tracking-tight text-[rgb(var(--ink))] transition hover:text-[rgb(var(--accent-2))]"
         >
           Life Decision Engine
         </Link>
