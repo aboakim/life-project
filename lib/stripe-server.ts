@@ -67,14 +67,21 @@ export async function createPremiumCheckoutSession(options: {
     mode: "subscription",
     payment_method_types: ["card"],
     line_items: [{ price: priceId, quantity: 1 }],
-    success_url: `${origin}/pricing?checkout=success`,
+    // Stripe substitutes {CHECKOUT_SESSION_ID} server-side before redirect;
+    // this lets the success page surface a reference id if we add one later.
+    success_url: `${origin}/pricing?checkout=success&session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${origin}/pricing?checkout=canceled`,
     allow_promotion_codes: true,
     billing_address_collection: "required",
+    // Stripe collects email itself if we don't pass one; only forward a
+    // client-provided email when it parses as a well-formed address.
     ...(options.customerEmail &&
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(options.customerEmail.trim())
       ? { customer_email: options.customerEmail.trim().toLowerCase() }
       : {}),
+    // Tag both the session and the resulting subscription so we can
+    // filter on them in Stripe Dashboard and ignore events from unrelated
+    // apps sharing the same account.
     subscription_data: {
       metadata: { app: "life-decision-engine" },
     },

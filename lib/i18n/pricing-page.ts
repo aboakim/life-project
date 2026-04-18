@@ -24,7 +24,7 @@ export type PricingCopy = {
 const hy: PricingCopy = {
   pageTitle: "Վճարային պլաններ",
   pageSubtitle:
-    "Անվճար MVP-ից մինչև Premium — Stripe-ի ինտեգրացիան կարելի է միացնել հետագայում։",
+    "Ընտրեք ձեզ համար հարմար փաթեթը՝ անվճար Free-ից մինչև Premium։ Վճարումները մշակվում են Stripe-ի միջոցով՝ քարտի տվյալները երբեք չեն անցնում մեր սերվերներով։",
   navPricing: "Գներ",
   freeTitle: "Free",
   freePrice: "0",
@@ -36,18 +36,18 @@ const hy: PricingCopy = {
   ],
   premiumTitle: "Premium",
   premiumPrice: "$4.99",
-  premiumDesc: "ամսական (օրինակ)",
+  premiumDesc: "ամսական",
   premiumBullets: [
     "Անսահմանափակ կամ ավելի շատ AI վերլուծություններ",
     "Խորը հաշվետվություններ (հետագա)",
     "Առաջնահերթ աջակցություն (հետագա)",
   ],
-  ctaUpgrade: "Միանալ Premium (placeholder)",
+  ctaUpgrade: "Միանալ Premium",
   ctaFree: "Սկսել անվճար",
-  badgePlaceholder: "Stripe կմախք",
+  badgePlaceholder: "Ապահով վճարում",
   toastNotReady:
-    "Վճարային համակարգը կարգավորված չէ։ Սերվերում լրացրեք Stripe env-երը (տես .env.example)։",
-  deployHint: "Deploy-ի քայլերը՝ docs/DEPLOY.md",
+    "Վճարումները հիմա հասանելի չեն։ Խնդրում ենք փորձել մի փոքր ուշ։",
+  deployHint: "Վճարումները մշակվում են Stripe-ի միջոցով — քարտի տվյալները երբեք չեն անցնում մեր սերվերներով։",
   checkoutSuccess:
     "Շնորհակալություն։ Բաժանորդագրությունը հաստատվում է Stripe-ի միջոցով — էլ. փոստով կստանաք հաստատում։",
   checkoutCanceled: "Վճարումը չեղարկվեց։ Կարող եք կրկին փորձել ցանկացած ժամանակ։",
@@ -56,7 +56,7 @@ const hy: PricingCopy = {
 const en: PricingCopy = {
   pageTitle: "Pricing",
   pageSubtitle:
-    "From free MVP to Premium—Stripe checkout can be enabled when you are ready.",
+    "Pick the plan that fits. Payments are processed by Stripe — card details never touch our servers, and you can cancel anytime from your receipt email.",
   navPricing: "Pricing",
   freeTitle: "Free",
   freePrice: "0",
@@ -68,7 +68,7 @@ const en: PricingCopy = {
   ],
   premiumTitle: "Premium",
   premiumPrice: "$4.99",
-  premiumDesc: "per month (example)",
+  premiumDesc: "per month",
   premiumBullets: [
     "More / unlimited AI analyses",
     "Deeper reports (future)",
@@ -78,8 +78,8 @@ const en: PricingCopy = {
   ctaFree: "Continue free",
   badgePlaceholder: "Secure checkout",
   toastNotReady:
-    "Payments are not configured. Set Stripe environment variables on the server (see .env.example).",
-  deployHint: "Deploy steps: docs/DEPLOY.md",
+    "Payments are not available right now. Please try again later.",
+  deployHint: "Payments are processed by Stripe — card details never touch our servers.",
   checkoutSuccess:
     "Thank you. Your subscription is confirmed via Stripe — check your email for the receipt.",
   checkoutCanceled: "Checkout was canceled. You can try again anytime.",
