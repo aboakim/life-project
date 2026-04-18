@@ -47,7 +47,6 @@ export default function ExpertsMarketplace() {
   const [formMsg, setFormMsg] = useState("");
   const [sending, setSending] = useState(false);
   const [formNote, setFormNote] = useState<string | null>(null);
-  const [loadError, setLoadError] = useState(false);
 
   useEffect(() => {
     const raw = localStorage.getItem(LOCALE_KEY);
@@ -64,20 +63,22 @@ export default function ExpertsMarketplace() {
 
   const load = useCallback(async () => {
     setLoading(true);
-    setLoadError(false);
     try {
       const url = new URL("/api/experts", window.location.origin);
       if (role) url.searchParams.set("role", role);
       const res = await fetch(url.toString());
+      // Treat both successful responses and transient errors as "empty
+      // directory" from the user's perspective — the rendered empty state
+      // (with "Be the first to join" CTA) is cleaner than a red error box.
       if (!res.ok) {
-        setLoadError(true);
         setRawExperts([]);
         return;
       }
-      const data = (await res.json()) as { experts: ExpertPublic[] };
+      const data = (await res.json().catch(() => ({ experts: [] }))) as {
+        experts?: ExpertPublic[];
+      };
       setRawExperts(data.experts ?? []);
     } catch {
-      setLoadError(true);
       setRawExperts([]);
     } finally {
       setLoading(false);
@@ -204,15 +205,6 @@ export default function ExpertsMarketplace() {
           {t.disclaimerExperts}
         </p>
 
-        {loadError ? (
-          <div
-            className="mt-10 rounded-2xl border border-rose-500/30 bg-rose-500/10 px-5 py-4 text-sm text-rose-100/95"
-            role="alert"
-          >
-            {t.expertsLoadFailed}
-          </div>
-        ) : null}
-
         {loading ? (
           <div
             className="mt-10 space-y-4"
@@ -233,7 +225,7 @@ export default function ExpertsMarketplace() {
           </div>
         ) : null}
 
-        {!loading && !loadError && experts.length === 0 ? (
+        {!loading && experts.length === 0 ? (
           <div className="mt-10 rounded-[1.75rem] border border-dashed border-white/15 bg-white/[0.03] px-6 py-14 text-center">
             <p className="text-base font-medium text-[rgb(var(--ink))]">
               {t.empty}
@@ -247,7 +239,7 @@ export default function ExpertsMarketplace() {
           </div>
         ) : null}
 
-        {!loading && !loadError && experts.length > 0 ? (
+        {!loading && experts.length > 0 ? (
           <ul className="mt-10 space-y-5">
             {experts.map((e) => (
               <li

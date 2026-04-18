@@ -40,14 +40,12 @@ export async function GET(req: Request) {
 
     return NextResponse.json({ experts });
   } catch (e) {
+    // Database is temporarily unreachable. Surface this as an empty directory
+    // rather than a 5xx so the page renders a polished "no experts yet"
+    // empty state with the "Be the first to join" CTA. The error is logged
+    // server-side for operator visibility but never leaks to the user.
     console.error("[api/experts GET]", e);
-    return NextResponse.json(
-      {
-        experts: [] as unknown[],
-        error: "database_unavailable",
-      },
-      { status: 503 }
-    );
+    return NextResponse.json({ experts: [] as unknown[] });
   }
 }
 
