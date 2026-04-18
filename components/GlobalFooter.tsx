@@ -19,6 +19,7 @@ const COLUMNS: { title: string; links: FooterLink[] }[] = [
       { href: "/blog", label: "Blog" },
       { href: "/faq", label: "FAQ" },
       { href: "/about", label: "About" },
+      { href: "/editorial-team", label: "Editorial Team" },
       { href: "/experts/register", label: "Join as expert" },
     ],
   },
@@ -26,6 +27,7 @@ const COLUMNS: { title: string; links: FooterLink[] }[] = [
     title: "Company & legal",
     links: [
       { href: "/contact", label: "Contact" },
+      { href: "/editorial-standards", label: "Editorial Standards" },
       { href: "/privacy", label: "Privacy Policy" },
       { href: "/terms", label: "Terms of Service" },
     ],

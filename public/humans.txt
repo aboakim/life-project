@@ -1,0 +1,16 @@
+/* TEAM */
+  Name: Life Decision Engine Editorial Team
+  Site: https://life-decision-engine.com
+  Role: Editorial, product, and engineering
+
+/* SITE */
+  Language: English (en-US), Armenian (hy)
+  Standards: HTML5, CSS3, ES2022, Schema.org structured data
+  Components: Next.js 15 App Router, React 19, TypeScript
+  Hosting: Vercel
+  Analytics: Google Analytics 4 (consent-gated)
+  Ads: Google AdSense (publisher ca-pub-3541461663112540)
+
+/* THANKS */
+  Google Fonts: Geist, Noto Sans, Noto Sans Armenian, Noto Sans Arabic
+  Open source: Next.js, Tailwind CSS, Prisma, Stripe Node SDK

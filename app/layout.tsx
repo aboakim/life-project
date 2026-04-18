@@ -11,6 +11,8 @@ import GlobalFooter from "@/components/GlobalFooter";
 import AnalyticsGate from "@/components/AnalyticsGate";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import SiteJsonLd from "@/components/SiteJsonLd";
+import ConsentBanner from "@/components/ConsentBanner";
+import SkipToContent from "@/components/SkipToContent";
 import "./globals.css";
 
 /** Must match the snippet in Google AdSense → Site → Verify (same ca-pub-…). */
@@ -90,7 +92,30 @@ export default function RootLayout({
   return (
     <html lang="en-US">
       <head>
-        {/* Same as Google AdSense snippet: async + crossorigin="anonymous" */}
+        {/*
+          Google Consent Mode v2 default: denied for all ad/analytics storage
+          until the user actively accepts via <ConsentBanner />.
+          This MUST execute before any gtag / AdSense script so it takes effect
+          for the very first pageview. GA4 loader in GoogleAnalytics.tsx also
+          re-pushes the same defaults as a safety net.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: [
+              "window.dataLayer = window.dataLayer || [];",
+              "function gtag(){dataLayer.push(arguments);}",
+              "window.gtag = window.gtag || gtag;",
+              "gtag('consent','default',{",
+              "  ad_storage:'denied',",
+              "  ad_user_data:'denied',",
+              "  ad_personalization:'denied',",
+              "  analytics_storage:'denied',",
+              "  wait_for_update: 500",
+              "});",
+            ].join(""),
+          }}
+        />
+        {/* Google AdSense: async + crossorigin="anonymous" — respects Consent Mode defaults above. */}
         <script
           async
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
@@ -100,10 +125,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${notoArmenian.variable} ${notoSans.variable} ${notoArabic.variable} font-sans`}
       >
+        <SkipToContent />
         <SiteJsonLd />
         <GlobalNav />
         {children}
         <GlobalFooter />
+        <ConsentBanner />
         <AnalyticsGate />
         <GoogleAnalytics />
       </body>

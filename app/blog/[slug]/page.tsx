@@ -131,7 +131,12 @@ function buildArticleJsonLd(post: BlogPost): Record<string, unknown> {
     description: post.description,
     datePublished: post.publishedAt,
     dateModified: post.updatedAt || post.publishedAt,
-    author: { "@type": "Organization", name: post.author },
+    author: {
+      "@type": "Organization",
+      name: post.author,
+      url: `${base}/editorial-team`,
+      "@id": `${base}/#editorial-team`,
+    },
     publisher: {
       "@type": "Organization",
       name: "Life Decision Engine",
@@ -188,7 +193,12 @@ export default async function BlogArticlePage({
           </p>
           <p className="mt-3 text-xs font-medium uppercase tracking-wider text-[rgb(var(--ink-soft))]/80">
             {formatDate(post.publishedAt)} · {post.readingMinutes} min read ·{" "}
-            {post.author}
+            <Link
+              href="/editorial-team"
+              className="text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+            >
+              {post.author}
+            </Link>
           </p>
         </>
       }

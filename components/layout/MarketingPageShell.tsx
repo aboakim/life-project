@@ -15,7 +15,7 @@ export default function MarketingPageShell({
   children,
 }: Props) {
   return (
-    <div className="relative z-10 min-h-screen pb-28">
+    <div id="main" className="relative z-10 min-h-screen pb-28">
       <OrbDecor />
       <div className="mx-auto max-w-6xl px-4 pt-8 sm:px-6 sm:pt-10">
         <header className="animate-fade-up relative overflow-hidden rounded-[2rem] border border-white/[0.09] bg-gradient-to-br from-white/[0.07] via-white/[0.02] to-transparent px-6 py-8 shadow-[0_0_0_1px_rgba(255,255,255,0.04)_inset] sm:px-10 sm:py-10">

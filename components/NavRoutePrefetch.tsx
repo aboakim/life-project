@@ -14,6 +14,8 @@ const ROUTES = [
   "/contact",
   "/blog",
   "/faq",
+  "/editorial-team",
+  "/editorial-standards",
   "/experts/register",
 ] as const;
 
