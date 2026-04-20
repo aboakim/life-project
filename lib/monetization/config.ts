@@ -112,14 +112,24 @@ export function getAffiliateOffers(): AffiliateOffer[] {
 }
 
 /**
- * Amazon Associates landing URL when tag or full URL is configured.
- * Kept separate from getAffiliateOffers() so it always shows on blog posts.
+ * Default Amazon Associates store / tracking ID (public — same as in every
+ * affiliate link). Used when NEXT_PUBLIC_AMAZON_ASSOCIATES_TAG is unset so the
+ * blog CTA still renders after SSG builds where Vercel env was missing or a
+ * cached redeploy skipped re-inlining NEXT_PUBLIC_*.
+ */
+export const DEFAULT_AMAZON_ASSOCIATES_TAG = "lifedecisions-20";
+
+/**
+ * Amazon Associates landing URL. Env overrides; otherwise falls back to
+ * DEFAULT_AMAZON_ASSOCIATES_TAG. Set NEXT_PUBLIC_AMAZON_ASSOCIATES_DISABLED=1
+ * to hide the block entirely.
  */
 export function getAmazonAffiliateHref(): string | undefined {
+  if (env("NEXT_PUBLIC_AMAZON_ASSOCIATES_DISABLED") === "1") return undefined;
   const override = env("NEXT_PUBLIC_AMAZON_AFFILIATE_URL");
   if (override) return override;
-  const tag = env("NEXT_PUBLIC_AMAZON_ASSOCIATES_TAG");
-  if (!tag) return undefined;
+  const tag =
+    env("NEXT_PUBLIC_AMAZON_ASSOCIATES_TAG") ?? DEFAULT_AMAZON_ASSOCIATES_TAG;
   return `https://www.amazon.com/?tag=${encodeURIComponent(tag)}`;
 }
 
