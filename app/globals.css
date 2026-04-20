@@ -3,23 +3,22 @@
 @tailwind utilities;
 
 /*
- * Design system v3 — “midnight editorial”
- * Distinct purple-forward dark theme, dot texture, high readability for
- * long-form content (AdSense / policy friendly: clear hierarchy, no clutter).
+ * Design system v3.1 — “midnight editorial” (lighter, easier on the eyes)
+ * Slightly lifted surfaces; section washes on the homepage for wayfinding.
  */
 :root {
-  --surface: 22 18 42;
-  --surface-2: 34 28 62;
-  --surface-elevated: 42 36 74;
+  --surface: 32 28 58;
+  --surface-2: 44 38 78;
+  --surface-elevated: 54 48 92;
   --ink: 252 250 255;
-  --ink-soft: 186 190 220;
-  --accent: 172 132 255;
-  --accent-2: 56 232 208;
-  --accent-warm: 255 210 140;
-  --accent-coral: 255 140 175;
-  --accent-magenta: 245 150 255;
-  --accent-dim: 200 190 255;
-  --glow: 180 160 255;
+  --ink-soft: 198 202 228;
+  --accent: 178 145 255;
+  --accent-2: 72 220 200;
+  --accent-warm: 255 218 158;
+  --accent-coral: 255 155 185;
+  --accent-magenta: 248 168 255;
+  --accent-dim: 210 200 255;
+  --glow: 190 175 255;
 }
 
 html {
@@ -39,11 +38,11 @@ body {
   /* Dot grid + aurora mesh — immediately reads as a different site */
   background-image:
     radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.055) 1px, transparent 0),
-    radial-gradient(ellipse 1000px 520px at 88% -10%, rgb(172 132 255 / 0.38), transparent 55%),
-    radial-gradient(ellipse 820px 480px at -8% 18%, rgb(56 232 208 / 0.22), transparent 50%),
-    radial-gradient(ellipse 720px 520px at 75% 108%, rgb(245 150 255 / 0.2), transparent 48%),
-    radial-gradient(ellipse 560px 400px at 15% 95%, rgb(255 210 140 / 0.1), transparent 52%),
-    linear-gradient(172deg, rgb(26 22 48) 0%, rgb(36 30 68) 45%, rgb(24 20 44) 100%);
+    radial-gradient(ellipse 1000px 520px at 88% -10%, rgb(178 145 255 / 0.32), transparent 55%),
+    radial-gradient(ellipse 820px 480px at -8% 18%, rgb(72 220 200 / 0.18), transparent 50%),
+    radial-gradient(ellipse 720px 520px at 75% 108%, rgb(248 168 255 / 0.16), transparent 48%),
+    radial-gradient(ellipse 560px 400px at 15% 95%, rgb(255 218 158 / 0.09), transparent 52%),
+    linear-gradient(172deg, rgb(34 30 62) 0%, rgb(44 38 82) 45%, rgb(32 28 58) 100%);
   background-size:
     28px 28px,
     auto,
@@ -214,4 +213,44 @@ body::before {
   .how-timeline-item:last-child {
     padding-bottom: 0;
   }
+}
+
+/*
+ * Homepage section washes — subtle tint per block so users remember “where they were”.
+ * Keeps the same family as the global palette; opacity stays low for readability.
+ */
+.home-section-wash {
+  background-image: radial-gradient(
+    ellipse 100% 75% at 50% -15%,
+    var(--wash-color, rgb(178 145 255 / 0.14)),
+    transparent 62%
+  );
+  background-repeat: no-repeat;
+}
+.home-section-wash--hero {
+  --wash-color: rgb(178 145 255 / 0.16);
+}
+.home-section-wash--overview {
+  --wash-color: rgb(72 220 200 / 0.13);
+}
+.home-section-wash--product {
+  --wash-color: rgb(178 145 255 / 0.12);
+}
+.home-section-wash--trust {
+  --wash-color: rgb(255 218 158 / 0.11);
+}
+.home-section-wash--how {
+  --wash-color: rgb(120 195 255 / 0.1);
+}
+.home-section-wash--language {
+  --wash-color: rgb(248 168 255 / 0.12);
+}
+.home-section-wash--workspace {
+  --wash-color: rgb(100 210 255 / 0.11);
+}
+.home-section-wash--privacy {
+  --wash-color: rgb(52 211 153 / 0.1);
+}
+.home-section-wash--results {
+  --wash-color: rgb(178 145 255 / 0.1);
 }

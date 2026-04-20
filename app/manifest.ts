@@ -13,8 +13,8 @@ export default function manifest(): MetadataRoute.Manifest {
       "Structured AI analysis for big life decisions — scenarios, lenses, timelines, and a decision score.",
     start_url: "/",
     display: "standalone",
-    background_color: "#16122a",
-    theme_color: "#16122a",
+    background_color: "#201c3a",
+    theme_color: "#201c3a",
     icons: [
       { src: "/icon", sizes: "64x64", type: "image/png", purpose: "any" },
       {

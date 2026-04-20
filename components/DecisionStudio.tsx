@@ -187,7 +187,7 @@ export default function DecisionStudio() {
         {/* Hero — split layout like leading SaaS landings */}
         <section
           id="section-hero"
-          className="animate-fade-up relative overflow-hidden rounded-[2.5rem] border border-white/[0.16] bg-gradient-to-br from-white/[0.14] via-white/[0.05] to-[rgb(var(--surface-elevated))]/40 p-6 shadow-[0_40px_120px_-52px_rgb(var(--accent)/0.5),0_0_0_1px_rgba(255,255,255,0.08)_inset] backdrop-blur-md sm:p-10 lg:p-14"
+          className="home-section-wash home-section-wash--hero animate-fade-up relative overflow-hidden rounded-[2.5rem] border border-white/[0.16] bg-gradient-to-br from-white/[0.16] via-white/[0.07] to-[rgb(var(--surface-elevated))]/45 p-6 shadow-[0_40px_120px_-52px_rgb(var(--accent)/0.45),0_0_0_1px_rgba(255,255,255,0.1)_inset] backdrop-blur-md sm:p-10 lg:p-14"
         >
           <div className="pointer-events-none absolute inset-y-10 start-3 w-[5px] rounded-full bg-gradient-to-b from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] opacity-95 shadow-[0_0_28px_rgb(var(--accent)/0.55)] sm:start-5 sm:w-1.5" />
           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(118deg,rgb(var(--accent)/0.16),transparent_38%,rgb(var(--accent-2)/0.11),transparent_62%,rgb(var(--accent-magenta)/0.12))]" />
@@ -288,7 +288,7 @@ export default function DecisionStudio() {
 
         <section
           id="section-overview"
-          className="scroll-mt-36 pt-12 sm:pt-14"
+          className="home-section-wash home-section-wash--overview scroll-mt-36 rounded-[1.85rem] px-3 pt-12 pb-1 sm:px-4 sm:pt-14"
           aria-labelledby="overview-heading"
         >
           <div className="rounded-[1.75rem] border border-white/[0.12] bg-gradient-to-br from-white/[0.1] via-white/[0.04] to-transparent p-6 shadow-[0_20px_60px_-36px_rgb(var(--accent)/0.25),0_0_0_1px_rgba(255,255,255,0.05)_inset] sm:p-8">
@@ -336,7 +336,7 @@ export default function DecisionStudio() {
         {/* Product — bento */}
         <section
           id="section-product"
-          className="scroll-mt-36 pt-16 sm:pt-20"
+          className="home-section-wash home-section-wash--product scroll-mt-36 rounded-[1.85rem] px-3 pt-16 pb-1 sm:px-4 sm:pt-20"
           aria-labelledby="product-heading"
         >
           <div className="max-w-2xl">
@@ -382,7 +382,7 @@ export default function DecisionStudio() {
         {/* Trust */}
         <section
           id="section-trust"
-          className="scroll-mt-36 pt-16 sm:pt-20"
+          className="home-section-wash home-section-wash--trust scroll-mt-36 rounded-[1.85rem] px-3 pt-16 pb-1 sm:px-4 sm:pt-20"
           aria-labelledby="trust-heading"
         >
           <h2
@@ -411,7 +411,7 @@ export default function DecisionStudio() {
         {/* How — timeline */}
         <section
           id="section-how"
-          className="scroll-mt-36 pt-16 sm:pt-20"
+          className="home-section-wash home-section-wash--how scroll-mt-36 rounded-[1.85rem] px-3 pt-16 pb-1 sm:px-4 sm:pt-20"
           aria-labelledby="how-heading"
         >
           <h2
@@ -442,7 +442,7 @@ export default function DecisionStudio() {
         {/* Language */}
         <section
           id="section-language"
-          className="scroll-mt-36 pt-16 sm:pt-20"
+          className="home-section-wash home-section-wash--language scroll-mt-36 rounded-[1.85rem] px-3 pt-16 pb-1 sm:px-4 sm:pt-20"
           aria-labelledby="lang-heading"
         >
           <h2
@@ -489,7 +489,7 @@ export default function DecisionStudio() {
         {/* Workspace: disclaimer + analyzer */}
         <section
           id="section-workspace"
-          className="scroll-mt-32 pt-16 sm:pt-20"
+          className="home-section-wash home-section-wash--workspace scroll-mt-32 rounded-[1.85rem] px-3 pt-16 pb-1 sm:px-4 sm:pt-20"
           aria-labelledby="workspace-heading"
         >
           <h2
@@ -590,7 +590,7 @@ export default function DecisionStudio() {
 
         <section
           id="section-privacy"
-          className="scroll-mt-36 pt-10 sm:pt-12"
+          className="home-section-wash home-section-wash--privacy scroll-mt-36 rounded-[1.85rem] px-3 pt-10 pb-1 sm:px-4 sm:pt-12"
           aria-labelledby="security-heading"
         >
           <div className="glass card-glow rounded-3xl border border-emerald-400/20 bg-gradient-to-br from-emerald-500/[0.08] to-transparent p-5 sm:p-6">
@@ -632,7 +632,7 @@ export default function DecisionStudio() {
         {a && (
           <section
             id="section-results"
-            className="scroll-mt-28 mt-16 space-y-6 border-t border-white/[0.08] pt-16"
+            className="home-section-wash home-section-wash--results scroll-mt-28 mt-16 space-y-6 rounded-[1.85rem] border-t border-white/[0.08] px-3 pt-16 sm:px-4"
           >
             <section className="glass animate-fade-up rounded-3xl p-6 sm:p-7">
               <h2 className="text-lg font-semibold text-[rgb(var(--ink))]">
