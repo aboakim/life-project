@@ -105,6 +105,48 @@ export function getAffiliateOffers(): AffiliateOffer[] {
     });
   }
 
+  /** Amazon Associates — set NEXT_PUBLIC_AMAZON_ASSOCIATES_TAG (e.g. lifedecisions-20). */
+  const amazonTag = env("NEXT_PUBLIC_AMAZON_ASSOCIATES_TAG");
+  const amazonUrlOverride = env("NEXT_PUBLIC_AMAZON_AFFILIATE_URL");
+  if (amazonUrlOverride) {
+    offers.push({
+      id: "amazon",
+      title: "Amazon — books & gear for your next chapter",
+      blurb:
+        "Decision-making reads, travel basics, and home-office gear — same Amazon you already use, with no extra cost to you.",
+      cta: "Shop on Amazon",
+      href: amazonUrlOverride,
+      topic: [
+        "finance",
+        "relocation",
+        "career",
+        "housing",
+        "relationships",
+        "general",
+      ],
+      badge: "Amazon Associates",
+    });
+  } else if (amazonTag) {
+    const tag = encodeURIComponent(amazonTag);
+    offers.push({
+      id: "amazon",
+      title: "Amazon — books & gear for your next chapter",
+      blurb:
+        "Decision-making reads, travel basics, and home-office gear — same Amazon you already use, with no extra cost to you.",
+      cta: "Shop on Amazon",
+      href: `https://www.amazon.com/?tag=${tag}`,
+      topic: [
+        "finance",
+        "relocation",
+        "career",
+        "housing",
+        "relationships",
+        "general",
+      ],
+      badge: "Amazon Associates",
+    });
+  }
+
   return offers;
 }
 
