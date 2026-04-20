@@ -105,49 +105,22 @@ export function getAffiliateOffers(): AffiliateOffer[] {
     });
   }
 
-  /** Amazon Associates — set NEXT_PUBLIC_AMAZON_ASSOCIATES_TAG (e.g. lifedecisions-20). */
-  const amazonTag = env("NEXT_PUBLIC_AMAZON_ASSOCIATES_TAG");
-  const amazonUrlOverride = env("NEXT_PUBLIC_AMAZON_AFFILIATE_URL");
-  if (amazonUrlOverride) {
-    offers.push({
-      id: "amazon",
-      title: "Amazon — books & gear for your next chapter",
-      blurb:
-        "Decision-making reads, travel basics, and home-office gear — same Amazon you already use, with no extra cost to you.",
-      cta: "Shop on Amazon",
-      href: amazonUrlOverride,
-      topic: [
-        "finance",
-        "relocation",
-        "career",
-        "housing",
-        "relationships",
-        "general",
-      ],
-      badge: "Amazon Associates",
-    });
-  } else if (amazonTag) {
-    const tag = encodeURIComponent(amazonTag);
-    offers.push({
-      id: "amazon",
-      title: "Amazon — books & gear for your next chapter",
-      blurb:
-        "Decision-making reads, travel basics, and home-office gear — same Amazon you already use, with no extra cost to you.",
-      cta: "Shop on Amazon",
-      href: `https://www.amazon.com/?tag=${tag}`,
-      topic: [
-        "finance",
-        "relocation",
-        "career",
-        "housing",
-        "relationships",
-        "general",
-      ],
-      badge: "Amazon Associates",
-    });
-  }
+  /** Amazon is NOT in this pool — it always loses to Wise/Booking in pickOffersForTags.
+   *  Use getAmazonAffiliateHref() + <AmazonAssociatesCta /> on article pages instead. */
 
   return offers;
+}
+
+/**
+ * Amazon Associates landing URL when tag or full URL is configured.
+ * Kept separate from getAffiliateOffers() so it always shows on blog posts.
+ */
+export function getAmazonAffiliateHref(): string | undefined {
+  const override = env("NEXT_PUBLIC_AMAZON_AFFILIATE_URL");
+  if (override) return override;
+  const tag = env("NEXT_PUBLIC_AMAZON_ASSOCIATES_TAG");
+  if (!tag) return undefined;
+  return `https://www.amazon.com/?tag=${encodeURIComponent(tag)}`;
 }
 
 /** Pick up to N affiliate offers that match a set of post tags. */

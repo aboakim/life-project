@@ -36,19 +36,9 @@ export default function AffiliateSuggestion({ tags }: { tags: string[] }) {
         <span aria-hidden="true">→</span>
       </Link>
       <p className="mt-3 text-[11px] text-[rgb(var(--ink-soft))]/70">
-        {o.id === "amazon" ? (
-          <>
-            As an Amazon Associate, Life Decision Engine earns from qualifying
-            purchases. Same price for you; it helps fund the site.
-          </>
-        ) : (
-          <>
-            Affiliate link — if you sign up through this button, Life Decision
-            Engine may earn a small commission at no cost to you. We only list
-            services we&rsquo;d genuinely recommend to someone in this
-            situation.
-          </>
-        )}
+        Affiliate link — if you sign up through this button, Life Decision
+        Engine may earn a small commission at no cost to you. We only list
+        services we&rsquo;d genuinely recommend to someone in this situation.
       </p>
     </aside>
   );

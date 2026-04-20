@@ -6,6 +6,7 @@ import NewsletterCta from "@/components/blog/NewsletterCta";
 import ArticleToc, { type TocItem } from "@/components/blog/ArticleToc";
 import ReadingProgress from "@/components/blog/ReadingProgress";
 import AffiliateSuggestion from "@/components/monetization/AffiliateSuggestion";
+import AmazonAssociatesCta from "@/components/monetization/AmazonAssociatesCta";
 import DirectSponsorSlot from "@/components/monetization/DirectSponsorSlot";
 import {
   type BlogBlock,
@@ -301,6 +302,8 @@ export default async function BlogArticlePage({
           {post.body.map((b, i) => renderBlock(b, i, resolveId))}
 
           <AffiliateSuggestion tags={post.tags} />
+
+          <AmazonAssociatesCta />
 
           <DirectSponsorSlot className="mt-6" />
 
