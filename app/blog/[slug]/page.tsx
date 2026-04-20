@@ -5,6 +5,8 @@ import MarketingPageShell from "@/components/layout/MarketingPageShell";
 import NewsletterCta from "@/components/blog/NewsletterCta";
 import ArticleToc, { type TocItem } from "@/components/blog/ArticleToc";
 import ReadingProgress from "@/components/blog/ReadingProgress";
+import AffiliateSuggestion from "@/components/monetization/AffiliateSuggestion";
+import DirectSponsorSlot from "@/components/monetization/DirectSponsorSlot";
 import {
   type BlogBlock,
   type BlogPost,
@@ -297,6 +299,10 @@ export default async function BlogArticlePage({
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_240px] lg:gap-12">
         <article className="min-w-0 max-w-3xl">
           {post.body.map((b, i) => renderBlock(b, i, resolveId))}
+
+          <AffiliateSuggestion tags={post.tags} />
+
+          <DirectSponsorSlot className="mt-6" />
 
           <div className="mt-12 rounded-2xl border border-[rgb(var(--accent))]/25 bg-gradient-to-br from-[rgb(var(--accent))]/[0.08] to-transparent p-5 sm:p-6">
             <p className="text-xs font-semibold uppercase tracking-wider text-[rgb(var(--accent-2))]/90">

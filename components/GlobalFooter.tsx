@@ -1,4 +1,5 @@
 import Link from "next/link";
+import SupportCta from "@/components/monetization/SupportCta";
 
 type FooterLink = { href: string; label: string };
 
@@ -53,6 +54,7 @@ export default function GlobalFooter() {
             <p className="mt-5 text-xs text-[rgb(var(--ink-soft))]/75">
               Not medical, legal, or therapeutic advice.
             </p>
+            <SupportCta className="mt-5" />
           </div>
 
           {COLUMNS.map((col) => (
