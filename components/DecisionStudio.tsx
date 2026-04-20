@@ -187,54 +187,55 @@ export default function DecisionStudio() {
         {/* Hero — split layout like leading SaaS landings */}
         <section
           id="section-hero"
-          className="animate-fade-up relative overflow-hidden rounded-[2rem] border border-white/[0.14] bg-gradient-to-br from-white/[0.12] via-white/[0.04] to-white/[0.02] p-6 shadow-[0_32px_100px_-48px_rgb(var(--accent)/0.45),0_0_0_1px_rgba(255,255,255,0.06)_inset] backdrop-blur-sm sm:p-10 lg:p-12"
+          className="animate-fade-up relative overflow-hidden rounded-[2.5rem] border border-white/[0.16] bg-gradient-to-br from-white/[0.14] via-white/[0.05] to-[rgb(var(--surface-elevated))]/40 p-6 shadow-[0_40px_120px_-52px_rgb(var(--accent)/0.5),0_0_0_1px_rgba(255,255,255,0.08)_inset] backdrop-blur-md sm:p-10 lg:p-14"
         >
-          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(115deg,rgb(var(--accent)/0.14),transparent_36%,rgb(var(--accent-2)/0.1),transparent_64%,rgb(var(--accent-magenta)/0.1))]" />
-          <div className="grid-view pointer-events-none absolute inset-0 opacity-[0.45]" />
-          <div className="relative grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(280px,400px)] lg:items-center">
+          <div className="pointer-events-none absolute inset-y-10 start-3 w-[5px] rounded-full bg-gradient-to-b from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] opacity-95 shadow-[0_0_28px_rgb(var(--accent)/0.55)] sm:start-5 sm:w-1.5" />
+          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(118deg,rgb(var(--accent)/0.16),transparent_38%,rgb(var(--accent-2)/0.11),transparent_62%,rgb(var(--accent-magenta)/0.12))]" />
+          <div className="grid-view pointer-events-none absolute inset-0 opacity-[0.5]" />
+          <div className="relative grid gap-12 ps-4 sm:ps-6 lg:grid-cols-[minmax(0,1fr)_minmax(280px,400px)] lg:items-center lg:ps-2">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.18] bg-white/[0.1] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[rgb(var(--ink))] shadow-[0_0_24px_-8px_rgb(var(--accent)/0.4)] backdrop-blur-sm">
-                <span className="size-2 rounded-full bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] shadow-[0_0_14px_rgb(var(--accent)/0.55)]" />
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.2] bg-white/[0.1] px-3.5 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-[rgb(var(--ink))] shadow-[0_0_32px_-10px_rgb(var(--accent)/0.45)] backdrop-blur-sm sm:text-xs">
+                <span className="size-2.5 rounded-full bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] shadow-[0_0_16px_rgb(var(--accent)/0.6)]" />
                 {t.brand}
               </div>
-              <p className="mt-5 text-[13px] font-medium leading-snug text-[rgb(var(--accent-2))]/95 [text-wrap:balance]">
+              <p className="mt-6 text-sm font-semibold leading-snug text-[rgb(var(--accent-2))] [text-wrap:balance] sm:text-base">
                 {t.heroRibbon}
               </p>
-              <h1 className="font-display mt-4 text-4xl font-bold tracking-tight [text-wrap:balance] sm:text-5xl lg:text-[3.25rem] lg:leading-[1.06]">
+              <h1 className="font-display mt-5 text-[clamp(2.1rem,1.15rem+4vw,4rem)] font-extrabold leading-[1.02] tracking-tight [text-wrap:balance]">
                 <span className="text-[rgb(var(--ink))]">{t.heroLine1}</span>{" "}
                 <span className="text-gradient">{t.heroAccent}</span>
               </h1>
-              <p className="mt-5 max-w-xl text-base leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty] md:text-xl md:leading-relaxed">
                 {t.subtitle}
               </p>
-              <div className="mt-6 flex flex-wrap gap-2">
+              <div className="mt-7 flex flex-wrap gap-2.5">
                 {t.features.map((f) => (
                   <span
                     key={f}
-                    className="rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 text-xs font-medium text-[rgb(var(--ink))]"
+                    className="rounded-full border border-white/[0.14] bg-white/[0.07] px-4 py-2 text-sm font-medium text-[rgb(var(--ink))]"
                   >
                     {f}
                   </span>
                 ))}
               </div>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+              <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                 <a
                   href="#section-workspace"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-[rgb(var(--accent)/0.28)] transition hover:brightness-110"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-8 py-3.5 text-base font-bold text-white shadow-xl shadow-[rgb(var(--accent)/0.35)] transition hover:brightness-110"
                 >
                   {t.heroCtaPrimary}
                   <span aria-hidden>↓</span>
                 </a>
                 <Link
                   href="/experts"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/12 bg-white/[0.04] px-6 py-3 text-sm font-semibold text-[rgb(var(--ink))] transition hover:bg-white/[0.08]"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/[0.18] bg-white/[0.07] px-8 py-3.5 text-base font-bold text-[rgb(var(--ink))] transition hover:bg-white/[0.12]"
                 >
                   {t.heroCtaSecondary}
                   <span aria-hidden>→</span>
                 </Link>
                 <Link
                   href="/pricing"
-                  className="inline-flex items-center justify-center gap-2 text-sm font-medium text-amber-200/90 underline-offset-4 hover:underline"
+                  className="inline-flex items-center justify-center gap-2 text-base font-semibold text-[rgb(var(--accent-warm))] underline-offset-4 hover:underline"
                 >
                   {pr.navPricing}
                 </Link>
@@ -296,7 +297,7 @@ export default function DecisionStudio() {
             </p>
             <h2
               id="overview-heading"
-              className="font-display mt-2 text-xl font-bold tracking-tight text-[rgb(var(--ink))] sm:text-2xl [text-wrap:balance]"
+              className="font-display mt-2 text-[clamp(1.35rem,1rem+1.4vw,1.95rem)] font-extrabold tracking-tight text-[rgb(var(--ink))] [text-wrap:balance]"
             >
               {t.atAGlanceTitle}
             </h2>
@@ -344,7 +345,7 @@ export default function DecisionStudio() {
             </p>
             <h2
               id="product-heading"
-              className="font-display mt-2 text-2xl font-bold tracking-tight text-[rgb(var(--ink))] sm:text-3xl [text-wrap:balance]"
+              className="font-display mt-2 text-[clamp(1.55rem,1.05rem+2vw,2.35rem)] font-extrabold tracking-tight text-[rgb(var(--ink))] [text-wrap:balance]"
             >
               {t.productSectionTitle}
             </h2>
@@ -386,7 +387,7 @@ export default function DecisionStudio() {
         >
           <h2
             id="trust-heading"
-            className="font-display text-2xl font-bold tracking-tight text-[rgb(var(--ink))] sm:text-3xl [text-wrap:balance]"
+            className="font-display text-[clamp(1.55rem,1.05rem+2vw,2.35rem)] font-extrabold tracking-tight text-[rgb(var(--ink))] [text-wrap:balance]"
           >
             {t.trustSectionTitle}
           </h2>
@@ -415,7 +416,7 @@ export default function DecisionStudio() {
         >
           <h2
             id="how-heading"
-            className="font-display text-2xl font-bold tracking-tight text-[rgb(var(--ink))] sm:text-3xl [text-wrap:balance]"
+            className="font-display text-[clamp(1.55rem,1.05rem+2vw,2.35rem)] font-extrabold tracking-tight text-[rgb(var(--ink))] [text-wrap:balance]"
           >
             {t.howSectionTitle}
           </h2>
@@ -446,7 +447,7 @@ export default function DecisionStudio() {
         >
           <h2
             id="lang-heading"
-            className="font-display text-2xl font-bold tracking-tight text-[rgb(var(--ink))] sm:text-3xl"
+            className="font-display text-[clamp(1.55rem,1.05rem+2vw,2.35rem)] font-extrabold tracking-tight text-[rgb(var(--ink))]"
           >
             {t.langLabel}
           </h2>
@@ -493,7 +494,7 @@ export default function DecisionStudio() {
         >
           <h2
             id="workspace-heading"
-            className="font-display text-2xl font-bold tracking-tight text-[rgb(var(--ink))] sm:text-3xl [text-wrap:balance]"
+            className="font-display text-[clamp(1.55rem,1.05rem+2vw,2.35rem)] font-extrabold tracking-tight text-[rgb(var(--ink))] [text-wrap:balance]"
           >
             {t.workspaceTitle}
           </h2>

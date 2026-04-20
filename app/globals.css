@@ -2,20 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Design system v3 — “midnight editorial”
+ * Distinct purple-forward dark theme, dot texture, high readability for
+ * long-form content (AdSense / policy friendly: clear hierarchy, no clutter).
+ */
 :root {
-  /* Modern “aurora” dark — soft indigo base, not flat grey; feels open & premium */
-  --surface: 42 44 78;
-  --surface-2: 54 58 98;
-  --ink: 252 252 255;
-  --ink-soft: 188 194 224;
-  --accent: 155 110 255;
-  --accent-2: 56 218 230;
-  --accent-warm: 255 200 120;
-  --accent-coral: 255 130 160;
-  --accent-magenta: 240 140 255;
-  --accent-dim: 210 200 255;
-  --glow: 175 150 255;
-  --ring-glass: 255 255 255;
+  --surface: 22 18 42;
+  --surface-2: 34 28 62;
+  --surface-elevated: 42 36 74;
+  --ink: 252 250 255;
+  --ink-soft: 186 190 220;
+  --accent: 172 132 255;
+  --accent-2: 56 232 208;
+  --accent-warm: 255 210 140;
+  --accent-coral: 255 140 175;
+  --accent-magenta: 245 150 255;
+  --accent-dim: 200 190 255;
+  --glow: 180 160 255;
 }
 
 html {
@@ -23,38 +27,38 @@ html {
   scroll-padding-top: 6.5rem;
 }
 
-/* Display headlines (homepage, marketing shell) — Plus Jakarta via layout */
 .font-display {
   font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
 }
 
 body {
   @apply min-h-screen antialiased;
   color: rgb(var(--ink));
   background-color: rgb(var(--surface));
-  /* Layered mesh: depth + warmth (peach/coral wisps) so it never feels “flat & sad” */
+  /* Dot grid + aurora mesh — immediately reads as a different site */
   background-image:
-    radial-gradient(ellipse 900px 480px at 90% -8%, rgb(155 110 255 / 0.34), transparent 55%),
-    radial-gradient(ellipse 800px 440px at -5% 15%, rgb(56 218 230 / 0.22), transparent 50%),
-    radial-gradient(ellipse 700px 500px at 72% 105%, rgb(240 140 255 / 0.18), transparent 48%),
-    radial-gradient(ellipse 520px 380px at 18% 92%, rgb(255 200 120 / 0.12), transparent 52%),
-    radial-gradient(ellipse 600px 400px at 48% 40%, rgb(255 130 160 / 0.06), transparent 55%),
-    linear-gradient(
-      168deg,
-      rgb(36 38 72) 0%,
-      rgb(48 50 92) 42%,
-      rgb(40 42 82) 100%
-    );
+    radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.055) 1px, transparent 0),
+    radial-gradient(ellipse 1000px 520px at 88% -10%, rgb(172 132 255 / 0.38), transparent 55%),
+    radial-gradient(ellipse 820px 480px at -8% 18%, rgb(56 232 208 / 0.22), transparent 50%),
+    radial-gradient(ellipse 720px 520px at 75% 108%, rgb(245 150 255 / 0.2), transparent 48%),
+    radial-gradient(ellipse 560px 400px at 15% 95%, rgb(255 210 140 / 0.1), transparent 52%),
+    linear-gradient(172deg, rgb(26 22 48) 0%, rgb(36 30 68) 45%, rgb(24 20 44) 100%);
+  background-size:
+    28px 28px,
+    auto,
+    auto,
+    auto,
+    auto,
+    auto;
 }
 
-/* subtle grid — marketing hero cards */
 .grid-view {
   background-image:
-    linear-gradient(rgb(255 255 255 / 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(255 255 255 / 0.045) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, black 20%, transparent 100%);
+    linear-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse 85% 72% at 50% 28%, black 18%, transparent 100%);
 }
 
 .scrollbar-none {
@@ -65,33 +69,31 @@ body {
   display: none;
 }
 
-/* Lighter grain — texture without “muddy” overlay */
 body::before {
   content: "";
   pointer-events: none;
   position: fixed;
   inset: 0;
   z-index: 0;
-  opacity: 0.035;
+  opacity: 0.028;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
-  mix-blend-mode: soft-light;
+  mix-blend-mode: overlay;
 }
 
 .glass {
-  @apply border border-white/[0.14] bg-white/[0.08] shadow-[0_0_0_1px_rgba(255,255,255,0.08)_inset] backdrop-blur-xl;
+  @apply border border-white/[0.16] bg-white/[0.09] shadow-[0_0_0_1px_rgba(255,255,255,0.1)_inset] backdrop-blur-xl;
 }
 
 .card-glow {
   box-shadow:
-    0 0 0 1px rgb(255 255 255 / 0.1) inset,
-    0 32px 100px -40px rgb(155 110 255 / 0.45),
-    0 18px 56px -32px rgb(56 218 230 / 0.22),
-    0 12px 40px -26px rgb(240 140 255 / 0.18);
+    0 0 0 1px rgb(255 255 255 / 0.11) inset,
+    0 36px 110px -42px rgb(172 132 255 / 0.5),
+    0 20px 60px -34px rgb(56 232 208 / 0.25),
+    0 14px 44px -28px rgb(245 150 255 / 0.2);
 }
 
-/* Hero & marketing panels — luminous rim */
 .panel-hero {
-  @apply relative overflow-hidden rounded-[1.75rem] border border-white/[0.14] bg-gradient-to-br from-white/[0.12] via-white/[0.05] to-transparent p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.08)_inset] backdrop-blur-xl sm:p-8;
+  @apply relative overflow-hidden rounded-[1.75rem] border border-white/[0.16] bg-gradient-to-br from-white/[0.14] via-white/[0.06] to-transparent p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.1)_inset] backdrop-blur-xl sm:p-8;
 }
 
 .panel-hero::before {
@@ -103,9 +105,9 @@ body::before {
   padding: 1px;
   background: linear-gradient(
     135deg,
-    rgb(var(--accent) / 0.55),
-    rgb(var(--accent-2) / 0.4),
-    rgb(var(--accent-magenta) / 0.35)
+    rgb(var(--accent) / 0.58),
+    rgb(var(--accent-2) / 0.42),
+    rgb(var(--accent-magenta) / 0.38)
   );
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
@@ -118,11 +120,11 @@ body::before {
 }
 
 .trust-card {
-  @apply rounded-2xl border border-white/[0.12] bg-gradient-to-b from-white/[0.1] to-white/[0.03] p-4 shadow-lg transition hover:border-[rgb(var(--accent))]/35 hover:shadow-[0_16px_48px_-18px_rgb(var(--accent)/0.4)] sm:p-5;
+  @apply rounded-2xl border border-white/[0.14] bg-gradient-to-b from-white/[0.11] to-white/[0.04] p-4 shadow-lg transition hover:border-[rgb(var(--accent))]/40 hover:shadow-[0_18px_52px_-20px_rgb(var(--accent)/0.45)] sm:p-5;
 }
 
 .step-card {
-  @apply relative rounded-2xl border border-white/[0.1] bg-white/[0.05] px-4 py-4 sm:px-5 sm:py-5;
+  @apply relative rounded-2xl border border-white/[0.12] bg-white/[0.06] px-4 py-4 sm:px-5 sm:py-5;
 }
 
 .step-num {
@@ -138,14 +140,14 @@ body::before {
     from 210deg,
     rgb(var(--accent)) 0%,
     rgb(var(--accent-2)) calc(var(--score, 0) * 1%),
-    rgb(255 255 255 / 0.1) 0
+    rgb(255 255 255 / 0.12) 0
   );
 }
 
 @keyframes fade-up {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(14px);
   }
   to {
     opacity: 1;
@@ -154,40 +156,39 @@ body::before {
 }
 
 .animate-fade-up {
-  animation: fade-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 @keyframes pulse-soft {
   0%,
   100% {
-    opacity: 0.5;
+    opacity: 0.52;
     transform: scale(1);
   }
   50% {
-    opacity: 0.85;
-    transform: scale(1.02);
+    opacity: 0.88;
+    transform: scale(1.03);
   }
 }
 
 .animate-pulse-soft {
-  animation: pulse-soft 8s ease-in-out infinite;
+  animation: pulse-soft 9s ease-in-out infinite;
 }
 
 @keyframes shimmer-slow {
   0%,
   100% {
-    opacity: 0.4;
+    opacity: 0.42;
   }
   50% {
-    opacity: 0.75;
+    opacity: 0.8;
   }
 }
 
 .animate-shimmer-slow {
-  animation: shimmer-slow 6s ease-in-out infinite;
+  animation: shimmer-slow 7s ease-in-out infinite;
 }
 
-/* How it works — vertical spine */
 .how-timeline {
   position: relative;
 }
@@ -201,9 +202,9 @@ body::before {
   border-radius: 999px;
   background: linear-gradient(
     180deg,
-    rgb(var(--accent) / 0.55),
-    rgb(var(--accent-2) / 0.3),
-    rgb(255 255 255 / 0.08)
+    rgb(var(--accent) / 0.58),
+    rgb(var(--accent-2) / 0.32),
+    rgb(255 255 255 / 0.1)
   );
 }
 @media (min-width: 640px) {
