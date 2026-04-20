@@ -17,6 +17,7 @@ const STATIC_PATHS: { path: string; priority: number; freq: "weekly" | "monthly"
   { path: "/contact", priority: 0.5, freq: "monthly" },
   { path: "/terms", priority: 0.4, freq: "monthly" },
   { path: "/privacy", priority: 0.4, freq: "monthly" },
+  { path: "/disclaimer", priority: 0.4, freq: "monthly" },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

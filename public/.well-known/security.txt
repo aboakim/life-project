@@ -1,0 +1,8 @@
+# Life Decision Engine — responsible disclosure
+# https://datatracker.ietf.org/doc/html/rfc9116
+
+Contact: https://lifedecisions.space/contact
+Preferred-Languages: en, hy
+Canonical: https://lifedecisions.space/.well-known/security.txt
+Policy: https://lifedecisions.space/terms
+Expires: 2027-04-30T23:59:59.000Z

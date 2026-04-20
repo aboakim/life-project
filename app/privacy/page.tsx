@@ -5,7 +5,8 @@ import MarketingPageShell from "@/components/layout/MarketingPageShell";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "How Life Decision Engine handles your data, cookies, ads (Google AdSense), and third-party services.",
+    "How Life Decision Engine handles your data, cookies, ads (Google AdSense), and third-party services. Includes your GDPR and CCPA rights and data retention periods.",
+  alternates: { canonical: "/privacy" },
 };
 
 export default function PrivacyPage() {
@@ -102,12 +103,195 @@ export default function PrivacyPage() {
 
         <section>
           <h2 className="text-base font-semibold text-[rgb(var(--ink))]">
+            Data retention
+          </h2>
+          <p className="mt-2">
+            We retain data only as long as needed for the purpose it was
+            collected:
+          </p>
+          <ul className="mt-2 list-disc space-y-1.5 ps-5">
+            <li>
+              Analyzer inputs and AI outputs: processed for your session and
+              not associated with an account unless you explicitly save them.
+              Logs useful for diagnosing service errors are kept for up to
+              30 days and then deleted or anonymised.
+            </li>
+            <li>
+              Contact and expert-registration submissions: kept for the time
+              required to respond and, where applicable, to maintain a
+              directory listing. You may request deletion at any time.
+            </li>
+            <li>
+              Billing records (if you purchase Premium or book an expert):
+              retained by our payment processor (Stripe) for as long as
+              required by applicable tax and accounting law. We keep minimal
+              internal records (invoice identifiers and plan status), not
+              full card data.
+            </li>
+            <li>
+              Cookies and advertising identifiers set by Google or partners
+              follow their own retention policies, which you can review on
+              Google&rsquo;s privacy pages.
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 className="text-base font-semibold text-[rgb(var(--ink))]">
+            Your privacy rights (GDPR, UK GDPR, CCPA/CPRA, and similar)
+          </h2>
+          <p className="mt-2">
+            Depending on where you live, you may have the following rights
+            regarding your personal information:
+          </p>
+          <ul className="mt-2 list-disc space-y-1.5 ps-5">
+            <li>
+              <strong className="text-[rgb(var(--ink))]">Right to access</strong> — ask
+              us what personal data we hold about you, in a portable format.
+            </li>
+            <li>
+              <strong className="text-[rgb(var(--ink))]">
+                Right to rectification
+              </strong>{" "}
+              — ask us to correct inaccurate or incomplete data.
+            </li>
+            <li>
+              <strong className="text-[rgb(var(--ink))]">
+                Right to erasure (&ldquo;be forgotten&rdquo;)
+              </strong>{" "}
+              — ask us to delete personal data we hold about you, subject to
+              legal obligations we cannot override.
+            </li>
+            <li>
+              <strong className="text-[rgb(var(--ink))]">
+                Right to restrict or object to processing
+              </strong>{" "}
+              — including objecting to personalised advertising or profiling.
+            </li>
+            <li>
+              <strong className="text-[rgb(var(--ink))]">
+                Right to withdraw consent
+              </strong>{" "}
+              — where we rely on consent (e.g. ad personalisation), you can
+              withdraw it at any time via the cookie banner, which you can
+              reopen from the footer.
+            </li>
+            <li>
+              <strong className="text-[rgb(var(--ink))]">
+                Right to data portability
+              </strong>{" "}
+              — receive your data in a machine-readable format.
+            </li>
+            <li>
+              <strong className="text-[rgb(var(--ink))]">
+                Right to non-discrimination (CCPA/CPRA)
+              </strong>{" "}
+              — we will not deny service, charge different prices, or provide
+              a lower quality of service because you exercised your privacy
+              rights.
+            </li>
+            <li>
+              <strong className="text-[rgb(var(--ink))]">
+                Right to lodge a complaint
+              </strong>{" "}
+              — with your local data-protection authority.
+            </li>
+          </ul>
+          <p className="mt-3">
+            To exercise any of these rights, email us from the{" "}
+            <Link
+              href="/contact"
+              className="font-medium text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+            >
+              contact page
+            </Link>
+            . We will verify your request and respond within a reasonable
+            timeframe (generally within 30 days).
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-base font-semibold text-[rgb(var(--ink))]">
+            &ldquo;Do Not Sell or Share My Personal Information&rdquo; (California)
+          </h2>
+          <p className="mt-2">
+            We do not sell personal information for money. However, under
+            CCPA/CPRA, the use of advertising cookies (including some
+            AdSense features) may be considered &ldquo;sharing&rdquo; for
+            cross-context behavioural advertising. California residents can
+            opt out by:
+          </p>
+          <ul className="mt-2 list-disc space-y-1.5 ps-5">
+            <li>
+              Declining or later withdrawing consent in the cookie banner
+              (which disables ad and analytics storage via Google Consent
+              Mode).
+            </li>
+            <li>
+              Using the Global Privacy Control (GPC) signal in your browser —
+              we honour GPC where technically possible.
+            </li>
+            <li>
+              Emailing us via the{" "}
+              <Link
+                href="/contact"
+                className="font-medium text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+              >
+                contact page
+              </Link>{" "}
+              with the subject &ldquo;Do Not Sell / Share&rdquo;.
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 className="text-base font-semibold text-[rgb(var(--ink))]">
+            International transfers
+          </h2>
+          <p className="mt-2">
+            The service is hosted on infrastructure operated internationally.
+            Data you submit (including analyzer prompts and contact messages)
+            may be processed in countries other than your own, including the
+            United States. Where such transfers are subject to GDPR, we rely
+            on Standard Contractual Clauses or equivalent safeguards offered
+            by our providers.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-base font-semibold text-[rgb(var(--ink))]">
+            Security
+          </h2>
+          <p className="mt-2">
+            We apply reasonable technical and organisational measures to
+            protect data in transit (HTTPS/TLS everywhere) and at rest.
+            Payment data is handled by Stripe on PCI-DSS certified
+            infrastructure. No system is 100% secure; if we ever learn of a
+            breach affecting your personal data, we will notify affected
+            users and regulators as required by law.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-base font-semibold text-[rgb(var(--ink))]">
             Children
           </h2>
           <p className="mt-2">
             The service is not directed at children under 13 (or the age
-            required in your jurisdiction). Do not use the service if you are
-            below that age.
+            required in your jurisdiction — 16 in much of the EU). Do not use
+            the service if you are below that age. If we learn we collected
+            data from a child without parental consent, we will delete it.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-base font-semibold text-[rgb(var(--ink))]">
+            Changes to this policy
+          </h2>
+          <p className="mt-2">
+            We may update this policy to reflect new features, providers, or
+            legal requirements. Material changes will be flagged on this
+            page with a revised &ldquo;Last updated&rdquo; date.
           </p>
         </section>
 

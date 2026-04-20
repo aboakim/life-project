@@ -30,6 +30,7 @@ const COLUMNS: { title: string; links: FooterLink[] }[] = [
       { href: "/editorial-standards", label: "Editorial Standards" },
       { href: "/privacy", label: "Privacy Policy" },
       { href: "/terms", label: "Terms of Service" },
+      { href: "/disclaimer", label: "Disclaimer" },
     ],
   },
 ];

@@ -14,6 +14,7 @@ import GoogleAnalytics from "@/components/GoogleAnalytics";
 import SiteJsonLd from "@/components/SiteJsonLd";
 import ConsentBanner from "@/components/ConsentBanner";
 import SkipToContent from "@/components/SkipToContent";
+import { getMetadataBase } from "@/lib/site-url";
 import "./globals.css";
 
 /** Must match the snippet in Google AdSense → Site → Verify (same ca-pub-…). */
@@ -56,6 +57,7 @@ const notoArabic = Noto_Sans_Arabic({
 });
 
 export const metadata: Metadata = {
+  metadataBase: getMetadataBase(),
   title: {
     default:
       "Life Decision Engine — AI decision analysis for big life choices (USA & worldwide)",
@@ -63,6 +65,24 @@ export const metadata: Metadata = {
   },
   description:
     "Structured AI analysis for career, relocation, relationships: scenarios, risks, timelines, and a score—plus a global network of psychologists, lawyers, and financial professionals. Not generic chat.",
+  applicationName: "Life Decision Engine",
+  authors: [{ name: "Life Decision Engine Editorial Team" }],
+  creator: "Life Decision Engine",
+  publisher: "Life Decision Engine",
+  category: "decision-making, self-help, finance, careers, psychology",
+  alternates: { canonical: "/" },
+  formatDetection: { telephone: false, email: false, address: false },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
+  },
   keywords: [
     "life decisions",
     "decision analysis",
