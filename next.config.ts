@@ -61,6 +61,17 @@ if (isProd) {
 }
 
 const nextConfig: NextConfig = {
+  /** Wrong slug from an old example URL → canonical post slug. */
+  async redirects() {
+    return [
+      {
+        source:
+          "/blog/how-to-decide-to-leave-a-stable-job-for-something-risky",
+        destination: "/blog/how-to-decide-to-leave-a-stable-job",
+        permanent: true,
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {
