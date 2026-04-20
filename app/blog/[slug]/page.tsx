@@ -299,11 +299,11 @@ export default async function BlogArticlePage({
 
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_240px] lg:gap-12">
         <article className="min-w-0 max-w-3xl">
+          <AmazonAssociatesCta variant="compact" className="mb-8 lg:mb-10" />
+
           {post.body.map((b, i) => renderBlock(b, i, resolveId))}
 
           <AffiliateSuggestion tags={post.tags} />
-
-          <AmazonAssociatesCta />
 
           <DirectSponsorSlot className="mt-6" />
 
