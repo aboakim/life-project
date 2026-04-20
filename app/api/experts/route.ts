@@ -8,6 +8,9 @@ const ROLES: ExpertRole[] = [
   ExpertRole.PSYCHOLOGIST,
   ExpertRole.LAWYER,
   ExpertRole.FINANCIAL,
+  ExpertRole.PHYSICIAN,
+  ExpertRole.COACH,
+  ExpertRole.IMMIGRATION,
 ];
 
 function isRole(x: unknown): x is ExpertRole {

@@ -11,6 +11,12 @@ enum ExpertRole {
   PSYCHOLOGIST
   LAWYER
   FINANCIAL
+  /// MD / physician — wellness & non-emergency health context (site is not emergency care)
+  PHYSICIAN
+  /// Career, executive, or life coach
+  COACH
+  /// Immigration, visa, relocation compliance specialist
+  IMMIGRATION
 }
 
 model Expert {

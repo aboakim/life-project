@@ -163,6 +163,9 @@ export default function ExpertsMarketplace() {
                   ["PSYCHOLOGIST", t.filterPsych],
                   ["LAWYER", t.filterLaw],
                   ["FINANCIAL", t.filterFinance],
+                  ["PHYSICIAN", t.filterPhysician],
+                  ["COACH", t.filterCoach],
+                  ["IMMIGRATION", t.filterImmigration],
                 ] as const
               ).map(([val, label]) => (
                 <button

@@ -117,6 +117,9 @@ export default function RegisterExpertForm() {
             <option value="PSYCHOLOGIST">{t.filterPsych}</option>
             <option value="LAWYER">{t.filterLaw}</option>
             <option value="FINANCIAL">{t.filterFinance}</option>
+            <option value="PHYSICIAN">{t.filterPhysician}</option>
+            <option value="COACH">{t.filterCoach}</option>
+            <option value="IMMIGRATION">{t.filterImmigration}</option>
           </select>
         </div>
         <div>

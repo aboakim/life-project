@@ -16,6 +16,9 @@ export type ExpertsCopy = {
   filterPsych: string;
   filterLaw: string;
   filterFinance: string;
+  filterPhysician: string;
+  filterCoach: string;
+  filterImmigration: string;
   searchPlaceholder: string;
   empty: string;
   cardLanguages: string;
@@ -50,15 +53,19 @@ const hy: ExpertsCopy = {
   pageEyebrow: "Ցանց",
   pageTitle: "Մասնագետների համաշխարհային ցանց",
   pageSubtitle:
-    "Հոգեբաններ, իրավաբաններ, ֆինանսիստներ — աշխարհի ցանկացած վայրից։ Գրանցվեք որպես մասնագետ կամ գտեք մասնագետ և ուղարկեք կապի հարցում։",
+    "Հոգեբաններ, իրավաբաններ, ֆինանսիստներ, բժիշկներ, կոուչներ, միգրացիայի մասնագետներ — աշխարհի ցանկացած վայրից։ Գրանցվեք որպես մասնագետ կամ գտեք մասնագետ և ուղարկեք կապի հարցում։",
   navExperts: "Մասնագետներ",
   navRegister: "Գրանցվել",
   navHome: "Վերլուծություն",
-  homePromoLink: "Մասնագետների համաշխարհային ցանց — հոգեբան, իրավաբան, ֆինանսիստ",
+  homePromoLink:
+    "Մասնագետների համաշխարհային ցանց — հոգեբան, իրավաբան, ֆինանսիստ, բժիշկ, կոուչ, միգրացիա",
   filterAll: "Բոլորը",
   filterPsych: "Հոգեբան",
   filterLaw: "Իրավաբան",
   filterFinance: "Ֆինանսիստ",
+  filterPhysician: "Բժիշկ",
+  filterCoach: "Կոուչ",
+  filterImmigration: "Միգրացիա",
   searchPlaceholder: "Երկիր, քաղաք, անուն…",
   empty: "Դեռ մասնագետներ չկան։ Դուք կարող եք առաջինը գրանցվել։",
   cardLanguages: "Լեզուներ",
@@ -101,15 +108,19 @@ const en: ExpertsCopy = {
   pageEyebrow: "Directory",
   pageTitle: "Global expert network",
   pageSubtitle:
-    "Psychologists, lawyers, financial professionals—from anywhere. Register as an expert or find one and send a contact request.",
+    "Psychologists, lawyers, financial advisors, physicians, coaches, immigration specialists—from anywhere. Register as an expert or find one and send a contact request.",
   navExperts: "Experts",
   navRegister: "Join as expert",
   navHome: "Analyzer",
-  homePromoLink: "Global expert network — psychology, law, finance",
+  homePromoLink:
+    "Global expert network — psychology, law, finance, medicine, coaching, immigration",
   filterAll: "All",
   filterPsych: "Psychologist",
   filterLaw: "Lawyer",
   filterFinance: "Financial",
+  filterPhysician: "Physician",
+  filterCoach: "Coach",
+  filterImmigration: "Immigration",
   searchPlaceholder: "Country, city, name…",
   empty: "No experts yet—you can be the first to register.",
   cardLanguages: "Languages",
@@ -156,14 +167,35 @@ export function getExpertsCopy(locale: AppLocale): ExpertsCopy {
   return fallback;
 }
 
-export type ExpertRoleKey = "PSYCHOLOGIST" | "LAWYER" | "FINANCIAL";
+export type ExpertRoleKey =
+  | "PSYCHOLOGIST"
+  | "LAWYER"
+  | "FINANCIAL"
+  | "PHYSICIAN"
+  | "COACH"
+  | "IMMIGRATION";
 
 export function roleLabel(
   locale: AppLocale,
   role: ExpertRoleKey
 ): string {
   const c = getExpertsCopy(locale);
-  if (role === "PSYCHOLOGIST") return c.filterPsych;
-  if (role === "LAWYER") return c.filterLaw;
-  return c.filterFinance;
+  switch (role) {
+    case "PSYCHOLOGIST":
+      return c.filterPsych;
+    case "LAWYER":
+      return c.filterLaw;
+    case "FINANCIAL":
+      return c.filterFinance;
+    case "PHYSICIAN":
+      return c.filterPhysician;
+    case "COACH":
+      return c.filterCoach;
+    case "IMMIGRATION":
+      return c.filterImmigration;
+    default: {
+      const _x: never = role;
+      return _x;
+    }
+  }
 }
