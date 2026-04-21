@@ -218,9 +218,9 @@ export default function DecisionStudio({ initialPreset = null }: Props) {
           language: locale,
         }),
       });
-      const data = (await res.json()) as ApiResponse & { error?: string };
+      const data = (await res.json()) as ApiResponse;
       if (!res.ok) {
-        setError(data.error ?? "Request failed");
+        setError(t.networkError);
         return;
       }
       setResult(data);
@@ -303,7 +303,7 @@ export default function DecisionStudio({ initialPreset = null }: Props) {
       <HomeSectionNav links={sectionLinks} />
 
       {demoMode ? (
-        <div className="pointer-events-none fixed start-3 end-3 top-[4.75rem] z-[30] max-w-none rounded-xl border border-amber-400/35 bg-amber-500/[0.12] px-3 py-2 text-center text-[11px] font-medium leading-snug text-amber-100/95 shadow-lg backdrop-blur-md sm:start-auto sm:end-4 sm:top-[4.5rem] sm:max-w-[min(100%,20rem)] sm:text-start sm:text-xs">
+        <div className="pointer-events-none fixed start-3 end-3 top-[4.75rem] z-[30] max-w-none rounded-xl border border-white/12 bg-white/[0.06] px-3 py-2 text-center text-[11px] font-medium leading-snug text-[rgb(var(--ink-soft))] shadow-lg backdrop-blur-md sm:start-auto sm:end-4 sm:top-[4.5rem] sm:max-w-[min(100%,20rem)] sm:text-start sm:text-xs">
           {sx.demoBadge}
         </div>
       ) : null}
@@ -799,7 +799,7 @@ export default function DecisionStudio({ initialPreset = null }: Props) {
                 ) : null}
               </div>
               {(result?.hint || result?.warning) && (
-                <p className="mt-3 text-xs leading-relaxed text-amber-200/90">
+                <p className="mt-3 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2 text-xs leading-relaxed text-[rgb(var(--ink-soft))]">
                   {result.warning ?? result.hint}
                 </p>
               )}

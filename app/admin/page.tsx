@@ -1,7 +1,8 @@
 import { cookies } from "next/headers";
 import type { Metadata } from "next";
+import Link from "next/link";
 import type { ExpertRole } from "@prisma/client";
-import { ADMIN_COOKIE_NAME, verifyAdminToken } from "@/lib/admin-cookie";
+import { getAdminGate } from "@/lib/admin-session";
 import { getAdminUi } from "@/lib/i18n/admin";
 import {
   LDE_LOCALE_COOKIE_NAME,
@@ -38,14 +39,13 @@ type Row = {
 };
 
 export default async function AdminPage() {
-  const secret = process.env.ADMIN_SECRET;
   const store = await cookies();
-  const token = store.get(ADMIN_COOKIE_NAME)?.value;
+  const gate = await getAdminGate();
   const a = getAdminUi(
     localeFromCookieValue(store.get(LDE_LOCALE_COOKIE_NAME)?.value)
   );
 
-  if (!secret || secret.length < 16) {
+  if (gate === "missing_secret") {
     return (
       <div className="mx-auto max-w-lg px-4 py-16 text-sm text-amber-200/90">
         {a.secretMissing}
@@ -53,7 +53,7 @@ export default async function AdminPage() {
     );
   }
 
-  if (!verifyAdminToken(token, secret)) {
+  if (gate === "unauthorized") {
     return <AdminLogin copy={a} />;
   }
 
@@ -83,7 +83,15 @@ export default async function AdminPage() {
             {a.pageSubtitle}
           </p>
         </div>
-        <AdminLogoutButton label={a.logOut} />
+        <div className="flex flex-wrap items-center gap-3">
+          <Link
+            href="/admin/diagnostics"
+            className="text-sm font-medium text-[rgb(var(--accent-2))] underline-offset-4 hover:underline"
+          >
+            {a.navDiagnostics}
+          </Link>
+          <AdminLogoutButton label={a.logOut} />
+        </div>
       </div>
 
       <div className="mt-8 overflow-x-auto rounded-2xl border border-white/10">

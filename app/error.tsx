@@ -13,14 +13,23 @@ export default function ErrorPage({
     console.error(error);
   }, [error]);
 
+  const isDev = process.env.NODE_ENV === "development";
+
   return (
     <div className="mx-auto max-w-lg px-4 py-20 text-center">
       <h1 className="text-xl font-semibold text-[rgb(var(--ink))]">
         Something went wrong
       </h1>
-      <p className="mt-3 whitespace-pre-wrap break-words text-sm text-rose-200/90">
-        {error.message}
+      <p className="mt-3 whitespace-pre-wrap break-words text-sm text-[rgb(var(--ink-soft))]">
+        {isDev
+          ? error.message
+          : "Please try again. If it keeps happening, contact support with the reference code below."}
       </p>
+      {error.digest ? (
+        <p className="mt-2 font-mono text-xs text-[rgb(var(--ink-soft))]/80">
+          {error.digest}
+        </p>
+      ) : null}
       <button
         type="button"
         onClick={() => reset()}

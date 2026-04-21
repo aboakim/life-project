@@ -394,7 +394,7 @@ export default function AnalysisResultTools({
                 ))}
               </div>
             ) : (
-              <p className="mt-4 text-sm text-amber-200/90" role="status">
+              <p className="mt-4 text-sm text-[rgb(var(--ink-soft))]" role="status">
                 {pa.compareDifferentRuns}
               </p>
             )}

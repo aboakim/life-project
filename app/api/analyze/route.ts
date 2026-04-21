@@ -12,15 +12,12 @@ export async function POST(req: Request) {
   try {
     body = (await req.json()) as AnalyzeRequestBody;
   } catch {
-    return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
+    return NextResponse.json({ error: "bad_request" }, { status: 400 });
   }
 
   const decision = typeof body.decision === "string" ? body.decision : "";
   if (!decision.trim()) {
-    return NextResponse.json(
-      { error: "Field `decision` is required" },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: "bad_request" }, { status: 400 });
   }
 
   const locale = parseLocale(body.language);
@@ -38,13 +35,12 @@ export async function POST(req: Request) {
         mode: "live" as const,
       });
     } catch (e) {
-      const message = e instanceof Error ? e.message : "Unknown error";
-      console.error("[analyze]", message);
+      console.error("[analyze] OpenAI path failed", e);
       const analysis = buildDemoAnalysis(decision, locale);
       return NextResponse.json({
         analysis,
         mode: "fallback" as const,
-        warning: ui.apiWarningFallback(message),
+        warning: ui.apiAnalysisServiceNotice,
       });
     }
   }

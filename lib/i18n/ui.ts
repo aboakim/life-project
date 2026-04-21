@@ -49,7 +49,8 @@ export type UIStrings = {
   accessLocal: string;
   langLabel: string;
   apiHintDemo: string;
-  apiWarningFallback: (msg: string) => string;
+  /** Shown when live AI fails — must not include server/API technical details */
+  apiAnalysisServiceNotice: string;
   securityTitle: string;
   securityIntro: string;
   securityPoints: [string, string, string];
@@ -452,8 +453,8 @@ const uiHy: Partial<UIStrings> = {
   navMore: "Ավելին",
   apiHintDemo:
     "Ցուցադրական վերլուծություն։ Ավելի խորը AI վերլուծությունը միանում է շուտով։",
-  apiWarningFallback: (msg) =>
-    `AI մոդելը ժամանակավորապես անհասանելի է։ Ցուցադրական արդյունք։ Մանրամասն՝ ${msg}`,
+  apiAnalysisServiceNotice:
+    "Վերլուծման ծառայությանը հիմա չհաջողվեցինք միանալ։ Ստորև՝ ցուցադրական հաշվետվություն՝ փորձեք մի քիչ հետո։",
   securityTitle: "Անվտանգ և գաղտնի հարթակ",
   securityIntro:
     "Այս հարթակը նախագծված է գաղտնիության և անվտանգության սկզբունքներով․ ձեր խնդիրը, հարցը կամ պատմությունը ուրիշ այցելուներին չի երևում, և այն չի հրապարակվում որպես բոլորին տեսանելի գրառում։",
@@ -511,8 +512,8 @@ const uiEn: Partial<UIStrings> = {
   navMore: "More",
   apiHintDemo:
     "Structured demo analysis. Deeper AI analysis is coming back online shortly.",
-  apiWarningFallback: (msg) =>
-    `AI temporarily unavailable. Showing demo. Details: ${msg}`,
+  apiAnalysisServiceNotice:
+    "We couldn’t reach the analysis service just now. Below is a demo report — please try again in a few minutes.",
   securityTitle: "A safe, private platform",
   securityIntro:
     "This platform is designed to be private and secure: your question and story are not visible to other visitors, and nothing is published as a public post for everyone to see.",
@@ -584,8 +585,8 @@ const uiRu: Partial<UIStrings> = {
   navMore: "Ещё",
   apiHintDemo:
     "Структурированный демо-анализ. Глубокий AI-анализ скоро снова будет доступен.",
-  apiWarningFallback: (msg) =>
-    `AI временно недоступен. Показано демо. Подробности: ${msg}`,
+  apiAnalysisServiceNotice:
+    "Сервис анализа сейчас недоступен. Ниже — демонстрационный отчёт. Попробуйте позже.",
   securityTitle: "Безопасная и приватная платформа",
   securityIntro:
     "Платформа создана с упором на конфиденциальность и безопасность: ваш вопрос и история не видны другим посетителям и не публикуются как открытая запись для всех.",
@@ -643,8 +644,8 @@ const uiDe: Partial<UIStrings> = {
   navMore: "Mehr",
   apiHintDemo:
     "Strukturierte Demo-Analyse. Die vollständige KI-Analyse ist in Kürze wieder verfügbar.",
-  apiWarningFallback: (msg) =>
-    `KI vorübergehend nicht verfügbar. Demo wird gezeigt. Details: ${msg}`,
+  apiAnalysisServiceNotice:
+    "Der Analysedienst ist gerade nicht erreichbar. Unten eine Demo-Auswertung — bitte später erneut versuchen.",
   securityTitle: "Sichere, private Plattform",
   securityIntro:
     "Diese Plattform ist auf Privatsphäre und Sicherheit ausgelegt: Deine Frage und Geschichte sind für andere Besucher nicht sichtbar und werden nicht als öffentlicher Beitrag für alle veröffentlicht.",
@@ -702,8 +703,8 @@ const uiFr: Partial<UIStrings> = {
   navMore: "Plus",
   apiHintDemo:
     "Analyse de démonstration structurée. L’analyse IA complète sera de nouveau disponible sous peu.",
-  apiWarningFallback: (msg) =>
-    `IA indisponible temporairement. Démo affichée. Détails : ${msg}`,
+  apiAnalysisServiceNotice:
+    "Le service d’analyse est indisponible pour le moment. Voici une version démo — réessayez dans quelques minutes.",
   securityTitle: "Une plateforme sûre et privée",
   securityIntro:
     "Cette plateforme est conçue pour la confidentialité et la sécurité : votre question et votre récit ne sont pas visibles par les autres visiteurs et ne sont pas publiés comme un message public pour tout le monde.",
@@ -761,8 +762,8 @@ const uiEs: Partial<UIStrings> = {
   navMore: "Más",
   apiHintDemo:
     "Análisis de demostración estructurado. El análisis de IA completo volverá a estar disponible en breve.",
-  apiWarningFallback: (msg) =>
-    `IA no disponible temporalmente. Mostrando demo. Detalles: ${msg}`,
+  apiAnalysisServiceNotice:
+    "No pudimos conectar con el servicio de análisis. Abajo hay un informe de demostración — inténtalo de nuevo más tarde.",
   securityTitle: "Una plataforma segura y privada",
   securityIntro:
     "La plataforma está pensada para la privacidad y la seguridad: tu pregunta e historia no son visibles para otros visitantes ni se publican como un post abierto para todos.",
@@ -820,8 +821,8 @@ const uiAr: Partial<UIStrings> = {
   navMore: "المزيد",
   apiHintDemo:
     "تحليل تجريبي مُنظَّم. سيعود التحليل الكامل بالذكاء الاصطناعي للعمل قريبًا.",
-  apiWarningFallback: (msg) =>
-    `الذكاء الاصطناعي غير متاح مؤقتًا. عرض تجريبي. التفاصيل: ${msg}`,
+  apiAnalysisServiceNotice:
+    "تعذّر الاتصال بخدمة التحليل الآن. أدناه تقرير تجريبي — أعِد المحاولة لاحقًا.",
   securityTitle: "منصة آمنة وخاصة",
   securityIntro:
     "صُممت المنصة مع مبدأ الخصوصية والأمان: سؤالك وقصتك لا يظهران للزوّار الآخرين، ولا يُنشران كمنشور عام للجميع.",
@@ -879,8 +880,8 @@ const uiIt: Partial<UIStrings> = {
   navMore: "Altro",
   apiHintDemo:
     "Analisi dimostrativa strutturata. L’analisi IA completa tornerà disponibile a breve.",
-  apiWarningFallback: (msg) =>
-    `IA temporaneamente non disponibile. Demo mostrata. Dettagli: ${msg}`,
+  apiAnalysisServiceNotice:
+    "Il servizio di analisi non è raggiungibile. Sotto trovi un report demo — riprova tra qualche minuto.",
   securityTitle: "Una piattaforma sicura e privata",
   securityIntro:
     "La piattaforma è pensata per privacy e sicurezza: la tua domanda e la tua storia non sono visibili agli altri visitatori e non vengono pubblicate come post aperto a tutti.",

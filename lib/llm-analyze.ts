@@ -109,7 +109,8 @@ export async function analyzeWithOpenAI(
 
   if (!res.ok) {
     const errText = await res.text();
-    throw new Error(`OpenAI error ${res.status}: ${errText.slice(0, 500)}`);
+    console.error("[OpenAI] request failed", res.status, errText.slice(0, 800));
+    throw new Error("openai_request_failed");
   }
 
   const data = (await res.json()) as {
