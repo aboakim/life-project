@@ -50,7 +50,6 @@ export const LOCALE_OPTIONS: {
 }[] = [
   { value: "en-US", label: "English (US)", flag: "🇺🇸" },
   { value: "hy", label: "Հայերեն", flag: "🇦🇲" },
-  { value: "en", label: "English (UK)", flag: "🇬🇧" },
   { value: "ru", label: "Русский", flag: "🇷🇺" },
   { value: "de", label: "Deutsch", flag: "🇩🇪" },
   { value: "fr", label: "Français", flag: "🇫🇷" },
