@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import DecisionBriefWizard from "@/components/home/DecisionBriefWizard";
 import HeroVisualSlider from "@/components/home/HeroVisualSlider";
 import HomeSectionNav from "@/components/home/HomeSectionNav";
@@ -32,7 +32,12 @@ import {
   LOCALE_CHANGE_EVENT,
   dispatchLocaleChanged,
 } from "@/lib/locale-sync";
+import type { InitialPreset } from "@/components/home/DecisionStudioShell";
+import { getSiteExtras, getWarmPresets } from "@/lib/i18n/site-extras";
+
 const LOCALE_STORAGE_KEY = "lde-locale";
+const VISIT_COUNT_KEY = "lde-home-visits";
+const VISITOR_BANNER_DISMISS_KEY = "lde-visitor-path-dismissed";
 
 type ApiResponse = {
   analysis: DecisionAnalysis;
@@ -79,9 +84,14 @@ function ScoreCircle({
   );
 }
 
-export default function DecisionStudio() {
+type Props = { initialPreset?: InitialPreset };
+
+export default function DecisionStudio({ initialPreset = null }: Props) {
   const [locale, setLocale] = useState<AppLocale>(DEFAULT_LOCALE);
   const t = getUi(locale);
+  const sx = getSiteExtras(locale);
+  const warmPresets = useMemo(() => getWarmPresets(locale), [locale]);
+  const presetApplied = useRef(false);
   const exNav = getExpertsCopy(locale);
   const pr = getPricingCopy(locale);
   const brief = getDecisionBriefCopy(locale);
@@ -124,6 +134,39 @@ export default function DecisionStudio() {
     return () => window.removeEventListener(LOCALE_CHANGE_EVENT, syncFromNav);
   }, []);
 
+  const [visitorBannerOpen, setVisitorBannerOpen] = useState(false);
+  const [decision, setDecision] = useState("");
+  const [context, setContext] = useState("");
+  const [constraints, setConstraints] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [result, setResult] = useState<ApiResponse | null>(null);
+
+  useEffect(() => {
+    try {
+      const prev = parseInt(
+        window.localStorage.getItem(VISIT_COUNT_KEY) ?? "0",
+        10
+      );
+      const next = Number.isFinite(prev) ? prev + 1 : 1;
+      window.localStorage.setItem(VISIT_COUNT_KEY, String(next));
+      const dismissed =
+        window.localStorage.getItem(VISITOR_BANNER_DISMISS_KEY) === "1";
+      if (next >= 3 && !dismissed) setVisitorBannerOpen(true);
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!initialPreset || presetApplied.current) return;
+    const pack = warmPresets[initialPreset];
+    setDecision(pack.decision);
+    setContext(pack.context);
+    setConstraints(pack.constraints);
+    presetApplied.current = true;
+  }, [initialPreset, warmPresets]);
+
   useEffect(() => {
     localStorage.setItem(LOCALE_STORAGE_KEY, locale);
     syncLocaleCookieClient(locale);
@@ -135,12 +178,9 @@ export default function DecisionStudio() {
     dispatchLocaleChanged();
   }, [locale]);
 
-  const [decision, setDecision] = useState("");
-  const [context, setContext] = useState("");
-  const [constraints, setConstraints] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<ApiResponse | null>(null);
+  const demoMode =
+    typeof process !== "undefined" &&
+    process.env.NEXT_PUBLIC_DEMO_MODE === "1";
 
   const canSubmit = useMemo(() => decision.trim().length > 0, [decision]);
 
@@ -206,6 +246,50 @@ export default function DecisionStudio() {
       <WelcomeModal locale={locale} onLocaleChange={setLocale} />
       <OrbDecor />
       <HomeSectionNav links={sectionLinks} />
+
+      {demoMode ? (
+        <div className="pointer-events-none fixed end-4 top-[4.5rem] z-[60] max-w-[min(100%,20rem)] rounded-xl border border-amber-400/35 bg-amber-500/[0.12] px-3 py-2 text-[11px] font-medium leading-snug text-amber-100/95 shadow-lg backdrop-blur-md sm:text-xs">
+          {sx.demoBadge}
+        </div>
+      ) : null}
+
+      {visitorBannerOpen ? (
+        <div
+          className="relative z-[45] mx-auto max-w-6xl px-4 pt-4 sm:px-6"
+          role="region"
+          aria-label={sx.visitorTitle}
+        >
+          <div className="flex flex-col gap-3 rounded-2xl border border-[rgb(var(--accent-2))]/35 bg-gradient-to-br from-[rgb(var(--accent))]/14 via-white/[0.06] to-transparent px-4 py-4 shadow-[0_20px_60px_-40px_rgb(var(--accent)/0.5)] backdrop-blur-md sm:flex-row sm:items-center sm:justify-between sm:px-6">
+            <div>
+              <p className="text-[0.65rem] font-bold uppercase tracking-[0.22em] text-[rgb(var(--accent-2))]">
+                {sx.visitorEyebrow}
+              </p>
+              <p className="mt-1 font-display text-base font-semibold text-[rgb(var(--ink))]">
+                {sx.visitorTitle}
+              </p>
+              <ol className="mt-2 list-decimal space-y-1 ps-5 text-sm text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
+                <li>{sx.visitorStep1}</li>
+                <li>{sx.visitorStep2}</li>
+                <li>{sx.visitorStep3}</li>
+              </ol>
+            </div>
+            <button
+              type="button"
+              className="shrink-0 rounded-xl border border-white/15 bg-white/[0.08] px-4 py-2 text-sm font-semibold text-[rgb(var(--ink))] transition hover:bg-white/[0.12]"
+              onClick={() => {
+                try {
+                  window.localStorage.setItem(VISITOR_BANNER_DISMISS_KEY, "1");
+                } catch {
+                  /* ignore */
+                }
+                setVisitorBannerOpen(false);
+              }}
+            >
+              {sx.visitorDismiss}
+            </button>
+          </div>
+        </div>
+      ) : null}
 
       <div className="mx-auto max-w-6xl px-4 pb-32 pt-6 sm:px-6 sm:pt-8">
         {/* Hero — split layout like leading SaaS landings */}
@@ -522,6 +606,37 @@ export default function DecisionStudio() {
           >
             {t.workspaceTitle}
           </h2>
+          <div className="mt-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[rgb(var(--accent-2))]">
+              {sx.warmEyebrow}
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {(
+                [
+                  ["relocate", sx.warmRelocate, warmPresets.relocate] as const,
+                  ["job", sx.warmJob, warmPresets.job] as const,
+                  [
+                    "relationship",
+                    sx.warmRel,
+                    warmPresets.relationship,
+                  ] as const,
+                ] as const
+              ).map(([key, label, pack]) => (
+                <button
+                  key={key}
+                  type="button"
+                  onClick={() => {
+                    setDecision(pack.decision);
+                    setContext(pack.context);
+                    setConstraints(pack.constraints);
+                  }}
+                  className="rounded-full border border-white/[0.14] bg-white/[0.07] px-4 py-2 text-sm font-medium text-[rgb(var(--ink))] transition hover:border-[rgb(var(--accent-2))]/35 hover:bg-white/[0.1]"
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
           <div className="mt-10 grid gap-6 lg:grid-cols-5">
             <aside className="glass card-glow rounded-3xl p-5 lg:col-span-2 lg:p-6">
               <p className="text-sm font-semibold text-[rgb(var(--ink))]">
@@ -768,6 +883,31 @@ export default function DecisionStudio() {
               <p className="mt-3 text-sm leading-relaxed text-[rgb(var(--ink-soft))]">
                 {a.digitalTwinNote}
               </p>
+            </section>
+
+            <section className="glass animate-fade-up rounded-3xl border border-dashed border-[rgb(var(--accent))]/35 bg-gradient-to-br from-[rgb(var(--accent))]/[0.07] to-transparent p-6 sm:p-7">
+              <h2 className="text-lg font-semibold text-[rgb(var(--ink))]">
+                {sx.premiumTitle}
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-[rgb(var(--ink-soft))]">
+                {sx.premiumHint}
+              </p>
+              <div className="mt-5 flex flex-wrap items-center gap-3">
+                <button
+                  type="button"
+                  disabled
+                  className="cursor-not-allowed rounded-2xl border border-white/15 bg-white/[0.06] px-5 py-2.5 text-sm font-semibold text-[rgb(var(--ink-soft))]/80"
+                  title={sx.premiumHint}
+                >
+                  {sx.premiumCta}
+                </button>
+                <Link
+                  href="/pricing"
+                  className="text-sm font-semibold text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+                >
+                  {pr.navPricing} →
+                </Link>
+              </div>
             </section>
 
             <footer className="border-t border-white/10 pt-8 text-center text-xs leading-relaxed text-[rgb(var(--ink-soft))]">

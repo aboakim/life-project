@@ -13,6 +13,7 @@ import {
   isRtlLocale,
   type AppLocale,
 } from "@/lib/i18n/locale";
+import { getSiteExtras } from "@/lib/i18n/site-extras";
 import { getUi } from "@/lib/i18n/ui";
 import {
   readLocaleCookieClient,
@@ -67,6 +68,7 @@ export default function GlobalNav() {
   const mz = getMonetizeCopy(locale);
   const cq = getCommunityCopy(locale);
   const t = getUi(locale);
+  const sx = getSiteExtras(locale);
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/[0.12] bg-[rgb(var(--surface))]/82 backdrop-blur-2xl shadow-[0_12px_40px_-16px_rgb(0_0_0/0.45),inset_0_1px_0_0_rgba(255,255,255,0.08)]">
@@ -115,6 +117,24 @@ export default function GlobalNav() {
             className="rounded-xl px-3 py-2 text-[rgb(var(--ink-soft))] transition hover:bg-white/[0.08] hover:text-[rgb(var(--ink))]"
           >
             {mz.navLabel}
+          </Link>
+          <Link
+            href="/journal"
+            className="rounded-xl px-3 py-2 text-[rgb(var(--ink-soft))] transition hover:bg-white/[0.08] hover:text-[rgb(var(--ink))]"
+          >
+            {sx.navJournal}
+          </Link>
+          <Link
+            href="/checklists"
+            className="rounded-xl px-3 py-2 text-[rgb(var(--ink-soft))] transition hover:bg-white/[0.08] hover:text-[rgb(var(--ink))]"
+          >
+            {sx.navChecklists}
+          </Link>
+          <Link
+            href="/how-we-use-ai"
+            className="rounded-xl px-3 py-2 text-[rgb(var(--ink-soft))] transition hover:bg-white/[0.08] hover:text-[rgb(var(--ink))]"
+          >
+            {sx.navHowAi}
           </Link>
           <Link
             href="/blog"

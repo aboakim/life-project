@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import type { CommunityCopy } from "@/lib/i18n/community-page";
+import { LOCALE_OPTIONS } from "@/lib/i18n/locale";
 
 type Answer = {
   id: string;
@@ -16,16 +17,30 @@ type Question = {
   authorName: string;
   title: string;
   body: string;
+  locale?: string | null;
   answers: Answer[];
 };
 
-type Props = { t: CommunityCopy; locale?: string };
+type Props = {
+  t: CommunityCopy;
+  locale?: string;
+  moderationNote: string;
+  filterLangLabel: string;
+  filterAllLabel: string;
+};
 
-export default function CommunityBoard({ t, locale }: Props) {
+export default function CommunityBoard({
+  t,
+  locale,
+  moderationNote,
+  filterLangLabel,
+  filterAllLabel,
+}: Props) {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState<string | null>(null);
   const [warn, setWarn] = useState<string | null>(null);
+  const [langFilter, setLangFilter] = useState<string>("all");
 
   const [qName, setQName] = useState("");
   const [qEmail, setQEmail] = useState("");
@@ -42,8 +57,15 @@ export default function CommunityBoard({ t, locale }: Props) {
   const load = useCallback(async () => {
     setErr(null);
     setWarn(null);
+    setLoading(true);
     try {
-      const res = await fetch("/api/community/questions", { cache: "no-store" });
+      const q =
+        langFilter === "all"
+          ? ""
+          : `?locale=${encodeURIComponent(langFilter)}`;
+      const res = await fetch(`/api/community/questions${q}`, {
+        cache: "no-store",
+      });
       if (!res.ok) throw new Error("load");
       const data = (await res.json()) as {
         questions: Question[];
@@ -56,7 +78,7 @@ export default function CommunityBoard({ t, locale }: Props) {
     } finally {
       setLoading(false);
     }
-  }, [t.dbUnavailable, t.errorGeneric]);
+  }, [langFilter, t.dbUnavailable, t.errorGeneric]);
 
   useEffect(() => {
     void load();
@@ -158,6 +180,27 @@ export default function CommunityBoard({ t, locale }: Props) {
         <p className="text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
           {t.securityNote}
         </p>
+        <p className="mt-4 text-sm leading-relaxed text-[rgb(var(--ink-soft))]/90 [text-wrap:pretty]">
+          {moderationNote}
+        </p>
+      </div>
+
+      <div className="flex flex-wrap items-center gap-3">
+        <label className="flex items-center gap-2 text-sm text-[rgb(var(--ink))]">
+          <span>{filterLangLabel}</span>
+          <select
+            value={langFilter}
+            onChange={(e) => setLangFilter(e.target.value)}
+            className="cursor-pointer rounded-xl border border-white/12 bg-black/35 px-3 py-2 text-sm text-[rgb(var(--ink))] outline-none focus:border-[rgb(var(--accent))]/45"
+          >
+            <option value="all">{filterAllLabel}</option>
+            {LOCALE_OPTIONS.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.flag} {opt.label}
+              </option>
+            ))}
+          </select>
+        </label>
       </div>
 
       {warn ? (
@@ -254,6 +297,11 @@ export default function CommunityBoard({ t, locale }: Props) {
                 <p className="text-xs text-[rgb(var(--ink-soft))]">
                   {new Date(q.createdAt).toLocaleString()}{" "}
                   <span className="text-[rgb(var(--ink))]">· {q.authorName}</span>
+                  {q.locale ? (
+                    <span className="ms-2 rounded-full border border-white/12 bg-white/[0.06] px-2 py-0.5 text-[10px] font-medium text-[rgb(var(--accent-2))]/90">
+                      {q.locale}
+                    </span>
+                  ) : null}
                 </p>
                 <h3 className="mt-2 text-base font-semibold text-[rgb(var(--ink))]">
                   {q.title}

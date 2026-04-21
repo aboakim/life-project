@@ -1,43 +1,93 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import SupportCta from "@/components/monetization/SupportCta";
+import { getCommunityCopy } from "@/lib/i18n/community-page";
+import { getExpertsCopy } from "@/lib/i18n/experts-network";
+import { getSiteExtras } from "@/lib/i18n/site-extras";
+import { getMonetizeCopy } from "@/lib/i18n/monetization-page";
+import { getPricingCopy } from "@/lib/i18n/pricing-page";
+import { getUi } from "@/lib/i18n/ui";
+import { DEFAULT_LOCALE } from "@/lib/locale-default";
+import {
+  isAppLocale,
+  type AppLocale,
+} from "@/lib/i18n/locale";
+import { readLocaleCookieClient } from "@/lib/locale-cookie";
+import { LOCALE_CHANGE_EVENT } from "@/lib/locale-sync";
 
-type FooterLink = { href: string; label: string };
-
-const COLUMNS: { title: string; links: FooterLink[] }[] = [
-  {
-    title: "Product",
-    links: [
-      { href: "/#section-workspace", label: "Analyzer" },
-      { href: "/experts", label: "Experts" },
-      { href: "/community", label: "Community Q&A" },
-      { href: "/pricing", label: "Pricing" },
-      { href: "/monetize", label: "Revenue" },
-    ],
-  },
-  {
-    title: "Learn",
-    links: [
-      { href: "/blog", label: "Blog" },
-      { href: "/faq", label: "FAQ" },
-      { href: "/about", label: "About" },
-      { href: "/editorial-team", label: "Editorial Team" },
-      { href: "/experts/register", label: "Join as expert" },
-    ],
-  },
-  {
-    title: "Company & legal",
-    links: [
-      { href: "/contact", label: "Contact" },
-      { href: "/editorial-standards", label: "Editorial Standards" },
-      { href: "/privacy", label: "Privacy Policy" },
-      { href: "/terms", label: "Terms of Service" },
-      { href: "/disclaimer", label: "Disclaimer" },
-    ],
-  },
-];
+const LOCALE_KEY = "lde-locale";
 
 export default function GlobalFooter() {
   const year = new Date().getFullYear();
+  const [locale, setLocale] = useState<AppLocale>(DEFAULT_LOCALE);
+
+  useEffect(() => {
+    const raw = window.localStorage.getItem(LOCALE_KEY);
+    const fromCookie = readLocaleCookieClient();
+    let resolved: AppLocale = DEFAULT_LOCALE;
+    if (raw !== null && isAppLocale(raw)) resolved = raw;
+    else if (fromCookie !== null) resolved = fromCookie;
+    setLocale(resolved);
+    if (raw === null || !isAppLocale(raw)) {
+      localStorage.setItem(LOCALE_KEY, resolved);
+    }
+  }, []);
+
+  useEffect(() => {
+    function sync() {
+      const raw = localStorage.getItem(LOCALE_KEY);
+      if (raw && isAppLocale(raw)) setLocale(raw);
+    }
+    window.addEventListener(LOCALE_CHANGE_EVENT, sync);
+    return () => window.removeEventListener(LOCALE_CHANGE_EVENT, sync);
+  }, []);
+
+  const ui = getUi(locale);
+  const ec = getExpertsCopy(locale);
+  const pr = getPricingCopy(locale);
+  const mz = getMonetizeCopy(locale);
+  const cq = getCommunityCopy(locale);
+  const sx = getSiteExtras(locale);
+
+  const columns: { title: string; links: { href: string; label: string }[] }[] =
+    [
+      {
+        title: "Product",
+        links: [
+          { href: "/#section-workspace", label: ui.sectionNavAnalyzer },
+          { href: "/journal", label: sx.footerJournal },
+          { href: "/checklists", label: sx.footerChecklists },
+          { href: "/how-we-use-ai", label: sx.footerHowAi },
+          { href: "/experts", label: ec.navExperts },
+          { href: "/community", label: cq.navLabel },
+          { href: "/pricing", label: pr.navPricing },
+          { href: "/monetize", label: mz.navLabel },
+        ],
+      },
+      {
+        title: "Learn",
+        links: [
+          { href: "/blog", label: "Blog" },
+          { href: "/faq", label: "FAQ" },
+          { href: "/about", label: "About" },
+          { href: "/editorial-team", label: "Editorial Team" },
+          { href: "/experts/register", label: ec.navRegister },
+        ],
+      },
+      {
+        title: "Company & legal",
+        links: [
+          { href: "/contact", label: "Contact" },
+          { href: "/editorial-standards", label: "Editorial Standards" },
+          { href: "/privacy", label: "Privacy Policy" },
+          { href: "/terms", label: "Terms of Service" },
+          { href: "/disclaimer", label: "Disclaimer" },
+        ],
+      },
+    ];
+
   return (
     <footer className="relative z-10 mt-24 border-t border-white/[0.07] bg-[rgb(var(--surface))]/80 pt-14 pb-10 backdrop-blur-xl">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -57,7 +107,7 @@ export default function GlobalFooter() {
             <SupportCta className="mt-5" />
           </div>
 
-          {COLUMNS.map((col) => (
+          {columns.map((col) => (
             <nav key={col.title} aria-label={col.title} className="text-sm">
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[rgb(var(--accent-dim))]">
                 {col.title}

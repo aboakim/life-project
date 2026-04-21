@@ -1,3 +1,4 @@
+import type { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { getClientIp } from "@/lib/client-ip";
 import { prisma } from "@/lib/prisma";
@@ -15,10 +16,20 @@ function clean(s: unknown, max: number): string {
   return t.length > max ? t.slice(0, max) : t;
 }
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
+    const { searchParams } = new URL(req.url);
+    const localeParam = searchParams.get("locale");
+    const where: Prisma.CommunityQuestionWhereInput = { status: "visible" };
+    if (
+      localeParam &&
+      localeParam !== "all" &&
+      localeParam.length <= 12
+    ) {
+      where.locale = localeParam;
+    }
     const rows = await prisma.communityQuestion.findMany({
-      where: { status: "visible" },
+      where,
       orderBy: { createdAt: "desc" },
       take: MAX_LIST,
       include: {
