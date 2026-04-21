@@ -27,6 +27,7 @@ import {
   PRODUCT_STRIP_IMAGE_URLS,
 } from "@/lib/home/hero-slide-images";
 import { getDecisionBriefCopy } from "@/lib/i18n/decision-brief";
+import WelcomeModal from "@/components/home/WelcomeModal";
 const LOCALE_STORAGE_KEY = "lde-locale";
 
 type ApiResponse = {
@@ -188,6 +189,7 @@ export default function DecisionStudio() {
           : undefined
       }
     >
+      <WelcomeModal locale={locale} />
       <OrbDecor />
       <HomeSectionNav links={sectionLinks} />
 
