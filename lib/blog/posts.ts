@@ -1557,6 +1557,97 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "decision-matrix-pros-and-cons-career-change",
+    title:
+      "Decision matrix vs. pros and cons: pick a method that matches the stakes",
+    description:
+      "When a simple pros-and-cons list stalls, a weighted decision matrix turns messy trade-offs into a clear picture. Step-by-step for career changes and other high-stakes calls.",
+    tags: ["decision-matrix", "career", "framework"],
+    readingMinutes: 9,
+    publishedAt: "2026-04-21",
+    author: "Life Decision Engine",
+    hero: {
+      eyebrow: "Decision playbook",
+      lede: "Pros and cons lists are a start. A decision matrix is what you use when every option is a mix of good and bad—and the career move won’t wait forever.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "If you are googling how to choose between two job offers, whether to go back to school, or when to leave a stable role, you have probably tried a pros and cons list. It helps you vent. It rarely helps you decide, because it treats every “pro” and “con” as equal. One fear cancels three concrete upsides, or one salary bump hides a toxic schedule.",
+      },
+      {
+        kind: "h2",
+        text: "What a pros and cons list is good for",
+      },
+      {
+        kind: "p",
+        text: "Use pros and cons when the decision is reversible in weeks, the downside is small, and you mainly need permission from yourself to act. It is a clarity tool, not a scoring tool. Write two columns, time-box the session to 20 minutes, and pick. If you are still stuck after a second pass, you are not looking at a list problem — you are looking at a weighting problem.",
+      },
+      {
+        kind: "h2",
+        text: "What a decision matrix adds",
+      },
+      {
+        kind: "p",
+        text: "A decision matrix (sometimes called a weighted decision matrix or Pugh matrix in product teams) does three things a flat list does not: it forces you to name the criteria that actually matter, it lets each criterion carry a different weight, and it stops one loud fear from swamping everything else. You are not trying to get a “scientific” number. You are trying to see where your stated priorities point when you apply them honestly.",
+      },
+      {
+        kind: "h3",
+        text: "Minimal version you can do on paper",
+      },
+      {
+        kind: "ol",
+        items: [
+          "List 2–3 real options (e.g. stay, take offer A, take offer B).",
+          "List 4–6 criteria: compensation, learning, commute or travel, manager fit, runway if it fails, alignment with 5-year identity — not a dozen vague virtues.",
+          "Weight each criterion so the weights add up to 100% (or 10 points total).",
+          "Score each option on each criterion (e.g. 1–5).",
+          "Multiply score × weight, add rows, compare totals.",
+        ],
+      },
+      {
+        kind: "p",
+        text: "If the winner feels wrong, that is data: either your weights are not your real values, or you have an unwritten criterion (stability, status, family harmony) you did not name. Update the model once, not endlessly.",
+      },
+      {
+        kind: "h2",
+        text: "Career change: a worked angle",
+      },
+      {
+        kind: "p",
+        text: "Career decisions drag because they bundle money, identity, and fear of looking foolish. A matrix keeps identity explicit: is “I want to be seen as a senior X” a criterion, or is it a mood? If it matters, add it. If it is only vanity, you will see it when the weighted scores disagree with your gut — then you choose whether to trust the gut or the grid.",
+      },
+      {
+        kind: "p",
+        text: "Also separate “reversible in 6 months” from “reversible in 5 years.” You can add a row for “exit optionality” and weight it if you are in a competitive field where a wrong step is costly. That single row often unblocks people who conflate all risks into one big blob of anxiety.",
+      },
+      {
+        kind: "h2",
+        text: "When to ignore the number",
+      },
+      {
+        kind: "p",
+        text: "If a matrix says “take the job” but you cannot sleep, check safety: abuse, legal exposure, or health collapse are veto factors, not cells in a table. A structured process should never override a red line. In those cases the matrix still helped — it told you the quantitative story while your body told you the veto.",
+      },
+      {
+        kind: "h2",
+        text: "Tie it to scenario thinking",
+      },
+      {
+        kind: "p",
+        text: "Matrices compare options in the present. Big life calls also need a 6-month and 2-year line of sight. After you have a tentative winner, run a short best / likely / worst narrative for that path. If the “likely” story is acceptable and the “worst” is survivable, you have done more than a spreadsheet — you have a defensible bet.",
+      },
+      {
+        kind: "p",
+        text: "The free structured flow on the Life Decision Engine home page runs scenarios, multiple lenses, and a timeline in one pass—useful when you want the matrix logic without building a grid by hand. The call-to-action at the end of this article opens the same workspace in one click.",
+      },
+      {
+        kind: "quote",
+        text: "The point of a decision matrix is not a perfect total. The point is to make trade-offs visible before reality makes them for you.",
+      },
+    ],
+  },
 ];
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
