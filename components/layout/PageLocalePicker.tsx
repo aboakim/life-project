@@ -6,6 +6,7 @@ import {
   isRtlLocale,
 } from "@/lib/i18n/locale";
 import { getUi } from "@/lib/i18n/ui";
+import { dispatchLocaleChanged } from "@/lib/locale-sync";
 
 type Props = {
   locale: AppLocale;
@@ -47,6 +48,7 @@ export default function PageLocalePicker({
                     isRtlLocale(opt.value) ? "rtl" : "ltr"
                   );
                 }
+                dispatchLocaleChanged();
               }}
               className={
                 active

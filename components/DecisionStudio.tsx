@@ -28,6 +28,10 @@ import {
 } from "@/lib/home/hero-slide-images";
 import { getDecisionBriefCopy } from "@/lib/i18n/decision-brief";
 import WelcomeModal from "@/components/home/WelcomeModal";
+import {
+  LOCALE_CHANGE_EVENT,
+  dispatchLocaleChanged,
+} from "@/lib/locale-sync";
 const LOCALE_STORAGE_KEY = "lde-locale";
 
 type ApiResponse = {
@@ -112,6 +116,15 @@ export default function DecisionStudio() {
   }, []);
 
   useEffect(() => {
+    function syncFromNav() {
+      const raw = localStorage.getItem(LOCALE_STORAGE_KEY);
+      if (raw && isAppLocale(raw)) setLocale(raw);
+    }
+    window.addEventListener(LOCALE_CHANGE_EVENT, syncFromNav);
+    return () => window.removeEventListener(LOCALE_CHANGE_EVENT, syncFromNav);
+  }, []);
+
+  useEffect(() => {
     localStorage.setItem(LOCALE_STORAGE_KEY, locale);
     syncLocaleCookieClient(locale);
     document.documentElement.lang = locale;
@@ -119,6 +132,7 @@ export default function DecisionStudio() {
       "dir",
       isRtlLocale(locale) ? "rtl" : "ltr"
     );
+    dispatchLocaleChanged();
   }, [locale]);
 
   const [decision, setDecision] = useState("");

@@ -7,8 +7,21 @@ import { getCommunityCopy } from "@/lib/i18n/community-page";
 import { getMonetizeCopy } from "@/lib/i18n/monetization-page";
 import { getPricingCopy } from "@/lib/i18n/pricing-page";
 import { DEFAULT_LOCALE } from "@/lib/locale-default";
-import { isAppLocale, type AppLocale } from "@/lib/i18n/locale";
-import { syncLocaleCookieClient } from "@/lib/locale-cookie";
+import {
+  LOCALE_OPTIONS,
+  isAppLocale,
+  isRtlLocale,
+  type AppLocale,
+} from "@/lib/i18n/locale";
+import { getUi } from "@/lib/i18n/ui";
+import {
+  readLocaleCookieClient,
+  syncLocaleCookieClient,
+} from "@/lib/locale-cookie";
+import {
+  LOCALE_CHANGE_EVENT,
+  dispatchLocaleChanged,
+} from "@/lib/locale-sync";
 import NavRoutePrefetch from "@/components/NavRoutePrefetch";
 
 const LOCALE_KEY = "lde-locale";
@@ -18,20 +31,42 @@ export default function GlobalNav() {
 
   useEffect(() => {
     const raw = localStorage.getItem(LOCALE_KEY);
-    if (raw === null) {
-      localStorage.setItem(LOCALE_KEY, DEFAULT_LOCALE);
-      setLocale(DEFAULT_LOCALE);
-    } else if (isAppLocale(raw)) setLocale(raw);
+    const fromCookie = readLocaleCookieClient();
+    let resolved: AppLocale = DEFAULT_LOCALE;
+    if (raw !== null && isAppLocale(raw)) {
+      resolved = raw;
+    } else if (fromCookie !== null) {
+      resolved = fromCookie;
+    }
+    setLocale(resolved);
+    if (raw === null || !isAppLocale(raw)) {
+      localStorage.setItem(LOCALE_KEY, resolved);
+    }
   }, []);
 
   useEffect(() => {
     syncLocaleCookieClient(locale);
+    document.documentElement.lang = locale;
+    document.documentElement.setAttribute(
+      "dir",
+      isRtlLocale(locale) ? "rtl" : "ltr"
+    );
   }, [locale]);
+
+  useEffect(() => {
+    function syncFromApp() {
+      const raw = localStorage.getItem(LOCALE_KEY);
+      if (raw && isAppLocale(raw)) setLocale(raw);
+    }
+    window.addEventListener(LOCALE_CHANGE_EVENT, syncFromApp);
+    return () => window.removeEventListener(LOCALE_CHANGE_EVENT, syncFromApp);
+  }, []);
 
   const ec = getExpertsCopy(locale);
   const pr = getPricingCopy(locale);
   const mz = getMonetizeCopy(locale);
   const cq = getCommunityCopy(locale);
+  const t = getUi(locale);
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/[0.12] bg-[rgb(var(--surface))]/82 backdrop-blur-2xl shadow-[0_12px_40px_-16px_rgb(0_0_0/0.45),inset_0_1px_0_0_rgba(255,255,255,0.08)]">
@@ -99,6 +134,33 @@ export default function GlobalNav() {
           >
             About
           </Link>
+          <label className="flex items-center gap-1.5 ps-1">
+            <span className="sr-only">{t.langLabel}</span>
+            <select
+              value={locale}
+              aria-label={t.langLabel}
+              onChange={(e) => {
+                const v = e.target.value;
+                if (!isAppLocale(v)) return;
+                setLocale(v);
+                localStorage.setItem(LOCALE_KEY, v);
+                syncLocaleCookieClient(v);
+                document.documentElement.lang = v;
+                document.documentElement.setAttribute(
+                  "dir",
+                  isRtlLocale(v) ? "rtl" : "ltr"
+                );
+                dispatchLocaleChanged();
+              }}
+              className="max-w-[11rem] cursor-pointer rounded-lg border border-white/[0.12] bg-black/35 px-2 py-1.5 text-xs font-medium text-[rgb(var(--ink))] outline-none transition focus:border-[rgb(var(--accent))]/45 sm:text-sm"
+            >
+              {LOCALE_OPTIONS.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.flag} {opt.label}
+                </option>
+              ))}
+            </select>
+          </label>
           <Link
             href="/experts/register"
             className="rounded-xl border border-[rgb(var(--accent))]/45 bg-[rgb(var(--accent))]/16 px-4 py-2 font-semibold text-[rgb(var(--ink))] shadow-[0_0_28px_-12px_rgb(var(--accent)/0.5)] transition hover:border-[rgb(var(--accent))]/65 hover:bg-[rgb(var(--accent))]/22"

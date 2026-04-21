@@ -10,6 +10,7 @@ import {
 import { DEFAULT_LOCALE } from "@/lib/locale-default";
 import { isAppLocale, type AppLocale } from "@/lib/i18n/locale";
 import { syncLocaleCookieClient } from "@/lib/locale-cookie";
+import { LOCALE_CHANGE_EVENT } from "@/lib/locale-sync";
 
 const LOCALE_KEY = "lde-locale";
 
@@ -34,6 +35,15 @@ export default function RegisterExpertForm() {
       localStorage.setItem(LOCALE_KEY, DEFAULT_LOCALE);
       setLocale(DEFAULT_LOCALE);
     } else if (isAppLocale(raw)) setLocale(raw);
+  }, []);
+
+  useEffect(() => {
+    function syncFromNav() {
+      const raw = localStorage.getItem(LOCALE_KEY);
+      if (raw && isAppLocale(raw)) setLocale(raw);
+    }
+    window.addEventListener(LOCALE_CHANGE_EVENT, syncFromNav);
+    return () => window.removeEventListener(LOCALE_CHANGE_EVENT, syncFromNav);
   }, []);
 
   useEffect(() => {
