@@ -303,7 +303,7 @@ export default function DecisionStudio({ initialPreset = null }: Props) {
       <HomeSectionNav links={sectionLinks} />
 
       {demoMode ? (
-        <div className="pointer-events-none fixed end-4 top-[4.5rem] z-[60] max-w-[min(100%,20rem)] rounded-xl border border-amber-400/35 bg-amber-500/[0.12] px-3 py-2 text-[11px] font-medium leading-snug text-amber-100/95 shadow-lg backdrop-blur-md sm:text-xs">
+        <div className="pointer-events-none fixed start-3 end-3 top-[4.75rem] z-[30] max-w-none rounded-xl border border-amber-400/35 bg-amber-500/[0.12] px-3 py-2 text-center text-[11px] font-medium leading-snug text-amber-100/95 shadow-lg backdrop-blur-md sm:start-auto sm:end-4 sm:top-[4.5rem] sm:max-w-[min(100%,20rem)] sm:text-start sm:text-xs">
           {sx.demoBadge}
         </div>
       ) : null}
@@ -782,21 +782,21 @@ export default function DecisionStudio({ initialPreset = null }: Props) {
                 </p>
               )}
 
-              <div className="mt-6 flex flex-wrap items-center gap-3">
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                 <button
                   type="submit"
                   disabled={!canSubmit || loading}
-                  className="min-h-[48px] min-w-[min(100%,14rem)] rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-6 py-3 text-base font-semibold text-white shadow-lg shadow-[rgb(var(--accent)/0.28)] transition enabled:hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
+                  className="min-h-[48px] w-full rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-6 py-3 text-base font-semibold text-white shadow-lg shadow-[rgb(var(--accent)/0.28)] transition enabled:hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40 sm:w-auto sm:min-w-[14rem]"
                 >
                   {loading ? t.analyzing : t.analyze}
                 </button>
-                {result && (
-                  <span className="rounded-full border border-white/15 bg-white/[0.03] px-3 py-1 text-xs text-[rgb(var(--ink-soft))]">
+                {result ? (
+                  <span className="inline-flex w-full justify-center rounded-full border border-white/15 bg-white/[0.03] px-3 py-2 text-center text-sm text-[rgb(var(--ink-soft))] sm:inline-flex sm:w-auto sm:justify-start sm:py-1.5 sm:text-xs">
                     {result.mode === "live" && t.badgeLive}
                     {result.mode === "demo" && t.badgeDemo}
                     {result.mode === "fallback" && t.badgeFallback}
                   </span>
-                )}
+                ) : null}
               </div>
               {(result?.hint || result?.warning) && (
                 <p className="mt-3 text-xs leading-relaxed text-amber-200/90">

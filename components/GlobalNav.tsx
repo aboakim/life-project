@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { createPortal } from "react-dom";
 import { useEffect, useRef, useState } from "react";
 import { getExpertsCopy } from "@/lib/i18n/experts-network";
 import { getCommunityCopy } from "@/lib/i18n/community-page";
@@ -98,6 +99,11 @@ export default function GlobalNav() {
   const pathname = usePathname();
   const [locale, setLocale] = useState<AppLocale>(DEFAULT_LOCALE);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const raw = localStorage.getItem(LOCALE_KEY);
@@ -176,8 +182,111 @@ export default function GlobalNav() {
     { href: "/blog", label: "Blog" },
   ];
 
+  const mobileMenuPortal =
+    mounted && mobileOpen
+      ? createPortal(
+          <div
+            id="global-mobile-nav"
+            className="fixed inset-0 z-[300] flex flex-col bg-[rgb(var(--surface))]"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Site menu"
+            style={{
+              paddingBottom: "max(1rem, env(safe-area-inset-bottom, 0px))",
+            }}
+          >
+            <div className="flex shrink-0 items-center justify-between border-b border-white/[0.1] bg-[rgb(var(--surface))] px-4 py-3 pt-[max(0.75rem,env(safe-area-inset-top,0px))]">
+              <span className="font-display text-lg font-bold text-[rgb(var(--ink))]">
+                Menu
+              </span>
+              <button
+                type="button"
+                className="flex size-11 items-center justify-center rounded-xl border border-white/[0.12] bg-white/[0.06] text-[rgb(var(--ink))]"
+                aria-label="Close menu"
+                onClick={() => setMobileOpen(false)}
+              >
+                <svg
+                  className="size-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+            <nav
+              className="min-h-0 flex-1 touch-pan-y overflow-y-auto overscroll-y-contain bg-[rgb(var(--surface))] px-4 pb-8"
+              aria-label="Main"
+            >
+              <div className="mt-3 rounded-2xl border border-white/[0.1] bg-black/25 p-3">
+                <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[rgb(var(--ink-soft))]">
+                  {t.langLabel}
+                </p>
+                <select
+                  value={locale}
+                  aria-label={t.langLabel}
+                  onChange={(e) => {
+                    const v = e.target.value;
+                    if (!isAppLocale(v)) return;
+                    setLocale(v);
+                    localStorage.setItem(LOCALE_KEY, v);
+                    syncLocaleCookieClient(v);
+                    document.documentElement.lang = v;
+                    document.documentElement.setAttribute(
+                      "dir",
+                      isRtlLocale(v) ? "rtl" : "ltr"
+                    );
+                    dispatchLocaleChanged();
+                  }}
+                  className="mt-2 w-full min-h-[48px] cursor-pointer rounded-xl border border-white/[0.14] bg-black/40 px-3 py-2 text-base font-medium text-[rgb(var(--ink))] outline-none"
+                >
+                  {LOCALE_OPTIONS.map((opt) => (
+                    <option key={opt.value} value={opt.value}>
+                      {opt.flag} {opt.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <p className="mt-6 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[rgb(var(--ink-soft))]">
+                Pages
+              </p>
+              <div className="mt-2 flex flex-col overflow-hidden rounded-2xl border border-white/[0.1] bg-black/15">
+                {[...primaryLinks, ...moreLinks].map((l) => (
+                  <Link
+                    key={`${l.href}-${l.label}`}
+                    href={l.href}
+                    className={`${mobileNavLinkClass} border-b border-white/[0.06] last:border-b-0`}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {l.label}
+                  </Link>
+                ))}
+              </div>
+
+              <Link
+                href="/experts/register"
+                className="mt-6 flex min-h-[52px] items-center justify-center rounded-2xl border border-[rgb(var(--accent))]/45 bg-[rgb(var(--accent))]/16 px-4 text-base font-semibold text-[rgb(var(--ink))]"
+                onClick={() => setMobileOpen(false)}
+              >
+                {ec.navRegister}
+              </Link>
+            </nav>
+          </div>,
+          document.body
+        )
+      : null;
+
   return (
-    <header className="print:hidden sticky top-0 z-50 border-b border-white/[0.12] bg-[rgb(var(--surface))]/82 pt-[env(safe-area-inset-top,0px)] backdrop-blur-2xl shadow-[0_12px_40px_-16px_rgb(0_0_0/0.45),inset_0_1px_0_0_rgba(255,255,255,0.08)]">
+    <>
+      <header className="print:hidden sticky top-0 z-50 border-b border-white/[0.12] bg-[rgb(var(--surface))]/82 pt-[env(safe-area-inset-top,0px)] backdrop-blur-2xl shadow-[0_12px_40px_-16px_rgb(0_0_0/0.45),inset_0_1px_0_0_rgba(255,255,255,0.08)]">
       <NavRoutePrefetch />
       <div className="mx-auto flex max-w-6xl flex-nowrap items-center justify-between gap-2 px-3 py-2.5 sm:gap-3 sm:px-6">
         <Link
@@ -284,103 +393,8 @@ export default function GlobalNav() {
           )}
         </button>
       </div>
-
-      {/* Mobile full-screen sheet */}
-      {mobileOpen ? (
-        <div
-          id="global-mobile-nav"
-          className="fixed inset-0 z-[210] flex flex-col bg-[rgb(var(--surface))] md:hidden"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Site menu"
-          style={{
-            paddingBottom: "max(1rem, env(safe-area-inset-bottom, 0px))",
-          }}
-        >
-          <div className="flex shrink-0 items-center justify-between border-b border-white/[0.1] px-4 py-3 pt-[max(0.75rem,env(safe-area-inset-top,0px))]">
-            <span className="font-display text-lg font-bold text-[rgb(var(--ink))]">
-              Menu
-            </span>
-            <button
-              type="button"
-              className="flex size-11 items-center justify-center rounded-xl border border-white/[0.12] bg-white/[0.06] text-[rgb(var(--ink))]"
-              aria-label="Close menu"
-              onClick={() => setMobileOpen(false)}
-            >
-              <svg
-                className="size-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
-          <nav
-            className="min-h-0 flex-1 overflow-y-auto overscroll-y-contain px-4 pb-6"
-            aria-label="Main"
-          >
-            <p className="mt-2 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[rgb(var(--ink-soft))]">
-              {t.langLabel}
-            </p>
-            <select
-              value={locale}
-              aria-label={t.langLabel}
-              onChange={(e) => {
-                const v = e.target.value;
-                if (!isAppLocale(v)) return;
-                setLocale(v);
-                localStorage.setItem(LOCALE_KEY, v);
-                syncLocaleCookieClient(v);
-                document.documentElement.lang = v;
-                document.documentElement.setAttribute(
-                  "dir",
-                  isRtlLocale(v) ? "rtl" : "ltr"
-                );
-                dispatchLocaleChanged();
-              }}
-              className="mt-2 w-full min-h-[48px] cursor-pointer rounded-xl border border-white/[0.14] bg-black/35 px-3 py-2 text-base font-medium text-[rgb(var(--ink))] outline-none"
-            >
-              {LOCALE_OPTIONS.map((opt) => (
-                <option key={opt.value} value={opt.value}>
-                  {opt.flag} {opt.label}
-                </option>
-              ))}
-            </select>
-
-            <p className="mt-6 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[rgb(var(--ink-soft))]">
-              Pages
-            </p>
-            <div className="mt-2 flex flex-col border-t border-white/[0.08]">
-              {[...primaryLinks, ...moreLinks].map((l) => (
-                <Link
-                  key={`${l.href}-${l.label}`}
-                  href={l.href}
-                  className={`${mobileNavLinkClass} border-b border-white/[0.06]`}
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {l.label}
-                </Link>
-              ))}
-            </div>
-
-            <Link
-              href="/experts/register"
-              className="mt-6 flex min-h-[52px] items-center justify-center rounded-2xl border border-[rgb(var(--accent))]/45 bg-[rgb(var(--accent))]/16 px-4 text-base font-semibold text-[rgb(var(--ink))]"
-              onClick={() => setMobileOpen(false)}
-            >
-              {ec.navRegister}
-            </Link>
-          </nav>
-        </div>
-      ) : null}
     </header>
+    {mobileMenuPortal}
+    </>
   );
 }
