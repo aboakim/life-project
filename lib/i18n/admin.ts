@@ -58,7 +58,7 @@ const enUS: AdminUiCopy = {
   colMessage: "Message",
   empty: "No requests yet.",
   secretMissing:
-    "Set ADMIN_SECRET in environment (at least 16 characters) and redeploy.",
+    "Set ADMIN_SECRET in your host (at least 16 characters), save it, then redeploy Production. If you already added it, open Vercel → Deployments → your latest Production deployment → Redeploy.",
   loginTitle: "Admin — contact requests",
   loginHint: "Enter the server ADMIN_SECRET.",
   signIn: "Sign in",
@@ -95,7 +95,7 @@ const hy: AdminUiCopy = {
   colMessage: "Հաղորդագրություն",
   empty: "Դեռ հարցումներ չկան։",
   secretMissing:
-    "Սահմանեք ADMIN_SECRET միջավայրում (առնվազն 16 նիշ) և նորից deploy արեք։",
+    "Սահմանեք ADMIN_SECRET հոսթում (առնվազն 16 նիշ), պահեք, ապա Production-ը նորից deploy արեք։ Եթե արդեն եք ավելացրել՝ Vercel → Deployments → վերջին Production deploy → Redeploy։",
   loginTitle: "Ադմին — կապի հարցումներ",
   loginHint: "Մուտքագրեք սերվերի ADMIN_SECRET-ը։",
   signIn: "Մուտք",

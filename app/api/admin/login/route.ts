@@ -1,11 +1,12 @@
 import { NextResponse } from "next/server";
+import { readAdminSecret } from "@/lib/admin-env";
 import { ADMIN_COOKIE_NAME, signAdminToken } from "@/lib/admin-cookie";
 
 export const runtime = "nodejs";
 
 export async function POST(req: Request) {
-  const secret = process.env.ADMIN_SECRET;
-  if (!secret || secret.length < 16) {
+  const secret = readAdminSecret();
+  if (!secret) {
     return NextResponse.json(
       { error: "Admin not configured (set ADMIN_SECRET in .env)" },
       { status: 503 }
@@ -19,7 +20,8 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  if (body.password !== secret) {
+  const pwd = typeof body.password === "string" ? body.password.trim() : "";
+  if (pwd !== secret) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

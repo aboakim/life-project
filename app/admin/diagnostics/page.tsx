@@ -56,7 +56,7 @@ export default async function AdminDiagnosticsPage() {
 
   if (gate === "missing_secret") {
     return (
-      <div className="mx-auto max-w-lg px-4 py-16 text-sm text-amber-200/90">
+      <div className="mx-auto max-w-lg px-4 py-16 text-sm text-[rgb(var(--ink-soft))]">
         {a.secretMissing}
       </div>
     );
