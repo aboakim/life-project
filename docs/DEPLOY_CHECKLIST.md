@@ -4,6 +4,14 @@
 
 ---
 
+## Կարևոր — Vercel build-ը կընկնի առանց `DATABASE_URL`
+
+Եթե build log-ում երևում է **`P1012` / `Environment variable not found: DATABASE_URL`**՝ Vercel-ում **դեռ չես ավելացրել** `DATABASE_URL` (կամ Preview branch-ի համար env-ը դատարկ է)։
+
+**Քայլ.** Vercel → **Settings → Environment Variables** → `DATABASE_URL` = Neon-ի `postgresql://...` string-ը → **Save** → **Deployments → Redeploy**։
+
+---
+
 ## Նախապայմաններ
 
 - Նախագիծը GitHub-ում repo-ի մեջ (օր. `life-decision-engine`).
