@@ -4,11 +4,12 @@
 
 ---
 
-## Կարևոր — Vercel build-ը կընկնի առանց `DATABASE_URL`
+## Կարևոր — `DATABASE_URL` և build
 
-Եթե build log-ում երևում է **`P1012` / `Environment variable not found: DATABASE_URL`**՝ Vercel-ում **դեռ չես ավելացրել** `DATABASE_URL` (կամ Preview branch-ի համար env-ը դատարկ է)։
+- **Build-ը կարող է հաջողել առանց `DATABASE_URL`** (placeholder միայն `prisma generate`-ի համար) — **`prisma migrate deploy` չի աշխատի**, մինչև Vercel-ում չավելացնես իրական Neon connection string։
+- **Community / Prisma API** production-ում **պետք է իրական բազա**՝ ավելացրու **`DATABASE_URL`** Vercel env-ում, հետո redeploy — migration-ները կկիրառվեն։
 
-**Քայլ.** Vercel → **Settings → Environment Variables** → `DATABASE_URL` = Neon-ի `postgresql://...` string-ը → **Save** → **Deployments → Redeploy**։
+**Քայլ.** Vercel → **Settings → Environment Variables** → `DATABASE_URL` = Neon-ի `postgresql://...` → **Save** → **Redeploy**։
 
 ---
 

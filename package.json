@@ -12,7 +12,7 @@
     "dev:fresh": "node scripts/clean-next.cjs && next dev",
     "fresh": "node scripts/clean-next.cjs && next dev",
     "dev:turbo": "next dev --turbopack",
-    "build": "node scripts/ensure-database-url.mjs && prisma generate && prisma migrate deploy && next build",
+    "build": "node scripts/vercel-build.mjs",
     "start": "next start",
     "lint": "next lint",
     "postinstall": "node scripts/postinstall-prisma.mjs",
