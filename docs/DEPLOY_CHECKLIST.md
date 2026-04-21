@@ -15,24 +15,16 @@
 
 1. Մտիր [neon.tech](https://neon.tech) → նոր **Project** / **Database**.
 2. Ստեղծիր բազան, պատճենիր **Connection string**-ը (սովորաբար `postgresql://...@...neon.tech/neondb?sslmode=require`).
-3. **Կարևոր.** Այս repo-ի `prisma/schema.prisma` ֆայլում `datasource db`-ը հիմա **`sqlite`** է։ Neon-ը **PostgreSQL** է, ուստի deploy-ից առաջ միայն **production branch**-ում կամ մեկ անգամ փոխիր․
+3. **Կարևոր.** Այս repo-ում `prisma/schema.prisma`-ը արդեն **`postgresql`** է։ Vercel build-ը անում է `prisma migrate deploy` — տվյալների բազան ստեղծվում/թարմացվում է migration-ներով։
 
-```prisma
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-```
-
-4. Տեղական `sqlite` ֆայլը production-ում **չի աշխատի** Vercel-ում — Neon-ի URL-ով ես միացնում ես Prisma-ն։
-5. Terminal (կամ CI)՝ Neon-ի `DATABASE_URL`-ով․
+4. Տեղական dev-ում ևս պետք է **PostgreSQL** (Neon անվճար branch, Docker, կամ տեղական `postgres`):
 
 ```bash
 npx prisma generate
-npx prisma db push
+npx prisma migrate deploy
 ```
 
-(կամ `prisma migrate deploy` — եթե ավելացնես migration ֆայլեր)։
+(կամ նոր DB-ի համար առաջին անգամ՝ `npx prisma migrate deploy` build-ից առաջ՝ Neon connection string-ով)։
 
 ---
 
@@ -40,7 +32,7 @@ npx prisma db push
 
 1. [vercel.com](https://vercel.com) → **Add New → Project** → Import GitHub repo-ն։
 2. **Framework:** Next.js (ինքը կճանաչի)։
-3. **Build Command** — թող լինի default (`next build`), քանի որ `package.json`-ում `build` արդեն անում է `prisma generate && next build`։
+3. **Build Command** — թող լինի default (`npm run build`), քանի որ `package.json`-ում `build` արդեն անում է `prisma generate && prisma migrate deploy && next build` (պետք է **`DATABASE_URL`** Vercel env-ում)։
 4. **Install Command** — `npm install` (կամ `pnpm install` եթե փոխես)։
 5. **Environment Variables** — լրացրու ստորևի աղյուսակը (քայլ 3)։
 6. **Deploy**։

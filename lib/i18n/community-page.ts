@@ -27,6 +27,10 @@ export type CommunityCopy = {
   validationName: string;
   validationEmail: string;
   rateLimited: string;
+  /** DB unreachable — list empty but page usable */
+  dbUnavailable: string;
+  /** DB unreachable — posting disabled */
+  dbUnavailablePost: string;
 };
 
 const en: CommunityCopy = {
@@ -58,6 +62,10 @@ const en: CommunityCopy = {
   validationName: "Name must be 1–80 characters.",
   validationEmail: "Please enter a valid email or leave it empty.",
   rateLimited: "Too many posts from this connection. Try again later.",
+  dbUnavailable:
+    "Community list is temporarily unavailable (database not connected). Other pages still work — the site owner should add DATABASE_URL (e.g. Neon Postgres) on the host.",
+  dbUnavailablePost:
+    "Cannot post right now — the database is not connected. Please try again after the site is configured.",
 };
 
 const hy: CommunityCopy = {
@@ -89,6 +97,10 @@ const hy: CommunityCopy = {
   validationName: "Անունը 1–80 նիշ։",
   validationEmail: "Գրիր ճիշտ էլ․ փոստ կամ թողնիր դատարկ։",
   rateLimited: "Չափից շատ հաղորդագրություն այս կապից։ Փորձեք ավելի ուշ։",
+  dbUnavailable:
+    "Հանրային հարցերի ցուցակը ժամանակավորապես անհասանելի է (տվյալների բազան կապված չէ)։ Մնացած էջերը աշխատում են — host-ում պետք է կարգավորել DATABASE_URL (օր. Neon PostgreSQL)։",
+  dbUnavailablePost:
+    "Այս պահին հնարավոր չէ հրապարակել — տվյալների բազան կապված չէ։ Փորձեք կարգավորումից հետո։",
 };
 
 const table: Record<AppLocale, CommunityCopy> = {

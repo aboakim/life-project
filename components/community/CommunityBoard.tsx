@@ -25,6 +25,7 @@ export default function CommunityBoard({ t, locale }: Props) {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState<string | null>(null);
+  const [warn, setWarn] = useState<string | null>(null);
 
   const [qName, setQName] = useState("");
   const [qEmail, setQEmail] = useState("");
@@ -40,17 +41,22 @@ export default function CommunityBoard({ t, locale }: Props) {
 
   const load = useCallback(async () => {
     setErr(null);
+    setWarn(null);
     try {
       const res = await fetch("/api/community/questions", { cache: "no-store" });
       if (!res.ok) throw new Error("load");
-      const data = (await res.json()) as { questions: Question[] };
-      setQuestions(data.questions);
+      const data = (await res.json()) as {
+        questions: Question[];
+        unavailable?: boolean;
+      };
+      setQuestions(data.questions ?? []);
+      if (data.unavailable) setWarn(t.dbUnavailable);
     } catch {
       setErr(t.errorGeneric);
     } finally {
       setLoading(false);
     }
-  }, [t.errorGeneric]);
+  }, [t.dbUnavailable, t.errorGeneric]);
 
   useEffect(() => {
     void load();
@@ -78,6 +84,10 @@ export default function CommunityBoard({ t, locale }: Props) {
         return;
       }
       if (!res.ok) {
+        if (res.status === 503 && data.error === "service_unavailable") {
+          setErr(t.dbUnavailablePost);
+          return;
+        }
         if (data.error === "validation_title") setErr(t.validationTitle);
         else if (data.error === "validation_body") setErr(t.validationBody);
         else if (data.error === "validation_name") setErr(t.validationName);
@@ -117,6 +127,10 @@ export default function CommunityBoard({ t, locale }: Props) {
         return;
       }
       if (!res.ok) {
+        if (res.status === 503 && data.error === "service_unavailable") {
+          setErr(t.dbUnavailablePost);
+          return;
+        }
         if (data.error === "validation_body") setErr(t.validationBody);
         else if (data.error === "validation_name") setErr(t.validationName);
         else if (data.error === "invalid_email") setErr(t.validationEmail);
@@ -145,6 +159,15 @@ export default function CommunityBoard({ t, locale }: Props) {
           {t.securityNote}
         </p>
       </div>
+
+      {warn ? (
+        <p
+          className="rounded-xl border border-amber-400/25 bg-amber-500/[0.08] px-4 py-3 text-sm leading-relaxed text-amber-100/95"
+          role="status"
+        >
+          {warn}
+        </p>
+      ) : null}
 
       {err ? (
         <p className="text-sm text-rose-300" role="alert">

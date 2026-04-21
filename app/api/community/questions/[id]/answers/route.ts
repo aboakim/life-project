@@ -27,9 +27,18 @@ export async function POST(req: Request, ctx: Params) {
     return NextResponse.json({ error: "missing_id" }, { status: 400 });
   }
 
-  const exists = await prisma.communityQuestion.findFirst({
-    where: { id: questionId, status: "visible" },
-  });
+  let exists;
+  try {
+    exists = await prisma.communityQuestion.findFirst({
+      where: { id: questionId, status: "visible" },
+    });
+  } catch (e) {
+    console.error("[community/answers] findFirst", e);
+    return NextResponse.json(
+      { error: "service_unavailable" },
+      { status: 503 }
+    );
+  }
   if (!exists) {
     return NextResponse.json({ error: "not_found" }, { status: 404 });
   }
@@ -60,14 +69,22 @@ export async function POST(req: Request, ctx: Params) {
     authorEmail = authorEmailRaw;
   }
 
-  const answer = await prisma.communityAnswer.create({
-    data: {
-      questionId,
-      authorName,
-      authorEmail,
-      body: bodyText,
-    },
-  });
+  try {
+    const answer = await prisma.communityAnswer.create({
+      data: {
+        questionId,
+        authorName,
+        authorEmail,
+        body: bodyText,
+      },
+    });
 
-  return NextResponse.json({ answer });
+    return NextResponse.json({ answer });
+  } catch (e) {
+    console.error("[community/answers POST]", e);
+    return NextResponse.json(
+      { error: "service_unavailable" },
+      { status: 503 }
+    );
+  }
 }

@@ -16,21 +16,29 @@ function clean(s: unknown, max: number): string {
 }
 
 export async function GET() {
-  const rows = await prisma.communityQuestion.findMany({
-    where: { status: "visible" },
-    orderBy: { createdAt: "desc" },
-    take: MAX_LIST,
-    include: {
-      answers: {
-        orderBy: { createdAt: "asc" },
+  try {
+    const rows = await prisma.communityQuestion.findMany({
+      where: { status: "visible" },
+      orderBy: { createdAt: "desc" },
+      take: MAX_LIST,
+      include: {
+        answers: {
+          orderBy: { createdAt: "asc" },
+        },
       },
-    },
-  });
+    });
 
-  return NextResponse.json(
-    { questions: rows },
-    { headers: { "Cache-Control": "no-store, max-age=0" } }
-  );
+    return NextResponse.json(
+      { questions: rows },
+      { headers: { "Cache-Control": "no-store, max-age=0" } }
+    );
+  } catch (e) {
+    console.error("[community/questions GET]", e);
+    return NextResponse.json(
+      { questions: [], unavailable: true },
+      { status: 200, headers: { "Cache-Control": "no-store, max-age=0" } }
+    );
+  }
 }
 
 export async function POST(req: Request) {
@@ -71,17 +79,25 @@ export async function POST(req: Request) {
     authorEmail = authorEmailRaw;
   }
 
-  const q = await prisma.communityQuestion.create({
-    data: {
-      authorName,
-      authorEmail,
-      title,
-      body: bodyText,
-      locale,
-      status: "visible",
-    },
-    include: { answers: true },
-  });
+  try {
+    const q = await prisma.communityQuestion.create({
+      data: {
+        authorName,
+        authorEmail,
+        title,
+        body: bodyText,
+        locale,
+        status: "visible",
+      },
+      include: { answers: true },
+    });
 
-  return NextResponse.json({ question: q });
+    return NextResponse.json({ question: q });
+  } catch (e) {
+    console.error("[community/questions POST]", e);
+    return NextResponse.json(
+      { error: "service_unavailable" },
+      { status: 503 }
+    );
+  }
 }
