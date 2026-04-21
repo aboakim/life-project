@@ -71,6 +71,13 @@ export const metadata: Metadata = {
   publisher: "Life Decision Engine",
   category: "decision-making, self-help, finance, careers, psychology",
   alternates: { canonical: "/" },
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/icon", type: "image/png", sizes: "64x64" },
+    ],
+    apple: [{ url: "/apple-icon", type: "image/png", sizes: "180x180" }],
+  },
   formatDetection: { telephone: false, email: false, address: false },
   robots: {
     index: true,
