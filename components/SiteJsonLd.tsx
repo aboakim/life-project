@@ -14,7 +14,12 @@ export default function SiteJsonLd() {
     "@id": `${base}/#organization`,
     name: "Life Decision Engine",
     url: base,
-    logo: `${base}/favicon.ico`,
+    logo: {
+      "@type": "ImageObject",
+      url: `${base}/logo-192.png`,
+      width: 192,
+      height: 192,
+    },
     sameAs: [] as string[],
     contactPoint: [
       {

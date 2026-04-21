@@ -16,8 +16,13 @@ const svgPath = path.join(root, "public", "favicon.svg");
 
 const buf48 = await sharp(svgPath).resize(48, 48).png().toBuffer();
 const buf32 = await sharp(svgPath).resize(32, 32).png().toBuffer();
+/** Google Organization logo JSON-LD: needs a square raster ≥ ~112px. */
+const buf192 = await sharp(svgPath).resize(192, 192).png().toBuffer();
 
 fs.writeFileSync(path.join(root, "public", "favicon-48x48.png"), buf48);
 fs.writeFileSync(path.join(root, "public", "favicon-32x32.png"), buf32);
+fs.writeFileSync(path.join(root, "public", "logo-192.png"), buf192);
 
-console.log("Wrote public/favicon-48x48.png, public/favicon-32x32.png");
+console.log(
+  "Wrote public/favicon-48x48.png, public/favicon-32x32.png, public/logo-192.png",
+);
