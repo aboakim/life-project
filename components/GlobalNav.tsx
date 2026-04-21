@@ -160,24 +160,30 @@ export default function GlobalNav() {
           <span className="truncate">Life Decision Engine</span>
         </Link>
         <nav
-          className="flex min-w-0 flex-1 flex-nowrap items-center justify-end gap-0.5 overflow-x-auto text-[0.8125rem] font-medium scrollbar-none sm:text-[0.9rem] md:text-base"
+          className="flex min-w-0 flex-1 flex-nowrap items-center justify-end gap-0.5 text-[0.8125rem] font-medium sm:text-[0.9rem] md:text-base"
           aria-label="Main"
         >
-          <Link href="/#section-workspace" className={navLinkClass}>
-            {ec.navHome}
-          </Link>
-          <Link href="/experts" className={navLinkClass}>
-            {ec.navExperts}
-          </Link>
-          <Link href="/community" className={navLinkClass}>
-            {cq.navLabel}
-          </Link>
-          <Link href="/pricing" className={navLinkClass}>
-            {pr.navPricing}
-          </Link>
-          <Link href="/blog" className={navLinkClass}>
-            Blog
-          </Link>
+          {/*
+            Horizontal scroll lives only on this strip. NavMoreMenu must NOT be
+            inside an overflow-x container or its dropdown is clipped (invisible).
+          */}
+          <div className="flex min-w-0 flex-1 flex-nowrap items-center justify-end gap-0.5 overflow-x-auto scrollbar-none">
+            <Link href="/#section-workspace" className={navLinkClass}>
+              {ec.navHome}
+            </Link>
+            <Link href="/experts" className={navLinkClass}>
+              {ec.navExperts}
+            </Link>
+            <Link href="/community" className={navLinkClass}>
+              {cq.navLabel}
+            </Link>
+            <Link href="/pricing" className={navLinkClass}>
+              {pr.navPricing}
+            </Link>
+            <Link href="/blog" className={navLinkClass}>
+              Blog
+            </Link>
+          </div>
           <NavMoreMenu label={t.navMore} links={moreLinks} />
           <label className="flex shrink-0 items-center gap-1.5 ps-0.5">
             <span className="sr-only">{t.langLabel}</span>
