@@ -16,7 +16,8 @@
     "start": "next start",
     "lint": "next lint",
     "postinstall": "node scripts/postinstall-prisma.mjs",
-    "db:push": "prisma db push"
+    "db:push": "prisma db push",
+    "favicons": "node scripts/generate-favicons.mjs"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",
@@ -35,6 +36,7 @@
     "eslint-config-next": "^15.1.0",
     "postcss": "^8.4.49",
     "prisma": "^6.19.3",
+    "sharp": "^0.33.5",
     "tailwindcss": "^3.4.16",
     "typescript": "^5.7.2"
   }

@@ -79,8 +79,10 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   icons: {
     icon: [
+      { url: "/favicon-48x48.png", type: "image/png", sizes: "48x48" },
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
       { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/icon", type: "image/png", sizes: "64x64" },
     ],
     apple: [{ url: "/apple-icon", type: "image/png", sizes: "180x180" }],
   },
