@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import {
   LOCALE_OPTIONS,
   type AppLocale,
@@ -19,6 +20,7 @@ type Props = {
 
 export default function WelcomeModal({ locale, onLocaleChange }: Props) {
   const [open, setOpen] = useState<boolean | null>(null);
+  const [mounted, setMounted] = useState(false);
   const w = getWelcomeCopy(locale);
   const rtl = isRtlLocale(locale);
   const t = getUi(locale);
@@ -30,6 +32,10 @@ export default function WelcomeModal({ locale, onLocaleChange }: Props) {
       /* ignore */
     }
     setOpen(false);
+  }, []);
+
+  useEffect(() => {
+    setMounted(true);
   }, []);
 
   useEffect(() => {
@@ -55,9 +61,9 @@ export default function WelcomeModal({ locale, onLocaleChange }: Props) {
     };
   }, [open, dismiss]);
 
-  if (open === null || !open) return null;
+  if (open === null || !open || !mounted) return null;
 
-  return (
+  return createPortal(
     <div
       className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-6"
       role="presentation"
@@ -133,6 +139,7 @@ export default function WelcomeModal({ locale, onLocaleChange }: Props) {
           {w.cta}
         </button>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

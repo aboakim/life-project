@@ -71,6 +71,8 @@ export type UIStrings = {
   sectionNavAnalyzer: string;
   sectionNavLanguage: string;
   sectionNavPrivacy: string;
+  /** Main nav overflow — “More” menu trigger */
+  navMore: string;
   productSectionTitle: string;
   productSectionSubtitle: string;
   bentoCards: ReadonlyArray<{ pill: string; title: string; body: string }>;
@@ -447,6 +449,7 @@ const uiHy: Partial<UIStrings> = {
   accessLocal:
     "Տեղային հասցե՝ http://localhost:3000 — գործարկեք `npm run dev` ձեր համակարգչում։",
   langLabel: "Լեզու",
+  navMore: "Ավելին",
   apiHintDemo:
     "Ցուցադրական վերլուծություն։ Ավելի խորը AI վերլուծությունը միանում է շուտով։",
   apiWarningFallback: (msg) =>
@@ -505,6 +508,7 @@ const uiEn: Partial<UIStrings> = {
   accessLocal:
     "Local URL: http://localhost:3000 — run `npm run dev` on your machine.",
   langLabel: "Language",
+  navMore: "More",
   apiHintDemo:
     "Structured demo analysis. Deeper AI analysis is coming back online shortly.",
   apiWarningFallback: (msg) =>
@@ -577,6 +581,7 @@ const uiRu: Partial<UIStrings> = {
   accessLocal:
     "Локально: http://localhost:3000 — запустите `npm run dev` на компьютере.",
   langLabel: "Язык",
+  navMore: "Ещё",
   apiHintDemo:
     "Структурированный демо-анализ. Глубокий AI-анализ скоро снова будет доступен.",
   apiWarningFallback: (msg) =>
@@ -635,6 +640,7 @@ const uiDe: Partial<UIStrings> = {
   accessLocal:
     "Lokal: http://localhost:3000 — `npm run dev` auf deinem Rechner ausführen.",
   langLabel: "Sprache",
+  navMore: "Mehr",
   apiHintDemo:
     "Strukturierte Demo-Analyse. Die vollständige KI-Analyse ist in Kürze wieder verfügbar.",
   apiWarningFallback: (msg) =>
@@ -693,6 +699,7 @@ const uiFr: Partial<UIStrings> = {
   accessLocal:
     "Local : http://localhost:3000 — lancez `npm run dev` sur votre machine.",
   langLabel: "Langue",
+  navMore: "Plus",
   apiHintDemo:
     "Analyse de démonstration structurée. L’analyse IA complète sera de nouveau disponible sous peu.",
   apiWarningFallback: (msg) =>
@@ -751,6 +758,7 @@ const uiEs: Partial<UIStrings> = {
   accessLocal:
     "Local: http://localhost:3000 — ejecuta `npm run dev` en tu equipo.",
   langLabel: "Idioma",
+  navMore: "Más",
   apiHintDemo:
     "Análisis de demostración estructurado. El análisis de IA completo volverá a estar disponible en breve.",
   apiWarningFallback: (msg) =>
@@ -809,6 +817,7 @@ const uiAr: Partial<UIStrings> = {
   accessLocal:
     "محلي: http://localhost:3000 — شغّل `npm run dev` على جهازك.",
   langLabel: "اللغة",
+  navMore: "المزيد",
   apiHintDemo:
     "تحليل تجريبي مُنظَّم. سيعود التحليل الكامل بالذكاء الاصطناعي للعمل قريبًا.",
   apiWarningFallback: (msg) =>
@@ -867,6 +876,7 @@ const uiIt: Partial<UIStrings> = {
   accessLocal:
     "Locale: http://localhost:3000 — esegui `npm run dev` sul tuo PC.",
   langLabel: "Lingua",
+  navMore: "Altro",
   apiHintDemo:
     "Analisi dimostrativa strutturata. L’analisi IA completa tornerà disponibile a breve.",
   apiWarningFallback: (msg) =>
