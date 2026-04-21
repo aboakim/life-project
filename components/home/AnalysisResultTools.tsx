@@ -24,6 +24,8 @@ type Props = {
   mode: "live" | "demo" | "fallback";
   pa: PostAnalysisCopy;
   expertsSearchHref: string;
+  /** Load saved brief into the main form and scroll to analyzer (drives repeat runs). */
+  onLoadBrief?: (decision: string, context: string, constraints: string) => void;
 };
 
 export default function AnalysisResultTools({
@@ -34,6 +36,7 @@ export default function AnalysisResultTools({
   mode,
   pa,
   expertsSearchHref,
+  onLoadBrief,
 }: Props) {
   const [flash, setFlash] = useState<string | null>(null);
   const [history, setHistory] = useState<HistorySnapshot[]>([]);
@@ -227,10 +230,26 @@ export default function AnalysisResultTools({
                 key={h.id}
                 className="rounded-xl border border-white/[0.06] bg-black/20 px-3 py-2 text-[rgb(var(--ink-soft))]"
               >
-                <span className="text-xs text-[rgb(var(--ink-soft))]/70">
-                  {new Date(h.at).toLocaleString()}
-                </span>
-                <p className="mt-1 font-medium text-[rgb(var(--ink))]">{h.decision.slice(0, 140)}{h.decision.length > 140 ? "…" : ""}</p>
+                <div className="flex flex-wrap items-start justify-between gap-2">
+                  <span className="text-xs text-[rgb(var(--ink-soft))]/70">
+                    {new Date(h.at).toLocaleString()}
+                  </span>
+                  {onLoadBrief ? (
+                    <button
+                      type="button"
+                      onClick={() =>
+                        onLoadBrief(h.decision, h.context, h.constraints)
+                      }
+                      className="shrink-0 rounded-lg border border-[rgb(var(--accent-2))]/40 bg-[rgb(var(--accent-2))]/10 px-2.5 py-1 text-xs font-semibold text-[rgb(var(--accent-2))] transition hover:bg-[rgb(var(--accent-2))]/18"
+                    >
+                      {pa.historyLoadBrief}
+                    </button>
+                  ) : null}
+                </div>
+                <p className="mt-1 font-medium text-[rgb(var(--ink))]">
+                  {h.decision.slice(0, 140)}
+                  {h.decision.length > 140 ? "…" : ""}
+                </p>
                 <p className="mt-1 text-xs">Score {h.analysis.score}%</p>
               </li>
             ))}

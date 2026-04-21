@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import DecisionBriefWizard from "@/components/home/DecisionBriefWizard";
 import HeroVisualSlider from "@/components/home/HeroVisualSlider";
 import HomeSectionNav from "@/components/home/HomeSectionNav";
@@ -266,6 +266,28 @@ export default function DecisionStudio({ initialPreset = null }: Props) {
       caption: t.heroSlides[i]!.caption,
     }));
   }, [t.heroSlides]);
+
+  const scrollToAnalyzer = useCallback(() => {
+    window.setTimeout(() => {
+      document.getElementById("analyzer")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+      window.setTimeout(() => {
+        document.getElementById("decision-input")?.focus({ preventScroll: true });
+      }, 450);
+    }, 30);
+  }, []);
+
+  const loadBriefFromHistory = useCallback(
+    (d: string, ctx: string, cons: string) => {
+      setDecision(d);
+      setContext(ctx);
+      setConstraints(cons);
+      window.setTimeout(() => scrollToAnalyzer(), 40);
+    },
+    [scrollToAnalyzer],
+  );
 
   return (
     <div
@@ -831,6 +853,19 @@ export default function DecisionStudio({ initialPreset = null }: Props) {
             id="section-results"
             className="home-section-wash home-section-wash--results scroll-mt-28 mt-16 space-y-6 rounded-[1.85rem] border-t border-white/[0.08] px-3 pt-16 sm:px-4"
           >
+            <div className="animate-fade-up flex flex-col gap-3 rounded-2xl border border-[rgb(var(--accent-2))]/35 bg-gradient-to-br from-[rgb(var(--accent))]/14 via-white/[0.04] to-transparent px-4 py-4 shadow-[0_16px_48px_-28px_rgb(var(--accent)/0.45)] sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-6">
+              <p className="max-w-2xl text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
+                {pa.runAnotherHint}
+              </p>
+              <button
+                type="button"
+                onClick={scrollToAnalyzer}
+                className="shrink-0 rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-[rgb(var(--accent)/0.28)] transition hover:brightness-110"
+              >
+                {pa.runAnotherCta}
+              </button>
+            </div>
+
             <section className="glass animate-fade-up rounded-3xl p-6 sm:p-7">
               <h2 className="text-lg font-semibold text-[rgb(var(--ink))]">
                 {t.sectionSummary}
@@ -952,6 +987,7 @@ export default function DecisionStudio({ initialPreset = null }: Props) {
                 mode={result.mode}
                 pa={pa}
                 expertsSearchHref={expertsSearchHref}
+                onLoadBrief={loadBriefFromHistory}
               />
             ) : null}
 

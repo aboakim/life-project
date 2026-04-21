@@ -34,6 +34,10 @@ export type PostAnalysisCopy = {
   mdTimeline: string;
   mdScore: string;
   mdTwin: string;
+  /** Nudge users to run analyses repeatedly */
+  runAnotherHint: string;
+  runAnotherCta: string;
+  historyLoadBrief: string;
 };
 
 const en: PostAnalysisCopy = {
@@ -82,6 +86,10 @@ const en: PostAnalysisCopy = {
   mdTimeline: "Timeline",
   mdScore: "Score",
   mdTwin: "Note",
+  runAnotherHint:
+    "Most big decisions need a second pass — update your brief and compare the score.",
+  runAnotherCta: "Run another analysis",
+  historyLoadBrief: "Load brief & re-run",
 };
 
 const hy: PostAnalysisCopy = {
@@ -131,6 +139,10 @@ const hy: PostAnalysisCopy = {
   mdTimeline: "Ժամանակացույց",
   mdScore: "Գնահատում",
   mdTwin: "Նշում",
+  runAnotherHint:
+    "Մեծ որոշումները հաճախ պահանջում են երկրորդ փորձ — թարմացրու brief-ը և համեմատիր միավորները։",
+  runAnotherCta: "Նոր վերլուծություն",
+  historyLoadBrief: "Բեռնել brief-ը և կրկին գործարկել",
 };
 
 const table: Record<AppLocale, PostAnalysisCopy> = {
