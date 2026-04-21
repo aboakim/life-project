@@ -40,10 +40,36 @@ export default function AnalysisResultTools({
 }: Props) {
   const [flash, setFlash] = useState<string | null>(null);
   const [history, setHistory] = useState<HistorySnapshot[]>([]);
+  const [compareLeftId, setCompareLeftId] = useState<string | null>(null);
+  const [compareRightId, setCompareRightId] = useState<string | null>(null);
 
   useEffect(() => {
     setHistory(loadHistory());
   }, [analysis, decision, context, constraints, mode]);
+
+  useEffect(() => {
+    if (history.length >= 2) {
+      setCompareLeftId(history[0]!.id);
+      setCompareRightId(history[1]!.id);
+    } else {
+      setCompareLeftId(null);
+      setCompareRightId(null);
+    }
+  }, [history]);
+
+  const compareLeft = useMemo(
+    () => history.find((h) => h.id === compareLeftId) ?? null,
+    [history, compareLeftId],
+  );
+  const compareRight = useMemo(
+    () => history.find((h) => h.id === compareRightId) ?? null,
+    [history, compareRightId],
+  );
+
+  const nextIterationQuestions = useMemo(
+    () => pa.followUpQuestions.slice(0, 3),
+    [pa.followUpQuestions],
+  );
 
   const md = useMemo(
     () =>
@@ -190,6 +216,31 @@ export default function AnalysisResultTools({
         </div>
       </section>
 
+      <section className="glass animate-fade-up no-print rounded-3xl border border-[rgb(var(--accent))]/20 bg-gradient-to-br from-[rgb(var(--accent))]/[0.07] to-transparent p-6 sm:p-7">
+        <h2 className="text-lg font-semibold text-[rgb(var(--ink))]">
+          {pa.nextIterationTitle}
+        </h2>
+        <p className="mt-2 text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
+          {pa.nextIterationLead}
+        </p>
+        <ul className="mt-4 space-y-2 text-sm leading-relaxed text-[rgb(var(--ink))]">
+          {nextIterationQuestions.map((q) => (
+            <li
+              key={q}
+              className="flex gap-3 rounded-xl border border-white/[0.08] bg-black/15 px-3 py-2.5 [text-wrap:pretty]"
+            >
+              <span
+                className="mt-0.5 shrink-0 text-[rgb(var(--accent-2))]"
+                aria-hidden
+              >
+                →
+              </span>
+              <span>{q}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
       <section className="glass animate-fade-up no-print rounded-3xl p-6 sm:p-7">
         <h2 className="text-lg font-semibold text-[rgb(var(--ink))]">{pa.followUpTitle}</h2>
         <ol className="mt-4 list-decimal space-y-2 ps-5 text-sm leading-relaxed text-[rgb(var(--ink-soft))]">
@@ -254,6 +305,100 @@ export default function AnalysisResultTools({
               </li>
             ))}
           </ul>
+        )}
+      </section>
+
+      <section className="glass animate-fade-up no-print rounded-3xl p-6 sm:p-7">
+        <h2 className="text-lg font-semibold text-[rgb(var(--ink))]">
+          {pa.compareTitle}
+        </h2>
+        {history.length < 2 ? (
+          <p className="mt-3 text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
+            {pa.compareNeedTwo}
+          </p>
+        ) : (
+          <>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              <label className="block text-sm">
+                <span className="mb-1.5 block text-xs font-medium uppercase tracking-wide text-[rgb(var(--ink-soft))]">
+                  {pa.comparePickA}
+                </span>
+                <select
+                  value={compareLeftId ?? ""}
+                  onChange={(e) => setCompareLeftId(e.target.value || null)}
+                  className="w-full cursor-pointer rounded-xl border border-white/[0.12] bg-black/30 px-3 py-2 text-sm text-[rgb(var(--ink))] outline-none transition focus:border-[rgb(var(--accent))]/45"
+                >
+                  {history.map((h) => (
+                    <option key={h.id} value={h.id}>
+                      {h.decision.slice(0, 90)}
+                      {h.decision.length > 90 ? "…" : ""}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="block text-sm">
+                <span className="mb-1.5 block text-xs font-medium uppercase tracking-wide text-[rgb(var(--ink-soft))]">
+                  {pa.comparePickB}
+                </span>
+                <select
+                  value={compareRightId ?? ""}
+                  onChange={(e) => setCompareRightId(e.target.value || null)}
+                  className="w-full cursor-pointer rounded-xl border border-white/[0.12] bg-black/30 px-3 py-2 text-sm text-[rgb(var(--ink))] outline-none transition focus:border-[rgb(var(--accent))]/45"
+                >
+                  {history.map((h) => (
+                    <option key={h.id} value={h.id}>
+                      {h.decision.slice(0, 90)}
+                      {h.decision.length > 90 ? "…" : ""}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+            {compareLeft &&
+            compareRight &&
+            compareLeft.id !== compareRight.id ? (
+              <div className="mt-6 grid gap-4 md:grid-cols-2 md:items-start">
+                {[compareLeft, compareRight].map((snap, i) => (
+                  <div
+                    key={snap.id}
+                    className="rounded-2xl border border-white/[0.1] bg-black/20 p-4"
+                  >
+                    <p className="text-[10px] font-semibold uppercase tracking-wide text-[rgb(var(--accent-dim))]">
+                      {i === 0 ? pa.comparePickA : pa.comparePickB}
+                    </p>
+                    <p className="mt-1 text-xs text-[rgb(var(--ink-soft))]/80">
+                      {new Date(snap.at).toLocaleString()}
+                    </p>
+                    <p className="mt-2 text-xs font-medium uppercase tracking-wide text-[rgb(var(--ink-soft))]">
+                      {pa.compareDecisionLabel}
+                    </p>
+                    <p className="mt-1 text-sm font-medium text-[rgb(var(--ink))] [text-wrap:pretty]">
+                      {snap.decision.slice(0, 220)}
+                      {snap.decision.length > 220 ? "…" : ""}
+                    </p>
+                    <p className="mt-4 text-xs font-medium uppercase tracking-wide text-[rgb(var(--ink-soft))]">
+                      {pa.compareScoreLabel}
+                    </p>
+                    <p className="mt-1 font-display text-3xl font-bold tabular-nums text-gradient">
+                      {snap.analysis.score}%
+                    </p>
+                    <p className="mt-4 text-xs font-medium uppercase tracking-wide text-[rgb(var(--ink-soft))]">
+                      {pa.compareSummaryLabel}
+                    </p>
+                    <p className="mt-1 text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
+                      {snap.analysis.summary.length > 420
+                        ? `${snap.analysis.summary.slice(0, 420)}…`
+                        : snap.analysis.summary}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="mt-4 text-sm text-amber-200/90" role="status">
+                {pa.compareDifferentRuns}
+              </p>
+            )}
+          </>
         )}
       </section>
 

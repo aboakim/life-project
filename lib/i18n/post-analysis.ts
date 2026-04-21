@@ -38,6 +38,16 @@ export type PostAnalysisCopy = {
   runAnotherHint: string;
   runAnotherCta: string;
   historyLoadBrief: string;
+  nextIterationTitle: string;
+  nextIterationLead: string;
+  compareTitle: string;
+  compareNeedTwo: string;
+  comparePickA: string;
+  comparePickB: string;
+  compareDecisionLabel: string;
+  compareScoreLabel: string;
+  compareSummaryLabel: string;
+  compareDifferentRuns: string;
 };
 
 const en: PostAnalysisCopy = {
@@ -90,6 +100,18 @@ const en: PostAnalysisCopy = {
     "Most big decisions need a second pass — update your brief and compare the score.",
   runAnotherCta: "Run another analysis",
   historyLoadBrief: "Load brief & re-run",
+  nextIterationTitle: "Before your next run",
+  nextIterationLead:
+    "A quick set of angles for your next edit. The full reflection list follows in the next section.",
+  compareTitle: "Compare two saved runs",
+  compareNeedTwo:
+    "Run the analyzer at least twice on this device to compare scores and summaries side by side.",
+  comparePickA: "Run A",
+  comparePickB: "Run B",
+  compareDecisionLabel: "Question",
+  compareScoreLabel: "Score",
+  compareSummaryLabel: "Summary",
+  compareDifferentRuns: "Choose two different entries.",
 };
 
 const hy: PostAnalysisCopy = {
@@ -143,6 +165,18 @@ const hy: PostAnalysisCopy = {
     "Մեծ որոշումները հաճախ պահանջում են երկրորդ փորձ — թարմացրու brief-ը և համեմատիր միավորները։",
   runAnotherCta: "Նոր վերլուծություն",
   historyLoadBrief: "Բեռնել brief-ը և կրկին գործարկել",
+  nextIterationTitle: "Հաջորդ գործարկումից առաջ",
+  nextIterationLead:
+    "Երեք արագ ուղղություն հաջորդ խմբագրման համար։ Լրիվ հարցերի ցանկը՝ հաջորդ բաժնում։",
+  compareTitle: "Երկու պահված վերլուծությունների համեմատում",
+  compareNeedTwo:
+    "Այս սարքում գոնե երկու անգամ գործարկիր վերլուծիչը, որպեսզի տեսնես միավորներն ու ամփոփումները կողք կողքի։",
+  comparePickA: "A վերլուծություն",
+  comparePickB: "B վերլուծություն",
+  compareDecisionLabel: "Հարց",
+  compareScoreLabel: "Միավոր",
+  compareSummaryLabel: "Ամփոփում",
+  compareDifferentRuns: "Ընտրիր երկու տարբեր գրառում։",
 };
 
 const table: Record<AppLocale, PostAnalysisCopy> = {
