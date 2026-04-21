@@ -19,8 +19,9 @@ export function isAppLocale(x: unknown): x is AppLocale {
   );
 }
 
+/** Fallback when locale is missing/invalid: matches `DEFAULT_LOCALE` (international default). */
 export function parseLocale(x: unknown): AppLocale {
-  return isAppLocale(x) ? x : "hy";
+  return isAppLocale(x) ? x : "en-US";
 }
 
 export function isRtlLocale(locale: AppLocale): boolean {
