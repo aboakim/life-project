@@ -70,12 +70,6 @@ const nextConfig: NextConfig = {
         destination: "/blog/how-to-decide-to-leave-a-stable-job",
         permanent: true,
       },
-      // Browsers prefetch /favicon.ico before HTML; we serve the same mark as /favicon.svg.
-      {
-        source: "/favicon.ico",
-        destination: "/favicon.svg",
-        permanent: false,
-      },
     ];
   },
   images: {
