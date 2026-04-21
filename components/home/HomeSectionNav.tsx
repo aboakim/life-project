@@ -52,7 +52,28 @@ export default function HomeSectionNav({ links }: { links: LinkItem[] }) {
       className="home-section-nav sticky top-[52px] z-40 border-b border-white/[0.1] bg-[rgb(var(--surface))]/70 backdrop-blur-2xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]"
       aria-label="On this page"
     >
-      <div className="mx-auto flex max-w-6xl items-center gap-1 overflow-x-auto px-4 py-2.5 sm:px-6 scrollbar-none">
+      <div className="mx-auto max-w-6xl px-3 py-2 sm:px-6 md:hidden">
+        <label className="sr-only" htmlFor="home-section-jump">
+          Jump to section
+        </label>
+        <select
+          id="home-section-jump"
+          className="w-full min-h-[48px] cursor-pointer rounded-xl border border-white/[0.14] bg-black/25 px-3 py-2 text-sm font-medium text-[rgb(var(--ink))] outline-none transition focus:border-[rgb(var(--accent))]/45"
+          value={active ?? ""}
+          onChange={(e) => {
+            const id = e.target.value;
+            if (id) window.location.hash = id;
+          }}
+        >
+          <option value="">— On this page —</option>
+          {links.map(({ id, label }) => (
+            <option key={id} value={id}>
+              {label}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="mx-auto hidden max-w-6xl items-center gap-1 overflow-x-auto px-4 py-2.5 scrollbar-none sm:px-6 md:flex">
         {links.map(({ id, label }) => {
           const isActive = active === id;
           return (
@@ -61,8 +82,8 @@ export default function HomeSectionNav({ links }: { links: LinkItem[] }) {
               href={`#${id}`}
               className={
                 isActive
-                  ? "shrink-0 rounded-full bg-white/[0.1] px-3.5 py-1.5 text-xs font-semibold text-[rgb(var(--ink))] ring-1 ring-[rgb(var(--accent))]/35"
-                  : "shrink-0 rounded-full px-3.5 py-1.5 text-xs font-medium text-[rgb(var(--ink-soft))] transition hover:bg-white/[0.05] hover:text-[rgb(var(--ink))]"
+                  ? "shrink-0 rounded-full bg-white/[0.1] px-3.5 py-2 text-xs font-semibold text-[rgb(var(--ink))] ring-1 ring-[rgb(var(--accent))]/35"
+                  : "shrink-0 rounded-full px-3.5 py-2 text-xs font-medium text-[rgb(var(--ink-soft))] transition hover:bg-white/[0.05] hover:text-[rgb(var(--ink))]"
               }
             >
               {label}

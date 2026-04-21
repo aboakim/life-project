@@ -65,7 +65,7 @@ export default function WelcomeModal({ locale, onLocaleChange }: Props) {
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-6"
+      className="fixed inset-0 z-[200] flex items-center justify-center p-4 pb-[max(1rem,env(safe-area-inset-bottom,0px))] pt-[max(1rem,env(safe-area-inset-top,0px))] sm:p-6"
       role="presentation"
     >
       <button

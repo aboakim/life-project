@@ -23,7 +23,14 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 6.5rem;
+  /* Sticky header + optional section nav; extra on small screens */
+  scroll-padding-top: max(6.5rem, env(safe-area-inset-top, 0px) + 5rem);
+}
+
+@media (min-width: 768px) {
+  html {
+    scroll-padding-top: max(6.5rem, env(safe-area-inset-top, 0px) + 3rem);
+  }
 }
 
 .font-display {
