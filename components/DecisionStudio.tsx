@@ -189,7 +189,7 @@ export default function DecisionStudio() {
           : undefined
       }
     >
-      <WelcomeModal locale={locale} />
+      <WelcomeModal locale={locale} onLocaleChange={setLocale} />
       <OrbDecor />
       <HomeSectionNav links={sectionLinks} />
 

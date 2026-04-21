@@ -1,19 +1,27 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { type AppLocale, isRtlLocale } from "@/lib/i18n/locale";
+import {
+  LOCALE_OPTIONS,
+  type AppLocale,
+  isAppLocale,
+  isRtlLocale,
+} from "@/lib/i18n/locale";
+import { getUi } from "@/lib/i18n/ui";
 import { getWelcomeCopy } from "@/lib/i18n/welcome-modal";
 
 const STORAGE_KEY = "lde-welcome-dismissed-v1";
 
 type Props = {
   locale: AppLocale;
+  onLocaleChange: (locale: AppLocale) => void;
 };
 
-export default function WelcomeModal({ locale }: Props) {
+export default function WelcomeModal({ locale, onLocaleChange }: Props) {
   const [open, setOpen] = useState<boolean | null>(null);
   const w = getWelcomeCopy(locale);
   const rtl = isRtlLocale(locale);
+  const t = getUi(locale);
 
   const dismiss = useCallback(() => {
     try {
@@ -72,12 +80,34 @@ export default function WelcomeModal({ locale }: Props) {
             : undefined
         }
       >
-        <h2
-          id="welcome-modal-title"
-          className="font-display text-2xl font-semibold tracking-tight text-[rgb(var(--ink))] sm:text-3xl"
-        >
-          {w.title}
-        </h2>
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
+          <h2
+            id="welcome-modal-title"
+            className="font-display text-2xl font-semibold tracking-tight text-[rgb(var(--ink))] sm:max-w-[calc(100%-13rem)] sm:text-3xl"
+          >
+            {w.title}
+          </h2>
+          <label className="flex shrink-0 flex-col gap-1.5 sm:items-end">
+            <span className="text-[10px] font-medium uppercase tracking-wide text-[rgb(var(--ink-soft))]">
+              {t.langLabel}
+            </span>
+            <select
+              value={locale}
+              aria-label={t.langLabel}
+              onChange={(e) => {
+                const v = e.target.value;
+                if (isAppLocale(v)) onLocaleChange(v);
+              }}
+              className="w-full min-w-[12rem] cursor-pointer rounded-lg border border-white/[0.14] bg-black/35 px-3 py-2 text-sm text-[rgb(var(--ink))] shadow-inner outline-none transition focus:border-[rgb(var(--accent))]/45 focus:ring-1 focus:ring-[rgb(var(--accent))]/30 sm:w-auto"
+            >
+              {LOCALE_OPTIONS.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.flag} {opt.label}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
         <p className="mt-4 text-sm leading-relaxed text-[rgb(var(--ink-soft))] sm:text-base">
           {w.lead}
         </p>
