@@ -22,6 +22,14 @@ export function getSupportUrl(): string | undefined {
   );
 }
 
+/**
+ * URL for the footer “Support” CTA. Uses external donation link when set;
+ * otherwise `/contact` so the button always renders and works.
+ */
+export function getSupportHref(): string {
+  return getSupportUrl() ?? "/contact";
+}
+
 /** Label shown on the support button (override from env). */
 export function getSupportLabel(): string {
   return env("NEXT_PUBLIC_SUPPORT_LABEL") ?? "Support this project";

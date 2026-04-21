@@ -1,26 +1,47 @@
+"use client";
+
 import Link from "next/link";
-import { getSupportUrl, getSupportLabel } from "@/lib/monetization/config";
+import {
+  getSupportHref,
+  getSupportLabel,
+  getSupportUrl,
+} from "@/lib/monetization/config";
 
 /**
- * "Support this project" button — Buy Me a Coffee / Ko-fi / custom page.
- * Renders nothing when no support URL is configured.
- *
- * Safe alongside AdSense: it's a direct donation link, not an ad unit, so
- * there's no policy conflict with the Google ads script loaded in layout.
+ * “Support this project” — Buy Me a Coffee / Ko-fi when `NEXT_PUBLIC_*` URLs
+ * are set; otherwise links to `/contact` so the footer CTA is never empty.
  */
 export default function SupportCta({ className = "" }: { className?: string }) {
-  const href = getSupportUrl();
-  if (!href) return null;
+  const href = getSupportHref();
   const label = getSupportLabel();
+  const external = Boolean(getSupportUrl());
+
+  const cls = `inline-flex items-center gap-2 rounded-xl border border-[rgb(var(--accent-warm))]/35 bg-[rgb(var(--accent-warm))]/[0.08] px-4 py-2 text-sm font-semibold text-[rgb(var(--ink))] transition hover:border-[rgb(var(--accent-warm))]/60 hover:bg-[rgb(var(--accent-warm))]/[0.14] ${className}`;
+
+  const icon = (
+    <span className="inline-flex shrink-0 text-[1.1rem] leading-none" aria-hidden="true">
+      ☕
+    </span>
+  );
+
+  if (external) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={cls}
+        aria-label={`${label} (opens in a new tab)`}
+      >
+        {icon}
+        {label}
+      </a>
+    );
+  }
 
   return (
-    <Link
-      href={href}
-      target="_blank"
-      rel="noopener"
-      className={`inline-flex items-center gap-2 rounded-xl border border-[rgb(var(--accent-warm))]/35 bg-[rgb(var(--accent-warm))]/[0.08] px-4 py-2 text-sm font-semibold text-[rgb(var(--ink))] transition hover:border-[rgb(var(--accent-warm))]/60 hover:bg-[rgb(var(--accent-warm))]/[0.14] ${className}`}
-    >
-      <span aria-hidden="true">☕</span>
+    <Link href={href} className={cls}>
+      {icon}
       {label}
     </Link>
   );
