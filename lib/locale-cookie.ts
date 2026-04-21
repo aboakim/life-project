@@ -14,6 +14,21 @@ export function syncLocaleCookieClient(locale: AppLocale): void {
   )}; path=/; max-age=${MAX_AGE_SEC}; SameSite=Lax`;
 }
 
+/** Read `lde-locale` on the client (e.g. first visit after server set cookie). */
+export function readLocaleCookieClient(): AppLocale | null {
+  if (typeof document === "undefined") return null;
+  const m = document.cookie.match(
+    new RegExp(`(?:^|; )${LDE_LOCALE_COOKIE_NAME}=([^;]*)`)
+  );
+  if (!m?.[1]) return null;
+  try {
+    const decoded = decodeURIComponent(m[1]);
+    return isAppLocale(decoded) ? decoded : null;
+  } catch {
+    return null;
+  }
+}
+
 export function localeFromCookieValue(
   value: string | undefined
 ): AppLocale {

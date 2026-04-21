@@ -18,7 +18,10 @@ import {
 } from "@/lib/i18n/locale";
 import { getUi } from "@/lib/i18n/ui";
 import { DEFAULT_LOCALE } from "@/lib/locale-default";
-import { syncLocaleCookieClient } from "@/lib/locale-cookie";
+import {
+  readLocaleCookieClient,
+  syncLocaleCookieClient,
+} from "@/lib/locale-cookie";
 import {
   HERO_SLIDE_IMAGE_URLS,
   PRODUCT_STRIP_IMAGE_URLS,
@@ -94,11 +97,16 @@ export default function DecisionStudio() {
 
   useEffect(() => {
     const raw = localStorage.getItem(LOCALE_STORAGE_KEY);
-    if (raw === null) {
-      localStorage.setItem(LOCALE_STORAGE_KEY, DEFAULT_LOCALE);
-      setLocale(DEFAULT_LOCALE);
-    } else if (isAppLocale(raw)) {
-      setLocale(raw);
+    const fromCookie = readLocaleCookieClient();
+    let resolved: AppLocale = DEFAULT_LOCALE;
+    if (raw !== null && isAppLocale(raw)) {
+      resolved = raw;
+    } else if (fromCookie !== null) {
+      resolved = fromCookie;
+    }
+    setLocale(resolved);
+    if (raw === null || !isAppLocale(raw)) {
+      localStorage.setItem(LOCALE_STORAGE_KEY, resolved);
     }
   }, []);
 

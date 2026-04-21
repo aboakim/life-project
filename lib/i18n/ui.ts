@@ -1,4 +1,12 @@
 import type { AppLocale } from "./locale";
+import {
+  trustHowAr,
+  trustHowDe,
+  trustHowEs,
+  trustHowFr,
+  trustHowIt,
+  trustHowRu,
+} from "./trust-how-locales";
 
 export type UIStrings = {
   brand: string;
@@ -887,9 +895,22 @@ const table: Record<AppLocale, Partial<UIStrings>> = {
 
 export function getUi(locale: AppLocale): UIStrings {
   const row = table[locale];
-  const merged = { ...trustHowEn, ...row };
   if (locale === "hy") {
-    return { ...merged, ...trustHowHy } as UIStrings;
+    return { ...trustHowEn, ...row, ...trustHowHy } as UIStrings;
   }
-  return merged as UIStrings;
+  const trustBase =
+    locale === "ru"
+      ? trustHowRu
+      : locale === "de"
+        ? trustHowDe
+        : locale === "fr"
+          ? trustHowFr
+          : locale === "es"
+            ? trustHowEs
+            : locale === "it"
+              ? trustHowIt
+              : locale === "ar"
+                ? trustHowAr
+                : trustHowEn;
+  return { ...trustBase, ...row } as UIStrings;
 }
