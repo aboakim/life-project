@@ -7,6 +7,7 @@ import {
   Noto_Sans_Arabic,
   Outfit,
 } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import GlobalNav from "@/components/GlobalNav";
 import GlobalFooter from "@/components/GlobalFooter";
 import AnalyticsGate from "@/components/AnalyticsGate";
@@ -175,6 +176,7 @@ export default function RootLayout({
         <ConsentBanner />
         <AnalyticsGate />
         <GoogleAnalytics />
+        <SpeedInsights />
       </body>
     </html>
   );
