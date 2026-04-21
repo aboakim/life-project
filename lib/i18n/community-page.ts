@@ -31,6 +31,17 @@ export type CommunityCopy = {
   dbUnavailable: string;
   /** DB unreachable — posting disabled */
   dbUnavailablePost: string;
+  topicLabel: string;
+  topicGeneral: string;
+  topicRelocation: string;
+  topicCareer: string;
+  topicRelationships: string;
+  topicFinance: string;
+  topicOther: string;
+  filterTopicAll: string;
+  helpfulCta: string;
+  helpfulThanks: string;
+  helpfulStat: string;
 };
 
 const en: CommunityCopy = {
@@ -66,6 +77,17 @@ const en: CommunityCopy = {
     "Community list is temporarily unavailable (database not connected). Other pages still work — the site owner should add DATABASE_URL (e.g. Neon Postgres) on the host.",
   dbUnavailablePost:
     "Cannot post right now — the database is not connected. Please try again after the site is configured.",
+  topicLabel: "Topic (optional)",
+  topicGeneral: "General",
+  topicRelocation: "Relocation / move",
+  topicCareer: "Career / work",
+  topicRelationships: "Relationships / family",
+  topicFinance: "Money / housing",
+  topicOther: "Other",
+  filterTopicAll: "All topics",
+  helpfulCta: "Helpful",
+  helpfulThanks: "Thanks — counted.",
+  helpfulStat: "helpful",
 };
 
 const hy: CommunityCopy = {
@@ -101,6 +123,17 @@ const hy: CommunityCopy = {
     "Հանրային հարցերի ցուցակը ժամանակավորապես անհասանելի է (տվյալների բազան կապված չէ)։ Մնացած էջերը աշխատում են — host-ում պետք է կարգավորել DATABASE_URL (օր. Neon PostgreSQL)։",
   dbUnavailablePost:
     "Այս պահին հնարավոր չէ հրապարակել — տվյալների բազան կապված չէ։ Փորձեք կարգավորումից հետո։",
+  topicLabel: "Թեմա (ընտրովի)",
+  topicGeneral: "Ընդհանուր",
+  topicRelocation: "Տեղափոխություն",
+  topicCareer: "Կարիերա / աշխատանք",
+  topicRelationships: "Հարաբերություններ / ընտանիք",
+  topicFinance: "Գումար / բնակարան",
+  topicOther: "Այլ",
+  filterTopicAll: "Բոլոր թեմաները",
+  helpfulCta: "Օգտակար է",
+  helpfulThanks: "Շնորհակալություն — հաշվարկվեց։",
+  helpfulStat: "օգտակար",
 };
 
 const table: Record<AppLocale, CommunityCopy> = {

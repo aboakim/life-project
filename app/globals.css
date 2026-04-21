@@ -7,11 +7,11 @@
  * Slightly lifted surfaces; section washes on the homepage for wayfinding.
  */
 :root {
-  --surface: 32 28 58;
-  --surface-2: 44 38 78;
-  --surface-elevated: 54 48 92;
+  --surface: 40 36 68;
+  --surface-2: 52 46 88;
+  --surface-elevated: 62 54 102;
   --ink: 252 250 255;
-  --ink-soft: 198 202 228;
+  --ink-soft: 208 212 236;
   --accent: 178 145 255;
   --accent-2: 72 220 200;
   --accent-warm: 255 218 158;
@@ -42,7 +42,7 @@ body {
     radial-gradient(ellipse 820px 480px at -8% 18%, rgb(72 220 200 / 0.18), transparent 50%),
     radial-gradient(ellipse 720px 520px at 75% 108%, rgb(248 168 255 / 0.16), transparent 48%),
     radial-gradient(ellipse 560px 400px at 15% 95%, rgb(255 218 158 / 0.09), transparent 52%),
-    linear-gradient(172deg, rgb(34 30 62) 0%, rgb(44 38 82) 45%, rgb(32 28 58) 100%);
+    linear-gradient(172deg, rgb(42 38 72) 0%, rgb(52 46 92) 45%, rgb(40 36 68) 100%);
   background-size:
     28px 28px,
     auto,
@@ -253,4 +253,23 @@ body::before {
 }
 .home-section-wash--results {
   --wash-color: rgb(178 145 255 / 0.1);
+}
+
+/* Print: only the analysis export block is visible; rest hidden via visibility */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #analysis-print-area,
+  #analysis-print-area * {
+    visibility: visible;
+  }
+  #analysis-print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
 }

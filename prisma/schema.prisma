@@ -67,18 +67,21 @@ model PremiumSubscription {
 
 /// Public Q&A — text only (no HTML); moderate via DB or future admin tools.
 model CommunityQuestion {
-  id          String            @id @default(cuid())
-  createdAt   DateTime          @default(now())
-  authorName  String
-  authorEmail String?
-  title       String
-  body        String
-  locale      String?
-  status      String            @default("visible")
-  answers     CommunityAnswer[]
+  id            String            @id @default(cuid())
+  createdAt     DateTime          @default(now())
+  authorName    String
+  authorEmail   String?
+  title         String
+  body          String
+  locale        String?
+  topic         String?
+  helpfulCount  Int               @default(0)
+  status        String            @default("visible")
+  answers       CommunityAnswer[]
 
   @@index([createdAt])
   @@index([status])
+  @@index([topic])
 }
 
 model CommunityAnswer {

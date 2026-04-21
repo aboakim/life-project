@@ -70,7 +70,9 @@ export default function GlobalFooter() {
         title: "Learn",
         links: [
           { href: "/blog", label: "Blog" },
+          { href: "/playbooks", label: "Playbooks" },
           { href: "/faq", label: "FAQ" },
+          { href: "/community/guidelines", label: "Community guidelines" },
           { href: "/about", label: "About" },
           { href: "/editorial-team", label: "Editorial Team" },
           { href: "/experts/register", label: ec.navRegister },
@@ -89,7 +91,7 @@ export default function GlobalFooter() {
     ];
 
   return (
-    <footer className="relative z-10 mt-24 border-t border-white/[0.07] bg-[rgb(var(--surface))]/80 pt-14 pb-10 backdrop-blur-xl">
+    <footer className="print:hidden relative z-10 mt-24 border-t border-white/[0.07] bg-[rgb(var(--surface))]/80 pt-14 pb-10 backdrop-blur-xl">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>

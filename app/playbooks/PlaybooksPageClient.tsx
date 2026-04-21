@@ -1,0 +1,86 @@
+"use client";
+
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import MarketingPageShell from "@/components/layout/MarketingPageShell";
+import { getPlaybooksPage } from "@/lib/i18n/playbooks-page";
+import {
+  isAppLocale,
+  type AppLocale,
+} from "@/lib/i18n/locale";
+import { DEFAULT_LOCALE } from "@/lib/locale-default";
+import { readLocaleCookieClient } from "@/lib/locale-cookie";
+import { LOCALE_CHANGE_EVENT } from "@/lib/locale-sync";
+
+const LOCALE_KEY = "lde-locale";
+
+export default function PlaybooksPageClient() {
+  const [locale, setLocale] = useState<AppLocale>(DEFAULT_LOCALE);
+
+  useEffect(() => {
+    const raw = window.localStorage.getItem(LOCALE_KEY);
+    const fromCookie = readLocaleCookieClient();
+    let resolved: AppLocale = DEFAULT_LOCALE;
+    if (raw !== null && isAppLocale(raw)) resolved = raw;
+    else if (fromCookie !== null) resolved = fromCookie;
+    setLocale(resolved);
+    if (raw === null || !isAppLocale(raw)) {
+      window.localStorage.setItem(LOCALE_KEY, resolved);
+    }
+  }, []);
+
+  useEffect(() => {
+    function sync() {
+      const raw = window.localStorage.getItem(LOCALE_KEY);
+      if (raw && isAppLocale(raw)) setLocale(raw);
+    }
+    window.addEventListener(LOCALE_CHANGE_EVENT, sync);
+    return () => window.removeEventListener(LOCALE_CHANGE_EVENT, sync);
+  }, []);
+
+  const p = getPlaybooksPage(locale);
+
+  return (
+    <MarketingPageShell
+      eyebrow={p.eyebrow}
+      title={p.title}
+      subtitle={<p>{p.subtitle}</p>}
+    >
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {p.cards.map((c) => (
+          <article
+            key={c.title}
+            className="glass card-glow flex flex-col rounded-3xl border border-white/[0.1] p-6"
+          >
+            <h2 className="text-base font-semibold text-[rgb(var(--ink))]">
+              {c.title}
+            </h2>
+            <p className="mt-3 flex-1 text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
+              {c.body}
+            </p>
+            <ul className="mt-5 space-y-2 text-sm">
+              {c.links.map((l) => (
+                <li key={l.href}>
+                  <Link
+                    href={l.href}
+                    className="font-medium text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+                  >
+                    {l.label} →
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+      <p className="mt-10">
+        <Link
+          href="/"
+          className="font-medium text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+        >
+          ← Home
+        </Link>
+      </p>
+    </MarketingPageShell>
+  );
+}

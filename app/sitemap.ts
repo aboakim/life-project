@@ -11,6 +11,8 @@ const STATIC_PATHS: { path: string; priority: number; freq: "weekly" | "monthly"
   { path: "/journal", priority: 0.6, freq: "monthly" },
   { path: "/checklists", priority: 0.65, freq: "monthly" },
   { path: "/how-we-use-ai", priority: 0.65, freq: "monthly" },
+  { path: "/playbooks", priority: 0.65, freq: "monthly" },
+  { path: "/community/guidelines", priority: 0.5, freq: "monthly" },
   { path: "/monetize", priority: 0.6, freq: "monthly" },
   { path: "/blog", priority: 0.9, freq: "weekly" },
   { path: "/faq", priority: 0.7, freq: "monthly" },

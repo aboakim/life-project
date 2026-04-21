@@ -34,6 +34,13 @@ import {
 } from "@/lib/locale-sync";
 import type { InitialPreset } from "@/components/home/DecisionStudioShell";
 import { getSiteExtras, getWarmPresets } from "@/lib/i18n/site-extras";
+import { getPostAnalysisCopy } from "@/lib/i18n/post-analysis";
+import AnalysisResultTools from "@/components/home/AnalysisResultTools";
+import {
+  pushHistory,
+  isReminderDue,
+  clearReminder,
+} from "@/lib/analysis-local";
 
 const LOCALE_STORAGE_KEY = "lde-locale";
 const VISIT_COUNT_KEY = "lde-home-visits";
@@ -91,6 +98,7 @@ export default function DecisionStudio({ initialPreset = null }: Props) {
   const t = getUi(locale);
   const sx = getSiteExtras(locale);
   const warmPresets = useMemo(() => getWarmPresets(locale), [locale]);
+  const pa = useMemo(() => getPostAnalysisCopy(locale), [locale]);
   const presetApplied = useRef(false);
   const exNav = getExpertsCopy(locale);
   const pr = getPricingCopy(locale);
@@ -135,6 +143,7 @@ export default function DecisionStudio({ initialPreset = null }: Props) {
   }, []);
 
   const [visitorBannerOpen, setVisitorBannerOpen] = useState(false);
+  const [decisionReminderBanner, setDecisionReminderBanner] = useState(false);
   const [decision, setDecision] = useState("");
   const [context, setContext] = useState("");
   const [constraints, setConstraints] = useState("");
@@ -153,6 +162,14 @@ export default function DecisionStudio({ initialPreset = null }: Props) {
       const dismissed =
         window.localStorage.getItem(VISITOR_BANNER_DISMISS_KEY) === "1";
       if (next >= 3 && !dismissed) setVisitorBannerOpen(true);
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      if (isReminderDue()) setDecisionReminderBanner(true);
     } catch {
       /* ignore */
     }
@@ -207,6 +224,17 @@ export default function DecisionStudio({ initialPreset = null }: Props) {
         return;
       }
       setResult(data);
+      try {
+        pushHistory({
+          decision,
+          context,
+          constraints,
+          analysis: data.analysis,
+          mode: data.mode,
+        });
+      } catch {
+        /* ignore */
+      }
       setTimeout(() => {
         document.getElementById("section-results")?.scrollIntoView({
           behavior: "smooth",
@@ -221,6 +249,11 @@ export default function DecisionStudio({ initialPreset = null }: Props) {
   }
 
   const a = result?.analysis;
+
+  const expertsSearchHref = useMemo(() => {
+    const q = decision.trim().slice(0, 160);
+    return q ? `/experts?q=${encodeURIComponent(q)}` : "/experts";
+  }, [decision]);
 
   const heroSlideDeck = useMemo(() => {
     const n = Math.min(
@@ -286,6 +319,31 @@ export default function DecisionStudio({ initialPreset = null }: Props) {
               }}
             >
               {sx.visitorDismiss}
+            </button>
+          </div>
+        </div>
+      ) : null}
+
+      {decisionReminderBanner ? (
+        <div
+          className="relative z-[44] mx-auto max-w-6xl px-4 pt-3 sm:px-6"
+          role="region"
+        >
+          <div className="flex flex-col gap-2 rounded-2xl border border-cyan-400/25 bg-cyan-500/[0.08] px-4 py-3 text-sm text-cyan-50/95 sm:flex-row sm:items-center sm:justify-between">
+            <p className="[text-wrap:pretty]">{pa.reminderBanner}</p>
+            <button
+              type="button"
+              className="shrink-0 rounded-xl border border-white/15 bg-white/[0.08] px-3 py-1.5 text-xs font-semibold text-[rgb(var(--ink))]"
+              onClick={() => {
+                try {
+                  clearReminder();
+                } catch {
+                  /* ignore */
+                }
+                setDecisionReminderBanner(false);
+              }}
+            >
+              {pa.reminderDismiss}
             </button>
           </div>
         </div>
@@ -884,6 +942,18 @@ export default function DecisionStudio({ initialPreset = null }: Props) {
                 {a.digitalTwinNote}
               </p>
             </section>
+
+            {result ? (
+              <AnalysisResultTools
+                analysis={a}
+                decision={decision}
+                context={context}
+                constraints={constraints}
+                mode={result.mode}
+                pa={pa}
+                expertsSearchHref={expertsSearchHref}
+              />
+            ) : null}
 
             <section className="glass animate-fade-up rounded-3xl border border-dashed border-[rgb(var(--accent))]/35 bg-gradient-to-br from-[rgb(var(--accent))]/[0.07] to-transparent p-6 sm:p-7">
               <h2 className="text-lg font-semibold text-[rgb(var(--ink))]">

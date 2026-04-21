@@ -13,6 +13,7 @@ import {
   isRtlLocale,
   type AppLocale,
 } from "@/lib/i18n/locale";
+import { getPostAnalysisCopy } from "@/lib/i18n/post-analysis";
 import { getSiteExtras } from "@/lib/i18n/site-extras";
 import { getUi } from "@/lib/i18n/ui";
 import {
@@ -69,9 +70,10 @@ export default function GlobalNav() {
   const cq = getCommunityCopy(locale);
   const t = getUi(locale);
   const sx = getSiteExtras(locale);
+  const pa = getPostAnalysisCopy(locale);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/[0.12] bg-[rgb(var(--surface))]/82 backdrop-blur-2xl shadow-[0_12px_40px_-16px_rgb(0_0_0/0.45),inset_0_1px_0_0_rgba(255,255,255,0.08)]">
+    <header className="print:hidden sticky top-0 z-50 border-b border-white/[0.12] bg-[rgb(var(--surface))]/82 backdrop-blur-2xl shadow-[0_12px_40px_-16px_rgb(0_0_0/0.45),inset_0_1px_0_0_rgba(255,255,255,0.08)]">
       <NavRoutePrefetch />
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3.5 sm:px-6">
         <Link
@@ -135,6 +137,18 @@ export default function GlobalNav() {
             className="rounded-xl px-3 py-2 text-[rgb(var(--ink-soft))] transition hover:bg-white/[0.08] hover:text-[rgb(var(--ink))]"
           >
             {sx.navHowAi}
+          </Link>
+          <Link
+            href="/playbooks"
+            className="rounded-xl px-3 py-2 text-[rgb(var(--ink-soft))] transition hover:bg-white/[0.08] hover:text-[rgb(var(--ink))]"
+          >
+            {pa.playbooksCta}
+          </Link>
+          <Link
+            href="/community/guidelines"
+            className="rounded-xl px-3 py-2 text-[rgb(var(--ink-soft))] transition hover:bg-white/[0.08] hover:text-[rgb(var(--ink))]"
+          >
+            {pa.guidelinesCta}
           </Link>
           <Link
             href="/blog"

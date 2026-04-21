@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import MarketingPageShell from "@/components/layout/MarketingPageShell";
 import PageLocalePicker from "@/components/layout/PageLocalePicker";
@@ -36,6 +37,7 @@ function initials(name: string): string {
 }
 
 export default function ExpertsMarketplace() {
+  const searchParams = useSearchParams();
   const [locale, setLocale] = useState<AppLocale>(DEFAULT_LOCALE);
   const t = getExpertsCopy(locale);
   const [rawExperts, setRawExperts] = useState<ExpertPublic[]>([]);
@@ -56,6 +58,11 @@ export default function ExpertsMarketplace() {
       setLocale(DEFAULT_LOCALE);
     } else if (isAppLocale(raw)) setLocale(raw);
   }, []);
+
+  useEffect(() => {
+    const fromUrl = searchParams.get("q");
+    if (fromUrl) setQ(fromUrl);
+  }, [searchParams]);
 
   useEffect(() => {
     function syncFromNav() {

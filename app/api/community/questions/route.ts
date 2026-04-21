@@ -20,6 +20,7 @@ export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
     const localeParam = searchParams.get("locale");
+    const topicParam = searchParams.get("topic");
     const where: Prisma.CommunityQuestionWhereInput = { status: "visible" };
     if (
       localeParam &&
@@ -27,6 +28,13 @@ export async function GET(req: Request) {
       localeParam.length <= 12
     ) {
       where.locale = localeParam;
+    }
+    if (
+      topicParam &&
+      topicParam !== "all" &&
+      topicParam.length <= 32
+    ) {
+      where.topic = topicParam;
     }
     const rows = await prisma.communityQuestion.findMany({
       where,
@@ -71,6 +79,18 @@ export async function POST(req: Request) {
   const bodyText = clean(body.body, 5000);
   const locale =
     typeof body.locale === "string" ? body.locale.trim().slice(0, 12) : undefined;
+  const rawTopic =
+    typeof body.topic === "string" ? body.topic.trim().slice(0, 32) : "";
+  const ALLOWED_TOPICS = new Set([
+    "general",
+    "relocation",
+    "career",
+    "relationships",
+    "finance",
+    "other",
+  ]);
+  const topic =
+    rawTopic && ALLOWED_TOPICS.has(rawTopic) ? rawTopic : undefined;
 
   if (authorName.length < 1 || authorName.length > 80) {
     return NextResponse.json({ error: "validation_name" }, { status: 400 });
@@ -98,6 +118,7 @@ export async function POST(req: Request) {
         title,
         body: bodyText,
         locale,
+        topic,
         status: "visible",
       },
       include: { answers: true },

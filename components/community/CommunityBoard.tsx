@@ -18,6 +18,8 @@ type Question = {
   title: string;
   body: string;
   locale?: string | null;
+  topic?: string | null;
+  helpfulCount?: number;
   answers: Answer[];
 };
 
@@ -41,6 +43,8 @@ export default function CommunityBoard({
   const [err, setErr] = useState<string | null>(null);
   const [warn, setWarn] = useState<string | null>(null);
   const [langFilter, setLangFilter] = useState<string>("all");
+  const [topicFilter, setTopicFilter] = useState<string>("all");
+  const [qTopic, setQTopic] = useState<string>("general");
 
   const [qName, setQName] = useState("");
   const [qEmail, setQEmail] = useState("");
@@ -59,13 +63,16 @@ export default function CommunityBoard({
     setWarn(null);
     setLoading(true);
     try {
-      const q =
-        langFilter === "all"
-          ? ""
-          : `?locale=${encodeURIComponent(langFilter)}`;
-      const res = await fetch(`/api/community/questions${q}`, {
-        cache: "no-store",
-      });
+      const params = new URLSearchParams();
+      if (langFilter !== "all") params.set("locale", langFilter);
+      if (topicFilter !== "all") params.set("topic", topicFilter);
+      const qs = params.toString();
+      const res = await fetch(
+        `/api/community/questions${qs ? `?${qs}` : ""}`,
+        {
+          cache: "no-store",
+        },
+      );
       if (!res.ok) throw new Error("load");
       const data = (await res.json()) as {
         questions: Question[];
@@ -78,7 +85,7 @@ export default function CommunityBoard({
     } finally {
       setLoading(false);
     }
-  }, [langFilter, t.dbUnavailable, t.errorGeneric]);
+  }, [langFilter, topicFilter, t.dbUnavailable, t.errorGeneric]);
 
   useEffect(() => {
     void load();
@@ -98,6 +105,7 @@ export default function CommunityBoard({
           title: qTitle,
           body: qBody,
           locale,
+          topic: qTopic || undefined,
         }),
       });
       const data = (await res.json()) as { error?: string };
@@ -174,6 +182,34 @@ export default function CommunityBoard({
   const input =
     "mt-2 w-full rounded-xl border border-white/12 bg-black/30 px-3 py-2 text-sm text-[rgb(var(--ink))] placeholder:text-[rgb(var(--ink-soft))]/55 outline-none focus:border-[rgb(var(--accent))]/45";
 
+  function hasVotedHelpful(id: string): boolean {
+    try {
+      return window.localStorage.getItem(`lde-helpful-${id}`) === "1";
+    } catch {
+      return false;
+    }
+  }
+
+  async function markHelpful(id: string) {
+    if (hasVotedHelpful(id)) return;
+    try {
+      const res = await fetch(`/api/community/questions/${id}/helpful`, {
+        method: "POST",
+      });
+      if (!res.ok) return;
+      window.localStorage.setItem(`lde-helpful-${id}`, "1");
+      setQuestions((prev) =>
+        prev.map((x) =>
+          x.id === id
+            ? { ...x, helpfulCount: (x.helpfulCount ?? 0) + 1 }
+            : x,
+        ),
+      );
+    } catch {
+      /* ignore */
+    }
+  }
+
   return (
     <div className="space-y-10">
       <div className="glass card-glow rounded-3xl border border-emerald-400/15 bg-gradient-to-br from-emerald-500/[0.06] to-transparent p-5 sm:p-6">
@@ -199,6 +235,22 @@ export default function CommunityBoard({
                 {opt.flag} {opt.label}
               </option>
             ))}
+          </select>
+        </label>
+        <label className="flex items-center gap-2 text-sm text-[rgb(var(--ink))]">
+          <span>{t.topicLabel}</span>
+          <select
+            value={topicFilter}
+            onChange={(e) => setTopicFilter(e.target.value)}
+            className="cursor-pointer rounded-xl border border-white/12 bg-black/35 px-3 py-2 text-sm text-[rgb(var(--ink))] outline-none focus:border-[rgb(var(--accent))]/45"
+          >
+            <option value="all">{t.filterTopicAll}</option>
+            <option value="general">{t.topicGeneral}</option>
+            <option value="relocation">{t.topicRelocation}</option>
+            <option value="career">{t.topicCareer}</option>
+            <option value="relationships">{t.topicRelationships}</option>
+            <option value="finance">{t.topicFinance}</option>
+            <option value="other">{t.topicOther}</option>
           </select>
         </label>
       </div>
@@ -267,6 +319,21 @@ export default function CommunityBoard({
             maxLength={5000}
           />
         </label>
+        <label className="mt-4 block text-sm text-[rgb(var(--ink))]">
+          {t.topicLabel}
+          <select
+            className={`${input} mt-2`}
+            value={qTopic}
+            onChange={(e) => setQTopic(e.target.value)}
+          >
+            <option value="general">{t.topicGeneral}</option>
+            <option value="relocation">{t.topicRelocation}</option>
+            <option value="career">{t.topicCareer}</option>
+            <option value="relationships">{t.topicRelationships}</option>
+            <option value="finance">{t.topicFinance}</option>
+            <option value="other">{t.topicOther}</option>
+          </select>
+        </label>
         <button
           type="submit"
           disabled={qPosting}
@@ -302,6 +369,11 @@ export default function CommunityBoard({
                       {q.locale}
                     </span>
                   ) : null}
+                  {q.topic ? (
+                    <span className="ms-2 rounded-full border border-white/12 bg-white/[0.06] px-2 py-0.5 text-[10px] font-medium text-violet-200/90">
+                      {q.topic}
+                    </span>
+                  ) : null}
                 </p>
                 <h3 className="mt-2 text-base font-semibold text-[rgb(var(--ink))]">
                   {q.title}
@@ -309,9 +381,23 @@ export default function CommunityBoard({
                 <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-[rgb(var(--ink-soft))]">
                   {q.body}
                 </p>
-                <p className="mt-3 text-xs text-[rgb(var(--accent-2))]/90">
-                  {q.answers.length} {t.answersLabel}
-                </p>
+                <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-[rgb(var(--ink-soft))]">
+                  <span className="text-[rgb(var(--accent-2))]/90">
+                    {q.answers.length} {t.answersLabel}
+                  </span>
+                  <span>·</span>
+                  <span>
+                    {q.helpfulCount ?? 0} {t.helpfulStat}
+                  </span>
+                  <button
+                    type="button"
+                    disabled={hasVotedHelpful(q.id)}
+                    onClick={() => void markHelpful(q.id)}
+                    className="rounded-lg border border-white/12 bg-white/[0.06] px-2 py-1 text-[11px] font-medium text-[rgb(var(--ink))] transition enabled:hover:bg-white/[0.1] disabled:cursor-not-allowed disabled:opacity-40"
+                  >
+                    {hasVotedHelpful(q.id) ? t.helpfulThanks : t.helpfulCta}
+                  </button>
+                </div>
                 {q.answers.length > 0 ? (
                   <ul className="mt-4 space-y-3 border-t border-white/[0.06] pt-4">
                     {q.answers.map((a) => (
