@@ -12,6 +12,7 @@ import GlobalFooter from "@/components/GlobalFooter";
 import AnalyticsGate from "@/components/AnalyticsGate";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import SiteJsonLd from "@/components/SiteJsonLd";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import ConsentBanner from "@/components/ConsentBanner";
 import SkipToContent from "@/components/SkipToContent";
 import { getMetadataBase } from "@/lib/site-url";
@@ -177,6 +178,7 @@ export default function RootLayout({
         <ConsentBanner />
         <AnalyticsGate />
         <GoogleAnalytics />
+        <SpeedInsights />
       </body>
     </html>
   );
