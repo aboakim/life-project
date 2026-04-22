@@ -31,7 +31,7 @@ import NavRoutePrefetch from "@/components/NavRoutePrefetch";
 const LOCALE_KEY = "lde-locale";
 
 const navLinkClass =
-  "shrink-0 rounded-xl px-2.5 py-2 text-[rgb(var(--ink-soft))] transition hover:bg-white/[0.08] hover:text-[rgb(var(--ink))] sm:px-3";
+  "shrink-0 rounded-xl px-2.5 py-2 text-[rgb(var(--ink-soft))] transition-colors duration-200 hover:bg-white/[0.08] hover:text-[rgb(var(--ink))] sm:px-3";
 
 const mobileNavLinkClass =
   "block rounded-xl px-3 py-3.5 text-base font-medium text-[rgb(var(--ink))] transition hover:bg-white/[0.08] active:bg-white/[0.1]";
@@ -286,7 +286,7 @@ export default function GlobalNav() {
 
   return (
     <>
-      <header className="print:hidden sticky top-0 z-50 border-b border-white/[0.12] bg-[rgb(var(--surface))]/82 pt-[env(safe-area-inset-top,0px)] backdrop-blur-2xl shadow-[0_12px_40px_-16px_rgb(0_0_0/0.45),inset_0_1px_0_0_rgba(255,255,255,0.08)]">
+      <header className="print:hidden sticky top-0 z-50 border-b border-white/[0.08] bg-[rgb(var(--surface))]/72 pt-[env(safe-area-inset-top,0px)] backdrop-blur-3xl shadow-[0_1px_0_0_rgba(255,255,255,0.06),0_10px_40px_-12px_rgba(0,0,0,0.4)]">
       <NavRoutePrefetch />
       <div className="mx-auto flex max-w-6xl flex-nowrap items-center justify-between gap-2 px-3 py-2.5 sm:gap-3 sm:px-6">
         <Link

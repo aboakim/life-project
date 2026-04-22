@@ -3,22 +3,22 @@
 @tailwind utilities;
 
 /*
- * Design system v3.1 — “midnight editorial” (lighter, easier on the eyes)
- * Slightly lifted surfaces; section washes on the homepage for wayfinding.
+ * Design system v4 — “midnight editorial”
+ * Deeper, airier base; calmer grid; crisper glass (2025+ product aesthetic).
  */
 :root {
-  --surface: 40 36 68;
-  --surface-2: 52 46 88;
-  --surface-elevated: 62 54 102;
-  --ink: 252 250 255;
-  --ink-soft: 208 212 236;
-  --accent: 178 145 255;
-  --accent-2: 72 220 200;
-  --accent-warm: 255 218 158;
-  --accent-coral: 255 155 185;
-  --accent-magenta: 248 168 255;
-  --accent-dim: 210 200 255;
-  --glow: 190 175 255;
+  --surface: 28 26 48;
+  --surface-2: 40 36 64;
+  --surface-elevated: 50 44 80;
+  --ink: 252 251 255;
+  --ink-soft: 200 204 230;
+  --accent: 186 150 255;
+  --accent-2: 78 228 208;
+  --accent-warm: 255 220 170;
+  --accent-coral: 255 160 195;
+  --accent-magenta: 250 175 255;
+  --accent-dim: 200 192 255;
+  --glow: 195 182 255;
 }
 
 html {
@@ -42,21 +42,22 @@ body {
   @apply min-h-screen antialiased;
   color: rgb(var(--ink));
   background-color: rgb(var(--surface));
-  /* Dot grid + aurora mesh — immediately reads as a different site */
+  /* Softer grid + broader mesh — less noise, more depth */
   background-image:
-    radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.055) 1px, transparent 0),
-    radial-gradient(ellipse 1000px 520px at 88% -10%, rgb(178 145 255 / 0.32), transparent 55%),
-    radial-gradient(ellipse 820px 480px at -8% 18%, rgb(72 220 200 / 0.18), transparent 50%),
-    radial-gradient(ellipse 720px 520px at 75% 108%, rgb(248 168 255 / 0.16), transparent 48%),
-    radial-gradient(ellipse 560px 400px at 15% 95%, rgb(255 218 158 / 0.09), transparent 52%),
-    linear-gradient(172deg, rgb(42 38 72) 0%, rgb(52 46 92) 45%, rgb(40 36 68) 100%);
+    radial-gradient(circle at 1.5px 1.5px, rgb(255 255 255 / 0.04) 1px, transparent 0),
+    radial-gradient(ellipse 1200px 580px at 90% 0%, rgb(186 150 255 / 0.26), transparent 58%),
+    radial-gradient(ellipse 900px 520px at 0% 20%, rgb(78 228 208 / 0.14), transparent 55%),
+    radial-gradient(ellipse 880px 600px at 70% 100%, rgb(250 175 255 / 0.12), transparent 52%),
+    radial-gradient(ellipse 640px 420px at 12% 92%, rgb(255 220 170 / 0.07), transparent 55%),
+    linear-gradient(168deg, rgb(28 24 48) 0%, rgb(34 30 58) 42%, rgb(24 22 40) 100%);
   background-size:
-    28px 28px,
+    32px 32px,
     auto,
     auto,
     auto,
     auto,
     auto;
+  text-rendering: optimizeLegibility;
 }
 
 .grid-view {
@@ -81,25 +82,30 @@ body::before {
   position: fixed;
   inset: 0;
   z-index: 0;
-  opacity: 0.028;
+  opacity: 0.02;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
   mix-blend-mode: overlay;
 }
 
+::selection {
+  background: rgb(186 150 255 / 0.35);
+  color: rgb(var(--ink));
+}
+
 .glass {
-  @apply border border-white/[0.16] bg-white/[0.09] shadow-[0_0_0_1px_rgba(255,255,255,0.1)_inset] backdrop-blur-xl;
+  @apply border border-white/[0.11] bg-white/[0.065] shadow-[0_0_0_1px_rgba(255,255,255,0.07)_inset,0_24px_64px_-32px_rgba(0,0,0,0.45)] backdrop-blur-2xl backdrop-saturate-150;
 }
 
 .card-glow {
   box-shadow:
-    0 0 0 1px rgb(255 255 255 / 0.11) inset,
-    0 36px 110px -42px rgb(172 132 255 / 0.5),
-    0 20px 60px -34px rgb(56 232 208 / 0.25),
-    0 14px 44px -28px rgb(245 150 255 / 0.2);
+    0 0 0 1px rgb(255 255 255 / 0.08) inset,
+    0 40px 120px -48px rgb(186 150 255 / 0.42),
+    0 28px 80px -40px rgb(78 228 208 / 0.18),
+    0 16px 48px -28px rgb(250 175 255 / 0.14);
 }
 
 .panel-hero {
-  @apply relative overflow-hidden rounded-[1.75rem] border border-white/[0.16] bg-gradient-to-br from-white/[0.14] via-white/[0.06] to-transparent p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.1)_inset] backdrop-blur-xl sm:p-8;
+  @apply relative overflow-hidden rounded-[1.75rem] border border-white/[0.11] bg-gradient-to-br from-white/[0.11] via-white/[0.05] to-transparent p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.07)_inset,0_32px_80px_-40px_rgba(0,0,0,0.5)] backdrop-blur-2xl backdrop-saturate-150 sm:p-8;
 }
 
 .panel-hero::before {
@@ -126,7 +132,7 @@ body::before {
 }
 
 .trust-card {
-  @apply rounded-2xl border border-white/[0.14] bg-gradient-to-b from-white/[0.11] to-white/[0.04] p-4 shadow-lg transition hover:border-[rgb(var(--accent))]/40 hover:shadow-[0_18px_52px_-20px_rgb(var(--accent)/0.45)] sm:p-5;
+  @apply rounded-2xl border border-white/[0.1] bg-gradient-to-b from-white/[0.09] to-white/[0.03] p-4 shadow-lg ring-1 ring-white/[0.04] transition duration-200 hover:border-[rgb(var(--accent))]/45 hover:shadow-[0_22px_56px_-22px_rgb(var(--accent)/0.4)] sm:p-5;
 }
 
 .step-card {
@@ -162,7 +168,7 @@ body::before {
 }
 
 .animate-fade-up {
-  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: fade-up 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @keyframes pulse-soft {
