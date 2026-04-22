@@ -6,6 +6,9 @@ import DecisionBriefWizard from "@/components/home/DecisionBriefWizard";
 import HeroVisualSlider from "@/components/home/HeroVisualSlider";
 import HomeSectionNav from "@/components/home/HomeSectionNav";
 import ProductSceneStrip from "@/components/home/ProductSceneStrip";
+import RevealOnScroll from "@/components/home/RevealOnScroll";
+import StayMomentsStrip from "@/components/home/StayMomentsStrip";
+import AmbientDriftLayer from "@/components/ui/AmbientDriftLayer";
 import OrbDecor from "@/components/ui/OrbDecor";
 import { getExpertsCopy } from "@/lib/i18n/experts-network";
 import { getPricingCopy } from "@/lib/i18n/pricing-page";
@@ -372,6 +375,7 @@ export default function DecisionStudio({
     >
       <WelcomeModal locale={locale} onLocaleChange={setLocale} />
       <OrbDecor />
+      <AmbientDriftLayer />
       <HomeSectionNav links={sectionLinks} />
 
       {demoMode ? (
@@ -534,7 +538,11 @@ export default function DecisionStudio({
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty] md:text-xl md:leading-relaxed">
                 {t.subtitle}
               </p>
-              <div className="mt-7 flex flex-wrap gap-2.5">
+              <StayMomentsStrip
+                eyebrow={sx.stayStripEyebrow}
+                moments={sx.stayMoments}
+              />
+              <div className="mt-6 flex flex-wrap gap-2.5">
                 {t.features.map((f) => (
                   <span
                     key={f}
@@ -612,6 +620,7 @@ export default function DecisionStudio({
           </div>
         </section>
 
+        <RevealOnScroll>
         <section
           id="section-overview"
           className="home-section-wash home-section-wash--overview scroll-mt-36 rounded-[1.85rem] px-3 pt-12 pb-1 sm:px-4 sm:pt-14"
@@ -658,8 +667,10 @@ export default function DecisionStudio({
             </div>
           </div>
         </section>
+        </RevealOnScroll>
 
         {/* Product — bento */}
+        <RevealOnScroll>
         <section
           id="section-product"
           className="home-section-wash home-section-wash--product scroll-mt-36 rounded-[1.85rem] px-3 pt-16 pb-1 sm:px-4 sm:pt-20"
@@ -704,8 +715,10 @@ export default function DecisionStudio({
             ))}
           </ul>
         </section>
+        </RevealOnScroll>
 
         {/* Trust */}
+        <RevealOnScroll>
         <section
           id="section-trust"
           className="home-section-wash home-section-wash--trust scroll-mt-36 rounded-[1.85rem] px-3 pt-16 pb-1 sm:px-4 sm:pt-20"
@@ -733,8 +746,10 @@ export default function DecisionStudio({
             ))}
           </ul>
         </section>
+        </RevealOnScroll>
 
         {/* How — timeline */}
+        <RevealOnScroll>
         <section
           id="section-how"
           className="home-section-wash home-section-wash--how scroll-mt-36 rounded-[1.85rem] px-3 pt-16 pb-1 sm:px-4 sm:pt-20"
@@ -764,8 +779,10 @@ export default function DecisionStudio({
             ))}
           </ol>
         </section>
+        </RevealOnScroll>
 
         {/* Language */}
+        <RevealOnScroll>
         <section
           id="section-language"
           className="home-section-wash home-section-wash--language scroll-mt-36 rounded-[1.85rem] px-3 pt-16 pb-1 sm:px-4 sm:pt-20"
@@ -811,6 +828,7 @@ export default function DecisionStudio({
             </p>
           </nav>
         </section>
+        </RevealOnScroll>
         </>
         )}
 
@@ -829,6 +847,7 @@ export default function DecisionStudio({
         )}
 
         {/* Workspace: disclaimer + analyzer */}
+        <RevealOnScroll>
         <section
           id="section-workspace"
           className="home-section-wash home-section-wash--workspace scroll-mt-32 rounded-[1.85rem] px-3 pt-16 pb-1 sm:px-4 sm:pt-20"
@@ -1047,6 +1066,7 @@ export default function DecisionStudio({
             </form>
           </div>
         </section>
+        </RevealOnScroll>
 
         {a && (
           <section
@@ -1309,6 +1329,7 @@ export default function DecisionStudio({
             </footer>
           </section>
         )}
+        <RevealOnScroll>
         <section
           id="section-privacy"
           className="home-section-wash home-section-wash--privacy scroll-mt-36 rounded-[1.85rem] px-3 pt-10 pb-1 sm:px-4 sm:pt-12"
@@ -1345,10 +1366,11 @@ export default function DecisionStudio({
                     Privacy Policy →
                   </Link>
                 </p>
-              </div>
             </div>
           </div>
+        </div>
         </section>
+        </RevealOnScroll>
 
       </div>
     </div>

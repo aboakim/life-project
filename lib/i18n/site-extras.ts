@@ -54,6 +54,9 @@ export type SiteExtras = {
   moderationNote: string;
   filterLang: string;
   filterAll: string;
+  /** Rotating one-line prompts on the home hero — encourages dwell time */
+  stayStripEyebrow: string;
+  stayMoments: [string, string, string, string, string];
 };
 
 const en: SiteExtras = {
@@ -133,6 +136,14 @@ const en: SiteExtras = {
     "Posts appear as plain text after light automated checks; we may remove spam or unsafe content. This is peer exchange, not therapy or legal counsel.",
   filterLang: "Language",
   filterAll: "All",
+  stayStripEyebrow: "In the next minute",
+  stayMoments: [
+    "Clarity is a process — we map trade-offs, not pick vibes.",
+    "One structured pass beats hours of open-ended scrolling.",
+    "Scenarios, risks, and a timeline so the next step feels obvious.",
+    "When stakes are high, structure is kindness to your future self.",
+    "Save your run and revisit in a week — good decisions like a second look.",
+  ],
 };
 
 const hy: SiteExtras = {
@@ -212,6 +223,14 @@ const hy: SiteExtras = {
     "Հաղորդագրությունները երևում են պարզ տեքստով․ կարող ենք ջնջել սպամ կամ վտանգավոր բովանդակություն։ Սա հասարակական փոխանակում է, ոչ թե թերապիա կամ իրավունք։",
   filterLang: "Լեզու",
   filterAll: "Բոլորը",
+  stayStripEyebrow: "Մի րոպեի մեջ",
+  stayMoments: [
+    "Պարզությունը գործընթաց է — մենք քարտեզագրում ենք փոխանակումները, ոչ թե «զգացում ենք ընտրում»։",
+    "Մեկ կառուցված անցումը լավն է ժամեր բաց թողնված սքրոլից։",
+    "Սցենարներ, ռիսքեր, ժամանակացույց — որ հաջորդ քայլը ակնհայտ դառնա։",
+    "Երբ դրույքը բարձր է, կառուցվածությունը բարություն է ապագա քեզ հանդեպ։",
+    "Պահիր վերլուծությունն ու մեկ շաբաթից վերադարձիր — լավ որոշումները սիրում են երկրորդ հայացք։",
+  ],
 };
 
 const ru: SiteExtras = {

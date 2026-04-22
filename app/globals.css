@@ -201,6 +201,55 @@ body::before {
   animation: shimmer-slow 7s ease-in-out infinite;
 }
 
+/* Subtle “alive” background — under content; off when user prefers less motion */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes ambient-drift-a {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(6%, 4%) scale(1.04);
+    }
+  }
+  @keyframes ambient-drift-b {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(-5%, -6%) scale(1.05);
+    }
+  }
+  .ambient-drift-blob--a {
+    animation: ambient-drift-a 38s ease-in-out infinite;
+  }
+  .ambient-drift-blob--b {
+    animation: ambient-drift-b 44s ease-in-out 2s infinite;
+  }
+}
+
+/* Scroll-in sections — one-time reveal */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translate3d(0, 0.9rem, 0);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-on-scroll--visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll,
+  .reveal-on-scroll--visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 .how-timeline {
   position: relative;
 }
