@@ -42,6 +42,9 @@ import {
   isReminderDue,
   clearReminder,
 } from "@/lib/analysis-local";
+import { buildAnalysisSpeechText } from "@/lib/tts-build-report-text";
+import VoiceDictateButton from "@/components/home/VoiceDictateButton";
+import ReadAloudReportButton from "@/components/home/ReadAloudReportButton";
 
 const LOCALE_STORAGE_KEY = "lde-locale";
 const VISIT_COUNT_KEY = "lde-home-visits";
@@ -255,6 +258,26 @@ export default function DecisionStudio({
 
   const a = result?.analysis;
   const matchedExperts = result?.matchedExperts ?? [];
+
+  const voiceLabels = useMemo(
+    () => ({
+      dictate: t.voiceDictate,
+      listening: t.voiceListening,
+      stop: t.voiceStop,
+      notSupported: t.voiceNotSupported,
+    }),
+    [t]
+  );
+
+  const readAloudText = useMemo(
+    () =>
+      a
+        ? buildAnalysisSpeechText(a, t, locale, {
+            experts: matchedExperts,
+          })
+        : "",
+    [a, t, locale, matchedExperts]
+  );
 
   useEffect(() => {
     if (!a) return;
@@ -854,36 +877,75 @@ export default function DecisionStudio({
                   setConstraints(cons);
                 }}
               />
+              <p className="mt-3 text-xs leading-relaxed text-[rgb(var(--ink-soft))]/85 [text-wrap:pretty]">
+                {t.voiceInputHint}
+              </p>
 
-              <textarea
-                id="decision-input"
-                value={decision}
-                onChange={(e) => setDecision(e.target.value)}
-                placeholder={t.decisionPh}
-                rows={4}
-                className="mt-4 w-full resize-y rounded-2xl border border-white/10 bg-white/[0.07] px-4 py-3 text-base leading-relaxed text-[rgb(var(--ink))] placeholder:text-[rgb(var(--ink-soft))]/65 outline-none transition focus:border-[rgb(var(--accent))]/45 focus:ring-2 focus:ring-[rgb(var(--accent))]/15"
-              />
+              <div className="mt-3">
+                <div className="mb-1.5 flex justify-end">
+                  <VoiceDictateButton
+                    locale={locale}
+                    onAppend={(chunk) =>
+                      setDecision((d) =>
+                        d.trim() ? `${d.trimEnd()} ${chunk}` : chunk
+                      )
+                    }
+                    disabled={loading}
+                    labels={voiceLabels}
+                  />
+                </div>
+                <textarea
+                  id="decision-input"
+                  value={decision}
+                  onChange={(e) => setDecision(e.target.value)}
+                  placeholder={t.decisionPh}
+                  rows={4}
+                  className="w-full resize-y rounded-2xl border border-white/10 bg-white/[0.07] px-4 py-3 text-base leading-relaxed text-[rgb(var(--ink))] placeholder:text-[rgb(var(--ink-soft))]/65 outline-none transition focus:border-[rgb(var(--accent))]/45 focus:ring-2 focus:ring-[rgb(var(--accent))]/15"
+                />
+              </div>
 
               <label className="mt-5 block text-sm font-medium text-[rgb(var(--ink))]">
                 {t.context}
               </label>
+              <div className="mb-1.5 flex justify-end">
+                <VoiceDictateButton
+                  locale={locale}
+                  onAppend={(chunk) =>
+                    setContext((c) => (c.trim() ? `${c.trimEnd()} ${chunk}` : chunk))
+                  }
+                  disabled={loading}
+                  labels={voiceLabels}
+                />
+              </div>
               <textarea
                 value={context}
                 onChange={(e) => setContext(e.target.value)}
                 placeholder={t.contextPh}
                 rows={3}
-                className="mt-2 w-full resize-y rounded-2xl border border-white/10 bg-white/[0.07] px-4 py-3 text-base outline-none transition focus:border-[rgb(var(--accent))]/45"
+                className="w-full resize-y rounded-2xl border border-white/10 bg-white/[0.07] px-4 py-3 text-base outline-none transition focus:border-[rgb(var(--accent))]/45"
               />
 
               <label className="mt-5 block text-sm font-medium text-[rgb(var(--ink))]">
                 {t.constraints}
               </label>
+              <div className="mb-1.5 flex justify-end">
+                <VoiceDictateButton
+                  locale={locale}
+                  onAppend={(chunk) =>
+                    setConstraints((c) =>
+                      c.trim() ? `${c.trimEnd()} ${chunk}` : chunk
+                    )
+                  }
+                  disabled={loading}
+                  labels={voiceLabels}
+                />
+              </div>
               <textarea
                 value={constraints}
                 onChange={(e) => setConstraints(e.target.value)}
                 placeholder={t.constraintsPh}
                 rows={2}
-                className="mt-2 w-full resize-y rounded-2xl border border-white/10 bg-white/[0.07] px-4 py-3 text-base outline-none transition focus:border-[rgb(var(--accent))]/45"
+                className="w-full resize-y rounded-2xl border border-white/10 bg-white/[0.07] px-4 py-3 text-base outline-none transition focus:border-[rgb(var(--accent))]/45"
               />
 
               {error && (
@@ -939,13 +1001,23 @@ export default function DecisionStudio({
               <p className="max-w-2xl text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
                 {pa.runAnotherHint}
               </p>
-              <button
-                type="button"
-                onClick={scrollToAnalyzer}
-                className="shrink-0 rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-[rgb(var(--accent)/0.28)] transition hover:brightness-110"
-              >
-                {pa.runAnotherCta}
-              </button>
+              <div className="flex w-full flex-col gap-2 sm:w-auto sm:min-w-0 sm:flex-row sm:items-center sm:gap-2">
+                <ReadAloudReportButton
+                  text={readAloudText}
+                  locale={locale}
+                  labels={{
+                    readAloud: t.readAloud,
+                    stop: t.readAloudStop,
+                  }}
+                />
+                <button
+                  type="button"
+                  onClick={scrollToAnalyzer}
+                  className="shrink-0 rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-[rgb(var(--accent)/0.28)] transition hover:brightness-110"
+                >
+                  {pa.runAnotherCta}
+                </button>
+              </div>
             </div>
 
             <section className="glass animate-fade-up rounded-3xl p-6 sm:p-7">

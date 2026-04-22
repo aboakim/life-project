@@ -110,6 +110,14 @@ export type UIStrings = {
   sectionDirectoryExperts: string;
   expertOpenInDirectory: string;
   expertNoDirectoryMatch: string;
+  /** Web Speech: dictate into fields */
+  voiceDictate: string;
+  voiceListening: string;
+  voiceStop: string;
+  voiceNotSupported: string;
+  voiceInputHint: string;
+  readAloud: string;
+  readAloudStop: string;
 };
 
 /** English trust/how blocks — reused as fallback for locales without custom copy */
@@ -494,6 +502,15 @@ const uiHy: Partial<UIStrings> = {
   expertOpenInDirectory: "Բացել ցանկում",
   expertNoDirectoryMatch:
     "Այս պահին ցանկում չկա այս կատեգորիայով գրանցված մասնագետ․ դիտեք ընդհանուր ցանկը։",
+  voiceDictate: "Խոսել",
+  voiceListening: "Լսում եմ…",
+  voiceStop: "Կանգ",
+  voiceNotSupported:
+    "Ձայնային մուտքը հասանելի չէ այս բրաուզերում։ Փորձեք Chrome կամ Edge։",
+  voiceInputHint:
+    "Թարմ UI լեզուն պետք է համընկնի ձեր խոսքի լեզվի հետ։ Chrome/Edge-ում աշխատում է լավագույնը։",
+  readAloud: "Լսել հաշվետվությունը",
+  readAloudStop: "Կանգնեցնել",
 };
 
 const uiEn: Partial<UIStrings> = {
@@ -568,6 +585,15 @@ const uiEn: Partial<UIStrings> = {
   expertOpenInDirectory: "Open in directory",
   expertNoDirectoryMatch:
     "No listed expert in this category yet — browse the full directory.",
+  voiceDictate: "Dictate",
+  voiceListening: "Listening…",
+  voiceStop: "Stop",
+  voiceNotSupported:
+    "Voice input isn’t available in this browser. Try Chrome or Edge.",
+  voiceInputHint:
+    "Pick the same interface language you speak. Works best in Chrome or Edge.",
+  readAloud: "Listen to report",
+  readAloudStop: "Stop playback",
 };
 
 /** American English — UI copy tuned for US spelling/idiom where it differs */
@@ -656,6 +682,14 @@ const uiRu: Partial<UIStrings> = {
   expertOpenInDirectory: "Открыть в каталоге",
   expertNoDirectoryMatch:
     "Пока нет эксперта в этой категории — смотрите весь список.",
+  voiceDictate: "Диктовка",
+  voiceListening: "Слушаю…",
+  voiceStop: "Стоп",
+  voiceNotSupported: "Голосовой ввод недоступен. Попробуйте Chrome или Edge.",
+  voiceInputHint:
+    "Язык интерфейса должен совпадать с языком речи. Лучше всего в Chrome/Edge.",
+  readAloud: "Прослушать отчёт",
+  readAloudStop: "Остановить",
 };
 
 const uiDe: Partial<UIStrings> = {
@@ -730,6 +764,15 @@ const uiDe: Partial<UIStrings> = {
   expertOpenInDirectory: "Im Verzeichnis öffnen",
   expertNoDirectoryMatch:
     "Noch kein passender Experte in dieser Kategorie — gesamtes Verzeichnis ansehen.",
+  voiceDictate: "Diktieren",
+  voiceListening: "Höre zu…",
+  voiceStop: "Stopp",
+  voiceNotSupported:
+    "Spracheingabe nicht verfügbar. Bitte Chrome oder Edge nutzen.",
+  voiceInputHint:
+    "Interface-Sprache wie Ihre Sprache wählen. Am besten in Chrome/Edge.",
+  readAloud: "Bericht anhören",
+  readAloudStop: "Stoppen",
 };
 
 const uiFr: Partial<UIStrings> = {
@@ -804,6 +847,15 @@ const uiFr: Partial<UIStrings> = {
   expertOpenInDirectory: "Ouvrir dans l’annuaire",
   expertNoDirectoryMatch:
     "Aucun expert listé pour cette catégorie — parcourez l’annuaire complet.",
+  voiceDictate: "Dicter",
+  voiceListening: "J’écoute…",
+  voiceStop: "Arrêter",
+  voiceNotSupported:
+    "Saisie vocale indisponible. Essayez Chrome ou Edge.",
+  voiceInputHint:
+    "Choisissez la même langue que celle parlée. Idéal avec Chrome/Edge.",
+  readAloud: "Écouter le rapport",
+  readAloudStop: "Arrêter",
 };
 
 const uiEs: Partial<UIStrings> = {
@@ -878,6 +930,15 @@ const uiEs: Partial<UIStrings> = {
   expertOpenInDirectory: "Abrir en el directorio",
   expertNoDirectoryMatch:
     "Aún no hay experto en esta categoría — ver el directorio completo.",
+  voiceDictate: "Dictar",
+  voiceListening: "Escuchando…",
+  voiceStop: "Detener",
+  voiceNotSupported:
+    "Entrada de voz no disponible. Prueba Chrome o Edge.",
+  voiceInputHint:
+    "Usa el mismo idioma de interfaz que hablas. Mejor en Chrome/Edge.",
+  readAloud: "Escuchar informe",
+  readAloudStop: "Detener",
 };
 
 const uiAr: Partial<UIStrings> = {
@@ -952,6 +1013,13 @@ const uiAr: Partial<UIStrings> = {
   expertOpenInDirectory: "فتح في الدليل",
   expertNoDirectoryMatch:
     "لا يوجد خبير مدرج في هذه الفئة حاليًا — تصفح الدليل كاملًا.",
+  voiceDictate: "إملاء صوتي",
+  voiceListening: "أستمع…",
+  voiceStop: "إيقاف",
+  voiceNotSupported: "الإدخال الصوتي غير متاح. جرّب Chrome أو Edge.",
+  voiceInputHint: "اجعل لغة الواجهة نفس لغة كلامك. يعمل أفضل في Chrome/Edge.",
+  readAloud: "استمع للتقرير",
+  readAloudStop: "إيقاف التشغيل",
 };
 
 const uiIt: Partial<UIStrings> = {
@@ -1026,6 +1094,15 @@ const uiIt: Partial<UIStrings> = {
   expertOpenInDirectory: "Apri in elenco",
   expertNoDirectoryMatch:
     "Nessun esperto in questa categoria in elenco — vedi l’elenco completo.",
+  voiceDictate: "Dettatura",
+  voiceListening: "In ascolto…",
+  voiceStop: "Stop",
+  voiceNotSupported:
+    "Input vocale non disponibile. Prova Chrome o Edge.",
+  voiceInputHint:
+    "Stessa lingua dell’interfaccia e del parlato. Meglio con Chrome/Edge.",
+  readAloud: "Ascolta il report",
+  readAloudStop: "Interrompi",
 };
 
 const table: Record<AppLocale, Partial<UIStrings>> = {
