@@ -41,6 +41,7 @@ export default function ThematicImageBand({
             sizes="(max-width: 1024px) 100vw, 400px"
             loading="lazy"
             draggable={false}
+            unoptimized
           />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[rgb(var(--surface))/0.35] via-transparent to-[rgb(var(--accent-magenta))/0.1] lg:from-[rgb(var(--surface))/0.5]" />
         </div>

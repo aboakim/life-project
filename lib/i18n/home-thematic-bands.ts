@@ -15,7 +15,8 @@ const enA: ThematicBandCopy = {
   body: "The analyzer is one place to name the fork, your constraints, and the trade-offs—then get scenarios, lenses, a timeline, and a score. No social feed, no hot takes. Just a report you can reread in a calmer week.",
   cta: "Open the analyzer",
   ctaHref: "/analyze",
-  imageAlt: "Calm minimal desk with laptop, notebook, and coffee in soft daylight",
+  imageAlt:
+    "Bright modern workspace with desk, chairs, and warm lighting from the window",
 };
 
 const enB: ThematicBandCopy = {
@@ -24,7 +25,7 @@ const enB: ThematicBandCopy = {
   body: "When you are ready, browse a directory of psychologists, legal and financial professionals. The tool does not replace them—it helps you walk in with better questions, scenarios already mapped.",
   cta: "Browse experts",
   ctaHref: "/experts",
-  imageAlt: "Two people in a professional handshake over a table",
+  imageAlt: "Diverse team collaborating with laptops around a long table",
 };
 
 const hyA: ThematicBandCopy = {
@@ -33,7 +34,7 @@ const hyA: ThematicBandCopy = {
   body: "Վերլուծիչը մեկ հարթակ է՝ անվանելու տարաձայնությունը, սահմանները, փոխարժեքները, հետո ստանալու սցենարներ, «линзы», ժամանակացույց միավոր։ Ոչ feed, ոչ աղմուկ։ Պարզ հաշվետվություն, որ կարող ես մեկ շաբաթից նորից կարդալ։",
   cta: "Բացել վերլուծիչ",
   ctaHref: "/analyze",
-  imageAlt: "Լուռ մինիմալ աշխատասեղան՝ նոթբուք, սուրճ, արևոտ լույս",
+  imageAlt: "Ժամանակակից աշխատատարածք՝ սեղան, նստարաններ, լուսամուտի բացվող լույս",
 };
 
 const hyB: ThematicBandCopy = {
@@ -42,7 +43,7 @@ const hyB: ThematicBandCopy = {
   body: "Երբ պատրաստ ես՝ դիտարկիր հոգեբանների, իրավական և ֆինանսական մասնագետների ցանցը։ Գործիքը չի փոխարինում նրանց․ ավելի հստակ հարցերով ու սցենարներով ես «մտնում» խոսակցությանը։",
   cta: "Դիտարկել մասնագետներ",
   ctaHref: "/experts",
-  imageAlt: "Երկու մասնագետ ձեռքի բարև պրոֆեսիոնալ միջավայրում",
+  imageAlt: "Թիմի համագործակցություն՝ նոութբուքներ, երկար սեղան, համատեղ աշխատանք",
 };
 
 const table: Partial<Record<AppLocale, { a: ThematicBandCopy; b: ThematicBandCopy }>> = {
