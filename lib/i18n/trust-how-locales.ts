@@ -145,6 +145,16 @@ export const trustHowRu: TrustHowPick = {
       alt: "Графики на экране ноутбука",
       caption: "Оценка и сроки — ясность без притворства судьбой.",
     },
+    {
+      alt: "Лесная тропа с высокими деревьями",
+      caption:
+        "Назовите пути, а не только страх — развилки проще, когда выборы видны.",
+    },
+    {
+      alt: "Блокнот, ручка и книга на столе в солнечном свете",
+      caption:
+        "Запишите, отложите, перечитайте — ясность часто приходит со второго взгляда.",
+    },
   ],
   productStripEyebrow: "Моменты",
   productStripAria: "Иллюстрации к потоку продукта",
@@ -153,6 +163,8 @@ export const trustHowRu: TrustHowPick = {
     "Команда за общим столом",
     "Планирование в офисе",
     "Воркшоп за столом",
+    "Городской проспект с пешеходным переходом",
+    "Светлая гостиная с диваном и окнами",
   ],
 };
 
@@ -269,6 +281,16 @@ export const trustHowDe: TrustHowPick = {
       alt: "Charts am Laptop",
       caption: "Score und Zeitlinie — Klarheit ohne Schicksalsmystik.",
     },
+    {
+      alt: "Waldweg mit hohen Bäumen",
+      caption:
+        "Benenne die Wege, nicht nur die Angst — Weichen sind leichter, wenn Optionen sichtbar sind.",
+    },
+    {
+      alt: "Notizbuch, Stift und Buch auf einem sonnigen Tisch",
+      caption:
+        "Aufs Schreiben kommt ein zweiter Blick — Klarheit kommt oft später.",
+    },
   ],
   productStripEyebrow: "Momente",
   productStripAria: "Illustrationen zum Produktfluss",
@@ -277,6 +299,8 @@ export const trustHowDe: TrustHowPick = {
     "Team an einem Tisch",
     "Planung im Büro",
     "Workshop am Tisch",
+    "Stadtboulevard mit Zebrastreifen",
+    "Helles Wohnzimmer mit Sofa und großen Fenstern",
   ],
 };
 
@@ -393,6 +417,16 @@ export const trustHowFr: TrustHowPick = {
       alt: "Graphiques sur un portable",
       caption: "Score et frise — clarté sans mystique.",
     },
+    {
+      alt: "Sentier forestier avec de grands arbres",
+      caption:
+        "Nommez les chemins, pas seulement la peur — les bifurcations sont plus claires quand les choix sont visibles.",
+    },
+    {
+      alt: "Carnet ouvert, stylo et livre sur une table ensoleillée",
+      caption:
+        "Écrivez, posez, relisez — la clarté arrive souvent au second regard.",
+    },
   ],
   productStripEyebrow: "Moments",
   productStripAria: "Illustrations du parcours produit",
@@ -401,6 +435,8 @@ export const trustHowFr: TrustHowPick = {
     "Équipe à une table",
     "Planification en bureau",
     "Atelier collectif",
+    "Avenue urbaine avec passage piéton",
+    "Salon lumineux avec canapé et grandes fenêtres",
   ],
 };
 
@@ -517,6 +553,16 @@ export const trustHowEs: TrustHowPick = {
       alt: "Gráficos en un portátil",
       caption: "Puntuación y plazos — claridad sin misticismo.",
     },
+    {
+      alt: "Sendero en el bosque con árboles altos",
+      caption:
+        "Nombra los caminos, no solo el miedo — las bifurcaciones son más claras cuando las opciones se ven.",
+    },
+    {
+      alt: "Cuaderno abierto, bolígrafo y libro sobre una mesa soleada",
+      caption:
+        "Escríbelo, déjalo reposar y vuelve a leer — la claridad suele llegar en la segunda lectura.",
+    },
   ],
   productStripEyebrow: "Momentos",
   productStripAria: "Ilustraciones del recorrido del producto",
@@ -525,6 +571,8 @@ export const trustHowEs: TrustHowPick = {
     "Equipo en una mesa",
     "Planificación en la oficina",
     "Taller en grupo",
+    "Avenida urbana con paso de peatones",
+    "Salón luminoso con sofá y ventanales",
   ],
 };
 
@@ -641,6 +689,16 @@ export const trustHowIt: TrustHowPick = {
       alt: "Grafici su un laptop",
       caption: "Punteggio e timeline — chiarezza senza misticismo.",
     },
+    {
+      alt: "Sentiero nel bosco con alberi alti",
+      caption:
+        "Dai un nome ai percorsi, non solo alla paura — le biforcazioni sono più chiare quando le opzioni si vedono.",
+    },
+    {
+      alt: "Quaderno aperto, penna e libro su un tavolo soleggiato",
+      caption:
+        "Scrivi, aspetta, rileggi — la chiarezza spesso arriva al secondo sguardo.",
+    },
   ],
   productStripEyebrow: "Momenti",
   productStripAria: "Illustrazioni del percorso prodotto",
@@ -649,6 +707,8 @@ export const trustHowIt: TrustHowPick = {
     "Team a un tavolo",
     "Pianificazione in ufficio",
     "Workshop di gruppo",
+    "Boulevard urbano con strisce pedonali",
+    "Soggiorno luminoso con divano e grandi finestre",
   ],
 };
 
@@ -765,6 +825,16 @@ export const trustHowAr: TrustHowPick = {
       alt: "رسوم على حاسوب محمول",
       caption: "التقييم والجدول — وضوح بلا غموض مصيري.",
     },
+    {
+      alt: "مسلك في الغابة بين أشجار عالية",
+      caption:
+        "سمِّ المسارات لا القلق فقط — التفرعات أوضح عندما تكون الخيارات مرئية.",
+    },
+    {
+      alt: "دفتر مفتوح وقلم وكتاب على طاولة مشمسة",
+      caption:
+        "اكتب، أرِحْ نظرك، ثم أعد القراءة — الوضوح غالباً يأتي في النظرة الثانية.",
+    },
   ],
   productStripEyebrow: "لحظات",
   productStripAria: "رسوم لمسار المنتج",
@@ -773,5 +843,7 @@ export const trustHowAr: TrustHowPick = {
     "فريق حول طاولة",
     "تخطيط في مكتب",
     "ورشة جماعية",
+    "شارع مدينة مع ممر للمشاة",
+    "غرفة معيشة فاتحة مع أريكة ونوافذ كبيرة",
   ],
 };

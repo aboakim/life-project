@@ -90,7 +90,7 @@ export type UIStrings = {
   heroSlides: ReadonlyArray<{ alt: string; caption: string }>;
   productStripEyebrow: string;
   productStripAria: string;
-  productStripAlts: readonly [string, string, string, string];
+  productStripAlts: readonly [string, string, string, string, string, string];
   /** Short “what is this?” strip below hero */
   atAGlanceEyebrow: string;
   atAGlanceTitle: string;
@@ -272,6 +272,15 @@ const trustHowEn: Pick<
       alt: "Analytics charts and metrics on a laptop screen",
       caption: "A score and timeline—clarity without pretending to be fate.",
     },
+    {
+      alt: "Forest path with tall trees and soft sunlight",
+      caption:
+        "Name the paths, not the panic—big forks are easier when choices are visible.",
+    },
+    {
+      alt: "Open notebook, pen, and book on a sunlit table",
+      caption: "Write it down, sleep on it. Clarity often comes on the second look.",
+    },
   ],
   productStripEyebrow: "Moments",
   productStripAria: "Illustrative scenes for the product flow",
@@ -280,6 +289,8 @@ const trustHowEn: Pick<
     "Team learning and collaboration at a shared desk",
     "Team planning together in an office",
     "Workshop with people around a table",
+    "Busy city avenue with a pedestrian crossing",
+    "Bright home living room with large windows and sofa",
   ],
 };
 
@@ -426,6 +437,16 @@ const trustHowHy: Pick<
       alt: "Վերլուծական գծապատկերներ և ցուցանիշներ լապտոպի էկրանին",
       caption: "Միավոր և ժամանակացույց՝ պարզություն առանց կախարդական պատասխանի։",
     },
+    {
+      alt: "Անտառային ճանապարհ՝ բարձր ծառեր, փափուկ լույս",
+      caption:
+        "Անվանի ուղիները, ոչ թե միայն վախը՝ մեծ տարաձայնություններն ավելի կառավարելի են դառնում։",
+    },
+    {
+      alt: "Բաց տետր, գրիչ, գիրք արևոտ սեղանի վրա",
+      caption:
+        "Գրիր, մի քանի ժամ կամ օր հետո նորից կարդա — պարզությունը հաճախ երկրորդ հայացքով է գալիս։",
+    },
   ],
   productStripEyebrow: "Պահեր",
   productStripAria: "Նկարագրական տեսարաններ արտադրանքի հոսքի համար",
@@ -434,6 +455,8 @@ const trustHowHy: Pick<
     "Թիմային ուսուցում ու համագործակցություն ընդհանուր սեղանի շուրջ",
     "Թիմը պլանավորում է գրասենյակում",
     "Վարպետաց դաս՝ մարդիկ սեղանի շուրջ",
+    "Խիտ քաղաքի պողոտ՝ հետիոտնային անցում",
+    "Լուսավոր ներս՝ սեղանամաց, սոֆա, մեծ լուսամուտներ",
   ],
 };
 

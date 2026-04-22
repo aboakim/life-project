@@ -74,7 +74,7 @@ export default function HeroVisualSlider({
                 loading="eager"
                 draggable={false}
               />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[rgb(8_10_22/0.92)] via-[rgb(8_10_22/0.25)] to-[rgb(var(--accent)/0.14)]" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[rgb(28_24_52/0.9)] via-[rgb(40_36_70/0.32)] to-[rgb(var(--accent)/0.12)]" />
               <p className="absolute bottom-0 left-0 right-0 px-4 pb-4 pt-12 text-center text-[13px] font-medium leading-snug text-white/95 [text-wrap:balance] sm:px-5 sm:pb-5 sm:text-sm">
                 {slide.caption}
               </p>
