@@ -38,6 +38,9 @@ next-env.d.ts
 # vercel
 .vercel
 
+# local screen recordings (run: npm run video:record-site)
+/ad-creative/output/
+
 # prisma sqlite local
 prisma/dev.db
 prisma/dev.db-journal
