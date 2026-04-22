@@ -16,18 +16,27 @@ type Props = {
   onAppend: (chunk: string) => void;
   disabled?: boolean;
   available: boolean;
+  /** If cloud is off, show this instead of hiding (e.g. “configure OPENAI”). */
+  unavailableMessage?: string;
   labels: Labels;
 };
 
-function pickMime(): string {
-  if (typeof window === "undefined" || !window.MediaRecorder) return "";
-  if (MediaRecorder.isTypeSupported("audio/webm;codecs=opus")) {
-    return "audio/webm;codecs=opus";
+function pickRecordingMimeAndExt(): { mime: string; ext: string } {
+  if (typeof window === "undefined" || !window.MediaRecorder) {
+    return { mime: "", ext: "webm" };
   }
-  if (MediaRecorder.isTypeSupported("audio/webm")) {
-    return "audio/webm";
+  const candidates: { mime: string; ext: string }[] = [
+    { mime: "audio/webm;codecs=opus", ext: "webm" },
+    { mime: "audio/webm", ext: "webm" },
+    { mime: "audio/mp4", ext: "m4a" },
+    { mime: "audio/ogg;codecs=opus", ext: "ogg" },
+  ];
+  for (const c of candidates) {
+    if (MediaRecorder.isTypeSupported(c.mime)) {
+      return c;
+    }
   }
-  return "";
+  return { mime: "", ext: "webm" };
 }
 
 export default function VoiceWhisperButton({
@@ -35,6 +44,7 @@ export default function VoiceWhisperButton({
   onAppend,
   disabled,
   available,
+  unavailableMessage,
   labels,
 }: Props) {
   const [phase, setPhase] = useState<"idle" | "rec" | "up">("idle");
@@ -43,6 +53,7 @@ export default function VoiceWhisperButton({
   const mrRef = useRef<MediaRecorder | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const mimeRef = useRef("");
+  const fileExtRef = useRef("webm");
 
   const cleanupStream = useCallback(() => {
     try {
@@ -58,7 +69,8 @@ export default function VoiceWhisperButton({
       setErr(null);
       setPhase("up");
       const fd = new FormData();
-      fd.append("file", blob, "clip.webm");
+      const name = `clip.${fileExtRef.current || "webm"}`;
+      fd.append("file", blob, name);
       fd.append("locale", locale);
       try {
         const res = await fetch("/api/speech/transcribe", { method: "POST", body: fd });
@@ -84,12 +96,14 @@ export default function VoiceWhisperButton({
       setErr(labels.needMic);
       return;
     }
-    const mime = pickMime() || "audio/webm";
+    const { mime, ext } = pickRecordingMimeAndExt();
     if (!window.MediaRecorder) {
       setErr(labels.error);
       return;
     }
-    mimeRef.current = mime;
+    const effectiveMime = mime || "audio/webm";
+    mimeRef.current = effectiveMime;
+    fileExtRef.current = ext;
     let stream: MediaStream;
     try {
       stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -99,7 +113,9 @@ export default function VoiceWhisperButton({
     }
     streamRef.current = stream;
     chunksRef.current = [];
-    const mr = new MediaRecorder(stream, { mimeType: mime });
+    const mr = mime
+      ? new MediaRecorder(stream, { mimeType: mime })
+      : new MediaRecorder(stream);
     mrRef.current = mr;
     mr.addEventListener("dataavailable", (e) => {
       if (e.data.size > 0) chunksRef.current.push(e.data);
@@ -160,6 +176,16 @@ export default function VoiceWhisperButton({
   }, [cleanupStream]);
 
   if (!available) {
+    if (unavailableMessage) {
+      return (
+        <p
+          className="max-w-[16rem] text-end text-[10px] leading-tight text-[rgb(var(--ink-soft))]/90 [text-wrap:pretty]"
+          role="status"
+        >
+          {unavailableMessage}
+        </p>
+      );
+    }
     return null;
   }
 

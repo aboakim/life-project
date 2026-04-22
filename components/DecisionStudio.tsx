@@ -299,6 +299,12 @@ export default function DecisionStudio({
     [t]
   );
 
+  const armenianBrowserSttMessage =
+    locale === "hy" ? t.voiceSttArmenianUseCloud : undefined;
+  const voiceWhisperUnavailableMessage = !whisperAvailable
+    ? t.voiceWhisperNotConfigured
+    : undefined;
+
   const readAloudText = useMemo(
     () =>
       a
@@ -922,6 +928,7 @@ export default function DecisionStudio({
                     }
                     disabled={loading}
                     available={whisperAvailable}
+                    unavailableMessage={voiceWhisperUnavailableMessage}
                     labels={whisperLabels}
                   />
                   <VoiceDictateButton
@@ -932,6 +939,7 @@ export default function DecisionStudio({
                       )
                     }
                     disabled={loading}
+                    replaceWithMessage={armenianBrowserSttMessage}
                     labels={voiceLabels}
                   />
                 </div>
@@ -958,6 +966,7 @@ export default function DecisionStudio({
                   }
                   disabled={loading}
                   available={whisperAvailable}
+                  unavailableMessage={voiceWhisperUnavailableMessage}
                   labels={whisperLabels}
                 />
                 <VoiceDictateButton
@@ -966,6 +975,7 @@ export default function DecisionStudio({
                     setContext((c) => (c.trim() ? `${c.trimEnd()} ${chunk}` : chunk))
                   }
                   disabled={loading}
+                  replaceWithMessage={armenianBrowserSttMessage}
                   labels={voiceLabels}
                 />
               </div>
@@ -990,6 +1000,7 @@ export default function DecisionStudio({
                   }
                   disabled={loading}
                   available={whisperAvailable}
+                  unavailableMessage={voiceWhisperUnavailableMessage}
                   labels={whisperLabels}
                 />
                 <VoiceDictateButton
@@ -1000,6 +1011,7 @@ export default function DecisionStudio({
                     )
                   }
                   disabled={loading}
+                  replaceWithMessage={armenianBrowserSttMessage}
                   labels={voiceLabels}
                 />
               </div>

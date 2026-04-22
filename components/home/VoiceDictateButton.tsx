@@ -8,6 +8,8 @@ type Props = {
   locale: AppLocale;
   onAppend: (chunk: string) => void;
   disabled?: boolean;
+  /** e.g. Armenian: browser STT is unusable; show this instead of the dictate button. */
+  replaceWithMessage?: string;
   labels: {
     dictate: string;
     listening: string;
@@ -42,6 +44,7 @@ export default function VoiceDictateButton({
   locale,
   onAppend,
   disabled,
+  replaceWithMessage,
   labels,
 }: Props) {
   const [listening, setListening] = useState(false);
@@ -119,6 +122,17 @@ export default function VoiceDictateButton({
       }
     };
   }, []);
+
+  if (replaceWithMessage) {
+    return (
+      <p
+        className="max-w-[16rem] text-end text-[10px] leading-tight text-[rgb(var(--ink-soft))]/90 [text-wrap:pretty]"
+        role="status"
+      >
+        {replaceWithMessage}
+      </p>
+    );
+  }
 
   if (!supported) {
     return (

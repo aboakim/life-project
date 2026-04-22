@@ -124,6 +124,10 @@ export type UIStrings = {
   voiceWhisperWorking: string;
   voiceWhisperError: string;
   voiceWhisperNeedMic: string;
+  /** Shown when /api/speech/available is false (no OPENAI key) */
+  voiceWhisperNotConfigured: string;
+  /** Shown for locale hy instead of a useless in-browser STT button */
+  voiceSttArmenianUseCloud: string;
 };
 
 /** English trust/how blocks — reused as fallback for locales without custom copy */
@@ -522,6 +526,10 @@ const uiHy: Partial<UIStrings> = {
   voiceWhisperWorking: "Գրառում…",
   voiceWhisperError: "Գրառումը չհաջողվեց. փորձեք բրաուզերի կոճակը.",
   voiceWhisperNeedMic: "Թույլտվեք միքրոֆոնը։",
+  voiceWhisperNotConfigured:
+    "Cloud խոսք→տեքստ — այս կայքի սերվերում key չի․ ավելացրե՛ք OpenAI, կամ մուտքը գրե՛ք։",
+  voiceSttArmenianUseCloud:
+    "Բրաուզերում հայերեն խոսում→տեքստը սովորաբար չի աշխատում․ ձայնը տեքստ ավելացրեք «(cloud) գրառում» կոճակով (OpenAI key), կամ մուտքը գրե՛ք։",
 };
 
 const uiEn: Partial<UIStrings> = {
@@ -610,6 +618,10 @@ const uiEn: Partial<UIStrings> = {
   voiceWhisperWorking: "Transcribing…",
   voiceWhisperError: "Transcription failed — try the browser button.",
   voiceWhisperNeedMic: "Allow microphone access.",
+  voiceWhisperNotConfigured:
+    "Cloud recording is not enabled (no OpenAI key on the server). Type your text, or configure OPENAI_API_KEY.",
+  voiceSttArmenianUseCloud:
+    "In-browser voice typing is not available for Armenian on most systems. Use the cloud (record) button when the server is configured, or type.",
 };
 
 /** American English — UI copy tuned for US spelling/idiom where it differs */
@@ -712,6 +724,10 @@ const uiRu: Partial<UIStrings> = {
   voiceWhisperWorking: "Расшифровка…",
   voiceWhisperError: "Не удалось — попробуйте кнопку браузера.",
   voiceWhisperNeedMic: "Разрешите доступ к микрофону.",
+  voiceWhisperNotConfigured:
+    "Серверная запись (cloud) выключена (нет ключа). Введите текст или настройте OPENAI_API_KEY.",
+  voiceSttArmenianUseCloud:
+    "Встроенный ввод гола для армянского в браузерах на ПК чаще не работает. Используйте кнопку «cloud (запись)» при настроенном сервере, или печатайте.",
 };
 
 const uiDe: Partial<UIStrings> = {
@@ -800,6 +816,10 @@ const uiDe: Partial<UIStrings> = {
   voiceWhisperWorking: "Wird transkribiert…",
   voiceWhisperError: "Fehlgeschlagen — Browser-Button nutzen.",
   voiceWhisperNeedMic: "Mikrofon erlauben.",
+  voiceWhisperNotConfigured:
+    "Cloud-Aufnahme ist nicht aktiv (kein API-Key). Text tippen oder OPENAI_API_KEY setzen.",
+  voiceSttArmenianUseCloud:
+    "Armenische Spracheingabe im Desktop-Browser funktioniert meist nicht. Cloud-Aufnahme (wenn eingerichtet) nutzen oder tippen.",
 };
 
 const uiFr: Partial<UIStrings> = {
@@ -888,6 +908,10 @@ const uiFr: Partial<UIStrings> = {
   voiceWhisperWorking: "Transcription…",
   voiceWhisperError: "Échec — essayez le bouton du navigateur.",
   voiceWhisperNeedMic: "Autorisez le micro.",
+  voiceWhisperNotConfigured:
+    "L’enregistrement cloud est désactivé (pas de clé). Saisir le texte ou configurer OPENAI_API_KEY.",
+  voiceSttArmenianUseCloud:
+    "La dictée navigateur en arménien ne fonctionne en général pas. Utilisez le nuage (enregistrement) si le serveur l’autorise, ou tapez.",
 };
 
 const uiEs: Partial<UIStrings> = {
@@ -976,6 +1000,10 @@ const uiEs: Partial<UIStrings> = {
   voiceWhisperWorking: "Transcribiendo…",
   voiceWhisperError: "Error — prueba el botón del navegador.",
   voiceWhisperNeedMic: "Permite el micrófono.",
+  voiceWhisperNotConfigured:
+    "Graba (nube) no activa: sin clave en el servidor. Escribe, o configura OPENAI_API_KEY.",
+  voiceSttArmenianUseCloud:
+    "El dictado del navegador en armenio casi nunca funciona. Usa la nube (grabar) si el servidor lo permite, o escribe.",
 };
 
 const uiAr: Partial<UIStrings> = {
@@ -1064,6 +1092,10 @@ const uiAr: Partial<UIStrings> = {
   voiceWhisperWorking: "جارٍ النسخ…",
   voiceWhisperError: "فشل — جرّب زر المتصفح.",
   voiceWhisperNeedMic: "اسمح بالوصول للميكروفون.",
+  voiceWhisperNotConfigured:
+    "التسجيل السحابي غير مفعّل (لا مفتاح في الخادم). اكتب، أو اضبط OPENAI_API_KEY.",
+  voiceSttArmenianUseCloud:
+    "توجيه أرميني بصوتٍ داخل المتصفح قليلاً يعمل. استخدم التسجيل (سحابي) إن كان الخادم يدعم، أو اكتب.",
 };
 
 const uiIt: Partial<UIStrings> = {
@@ -1152,6 +1184,10 @@ const uiIt: Partial<UIStrings> = {
   voiceWhisperWorking: "Trascrizione…",
   voiceWhisperError: "Errore — prova il pulsante del browser.",
   voiceWhisperNeedMic: "Consenti l’accesso al microfono.",
+  voiceWhisperNotConfigured:
+    "Registrazione cloud disattivata (nessuna chiave sul server). Scrivi, o configura OPENAI_API_KEY.",
+  voiceSttArmenianUseCloud:
+    "L’inserimento vocale in armeno dal browser in genere non funziona. Usa la registrazione (cloud) se il server la abilita, o scrivi.",
 };
 
 const table: Record<AppLocale, Partial<UIStrings>> = {
