@@ -253,6 +253,16 @@ export default function DecisionStudio({
 
   const a = result?.analysis;
 
+  useEffect(() => {
+    if (!a) return;
+    const id = window.setTimeout(() => {
+      document
+        .getElementById("results-main-heading")
+        ?.focus({ preventScroll: true });
+    }, 420);
+    return () => clearTimeout(id);
+  }, [a]);
+
   const expertsSearchHref = useMemo(() => {
     const q = decision.trim().slice(0, 160);
     return q ? `/experts?q=${encodeURIComponent(q)}` : "/experts";
@@ -383,7 +393,7 @@ export default function DecisionStudio({
       >
         {focusLayout && (
           <section
-            className="mb-8 rounded-[1.75rem] border border-white/[0.12] bg-gradient-to-br from-white/[0.1] to-white/[0.02] p-5 sm:p-6"
+            className="mb-8 rounded-[1.75rem] border-2 border-[rgb(var(--accent))]/40 bg-gradient-to-br from-[rgb(var(--accent))]/[0.12] via-white/[0.08] to-white/[0.02] p-5 shadow-[0_0_0_1px_rgba(255,255,255,0.06)_inset,0_24px_80px_-32px_rgb(var(--accent)/0.45)] sm:p-7"
             aria-labelledby="analyze-focus-h"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[rgb(var(--accent-2))]">
@@ -476,13 +486,13 @@ export default function DecisionStudio({
                 ))}
               </div>
               <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-                <a
-                  href="#section-workspace"
+                <Link
+                  href="/analyze"
                   className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-8 py-3.5 text-base font-bold text-white shadow-xl shadow-[rgb(var(--accent)/0.35)] transition hover:brightness-110"
                 >
                   {t.heroCtaPrimary}
-                  <span aria-hidden>↓</span>
-                </a>
+                  <span aria-hidden>→</span>
+                </Link>
                 <Link
                   href="/experts"
                   className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/[0.18] bg-white/[0.07] px-8 py-3.5 text-base font-bold text-[rgb(var(--ink))] transition hover:bg-white/[0.12]"
@@ -745,6 +755,20 @@ export default function DecisionStudio({
         </>
         )}
 
+        {!focusLayout && (
+          <div className="mb-6 flex flex-col gap-3 rounded-2xl border-2 border-dashed border-[rgb(var(--accent-2))]/40 bg-gradient-to-r from-[rgb(var(--accent))]/[0.1] to-[rgb(var(--accent-magenta))]/[0.08] p-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-5 sm:py-4">
+            <p className="text-sm font-medium leading-relaxed text-[rgb(var(--ink))] [text-wrap:pretty]">
+              {t.homeAnalyzerPromoLine}
+            </p>
+            <Link
+              href="/analyze"
+              className="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-xl bg-white/[0.12] px-4 py-2.5 text-sm font-bold text-white ring-1 ring-white/20 transition hover:bg-white/[0.18]"
+            >
+              {t.homeAnalyzerPromoCta} →
+            </Link>
+          </div>
+        )}
+
         {/* Workspace: disclaimer + analyzer */}
         <section
           id="section-workspace"
@@ -757,6 +781,18 @@ export default function DecisionStudio({
           >
             {t.workspaceTitle}
           </h2>
+          <p
+            className="mt-4 max-w-3xl rounded-2xl border border-[rgb(var(--accent-2))]/30 bg-white/[0.04] px-4 py-3 text-sm font-medium leading-relaxed text-[rgb(var(--ink))] [text-wrap:pretty] sm:px-5"
+            role="status"
+          >
+            <span
+              className="me-2 inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[rgb(var(--accent))]/40 to-[rgb(var(--accent-2))]/30 text-xs font-bold text-white"
+              aria-hidden
+            >
+              1
+            </span>
+            {t.workspaceFillHint}
+          </p>
           <div className="mt-5">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[rgb(var(--accent-2))]">
               {sx.warmEyebrow}
@@ -801,7 +837,7 @@ export default function DecisionStudio({
             <form
               id="analyzer"
               onSubmit={onSubmit}
-              className="glass card-glow rounded-3xl p-5 sm:p-6 lg:col-span-3"
+              className="glass card-glow ring-1 ring-inset ring-[rgb(var(--accent))]/25 rounded-3xl p-5 sm:p-6 lg:col-span-3"
             >
               <h3 className="text-lg font-semibold text-[rgb(var(--ink))]">
                 {t.decision}
@@ -881,8 +917,21 @@ export default function DecisionStudio({
         {a && (
           <section
             id="section-results"
-            className="home-section-wash home-section-wash--results scroll-mt-28 mt-8 space-y-6 rounded-[1.85rem] border-t border-white/[0.08] px-3 pt-10 sm:px-4"
+            className="home-section-wash home-section-wash--results scroll-mt-28 mt-8 space-y-6 rounded-[1.85rem] border-2 border-emerald-500/30 bg-gradient-to-b from-emerald-500/[0.07] to-transparent px-3 pt-8 sm:px-4"
+            aria-labelledby="results-main-heading"
           >
+            <div
+              id="results-main-heading"
+              tabIndex={-1}
+              className="animate-fade-up rounded-2xl border border-emerald-400/35 bg-gradient-to-r from-emerald-500/20 to-cyan-500/10 px-4 py-4 sm:px-5"
+            >
+              <h2 className="font-display text-xl font-extrabold tracking-tight text-emerald-50/95 [text-wrap:balance] sm:text-2xl">
+                <span className="me-2 text-2xl" aria-hidden>
+                  ✓
+                </span>
+                {t.resultsYouAreHere}
+              </h2>
+            </div>
             <div className="animate-fade-up flex flex-col gap-3 rounded-2xl border border-[rgb(var(--accent-2))]/35 bg-gradient-to-br from-[rgb(var(--accent))]/14 via-white/[0.04] to-transparent px-4 py-4 shadow-[0_16px_48px_-28px_rgb(var(--accent)/0.45)] sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-6">
               <p className="max-w-2xl text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
                 {pa.runAnotherHint}

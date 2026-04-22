@@ -99,6 +99,13 @@ export type UIStrings = {
   analyzePageTitle: string;
   analyzePageSubtitle: string;
   analyzeBackHome: string;
+  /** Shown above the form — where to type */
+  workspaceFillHint: string;
+  /** Shown as first thing in the results block */
+  resultsYouAreHere: string;
+  /** Home only — points users to the full-screen /analyze experience */
+  homeAnalyzerPromoLine: string;
+  homeAnalyzerPromoCta: string;
 };
 
 /** English trust/how blocks — reused as fallback for locales without custom copy */
@@ -472,6 +479,12 @@ const uiHy: Partial<UIStrings> = {
   analyzePageSubtitle:
     "Գրիր հարցը ստորև, հետո սեղմիր «Վերլուծել»․ կառուցված հաշվետվությունը կերևա բանաձևի հենց տակ, երբ պատրաստ լինի։",
   analyzeBackHome: "Գլխավոր էջ",
+  workspaceFillHint:
+    "Նախ՝ գրեք ձեր հարցը առաջին դաշտում, հետո սեղմեք «Վերլուծել»․ հաշվետվությունը հայտնվում է բանաձևի անմիջապես ներքևում։",
+  resultsYouAreHere: "Ձեր հաշվետվությունը պատրաստ է",
+  homeAnalyzerPromoLine:
+    "Ցանկանա՞ք էջ, որտեղ միայն վերլուծիչն է, առանց երկար սքրոլի․",
+  homeAnalyzerPromoCta: "Բացել /analyze",
 };
 
 const uiEn: Partial<UIStrings> = {
@@ -535,6 +548,12 @@ const uiEn: Partial<UIStrings> = {
   analyzePageSubtitle:
     "Write your question below, then run the analysis. Your structured report appears right under the form when it’s ready.",
   analyzeBackHome: "Back to home",
+  workspaceFillHint:
+    "Type your main question in the first box, then run analysis. The report appears directly below the form.",
+  resultsYouAreHere: "Your report is ready",
+  homeAnalyzerPromoLine:
+    "Want a page with only the analyzer and no long scroll?",
+  homeAnalyzerPromoCta: "Open the analyzer",
 };
 
 /** American English — UI copy tuned for US spelling/idiom where it differs */
@@ -612,6 +631,12 @@ const uiRu: Partial<UIStrings> = {
   analyzePageSubtitle:
     "Напишите вопрос ниже и запустите анализ. Структурированный отчёт появится сразу под формой, когда будет готов.",
   analyzeBackHome: "На главную",
+  workspaceFillHint:
+    "Сначала введите вопрос в первом поле, затем запустите анализ. Отчёт появится сразу под формой.",
+  resultsYouAreHere: "Ваш отчёт готов",
+  homeAnalyzerPromoLine:
+    "Нужна страница только с анализатором, без длинной прокрутки?",
+  homeAnalyzerPromoCta: "Открыть анализатор",
 };
 
 const uiDe: Partial<UIStrings> = {
@@ -675,6 +700,12 @@ const uiDe: Partial<UIStrings> = {
   analyzePageSubtitle:
     "Schreibe deine Frage unten, starte die Analyse. Dein strukturierter Bericht erscheint direkt unter dem Formular, sobald er fertig ist.",
   analyzeBackHome: "Zur Startseite",
+  workspaceFillHint:
+    "Schreib deine Hauptfrage ins erste Feld, dann Analyse starten. Der Bericht erscheint direkt unter dem Formular.",
+  resultsYouAreHere: "Dein Bericht ist fertig",
+  homeAnalyzerPromoLine:
+    "Nur Analyse-Seite ohne langen Scroll?",
+  homeAnalyzerPromoCta: "Analyzer öffnen",
 };
 
 const uiFr: Partial<UIStrings> = {
@@ -738,6 +769,12 @@ const uiFr: Partial<UIStrings> = {
   analyzePageSubtitle:
     "Écrivez votre question ci-dessous, lancez l’analyse. Le rapport structuré apparaît juste sous le formulaire dès qu’il est prêt.",
   analyzeBackHome: "Retour à l’accueil",
+  workspaceFillHint:
+    "Écrivez votre question principale dans le premier champ, puis lancez l’analyse. Le rapport apparaît juste sous le formulaire.",
+  resultsYouAreHere: "Votre rapport est prêt",
+  homeAnalyzerPromoLine:
+    "Une page avec seulement l’analyseur, sans long défilement ?",
+  homeAnalyzerPromoCta: "Ouvrir l’analyseur",
 };
 
 const uiEs: Partial<UIStrings> = {
@@ -801,6 +838,12 @@ const uiEs: Partial<UIStrings> = {
   analyzePageSubtitle:
     "Escribe tu pregunta abajo y ejecuta el análisis. El informe estructurado aparece justo debajo del formulario cuando esté listo.",
   analyzeBackHome: "Volver al inicio",
+  workspaceFillHint:
+    "Escribe tu pregunta principal en el primer campo, luego ejecuta el análisis. El informe aparece justo debajo del formulario.",
+  resultsYouAreHere: "Tu informe está listo",
+  homeAnalyzerPromoLine:
+    "¿Quieres una página solo con el analizador, sin scroll largo?",
+  homeAnalyzerPromoCta: "Abrir analizador",
 };
 
 const uiAr: Partial<UIStrings> = {
@@ -864,6 +907,12 @@ const uiAr: Partial<UIStrings> = {
   analyzePageSubtitle:
     "اكتب سؤالك أدناه ثم شغّل التحليل. يظهر التقرير المنظّم مباشرة تحت النموذج عند جاهزيته.",
   analyzeBackHome: "العودة للرئيسية",
+  workspaceFillHint:
+    "اكتب سؤالك الرئيسي في الحقل الأول، ثم شغّل التحليل. يظهر التقرير مباشرة تحت النموذج.",
+  resultsYouAreHere: "تقريرك جاهز",
+  homeAnalyzerPromoLine:
+    "تريد صفحة فيها المحلّل فقط بدون تمرير طويل؟",
+  homeAnalyzerPromoCta: "افتح المحلّل",
 };
 
 const uiIt: Partial<UIStrings> = {
@@ -927,6 +976,12 @@ const uiIt: Partial<UIStrings> = {
   analyzePageSubtitle:
     "Scrivi la tua domanda sotto, poi avvia l’analisi. Il report strutturato compare subito sotto al modulo quando è pronto.",
   analyzeBackHome: "Torna alla home",
+  workspaceFillHint:
+    "Scrivi la domanda principale nel primo campo, poi avvia l’analisi. Il report compare subito sotto al modulo.",
+  resultsYouAreHere: "Il tuo report è pronto",
+  homeAnalyzerPromoLine:
+    "Vuoi una pagina solo con l’analizzatore, senza scroll lungo?",
+  homeAnalyzerPromoCta: "Apri analizzatore",
 };
 
 const table: Record<AppLocale, Partial<UIStrings>> = {
