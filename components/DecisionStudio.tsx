@@ -37,7 +37,13 @@ import {
   dispatchLocaleChanged,
 } from "@/lib/locale-sync";
 import type { InitialPreset } from "@/components/home/DecisionStudioShell";
+import { getHomeThematicBands } from "@/lib/i18n/home-thematic-bands";
 import { getSiteExtras, getWarmPresets } from "@/lib/i18n/site-extras";
+import {
+  THEMATIC_BAND_A_IMAGE,
+  THEMATIC_BAND_B_IMAGE,
+} from "@/lib/home/thematic-banners";
+import ThematicImageBand from "@/components/home/ThematicImageBand";
 import { getPostAnalysisCopy } from "@/lib/i18n/post-analysis";
 import AnalysisResultTools from "@/components/home/AnalysisResultTools";
 import {
@@ -115,6 +121,7 @@ export default function DecisionStudio({
   const pa = useMemo(() => getPostAnalysisCopy(locale), [locale]);
   const presetApplied = useRef(false);
   const exNav = getExpertsCopy(locale);
+  const homeBands = useMemo(() => getHomeThematicBands(locale), [locale]);
   const pr = getPricingCopy(locale);
   const brief = getDecisionBriefCopy(locale);
   const rtl = isRtlLocale(locale);
@@ -669,6 +676,15 @@ export default function DecisionStudio({
         </section>
         </RevealOnScroll>
 
+        <RevealOnScroll>
+          <ThematicImageBand
+            copy={homeBands.a}
+            imageSrc={THEMATIC_BAND_A_IMAGE}
+            imageSide="start"
+            sectionId="section-thematic-clarity"
+          />
+        </RevealOnScroll>
+
         {/* Product — bento */}
         <RevealOnScroll>
         <section
@@ -746,6 +762,15 @@ export default function DecisionStudio({
             ))}
           </ul>
         </section>
+        </RevealOnScroll>
+
+        <RevealOnScroll>
+          <ThematicImageBand
+            copy={homeBands.b}
+            imageSrc={THEMATIC_BAND_B_IMAGE}
+            imageSide="end"
+            sectionId="section-thematic-humans"
+          />
         </RevealOnScroll>
 
         {/* How — timeline */}
