@@ -46,7 +46,8 @@ const baseSecurityHeaders: { key: string; value: string }[] = [
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   {
     key: "Permissions-Policy",
-    value: "camera=(), microphone=(), geolocation=(), payment=(self \"https://checkout.stripe.com\" \"https://js.stripe.com\")",
+    value:
+      "camera=(), microphone=(self), geolocation=(), payment=(self \"https://checkout.stripe.com\" \"https://js.stripe.com\")",
   },
   { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
   { key: "X-Permitted-Cross-Domain-Policies", value: "none" },

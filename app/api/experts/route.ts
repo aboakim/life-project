@@ -1,8 +1,13 @@
 import { NextResponse } from "next/server";
 import { ExpertRole } from "@prisma/client";
+import { getClientIp } from "@/lib/client-ip";
 import { prisma } from "@/lib/prisma";
+import { rateLimitAllow } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
+
+const EXPERTS_POST_WINDOW_MS = 60 * 60 * 1000;
+const EXPERTS_POST_MAX = 5;
 
 const ROLES: ExpertRole[] = [
   ExpertRole.PSYCHOLOGIST,
@@ -53,6 +58,11 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
+  const ip = getClientIp(req);
+  if (!rateLimitAllow(`expertSignUp:${ip}`, EXPERTS_POST_MAX, EXPERTS_POST_WINDOW_MS)) {
+    return NextResponse.json({ error: "rate_limited" }, { status: 429 });
+  }
+
   let body: Record<string, unknown>;
   try {
     body = (await req.json()) as Record<string, unknown>;

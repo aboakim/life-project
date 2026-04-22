@@ -1,28 +1,36 @@
 import { NextResponse } from "next/server";
+import { getClientIp } from "@/lib/client-ip";
 import { readAdminSecret } from "@/lib/admin-env";
 import { ADMIN_COOKIE_NAME, signAdminToken } from "@/lib/admin-cookie";
+import { rateLimitAllow } from "@/lib/rate-limit";
+import { safeEqualString } from "@/lib/secure-compare";
 
 export const runtime = "nodejs";
 
+const WINDOW_MS = 15 * 60 * 1000;
+const MAX_ATTEMPTS = 8;
+
 export async function POST(req: Request) {
+  const ip = getClientIp(req);
+  if (!rateLimitAllow(`adminLogin:${ip}`, MAX_ATTEMPTS, WINDOW_MS)) {
+    return NextResponse.json({ error: "rate_limited" }, { status: 429 });
+  }
+
   const secret = readAdminSecret();
   if (!secret) {
-    return NextResponse.json(
-      { error: "Admin not configured (set ADMIN_SECRET in .env)" },
-      { status: 503 }
-    );
+    return NextResponse.json({ error: "unavailable" }, { status: 503 });
   }
 
   let body: { password?: string };
   try {
     body = (await req.json()) as { password?: string };
   } catch {
-    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+    return NextResponse.json({ error: "invalid_request" }, { status: 400 });
   }
 
-  const pwd = typeof body.password === "string" ? body.password.trim() : "";
-  if (pwd !== secret) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const pwd = typeof body.password === "string" ? body.password : "";
+  if (!safeEqualString(pwd, secret)) {
+    return NextResponse.json({ error: "invalid_credentials" }, { status: 401 });
   }
 
   const token = signAdminToken(secret);

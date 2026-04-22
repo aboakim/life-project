@@ -1,10 +1,20 @@
 import { NextResponse } from "next/server";
+import { getClientIp } from "@/lib/client-ip";
 import { sendContactNotifications } from "@/lib/email";
 import { prisma } from "@/lib/prisma";
+import { rateLimitAllow } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 
+const WINDOW_MS = 60 * 60 * 1000;
+const MAX_PER_HOUR = 8;
+
 export async function POST(req: Request) {
+  const ip = getClientIp(req);
+  if (!rateLimitAllow(`contact:${ip}`, MAX_PER_HOUR, WINDOW_MS)) {
+    return NextResponse.json({ error: "rate_limited" }, { status: 429 });
+  }
+
   let body: Record<string, unknown>;
   try {
     body = (await req.json()) as Record<string, unknown>;

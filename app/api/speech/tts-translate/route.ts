@@ -1,7 +1,12 @@
 import { NextResponse } from "next/server";
+import { getClientIp } from "@/lib/client-ip";
 import { isEnglishAppLocale, parseLocale, type AppLocale } from "@/lib/i18n/locale";
+import { rateLimitAllow } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
+
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+const RATE_MAX = 20;
 
 const MAX_CHARS = 24_000;
 const MODEL = process.env.OPENAI_MODEL ?? "gpt-4o-mini";
@@ -11,6 +16,11 @@ const MODEL = process.env.OPENAI_MODEL ?? "gpt-4o-mini";
  * for the page language (e.g. Armenian on Windows). Same key as /api/analyze.
  */
 export async function POST(req: Request) {
+  const ip = getClientIp(req);
+  if (!rateLimitAllow(`ttsTranslate:${ip}`, RATE_MAX, RATE_WINDOW_MS)) {
+    return NextResponse.json({ error: "rate_limited" }, { status: 429 });
+  }
+
   const key = process.env.OPENAI_API_KEY;
   if (!key) {
     return NextResponse.json({ error: "unavailable" }, { status: 503 });

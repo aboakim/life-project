@@ -1,14 +1,24 @@
 import { NextResponse } from "next/server";
+import { getClientIp } from "@/lib/client-ip";
 import { buildDemoAnalysis } from "@/lib/demo-analysis";
 import { getUi } from "@/lib/i18n/ui";
 import { parseLocale } from "@/lib/i18n/locale";
 import { loadMatchedExperts } from "@/lib/matched-experts";
 import { analyzeWithOpenAI } from "@/lib/llm-analyze";
+import { rateLimitAllow } from "@/lib/rate-limit";
 import type { AnalyzeRequestBody } from "@/lib/types";
 
 export const runtime = "nodejs";
 
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+const RATE_MAX = 32;
+
 export async function POST(req: Request) {
+  const ip = getClientIp(req);
+  if (!rateLimitAllow(`analyze:${ip}`, RATE_MAX, RATE_WINDOW_MS)) {
+    return NextResponse.json({ error: "rate_limited" }, { status: 429 });
+  }
+
   let body: AnalyzeRequestBody;
   try {
     body = (await req.json()) as AnalyzeRequestBody;

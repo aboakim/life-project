@@ -1,8 +1,13 @@
 import { NextResponse } from "next/server";
+import { getClientIp } from "@/lib/client-ip";
 import { appLocaleToWhisperLanguage } from "@/lib/speech/whisper-locale";
 import { isAppLocale, type AppLocale } from "@/lib/i18n/locale";
+import { rateLimitAllow } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
+
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+const RATE_MAX = 40;
 
 const MAX_BYTES = 15 * 1024 * 1024;
 
@@ -41,6 +46,11 @@ async function openaiTranscribe(
  * If a fixed `language` request fails, retries once with auto language detection.
  */
 export async function POST(req: Request) {
+  const ip = getClientIp(req);
+  if (!rateLimitAllow(`transcribe:${ip}`, RATE_MAX, RATE_WINDOW_MS)) {
+    return NextResponse.json({ error: "rate_limited" }, { status: 429 });
+  }
+
   const key = process.env.OPENAI_API_KEY;
   if (!key) {
     return NextResponse.json(
