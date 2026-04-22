@@ -301,9 +301,6 @@ export default function DecisionStudio({
 
   const armenianBrowserSttMessage =
     locale === "hy" ? t.voiceSttArmenianUseCloud : undefined;
-  const voiceWhisperUnavailableMessage = !whisperAvailable
-    ? t.voiceWhisperNotConfigured
-    : undefined;
 
   const readAloudText = useMemo(
     () =>
@@ -928,7 +925,6 @@ export default function DecisionStudio({
                     }
                     disabled={loading}
                     available={whisperAvailable}
-                    unavailableMessage={voiceWhisperUnavailableMessage}
                     labels={whisperLabels}
                   />
                   <VoiceDictateButton
@@ -966,7 +962,6 @@ export default function DecisionStudio({
                   }
                   disabled={loading}
                   available={whisperAvailable}
-                  unavailableMessage={voiceWhisperUnavailableMessage}
                   labels={whisperLabels}
                 />
                 <VoiceDictateButton
@@ -1000,7 +995,6 @@ export default function DecisionStudio({
                   }
                   disabled={loading}
                   available={whisperAvailable}
-                  unavailableMessage={voiceWhisperUnavailableMessage}
                   labels={whisperLabels}
                 />
                 <VoiceDictateButton

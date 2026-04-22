@@ -118,14 +118,12 @@ export type UIStrings = {
   voiceInputHint: string;
   readAloud: string;
   readAloudStop: string;
-  /** OpenAI Whisper — server record */
+  /** Server-side record button (Whisper) — public copy must not mention providers or keys */
   voiceWhisperStart: string;
   voiceWhisperStop: string;
   voiceWhisperWorking: string;
   voiceWhisperError: string;
   voiceWhisperNeedMic: string;
-  /** Shown when /api/speech/available is false (no OPENAI key) */
-  voiceWhisperNotConfigured: string;
   /** Shown for locale hy instead of a useless in-browser STT button */
   voiceSttArmenianUseCloud: string;
 };
@@ -516,9 +514,9 @@ const uiHy: Partial<UIStrings> = {
   voiceListening: "Լսում եմ…",
   voiceStop: "Կանգ",
   voiceNotSupported:
-    "Բրաուզերով խոսում→տեքստը հաճախ չի աշխատում հայերենում․ ավելի հուսալի է «(cloud) գրառում» կոճակը, երբ սերվերում Whisper-ը միացած է (OpenAI key)․ Փորձեք Chrome/Edge։",
+    "Բրաուզերով խոսում→տեքստը հայերենում հաճախ չի աշխատում․ երևում է «(cloud) գրառում» կոճակը — այն ավելի հավանական է աշխատի, կամ մուտքը գրե՛ք։ Փորձեք Chrome/Edge։",
   voiceInputHint:
-    "Ընտրված UI լեզուն = վերլուծության, cloud գրառման և «Լսել»-ի հիմքը․ հավասար պահեք խոսքի հետ։ Եթե սարքին այդ լեզվի TTS ձայն չկա, «Լսել»-ը կարող է մեկ անգամ թարգմանել անգլերեն (OpenAI-ով)։",
+    "Ընտրված միջերեսի լեզուն = վերլուծության, ձայնի և «Լսել»-ի համար. պահե՛ք նույնը, ինչ խոսում եք։ Եթե «Լսել»-ը ձեր լեզվով ձայն չունի, կարող է տարբեր լեզվով կամ թարգմանված կարդալ (կախված սարքից)։",
   readAloud: "Լսել հաշվետվությունը",
   readAloudStop: "Կանգնեցնել",
   voiceWhisperStart: "Գրանցում (cloud)",
@@ -526,10 +524,8 @@ const uiHy: Partial<UIStrings> = {
   voiceWhisperWorking: "Գրառում…",
   voiceWhisperError: "Գրառումը չհաջողվեց. փորձեք բրաուզերի կոճակը.",
   voiceWhisperNeedMic: "Թույլտվեք միքրոֆոնը։",
-  voiceWhisperNotConfigured:
-    "Cloud խոսք→տեքստ — այս կայքի սերվերում key չի․ ավելացրե՛ք OpenAI, կամ մուտքը գրե՛ք։",
   voiceSttArmenianUseCloud:
-    "Բրաուզերում հայերեն խոսում→տեքստը սովորաբար չի աշխատում․ ձայնը տեքստ ավելացրեք «(cloud) գրառում» կոճակով (OpenAI key), կամ մուտքը գրե՛ք։",
+    "Բրաուզերում հայերեն խոսում→տեքստը սովորաբար չի աշխատում․ երևում է «(cloud) գրառում» — այն ավելի հավանական է աշխատի, կամ մուտքը գրե՛ք։",
 };
 
 const uiEn: Partial<UIStrings> = {
@@ -608,9 +604,9 @@ const uiEn: Partial<UIStrings> = {
   voiceListening: "Listening…",
   voiceStop: "Stop",
   voiceNotSupported:
-    "In-browser voice typing isn’t available here. Use the cloud (record) button if your deployment enables it, or type. Best in Chrome or Edge for supported languages.",
+    "In-browser voice typing isn’t available here. If you see a cloud (record) option, try that, or type. Best in Chrome or Edge for supported languages.",
   voiceInputHint:
-    "Your selected page language is used for the analysis, cloud transcription, and read-aloud. It should match the language you speak. If your device has no voice for that language, read-aloud may translate to English for TTS (when the server is configured with OpenAI).",
+    "Your selected page language applies to the analysis, voice features, and read-aloud — keep it aligned with the language you speak. If read-aloud doesn’t offer a voice in your language, your device may fall back to another language (best effort).",
   readAloud: "Listen to report",
   readAloudStop: "Stop playback",
   voiceWhisperStart: "Record (cloud)",
@@ -618,10 +614,8 @@ const uiEn: Partial<UIStrings> = {
   voiceWhisperWorking: "Transcribing…",
   voiceWhisperError: "Transcription failed — try the browser button.",
   voiceWhisperNeedMic: "Allow microphone access.",
-  voiceWhisperNotConfigured:
-    "Cloud recording is not enabled (no OpenAI key on the server). Type your text, or configure OPENAI_API_KEY.",
   voiceSttArmenianUseCloud:
-    "In-browser voice typing is not available for Armenian on most systems. Use the cloud (record) button when the server is configured, or type.",
+    "In-browser voice typing usually doesn’t work for Armenian. If you see cloud (record), use that, or type.",
 };
 
 /** American English — UI copy tuned for US spelling/idiom where it differs */
@@ -714,9 +708,9 @@ const uiRu: Partial<UIStrings> = {
   voiceListening: "Слушаю…",
   voiceStop: "Стоп",
   voiceNotSupported:
-    "Голос в браузере может не поддерживать этот язык. Используйте кнопку «cloud (запись)» при настроенном сервере, либо ввод с клавиатуры. Chrome/Edge — лучше.",
+    "Голос в браузере может не поддерживать этот язык. Если видна кнопка «cloud (запись)», попробуйте её, иначе ввод с клавиатуры. Chrome/Edge — лучше.",
   voiceInputHint:
-    "Язык интерфейса задаёт и отчёт, и голос. При отсутствии голоса к системе TTS «Прослушать» может перевести на английский (если на сервере есть OpenAI).",
+    "Язык интерфейса задаёт и отчёт, и голос. Если для «Прослушать» нет голоса на вашем языке, устройство может выбрать другой язык (по возможности).",
   readAloud: "Прослушать отчёт",
   readAloudStop: "Остановить",
   voiceWhisperStart: "Запись (cloud)",
@@ -724,10 +718,8 @@ const uiRu: Partial<UIStrings> = {
   voiceWhisperWorking: "Расшифровка…",
   voiceWhisperError: "Не удалось — попробуйте кнопку браузера.",
   voiceWhisperNeedMic: "Разрешите доступ к микрофону.",
-  voiceWhisperNotConfigured:
-    "Серверная запись (cloud) выключена (нет ключа). Введите текст или настройте OPENAI_API_KEY.",
   voiceSttArmenianUseCloud:
-    "Встроенный ввод гола для армянского в браузерах на ПК чаще не работает. Используйте кнопку «cloud (запись)» при настроенном сервере, или печатайте.",
+    "Встроенный голосовой ввод для армянского в браузере на ПК часто не работает. Если видна «cloud (запись)», попробуйте её, или печатайте.",
 };
 
 const uiDe: Partial<UIStrings> = {
@@ -806,9 +798,9 @@ const uiDe: Partial<UIStrings> = {
   voiceListening: "Höre zu…",
   voiceStop: "Stopp",
   voiceNotSupported:
-    "Manche Sprachen laufen im Browser nicht. Nutze die Cloud-(Aufnahme)-Taste, wenn eingerichtet, oder tippen. Chrome/Edge meist besser.",
+    "Manche Sprachen laufen im Browser nicht. Wenn eine Cloud-Aufnahme erscheint, nutze sie, sonst tippen. Chrome/Edge meist besser.",
   voiceInputHint:
-    "Gleiche Oberflächensprache = gleiche Analyse- und TTS-Sprache. Fehlt eine Stimme, kann die Vorlesefunktion fürs TTS ins Englische wechseln (wenn der Server OpenAI nutzt).",
+    "Gleiche Oberflächensprache = gleiche Analyse- und Sprachfunktionen. Fehlt eine Stimme für «Vorlesen», kann das Gerät ausweichen (bestmöglich).",
   readAloud: "Bericht anhören",
   readAloudStop: "Stoppen",
   voiceWhisperStart: "Aufnahme (Cloud)",
@@ -816,10 +808,8 @@ const uiDe: Partial<UIStrings> = {
   voiceWhisperWorking: "Wird transkribiert…",
   voiceWhisperError: "Fehlgeschlagen — Browser-Button nutzen.",
   voiceWhisperNeedMic: "Mikrofon erlauben.",
-  voiceWhisperNotConfigured:
-    "Cloud-Aufnahme ist nicht aktiv (kein API-Key). Text tippen oder OPENAI_API_KEY setzen.",
   voiceSttArmenianUseCloud:
-    "Armenische Spracheingabe im Desktop-Browser funktioniert meist nicht. Cloud-Aufnahme (wenn eingerichtet) nutzen oder tippen.",
+    "Armenische Spracheingabe im Desktop-Browser funktioniert meist nicht. Cloud-Aufnahme nutzen, wenn sichtbar, oder tippen.",
 };
 
 const uiFr: Partial<UIStrings> = {
@@ -898,9 +888,9 @@ const uiFr: Partial<UIStrings> = {
   voiceListening: "J’écoute…",
   voiceStop: "Arrêter",
   voiceNotSupported:
-    "La dictée intégrée ne couvre pas toutes les langues. Utilisez le nuage (enregistrement) si le serveur le permet, ou le clavier. Chrome/Edge de préférence.",
+    "La dictée intégrée ne couvre pas toutes les langues. Si un enregistrement « nuage » apparaît, essayez-le, sinon le clavier. Chrome/Edge de préférence.",
   voiceInputHint:
-    "La langue d’interface guide analyse, dictée et lecture vocale. Sans voix locale, l’écoute peut passer en anglais pour la synthèse (si le serveur a OpenAI).",
+    "La langue d’interface guide analyse, dictée et lecture vocale. Sans voix adaptée, la lecture peut utiliser une autre langue (selon l’appareil).",
   readAloud: "Écouter le rapport",
   readAloudStop: "Arrêter",
   voiceWhisperStart: "Enregistrer (cloud)",
@@ -908,10 +898,8 @@ const uiFr: Partial<UIStrings> = {
   voiceWhisperWorking: "Transcription…",
   voiceWhisperError: "Échec — essayez le bouton du navigateur.",
   voiceWhisperNeedMic: "Autorisez le micro.",
-  voiceWhisperNotConfigured:
-    "L’enregistrement cloud est désactivé (pas de clé). Saisir le texte ou configurer OPENAI_API_KEY.",
   voiceSttArmenianUseCloud:
-    "La dictée navigateur en arménien ne fonctionne en général pas. Utilisez le nuage (enregistrement) si le serveur l’autorise, ou tapez.",
+    "La dictée navigateur en arménien ne fonctionne en général pas. Si l’enregistrement nuage apparaît, essayez-le, ou tapez.",
 };
 
 const uiEs: Partial<UIStrings> = {
@@ -990,9 +978,9 @@ const uiEs: Partial<UIStrings> = {
   voiceListening: "Escuchando…",
   voiceStop: "Detener",
   voiceNotSupported:
-    "El dictado del navegador a veces no soporta tu idioma. Usa la nube (grabar) si el servidor lo permite, o el teclado. Mejor con Chrome/Edge.",
+    "El dictado del navegador a veces no soporta tu idioma. Si ves «nube (grabar)», pruébalo, o usa el teclado. Mejor con Chrome/Edge.",
   voiceInputHint:
-    "El idioma de la página aplica a análisis, transcripción e «Escuchar». Sin voz TTS, puede leerse en inglés (si el servidor traduce vía OpenAI).",
+    "El idioma de la página aplica a análisis, voz y «Escuchar». Sin voz en tu idioma, el dispositivo puede usar otro (mejor esfuerzo).",
   readAloud: "Escuchar informe",
   readAloudStop: "Detener",
   voiceWhisperStart: "Grabar (nube)",
@@ -1000,10 +988,8 @@ const uiEs: Partial<UIStrings> = {
   voiceWhisperWorking: "Transcribiendo…",
   voiceWhisperError: "Error — prueba el botón del navegador.",
   voiceWhisperNeedMic: "Permite el micrófono.",
-  voiceWhisperNotConfigured:
-    "Graba (nube) no activa: sin clave en el servidor. Escribe, o configura OPENAI_API_KEY.",
   voiceSttArmenianUseCloud:
-    "El dictado del navegador en armenio casi nunca funciona. Usa la nube (grabar) si el servidor lo permite, o escribe.",
+    "El dictado del navegador en armenio casi nunca funciona. Si ves nube (grabar), pruébalo, o escribe.",
 };
 
 const uiAr: Partial<UIStrings> = {
@@ -1082,9 +1068,9 @@ const uiAr: Partial<UIStrings> = {
   voiceListening: "أستمع…",
   voiceStop: "إيقاف",
   voiceNotSupported:
-    "قد لا يدعم المتصفح لغتك. استخدم زر (السحابة/تسجيل) إن كان مفعّلًا، أو اكتب. Chrome/Edge أغلب الأحيان أصلح.",
+    "قد لا يدعم المتصفح لغتك. إن ظهر زر (السحابة/تسجيل) جرّبه، وإلا اكتب. Chrome/Edge أغلب الأحيان أصلح.",
   voiceInputHint:
-    "لغة الواجهة هي نفس لغة التحليل والتسجيل والاستماع. إن لم تتوفر مزامنة صوتٍ فقد يُقرأ بالإنجليزية (إن كان الخادم يدعم OpenAI).",
+    "لغة الواجهة هي نفس لغة التحليل والتسجيل والاستماع. إن لم يتوفر صوت بلغتك، قد يستخدم الجهاز لغة أخرى حسب الإمكان.",
   readAloud: "استمع للتقرير",
   readAloudStop: "إيقاف التشغيل",
   voiceWhisperStart: "تسجيل (سحابي)",
@@ -1092,10 +1078,8 @@ const uiAr: Partial<UIStrings> = {
   voiceWhisperWorking: "جارٍ النسخ…",
   voiceWhisperError: "فشل — جرّب زر المتصفح.",
   voiceWhisperNeedMic: "اسمح بالوصول للميكروفون.",
-  voiceWhisperNotConfigured:
-    "التسجيل السحابي غير مفعّل (لا مفتاح في الخادم). اكتب، أو اضبط OPENAI_API_KEY.",
   voiceSttArmenianUseCloud:
-    "توجيه أرميني بصوتٍ داخل المتصفح قليلاً يعمل. استخدم التسجيل (سحابي) إن كان الخادم يدعم، أو اكتب.",
+    "إدخال أرميني صوتي من المتصفح نادرًا يعمل. إن ظهر التسجيل (سحابي) جرّبه، أو اكتب.",
 };
 
 const uiIt: Partial<UIStrings> = {
@@ -1174,9 +1158,9 @@ const uiIt: Partial<UIStrings> = {
   voiceListening: "In ascolto…",
   voiceStop: "Stop",
   voiceNotSupported:
-    "Il dettatura del browser non supporta ogni lingua. Usa Registra (cloud) se il server lo consente, oppure scrivi. Chrome/Edge di solito meglio.",
+    "Il dettatura del browser non supporta ogni lingua. Se compare Registra (cloud), provalo, altrimenti scrivi. Chrome/Edge di solito meglio.",
   voiceInputHint:
-    "La lingua scelta vale per analisi, cloud e ascolto. Se manca la voce TTS, l’ascolto può passare all’inglese (con OpenAI sul server).",
+    "La lingua scelta vale per analisi, voce e ascolto. Se manca una voce nella tua lingua, il dispositivo può usare un’altra (possibile).",
   readAloud: "Ascolta il report",
   readAloudStop: "Interrompi",
   voiceWhisperStart: "Registra (cloud)",
@@ -1184,10 +1168,8 @@ const uiIt: Partial<UIStrings> = {
   voiceWhisperWorking: "Trascrizione…",
   voiceWhisperError: "Errore — prova il pulsante del browser.",
   voiceWhisperNeedMic: "Consenti l’accesso al microfono.",
-  voiceWhisperNotConfigured:
-    "Registrazione cloud disattivata (nessuna chiave sul server). Scrivi, o configura OPENAI_API_KEY.",
   voiceSttArmenianUseCloud:
-    "L’inserimento vocale in armeno dal browser in genere non funziona. Usa la registrazione (cloud) se il server la abilita, o scrivi.",
+    "L’inserimento vocale in armeno dal browser in genere non funziona. Se compare Registra (cloud), provalo, o scrivi.",
 };
 
 const table: Record<AppLocale, Partial<UIStrings>> = {

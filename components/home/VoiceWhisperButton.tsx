@@ -16,8 +16,6 @@ type Props = {
   onAppend: (chunk: string) => void;
   disabled?: boolean;
   available: boolean;
-  /** If cloud is off, show this instead of hiding (e.g. “configure OPENAI”). */
-  unavailableMessage?: string;
   labels: Labels;
 };
 
@@ -44,7 +42,6 @@ export default function VoiceWhisperButton({
   onAppend,
   disabled,
   available,
-  unavailableMessage,
   labels,
 }: Props) {
   const [phase, setPhase] = useState<"idle" | "rec" | "up">("idle");
@@ -176,16 +173,6 @@ export default function VoiceWhisperButton({
   }, [cleanupStream]);
 
   if (!available) {
-    if (unavailableMessage) {
-      return (
-        <p
-          className="max-w-[16rem] text-end text-[10px] leading-tight text-[rgb(var(--ink-soft))]/90 [text-wrap:pretty]"
-          role="status"
-        >
-          {unavailableMessage}
-        </p>
-      );
-    }
     return null;
   }
 
