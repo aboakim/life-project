@@ -91,9 +91,12 @@ function ScoreCircle({
   );
 }
 
-type Props = { initialPreset?: InitialPreset };
+type Props = { initialPreset?: InitialPreset; focusLayout?: boolean };
 
-export default function DecisionStudio({ initialPreset = null }: Props) {
+export default function DecisionStudio({
+  initialPreset = null,
+  focusLayout = false,
+}: Props) {
   const [locale, setLocale] = useState<AppLocale>(DEFAULT_LOCALE);
   const t = getUi(locale);
   const sx = getSiteExtras(locale);
@@ -240,7 +243,7 @@ export default function DecisionStudio({ initialPreset = null }: Props) {
           behavior: "smooth",
           block: "start",
         });
-      }, 120);
+      }, 150);
     } catch {
       setError(t.networkError);
     } finally {
@@ -371,7 +374,73 @@ export default function DecisionStudio({ initialPreset = null }: Props) {
         </div>
       ) : null}
 
-      <div className="mx-auto max-w-6xl px-4 pb-32 pt-6 sm:px-6 sm:pt-8">
+      <div
+        className={
+          focusLayout
+            ? "mx-auto max-w-6xl px-4 pb-20 pt-4 sm:px-6 sm:pt-6"
+            : "mx-auto max-w-6xl px-4 pb-32 pt-6 sm:px-6 sm:pt-8"
+        }
+      >
+        {focusLayout && (
+          <section
+            className="mb-8 rounded-[1.75rem] border border-white/[0.12] bg-gradient-to-br from-white/[0.1] to-white/[0.02] p-5 sm:p-6"
+            aria-labelledby="analyze-focus-h"
+          >
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[rgb(var(--accent-2))]">
+              {t.sectionNavAnalyzer}
+            </p>
+            <h1
+              id="analyze-focus-h"
+              className="font-display mt-2 text-[clamp(1.45rem,1.1rem+1.6vw,2.1rem)] font-extrabold tracking-tight text-[rgb(var(--ink))] [text-wrap:balance]"
+            >
+              {t.analyzePageTitle}
+            </h1>
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
+              {t.analyzePageSubtitle}
+            </p>
+            <p className="mt-4">
+              <Link
+                href="/"
+                className="text-sm font-semibold text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+              >
+                ← {t.analyzeBackHome}
+              </Link>
+            </p>
+            <nav
+              className="mt-5 rounded-2xl border border-white/[0.12] bg-gradient-to-br from-white/[0.08] to-white/[0.03] p-3 sm:p-4"
+              aria-label={t.langLabel}
+            >
+              <p className="mb-2 text-xs font-medium text-[rgb(var(--ink-soft))]">
+                {t.langLabel}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {LOCALE_OPTIONS.map((opt) => {
+                  const active = locale === opt.value;
+                  return (
+                    <button
+                      key={opt.value}
+                      type="button"
+                      onClick={() => setLocale(opt.value)}
+                      className={
+                        active
+                          ? "rounded-xl border border-[rgb(var(--accent))]/50 bg-gradient-to-r from-[rgb(var(--accent))]/25 to-[rgb(var(--accent-2))]/18 px-3 py-2 text-sm font-semibold text-white shadow-[0_0_24px_-8px_rgb(var(--accent))]"
+                          : "rounded-xl border border-white/[0.12] bg-white/[0.06] px-3 py-2 text-sm text-[rgb(var(--ink-soft))] transition hover:border-[rgb(var(--accent-2))]/30 hover:bg-white/[0.1] hover:text-[rgb(var(--ink))]"
+                      }
+                    >
+                      <span className="me-1.5 opacity-90" aria-hidden>
+                        {opt.flag}
+                      </span>
+                      {opt.label}
+                    </button>
+                  );
+                })}
+              </div>
+            </nav>
+          </section>
+        )}
+
+        {!focusLayout && (
+        <>
         {/* Hero — split layout like leading SaaS landings */}
         <section
           id="section-hero"
@@ -508,12 +577,12 @@ export default function DecisionStudio({ initialPreset = null }: Props) {
               ))}
             </ul>
             <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-white/[0.06] pt-6">
-              <a
-                href="#section-workspace"
+              <Link
+                href="/analyze"
                 className="inline-flex items-center justify-center rounded-xl bg-white/[0.07] px-4 py-2.5 text-sm font-semibold text-[rgb(var(--ink))] ring-1 ring-white/10 transition hover:bg-white/[0.1]"
               >
                 {t.heroCtaPrimary}
-              </a>
+              </Link>
               <span className="text-xs text-[rgb(var(--ink-soft))]/90">
                 {t.sectionNavProduct} → {t.sectionNavHow} → {t.sectionNavAnalyzer}
               </span>
@@ -673,6 +742,8 @@ export default function DecisionStudio({ initialPreset = null }: Props) {
             </p>
           </nav>
         </section>
+        </>
+        )}
 
         {/* Workspace: disclaimer + analyzer */}
         <section
@@ -807,51 +878,10 @@ export default function DecisionStudio({ initialPreset = null }: Props) {
           </div>
         </section>
 
-        <section
-          id="section-privacy"
-          className="home-section-wash home-section-wash--privacy scroll-mt-36 rounded-[1.85rem] px-3 pt-10 pb-1 sm:px-4 sm:pt-12"
-          aria-labelledby="security-heading"
-        >
-          <div className="glass card-glow rounded-3xl border border-emerald-400/20 bg-gradient-to-br from-emerald-500/[0.08] to-transparent p-5 sm:p-6">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
-              <span
-                className="flex size-11 shrink-0 items-center justify-center rounded-2xl border border-emerald-400/30 bg-emerald-500/15 text-[1.35rem] shadow-inner shadow-emerald-500/10"
-                aria-hidden
-              >
-                🔒
-              </span>
-              <div className="min-w-0 flex-1">
-                <h2
-                  id="security-heading"
-                  className="text-base font-semibold tracking-tight text-emerald-50/95"
-                >
-                  {t.securityTitle}
-                </h2>
-                <p className="mt-3 text-sm font-medium leading-relaxed text-[rgb(var(--ink))]/95 [text-wrap:pretty]">
-                  {t.securityIntro}
-                </p>
-                <ul className="mt-4 list-disc space-y-2.5 ps-5 text-sm leading-relaxed text-[rgb(var(--ink-soft))] marker:text-emerald-400/90 [text-wrap:pretty]">
-                  {t.securityPoints.map((point, i) => (
-                    <li key={i}>{point}</li>
-                  ))}
-                </ul>
-                <p className="mt-5 text-sm">
-                  <Link
-                    href="/privacy"
-                    className="font-medium text-emerald-200/95 underline-offset-2 hover:underline"
-                  >
-                    Privacy Policy →
-                  </Link>
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {a && (
           <section
             id="section-results"
-            className="home-section-wash home-section-wash--results scroll-mt-28 mt-16 space-y-6 rounded-[1.85rem] border-t border-white/[0.08] px-3 pt-16 sm:px-4"
+            className="home-section-wash home-section-wash--results scroll-mt-28 mt-8 space-y-6 rounded-[1.85rem] border-t border-white/[0.08] px-3 pt-10 sm:px-4"
           >
             <div className="animate-fade-up flex flex-col gap-3 rounded-2xl border border-[rgb(var(--accent-2))]/35 bg-gradient-to-br from-[rgb(var(--accent))]/14 via-white/[0.04] to-transparent px-4 py-4 shadow-[0_16px_48px_-28px_rgb(var(--accent)/0.45)] sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-6">
               <p className="max-w-2xl text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
@@ -1021,6 +1051,47 @@ export default function DecisionStudio({ initialPreset = null }: Props) {
             </footer>
           </section>
         )}
+        <section
+          id="section-privacy"
+          className="home-section-wash home-section-wash--privacy scroll-mt-36 rounded-[1.85rem] px-3 pt-10 pb-1 sm:px-4 sm:pt-12"
+          aria-labelledby="security-heading"
+        >
+          <div className="glass card-glow rounded-3xl border border-emerald-400/20 bg-gradient-to-br from-emerald-500/[0.08] to-transparent p-5 sm:p-6">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
+              <span
+                className="flex size-11 shrink-0 items-center justify-center rounded-2xl border border-emerald-400/30 bg-emerald-500/15 text-[1.35rem] shadow-inner shadow-emerald-500/10"
+                aria-hidden
+              >
+                🔒
+              </span>
+              <div className="min-w-0 flex-1">
+                <h2
+                  id="security-heading"
+                  className="text-base font-semibold tracking-tight text-emerald-50/95"
+                >
+                  {t.securityTitle}
+                </h2>
+                <p className="mt-3 text-sm font-medium leading-relaxed text-[rgb(var(--ink))]/95 [text-wrap:pretty]">
+                  {t.securityIntro}
+                </p>
+                <ul className="mt-4 list-disc space-y-2.5 ps-5 text-sm leading-relaxed text-[rgb(var(--ink-soft))] marker:text-emerald-400/90 [text-wrap:pretty]">
+                  {t.securityPoints.map((point, i) => (
+                    <li key={i}>{point}</li>
+                  ))}
+                </ul>
+                <p className="mt-5 text-sm">
+                  <Link
+                    href="/privacy"
+                    className="font-medium text-emerald-200/95 underline-offset-2 hover:underline"
+                  >
+                    Privacy Policy →
+                  </Link>
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
       </div>
     </div>
   );

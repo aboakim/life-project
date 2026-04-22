@@ -319,7 +319,7 @@ export default async function BlogArticlePage({
               a 5-year timeline for what you are actually facing.
             </p>
             <Link
-              href="/#section-workspace"
+              href="/analyze"
               className="mt-4 inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[rgb(var(--accent)/0.28)] transition hover:brightness-110"
             >
               Open analyzer

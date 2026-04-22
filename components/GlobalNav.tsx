@@ -175,7 +175,7 @@ export default function GlobalNav() {
   ];
 
   const primaryLinks: MoreLink[] = [
-    { href: "/#section-workspace", label: ec.navHome },
+    { href: "/analyze", label: ec.navHome },
     { href: "/experts", label: ec.navExperts },
     { href: "/community", label: cq.navLabel },
     { href: "/pricing", label: pr.navPricing },

@@ -95,6 +95,10 @@ export type UIStrings = {
   atAGlanceEyebrow: string;
   atAGlanceTitle: string;
   atAGlanceCards: ReadonlyArray<{ title: string; body: string }>;
+  /** Dedicated /analyze page */
+  analyzePageTitle: string;
+  analyzePageSubtitle: string;
+  analyzeBackHome: string;
 };
 
 /** English trust/how blocks — reused as fallback for locales without custom copy */
@@ -464,6 +468,10 @@ const uiHy: Partial<UIStrings> = {
     "Այս տարբերակում տեքստը չի պահվում բազայում որպես հրապարակային post, որպեսզի երրորդ անձինք կարդան այն։",
     "Եթե միացված է AI վերլուծությունը, տեքստը փոխանցվում է միայն պատասխան պատրաստելու նպատակով (ըստ մատակարարի պայմանների)։",
   ],
+  analyzePageTitle: "Վերլուծության հարթակ",
+  analyzePageSubtitle:
+    "Գրիր հարցը ստորև, հետո սեղմիր «Վերլուծել»․ կառուցված հաշվետվությունը կերևա բանաձևի հենց տակ, երբ պատրաստ լինի։",
+  analyzeBackHome: "Գլխավոր էջ",
 };
 
 const uiEn: Partial<UIStrings> = {
@@ -523,6 +531,10 @@ const uiEn: Partial<UIStrings> = {
     "This build does not store your text in a database as public posts that strangers could read.",
     "If AI analysis is on, your text is sent to the provider only to generate your answer (under their terms).",
   ],
+  analyzePageTitle: "Decision analyzer",
+  analyzePageSubtitle:
+    "Write your question below, then run the analysis. Your structured report appears right under the form when it’s ready.",
+  analyzeBackHome: "Back to home",
 };
 
 /** American English — UI copy tuned for US spelling/idiom where it differs */
@@ -596,6 +608,10 @@ const uiRu: Partial<UIStrings> = {
     "В этой версии текст не хранится в базе как публичные посты, которые могли бы читать посторонние.",
     "Если включён AI-анализ, текст передаётся поставщику только для генерации ответа (на условиях сервиса).",
   ],
+  analyzePageTitle: "Анализатор решений",
+  analyzePageSubtitle:
+    "Напишите вопрос ниже и запустите анализ. Структурированный отчёт появится сразу под формой, когда будет готов.",
+  analyzeBackHome: "На главную",
 };
 
 const uiDe: Partial<UIStrings> = {
@@ -655,6 +671,10 @@ const uiDe: Partial<UIStrings> = {
     "In dieser Version wird dein Text nicht als öffentliche Posts in einer Datenbank gespeichert, die Fremde lesen könnten.",
     "Wenn die KI-Analyse aktiv ist, wird dein Text nur an den Anbieter übermittelt, um deine Antwort zu erzeugen (gemäß deren Bedingungen).",
   ],
+  analyzePageTitle: "Analyse-Workspace",
+  analyzePageSubtitle:
+    "Schreibe deine Frage unten, starte die Analyse. Dein strukturierter Bericht erscheint direkt unter dem Formular, sobald er fertig ist.",
+  analyzeBackHome: "Zur Startseite",
 };
 
 const uiFr: Partial<UIStrings> = {
@@ -714,6 +734,10 @@ const uiFr: Partial<UIStrings> = {
     "Cette version n’enregistre pas votre texte en base comme publications publiques lisibles par des inconnus.",
     "Si l’analyse IA est activée, votre texte est envoyé au fournisseur uniquement pour générer votre réponse (selon leurs conditions).",
   ],
+  analyzePageTitle: "Espace d’analyse",
+  analyzePageSubtitle:
+    "Écrivez votre question ci-dessous, lancez l’analyse. Le rapport structuré apparaît juste sous le formulaire dès qu’il est prêt.",
+  analyzeBackHome: "Retour à l’accueil",
 };
 
 const uiEs: Partial<UIStrings> = {
@@ -773,6 +797,10 @@ const uiEs: Partial<UIStrings> = {
     "Esta versión no guarda tu texto en la base de datos como publicaciones que extraños puedan leer.",
     "Si el análisis con IA está activo, tu texto se envía al proveedor solo para generar tu respuesta (según sus términos).",
   ],
+  analyzePageTitle: "Analizador de decisiones",
+  analyzePageSubtitle:
+    "Escribe tu pregunta abajo y ejecuta el análisis. El informe estructurado aparece justo debajo del formulario cuando esté listo.",
+  analyzeBackHome: "Volver al inicio",
 };
 
 const uiAr: Partial<UIStrings> = {
@@ -832,6 +860,10 @@ const uiAr: Partial<UIStrings> = {
     "هذا الإصدار لا يخزن نصك كمنشورات عامة في قاعدة بيانات يقرؤها غرباء.",
     "إذا كان تحليل الذكاء الاصطناعي مفعّلًا، يُرسل نصك إلى المزوّد فقط لإنشاء إجابتك (وفق شروطهم).",
   ],
+  analyzePageTitle: "منصة التحليل",
+  analyzePageSubtitle:
+    "اكتب سؤالك أدناه ثم شغّل التحليل. يظهر التقرير المنظّم مباشرة تحت النموذج عند جاهزيته.",
+  analyzeBackHome: "العودة للرئيسية",
 };
 
 const uiIt: Partial<UIStrings> = {
@@ -891,6 +923,10 @@ const uiIt: Partial<UIStrings> = {
     "Questa versione non salva il tuo testo nel database come post pubblici leggibili da sconosciuti.",
     "Se l’analisi IA è attiva, il testo viene inviato al fornitore solo per generare la risposta (secondo i loro termini).",
   ],
+  analyzePageTitle: "Analizzatore decisioni",
+  analyzePageSubtitle:
+    "Scrivi la tua domanda sotto, poi avvia l’analisi. Il report strutturato compare subito sotto al modulo quando è pronto.",
+  analyzeBackHome: "Torna alla home",
 };
 
 const table: Record<AppLocale, Partial<UIStrings>> = {

@@ -129,7 +129,7 @@ export default function PricingPageClient() {
             ))}
           </ul>
           <Link
-            href="/#section-workspace"
+            href="/analyze"
             className="mt-8 inline-flex rounded-2xl border border-white/15 px-5 py-2.5 text-sm font-medium text-[rgb(var(--ink))] transition hover:bg-white/5"
           >
             {t.ctaFree}

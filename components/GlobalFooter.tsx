@@ -56,7 +56,7 @@ export default function GlobalFooter() {
       {
         title: "Product",
         links: [
-          { href: "/#section-workspace", label: ui.sectionNavAnalyzer },
+          { href: "/analyze", label: ui.sectionNavAnalyzer },
           { href: "/journal", label: sx.footerJournal },
           { href: "/checklists", label: sx.footerChecklists },
           { href: "/how-we-use-ai", label: sx.footerHowAi },

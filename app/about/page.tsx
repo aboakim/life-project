@@ -55,7 +55,7 @@ export default function AboutPage() {
             <li>
               A{" "}
               <Link
-                href="/#section-workspace"
+                href="/analyze"
                 className="font-medium text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
               >
                 structured analyzer

@@ -4,6 +4,7 @@ import { getAllPosts, getAllTagSlugs } from "@/lib/blog/posts";
 
 const STATIC_PATHS: { path: string; priority: number; freq: "weekly" | "monthly" }[] = [
   { path: "", priority: 1, freq: "weekly" },
+  { path: "/analyze", priority: 0.95, freq: "weekly" },
   { path: "/pricing", priority: 0.8, freq: "weekly" },
   { path: "/experts", priority: 0.8, freq: "weekly" },
   { path: "/experts/register", priority: 0.6, freq: "monthly" },
