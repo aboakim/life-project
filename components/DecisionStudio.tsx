@@ -44,6 +44,7 @@ import {
 } from "@/lib/analysis-local";
 import { buildAnalysisSpeechText } from "@/lib/tts-build-report-text";
 import VoiceDictateButton from "@/components/home/VoiceDictateButton";
+import VoiceWhisperButton from "@/components/home/VoiceWhisperButton";
 import ReadAloudReportButton from "@/components/home/ReadAloudReportButton";
 
 const LOCALE_STORAGE_KEY = "lde-locale";
@@ -57,6 +58,8 @@ type ApiResponse = {
   warning?: string;
   matchedExperts?: MatchedExpertSummary[];
 };
+
+const NO_MATCHED_EXPERTS: MatchedExpertSummary[] = [];
 
 function previewHref(
   section: "workspace" | "product" | "language"
@@ -158,6 +161,22 @@ export default function DecisionStudio({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<ApiResponse | null>(null);
+  const [whisperAvailable, setWhisperAvailable] = useState(false);
+
+  useEffect(() => {
+    let cancel = false;
+    fetch("/api/speech/available")
+      .then((r) => r.json() as Promise<{ whisper?: boolean }>)
+      .then((data) => {
+        if (!cancel && data.whisper) setWhisperAvailable(true);
+      })
+      .catch(() => {
+        /* ignore */
+      });
+    return () => {
+      cancel = true;
+    };
+  }, []);
 
   useEffect(() => {
     try {
@@ -257,7 +276,7 @@ export default function DecisionStudio({
   }
 
   const a = result?.analysis;
-  const matchedExperts = result?.matchedExperts ?? [];
+  const matchedExperts = result?.matchedExperts ?? NO_MATCHED_EXPERTS;
 
   const voiceLabels = useMemo(
     () => ({
@@ -265,6 +284,17 @@ export default function DecisionStudio({
       listening: t.voiceListening,
       stop: t.voiceStop,
       notSupported: t.voiceNotSupported,
+    }),
+    [t]
+  );
+
+  const whisperLabels = useMemo(
+    () => ({
+      start: t.voiceWhisperStart,
+      stop: t.voiceWhisperStop,
+      working: t.voiceWhisperWorking,
+      error: t.voiceWhisperError,
+      needMic: t.voiceWhisperNeedMic,
     }),
     [t]
   );
@@ -882,7 +912,18 @@ export default function DecisionStudio({
               </p>
 
               <div className="mt-3">
-                <div className="mb-1.5 flex justify-end">
+                <div className="mb-1.5 flex flex-wrap items-start justify-end gap-2">
+                  <VoiceWhisperButton
+                    locale={locale}
+                    onAppend={(chunk) =>
+                      setDecision((d) =>
+                        d.trim() ? `${d.trimEnd()} ${chunk}` : chunk
+                      )
+                    }
+                    disabled={loading}
+                    available={whisperAvailable}
+                    labels={whisperLabels}
+                  />
                   <VoiceDictateButton
                     locale={locale}
                     onAppend={(chunk) =>
@@ -907,7 +948,18 @@ export default function DecisionStudio({
               <label className="mt-5 block text-sm font-medium text-[rgb(var(--ink))]">
                 {t.context}
               </label>
-              <div className="mb-1.5 flex justify-end">
+              <div className="mb-1.5 flex flex-wrap items-start justify-end gap-2">
+                <VoiceWhisperButton
+                  locale={locale}
+                  onAppend={(chunk) =>
+                    setContext((c) =>
+                      c.trim() ? `${c.trimEnd()} ${chunk}` : chunk
+                    )
+                  }
+                  disabled={loading}
+                  available={whisperAvailable}
+                  labels={whisperLabels}
+                />
                 <VoiceDictateButton
                   locale={locale}
                   onAppend={(chunk) =>
@@ -928,7 +980,18 @@ export default function DecisionStudio({
               <label className="mt-5 block text-sm font-medium text-[rgb(var(--ink))]">
                 {t.constraints}
               </label>
-              <div className="mb-1.5 flex justify-end">
+              <div className="mb-1.5 flex flex-wrap items-start justify-end gap-2">
+                <VoiceWhisperButton
+                  locale={locale}
+                  onAppend={(chunk) =>
+                    setConstraints((c) =>
+                      c.trim() ? `${c.trimEnd()} ${chunk}` : chunk
+                    )
+                  }
+                  disabled={loading}
+                  available={whisperAvailable}
+                  labels={whisperLabels}
+                />
                 <VoiceDictateButton
                   locale={locale}
                   onAppend={(chunk) =>

@@ -118,6 +118,12 @@ export type UIStrings = {
   voiceInputHint: string;
   readAloud: string;
   readAloudStop: string;
+  /** OpenAI Whisper — server record */
+  voiceWhisperStart: string;
+  voiceWhisperStop: string;
+  voiceWhisperWorking: string;
+  voiceWhisperError: string;
+  voiceWhisperNeedMic: string;
 };
 
 /** English trust/how blocks — reused as fallback for locales without custom copy */
@@ -511,6 +517,11 @@ const uiHy: Partial<UIStrings> = {
     "Թարմ UI լեզուն պետք է համընկնի ձեր խոսքի լեզվի հետ։ Chrome/Edge-ում աշխատում է լավագույնը։",
   readAloud: "Լսել հաշվետվությունը",
   readAloudStop: "Կանգնեցնել",
+  voiceWhisperStart: "Գրանցում (cloud)",
+  voiceWhisperStop: "Կանգ և ուղարկել",
+  voiceWhisperWorking: "Գրառում…",
+  voiceWhisperError: "Գրառումը չհաջողվեց. փորձեք բրաուզերի կոճակը.",
+  voiceWhisperNeedMic: "Թույլտվեք միքրոֆոնը։",
 };
 
 const uiEn: Partial<UIStrings> = {
@@ -594,6 +605,11 @@ const uiEn: Partial<UIStrings> = {
     "Pick the same interface language you speak. Works best in Chrome or Edge.",
   readAloud: "Listen to report",
   readAloudStop: "Stop playback",
+  voiceWhisperStart: "Record (cloud)",
+  voiceWhisperStop: "Stop & send",
+  voiceWhisperWorking: "Transcribing…",
+  voiceWhisperError: "Transcription failed — try the browser button.",
+  voiceWhisperNeedMic: "Allow microphone access.",
 };
 
 /** American English — UI copy tuned for US spelling/idiom where it differs */
@@ -690,6 +706,11 @@ const uiRu: Partial<UIStrings> = {
     "Язык интерфейса должен совпадать с языком речи. Лучше всего в Chrome/Edge.",
   readAloud: "Прослушать отчёт",
   readAloudStop: "Остановить",
+  voiceWhisperStart: "Запись (cloud)",
+  voiceWhisperStop: "Стоп и отправить",
+  voiceWhisperWorking: "Расшифровка…",
+  voiceWhisperError: "Не удалось — попробуйте кнопку браузера.",
+  voiceWhisperNeedMic: "Разрешите доступ к микрофону.",
 };
 
 const uiDe: Partial<UIStrings> = {
@@ -773,6 +794,11 @@ const uiDe: Partial<UIStrings> = {
     "Interface-Sprache wie Ihre Sprache wählen. Am besten in Chrome/Edge.",
   readAloud: "Bericht anhören",
   readAloudStop: "Stoppen",
+  voiceWhisperStart: "Aufnahme (Cloud)",
+  voiceWhisperStop: "Stopp & senden",
+  voiceWhisperWorking: "Wird transkribiert…",
+  voiceWhisperError: "Fehlgeschlagen — Browser-Button nutzen.",
+  voiceWhisperNeedMic: "Mikrofon erlauben.",
 };
 
 const uiFr: Partial<UIStrings> = {
@@ -856,6 +882,11 @@ const uiFr: Partial<UIStrings> = {
     "Choisissez la même langue que celle parlée. Idéal avec Chrome/Edge.",
   readAloud: "Écouter le rapport",
   readAloudStop: "Arrêter",
+  voiceWhisperStart: "Enregistrer (cloud)",
+  voiceWhisperStop: "Stop et envoi",
+  voiceWhisperWorking: "Transcription…",
+  voiceWhisperError: "Échec — essayez le bouton du navigateur.",
+  voiceWhisperNeedMic: "Autorisez le micro.",
 };
 
 const uiEs: Partial<UIStrings> = {
@@ -939,6 +970,11 @@ const uiEs: Partial<UIStrings> = {
     "Usa el mismo idioma de interfaz que hablas. Mejor en Chrome/Edge.",
   readAloud: "Escuchar informe",
   readAloudStop: "Detener",
+  voiceWhisperStart: "Grabar (nube)",
+  voiceWhisperStop: "Parar y enviar",
+  voiceWhisperWorking: "Transcribiendo…",
+  voiceWhisperError: "Error — prueba el botón del navegador.",
+  voiceWhisperNeedMic: "Permite el micrófono.",
 };
 
 const uiAr: Partial<UIStrings> = {
@@ -1020,6 +1056,11 @@ const uiAr: Partial<UIStrings> = {
   voiceInputHint: "اجعل لغة الواجهة نفس لغة كلامك. يعمل أفضل في Chrome/Edge.",
   readAloud: "استمع للتقرير",
   readAloudStop: "إيقاف التشغيل",
+  voiceWhisperStart: "تسجيل (سحابي)",
+  voiceWhisperStop: "إيقاف وإرسال",
+  voiceWhisperWorking: "جارٍ النسخ…",
+  voiceWhisperError: "فشل — جرّب زر المتصفح.",
+  voiceWhisperNeedMic: "اسمح بالوصول للميكروفون.",
 };
 
 const uiIt: Partial<UIStrings> = {
@@ -1103,6 +1144,11 @@ const uiIt: Partial<UIStrings> = {
     "Stessa lingua dell’interfaccia e del parlato. Meglio con Chrome/Edge.",
   readAloud: "Ascolta il report",
   readAloudStop: "Interrompi",
+  voiceWhisperStart: "Registra (cloud)",
+  voiceWhisperStop: "Stop e invia",
+  voiceWhisperWorking: "Trascrizione…",
+  voiceWhisperError: "Errore — prova il pulsante del browser.",
+  voiceWhisperNeedMic: "Consenti l’accesso al microfono.",
 };
 
 const table: Record<AppLocale, Partial<UIStrings>> = {

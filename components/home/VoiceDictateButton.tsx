@@ -16,11 +16,24 @@ type Props = {
   };
 };
 
-function getRecognitionCtor() {
+/** Web Speech `SpeechRecognition` surface we use (browser APIs vary). */
+type SpeechRecHandle = {
+  lang: string;
+  interimResults: boolean;
+  continuous: boolean;
+  maxAlternatives: number;
+  onresult: ((ev: Event) => void) | null;
+  onend: (() => void) | null;
+  onerror: (() => void) | null;
+  start: () => void;
+  stop: () => void;
+};
+
+function getRecognitionCtor(): (new () => SpeechRecHandle) | null {
   if (typeof window === "undefined") return null;
   const w = window as unknown as {
-    SpeechRecognition?: new () => object;
-    webkitSpeechRecognition?: new () => object;
+    SpeechRecognition?: new () => SpeechRecHandle;
+    webkitSpeechRecognition?: new () => SpeechRecHandle;
   };
   return w.SpeechRecognition ?? w.webkitSpeechRecognition ?? null;
 }
@@ -33,9 +46,7 @@ export default function VoiceDictateButton({
 }: Props) {
   const [listening, setListening] = useState(false);
   const [supported, setSupported] = useState(true);
-  // Web Speech: constructor varies by browser
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const recRef = useRef<any>(null);
+  const recRef = useRef<SpeechRecHandle | null>(null);
   const bcp47 = appLocaleToSpeechBcp47(locale);
 
   const stop = useCallback(() => {
@@ -59,9 +70,7 @@ export default function VoiceDictateButton({
       stop();
       return;
     }
-    // Browser speech engine has the full API; constructor is weakly typed here.
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const r: any = new Ctor();
+    const r = new Ctor();
     r.lang = bcp47;
     r.interimResults = false;
     r.continuous = true;
