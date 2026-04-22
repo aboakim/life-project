@@ -78,6 +78,7 @@ export default function AnalysisResultTools({
         context: pa.mdContext,
         constraints: pa.mdConstraints,
         summary: pa.mdSummary,
+        professional: pa.mdProfessional,
         dimensions: pa.mdDimensions,
         scenarios: pa.mdScenarios,
         timeline: pa.mdTimeline,

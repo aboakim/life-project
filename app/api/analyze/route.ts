@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { buildDemoAnalysis } from "@/lib/demo-analysis";
 import { getUi } from "@/lib/i18n/ui";
 import { parseLocale } from "@/lib/i18n/locale";
+import { loadMatchedExperts } from "@/lib/matched-experts";
 import { analyzeWithOpenAI } from "@/lib/llm-analyze";
 import type { AnalyzeRequestBody } from "@/lib/types";
 
@@ -30,25 +31,37 @@ export async function POST(req: Request) {
         decision: decision.trim(),
         language: locale,
       });
+      const matchedExperts = await loadMatchedExperts(
+        analysis.suggestedDirectoryRole ?? "UNSPECIFIED"
+      );
       return NextResponse.json({
         analysis,
         mode: "live" as const,
+        matchedExperts,
       });
     } catch (e) {
       console.error("[analyze] OpenAI path failed", e);
       const analysis = buildDemoAnalysis(decision, locale);
+      const matchedExperts = await loadMatchedExperts(
+        analysis.suggestedDirectoryRole ?? "UNSPECIFIED"
+      );
       return NextResponse.json({
         analysis,
         mode: "fallback" as const,
         warning: ui.apiAnalysisServiceNotice,
+        matchedExperts,
       });
     }
   }
 
   const analysis = buildDemoAnalysis(decision, locale);
+  const matchedExperts = await loadMatchedExperts(
+    analysis.suggestedDirectoryRole ?? "UNSPECIFIED"
+  );
   return NextResponse.json({
     analysis,
     mode: "demo" as const,
     hint: ui.apiHintDemo,
+    matchedExperts,
   });
 }

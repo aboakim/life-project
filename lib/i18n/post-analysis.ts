@@ -34,6 +34,7 @@ export type PostAnalysisCopy = {
   mdTimeline: string;
   mdScore: string;
   mdTwin: string;
+  mdProfessional: string;
   /** Nudge users to run analyses repeatedly */
   runAnotherHint: string;
   runAnotherCta: string;
@@ -96,6 +97,7 @@ const en: PostAnalysisCopy = {
   mdTimeline: "Timeline",
   mdScore: "Score",
   mdTwin: "Note",
+  mdProfessional: "Professional guidance",
   runAnotherHint:
     "Most big decisions need a second pass — update your brief and compare the score.",
   runAnotherCta: "Run another analysis",
@@ -161,6 +163,7 @@ const hy: PostAnalysisCopy = {
   mdTimeline: "Ժամանակացույց",
   mdScore: "Գնահատում",
   mdTwin: "Նշում",
+  mdProfessional: "Մասնագիտական ուղեցույց",
   runAnotherHint:
     "Մեծ որոշումները հաճախ պահանջում են երկրորդ փորձ — թարմացրու brief-ը և համեմատիր միավորները։",
   runAnotherCta: "Նոր վերլուծություն",

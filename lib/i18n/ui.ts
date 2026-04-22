@@ -106,6 +106,10 @@ export type UIStrings = {
   /** Home only — points users to the full-screen /analyze experience */
   homeAnalyzerPromoLine: string;
   homeAnalyzerPromoCta: string;
+  sectionProfessional: string;
+  sectionDirectoryExperts: string;
+  expertOpenInDirectory: string;
+  expertNoDirectoryMatch: string;
 };
 
 /** English trust/how blocks — reused as fallback for locales without custom copy */
@@ -485,6 +489,11 @@ const uiHy: Partial<UIStrings> = {
   homeAnalyzerPromoLine:
     "Ցանկանա՞ք էջ, որտեղ միայն վերլուծիչն է, առանց երկար սքրոլի․",
   homeAnalyzerPromoCta: "Բացել /analyze",
+  sectionProfessional: "Ում կարող եք դիմել (մասնագիտական ուղեցույց)",
+  sectionDirectoryExperts: "Մեր ցանցում գրանցված մասնագետներ այս ուղղությամբ",
+  expertOpenInDirectory: "Բացել ցանկում",
+  expertNoDirectoryMatch:
+    "Այս պահին ցանկում չկա այս կատեգորիայով գրանցված մասնագետ․ դիտեք ընդհանուր ցանկը։",
 };
 
 const uiEn: Partial<UIStrings> = {
@@ -554,6 +563,11 @@ const uiEn: Partial<UIStrings> = {
   homeAnalyzerPromoLine:
     "Want a page with only the analyzer and no long scroll?",
   homeAnalyzerPromoCta: "Open the analyzer",
+  sectionProfessional: "Who to involve (professional guidance)",
+  sectionDirectoryExperts: "Registered experts in our directory for this area",
+  expertOpenInDirectory: "Open in directory",
+  expertNoDirectoryMatch:
+    "No listed expert in this category yet — browse the full directory.",
 };
 
 /** American English — UI copy tuned for US spelling/idiom where it differs */
@@ -637,6 +651,11 @@ const uiRu: Partial<UIStrings> = {
   homeAnalyzerPromoLine:
     "Нужна страница только с анализатором, без длинной прокрутки?",
   homeAnalyzerPromoCta: "Открыть анализатор",
+  sectionProfessional: "С кем проконсультироваться (о профессии)",
+  sectionDirectoryExperts: "Зарегистрированные эксперты в этой сфере",
+  expertOpenInDirectory: "Открыть в каталоге",
+  expertNoDirectoryMatch:
+    "Пока нет эксперта в этой категории — смотрите весь список.",
 };
 
 const uiDe: Partial<UIStrings> = {
@@ -706,6 +725,11 @@ const uiDe: Partial<UIStrings> = {
   homeAnalyzerPromoLine:
     "Nur Analyse-Seite ohne langen Scroll?",
   homeAnalyzerPromoCta: "Analyzer öffnen",
+  sectionProfessional: "Wen einbeziehen (fachliche Orientierung)",
+  sectionDirectoryExperts: "Registrierte Experten in diesem Bereich",
+  expertOpenInDirectory: "Im Verzeichnis öffnen",
+  expertNoDirectoryMatch:
+    "Noch kein passender Experte in dieser Kategorie — gesamtes Verzeichnis ansehen.",
 };
 
 const uiFr: Partial<UIStrings> = {
@@ -775,6 +799,11 @@ const uiFr: Partial<UIStrings> = {
   homeAnalyzerPromoLine:
     "Une page avec seulement l’analyseur, sans long défilement ?",
   homeAnalyzerPromoCta: "Ouvrir l’analyseur",
+  sectionProfessional: "Qui consulter (orientation professionnelle)",
+  sectionDirectoryExperts: "Experts inscrits sur ce thème",
+  expertOpenInDirectory: "Ouvrir dans l’annuaire",
+  expertNoDirectoryMatch:
+    "Aucun expert listé pour cette catégorie — parcourez l’annuaire complet.",
 };
 
 const uiEs: Partial<UIStrings> = {
@@ -844,6 +873,11 @@ const uiEs: Partial<UIStrings> = {
   homeAnalyzerPromoLine:
     "¿Quieres una página solo con el analizador, sin scroll largo?",
   homeAnalyzerPromoCta: "Abrir analizador",
+  sectionProfessional: "A quién acudir (orientación profesional)",
+  sectionDirectoryExperts: "Expertos registrados en esta área",
+  expertOpenInDirectory: "Abrir en el directorio",
+  expertNoDirectoryMatch:
+    "Aún no hay experto en esta categoría — ver el directorio completo.",
 };
 
 const uiAr: Partial<UIStrings> = {
@@ -913,6 +947,11 @@ const uiAr: Partial<UIStrings> = {
   homeAnalyzerPromoLine:
     "تريد صفحة فيها المحلّل فقط بدون تمرير طويل؟",
   homeAnalyzerPromoCta: "افتح المحلّل",
+  sectionProfessional: "من تستعين به (توجيه مهني)",
+  sectionDirectoryExperts: "خبراء مسجّلون في مجالك",
+  expertOpenInDirectory: "فتح في الدليل",
+  expertNoDirectoryMatch:
+    "لا يوجد خبير مدرج في هذه الفئة حاليًا — تصفح الدليل كاملًا.",
 };
 
 const uiIt: Partial<UIStrings> = {
@@ -982,6 +1021,11 @@ const uiIt: Partial<UIStrings> = {
   homeAnalyzerPromoLine:
     "Vuoi una pagina solo con l’analizzatore, senza scroll lungo?",
   homeAnalyzerPromoCta: "Apri analizzatore",
+  sectionProfessional: "Chi coinvolgere (orientamento professionale)",
+  sectionDirectoryExperts: "Esperti registrati in quest’area",
+  expertOpenInDirectory: "Apri in elenco",
+  expertNoDirectoryMatch:
+    "Nessun esperto in questa categoria in elenco — vedi l’elenco completo.",
 };
 
 const table: Record<AppLocale, Partial<UIStrings>> = {

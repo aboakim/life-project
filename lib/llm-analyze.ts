@@ -1,9 +1,15 @@
 import { llmLanguageLabel } from "@/lib/i18n/locale";
-import type { AnalyzeRequestBody, DecisionAnalysis } from "./types";
+import type {
+  AnalyzeRequestBody,
+  DecisionAnalysis,
+  SuggestedDirectoryRole,
+} from "./types";
 
 const JSON_INSTRUCTION = `You must respond with a single JSON object only, no markdown, with this exact shape:
 {
   "summary": "string, 2-4 sentences",
+  "professionalGuidance": "string, 3-6 sentences: based on the user's question, name which kinds of professionals could help (e.g. licensed psychologist/therapist, attorney, financial planner, immigration adviser, career coach, physician) and in what situations; clarify this software is not a substitute. Do not invent real people's names. Same language as other fields.",
+  "suggestedDirectoryRole": "one of exactly: PSYCHOLOGIST, LAWYER, FINANCIAL, PHYSICIAN, COACH, IMMIGRATION, UNSPECIFIED — the single type from our expert directory that best matches who should help; use UNSPECIFIED if no clear fit or mixed",
   "dimensions": {
     "finances": "string",
     "psychology": "string",
@@ -25,6 +31,22 @@ const JSON_INSTRUCTION = `You must respond with a single JSON object only, no ma
   "digitalTwinNote": "string: what a 'future you' perspective might emphasize, hypothetical, not factual"
 }`;
 
+const ALLOWED_ROLES: SuggestedDirectoryRole[] = [
+  "PSYCHOLOGIST",
+  "LAWYER",
+  "FINANCIAL",
+  "PHYSICIAN",
+  "COACH",
+  "IMMIGRATION",
+  "UNSPECIFIED",
+];
+
+function parseSuggestedRole(v: unknown): SuggestedDirectoryRole {
+  if (typeof v !== "string") return "UNSPECIFIED";
+  const u = v.trim().toUpperCase() as SuggestedDirectoryRole;
+  return ALLOWED_ROLES.includes(u) ? u : "UNSPECIFIED";
+}
+
 function normalize(raw: unknown): DecisionAnalysis | null {
   if (!raw || typeof raw !== "object") return null;
   const o = raw as Record<string, unknown>;
@@ -36,6 +58,12 @@ function normalize(raw: unknown): DecisionAnalysis | null {
   if (Number.isNaN(score)) return null;
   return {
     summary: String(o.summary ?? ""),
+    professionalGuidance: String(
+      o.professionalGuidance ?? o.professional_guidance ?? "",
+    ),
+    suggestedDirectoryRole: parseSuggestedRole(
+      o.suggestedDirectoryRole ?? o.suggested_directory_role,
+    ),
     dimensions: {
       finances: String(dims.finances ?? ""),
       psychology: String(dims.psychology ?? ""),
@@ -83,6 +111,7 @@ export async function analyzeWithOpenAI(
     "- Be structured, not chatty. No therapy diagnosis; encourage professional help for crisis.",
     "- Acknowledge uncertainty; avoid absolute predictions.",
     "- Score is a heuristic 'alignment / feasibility' estimate, not fate.",
+    "- professionalGuidance: practical referral-style guidance (types of pros, not specific names).",
     JSON_INSTRUCTION,
   ].join("\n\n");
 

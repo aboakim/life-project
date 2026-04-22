@@ -105,6 +105,7 @@ export function buildMarkdownSummary(
     context: string;
     constraints: string;
     summary: string;
+    professional: string;
     dimensions: string;
     scenarios: string;
     timeline: string;
@@ -112,6 +113,7 @@ export function buildMarkdownSummary(
     twin: string;
   },
 ): string {
+  const pro = (a.professionalGuidance ?? "").trim();
   const lines = [
     `# ${headings.decision}`,
     decision.trim(),
@@ -125,6 +127,9 @@ export function buildMarkdownSummary(
     `## ${headings.summary}`,
     a.summary,
     "",
+    ...(pro
+      ? [`## ${headings.professional}`, pro, ""]
+      : []),
     `## ${headings.dimensions}`,
     `- ${a.dimensions.finances}`,
     `- ${a.dimensions.psychology}`,

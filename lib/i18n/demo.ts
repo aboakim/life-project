@@ -1,4 +1,4 @@
-import type { DecisionAnalysis } from "../types";
+import type { DecisionAnalysis, SuggestedDirectoryRole } from "../types";
 import type { AppLocale } from "./locale";
 
 function clampScore(seed: number): number {
@@ -18,7 +18,24 @@ function base(decision: string, seed: number) {
   return { quote, score: clampScore(seed) };
 }
 
-function demoEnglish(quote: string): Omit<DecisionAnalysis, "score"> {
+function professionalDemo(
+  locale: AppLocale
+): Pick<DecisionAnalysis, "professionalGuidance" | "suggestedDirectoryRole"> {
+  if (locale === "hy") {
+    return {
+      professionalGuidance:
+        "Այս հարցի շուրջ ավելի ճիշտ որոշման համար, կախված բնույթից, կարող են օգնել որակավորված հոգեբան/թերապевտ, իրավաբան, ֆինանսական խորհրդատու, աշխատանքի coach, միգրացիայի մասնագետ կամ, առողջական թվարկումների դեպքում, բժիշկ։ Software-ը աջակցություն է, ոչ փոխարեն մասնագետի. ընտրիր լիցենзіավորված մասնագետ ձեր երկրում։",
+      suggestedDirectoryRole: "UNSPECIFIED",
+    };
+  }
+  return {
+    professionalGuidance:
+      "For a decision at this level, the right help depends on the domain: a licensed mental-health professional for distress or relationship harm; a qualified attorney for legal exposure; a financial or tax adviser for real money/contract trade-offs; an immigration professional for visa or cross-border rules; a coach for career structure; a physician for health-related forks. This tool sketches trade-offs; it is not a substitute for regulated advice where your situation requires it.",
+    suggestedDirectoryRole: "UNSPECIFIED" as SuggestedDirectoryRole,
+  };
+}
+
+function demoEnglish(quote: string): Omit<DecisionAnalysis, "score" | "professionalGuidance" | "suggestedDirectoryRole"> {
   return {
     summary:
       "This is a structured preview analysis. Deeper AI insight returns shortly. Your question: «" +
@@ -64,7 +81,13 @@ export function buildDemoAnalysis(
   const seed = hashString(decision.trim() || "empty");
   const { quote, score } = base(decision, seed);
 
-  const blocks: Record<AppLocale, Omit<DecisionAnalysis, "score">> = {
+  const blocks: Record<
+    AppLocale,
+    Omit<
+      DecisionAnalysis,
+      "score" | "professionalGuidance" | "suggestedDirectoryRole"
+    >
+  > = {
     hy: {
       summary:
         "Սա կառուցվածքային նախնական վերլուծություն է։ Ավելի խորը AI վերլուծությունը շուտով կվերականգնվի։ Ձեր հարցը՝ «" +
@@ -322,5 +345,5 @@ export function buildDemoAnalysis(
   };
 
   const b = blocks[locale];
-  return { ...b, score };
+  return { ...b, ...professionalDemo(locale), score };
 }

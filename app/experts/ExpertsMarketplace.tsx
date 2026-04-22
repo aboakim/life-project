@@ -10,6 +10,19 @@ import {
   roleLabel,
   type ExpertRoleKey,
 } from "@/lib/i18n/experts-network";
+
+const EXPERT_ROLES: ExpertRoleKey[] = [
+  "PSYCHOLOGIST",
+  "LAWYER",
+  "FINANCIAL",
+  "PHYSICIAN",
+  "COACH",
+  "IMMIGRATION",
+];
+
+function isExpertRoleParam(x: string): x is ExpertRoleKey {
+  return (EXPERT_ROLES as readonly string[]).includes(x);
+}
 import { DEFAULT_LOCALE } from "@/lib/locale-default";
 import { isAppLocale, type AppLocale } from "@/lib/i18n/locale";
 import { syncLocaleCookieClient } from "@/lib/locale-cookie";
@@ -62,7 +75,14 @@ export default function ExpertsMarketplace() {
   useEffect(() => {
     const fromUrl = searchParams.get("q");
     if (fromUrl) setQ(fromUrl);
+    const r = searchParams.get("role");
+    if (r && isExpertRoleParam(r)) setRole(r);
   }, [searchParams]);
+
+  useEffect(() => {
+    const h = searchParams.get("highlight");
+    if (h && rawExperts.some((e) => e.id === h)) setOpenId(h);
+  }, [searchParams, rawExperts]);
 
   useEffect(() => {
     function syncFromNav() {

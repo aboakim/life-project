@@ -9,7 +9,8 @@ import ProductSceneStrip from "@/components/home/ProductSceneStrip";
 import OrbDecor from "@/components/ui/OrbDecor";
 import { getExpertsCopy } from "@/lib/i18n/experts-network";
 import { getPricingCopy } from "@/lib/i18n/pricing-page";
-import type { DecisionAnalysis } from "@/lib/types";
+import type { DecisionAnalysis, MatchedExpertSummary } from "@/lib/types";
+import { roleLabel, type ExpertRoleKey } from "@/lib/i18n/experts-network";
 import {
   LOCALE_OPTIONS,
   type AppLocale,
@@ -51,6 +52,7 @@ type ApiResponse = {
   mode: "live" | "demo" | "fallback";
   hint?: string;
   warning?: string;
+  matchedExperts?: MatchedExpertSummary[];
 };
 
 function previewHref(
@@ -252,6 +254,7 @@ export default function DecisionStudio({
   }
 
   const a = result?.analysis;
+  const matchedExperts = result?.matchedExperts ?? [];
 
   useEffect(() => {
     if (!a) return;
@@ -953,6 +956,71 @@ export default function DecisionStudio({
                 {a.summary}
               </p>
             </section>
+
+            {(a.professionalGuidance ?? "").trim() ? (
+              <section className="glass animate-fade-up rounded-3xl border border-amber-400/20 bg-gradient-to-br from-amber-500/[0.07] to-transparent p-6 sm:p-7">
+                <h2 className="text-lg font-semibold text-amber-50/95">
+                  {t.sectionProfessional}
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty] whitespace-pre-wrap">
+                  {a.professionalGuidance}
+                </p>
+              </section>
+            ) : null}
+
+            {matchedExperts.length > 0 ? (
+              <section className="glass animate-fade-up rounded-3xl p-6 sm:p-7">
+                <h2 className="text-lg font-semibold text-[rgb(var(--ink))]">
+                  {t.sectionDirectoryExperts}
+                </h2>
+                <ul className="mt-4 space-y-4">
+                  {matchedExperts.map((e) => (
+                    <li
+                      key={e.id}
+                      className="flex flex-col gap-2 rounded-2xl border border-white/[0.08] bg-white/[0.04] p-4 sm:flex-row sm:items-center sm:justify-between"
+                    >
+                      <div>
+                        <p className="font-semibold text-[rgb(var(--ink))]">
+                          {e.name}
+                        </p>
+                        <p className="text-xs font-medium text-[rgb(var(--accent-2))]">
+                          {roleLabel(locale, e.role as ExpertRoleKey)} · {e.country}
+                          {e.city ? ` · ${e.city}` : ""}
+                        </p>
+                        <p className="mt-1 line-clamp-2 text-sm text-[rgb(var(--ink-soft))]">
+                          {e.bio}
+                        </p>
+                        <p className="mt-1 text-xs text-[rgb(var(--ink-soft))]/85">
+                          {e.languages}
+                        </p>
+                      </div>
+                      <Link
+                        href={`/experts?role=${encodeURIComponent(e.role)}&highlight=${encodeURIComponent(e.id)}`}
+                        className="shrink-0 self-start rounded-xl bg-gradient-to-r from-[rgb(var(--accent))]/30 to-[rgb(var(--accent-2))]/20 px-4 py-2.5 text-sm font-bold text-white ring-1 ring-white/15 sm:self-center"
+                      >
+                        {t.expertOpenInDirectory} →
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ) : null}
+
+            {matchedExperts.length === 0 &&
+            (a.suggestedDirectoryRole ?? "UNSPECIFIED") !==
+              "UNSPECIFIED" ? (
+              <p className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
+                {t.expertNoDirectoryMatch}{" "}
+                <Link
+                  href={`/experts?role=${encodeURIComponent(
+                    a.suggestedDirectoryRole ?? "",
+                  )}`}
+                  className="font-semibold text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+                >
+                  {exNav.navExperts} →
+                </Link>
+              </p>
+            ) : null}
 
             <section className="glass animate-fade-up rounded-3xl p-6 sm:p-7">
               <h2 className="text-lg font-semibold">{t.sectionDimensions}</h2>
