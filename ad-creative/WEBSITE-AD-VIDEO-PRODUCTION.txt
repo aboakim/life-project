@@ -1,0 +1,139 @@
+================================================================================
+LIFE DECISION ENGINE — SHORT AD / PROMO VIDEO (PRODUCTION PACK)
+================================================================================
+[See also: SITE-PROMO-VOICEOVER-AND-MP4-EXPORT.txt for a longer voiceover that
+  explains the site, its content, and purpose, plus how to save an MP4.]
+================================================================================
+Created for: screen recording, social ads, YouTube Shorts, Meta ads.
+Language of voiceover: American English, simple and clear (medium pace).
+================================================================================
+IMPORTANT — WHAT THIS FILE IS
+================================================================================
+This is NOT a video file. I cannot render an MP4 in this project. This pack
+gives you:
+  • a ready English voiceover (read aloud or TTS);
+  • scene list + timing;
+  • exact image URLs already used on the site (Unsplash) + your logo;
+  • steps to build the final video in CapCut, Canva, or FFmpeg.
+
+Use your live site: https://lifedecisions.space (or your final domain) for
+screen capture if you want real UI, OR use only the static images below.
+
+================================================================================
+1) SUGGESTED RUNTIME
+================================================================================
+Target: 55–75 seconds. Pace: not rushed, not slow — about 130 words ≈ 1 min.
+
+================================================================================
+2) IMAGES + BRAND (FROM / LINKED IN YOUR PROJECT)
+================================================================================
+Your logo (local file in repo, also usable in editors):
+  public/logo-192.png
+  public/favicon.svg
+
+Hero + marketing (Unsplash, same as lib/home/hero-slide-images.ts):
+  [0] https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=85
+  [1] https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=85
+  [2] https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=85
+  [3] https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=85
+  [4] https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=85
+  [5] https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=85
+  [6] https://images.unsplash.com/photo-1517842645767-c167b2a3b48b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=85
+
+Thematic bands (lib/home/thematic-banners.ts):
+  [A] https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=85
+  [B] https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=85
+
+(Screen record the real analyzer: open the site, fill one example question,
+  click Analyze — that is the best “product proof” shot.)
+
+================================================================================
+3) VOICEOVER — ENGLISH (READ AS-IS; PAUSES WHERE MARKED)
+================================================================================
+[Pace: calm. Breathe at each  /  ]
+
+Hi. Big life decision — a new job, a move, a relationship fork —
+  it is easy to scroll random advice, and still feel lost.
+
+"Life Decision Engine" is different.
+It is not open-ended chit-chat. It is a structured workspace. /
+
+You describe your question. The tool maps scenarios — best, worst, likely. /
+It looks at your situation through clear lenses, like money, mind, and risk. /
+You get a simple timeline, from a few months out to a few years. /
+And a score, with a clear explanation — not magic, just structure. /
+
+If you need a real person — a therapist, a lawyer, a money expert —
+  there is a directory to help you go deeper. /
+
+The core report is free to try, on the web. /
+
+Open lifedecisions dot space, and make your next step with a plan — not
+  just a feeling. /
+
+(approx. 140 words → ~1 minute at a calm pace; trim last line to 40 s if
+  your platform has a 40-second limit)
+
+================================================================================
+4) OPTIONAL: SHORT 30-SECOND CUT
+================================================================================
+Big job, big move, big relationship call?
+Stop scrolling. Use "Life Decision Engine."
+Structured scenarios, a timeline, a score, and a clear rationale — in one
+  place.
+Add experts when you want humans in the loop.
+Free to try. lifedecisions dot space
+
+================================================================================
+5) SCENE STORYBOARD (FITS 60-SEC EDIT)
+================================================================================
+Sec 0–5   : Logo on dark background (logo-192) + product name on screen
+Sec 5–12  : Image [0] — horizon / distance (see farther)
+Sec 12–20 : Image [1] or [4] — plans / data (structure)
+Sec 20–32 : Screenshot: lifedecisions.space home or /analyze (if you record)
+Sec 32–42 : Image [5] — fork / paths (decision)
+Sec 42–50 : Image [B] or [2] — people (experts, humans)
+Sec 50–60 : URL on screen: lifedecisions.space  +  logo again
+
+On-screen text (very short, large font):
+  • "Structured — not random chat"
+  • "Scenarios · timeline · score"
+  • "Free core analyzer"
+  • "lifedecisions.space"
+
+================================================================================
+6) HOW TO BUILD THE FILE YOU UPLOAD
+================================================================================
+A) Canva: Video 1080x1920 (Stories) or 1920x1080 (YouTube) → import images
+   → Voice record or upload TTS → export MP4.
+
+B) CapCut: Same — import, auto-captions in English, export.
+
+C) FFmpeg (if you have it): download images, then slideshow + your voice WAV.
+   (Example idea only; paths must be yours)
+   ffprobe is not required; basic pattern:
+   - save images as 01.jpg, 02.jpg, ...
+   - create list.txt:  file '01.jpg'  duration 5  etc.
+   - ffmpeg -f concat -i list.txt -vsync vfr -pix_fmt yuv420p -r 30 out.mp4
+   Then in any editor, add the voiceover track.
+
+D) TTS: Microsoft Edge "Read aloud" the voiceover to WAV; or Google Cloud TTS;
+   keep speed at 0.9–0.95 for "not too fast".
+
+================================================================================
+7) ATTRIBUTION (UNSPLASH)
+================================================================================
+Unsplash images require photographer credit in some uses. See:
+  https://unsplash.com/license
+In paid ads, check Unsplash + your ad network rules; when in doubt, use
+  only your own screen recordings + logo.
+
+================================================================================
+8) CTA (COPY-PASTE)
+================================================================================
+https://lifedecisions.space
+Alt: Life Decision Engine — structured life-decision analysis (free core).
+
+================================================================================
+END
+================================================================================

@@ -1,0 +1,148 @@
+================================================================================
+LIFE DECISION ENGINE — VOICEOVER (SITE + PURPOSE + CONTENT) + HOW TO GET AN MP4
+================================================================================
+File purpose:
+  1) English voiceover that INTRODUCES the site, what is ON it, and WHY it
+     was built (clear, calm, not too fast).
+  2) Practical steps so YOU can create a real VIDEO FILE (MP4) on your
+     device, then download, upload, and share it anywhere.
+================================================================================
+NOTE — MP4 IS NOT BUILT INSIDE THIS GITHUB FOLDER
+================================================================================
+A playable .mp4 is created on YOUR computer or phone (CapCut, Canva, or
+  screen recording). This text file is the script + the export checklist.
+After export, the MP4 is a normal file: you can copy it to phone, post to
+  Instagram, send via Telegram, upload to YouTube, etc.
+
+Your public site: https://lifedecisions.space
+(If you use another domain, say that name in the voiceover instead.)
+
+================================================================================
+SECTION A — FULL VOICEOVER (ENGLISH) — ~ 90 to 100 SECONDS
+================================================================================
+Read slowly. Breathe at each " / "
+
+---
+
+Hello. I want to show you a website called “Life Decision Engine,” at
+  lifedecisions dot space. /
+
+It was built for one job: to help you think through BIG life decisions in a
+  structured way. Not with endless generic chat — but with clear building
+  blocks you can actually use. /
+
+So what is on the site? /
+
+The heart of it is the analyzer. You write your main question: for example
+  a career move, a relocation, a relationship, or a money fork. /
+
+You can add context and your limits. Then the engine returns a real report: /
+  several scenarios — a better path, a rough path, a likely path. /
+  It also looks at your case through a few “lenses,” like money, how you
+  feel, risks, and opportunity. /
+
+You get a time view — a few months ahead, a couple of years, and longer. /
+  And a score, with a written reason — to give you a compass, not a
+  superstition. /
+
+On the same project you will find: a public community space for light
+  questions, a blog and playbooks with longer writing, a directory where you
+  can look for a psychologist, legal, or money professional, languages for
+  many countries, and simple explainers for privacy and how the tool uses
+  A.I. /
+
+It is important to say: this is decision support, not a substitute for
+  emergency care, or your doctor, or your lawyer. /
+
+The core experience is on the open web, so you can try the flow without
+  signing up to another social network. /
+
+If a major choice is in front of you, go to lifedecisions dot space, run the
+  analyzer once, and read the report with a calmer week in mind. /
+
+---
+Word count: about 260 words. At ~140 words per minute (clear speech), the
+  full block is roughly 1 minute 50 seconds. If you need exactly one minute,
+  use SECTION B (short) or cut the “community + blog + directory” sentence.
+
+================================================================================
+SECTION B — SHORTER VOICEOVER — ~ 55 SECONDS
+================================================================================
+[Calm. Pause at  /  ]
+
+“Life Decision Engine” at lifedecisions dot space is a site for people facing
+  big life decisions — a job, a move, or a hard relationship choice. /
+
+It is built to give you STRUCTURE: not random chat, but a clear report. /
+
+You enter your question; you get several scenarios, a money-and-mind style
+  look at the trade-offs, a timeline from a few months to a few years, and
+  a score with an explanation. /
+
+There is also a community, a blog, and a list of real experts when you
+  want a human, not a screen. /
+
+The tool is for thinking in order — it does not replace a therapist or
+  a lawyer. /
+
+Try the free flow at lifedecisions dot space. /
+
+---
+About 120 words.
+
+================================================================================
+SECTION C — WHAT THE SITE IS “FOR” (one sentence you can use as a hook)
+================================================================================
+Hook options (pick one at the start of a short edit):
+  • “This site exists so your biggest choices get a plan — not a scroll hole.”
+  • “If the decision is heavy, the answer should be structured, not random.”
+  • “One place for scenarios, a timeline, and a score for major life calls.”
+
+================================================================================
+SECTION D — HOW TO GET A DOWNLOADABLE MP4 (STEP BY STEP)
+================================================================================
+
+(1) PREP
+  - Copy the voiceover you want from Section A or B into a text file or
+    teleprompter app.
+  - Open https://lifedecisions.space in a browser to record, or use images
+    from: ad-creative/WEBSITE-AD-VIDEO-PRODUCTION.txt
+
+(2) ON WINDOWS — BUILT-IN (simple)
+  - Press Windows key + G → Xbox Game Bar → Capture. Record a tab with the
+    site, or your slides.
+  - Video saves under Videos\Captures\ as .mp4. That file can be moved,
+    posted, or re-uploaded anywhere.
+
+(3) ON PHONE — CapCut (very common)
+  - Install CapCut. New project → add photos or screen recording → add audio
+    (record voice, or TTS) → place text captions if you want.
+  - Top right: Export → 1080p → Save to gallery. The result is an MP4 on the
+    phone. From Gallery you can Share to Instagram, YouTube, Telegram, Drive.
+
+(4) IN THE BROWSER — Canva
+  - canva.com → Video → use template “promo” or “product”.
+  - Upload logo from your repo: public/logo-192.png
+  - Paste your voice with Canva’s record, or import an MP3 you made elsewhere.
+  - Share → Download → MP4.
+
+(5) TTS (text-to-speech) for the English script
+  - Read aloud in Edge browser (select text → right-click → Read aloud) and
+    record the speaker output with (2), OR use any TTS you trust; keep
+    speed around ninety percent of default so it stays clear.
+
+(6) “DOWNLOAD” FOR SHARING
+  - The MP4 on your device IS the file you “download” in the sense of keeping
+    a local copy. To share without losing quality: upload the same file to
+    Google Drive or Dropbox → get a link → or upload to YouTube (Unlisted) so
+    you can share a link. Social apps also accept the MP4 directly from your
+    gallery.
+
+(7) LEGAL / IMAGE RIGHTS
+  - Site screenshots: yours.
+  - Unsplash photos: see Unsplash license; credit photographers when the
+    platform requires it. For paid ads, follow the ad network’s rules.
+
+================================================================================
+END — COPY THE BLOCKS ABOVE INTO YOUR VIDEO EDITOR
+================================================================================
