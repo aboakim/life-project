@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import MarketingPageShell from "@/components/layout/MarketingPageShell";
 import PageLocalePicker from "@/components/layout/PageLocalePicker";
 import {
@@ -93,7 +93,19 @@ export default function RegisterExpertForm() {
   }
 
   return (
-    <MarketingPageShell title={t.registerTitle} subtitle={t.registerSubtitle}>
+    <MarketingPageShell
+      title={t.registerTitle}
+      subtitle={
+        <Fragment>
+          <p>{t.registerIntro}</p>
+          <ul className="mt-5 list-disc space-y-2 ps-5 text-base leading-relaxed md:text-lg">
+            {t.registerPoints.map((line) => (
+              <li key={line}>{line}</li>
+            ))}
+          </ul>
+        </Fragment>
+      }
+    >
       <PageLocalePicker
         locale={locale}
         onChange={setLocale}

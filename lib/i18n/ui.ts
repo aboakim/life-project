@@ -128,7 +128,8 @@ const trustHowEn: Pick<
   | "atAGlanceTitle"
   | "atAGlanceCards"
 > = {
-  heroRibbon: "8+ languages · Scenario engine · Privacy-first design",
+  heroRibbon:
+    "Free structured analyzer · Global expert directory · Private by design",
   sectionNavOverview: "Overview",
   atAGlanceEyebrow: "Start here",
   atAGlanceTitle: "What this site is — in three lines",
@@ -282,18 +283,18 @@ const trustHowHy: Pick<
   | "atAGlanceCards"
 > = {
   heroRibbon:
-    "8+ լեզու · Սցենարների շարժիչ · Գաղտնիության առաջնահերթություն",
+    "Անվճար կառուցված վերլուծիչ · Մասնագետների ցանց · Գաղտնիության առաջնահերթություն",
   sectionNavOverview: "Ընդհանուր",
   atAGlanceEyebrow: "Սկսիր այստեղից",
   atAGlanceTitle: "Ինչ է այս կայքը — երեք նախադասությամբ",
   atAGlanceCards: [
     {
       title: "Ինչ է սա",
-      body: "Մեծ կյանքի ընտրությունների (տեղափոխություն, աշխատանք, հարաբերություններ) կառուցված աշխատատարածք է։ Ստանում ես սցենարներ, չորս հարթակ, ժամանակացույց և միավոր՝ ոչ թե անվերջ ընդհանուր chat։",
+      body: "Մեծ կյանքի ընտրությունների (տեղափոխություն, աշխատանք, հարաբերություն, ֆինանսներ) համար մեկ հոսքով տալիս է լավագույն/հավանական/վատ սցենար, չորս հարթակ, ժամանակացույց, միավոր․ հստակ կառուցվածք, ոչ թե chat։",
     },
     {
       title: "Ինչ ես անում",
-      body: "Գրում ես հարցը, կամաց կոնտեքստ, սեղմում «Վերլուծել», կարդում հաշվետվությունը։ Ցանկության դեպքում՝ մասնագետներ կամ գներ։",
+      body: "Գրում ես հարցը վերլուծիչում, սեղմում «Վերլուծել», կարդում հաշվետվությունը։ Եթե ուզում ես մարդու՝ բացում ես մասնագետների ցանցը, ուղարկում հարցում։ (Գնային տարբերակ՝ /pricing)։",
     },
     {
       title: "Ինչ չէ սա",
@@ -410,7 +411,7 @@ const uiHy: Partial<UIStrings> = {
   heroLine1: "Մեծ որոշումների համար՝",
   heroAccent: "կառուցված վերլուծություն",
   subtitle:
-    "Գրիր իրական հարցը (տեղափոխություն, աշխատանք, հարաբերություններ) — ստացիր սցենարներ, ժամանակացույց և միավոր։ Սա կառուցված վերլուծիչ է, ոչ պատահական chat։",
+    "Այս կայքը մեկ նպատակ ունի․ մեծ կյանքի որոշումը մտածելու կառուցված (սցենարներ, ռիսկ-փոխարժեք, 6 ամիս․․․5 տարուց հետո) և, եթե պետք է, կապ հասցնել մասնագետների հետ․ հիմնական վերլուծիչը անվճար է, paid՝ ավելի խորք։",
   disclaimerTitle: "Պարտադիր հիշեցում",
   disclaimerBody:
     "Այս գործիքը աջակցություն է, ոչ թե վերջնական իշխանություն։ Ճգնաժամային իրավիճակներում դիմեք մասնագետի։ Սա բժշկական, իրավական կամ թերապևտիկ խորհուրդ չէ։",
@@ -530,7 +531,7 @@ const uiEnUs: Partial<UIStrings> = {
   decisionPh:
     'e.g. "Should I move to Germany?", "Should I quit my job?"…',
   subtitle:
-    "One structured flow: scenarios, timelines, and a score—not generic chit-chat.",
+    "This site does one job: help you think through a big life decision in a structured way (scenarios, trade-offs, 6 months→5 years), then connect you to real experts if you need one. Not random chat. Free core analyzer; optional paid depth.",
   accessLocal:
     "Local URL: http://localhost:3000 — run `npm run dev`, then open it in your browser.",
   footerPremium:

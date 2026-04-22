@@ -33,7 +33,8 @@ export type ExpertsCopy = {
   contactSuccess: string;
   contactError: string;
   registerTitle: string;
-  registerSubtitle: string;
+  registerIntro: string;
+  registerPoints: [string, string, string];
   regName: string;
   regRole: string;
   regCountry: string;
@@ -53,7 +54,7 @@ const hy: ExpertsCopy = {
   pageEyebrow: "Ցանց",
   pageTitle: "Մասնագետների համաշխարհային ցանց",
   pageSubtitle:
-    "Հոգեբաններ, իրավաբաններ, ֆինանսիստներ, բժիշկներ, կոուչներ, միգրացիայի մասնագետներ — աշխարհի ցանկացած վայրից։ Գրանցվեք որպես մասնագետ կամ գտեք մասնագետ և ուղարկեք կապի հարցում։",
+    "Մարդիկ նախ կիրառում են կառուցված վերլուծողը, հետո արդեն ավելի պարզ հարցով են ձեզանից փնտրում աջակցություն (տեղափոխություն, աշխատանք, իրավական/ֆինանսական հարցեր)։ Որպես մասնագետ երե՛ւացեք ցուցակում, ստացե՛ք կապի հարցումներ. պայմաններն՝ միշտ ձեզանով ու կլիենտով։",
   navExperts: "Մասնագետներ",
   navRegister: "Գրանցվել",
   navHome: "Վերլուծություն",
@@ -81,8 +82,13 @@ const hy: ExpertsCopy = {
     "Հարցումը ուղարկվեց։ Մասնագետը կտեսնի այն իր պրոֆիլի վահանակում և անձամբ կկապվի ձեզ հետ։",
   contactError: "Չհաջողվեց ուղարկել։ Փորձեք նորից։",
   registerTitle: "Գրանցվել որպես մասնագետ",
-  registerSubtitle:
-    "Լրացրեք դաշտերը։ Ձեր պրոֆիլը կերևա համաշխարհային ցանցում (ցույց է տրվում բոլոր այցելուներին)։",
+  registerIntro:
+    "Երևա՛ցեք նրանց, ովքեր արդեն ձևակերպել են հարցը (ոչ թե պատահական chat)․ հարցումը գալիս է ձեր էլ. փոստ, պատասխանն ու պայմանները Դուք եք սահմանում։",
+  registerPoints: [
+    "Ցուցակում հայտնվելը (այս տարբերակում) ազատ է․ մասնագիտություն, երկիր, լեզուներ, bio — երևում են /experts-ում։",
+    "Կապի հարցում․ այցելուներն ուղարկում են հաղորդագրություն, Դուք արդյունքում կապվում եք նրանց հետ, վճարն ու սահմանները՝ ուղիղ ձեզանից։",
+    "Մնում եք անկախ․ ձեր սակագինը, արձագանքի ժամկետը, մասնագիտական կանոնները․ կայքը միայն կապի կամուրջ է, ոչ ձեր ծառայության կատարող։",
+  ],
   regName: "Անուն / կարգավիճակ",
   regRole: "Մասնագիտություն",
   regCountry: "Երկիր",
@@ -108,7 +114,7 @@ const en: ExpertsCopy = {
   pageEyebrow: "Directory",
   pageTitle: "Global expert network",
   pageSubtitle:
-    "Psychologists, lawyers, financial advisors, physicians, coaches, immigration specialists—from anywhere. Register as an expert or find one and send a contact request.",
+    "Visitors use the structured analyzer for big life forks, then look for a real professional. Get listed to receive contact requests; fees, scope, and advice are between you and each client. Independent experts worldwide welcome.",
   navExperts: "Experts",
   navRegister: "Join as expert",
   navHome: "Analyzer",
@@ -136,8 +142,13 @@ const en: ExpertsCopy = {
     "Your request has been sent. The expert will see it in their dashboard and reach out to you directly.",
   contactError: "Could not send. Try again.",
   registerTitle: "Register as a professional",
-  registerSubtitle:
-    "Fill in the fields. Your profile appears in the global directory (visible to visitors).",
+  registerIntro:
+    "Get in front of people who already framed a serious decision (not random chat). You receive contact requests by email; you decide how to respond, what to charge, and what is in scope.",
+  registerPoints: [
+    "Global directory listing (this build): your role, country, languages, and bio are visible in /experts search.",
+    "Inbound leads: visitors send a contact request; we do not take a cut on the base listing in this version.",
+    "You stay independent: you set your own fees, response time, and professional boundaries; the site connects—does not provide your services for you.",
+  ],
   regName: "Name / title",
   regRole: "Profession",
   regCountry: "Country",
