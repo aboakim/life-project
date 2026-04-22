@@ -8,9 +8,37 @@ const MAX_BYTES = 15 * 1024 * 1024;
 
 const MODEL = process.env.OPENAI_TRANSCRIBE_MODEL ?? "whisper-1";
 
+async function openaiTranscribe(
+  key: string,
+  ab: ArrayBuffer,
+  file: File,
+  language: string | null
+): Promise<Response> {
+  const out = new FormData();
+  out.append(
+    "file",
+    new Blob([ab], {
+      type: file.type || "application/octet-stream",
+    }),
+    file.name || "audio.webm"
+  );
+  out.append("model", MODEL);
+  if (language) {
+    out.append("language", language);
+  }
+  out.append("response_format", "json");
+
+  return fetch("https://api.openai.com/v1/audio/transcriptions", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${key}` },
+    body: out,
+  });
+}
+
 /**
  * OpenAI Whisper — multipart audio from the browser (e.g. webm from MediaRecorder).
  * Requires OPENAI_API_KEY (same as /api/analyze).
+ * If a fixed `language` request fails, retries once with auto language detection.
  */
 export async function POST(req: Request) {
   const key = process.env.OPENAI_API_KEY;
@@ -46,23 +74,16 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "file_too_large" }, { status: 413 });
   }
 
-  const out = new FormData();
-  out.append(
-    "file",
-    new Blob([ab], {
-      type: file.type || "application/octet-stream",
-    }),
-    file.name || "audio.webm"
-  );
-  out.append("model", MODEL);
-  out.append("language", lang);
-  out.append("response_format", "json");
-
-  const res = await fetch("https://api.openai.com/v1/audio/transcriptions", {
-    method: "POST",
-    headers: { Authorization: `Bearer ${key}` },
-    body: out,
-  });
+  let res = await openaiTranscribe(key, ab, file, lang);
+  if (!res.ok && lang) {
+    const err = await res.text();
+    console.warn(
+      "[transcribe] OpenAI with language failed, retrying auto",
+      res.status,
+      err.slice(0, 200)
+    );
+    res = await openaiTranscribe(key, ab, file, null);
+  }
 
   if (!res.ok) {
     const err = await res.text();

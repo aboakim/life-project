@@ -512,9 +512,9 @@ const uiHy: Partial<UIStrings> = {
   voiceListening: "Լսում եմ…",
   voiceStop: "Կանգ",
   voiceNotSupported:
-    "Ձայնային մուտքը հասանելի չէ այս բրաուզերում։ Փորձեք Chrome կամ Edge։",
+    "Բրաուզերով խոսում→տեքստը հաճախ չի աշխատում հայերենում․ ավելի հուսալի է «(cloud) գրառում» կոճակը, երբ սերվերում Whisper-ը միացած է (OpenAI key)․ Փորձեք Chrome/Edge։",
   voiceInputHint:
-    "Թարմ UI լեզուն պետք է համընկնի ձեր խոսքի լեզվի հետ։ Chrome/Edge-ում աշխատում է լավագույնը։",
+    "Ընտրված UI լեզուն = վերլուծության, cloud գրառման և «Լսել»-ի հիմքը․ հավասար պահեք խոսքի հետ։ Եթե սարքին այդ լեզվի TTS ձայն չկա, «Լսել»-ը կարող է մեկ անգամ թարգմանել անգլերեն (OpenAI-ով)։",
   readAloud: "Լսել հաշվետվությունը",
   readAloudStop: "Կանգնեցնել",
   voiceWhisperStart: "Գրանցում (cloud)",
@@ -600,9 +600,9 @@ const uiEn: Partial<UIStrings> = {
   voiceListening: "Listening…",
   voiceStop: "Stop",
   voiceNotSupported:
-    "Voice input isn’t available in this browser. Try Chrome or Edge.",
+    "In-browser voice typing isn’t available here. Use the cloud (record) button if your deployment enables it, or type. Best in Chrome or Edge for supported languages.",
   voiceInputHint:
-    "Pick the same interface language you speak. Works best in Chrome or Edge.",
+    "Your selected page language is used for the analysis, cloud transcription, and read-aloud. It should match the language you speak. If your device has no voice for that language, read-aloud may translate to English for TTS (when the server is configured with OpenAI).",
   readAloud: "Listen to report",
   readAloudStop: "Stop playback",
   voiceWhisperStart: "Record (cloud)",
@@ -701,9 +701,10 @@ const uiRu: Partial<UIStrings> = {
   voiceDictate: "Диктовка",
   voiceListening: "Слушаю…",
   voiceStop: "Стоп",
-  voiceNotSupported: "Голосовой ввод недоступен. Попробуйте Chrome или Edge.",
+  voiceNotSupported:
+    "Голос в браузере может не поддерживать этот язык. Используйте кнопку «cloud (запись)» при настроенном сервере, либо ввод с клавиатуры. Chrome/Edge — лучше.",
   voiceInputHint:
-    "Язык интерфейса должен совпадать с языком речи. Лучше всего в Chrome/Edge.",
+    "Язык интерфейса задаёт и отчёт, и голос. При отсутствии голоса к системе TTS «Прослушать» может перевести на английский (если на сервере есть OpenAI).",
   readAloud: "Прослушать отчёт",
   readAloudStop: "Остановить",
   voiceWhisperStart: "Запись (cloud)",
@@ -789,9 +790,9 @@ const uiDe: Partial<UIStrings> = {
   voiceListening: "Höre zu…",
   voiceStop: "Stopp",
   voiceNotSupported:
-    "Spracheingabe nicht verfügbar. Bitte Chrome oder Edge nutzen.",
+    "Manche Sprachen laufen im Browser nicht. Nutze die Cloud-(Aufnahme)-Taste, wenn eingerichtet, oder tippen. Chrome/Edge meist besser.",
   voiceInputHint:
-    "Interface-Sprache wie Ihre Sprache wählen. Am besten in Chrome/Edge.",
+    "Gleiche Oberflächensprache = gleiche Analyse- und TTS-Sprache. Fehlt eine Stimme, kann die Vorlesefunktion fürs TTS ins Englische wechseln (wenn der Server OpenAI nutzt).",
   readAloud: "Bericht anhören",
   readAloudStop: "Stoppen",
   voiceWhisperStart: "Aufnahme (Cloud)",
@@ -877,9 +878,9 @@ const uiFr: Partial<UIStrings> = {
   voiceListening: "J’écoute…",
   voiceStop: "Arrêter",
   voiceNotSupported:
-    "Saisie vocale indisponible. Essayez Chrome ou Edge.",
+    "La dictée intégrée ne couvre pas toutes les langues. Utilisez le nuage (enregistrement) si le serveur le permet, ou le clavier. Chrome/Edge de préférence.",
   voiceInputHint:
-    "Choisissez la même langue que celle parlée. Idéal avec Chrome/Edge.",
+    "La langue d’interface guide analyse, dictée et lecture vocale. Sans voix locale, l’écoute peut passer en anglais pour la synthèse (si le serveur a OpenAI).",
   readAloud: "Écouter le rapport",
   readAloudStop: "Arrêter",
   voiceWhisperStart: "Enregistrer (cloud)",
@@ -965,9 +966,9 @@ const uiEs: Partial<UIStrings> = {
   voiceListening: "Escuchando…",
   voiceStop: "Detener",
   voiceNotSupported:
-    "Entrada de voz no disponible. Prueba Chrome o Edge.",
+    "El dictado del navegador a veces no soporta tu idioma. Usa la nube (grabar) si el servidor lo permite, o el teclado. Mejor con Chrome/Edge.",
   voiceInputHint:
-    "Usa el mismo idioma de interfaz que hablas. Mejor en Chrome/Edge.",
+    "El idioma de la página aplica a análisis, transcripción e «Escuchar». Sin voz TTS, puede leerse en inglés (si el servidor traduce vía OpenAI).",
   readAloud: "Escuchar informe",
   readAloudStop: "Detener",
   voiceWhisperStart: "Grabar (nube)",
@@ -1052,8 +1053,10 @@ const uiAr: Partial<UIStrings> = {
   voiceDictate: "إملاء صوتي",
   voiceListening: "أستمع…",
   voiceStop: "إيقاف",
-  voiceNotSupported: "الإدخال الصوتي غير متاح. جرّب Chrome أو Edge.",
-  voiceInputHint: "اجعل لغة الواجهة نفس لغة كلامك. يعمل أفضل في Chrome/Edge.",
+  voiceNotSupported:
+    "قد لا يدعم المتصفح لغتك. استخدم زر (السحابة/تسجيل) إن كان مفعّلًا، أو اكتب. Chrome/Edge أغلب الأحيان أصلح.",
+  voiceInputHint:
+    "لغة الواجهة هي نفس لغة التحليل والتسجيل والاستماع. إن لم تتوفر مزامنة صوتٍ فقد يُقرأ بالإنجليزية (إن كان الخادم يدعم OpenAI).",
   readAloud: "استمع للتقرير",
   readAloudStop: "إيقاف التشغيل",
   voiceWhisperStart: "تسجيل (سحابي)",
@@ -1139,9 +1142,9 @@ const uiIt: Partial<UIStrings> = {
   voiceListening: "In ascolto…",
   voiceStop: "Stop",
   voiceNotSupported:
-    "Input vocale non disponibile. Prova Chrome o Edge.",
+    "Il dettatura del browser non supporta ogni lingua. Usa Registra (cloud) se il server lo consente, oppure scrivi. Chrome/Edge di solito meglio.",
   voiceInputHint:
-    "Stessa lingua dell’interfaccia e del parlato. Meglio con Chrome/Edge.",
+    "La lingua scelta vale per analisi, cloud e ascolto. Se manca la voce TTS, l’ascolto può passare all’inglese (con OpenAI sul server).",
   readAloud: "Ascolta il report",
   readAloudStop: "Interrompi",
   voiceWhisperStart: "Registra (cloud)",

@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { appLocaleToSpeechBcp47 } from "@/lib/tts-bcp47";
+import { appLocaleToWebSttBcp47 } from "@/lib/tts-bcp47";
 import type { AppLocale } from "@/lib/i18n/locale";
 
 type Props = {
@@ -47,7 +47,7 @@ export default function VoiceDictateButton({
   const [listening, setListening] = useState(false);
   const [supported, setSupported] = useState(true);
   const recRef = useRef<SpeechRecHandle | null>(null);
-  const bcp47 = appLocaleToSpeechBcp47(locale);
+  const bcp47 = appLocaleToWebSttBcp47(locale);
 
   const stop = useCallback(() => {
     try {

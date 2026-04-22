@@ -19,6 +19,10 @@ export function isAppLocale(x: unknown): x is AppLocale {
   );
 }
 
+export function isEnglishAppLocale(locale: AppLocale): boolean {
+  return locale === "en" || locale === "en-US";
+}
+
 /** Fallback when locale is missing/invalid: matches `DEFAULT_LOCALE` (international default). */
 export function parseLocale(x: unknown): AppLocale {
   return isAppLocale(x) ? x : "en-US";
