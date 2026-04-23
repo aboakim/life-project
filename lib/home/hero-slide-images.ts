@@ -15,8 +15,8 @@ export const HERO_SLIDE_IMAGE_URLS = [
   "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=85",
   // 5 · fork in the road — name the paths
   "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=85",
-  // 6 · reflection — write, pause, revisit
-  "https://images.unsplash.com/photo-1517842645767-c167b2a3b48b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=85",
+  // 6 · reflection — write, pause, revisit (verified 200; prior id returned 404)
+  "https://images.unsplash.com/photo-1416339306562-f3d12fefd36f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=85",
 ] as const;
 
 export const PRODUCT_STRIP_IMAGE_URLS = [

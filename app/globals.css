@@ -317,6 +317,19 @@ body::before {
   --wash-color: rgb(178 145 255 / 0.1);
 }
 
+/* Indeterminate “analysis running” bar */
+@keyframes home-analyzing-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(250%);
+  }
+}
+.home-analyzing-bar-inner {
+  animation: home-analyzing-sweep 1.35s ease-in-out infinite;
+}
+
 /* Print: only the analysis export block is visible; rest hidden via visibility */
 @media print {
   body * {

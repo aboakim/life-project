@@ -97,6 +97,16 @@ export type UIStrings = {
   atAGlanceEyebrow: string;
   atAGlanceTitle: string;
   atAGlanceCards: ReadonlyArray<{ title: string; body: string }>;
+  /** Compact trust badges (home, under hero) */
+  trustMicroPoints: readonly [string, string, string];
+  /** Home “try a demo” mini-block */
+  homeDemoEyebrow: string;
+  homeDemoTitle: string;
+  homeDemoExample1: string;
+  homeDemoExample2: string;
+  homeDemoCta: string;
+  /** Shown with the progress bar while analysis is running */
+  analyzingProgressLine: string;
   /** Dedicated /analyze page */
   analyzePageTitle: string;
   analyzePageSubtitle: string;
@@ -161,38 +171,56 @@ const trustHowEn: Pick<
   | "atAGlanceEyebrow"
   | "atAGlanceTitle"
   | "atAGlanceCards"
+  | "trustMicroPoints"
+  | "homeDemoEyebrow"
+  | "homeDemoTitle"
+  | "homeDemoExample1"
+  | "homeDemoExample2"
+  | "homeDemoCta"
+  | "analyzingProgressLine"
 > = {
   heroRibbon:
     "Free structured analyzer · Global expert directory · Private by design",
   sectionNavOverview: "Overview",
   sectionNavFixes: "What it fixes",
   atAGlanceEyebrow: "Start here",
-  atAGlanceTitle: "What this site is — in three lines",
+  atAGlanceTitle: "Three quick steps",
   atAGlanceCards: [
     {
-      title: "What it is",
-      body: "A structured decision workspace for big life forks (move, career, relationships). You get scenarios, four lenses, timelines, and a score—not endless generic chat.",
+      title: "Enter your decision",
+      body: "One clear question—add context and values if you want.",
     },
     {
-      title: "What you do",
-      body: "Write your question, add context if you want, run the analyzer, then read the report. Optionally browse experts or pricing when you’re ready.",
+      title: "Compare scenarios",
+      body: "Best, worst, and likely paths with trade-offs side by side.",
     },
     {
-      title: "What it isn’t",
-      body: "Not therapy, not legal or medical advice, and not a social feed. In an emergency, contact a real professional.",
+      title: "Get a clear outcome",
+      body: "Score, timeline, four lenses—talk to a pro only if you want one.",
     },
   ],
+  trustMicroPoints: [
+    "No data stored as a public post",
+    "Private analysis in your session",
+    "Optional expert help when you want a human",
+  ],
+  homeDemoEyebrow: "Try an example",
+  homeDemoTitle: "See a structured report in one click",
+  homeDemoExample1: "Should I move abroad?",
+  homeDemoExample2: "Quit job or stay?",
+  homeDemoCta: "Try demo",
+  analyzingProgressLine: "Analyzing your decision…",
   trustSectionTitle: "Why people use this framework",
   trustCards: [
     {
       emoji: "🧭",
-      title: "Structured, not random",
-      body: "Best / worst / likely paths, four lenses, and a timeline—so you compare options side by side.",
+      title: "Structured logic, not opinions",
+      body: "Clear trade-offs between paths—scenarios and lenses, not vibes or generic chat.",
     },
     {
       emoji: "🔐",
-      title: "Respect for your story",
-      body: "No public feed or voting wall. Your text stays in your session; AI (if enabled) only generates your answer.",
+      title: "Clear trade-offs, not guesses",
+      body: "Best, worst, and likely paths with evidence—your text stays in your session.",
     },
     {
       emoji: "🌍",
@@ -246,7 +274,7 @@ const trustHowEn: Pick<
       body: "A percentage with rationale—not a magic answer.",
     },
   ],
-  heroCtaPrimary: "Open analyzer",
+  heroCtaPrimary: "Start free analysis",
   heroCtaSecondary: "Browse experts",
   previewCardTitle: "Workspace preview",
   previewRows: [
@@ -282,7 +310,7 @@ const trustHowEn: Pick<
         "Name the paths, not the panic—big forks are easier when choices are visible.",
     },
     {
-      alt: "Open notebook, pen, and book on a sunlit table",
+      alt: "Laptop and coffee on a wooden desk—time to think before you choose",
       caption: "Write it down, sleep on it. Clarity often comes on the second look.",
     },
   ],
@@ -328,38 +356,56 @@ const trustHowHy: Pick<
   | "atAGlanceEyebrow"
   | "atAGlanceTitle"
   | "atAGlanceCards"
+  | "trustMicroPoints"
+  | "homeDemoEyebrow"
+  | "homeDemoTitle"
+  | "homeDemoExample1"
+  | "homeDemoExample2"
+  | "homeDemoCta"
+  | "analyzingProgressLine"
 > = {
   heroRibbon:
     "Անվճար կառուցված վերլուծիչ · Մասնագետների ցանց · Գաղտնիության առաջնահերթություն",
   sectionNavOverview: "Ընդհանուր",
   sectionNavFixes: "Ինչ է լուծում",
   atAGlanceEyebrow: "Սկսիր այստեղից",
-  atAGlanceTitle: "Ինչ է այս կայքը — երեք նախադասությամբ",
+  atAGlanceTitle: "Երեք հստակ քայլ",
   atAGlanceCards: [
     {
-      title: "Ինչ է սա",
-      body: "Մեծ կյանքի ընտրությունների (տեղափոխություն, աշխատանք, հարաբերություն, ֆինանսներ) համար մեկ հոսքով տալիս է լավագույն/հավանական/վատ սցենար, չորս հարթակ, ժամանակացույց, միավոր․ հստակ կառուցվածք, ոչ թե chat։",
+      title: "Մուտքագրիր հարցդ",
+      body: "Մեկ հստակ հարց, կամաց ավելացրու կոնտեքստ և արժեքներ։",
     },
     {
-      title: "Ինչ ես անում",
-      body: "Գրում ես հարցը վերլուծիչում, սեղմում «Վերլուծել», կարդում հաշվետվությունը։ Եթե ուզում ես մարդու՝ բացում ես մասնագետների ցանցը, ուղարկում հարցում։ (Գնային տարբերակ՝ /pricing)։",
+      title: "Համեմատիր սցենարները",
+      body: "Լավագույն, վատ և հավանական ուղիներ՝ փոխարժեքներով կողք կողքի։",
     },
     {
-      title: "Ինչ չէ սա",
-      body: "Ոչ թերապիա, ոչ իրավաբանական/բժշկական խորհուրդ, ոչ սոցիալ ժապավեն։ Ճգնաժամում դիմիր իրական մասնագետի։",
+      title: "Ստացիր հստակ ելք",
+      body: "Միավոր, ժամանակացույց, չորս հարթակ․ մասնագետ՝ միայն եթե ուզում ես։",
     },
   ],
+  trustMicroPoints: [
+    "Տեքստը որպես հրապարակային գրառում չի պահվում",
+    "Գաղտնի վերլուծություն՝ քո սեանսի մեջ",
+    "Մասնագետ՝ ցանկությամբ, ոչ պարտադիր",
+  ],
+  homeDemoEyebrow: "Փորձիր օրինակ",
+  homeDemoTitle: "Ինչպես է աշխատում մեկ կտարվածով",
+  homeDemoExample1: "Տեղափոխվե՞լ արտերկիր",
+  homeDemoExample2: "Թողնե՞լ աշխատանքը, թե՞ մնալ",
+  homeDemoCta: "Բացել ցուցադրում",
+  analyzingProgressLine: "Վերլուծում ենք ձեր որոշումը․․․",
   trustSectionTitle: "Ինչու են ընտրում այս գործիքը",
   trustCards: [
     {
       emoji: "🧭",
-      title: "Կառուցված, ոչ պատահական",
-      body: "Լավագույն / վատ / հավանական սցենարներ, չորս հարթակ, ժամանակացույց՝ տարբերակները կողք կողքի համեմատելու համար։",
+      title: "Կարգավորված մտածողություն, ոչ կարծիքներ",
+      body: "Հստակ փոխարժեքներ ուղիների միջեւ, ոչ թե ընդհանուր խորհուրդ։",
     },
     {
       emoji: "🔐",
-      title: "Հարգանք ձեր պատմության նկատմամբ",
-      body: "Հրապարակային ժապավեն չկա։ Ձեր տեքստը մնում է սեանսի մեջ․ AI-ն (եթե միացված է) միայն պատասխան է գեներացնում։",
+      title: "Պարզ ռիսկ-փոխարժեք, ոչ կռահում",
+      body: "Լավագույն, վատ և հավանական սցենարներ, չորս հարթակ, ժամկետներ․ ձեր տեքստը մնում է սեանսում։",
     },
     {
       emoji: "🌍",
@@ -413,7 +459,7 @@ const trustHowHy: Pick<
       body: "Տոկոս բացատրությամբ՝ ոչ թե «կախարդական պատասխան»։",
     },
   ],
-  heroCtaPrimary: "Բացել վերլուծիչը",
+  heroCtaPrimary: "Սկսել անվճար վերլուծություն",
   heroCtaSecondary: "Մասնագետներ",
   previewCardTitle: "Աշխատատարածքի նախադիտում",
   previewRows: [
@@ -449,7 +495,7 @@ const trustHowHy: Pick<
         "Անվանի ուղիները, ոչ թե միայն վախը՝ մեծ տարաձայնություններն ավելի կառավարելի են դառնում։",
     },
     {
-      alt: "Բաց տետր, գրիչ, գիրք արևոտ սեղանի վրա",
+      alt: "Լապտոպ և սուրճ փայտե սեղանի վրա, հանգիստ աշխատանքային պահ",
       caption:
         "Գրիր, մի քանի ժամ կամ օր հետո նորից կարդա — պարզությունը հաճախ երկրորդ հայացքով է գալիս։",
     },
@@ -468,10 +514,10 @@ const trustHowHy: Pick<
 
 const uiHy: Partial<UIStrings> = {
   brand: "Կյանքի որոշումների AI",
-  heroLine1: "Մեծ որոշումների համար՝",
-  heroAccent: "կառուցված վերլուծություն",
+  heroLine1: "Կայացրո՛ր լավ կյանքի որոշումներ",
+  heroAccent: "րոպեների մեջ",
   subtitle:
-    "Այս կայքը մեկ նպատակ ունի․ մեծ կյանքի որոշումը մտածելու կառուցված (սցենարներ, ռիսկ-փոխարժեք, 6 ամիս․․․5 տարուց հետո) և, եթե պետք է, կապ հասցնել մասնագետների հետ․ հիմնական վերլուծիչը անվճար է, paid՝ ավելի խորք։",
+    "Համեմատի՛ր տարբերակները, տե՛ս արդյունքները, հստա՛ր որոշի՛ր. կառուցված վերլուծություն, ոչ պատահական chat։",
   disclaimerTitle: "Պարտադիր հիշեցում",
   disclaimerBody:
     "Այս գործիքը աջակցություն է, ոչ թե վերջնական իշխանություն։ Ճգնաժամային իրավիճակներում դիմեք մասնագետի։ Սա բժշկական, իրավական կամ թերապևտիկ խորհուրդ չէ։",
@@ -559,10 +605,10 @@ const uiHy: Partial<UIStrings> = {
 
 const uiEn: Partial<UIStrings> = {
   brand: "Life Decision Engine",
-  heroLine1: "Big life decisions →",
-  heroAccent: "structured AI analysis",
+  heroLine1: "Make better life decisions",
+  heroAccent: "in minutes",
   subtitle:
-    "Ask a real fork (move, job, relationship). Get scenarios, timelines, four lenses, and a score—structured analysis, not random chat.",
+    "Compare options, see outcomes, decide clearly. Structured analysis—not random chat.",
   disclaimerTitle: "Important",
   disclaimerBody:
     "This is a support tool—not final authority. In a crisis, contact a professional. Not medical, legal, or therapeutic advice.",
@@ -652,8 +698,6 @@ const uiEnUs: Partial<UIStrings> = {
   ...uiEn,
   decisionPh:
     'e.g. "Should I move to Germany?", "Should I quit my job?"…',
-  subtitle:
-    "This site does one job: help you think through a big life decision in a structured way (scenarios, trade-offs, 6 months→5 years), then connect you to real experts if you need one. Not random chat. Free core analyzer; optional paid depth.",
   accessLocal:
     "Local URL: http://localhost:3000 — run `npm run dev`, then open it in your browser.",
   footerPremium:
@@ -1213,10 +1257,39 @@ const table: Record<AppLocale, Partial<UIStrings>> = {
   it: uiIt,
 };
 
+/** English defaults for home trust/demo copy—locales can override in `trustHow*`. */
+const HOME_I18N_FALLBACKS: Pick<
+  UIStrings,
+  | "trustMicroPoints"
+  | "homeDemoEyebrow"
+  | "homeDemoTitle"
+  | "homeDemoExample1"
+  | "homeDemoExample2"
+  | "homeDemoCta"
+  | "analyzingProgressLine"
+> = {
+  trustMicroPoints: [
+    "No data stored as a public post",
+    "Private analysis in your session",
+    "Optional expert help when you want a human",
+  ],
+  homeDemoEyebrow: "Try an example",
+  homeDemoTitle: "See a structured report in one click",
+  homeDemoExample1: "Should I move abroad?",
+  homeDemoExample2: "Quit job or stay?",
+  homeDemoCta: "Try demo",
+  analyzingProgressLine: "Analyzing your decision…",
+};
+
 export function getUi(locale: AppLocale): UIStrings {
   const row = table[locale];
   if (locale === "hy") {
-    return { ...trustHowEn, ...row, ...trustHowHy } as UIStrings;
+    return {
+      ...HOME_I18N_FALLBACKS,
+      ...trustHowEn,
+      ...row,
+      ...trustHowHy,
+    } as UIStrings;
   }
   const trustBase =
     locale === "ru"
@@ -1232,5 +1305,5 @@ export function getUi(locale: AppLocale): UIStrings {
               : locale === "ar"
                 ? trustHowAr
                 : trustHowEn;
-  return { ...trustBase, ...row } as UIStrings;
+  return { ...HOME_I18N_FALLBACKS, ...trustBase, ...row } as UIStrings;
 }

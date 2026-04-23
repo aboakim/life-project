@@ -7,27 +7,27 @@ type Triple = readonly [string, string, string];
  * Full text remains in `sr-only` next to each card.
  */
 const atEn: Triple = [
-  "3 scenarios, 4 lenses, timeline & score—structure, not random chat.",
-  "You write → run the analyzer → read the report. Experts optional.",
-  "Not therapy or legal advice. In an emergency, contact a real professional.",
+  "Enter your decision, optional context, then run the structured analyzer.",
+  "Compare best / worst / likely with trade-offs side by side.",
+  "A score and a timeline—not therapy or legal advice. Pros are optional.",
 ];
 
 const atHy: Triple = [
-  "3 սցենար, 4 հարթակ, ժամանակացույց, միավոր․ հստակ հոսք, ոչ chat։",
-  "Գրում ես → Վերլուծել → հաշվետվություն. Մասնագետը՝ ցանկությամբ։",
-  "Թերապիա, իրավունք, բժշկական խորհուրդ չէ. ճգնաժամում դիմիր մասնագետի։",
+  "Գրիր հարցը, ավելացրու կոնտեքստ, հետո միացրու վերլուծիչը։",
+  "Համեմատի՛ր լավագույն/վատ/հավանական՝ փոխարժեքներով։",
+  "Միավոր և ժամկետ․ ոչ թերապիա կամ իրավական խորհուրդ. մասնագետ՝ ցանկությամբ։",
 ];
 
 const trustEn: Triple = [
-  "Best / worst / likely—compare side by side.",
-  "No public feed. Your text stays in your session.",
-  "Psychology, legal, finance directory—many languages.",
+  "Structured logic and clear trade-offs—not random opinions.",
+  "Session-private analysis. No public feed of your story.",
+  "Expert directory in many languages—only when you want a human.",
 ];
 
 const trustHy: Triple = [
-  "Լավագույն / վատ / հավանական․ կողք կողքի համեմատելու համար։",
-  "Հրապարակային ժապավեն չէ. Ձեր տեքստը մնում է սեանսի մեջ։",
-  "Հոգեբանական, իրավական, ֆինանսական ցանց, բազմալեզու միջերես։",
+  "Կարգավորված մտածողություն, ոչ կարծիքներ, հստակ փոխարժեքներ։",
+  "Գաղտնի վերլուծություն սեանսում, հրապարակային ժապավեն չէ։",
+  "Բազմալեզու ցանց, երբ ուզում ես մասնագետի։",
 ];
 
 const howEn: Triple = [

@@ -475,7 +475,7 @@ export default function DecisionStudio({
         className={
           focusLayout
             ? "mx-auto max-w-6xl px-4 pb-20 pt-4 sm:px-6 sm:pt-6"
-            : "mx-auto max-w-6xl px-4 pb-32 pt-6 sm:px-6 sm:pt-8"
+            : "mx-auto max-w-6xl max-md:pb-40 px-4 pb-32 pt-6 sm:px-6 sm:pt-8"
         }
       >
         {focusLayout && (
@@ -541,10 +541,10 @@ export default function DecisionStudio({
         {/* Hero — split layout like leading SaaS landings */}
         <section
           id="section-hero"
-          className="home-section-wash home-section-wash--hero animate-fade-up relative overflow-hidden rounded-[1.75rem] border border-white/[0.16] bg-gradient-to-br from-white/[0.16] via-white/[0.07] to-[rgb(var(--surface-elevated))]/45 p-4 shadow-[0_40px_120px_-52px_rgb(var(--accent)/0.45),0_0_0_1px_rgba(255,255,255,0.1)_inset] backdrop-blur-md sm:rounded-[2.5rem] sm:p-10 lg:p-14"
+          className="home-section-wash home-section-wash--hero animate-fade-up relative overflow-hidden rounded-[1.75rem] border border-white/[0.16] bg-gradient-to-br from-white/[0.1] via-white/[0.05] to-[rgb(var(--surface-elevated))]/55 p-4 shadow-[0_28px_80px_-48px_rgb(var(--accent)/0.35),0_0_0_1px_rgba(255,255,255,0.1)_inset] backdrop-blur-sm sm:rounded-[2.5rem] sm:p-10 lg:p-14"
         >
-          <div className="pointer-events-none absolute inset-y-10 start-3 w-[5px] rounded-full bg-gradient-to-b from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] opacity-95 shadow-[0_0_28px_rgb(var(--accent)/0.55)] sm:start-5 sm:w-1.5" />
-          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(118deg,rgb(var(--accent)/0.16),transparent_38%,rgb(var(--accent-2)/0.11),transparent_62%,rgb(var(--accent-magenta)/0.12))]" />
+          <div className="pointer-events-none absolute inset-y-10 start-3 w-[5px] rounded-full bg-gradient-to-b from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] opacity-90 shadow-[0_0_20px_rgb(var(--accent)/0.4)] sm:start-5 sm:w-1.5" />
+          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(118deg,rgb(var(--accent)/0.1),transparent_40%,rgb(var(--accent-2)/0.07),transparent_60%,rgb(var(--accent-magenta)/0.08))]" />
           <div className="grid-view pointer-events-none absolute inset-0 opacity-[0.5]" />
           <div className="relative grid gap-12 ps-4 sm:ps-6 lg:grid-cols-[minmax(0,1fr)_minmax(280px,400px)] lg:items-center lg:ps-2">
             <div>
@@ -579,7 +579,7 @@ export default function DecisionStudio({
               <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                 <Link
                   href="/analyze"
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-8 py-3.5 text-base font-bold text-white shadow-xl shadow-[rgb(var(--accent)/0.35)] transition hover:brightness-110"
+                  className="inline-flex min-h-[52px] min-w-[min(100%,18rem)] items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-10 py-4 text-lg font-bold text-white shadow-xl shadow-[rgb(var(--accent)/0.3)] transition hover:brightness-110"
                 >
                   {t.heroCtaPrimary}
                   <span aria-hidden>→</span>
@@ -601,7 +601,7 @@ export default function DecisionStudio({
             </div>
 
             <div className="relative space-y-5">
-              <div className="absolute -inset-4 -z-10 rounded-[1.75rem] bg-gradient-to-br from-[rgb(var(--accent))]/22 via-[rgb(var(--accent-magenta))]/12 to-[rgb(var(--accent-2))]/18 blur-2xl" />
+              <div className="absolute -inset-4 -z-10 rounded-[1.75rem] bg-gradient-to-br from-[rgb(var(--accent))]/14 via-[rgb(var(--accent-magenta))]/8 to-[rgb(var(--accent-2))]/12 blur-xl" />
               <HeroVisualSlider slides={heroSlideDeck} />
               <div className="relative overflow-hidden rounded-2xl border border-white/12 bg-[rgb(var(--surface-2))]/90 shadow-2xl backdrop-blur-xl">
                 <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
@@ -643,6 +643,61 @@ export default function DecisionStudio({
             </div>
           </div>
         </section>
+
+        {!focusLayout ? (
+          <>
+            <div className="home-section-wash mt-6 grid gap-3 rounded-2xl border border-white/[0.12] bg-[rgb(var(--surface-elevated))]/60 px-4 py-4 sm:px-6 sm:py-5">
+              <p className="m-0 text-xs font-bold uppercase tracking-[0.16em] text-white/70">
+                {t.sectionNavTrust}
+              </p>
+              <ul className="m-0 grid list-none grid-cols-1 gap-2.5 p-0 sm:grid-cols-3 sm:gap-3">
+                {t.trustMicroPoints.map((line, i) => (
+                  <li
+                    key={i}
+                    className="flex items-start gap-2.5 rounded-xl border border-white/[0.1] bg-black/25 px-3 py-2.5 text-sm leading-snug text-white/95"
+                  >
+                    <span className="shrink-0 text-base" aria-hidden>
+                      {i === 0 ? "🔒" : i === 1 ? "🔐" : "🤝"}
+                    </span>
+                    <span>{line}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="home-section-wash mt-4 rounded-2xl border border-white/[0.12] bg-[rgb(var(--surface-elevated))]/55 px-4 py-5 sm:px-6">
+              <p className="m-0 text-xs font-bold uppercase tracking-[0.2em] text-[rgb(var(--accent-2))]">
+                {t.homeDemoEyebrow}
+              </p>
+              <p className="font-display mt-1 text-lg font-bold text-[rgb(var(--ink))] [text-wrap:balance]">
+                {t.homeDemoTitle}
+              </p>
+              <ul className="mt-3 list-none space-y-2 p-0 text-sm">
+                <li>
+                  <Link
+                    href="/analyze?preset=relocate"
+                    className="font-semibold text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+                  >
+                    {t.homeDemoExample1} →
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/analyze?preset=job"
+                    className="font-semibold text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+                  >
+                    {t.homeDemoExample2} →
+                  </Link>
+                </li>
+              </ul>
+              <Link
+                href="/analyze"
+                className="mt-4 inline-flex min-h-[48px] items-center justify-center rounded-2xl border border-white/15 bg-white/[0.1] px-6 py-3 text-sm font-bold text-white transition hover:bg-white/[0.14]"
+              >
+                {t.homeDemoCta} →
+              </Link>
+            </div>
+          </>
+        ) : null}
 
         <RevealOnScroll>
         <section
@@ -1113,6 +1168,25 @@ export default function DecisionStudio({
                   </span>
                 ) : null}
               </div>
+              {loading ? (
+                <div
+                  className="mt-4 space-y-2"
+                  role="status"
+                  aria-live="polite"
+                >
+                  <p className="text-sm font-medium text-[rgb(var(--ink))]">
+                    {t.analyzingProgressLine}
+                  </p>
+                  <div
+                    className="relative h-1.5 w-full overflow-hidden rounded-full bg-white/10"
+                    aria-hidden
+                  >
+                    <div
+                      className="home-analyzing-bar-inner absolute start-0 top-0 h-full w-2/5 rounded-full bg-gradient-to-r from-[rgb(var(--accent))] to-[rgb(var(--accent-2))]"
+                    />
+                  </div>
+                </div>
+              ) : null}
               {(result?.hint || result?.warning) && (
                 <p className="mt-3 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2 text-xs leading-relaxed text-[rgb(var(--ink-soft))]">
                   {result.warning ?? result.hint}
@@ -1427,6 +1501,19 @@ export default function DecisionStudio({
         </section>
         </RevealOnScroll>
 
+        {!focusLayout ? (
+          <div className="pointer-events-none fixed inset-x-0 bottom-0 z-50 md:hidden">
+            <div className="pointer-events-auto mx-auto max-w-6xl border-t border-white/10 bg-[rgb(var(--surface))]/92 px-4 pt-2 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-md">
+              <Link
+                href="/analyze"
+                className="flex min-h-[52px] w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] text-base font-bold text-white shadow-lg shadow-[rgb(var(--accent)/0.25)] transition hover:brightness-110"
+              >
+                {t.heroCtaPrimary}
+                <span aria-hidden>→</span>
+              </Link>
+            </div>
+          </div>
+        ) : null}
       </div>
     </div>
   );
