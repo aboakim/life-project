@@ -79,6 +79,9 @@ export type PostAnalysisCopy = {
   emailRemindSubmitting: string;
   emailRemindSuccess: string;
   emailRemindError: string;
+  emailRemindRateLimited: string;
+  /** bad_request (e.g. anti-spam field touched by autofill) */
+  emailRemindBlockedRequest: string;
   emailRemindCaptchaFailed: string;
   emailRemindNeedTurnstile: string;
   emailRemindPrivacy: string;
@@ -200,6 +203,10 @@ const en: PostAnalysisCopy = {
   emailRemindSuccess7d:
     "Saved. You’ll get a short “come back to the analyzer” email in about 7 days — and you can still use the 3 / 7 / 14 day buttons for an earlier nudge.",
   emailRemindError: "Could not save — try again in a moment.",
+  emailRemindRateLimited:
+    "Too many attempts from this network. Wait a few minutes and try again.",
+  emailRemindBlockedRequest:
+    "The request was blocked. Refresh the page and try again — password managers sometimes auto-fill a hidden anti-spam field.",
   emailRemindCaptchaFailed: "Robot check failed — try again.",
   emailRemindNeedTurnstile:
     "Optional: add Cloudflare Turnstile (NEXT_PUBLIC_TURNSTILE_SITE_KEY + TURNSTILE_SECRET_KEY) for stronger bot protection; the form works without it using consent + a hidden bot trap.",
@@ -324,6 +331,10 @@ const hy: PostAnalysisCopy = {
   emailRemindSuccess7d:
     "Պահվեց։ Մոտ 7 օրից կուղարկենք կարճ նամակ՝ հղումով նորից բացելու վերլուծիչը. ցանկության դեպքում ավելի շուտ հիշեցում կարող ես ընտրել 3 / 7 / 14 օր կոճակներով։",
   emailRemindError: "Չհաջողվեց — փորձիր մի քիչ հետո։",
+  emailRemindRateLimited:
+    "Չափից շատ փորձեր այս ցանցից. սպասիր մի քանի րոպե և կրկին փորձիր։",
+  emailRemindBlockedRequest:
+    "Հարցումը արգելափակվեց. թարմացրու էջը և կրկին փորձիր — գաղտնաբառերի կառավարիչները երբեմն լցնում են թաքնված դաշտը։",
   emailRemindCaptchaFailed: "Ռոբոտի ստուգումը չանցավ — կրկին փորձիր։",
   emailRemindNeedTurnstile:
     "Ընտրովի՝ Cloudflare Turnstile (NEXT_PUBLIC_TURNSTILE_SITE_KEY + TURNSTILE_SECRET_KEY)՝ ավելի ուժեղ պաշտպանություն. ձևը աշխատում է նաև առանց դրանց՝ համաձայնություն + թաքնված դաշտ։",

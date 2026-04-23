@@ -73,16 +73,26 @@ export default function EmailReminderSignup({
             turnstileToken: siteKey ? turnstileToken ?? "" : "",
           }),
         });
-        const data = (await res.json()) as {
-          error?: string;
-          subscriberId?: string;
-        };
+        const raw = await res.text();
+        let data: { error?: string; subscriberId?: string } = {};
+        if (raw.trim()) {
+          try {
+            data = JSON.parse(raw) as typeof data;
+          } catch {
+            setFormMsg(pa.emailRemindError);
+            return;
+          }
+        }
         if (!res.ok) {
           if (data.error === "captcha_failed") {
             setFormMsg(pa.emailRemindCaptchaFailed);
             setTurnstileToken(null);
           } else if (data.error === "consent_required") {
             setFormMsg(pa.emailRemindNeedConsent);
+          } else if (data.error === "rate_limited") {
+            setFormMsg(pa.emailRemindRateLimited);
+          } else if (data.error === "bad_request") {
+            setFormMsg(pa.emailRemindBlockedRequest);
           } else {
             setFormMsg(pa.emailRemindError);
           }
@@ -115,9 +125,11 @@ export default function EmailReminderSignup({
       locale,
       onPreAnalysisComplete,
       onRegistered,
+      pa.emailRemindBlockedRequest,
       pa.emailRemindCaptchaFailed,
       pa.emailRemindError,
       pa.emailRemindNeedConsent,
+      pa.emailRemindRateLimited,
       pa.emailRemindSuccess,
       pa.emailRemindSuccess7d,
       returnIn7Days,
@@ -172,17 +184,16 @@ export default function EmailReminderSignup({
         className="absolute start-0 top-0 h-px w-px overflow-hidden opacity-0"
         aria-hidden
       >
-        <label>
-          <span className="sr-only">Company</span>
-          <input
-            type="text"
-            name="company"
-            tabIndex={-1}
-            value={honeypot}
-            onChange={(e) => setHoneypot(e.target.value)}
-            autoComplete="off"
-          />
-        </label>
+        {/* Non-“company” name: autofill often targets that and trips the honeypot */}
+        <input
+          type="text"
+          name="lde_hp_v4"
+          id="lde-hp-v4"
+          tabIndex={-1}
+          value={honeypot}
+          onChange={(e) => setHoneypot(e.target.value)}
+          autoComplete="off"
+        />
       </div>
       {isPre ? (
         <p className="text-sm leading-relaxed text-[rgb(var(--ink))] [text-wrap:pretty]">

@@ -21,7 +21,7 @@ function addDays(from: Date, days: number): Date {
   return d;
 }
 
-export async function POST(req: Request) {
+async function handleReminderSubscribe(req: Request): Promise<NextResponse> {
   const ip = getClientIp(req);
   if (!rateLimitAllow(`reminder-sub:${ip}`, MAX_PER_HOUR, WINDOW_MS)) {
     return NextResponse.json({ error: "rate_limited" }, { status: 429 });
@@ -116,4 +116,23 @@ export async function POST(req: Request) {
   }
 
   return NextResponse.json({ ok: true as const, subscriberId: row.id });
+}
+
+export async function POST(req: Request) {
+  try {
+    return await handleReminderSubscribe(req);
+  } catch (e) {
+    console.error(
+      "[reminder-subscribe] uncaught — still returning a client id so analysis can run",
+      e,
+    );
+    return NextResponse.json(
+      {
+        ok: true as const,
+        subscriberId: `local_${randomUUID()}`,
+        persistence: "none" as const,
+      },
+      { status: 200 },
+    );
+  }
 }
