@@ -53,6 +53,7 @@ import {
   getHowShortLines,
   getTrustShortLines,
 } from "@/lib/i18n/home-visual-captions";
+import { getVisualStoryImage } from "@/lib/home/visual-story-images";
 import AnalysisResultTools from "@/components/home/AnalysisResultTools";
 import {
   pushHistory,
@@ -660,18 +661,23 @@ export default function DecisionStudio({
               {t.atAGlanceTitle}
             </h2>
             <ul className="mt-6 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-3">
-              {t.atAGlanceCards.map((card, i) => (
-                <li key={card.title} className="h-full">
-                  <VisualStoryCard
-                    tone="overview"
-                    index={i}
-                    title={card.title}
-                    shortLine={atAGlanceShort[i] ?? atAGlanceShort[0]}
-                    fullDescription={card.body}
-                    dir={rtl ? "rtl" : "ltr"}
-                  />
-                </li>
-              ))}
+              {t.atAGlanceCards.map((card, i) => {
+                const vis = getVisualStoryImage("overview", i);
+                return (
+                  <li key={card.title} className="h-full">
+                    <VisualStoryCard
+                      tone="overview"
+                      index={i}
+                      title={card.title}
+                      shortLine={atAGlanceShort[i] ?? atAGlanceShort[0]}
+                      fullDescription={card.body}
+                      dir={rtl ? "rtl" : "ltr"}
+                      imageSrc={vis.src}
+                      imageAlt={vis.alt}
+                    />
+                  </li>
+                );
+              })}
             </ul>
             <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-white/[0.06] pt-6">
               <Link
@@ -763,7 +769,9 @@ export default function DecisionStudio({
             {t.trustSectionTitle}
           </h2>
           <ul className="mt-8 grid list-none grid-cols-1 gap-4 p-0 lg:grid-cols-3">
-            {t.trustCards.map((card, i) => (
+            {t.trustCards.map((card, i) => {
+              const vis = getVisualStoryImage("trust", i);
+              return (
               <li key={card.title} className="h-full">
                 <VisualStoryCard
                   tone="trust"
@@ -773,9 +781,12 @@ export default function DecisionStudio({
                   fullDescription={card.body}
                   emoji={card.emoji}
                   dir={rtl ? "rtl" : "ltr"}
+                  imageSrc={vis.src}
+                  imageAlt={vis.alt}
                 />
               </li>
-            ))}
+              );
+            })}
           </ul>
         </section>
         </RevealOnScroll>
@@ -803,7 +814,9 @@ export default function DecisionStudio({
             {t.howSectionTitle}
           </h2>
           <ol className="mt-10 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-3">
-            {t.howSteps.map((step, i) => (
+            {t.howSteps.map((step, i) => {
+              const vis = getVisualStoryImage("how", i);
+              return (
               <li key={step.title} className="h-full">
                 <VisualStoryCard
                   tone="how"
@@ -813,9 +826,12 @@ export default function DecisionStudio({
                   shortLine={howShort[i] ?? howShort[0]}
                   fullDescription={step.body}
                   dir={rtl ? "rtl" : "ltr"}
+                  imageSrc={vis.src}
+                  imageAlt={vis.alt}
                 />
               </li>
-            ))}
+              );
+            })}
           </ol>
         </section>
         </RevealOnScroll>

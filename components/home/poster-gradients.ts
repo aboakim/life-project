@@ -1,6 +1,5 @@
 /**
- * Typographic “poster” panels: no stock photos — gradient + pattern = the frame
- * for your real copy (title + line). Each index is a distinct mood per section.
+ * Gradient fallback for `VisualStoryCard` when `imageSrc` is omitted.
  */
 export type PosterTone = "overview" | "trust" | "how";
 
@@ -32,15 +31,4 @@ export function posterGradientClass(tone: PosterTone, index: number): string {
   const row = byTone[tone];
   const cls = row[index % row.length] ?? row[0];
   return `bg-gradient-to-br ${cls}`;
-}
-
-/** “What it fixes” strip — same poster idea, own palette. */
-const fixes = [
-  "from-[#0c0a09] via-[#57534e]/80 to-[#0c0a09]",
-  "from-[#0c1e3a] via-[#1d4ed8]/55 to-[#0f172a]",
-  "from-[#134e2e] via-[#15803d]/60 to-[#14532d]",
-] as const;
-
-export function whatItFixesPosterClass(index: number): string {
-  return `bg-gradient-to-br ${fixes[index % fixes.length] ?? fixes[0]}`;
 }
