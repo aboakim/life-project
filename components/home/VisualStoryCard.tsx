@@ -6,7 +6,6 @@ import { type PosterTone, posterGradientClass } from "@/components/home/poster-g
 
 type Props = {
   tone: PosterTone;
-  /** 0–2: gradient fallback when `imageSrc` is omitted; image pick when `imageSrc` is set. */
   index: number;
   title: string;
   shortLine: string;
@@ -14,10 +13,37 @@ type Props = {
   stepNumber?: number;
   emoji?: string;
   dir?: "ltr" | "rtl";
-  /** Photo background; readable text is ensured with dark scrims, not the raw photo. */
   imageSrc?: string;
   imageAlt?: string;
 };
+
+/** Black / slate text on a light panel under the photo — best contrast. */
+function TextOnLight({ title, shortLine }: { title: string; shortLine: string }) {
+  return (
+    <div className="border-t border-slate-200/90 bg-stone-50/98 px-3 py-3 sm:px-4 sm:py-3.5">
+      <h3 className="font-display text-base font-extrabold leading-snug text-slate-900 [text-wrap:balance] sm:text-lg">
+        {title}
+      </h3>
+      <p className="mt-2 text-sm font-medium leading-relaxed text-slate-700 [text-wrap:pretty] sm:text-[0.95rem]">
+        {shortLine}
+      </p>
+    </div>
+  );
+}
+
+/** Fallback: no photo — white text on gradient “poster”. */
+function TextOnDark({ title, shortLine }: { title: string; shortLine: string }) {
+  return (
+    <div className="relative z-10 flex flex-col justify-end [text-shadow:0_1px_10px_rgba(0,0,0,0.45)]">
+      <h3 className="font-display text-base font-extrabold leading-snug text-white [text-wrap:balance] sm:text-lg">
+        {title}
+      </h3>
+      <p className="mt-2.5 text-sm font-medium leading-relaxed text-white/95 [text-wrap:pretty] sm:text-[0.95rem]">
+        {shortLine}
+      </p>
+    </div>
+  );
+}
 
 export default function VisualStoryCard({
   tone,
@@ -36,58 +62,49 @@ export default function VisualStoryCard({
 
   return (
     <article
-      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/[0.12] shadow-[0_20px_56px_-28px_rgb(var(--accent-2)/0.28)] ring-1 ring-white/[0.08] transition duration-300 hover:-translate-y-0.5 hover:border-[rgb(var(--accent))]/40 hover:ring-[rgb(var(--accent))]/20"
+      className="group flex h-full max-w-full flex-col overflow-hidden rounded-2xl border border-white/[0.12] bg-[rgb(var(--surface-2))] shadow-[0_20px_56px_-28px_rgb(var(--accent-2)/0.28)] ring-1 ring-white/[0.08] transition duration-300 hover:-translate-y-0.5 hover:border-[rgb(var(--accent))]/40 hover:ring-[rgb(var(--accent))]/20"
       dir={dir}
     >
       <div
-        className={`relative flex min-h-[220px] flex-col justify-end overflow-hidden p-4 sm:min-h-[260px] sm:p-5 ${
-          withPhoto ? "bg-[rgb(var(--surface-2))]" : g
-        }`}
+        className={
+          withPhoto
+            ? "relative h-40 w-full shrink-0 sm:h-44"
+            : `relative flex min-h-[240px] w-full flex-col justify-end overflow-hidden p-4 sm:min-h-[260px] sm:p-5 ${g}`
+        }
       >
         {withPhoto ? (
-          <>
-            <Image
-              src={imageSrc!}
-              alt={imageAlt ?? ""}
-              fill
-              className="object-cover transition duration-500 group-hover:scale-[1.03]"
-              sizes="(min-width: 1024px) 32vw, (min-width: 640px) 45vw, 100vw"
-            />
-            {/* Readability: strong bottom scrim + lighter top so photo still shows through */}
-            <div
-              className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-black/92 via-black/50 to-black/20"
-              aria-hidden
-            />
-            <div
-              className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_90%_70%_at_50%_0%,rgba(0,0,0,0.2),transparent_55%)]"
-              aria-hidden
-            />
-          </>
+          <Image
+            src={imageSrc!}
+            alt={imageAlt ?? ""}
+            fill
+            className="object-cover transition duration-500 group-hover:scale-[1.02]"
+            sizes="(min-width: 1024px) 32vw, (min-width: 640px) 45vw, 100vw"
+          />
         ) : (
           <PosterBackdrop />
         )}
-        {emoji ? (
+        {withPhoto && stepNumber != null ? (
+          <span className="absolute start-2.5 top-2.5 z-20 flex size-8 items-center justify-center rounded-full bg-white/95 text-xs font-bold text-slate-900 shadow-md ring-1 ring-black/10 sm:size-9 sm:text-sm">
+            {stepNumber}
+          </span>
+        ) : null}
+        {withPhoto && emoji ? (
           <span
-            className="absolute start-3 top-3 z-10 text-2xl drop-shadow-md [filter:drop-shadow(0_0_6px_rgba(0,0,0,0.9))]"
+            className={`absolute top-2.5 z-20 rounded-md bg-white/95 px-1.5 py-0.5 text-2xl shadow-sm ring-1 ring-black/5 ${
+              stepNumber != null ? "start-12 sm:start-14" : "start-2.5"
+            }`}
             aria-hidden
           >
             {emoji}
           </span>
         ) : null}
-        {stepNumber != null ? (
-          <span className="absolute start-3 top-3 z-10 flex size-9 items-center justify-center rounded-full bg-black/50 text-xs font-bold text-white shadow-lg ring-2 ring-white/35 backdrop-blur-sm">
-            {stepNumber}
-          </span>
+        {!withPhoto ? (
+          <div className="relative z-10 flex flex-1 flex-col justify-end">
+            <TextOnDark title={title} shortLine={shortLine} />
+          </div>
         ) : null}
-        <div className="relative z-10 flex flex-col justify-end [text-shadow:0_2px_16px_rgba(0,0,0,0.85),0_1px_3px_rgba(0,0,0,0.9)]">
-          <h3 className="font-display text-base font-extrabold leading-snug text-white [text-wrap:balance] sm:text-lg">
-            {title}
-          </h3>
-          <p className="mt-2.5 text-sm font-medium leading-relaxed text-white [text-wrap:pretty] sm:text-[0.95rem]">
-            {shortLine}
-          </p>
-        </div>
       </div>
+      {withPhoto ? <TextOnLight title={title} shortLine={shortLine} /> : null}
       <p className="sr-only">{fullDescription}</p>
     </article>
   );
