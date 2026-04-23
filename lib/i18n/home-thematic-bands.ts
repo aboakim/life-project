@@ -12,7 +12,7 @@ export type ThematicBandCopy = {
 const enA: ThematicBandCopy = {
   eyebrow: "Clarity, not noise",
   title: "A big decision is a document, not a mood.",
-  body: "The analyzer is one place to name the fork, your constraints, and the trade-offs—then get scenarios, lenses, a timeline, and a score. No social feed, no hot takes. Just a report you can reread in a calmer week.",
+  body: "Name the fork and trade-offs in one place—then scenarios, lenses, a timeline, and a score. No feed, no hot takes: a report you can reread later.",
   cta: "Open the analyzer",
   ctaHref: "/analyze",
   imageAlt:
@@ -22,7 +22,7 @@ const enA: ThematicBandCopy = {
 const enB: ThematicBandCopy = {
   eyebrow: "Human layer",
   title: "Software first. Real experts when you want backup.",
-  body: "When you are ready, browse a directory of psychologists, legal and financial professionals. The tool does not replace them—it helps you walk in with better questions, scenarios already mapped.",
+  body: "When you are ready: psychologists, legal, finance. The tool does not replace them—it helps you arrive with clearer questions.",
   cta: "Browse experts",
   ctaHref: "/experts",
   imageAlt: "Diverse team collaborating with laptops around a long table",
@@ -31,7 +31,7 @@ const enB: ThematicBandCopy = {
 const hyA: ThematicBandCopy = {
   eyebrow: "Պարզություն, ոչ աղմուկ",
   title: "Խոշոր որոշումը «լուսանկար չէ»՝ փաստաթուղթ է։",
-  body: "Վերլուծիչը մեկ հարթակ է՝ անվանելու տարաձայնությունը, սահմանները, փոխարժեքները, հետո ստանալու սցենարներ, «линзы», ժամանակացույց միավոր։ Ոչ feed, ոչ աղմուկ։ Պարզ հաշվետվություն, որ կարող ես մեկ շաբաթից նորից կարդալ։",
+  body: "Մեկ հարթակում՝ տարաձայնությունը, սահմանները, սցենարներ, ժամանակացույց, միավոր։ Ոչ feed, ոչ աղմուկ․ հաշվետվություն, որ կարելի է կրկին կարդալ։",
   cta: "Բացել վերլուծիչ",
   ctaHref: "/analyze",
   imageAlt: "Ժամանակակից աշխատատարածք՝ սեղան, նստարաններ, լուսամուտի բացվող լույս",
@@ -40,7 +40,7 @@ const hyA: ThematicBandCopy = {
 const hyB: ThematicBandCopy = {
   eyebrow: "Մարդկային շերտ",
   title: "Նախ software, հետո աջակցություն մասնագետից, երբ կամենաս։",
-  body: "Երբ պատրաստ ես՝ դիտարկիր հոգեբանների, իրավական և ֆինանսական մասնագետների ցանցը։ Գործիքը չի փոխարինում նրանց․ ավելի հստակ հարցերով ու սցենարներով ես «մտնում» խոսակցությանը։",
+  body: "Երբ պատրաստ ես․ հոգեբաններ, իրավունք, ֆինանս։ Գործիքը չի փոխարինում նրանց, բայց ավելի հստակ հարցեր ես բերում։",
   cta: "Դիտարկել մասնագետներ",
   ctaHref: "/experts",
   imageAlt: "Թիմի համագործակցություն՝ նոութբուքներ, երկար սեղան, համատեղ աշխատանք",

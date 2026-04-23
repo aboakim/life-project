@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 
 const SECTION_IDS = [
   "section-overview",
+  "section-what-it-fixes",
   "section-product",
   "section-trust",
   "section-how",

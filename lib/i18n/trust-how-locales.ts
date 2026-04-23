@@ -9,6 +9,7 @@ export type TrustHowPick = Pick<
   | "howSectionTitle"
   | "howSteps"
   | "sectionNavOverview"
+  | "sectionNavFixes"
   | "sectionNavProduct"
   | "sectionNavTrust"
   | "sectionNavHow"
@@ -35,6 +36,7 @@ export type TrustHowPick = Pick<
 export const trustHowRu: TrustHowPick = {
   heroRibbon: "8+ языков · Сценарный движок · Приватность прежде всего",
   sectionNavOverview: "Обзор",
+  sectionNavFixes: "Чем помогает",
   atAGlanceEyebrow: "Начните здесь",
   atAGlanceTitle: "Что это за сайт — в трёх строках",
   atAGlanceCards: [
@@ -171,6 +173,7 @@ export const trustHowRu: TrustHowPick = {
 export const trustHowDe: TrustHowPick = {
   heroRibbon: "8+ Sprachen · Szenario-Engine · Privacy-first",
   sectionNavOverview: "Überblick",
+  sectionNavFixes: "Was es bringt",
   atAGlanceEyebrow: "Hier starten",
   atAGlanceTitle: "Was diese Seite ist — in drei Sätzen",
   atAGlanceCards: [
@@ -307,6 +310,7 @@ export const trustHowDe: TrustHowPick = {
 export const trustHowFr: TrustHowPick = {
   heroRibbon: "8+ langues · Moteur de scénarios · Vie privée d’abord",
   sectionNavOverview: "Aperçu",
+  sectionNavFixes: "Utilité",
   atAGlanceEyebrow: "Commencer ici",
   atAGlanceTitle: "Ce qu’est ce site — en trois phrases",
   atAGlanceCards: [
@@ -443,6 +447,7 @@ export const trustHowFr: TrustHowPick = {
 export const trustHowEs: TrustHowPick = {
   heroRibbon: "8+ idiomas · Motor de escenarios · Privacidad primero",
   sectionNavOverview: "Resumen",
+  sectionNavFixes: "Qué alivia",
   atAGlanceEyebrow: "Empieza aquí",
   atAGlanceTitle: "Qué es este sitio — en tres frases",
   atAGlanceCards: [
@@ -579,6 +584,7 @@ export const trustHowEs: TrustHowPick = {
 export const trustHowIt: TrustHowPick = {
   heroRibbon: "8+ lingue · Motore di scenari · Privacy al primo posto",
   sectionNavOverview: "Panoramica",
+  sectionNavFixes: "A cosa serve",
   atAGlanceEyebrow: "Inizia qui",
   atAGlanceTitle: "Che cos’è questo sito — in tre righe",
   atAGlanceCards: [
@@ -715,6 +721,7 @@ export const trustHowIt: TrustHowPick = {
 export const trustHowAr: TrustHowPick = {
   heroRibbon: "أكثر من 8 لغات · محرك السيناريوهات · الخصوصية أولاً",
   sectionNavOverview: "نظرة عامة",
+  sectionNavFixes: "الفائدة",
   atAGlanceEyebrow: "ابدأ هنا",
   atAGlanceTitle: "ما هذا الموقع — في ثلاث جمل",
   atAGlanceCards: [

@@ -66,6 +66,8 @@ export type UIStrings = {
   howSteps: ReadonlyArray<{ title: string; body: string }>;
   /** Sticky section jump links (home page) */
   sectionNavOverview: string;
+  /** Home: problem → solution strip with images (after Overview) */
+  sectionNavFixes: string;
   sectionNavProduct: string;
   sectionNavTrust: string;
   sectionNavHow: string;
@@ -137,6 +139,7 @@ const trustHowEn: Pick<
   | "howSectionTitle"
   | "howSteps"
   | "sectionNavOverview"
+  | "sectionNavFixes"
   | "sectionNavProduct"
   | "sectionNavTrust"
   | "sectionNavHow"
@@ -162,6 +165,7 @@ const trustHowEn: Pick<
   heroRibbon:
     "Free structured analyzer · Global expert directory · Private by design",
   sectionNavOverview: "Overview",
+  sectionNavFixes: "What it fixes",
   atAGlanceEyebrow: "Start here",
   atAGlanceTitle: "What this site is — in three lines",
   atAGlanceCards: [
@@ -302,6 +306,7 @@ const trustHowHy: Pick<
   | "howSectionTitle"
   | "howSteps"
   | "sectionNavOverview"
+  | "sectionNavFixes"
   | "sectionNavProduct"
   | "sectionNavTrust"
   | "sectionNavHow"
@@ -327,6 +332,7 @@ const trustHowHy: Pick<
   heroRibbon:
     "Անվճար կառուցված վերլուծիչ · Մասնագետների ցանց · Գաղտնիության առաջնահերթություն",
   sectionNavOverview: "Ընդհանուր",
+  sectionNavFixes: "Ինչ է լուծում",
   atAGlanceEyebrow: "Սկսիր այստեղից",
   atAGlanceTitle: "Ինչ է այս կայքը — երեք նախադասությամբ",
   atAGlanceCards: [

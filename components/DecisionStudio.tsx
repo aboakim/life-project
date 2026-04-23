@@ -44,7 +44,15 @@ import {
   THEMATIC_BAND_B_IMAGE,
 } from "@/lib/home/thematic-banners";
 import ThematicImageBand from "@/components/home/ThematicImageBand";
+import WhatItFixesSection from "@/components/home/WhatItFixesSection";
+import VisualStoryCard from "@/components/home/VisualStoryCard";
 import { getPostAnalysisCopy } from "@/lib/i18n/post-analysis";
+import { getSolveSectionCopy } from "@/lib/i18n/home-solve-section";
+import {
+  getAtAGlanceShortLines,
+  getHowShortLines,
+  getTrustShortLines,
+} from "@/lib/i18n/home-visual-captions";
 import AnalysisResultTools from "@/components/home/AnalysisResultTools";
 import {
   pushHistory,
@@ -122,6 +130,13 @@ export default function DecisionStudio({
   const presetApplied = useRef(false);
   const exNav = getExpertsCopy(locale);
   const homeBands = useMemo(() => getHomeThematicBands(locale), [locale]);
+  const solveCopy = useMemo(() => getSolveSectionCopy(locale), [locale]);
+  const atAGlanceShort = useMemo(
+    () => getAtAGlanceShortLines(locale),
+    [locale],
+  );
+  const trustShort = useMemo(() => getTrustShortLines(locale), [locale]);
+  const howShort = useMemo(() => getHowShortLines(locale), [locale]);
   const pr = getPricingCopy(locale);
   const brief = getDecisionBriefCopy(locale);
   const rtl = isRtlLocale(locale);
@@ -129,6 +144,7 @@ export default function DecisionStudio({
   const sectionLinks = useMemo(
     () => [
       { id: "section-overview" as const, label: t.sectionNavOverview },
+      { id: "section-what-it-fixes" as const, label: t.sectionNavFixes },
       { id: "section-product" as const, label: t.sectionNavProduct },
       { id: "section-trust" as const, label: t.sectionNavTrust },
       { id: "section-how" as const, label: t.sectionNavHow },
@@ -643,21 +659,17 @@ export default function DecisionStudio({
             >
               {t.atAGlanceTitle}
             </h2>
-            <ul className="mt-6 grid gap-4 sm:grid-cols-3">
+            <ul className="mt-6 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-3">
               {t.atAGlanceCards.map((card, i) => (
-                <li
-                  key={card.title}
-                  className="flex flex-col rounded-2xl border border-white/[0.1] bg-[rgb(var(--surface-2))]/55 p-5 ring-1 ring-white/[0.06]"
-                >
-                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[rgb(var(--accent))]/35 to-[rgb(var(--accent-2))]/20 text-xs font-bold text-white shadow-inner">
-                    {i + 1}
-                  </span>
-                  <h3 className="mt-4 text-sm font-semibold text-[rgb(var(--ink))]">
-                    {card.title}
-                  </h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
-                    {card.body}
-                  </p>
+                <li key={card.title} className="h-full">
+                  <VisualStoryCard
+                    tone="overview"
+                    index={i}
+                    title={card.title}
+                    shortLine={atAGlanceShort[i] ?? atAGlanceShort[0]}
+                    fullDescription={card.body}
+                    dir={rtl ? "rtl" : "ltr"}
+                  />
                 </li>
               ))}
             </ul>
@@ -674,6 +686,10 @@ export default function DecisionStudio({
             </div>
           </div>
         </section>
+        </RevealOnScroll>
+
+        <RevealOnScroll>
+          <WhatItFixesSection copy={solveCopy} />
         </RevealOnScroll>
 
         <RevealOnScroll>
@@ -746,18 +762,18 @@ export default function DecisionStudio({
           >
             {t.trustSectionTitle}
           </h2>
-          <ul className="mt-8 grid gap-4 lg:grid-cols-3">
-            {t.trustCards.map((card) => (
-              <li key={card.title} className="trust-card list-none">
-                <span className="text-2xl" aria-hidden>
-                  {card.emoji}
-                </span>
-                <h3 className="mt-3 text-sm font-semibold text-[rgb(var(--ink))]">
-                  {card.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
-                  {card.body}
-                </p>
+          <ul className="mt-8 grid list-none grid-cols-1 gap-4 p-0 lg:grid-cols-3">
+            {t.trustCards.map((card, i) => (
+              <li key={card.title} className="h-full">
+                <VisualStoryCard
+                  tone="trust"
+                  index={i}
+                  title={card.title}
+                  shortLine={trustShort[i] ?? trustShort[0]}
+                  fullDescription={card.body}
+                  emoji={card.emoji}
+                  dir={rtl ? "rtl" : "ltr"}
+                />
               </li>
             ))}
           </ul>
@@ -786,20 +802,18 @@ export default function DecisionStudio({
           >
             {t.howSectionTitle}
           </h2>
-          <ol className="how-timeline mt-10 max-w-3xl space-y-0">
+          <ol className="mt-10 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-3">
             {t.howSteps.map((step, i) => (
-              <li key={step.title} className="how-timeline-item relative ps-10">
-                <span className="how-timeline-dot absolute start-0 top-1 flex size-8 items-center justify-center rounded-full bg-gradient-to-br from-[rgb(var(--accent))]/40 to-[rgb(var(--accent-2))]/25 text-xs font-bold text-white shadow-lg ring-4 ring-[rgb(var(--surface))]">
-                  {i + 1}
-                </span>
-                <div className="rounded-2xl border border-white/[0.1] bg-white/[0.06] px-5 py-4">
-                  <h3 className="text-sm font-semibold text-[rgb(var(--ink))]">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
-                    {step.body}
-                  </p>
-                </div>
+              <li key={step.title} className="h-full">
+                <VisualStoryCard
+                  tone="how"
+                  index={i}
+                  stepNumber={i + 1}
+                  title={step.title}
+                  shortLine={howShort[i] ?? howShort[0]}
+                  fullDescription={step.body}
+                  dir={rtl ? "rtl" : "ltr"}
+                />
               </li>
             ))}
           </ol>
