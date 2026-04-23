@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import type { Metadata } from "next";
 import Link from "next/link";
+import AdminTestReminderEmail from "../AdminTestReminderEmail";
 import AdminLogin from "../AdminLogin";
 import AdminLogoutButton from "../AdminLogoutButton";
 import { getAdminGate } from "@/lib/admin-session";
@@ -125,6 +126,8 @@ export default async function AdminDiagnosticsPage() {
           </p>
         )}
       </div>
+
+      <AdminTestReminderEmail resend={resend} copy={a} />
     </div>
   );
 }

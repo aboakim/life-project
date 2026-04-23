@@ -30,6 +30,17 @@ export type AdminUiCopy = {
   networkError: string;
   unauthorized: string;
   logOut: string;
+  diagnosticsTestEmailTitle: string;
+  diagnosticsTestEmailHint: string;
+  diagnosticsTestEmail: string;
+  diagnosticsTestFirstName: string;
+  diagnosticsSendTestWelcome: string;
+  diagnosticsSendLatest: string;
+  diagnosticsTestSending: string;
+  diagnosticsTestSent: string;
+  diagnosticsTestFailed: string;
+  diagnosticsTestNoResend: string;
+  diagnosticsTestNoSubscribers: string;
 };
 
 const enUS: AdminUiCopy = {
@@ -67,6 +78,18 @@ const enUS: AdminUiCopy = {
   networkError: "Network error",
   unauthorized: "Unauthorized",
   logOut: "Log out",
+  diagnosticsTestEmailTitle: "Send a test reminder email (Resend)",
+  diagnosticsTestEmailHint:
+    "Sends the same “welcome / optional reminders” message users get when they subscribe. Confirm RESEND_API_KEY and RESEND_FROM_EMAIL on the host.",
+  diagnosticsTestEmail: "Recipient email",
+  diagnosticsTestFirstName: "First name (salutation)",
+  diagnosticsSendTestWelcome: "Send test email",
+  diagnosticsSendLatest: "Send to latest DB subscriber",
+  diagnosticsTestSending: "Sending…",
+  diagnosticsTestSent: "Sent. Check the inbox (and spam).",
+  diagnosticsTestFailed: "Failed — see server logs. Is Resend configured?",
+  diagnosticsTestNoResend: "Resend is not configured — set RESEND_API_KEY first.",
+  diagnosticsTestNoSubscribers: "No rows in decision reminder table.",
 };
 
 const hy: AdminUiCopy = {
@@ -104,6 +127,18 @@ const hy: AdminUiCopy = {
   networkError: "Ցանցի սխալ",
   unauthorized: "Մուտքը մերժված է",
   logOut: "Ելք",
+  diagnosticsTestEmailTitle: "Թեստ նամակ (Resend)",
+  diagnosticsTestEmailHint:
+    "Ուղարկում է user-ին հասանելի «welcome / optional reminders» հաղորդագրությունը։ Վստահ եղեք, որ RESEND_API_KEY և RESEND_FROM_EMAIL կան հոսթում։",
+  diagnosticsTestEmail: "Ստացողի էլ. փոստ",
+  diagnosticsTestFirstName: "Անուն (դիմելու համար)",
+  diagnosticsSendTestWelcome: "Ուղարկել թեստ նամակ",
+  diagnosticsSendLatest: "Ուղարկել վերջին գրանցվածին (DB)",
+  diagnosticsTestSending: "Ուղարկում…",
+  diagnosticsTestSent: "Ուղարկվեց։ Ստուգի inbox-ը (և spam)։",
+  diagnosticsTestFailed: "Չստացվեց — նայիր սերվերի լոգեր։ Resend-ը կարգավորվա՞ծ է։",
+  diagnosticsTestNoResend: "Resend-ը չի կարգավորված — ավելացրու RESEND_API_KEY։",
+  diagnosticsTestNoSubscribers: "Հիշեցման աղյուսակում տող չկա։",
 };
 
 export function getAdminUi(locale: AppLocale): AdminUiCopy {
