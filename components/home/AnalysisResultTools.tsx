@@ -15,9 +15,6 @@ import {
   type HistorySnapshot,
 } from "@/lib/analysis-local";
 import type { PostAnalysisCopy } from "@/lib/i18n/post-analysis";
-import type { AppLocale } from "@/lib/i18n/locale";
-import { getStoredSubscriberId } from "@/lib/reminder-subscriber-storage";
-import EmailReminderSignup from "@/components/home/EmailReminderSignup";
 
 type Props = {
   analysis: DecisionAnalysis;
@@ -36,7 +33,6 @@ type Props = {
     constraints: string,
     stakesLevel?: number,
   ) => void;
-  locale: AppLocale;
 };
 
 export default function AnalysisResultTools({
@@ -49,7 +45,6 @@ export default function AnalysisResultTools({
   pa,
   expertsSearchHref,
   onLoadBrief,
-  locale,
 }: Props) {
   const [flash, setFlash] = useState<string | null>(null);
   const [history, setHistory] = useState<HistorySnapshot[]>([]);
@@ -264,15 +259,6 @@ export default function AnalysisResultTools({
           <p className="mt-3 text-xs leading-relaxed text-[rgb(var(--ink-soft))]/90 [text-wrap:pretty]">
             {pa.emailRemindScheduleNote}
           </p>
-        </div>
-
-        <div className="mt-6 border-t border-white/[0.08] pt-5">
-          <h3 className="text-sm font-semibold text-[rgb(var(--ink))]">
-            {pa.emailRemindSectionTitle}
-          </h3>
-          <div className="mt-3">
-            <EmailReminderSignup pa={pa} locale={locale} />
-          </div>
         </div>
       </section>
 

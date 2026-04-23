@@ -15,15 +15,28 @@ type Props = {
   pa: PostAnalysisCopy;
   locale: AppLocale;
   onRegistered?: (subscriberId: string) => void;
+  /**
+   * `preAnalysis` — one consent line, always schedules ~7d return email + same API as after analysis.
+   */
+  variant?: "default" | "preAnalysis";
+  /** Fires after a successful pre-analysis save (parent runs `/api/analyze`). */
+  onPreAnalysisComplete?: () => void;
 };
 
-export default function EmailReminderSignup({ pa, locale, onRegistered }: Props) {
+export default function EmailReminderSignup({
+  pa,
+  locale,
+  onRegistered,
+  variant = "default",
+  onPreAnalysisComplete,
+}: Props) {
+  const isPre = variant === "preAnalysis";
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [honeypot, setHoneypot] = useState("");
   const [consentReminders, setConsentReminders] = useState(false);
-  const [returnIn7Days, setReturnIn7Days] = useState(false);
+  const [returnIn7Days, setReturnIn7Days] = useState(true);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [formMsg, setFormMsg] = useState<string | null>(null);
@@ -44,6 +57,7 @@ export default function EmailReminderSignup({ pa, locale, onRegistered }: Props)
       if (!canSubmit) return;
       setLoading(true);
       setFormMsg(null);
+      const sendReturn7 = isPre ? true : returnIn7Days;
       try {
         const res = await fetch("/api/reminder-subscribe", {
           method: "POST",
@@ -55,7 +69,7 @@ export default function EmailReminderSignup({ pa, locale, onRegistered }: Props)
             locale,
             consent: true,
             honeypot,
-            returnIn7Days,
+            returnIn7Days: sendReturn7,
             turnstileToken: siteKey ? turnstileToken ?? "" : "",
           }),
         });
@@ -78,10 +92,12 @@ export default function EmailReminderSignup({ pa, locale, onRegistered }: Props)
           setStoredSubscriberId(data.subscriberId);
           onRegistered?.(data.subscriberId);
         }
+        if (isPre) {
+          onPreAnalysisComplete?.();
+          return;
+        }
         setFormMsg(
-          returnIn7Days
-            ? pa.emailRemindSuccess7d
-            : pa.emailRemindSuccess,
+          sendReturn7 ? pa.emailRemindSuccess7d : pa.emailRemindSuccess,
         );
       } catch {
         setFormMsg(pa.emailRemindError);
@@ -94,8 +110,10 @@ export default function EmailReminderSignup({ pa, locale, onRegistered }: Props)
       email,
       firstName,
       honeypot,
+      isPre,
       lastName,
       locale,
+      onPreAnalysisComplete,
       onRegistered,
       pa.emailRemindCaptchaFailed,
       pa.emailRemindError,
@@ -107,10 +125,18 @@ export default function EmailReminderSignup({ pa, locale, onRegistered }: Props)
     ],
   );
 
+  const lead = isPre ? pa.emailRemindPreAnalysisLead : pa.emailRemindSectionLead;
+  const consentText = isPre
+    ? pa.emailRemindPreAnalysisConsentLabel
+    : pa.emailRemindConsentLabel;
+  const primaryButton = isPre
+    ? pa.emailRemindPreAnalysisButton
+    : pa.emailRemindSubmit;
+
   return (
     <form onSubmit={onSubmit} className="relative space-y-3">
       <p className="text-xs text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
-        {pa.emailRemindSectionLead}
+        {lead}
       </p>
       <div className="grid gap-2 sm:grid-cols-2">
         <label className="block text-xs font-medium text-[rgb(var(--ink))]">
@@ -145,8 +171,10 @@ export default function EmailReminderSignup({ pa, locale, onRegistered }: Props)
           className="mt-1 w-full rounded-xl border border-white/[0.12] bg-black/25 px-3 py-2 text-sm text-[rgb(var(--ink))] outline-none focus:border-[rgb(var(--accent))]/45"
         />
       </label>
-      {/* Honeypot — bots often fill; must stay empty */}
-      <div className="absolute start-0 top-0 h-px w-px overflow-hidden opacity-0" aria-hidden>
+      <div
+        className="absolute start-0 top-0 h-px w-px overflow-hidden opacity-0"
+        aria-hidden
+      >
         <label>
           <span className="sr-only">Company</span>
           <input
@@ -166,17 +194,19 @@ export default function EmailReminderSignup({ pa, locale, onRegistered }: Props)
           onChange={(e) => setConsentReminders(e.target.checked)}
           className="mt-1 size-4 shrink-0 rounded border-white/20 bg-black/30 accent-[rgb(var(--accent-2))]"
         />
-        <span>{pa.emailRemindConsentLabel}</span>
+        <span>{consentText}</span>
       </label>
-      <label className="flex cursor-pointer items-start gap-2 text-sm text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
-        <input
-          type="checkbox"
-          checked={returnIn7Days}
-          onChange={(e) => setReturnIn7Days(e.target.checked)}
-          className="mt-1 size-4 shrink-0 rounded border-white/20 bg-black/30 accent-[rgb(var(--accent-2))]"
-        />
-        <span>{pa.emailRemindOptIn7DayLabel}</span>
-      </label>
+      {!isPre ? (
+        <label className="flex cursor-pointer items-start gap-2 text-sm text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
+          <input
+            type="checkbox"
+            checked={returnIn7Days}
+            onChange={(e) => setReturnIn7Days(e.target.checked)}
+            className="mt-1 size-4 shrink-0 rounded border-white/20 bg-black/30 accent-[rgb(var(--accent-2))]"
+          />
+          <span>{pa.emailRemindOptIn7DayLabel}</span>
+        </label>
+      ) : null}
       {siteKey ? (
         <div className="pt-1">
           <Turnstile
@@ -195,7 +225,12 @@ export default function EmailReminderSignup({ pa, locale, onRegistered }: Props)
       <p className="text-[11px] leading-relaxed text-[rgb(var(--ink-soft))]/90 [text-wrap:pretty]">
         {pa.emailRemindPrivacy}
       </p>
-      {formMsg ? (
+      {isPre && formMsg ? (
+        <p className="text-sm text-rose-200/90" role="alert">
+          {formMsg}
+        </p>
+      ) : null}
+      {!isPre && formMsg ? (
         <p className="text-sm text-emerald-200/95" role="status">
           {formMsg}
         </p>
@@ -205,9 +240,9 @@ export default function EmailReminderSignup({ pa, locale, onRegistered }: Props)
         disabled={!canSubmit}
         className="rounded-xl border border-[rgb(var(--accent-2))]/40 bg-[rgb(var(--accent-2))]/12 px-4 py-2 text-sm font-semibold text-[rgb(var(--ink))] transition enabled:hover:bg-[rgb(var(--accent-2))]/20 disabled:cursor-not-allowed disabled:opacity-40"
       >
-        {loading ? pa.emailRemindSubmitting : pa.emailRemindSubmit}
+        {loading ? pa.emailRemindSubmitting : primaryButton}
       </button>
-      {getStoredSubscriberId() ? (
+      {!isPre && getStoredSubscriberId() ? (
         <p className="text-[11px] text-[rgb(var(--ink-soft))]">
           {pa.emailRemindIdStored}
         </p>

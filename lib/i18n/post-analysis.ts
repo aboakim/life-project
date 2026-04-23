@@ -93,6 +93,12 @@ export type PostAnalysisCopy = {
   emailRemindFallbackNote: string;
   emailRemindNeedConsent: string;
   emailRemindSuccess7d: string;
+  /** Modal before first analysis (email gate) */
+  emailRemindPreAnalysisTitle: string;
+  emailRemindPreAnalysisLead: string;
+  emailRemindPreAnalysisConsentLabel: string;
+  emailRemindPreAnalysisButton: string;
+  emailRemindPreAnalysisCancel: string;
 };
 
 const en: PostAnalysisCopy = {
@@ -207,7 +213,14 @@ const en: PostAnalysisCopy = {
     "Local dev: Turnstile not set — use REMINDER_SKIP_CAPTCHA=1 on the server to test without the widget.",
   emailRemindIdStored: "This browser is linked to your saved email — use the same device when you pick 3 / 7 / 14 days.",
   emailRemindScheduleNote:
-    "If you saved your email above, we’ll try to send the same-day nudge by email (in addition to this browser).",
+    "If this browser is linked to your email (from the pre-analysis step on “Run analysis”), we can also email when you pick 3 / 7 / 14 days (not only a browser nudge).",
+  emailRemindPreAnalysisTitle: "One quick step before we analyze",
+  emailRemindPreAnalysisLead:
+    "Enter your name and email. We use this to filter bots and, if you agree below, to send a single return visit email about 7 days from now, plus one-off nudges when you choose 3/7/14 day reminders. Your question text is not part of this — it is sent to the engine only when you continue.",
+  emailRemindPreAnalysisConsentLabel:
+    "I agree: (1) a single “come back to the site” email about 7 days from now, and (2) one-off reminder emails if I use 3/7/14 day on this browser. I understand this is not a newsletter.",
+  emailRemindPreAnalysisButton: "Continue — run analysis",
+  emailRemindPreAnalysisCancel: "Cancel",
 };
 
 const hy: PostAnalysisCopy = {
@@ -323,7 +336,14 @@ const hy: PostAnalysisCopy = {
   emailRemindIdStored:
     "Այս բրաուզերը կապված է պահված հասցեի հետ — նույն սարքով ընտրիր 3 / 7 / 14 օրը։",
   emailRemindScheduleNote:
-    "Եթե վերևում պահել ես էլ․ փոստը, կփորձենք նաև նամակով հիշեցնել (լրացուցիչ բրաուզերի հիշեցմանը)։",
+    "Եթե այս բրաուզերը կապված է քո էլ․ հասցեի հետ («Վերլուծել»-ից առաջ եղած քայլից), 3/7/14 օրյա ընտրության դեպքում կարող ենք նաև էլ․ նամակ ուղարկել, ոչ միայն բրաուզերային հիշեցում։",
+  emailRemindPreAnalysisTitle: "Մեկ կարճ քայլ՝ նախքան վերլուծությունը",
+  emailRemindPreAnalysisLead:
+    "Գրիր անուն, ազգանուն, էլ․ փոստ. սպամ/bot-ից պաշտպանվելու համար է, և, եթե ներքևում համաձայնվես, մոտ 7 օրից մեկ վերադարձի հիշեցում կուղարկենք, ինչպես նաև մեկանգամյա հիշեցումներ, երբ այստեղ ընտրես 3/7/14 օր։ Քո հարցի տեքստն այստեղ չէ պահվում․ engine-ին գնում է միայն «Շարունակել»-ից հետո։",
+  emailRemindPreAnalysisConsentLabel:
+    "Համաձայն եմ․ (1) մոտ 7 օրից մեկ «նորից մտի կայք» նամակ, (2) մեկանգամյա հիշեցումներ, եթե այս բրաուզերում ընտրեմ 3/7/14 օր. սա newsletter չէ։",
+  emailRemindPreAnalysisButton: "Շարունակել — վերլուծել",
+  emailRemindPreAnalysisCancel: "Չեղարկել",
 };
 
 const table: Record<AppLocale, PostAnalysisCopy> = {

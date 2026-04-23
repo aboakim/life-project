@@ -60,6 +60,8 @@ import {
   isReminderDue,
   clearReminder,
 } from "@/lib/analysis-local";
+import { getStoredSubscriberId } from "@/lib/reminder-subscriber-storage";
+import PreAnalysisEmailModal from "@/components/home/PreAnalysisEmailModal";
 import { buildAnalysisSpeechText } from "@/lib/tts-build-report-text";
 import VoiceDictateButton from "@/components/home/VoiceDictateButton";
 import VoiceWhisperButton from "@/components/home/VoiceWhisperButton";
@@ -187,6 +189,7 @@ export default function DecisionStudio({
   const [constraints, setConstraints] = useState("");
   const [stakesLevel, setStakesLevel] = useState(5);
   const [loading, setLoading] = useState(false);
+  const [preAnalysisEmailOpen, setPreAnalysisEmailOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<ApiResponse | null>(null);
   const [whisperAvailable, setWhisperAvailable] = useState(false);
@@ -255,9 +258,9 @@ export default function DecisionStudio({
     process.env.NEXT_PUBLIC_DEMO_MODE === "1";
 
   const canSubmit = useMemo(() => decision.trim().length > 0, [decision]);
+  const formBusy = loading || preAnalysisEmailOpen;
 
-  async function onSubmit(e: React.FormEvent) {
-    e.preventDefault();
+  const runAnalysis = useCallback(async () => {
     if (!canSubmit) return;
     setLoading(true);
     setError(null);
@@ -303,6 +306,16 @@ export default function DecisionStudio({
     } finally {
       setLoading(false);
     }
+  }, [canSubmit, context, constraints, decision, locale, stakesLevel, t]);
+
+  function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!canSubmit) return;
+    if (!getStoredSubscriberId()) {
+      setPreAnalysisEmailOpen(true);
+      return;
+    }
+    void runAnalysis();
   }
 
   const a = result?.analysis;
@@ -404,6 +417,16 @@ export default function DecisionStudio({
       }
     >
       <WelcomeModal locale={locale} onLocaleChange={setLocale} />
+      <PreAnalysisEmailModal
+        open={preAnalysisEmailOpen}
+        onClose={() => setPreAnalysisEmailOpen(false)}
+        onComplete={() => {
+          setPreAnalysisEmailOpen(false);
+          void runAnalysis();
+        }}
+        pa={pa}
+        locale={locale}
+      />
       <OrbDecor />
       <AmbientDriftLayer />
       <HomeSectionNav links={sectionLinks} />
@@ -1066,7 +1089,7 @@ export default function DecisionStudio({
                         d.trim() ? `${d.trimEnd()} ${chunk}` : chunk
                       )
                     }
-                    disabled={loading}
+                    disabled={formBusy}
                     available={whisperAvailable}
                     labels={whisperLabels}
                   />
@@ -1077,7 +1100,7 @@ export default function DecisionStudio({
                         d.trim() ? `${d.trimEnd()} ${chunk}` : chunk
                       )
                     }
-                    disabled={loading}
+                    disabled={formBusy}
                     replaceWithMessage={armenianBrowserSttMessage}
                     labels={voiceLabels}
                   />
@@ -1103,7 +1126,7 @@ export default function DecisionStudio({
                       c.trim() ? `${c.trimEnd()} ${chunk}` : chunk
                     )
                   }
-                  disabled={loading}
+                  disabled={formBusy}
                   available={whisperAvailable}
                   labels={whisperLabels}
                 />
@@ -1112,7 +1135,7 @@ export default function DecisionStudio({
                   onAppend={(chunk) =>
                     setContext((c) => (c.trim() ? `${c.trimEnd()} ${chunk}` : chunk))
                   }
-                  disabled={loading}
+                  disabled={formBusy}
                   replaceWithMessage={armenianBrowserSttMessage}
                   labels={voiceLabels}
                 />
@@ -1136,7 +1159,7 @@ export default function DecisionStudio({
                       c.trim() ? `${c.trimEnd()} ${chunk}` : chunk
                     )
                   }
-                  disabled={loading}
+                  disabled={formBusy}
                   available={whisperAvailable}
                   labels={whisperLabels}
                 />
@@ -1147,7 +1170,7 @@ export default function DecisionStudio({
                       c.trim() ? `${c.trimEnd()} ${chunk}` : chunk
                     )
                   }
-                  disabled={loading}
+                  disabled={formBusy}
                   replaceWithMessage={armenianBrowserSttMessage}
                   labels={voiceLabels}
                 />
@@ -1180,7 +1203,7 @@ export default function DecisionStudio({
                     onChange={(e) =>
                       setStakesLevel(Number(e.target.value) || 5)
                     }
-                    disabled={loading}
+                    disabled={formBusy}
                     className="h-2 w-full min-w-[12rem] flex-1 accent-[rgb(var(--accent-2))] disabled:opacity-50"
                   />
                   <span
@@ -1201,7 +1224,7 @@ export default function DecisionStudio({
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                 <button
                   type="submit"
-                  disabled={!canSubmit || loading}
+                  disabled={!canSubmit || formBusy}
                   className="min-h-[48px] w-full rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-6 py-3 text-base font-semibold text-white shadow-lg shadow-[rgb(var(--accent)/0.28)] transition enabled:hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40 sm:w-auto sm:min-w-[14rem]"
                 >
                   {loading ? t.analyzing : t.analyze}
@@ -1478,7 +1501,6 @@ export default function DecisionStudio({
                 pa={pa}
                 expertsSearchHref={expertsSearchHref}
                 onLoadBrief={loadBriefFromHistory}
-                locale={locale}
               />
             ) : null}
 
