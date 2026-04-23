@@ -1,5 +1,7 @@
 /**
- * 12 unique Unsplash images (all verified 200) — no duplicate photo IDs.
+ * 12 unique Unsplash images for story + “What it fixes” cards.
+ * IDs are disjoint from `HERO_SLIDE_IMAGE_URLS`, `PRODUCT_STRIP_IMAGE_URLS`,
+ * and `thematic-banners` so the home page never repeats the same photo.
  * Query string matches the rest of the project (`hero-slide-images` style).
  */
 const Q =
@@ -8,58 +10,58 @@ const Q =
 const u = (id: string) =>
   `https://images.unsplash.com/photo-${id}?${Q}`;
 
-/** Overview: desk / people / structure */
+/** Overview: focus, remote collaboration, big picture */
 const overview = {
   src: [
-    u("1454165804606-c3d57bc86b40"),
-    u("1504384308090-c894fdcc538d"),
-    u("1503387762-592deb58ef4e"),
+    u("1507679799987-c73779587ccf"),
+    u("1600880292203-757bb62b4baf"),
+    u("1449614115178-cb924f730780"),
   ],
   alt: [
-    "Business planning: papers and pen on a wooden desk",
-    "Team of three collaborating at a laptop in an office",
-    "Architectural blueprints and drawings spread on a table",
+    "Person typing on a laptop on a light desk, neutral background",
+    "Laptop on a call with a remote team, friendly collaboration",
+    "Aerial view of a city on a clear day, sense of scale",
   ],
 } as const;
 
-/** Trust: horizon, team, office calm */
+/** Trust: calm nature, small rituals, space to think */
 const trust = {
   src: [
-    u("1506905925346-21bda4d32df4"),
-    u("1522071820081-009f0129c71c"),
-    u("1524758631624-e2822e304c36"),
+    u("1454625233598-f29d597eea1e"),
+    u("1416339306562-f3d12fefd36f"),
+    u("1495978866932-92dbc079e62e"),
   ],
   alt: [
-    "Layered mountain ridges above a sea of clouds at sunrise",
-    "Team sitting around a table in a modern workspace",
-    "Bright minimal workspace with desk, chairs, and soft daylight",
+    "Calm water reflecting mountains under soft light",
+    "Laptop and coffee cup on a wooden table, deep focus",
+    "Open water meeting the horizon, gentle waves",
   ],
 } as const;
 
-/** How: metrics, nature path, workshop */
+/** How: data, long path, shared learning */
 const how = {
   src: [
-    u("1551288049-bebda4e38f71"),
-    u("1441974231531-c6227db76b6e"),
-    u("1522202176988-66273c2fd55f"),
+    u("1461988320302-91bde64fc8e4"),
+    u("1479030574009-1e48577746e8"),
+    u("1417325384643-aac51acc9e5d"),
   ],
   alt: [
-    "Laptop screen showing analytics charts and graphs",
-    "A forest path with tall green trees and sunlight",
-    "People learning together in a training session",
+    "Laptop in a light-filled room, shopping or planning on screen",
+    "Narrow path through a green forest with dappled sunlight",
+    "Soft white clouds as seen from above the weather layer",
   ],
 } as const;
 
 const fixes = {
   src: [
-    u("1552664730-d307ca884978"),
-    u("1449824913935-59a10b8d2000"),
-    u("1522708323590-d24dbb6b0267"),
+    u("1482938289607-e9573fc25ebb"),
+    u("1449182325215-d517de72c42d"),
+    u("1540538581514-1d465aaad58c"),
   ],
   alt: [
-    "Leaders in a modern office celebrating or presenting",
-    "Wide city crosswalk with people and light traffic at dusk",
-    "Bright home interior with a sofa and large windows",
+    "Colleagues working on laptops in a bright open office",
+    "Colorful markers and design materials spread on a table",
+    "Spacious living area with a sofa, plants, and daylight",
   ],
 } as const;
 
