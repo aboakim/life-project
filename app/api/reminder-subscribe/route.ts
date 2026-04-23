@@ -3,7 +3,7 @@ import { getClientIp } from "@/lib/client-ip";
 import { sendDecisionReminderWelcome } from "@/lib/email";
 import { prisma } from "@/lib/prisma";
 import { rateLimitAllow } from "@/lib/rate-limit";
-import { verifyTurnstileToken } from "@/lib/turnstile";
+import { isTurnstileConfigured, verifyTurnstileToken } from "@/lib/turnstile";
 
 export const runtime = "nodejs";
 
@@ -12,6 +12,12 @@ const MAX_PER_HOUR = 12;
 
 function normalizeEmail(raw: string): string {
   return raw.trim().toLowerCase();
+}
+
+function addDays(from: Date, days: number): Date {
+  const d = new Date(from);
+  d.setDate(d.getDate() + days);
+  return d;
 }
 
 export async function POST(req: Request) {
@@ -36,6 +42,17 @@ export async function POST(req: Request) {
     typeof body.locale === "string" ? body.locale.trim().slice(0, 16) : null;
   const turnstileToken =
     typeof body.turnstileToken === "string" ? body.turnstileToken : "";
+  const consentOptIn = body.consent === true;
+  const honeypot =
+    typeof body.honeypot === "string" ? body.honeypot.trim() : "";
+  const returnIn7Days = body.returnIn7Days === true;
+
+  if (!consentOptIn) {
+    return NextResponse.json({ error: "consent_required" }, { status: 400 });
+  }
+  if (honeypot !== "") {
+    return NextResponse.json({ error: "bad_request" }, { status: 400 });
+  }
 
   if (!firstName || firstName.length > 80 || !lastName || lastName.length > 80) {
     return NextResponse.json({ error: "invalid_name" }, { status: 400 });
@@ -46,11 +63,19 @@ export async function POST(req: Request) {
 
   const email = normalizeEmail(emailRaw);
   const ipForTurnstile = ip && ip !== "unknown" ? ip : undefined;
-  const captchaOk = await verifyTurnstileToken(turnstileToken, ipForTurnstile);
-  if (!captchaOk) {
-    return NextResponse.json({ error: "captcha_failed" }, { status: 400 });
+
+  if (isTurnstileConfigured()) {
+    const captchaOk = await verifyTurnstileToken(turnstileToken, ipForTurnstile);
+    if (!captchaOk) {
+      return NextResponse.json({ error: "captcha_failed" }, { status: 400 });
+    }
   }
 
+  const existing = await prisma.decisionReminderSubscriber.findUnique({
+    where: { email },
+  });
+
+  const now = new Date();
   const row = await prisma.decisionReminderSubscriber.upsert({
     where: { email },
     create: {
@@ -58,18 +83,22 @@ export async function POST(req: Request) {
       firstName,
       lastName,
       locale: locale || undefined,
+      nextNudgeAt: returnIn7Days ? addDays(now, 7) : undefined,
     },
     update: {
       firstName,
       lastName,
       locale: locale || undefined,
+      ...(returnIn7Days ? { nextNudgeAt: addDays(now, 7) } : {}),
     },
   });
 
-  void sendDecisionReminderWelcome({
-    to: row.email,
-    firstName: row.firstName,
-  });
+  if (!existing) {
+    void sendDecisionReminderWelcome({
+      to: row.email,
+      firstName: row.firstName,
+    });
+  }
 
   return NextResponse.json({ ok: true as const, subscriberId: row.id });
 }

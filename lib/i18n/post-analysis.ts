@@ -85,6 +85,14 @@ export type PostAnalysisCopy = {
   emailRemindDevCaptchaBypass: string;
   emailRemindIdStored: string;
   emailRemindScheduleNote: string;
+  /** Required checkbox — no emails without this */
+  emailRemindConsentLabel: string;
+  /** Optional 7-day return nudge — only if checked */
+  emailRemindOptIn7DayLabel: string;
+  /** When Turnstile is not configured (consent + honeypot still protect the form) */
+  emailRemindFallbackNote: string;
+  emailRemindNeedConsent: string;
+  emailRemindSuccess7d: string;
 };
 
 const en: PostAnalysisCopy = {
@@ -172,19 +180,29 @@ const en: PostAnalysisCopy = {
   compareDifferentRuns: "Choose two different entries.",
   emailRemindSectionTitle: "Email nudges (optional)",
   emailRemindSectionLead:
-    "Add your name and email so we know who to nudge. The “I’m not a robot” check helps keep junk out. We store your address only to send the reminder you choose below — not newsletter spam.",
+    "Enter your name and email. We never send bulk marketing: only what you explicitly opt into below (plus an optional robot check).",
   emailRemindFirstName: "First name",
   emailRemindLastName: "Last name",
   emailRemindEmail: "Email",
   emailRemindSubmit: "Save my email for reminders",
   emailRemindSubmitting: "Saving…",
-  emailRemindSuccess: "Saved. When you tap a reminder below, we’ll also schedule an email to this address (if your host has Resend + cron configured).",
+  emailRemindSuccess:
+    "Saved. When you tap 3 / 7 / 14 days below, we can also email this address (Resend + cron on the host).",
+  emailRemindSuccess7d:
+    "Saved. You’ll get a short “come back to the analyzer” email in about 7 days — and you can still use the 3 / 7 / 14 day buttons for an earlier nudge.",
   emailRemindError: "Could not save — try again in a moment.",
   emailRemindCaptchaFailed: "Robot check failed — try again.",
   emailRemindNeedTurnstile:
-    "Email reminders need Cloudflare Turnstile keys (NEXT_PUBLIC_TURNSTILE_SITE_KEY + TURNSTILE_SECRET_KEY) in the site environment.",
+    "Optional: add Cloudflare Turnstile (NEXT_PUBLIC_TURNSTILE_SITE_KEY + TURNSTILE_SECRET_KEY) for stronger bot protection; the form works without it using consent + a hidden bot trap.",
+  emailRemindFallbackNote:
+    "No Turnstile keys on this site yet — we still block many bots with your consent checkbox and a hidden field. Add Turnstile anytime for an extra layer.",
+  emailRemindConsentLabel:
+    "I agree that Life Decision Engine may send me one-off reminder emails only in these cases: (a) when I opt in below for a ~7 day nudge, and/or (b) when I choose 3 / 7 / 14 day reminders in the analyzer on this browser. Not a newsletter.",
+  emailRemindOptIn7DayLabel:
+    "Optional: email me in about 7 days with a link to open the analyzer again and run another question (I can turn this off by not checking).",
+  emailRemindNeedConsent: "Please tick the consent box to continue.",
   emailRemindPrivacy:
-    "By continuing, you agree we may send one-off reminder emails associated with this tool. See the site privacy policy for how data is handled.",
+    "How we use your email: storage and sending are limited to the reminders you opt into. See the privacy policy on this site.",
   emailRemindDevCaptchaBypass:
     "Local dev: Turnstile not set — use REMINDER_SKIP_CAPTCHA=1 on the server to test without the widget.",
   emailRemindIdStored: "This browser is linked to your saved email — use the same device when you pick 3 / 7 / 14 days.",
@@ -277,20 +295,29 @@ const hy: PostAnalysisCopy = {
   compareDifferentRuns: "Ընտրիր երկու տարբեր գրառում։",
   emailRemindSectionTitle: "Էլ․ փոստով հիշեցում (ընտրովի)",
   emailRemindSectionLead:
-    "Գրիր անուն, ազգանուն և էլ․ փոստ, որ իմանանք ում գրել։ «Ես ռոբոտ չեմ» ստուգումը պաշտպանում է սպամից։ Հասցեն պահում ենք միայն քո ընտրած հիշեցումն ուղարկելու համար, ոչ թե նամակագիր ցուցակի համար։",
+    "Գրիր անուն, ազգանուն և էլ․ փոստ։ Նամակներ չենք ուղարկում առանց քո հստակ համաձայնության ներքևում (ինչպես նաև ընտրովի ռոբոտի ստուգում)։",
   emailRemindFirstName: "Անուն",
   emailRemindLastName: "Ազգանուն",
   emailRemindEmail: "Էլ․ փոստ",
   emailRemindSubmit: "Պահել իմ հասցեն հիշեցումների համար",
   emailRemindSubmitting: "Պահվում է…",
   emailRemindSuccess:
-    "Պահվեց։ Երբ ստորև ընտրես 3 / 7 / 14 օր, կծրագրենք նաև էլ․ նամակ (եթե սերվերում միացված են Resend և cron)։",
+    "Պահվեց։ Երբ ստորև ընտրես 3 / 7 / 14 օր, կարող ենք նաև էլ․ նամակ ուղարկել (եթե սերվերում կան Resend և cron)։",
+  emailRemindSuccess7d:
+    "Պահվեց։ Մոտ 7 օրից կուղարկենք կարճ նամակ՝ հղումով նորից բացելու վերլուծիչը. ցանկության դեպքում ավելի շուտ հիշեցում կարող ես ընտրել 3 / 7 / 14 օր կոճակներով։",
   emailRemindError: "Չհաջողվեց — փորձիր մի քիչ հետո։",
   emailRemindCaptchaFailed: "Ռոբոտի ստուգումը չանցավ — կրկին փորձիր։",
   emailRemindNeedTurnstile:
-    "Էլ․ հիշեցումների համար պետք են Cloudflare Turnstile բանալիներ (NEXT_PUBLIC_TURNSTILE_SITE_KEY և TURNSTILE_SECRET_KEY) սերվերի կարգավորումներում։",
+    "Ընտրովի՝ Cloudflare Turnstile (NEXT_PUBLIC_TURNSTILE_SITE_KEY + TURNSTILE_SECRET_KEY)՝ ավելի ուժեղ պաշտպանություն. ձևը աշխատում է նաև առանց դրանց՝ համաձայնություն + թաքնված դաշտ։",
+  emailRemindFallbackNote:
+    "Այս կայքում դեռ Turnstile բանալիներ չկան — մի մասը բոտերի դեմ արգելափակում ենք համաձայնության տուփով և թաքնված դաշտով. Turnstile-ը կարելի է ավելացնել ցանկացած ժամանակ։",
+  emailRemindConsentLabel:
+    "Համաձայն եմ, որ Life Decision Engine-ը ուղարկի միայն մեկանգամյա հիշեցումներ հետևյալ դեպքերում՝ (ա) եթե ներքևում նշեմ ~7 օրյա նամակը, և/կամ (բ) երբ այս բրաուզերում ընտրեմ 3 / 7 / 14 օրյա հիշեցումը։ Սա նամակագիր չէ։",
+  emailRemindOptIn7DayLabel:
+    "Ընտրովի՝ մոտ 7 օրից ուղարկիր էլ․ նամակ՝ հղումով նորից բացելու վերլուծիչը և հարց տալու (կարող եմ չնշել)։",
+  emailRemindNeedConsent: "Շարունակելու համար նշիր համաձայնության տուփը։",
   emailRemindPrivacy:
-    "Շարունակելով՝ համաձայն ես, որ կարող ենք ուղարկել մեկանգամյա հիշեցումներ՝ կապված այս գործիքի հետ։ Մանրամասների համար՝ գաղտնիության քաղաքականություն։",
+    "Էլ․ փոստը օգտագործում ենք միայն քո ընտրած հիշեցումների համար։ Մանրամասներ՝ կայքի գաղտնիության քաղաքականություն։",
   emailRemindDevCaptchaBypass:
     "Տեղային dev՝ Turnstile չկա — սերվերում դրու REMINDER_SKIP_CAPTCHA=1, որ փորձես առանց վիջեթի։",
   emailRemindIdStored:

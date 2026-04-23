@@ -117,8 +117,8 @@ export async function sendDecisionReminderWelcome(
   const text = [
     `Hi ${p.firstName},`,
     ``,
-    `You're signed up for optional email nudges from Life Decision Engine.`,
-    `After you run an analysis, you can pick “remind me in 3 / 7 / 14 days” — when you do (with the same browser where you saved your email), we'll send a short reminder to this address so you can take a second look.`,
+    `Thanks for saving your details for optional reminders from Life Decision Engine.`,
+    `We only send email when you’ve explicitly asked: either the optional “come back in about 7 days” choice on the form, or after you pick 3 / 7 / 14 days in the analyzer on this browser. We don’t run a newsletter or bulk promos from this signup.`,
     ``,
     `Open the analyzer: ${site}/analyze`,
     ``,

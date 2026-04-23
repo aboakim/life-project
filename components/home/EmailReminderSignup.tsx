@@ -21,6 +21,9 @@ export default function EmailReminderSignup({ pa, locale, onRegistered }: Props)
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [honeypot, setHoneypot] = useState("");
+  const [consentReminders, setConsentReminders] = useState(false);
+  const [returnIn7Days, setReturnIn7Days] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [formMsg, setFormMsg] = useState<string | null>(null);
@@ -28,6 +31,8 @@ export default function EmailReminderSignup({ pa, locale, onRegistered }: Props)
   const needTurnstile = Boolean(siteKey);
   const canSubmit =
     !loading &&
+    consentReminders &&
+    honeypot === "" &&
     firstName.trim().length > 0 &&
     lastName.trim().length > 0 &&
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()) &&
@@ -37,10 +42,6 @@ export default function EmailReminderSignup({ pa, locale, onRegistered }: Props)
     async (e: React.FormEvent) => {
       e.preventDefault();
       if (!canSubmit) return;
-      if (!siteKey && process.env.NODE_ENV !== "development") {
-        setFormMsg(pa.emailRemindNeedTurnstile);
-        return;
-      }
       setLoading(true);
       setFormMsg(null);
       try {
@@ -52,14 +53,22 @@ export default function EmailReminderSignup({ pa, locale, onRegistered }: Props)
             lastName: lastName.trim(),
             email: email.trim(),
             locale,
+            consent: true,
+            honeypot,
+            returnIn7Days,
             turnstileToken: siteKey ? turnstileToken ?? "" : "",
           }),
         });
-        const data = (await res.json()) as { error?: string; subscriberId?: string };
+        const data = (await res.json()) as {
+          error?: string;
+          subscriberId?: string;
+        };
         if (!res.ok) {
           if (data.error === "captcha_failed") {
             setFormMsg(pa.emailRemindCaptchaFailed);
             setTurnstileToken(null);
+          } else if (data.error === "consent_required") {
+            setFormMsg(pa.emailRemindNeedConsent);
           } else {
             setFormMsg(pa.emailRemindError);
           }
@@ -69,7 +78,11 @@ export default function EmailReminderSignup({ pa, locale, onRegistered }: Props)
           setStoredSubscriberId(data.subscriberId);
           onRegistered?.(data.subscriberId);
         }
-        setFormMsg(pa.emailRemindSuccess);
+        setFormMsg(
+          returnIn7Days
+            ? pa.emailRemindSuccess7d
+            : pa.emailRemindSuccess,
+        );
       } catch {
         setFormMsg(pa.emailRemindError);
       } finally {
@@ -80,27 +93,22 @@ export default function EmailReminderSignup({ pa, locale, onRegistered }: Props)
       canSubmit,
       email,
       firstName,
+      honeypot,
       lastName,
       locale,
       onRegistered,
       pa.emailRemindCaptchaFailed,
       pa.emailRemindError,
-      pa.emailRemindNeedTurnstile,
+      pa.emailRemindNeedConsent,
       pa.emailRemindSuccess,
+      pa.emailRemindSuccess7d,
+      returnIn7Days,
       turnstileToken,
     ],
   );
 
-  if (!siteKey && process.env.NODE_ENV === "production") {
-    return (
-      <p className="text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
-        {pa.emailRemindNeedTurnstile}
-      </p>
-    );
-  }
-
   return (
-    <form onSubmit={onSubmit} className="space-y-3">
+    <form onSubmit={onSubmit} className="relative space-y-3">
       <p className="text-xs text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
         {pa.emailRemindSectionLead}
       </p>
@@ -137,6 +145,38 @@ export default function EmailReminderSignup({ pa, locale, onRegistered }: Props)
           className="mt-1 w-full rounded-xl border border-white/[0.12] bg-black/25 px-3 py-2 text-sm text-[rgb(var(--ink))] outline-none focus:border-[rgb(var(--accent))]/45"
         />
       </label>
+      {/* Honeypot — bots often fill; must stay empty */}
+      <div className="absolute start-0 top-0 h-px w-px overflow-hidden opacity-0" aria-hidden>
+        <label>
+          <span className="sr-only">Company</span>
+          <input
+            type="text"
+            name="company"
+            tabIndex={-1}
+            value={honeypot}
+            onChange={(e) => setHoneypot(e.target.value)}
+            autoComplete="off"
+          />
+        </label>
+      </div>
+      <label className="flex cursor-pointer items-start gap-2 text-sm text-[rgb(var(--ink))] [text-wrap:pretty]">
+        <input
+          type="checkbox"
+          checked={consentReminders}
+          onChange={(e) => setConsentReminders(e.target.checked)}
+          className="mt-1 size-4 shrink-0 rounded border-white/20 bg-black/30 accent-[rgb(var(--accent-2))]"
+        />
+        <span>{pa.emailRemindConsentLabel}</span>
+      </label>
+      <label className="flex cursor-pointer items-start gap-2 text-sm text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
+        <input
+          type="checkbox"
+          checked={returnIn7Days}
+          onChange={(e) => setReturnIn7Days(e.target.checked)}
+          className="mt-1 size-4 shrink-0 rounded border-white/20 bg-black/30 accent-[rgb(var(--accent-2))]"
+        />
+        <span>{pa.emailRemindOptIn7DayLabel}</span>
+      </label>
       {siteKey ? (
         <div className="pt-1">
           <Turnstile
@@ -148,8 +188,8 @@ export default function EmailReminderSignup({ pa, locale, onRegistered }: Props)
           />
         </div>
       ) : (
-        <p className="text-[11px] text-amber-200/80 [text-wrap:pretty]">
-          {pa.emailRemindDevCaptchaBypass}
+        <p className="text-[11px] leading-relaxed text-[rgb(var(--ink-soft))]/90 [text-wrap:pretty]">
+          {pa.emailRemindFallbackNote}
         </p>
       )}
       <p className="text-[11px] leading-relaxed text-[rgb(var(--ink-soft))]/90 [text-wrap:pretty]">

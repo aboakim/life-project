@@ -3,6 +3,10 @@
  * @see https://developers.cloudflare.com/turnstile/get-started/server-side-validation/
  */
 
+export function isTurnstileConfigured(): boolean {
+  return Boolean(process.env.TURNSTILE_SECRET_KEY?.trim());
+}
+
 export async function verifyTurnstileToken(
   token: string,
   remoteip: string | undefined,
@@ -15,6 +19,7 @@ export async function verifyTurnstileToken(
     ) {
       return true;
     }
+    /* When Turnstile is off, /api/reminder-subscribe uses consent + honeypot instead. */
     return false;
   }
   if (!token.trim()) {
