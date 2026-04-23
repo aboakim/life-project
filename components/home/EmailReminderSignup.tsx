@@ -16,7 +16,7 @@ type Props = {
   locale: AppLocale;
   onRegistered?: (subscriberId: string) => void;
   /**
-   * `preAnalysis` — name/email + captcha to block bots; no email checkboxes. API still records subscriber + 7d nudges.
+   * `preAnalysis` — name/email + optional Turnstile; no honeypot (autofill was disabling the button).
    */
   variant?: "default" | "preAnalysis";
   /** Fires after a successful pre-analysis save (parent runs `/api/analyze`). */
@@ -45,7 +45,7 @@ export default function EmailReminderSignup({
   const canSubmit =
     !loading &&
     (isPre || consentReminders) &&
-    honeypot === "" &&
+    (isPre || honeypot === "") &&
     firstName.trim().length > 0 &&
     lastName.trim().length > 0 &&
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()) &&
@@ -68,7 +68,7 @@ export default function EmailReminderSignup({
             email: email.trim(),
             locale,
             consent: true,
-            honeypot,
+            honeypot: isPre ? "" : honeypot,
             returnIn7Days: sendReturn7,
             turnstileToken: siteKey ? turnstileToken ?? "" : "",
           }),
@@ -180,21 +180,22 @@ export default function EmailReminderSignup({
           className="mt-1 w-full rounded-xl border border-white/[0.12] bg-black/25 px-3 py-2 text-sm text-[rgb(var(--ink))] outline-none focus:border-[rgb(var(--accent))]/45"
         />
       </label>
-      <div
-        className="absolute start-0 top-0 h-px w-px overflow-hidden opacity-0"
-        aria-hidden
-      >
-        {/* Non-“company” name: autofill often targets that and trips the honeypot */}
-        <input
-          type="text"
-          name="lde_hp_v4"
-          id="lde-hp-v4"
-          tabIndex={-1}
-          value={honeypot}
-          onChange={(e) => setHoneypot(e.target.value)}
-          autoComplete="off"
-        />
-      </div>
+      {!isPre ? (
+        <div
+          className="absolute start-0 top-0 h-px w-px overflow-hidden opacity-0"
+          aria-hidden
+        >
+          <input
+            type="text"
+            name="lde_hp_v4"
+            id="lde-hp-v4"
+            tabIndex={-1}
+            value={honeypot}
+            onChange={(e) => setHoneypot(e.target.value)}
+            autoComplete="off"
+          />
+        </div>
+      ) : null}
       {isPre ? (
         <p className="text-sm leading-relaxed text-[rgb(var(--ink))] [text-wrap:pretty]">
           {pa.emailRemindPreAnalysisVerificationNote}

@@ -230,7 +230,7 @@ const en: PostAnalysisCopy = {
   emailRemindPreAnalysisVerificationNote:
     "This step exists so we can be sure you are a real person, not a bot or an automated script.",
   emailRemindPreAnalysisNoTurnstile:
-    "Extra bot protection: this form includes a hidden field. The site can also add Cloudflare Turnstile for another layer if configured.",
+    "The server rate-limits this step. You can add Cloudflare Turnstile (site + secret keys) for an extra check.",
   emailRemindPreAnalysisButton: "Continue — run analysis",
   emailRemindPreAnalysisCancel: "Cancel",
 };
@@ -359,7 +359,7 @@ const hy: PostAnalysisCopy = {
   emailRemindPreAnalysisVerificationNote:
     "Այս քայլը հենց դրա համար է, որ համոզվենք, որ դու մարդ ես, ոչ թե ավտոմատ ռոբոտ կամ բոտ։",
   emailRemindPreAnalysisNoTurnstile:
-    "Բոտերից ավելի պաշտպանություն` թաքնված դաշտ. կայքն ավելացնի Cloudflare Turnstile, եթե կարգավորված լինի։",
+    "Սերվերը սահմանափակում է այս քայլի հաճախականությունը. Cloudflare Turnstile-ը ավելացրու, երբ public և secret բանալիներն ունենաս։",
   emailRemindPreAnalysisButton: "Շարունակել — վերլուծել",
   emailRemindPreAnalysisCancel: "Չեղարկել",
 };
