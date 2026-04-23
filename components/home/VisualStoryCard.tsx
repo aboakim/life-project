@@ -17,14 +17,17 @@ type Props = {
   imageAlt?: string;
 };
 
-/** Black / slate text on a light panel under the photo — best contrast. */
+/**
+ * Solid light panel (no alpha) so section “wash” tints don’t bleed through.
+ * `!text-*` avoids inheriting homepage `rgb(var(--ink-soft))` (teal/grey) from parents.
+ */
 function TextOnLight({ title, shortLine }: { title: string; shortLine: string }) {
   return (
-    <div className="border-t border-slate-200/90 bg-stone-50/98 px-3 py-3 sm:px-4 sm:py-3.5">
-      <h3 className="font-display text-base font-extrabold leading-snug text-slate-900 [text-wrap:balance] sm:text-lg">
+    <div className="isolate border-t border-neutral-200 bg-white px-3 py-3 sm:px-4 sm:py-3.5">
+      <h3 className="font-display text-base font-extrabold leading-snug !text-neutral-950 [text-wrap:balance] antialiased sm:text-lg">
         {title}
       </h3>
-      <p className="mt-2 text-sm font-medium leading-relaxed text-slate-700 [text-wrap:pretty] sm:text-[0.95rem]">
+      <p className="mt-2 text-sm font-medium leading-relaxed !text-neutral-800 [text-wrap:pretty] antialiased sm:text-[0.95rem]">
         {shortLine}
       </p>
     </div>

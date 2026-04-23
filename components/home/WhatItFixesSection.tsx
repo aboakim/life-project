@@ -47,14 +47,14 @@ export default function WhatItFixesSection({ copy, dir = "ltr" }: Props) {
                       sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
                     />
                   </div>
-                  <div className="border-t border-slate-200/90 bg-stone-50/98 px-3 py-3 sm:px-4 sm:py-3.5">
-                    <p className="text-[0.65rem] font-bold uppercase leading-tight tracking-[0.18em] text-slate-500">
+                  <div className="isolate border-t border-neutral-200 bg-white px-3 py-3 sm:px-4 sm:py-3.5">
+                    <p className="text-[0.65rem] font-bold uppercase leading-tight tracking-[0.18em] !text-neutral-500 antialiased">
                       {b.label}
                     </p>
-                    <p className="mt-2 text-sm font-medium leading-relaxed text-slate-800 [text-wrap:pretty] sm:text-base">
+                    <p className="mt-2 text-sm font-medium leading-relaxed !text-neutral-800 [text-wrap:pretty] antialiased sm:text-base">
                       {b.problem}
                     </p>
-                    <p className="mt-2 font-display text-base font-extrabold leading-snug text-slate-900 [text-wrap:pretty] sm:text-lg">
+                    <p className="mt-2 font-display text-base font-extrabold leading-snug !text-neutral-950 [text-wrap:pretty] antialiased sm:text-lg">
                       {b.fix}
                     </p>
                   </div>
