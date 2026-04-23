@@ -157,14 +157,27 @@ export async function sendDecisionReminderNudge(
     }
     return false;
   }
-  const site =
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://localhost:3000";
+  const base =
+    (process.env.NEXT_PUBLIC_SITE_URL ?? "https://lifedecisions.space").replace(
+      /\/$/,
+      "",
+    );
   const text = [
     `Hi ${p.firstName},`,
     ``,
-    `You asked for a nudge to revisit a decision. When you're ready, open your workspace and run the analyzer again with an updated brief:`,
+    `What if you're making the wrong decision?`,
     ``,
-    `${site}/analyze`,
+    `Not right now… but the one that could affect your next few years.`,
+    ``,
+    `Most people realize it too late.`,
+    ``,
+    `You have a chance to see it in advance.`,
+    ``,
+    `Your decision is still here—`,
+    `ready to show you what happens next.`,
+    ``,
+    `Try it now👇`,
+    `${base}/`,
     ``,
     `— Life Decision Engine`,
   ].join("\n");
@@ -174,7 +187,7 @@ export async function sendDecisionReminderNudge(
     const r = await resend.emails.send({
       from,
       to: p.to,
-      subject: `Time for a second look? — Life Decision Engine`,
+      subject: `What if you're making the wrong decision? — Life Decision Engine`,
       text,
     });
     if (r.error) {
