@@ -3,7 +3,7 @@ import { getClientIp } from "@/lib/client-ip";
 import { sendDecisionReminderWelcome } from "@/lib/email";
 import { prisma } from "@/lib/prisma";
 import { rateLimitAllow } from "@/lib/rate-limit";
-import { isTurnstileConfigured, verifyTurnstileToken } from "@/lib/turnstile";
+import { isTurnstileEnforced, verifyTurnstileToken } from "@/lib/turnstile";
 
 export const runtime = "nodejs";
 
@@ -64,34 +64,43 @@ export async function POST(req: Request) {
   const email = normalizeEmail(emailRaw);
   const ipForTurnstile = ip && ip !== "unknown" ? ip : undefined;
 
-  if (isTurnstileConfigured()) {
+  if (isTurnstileEnforced()) {
     const captchaOk = await verifyTurnstileToken(turnstileToken, ipForTurnstile);
     if (!captchaOk) {
       return NextResponse.json({ error: "captcha_failed" }, { status: 400 });
     }
   }
 
-  const existing = await prisma.decisionReminderSubscriber.findUnique({
-    where: { email },
-  });
-
-  const now = new Date();
-  const row = await prisma.decisionReminderSubscriber.upsert({
-    where: { email },
-    create: {
-      email,
-      firstName,
-      lastName,
-      locale: locale || undefined,
-      nextNudgeAt: returnIn7Days ? addDays(now, 7) : undefined,
-    },
-    update: {
-      firstName,
-      lastName,
-      locale: locale || undefined,
-      ...(returnIn7Days ? { nextNudgeAt: addDays(now, 7) } : {}),
-    },
-  });
+  let existing;
+  let row;
+  try {
+    existing = await prisma.decisionReminderSubscriber.findUnique({
+      where: { email },
+    });
+    const now = new Date();
+    row = await prisma.decisionReminderSubscriber.upsert({
+      where: { email },
+      create: {
+        email,
+        firstName,
+        lastName,
+        locale: locale || undefined,
+        nextNudgeAt: returnIn7Days ? addDays(now, 7) : undefined,
+      },
+      update: {
+        firstName,
+        lastName,
+        locale: locale || undefined,
+        ...(returnIn7Days ? { nextNudgeAt: addDays(now, 7) } : {}),
+      },
+    });
+  } catch (e) {
+    console.error("[reminder-subscribe] db error", e);
+    return NextResponse.json(
+      { error: "save_failed" },
+      { status: 503 },
+    );
+  }
 
   if (!existing) {
     void sendDecisionReminderWelcome({

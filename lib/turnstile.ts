@@ -7,6 +7,18 @@ export function isTurnstileConfigured(): boolean {
   return Boolean(process.env.TURNSTILE_SECRET_KEY?.trim());
 }
 
+/**
+ * Turnstile is only enforceable when the browser can render the widget (public site key)
+ * and the server can verify the token (secret). If only the secret is set in production,
+ * the client would show no widget and every subscribe would fail — avoid that.
+ */
+export function isTurnstileEnforced(): boolean {
+  return Boolean(
+    process.env.TURNSTILE_SECRET_KEY?.trim() &&
+      process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim(),
+  );
+}
+
 export async function verifyTurnstileToken(
   token: string,
   remoteip: string | undefined,
