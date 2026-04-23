@@ -1,0 +1,15 @@
+---
+description: After code changes, verify build and push to git so Vercel deploys
+alwaysApply: true
+---
+
+# Ship changes after each task
+
+When you finish work that touches application code, `lib/`, `components/`, APIs, i18n, prisma, or config:
+
+1. Run `npx tsc --noEmit` (or `npm run build` if the change is risky or touches build scripts).
+2. Stage the relevant files, commit with a short conventional message (e.g. `feat:`, `fix:`, `chore:`), and `git push` to the active branch (usually `main`).
+
+Do this **without being asked again**, unless the user explicitly says not to commit, wants a draft only, or the repo is in a broken state.
+
+If push fails (auth, network), report the error and what remains uncommitted.

@@ -96,7 +96,10 @@ export type PostAnalysisCopy = {
   /** Modal before first analysis (email gate) */
   emailRemindPreAnalysisTitle: string;
   emailRemindPreAnalysisLead: string;
-  emailRemindPreAnalysisConsentLabel: string;
+  /** Shown in pre modal — no email opt-in checkboxes, bot gate only */
+  emailRemindPreAnalysisVerificationNote: string;
+  /** When Turnstile is off, pre modal: bot trap explanation, no consent copy */
+  emailRemindPreAnalysisNoTurnstile: string;
   emailRemindPreAnalysisButton: string;
   emailRemindPreAnalysisCancel: string;
 };
@@ -216,9 +219,11 @@ const en: PostAnalysisCopy = {
     "If this browser is linked to your email (from the pre-analysis step on “Run analysis”), we can also email when you pick 3 / 7 / 14 days (not only a browser nudge).",
   emailRemindPreAnalysisTitle: "One quick step before we analyze",
   emailRemindPreAnalysisLead:
-    "Enter your name and email. We use this to filter bots and, if you agree below, to send a single return visit email about 7 days from now, plus one-off nudges when you choose 3/7/14 day reminders. Your question text is not part of this — it is sent to the engine only when you continue.",
-  emailRemindPreAnalysisConsentLabel:
-    "I agree: (1) a single “come back to the site” email about 7 days from now, and (2) one-off reminder emails if I use 3/7/14 day on this browser. I understand this is not a newsletter.",
+    "Add your name and a working email. They are not used to judge your question — we only use them for this check before the engine runs your analysis.",
+  emailRemindPreAnalysisVerificationNote:
+    "This step exists so we can be sure you are a real person, not a bot or an automated script.",
+  emailRemindPreAnalysisNoTurnstile:
+    "Extra bot protection: this form includes a hidden field. The site can also add Cloudflare Turnstile for another layer if configured.",
   emailRemindPreAnalysisButton: "Continue — run analysis",
   emailRemindPreAnalysisCancel: "Cancel",
 };
@@ -339,9 +344,11 @@ const hy: PostAnalysisCopy = {
     "Եթե այս բրաուզերը կապված է քո էլ․ հասցեի հետ («Վերլուծել»-ից առաջ եղած քայլից), 3/7/14 օրյա ընտրության դեպքում կարող ենք նաև էլ․ նամակ ուղարկել, ոչ միայն բրաուզերային հիշեցում։",
   emailRemindPreAnalysisTitle: "Մեկ կարճ քայլ՝ նախքան վերլուծությունը",
   emailRemindPreAnalysisLead:
-    "Գրիր անուն, ազգանուն, էլ․ փոստ. սպամ/bot-ից պաշտպանվելու համար է, և, եթե ներքևում համաձայնվես, մոտ 7 օրից մեկ վերադարձի հիշեցում կուղարկենք, ինչպես նաև մեկանգամյա հիշեցումներ, երբ այստեղ ընտրես 3/7/14 օր։ Քո հարցի տեքստն այստեղ չէ պահվում․ engine-ին գնում է միայն «Շարունակել»-ից հետո։",
-  emailRemindPreAnalysisConsentLabel:
-    "Համաձայն եմ․ (1) մոտ 7 օրից մեկ «նորից մտի կայք» նամակ, (2) մեկանգամյա հիշեցումներ, եթե այս բրաուզերում ընտրեմ 3/7/14 օր. սա newsletter չէ։",
+    "Գրիր անուն, ազգանուն, աշխատանքային էլ․փոստ․ չի օգտագործվի քո հարցը գնահատելու համար, միայն այս ստուգման համար, նախքան վերլուծիչը աշխատի։",
+  emailRemindPreAnalysisVerificationNote:
+    "Այս քայլը հենց դրա համար է, որ համոզվենք, որ դու մարդ ես, ոչ թե ավտոմատ ռոբոտ կամ բոտ։",
+  emailRemindPreAnalysisNoTurnstile:
+    "Բոտերից ավելի պաշտպանություն` թաքնված դաշտ. կայքն ավելացնի Cloudflare Turnstile, եթե կարգավորված լինի։",
   emailRemindPreAnalysisButton: "Շարունակել — վերլուծել",
   emailRemindPreAnalysisCancel: "Չեղարկել",
 };

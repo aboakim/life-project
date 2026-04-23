@@ -16,7 +16,7 @@ type Props = {
   locale: AppLocale;
   onRegistered?: (subscriberId: string) => void;
   /**
-   * `preAnalysis` — one consent line, always schedules ~7d return email + same API as after analysis.
+   * `preAnalysis` — name/email + captcha to block bots; no email checkboxes. API still records subscriber + 7d nudges.
    */
   variant?: "default" | "preAnalysis";
   /** Fires after a successful pre-analysis save (parent runs `/api/analyze`). */
@@ -44,7 +44,7 @@ export default function EmailReminderSignup({
   const needTurnstile = Boolean(siteKey);
   const canSubmit =
     !loading &&
-    consentReminders &&
+    (isPre || consentReminders) &&
     honeypot === "" &&
     firstName.trim().length > 0 &&
     lastName.trim().length > 0 &&
@@ -126,9 +126,6 @@ export default function EmailReminderSignup({
   );
 
   const lead = isPre ? pa.emailRemindPreAnalysisLead : pa.emailRemindSectionLead;
-  const consentText = isPre
-    ? pa.emailRemindPreAnalysisConsentLabel
-    : pa.emailRemindConsentLabel;
   const primaryButton = isPre
     ? pa.emailRemindPreAnalysisButton
     : pa.emailRemindSubmit;
@@ -187,26 +184,32 @@ export default function EmailReminderSignup({
           />
         </label>
       </div>
-      <label className="flex cursor-pointer items-start gap-2 text-sm text-[rgb(var(--ink))] [text-wrap:pretty]">
-        <input
-          type="checkbox"
-          checked={consentReminders}
-          onChange={(e) => setConsentReminders(e.target.checked)}
-          className="mt-1 size-4 shrink-0 rounded border-white/20 bg-black/30 accent-[rgb(var(--accent-2))]"
-        />
-        <span>{consentText}</span>
-      </label>
-      {!isPre ? (
-        <label className="flex cursor-pointer items-start gap-2 text-sm text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
-          <input
-            type="checkbox"
-            checked={returnIn7Days}
-            onChange={(e) => setReturnIn7Days(e.target.checked)}
-            className="mt-1 size-4 shrink-0 rounded border-white/20 bg-black/30 accent-[rgb(var(--accent-2))]"
-          />
-          <span>{pa.emailRemindOptIn7DayLabel}</span>
-        </label>
-      ) : null}
+      {isPre ? (
+        <p className="text-sm leading-relaxed text-[rgb(var(--ink))] [text-wrap:pretty]">
+          {pa.emailRemindPreAnalysisVerificationNote}
+        </p>
+      ) : (
+        <>
+          <label className="flex cursor-pointer items-start gap-2 text-sm text-[rgb(var(--ink))] [text-wrap:pretty]">
+            <input
+              type="checkbox"
+              checked={consentReminders}
+              onChange={(e) => setConsentReminders(e.target.checked)}
+              className="mt-1 size-4 shrink-0 rounded border-white/20 bg-black/30 accent-[rgb(var(--accent-2))]"
+            />
+            <span>{pa.emailRemindConsentLabel}</span>
+          </label>
+          <label className="flex cursor-pointer items-start gap-2 text-sm text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
+            <input
+              type="checkbox"
+              checked={returnIn7Days}
+              onChange={(e) => setReturnIn7Days(e.target.checked)}
+              className="mt-1 size-4 shrink-0 rounded border-white/20 bg-black/30 accent-[rgb(var(--accent-2))]"
+            />
+            <span>{pa.emailRemindOptIn7DayLabel}</span>
+          </label>
+        </>
+      )}
       {siteKey ? (
         <div className="pt-1">
           <Turnstile
@@ -219,12 +222,14 @@ export default function EmailReminderSignup({
         </div>
       ) : (
         <p className="text-[11px] leading-relaxed text-[rgb(var(--ink-soft))]/90 [text-wrap:pretty]">
-          {pa.emailRemindFallbackNote}
+          {isPre ? pa.emailRemindPreAnalysisNoTurnstile : pa.emailRemindFallbackNote}
         </p>
       )}
-      <p className="text-[11px] leading-relaxed text-[rgb(var(--ink-soft))]/90 [text-wrap:pretty]">
-        {pa.emailRemindPrivacy}
-      </p>
+      {isPre ? null : (
+        <p className="text-[11px] leading-relaxed text-[rgb(var(--ink-soft))]/90 [text-wrap:pretty]">
+          {pa.emailRemindPrivacy}
+        </p>
+      )}
       {isPre && formMsg ? (
         <p className="text-sm text-rose-200/90" role="alert">
           {formMsg}
