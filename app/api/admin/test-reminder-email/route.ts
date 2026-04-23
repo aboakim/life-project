@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { ADMIN_COOKIE_NAME, verifyAdminToken } from "@/lib/admin-cookie";
-import { sendDecisionReminderWelcome } from "@/lib/email";
+import { sendDecisionReminderNudge, sendDecisionReminderWelcome } from "@/lib/email";
 import { prisma } from "@/lib/prisma";
 
 export const runtime = "nodejs";
@@ -10,6 +10,8 @@ type Body = {
   to?: string;
   firstName?: string;
   useLatestSubscriber?: boolean;
+  /** @default "welcome" — "nudge" = 7-day copy (`sendDecisionReminderNudge`) */
+  template?: "welcome" | "nudge";
 };
 
 function validEmail(s: string): boolean {
@@ -19,7 +21,10 @@ function validEmail(s: string): boolean {
 export async function POST(req: Request) {
   const secret = process.env.ADMIN_SECRET;
   const store = await cookies();
-  const token = store.get(ADMIN_COOKIE_NAME)?.value;
+  const auth = req.headers.get("authorization");
+  const bearer =
+    auth?.startsWith("Bearer ") ? auth.slice(7).trim() : undefined;
+  const token = store.get(ADMIN_COOKIE_NAME)?.value ?? bearer;
   if (!verifyAdminToken(token, secret)) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
@@ -60,9 +65,13 @@ export async function POST(req: Request) {
     }
   }
 
-  const ok = await sendDecisionReminderWelcome({ to, firstName });
+  const template = body.template === "nudge" ? "nudge" : "welcome";
+  const ok =
+    template === "nudge"
+      ? await sendDecisionReminderNudge({ to, firstName })
+      : await sendDecisionReminderWelcome({ to, firstName });
   if (!ok) {
     return NextResponse.json({ error: "send_failed" }, { status: 502 });
   }
-  return NextResponse.json({ ok: true as const });
+  return NextResponse.json({ ok: true as const, template });
 }

@@ -36,11 +36,13 @@ export type AdminUiCopy = {
   diagnosticsTestFirstName: string;
   diagnosticsSendTestWelcome: string;
   diagnosticsSendLatest: string;
+  diagnosticsSendNudge: string;
   diagnosticsTestSending: string;
   diagnosticsTestSent: string;
   diagnosticsTestFailed: string;
   diagnosticsTestNoResend: string;
   diagnosticsTestNoSubscribers: string;
+  diagnosticsTestEmailRequired: string;
 };
 
 const enUS: AdminUiCopy = {
@@ -85,11 +87,13 @@ const enUS: AdminUiCopy = {
   diagnosticsTestFirstName: "First name (salutation)",
   diagnosticsSendTestWelcome: "Send test email",
   diagnosticsSendLatest: "Send to latest DB subscriber",
+  diagnosticsSendNudge: "Send 7-day nudge (current copy)",
   diagnosticsTestSending: "Sending…",
   diagnosticsTestSent: "Sent. Check the inbox (and spam).",
   diagnosticsTestFailed: "Failed — see server logs. Is Resend configured?",
   diagnosticsTestNoResend: "Resend is not configured — set RESEND_API_KEY first.",
   diagnosticsTestNoSubscribers: "No rows in decision reminder table.",
+  diagnosticsTestEmailRequired: "Enter a recipient email first.",
 };
 
 const hy: AdminUiCopy = {
@@ -134,11 +138,13 @@ const hy: AdminUiCopy = {
   diagnosticsTestFirstName: "Անուն (դիմելու համար)",
   diagnosticsSendTestWelcome: "Ուղարկել թեստ նամակ",
   diagnosticsSendLatest: "Ուղարկել վերջին գրանցվածին (DB)",
+  diagnosticsSendNudge: "Ուղարկել 7օրյա nudge (ներկա տեքստ)",
   diagnosticsTestSending: "Ուղարկում…",
   diagnosticsTestSent: "Ուղարկվեց։ Ստուգի inbox-ը (և spam)։",
   diagnosticsTestFailed: "Չստացվեց — նայիր սերվերի լոգեր։ Resend-ը կարգավորվա՞ծ է։",
   diagnosticsTestNoResend: "Resend-ը չի կարգավորված — ավելացրու RESEND_API_KEY։",
   diagnosticsTestNoSubscribers: "Հիշեցման աղյուսակում տող չկա։",
+  diagnosticsTestEmailRequired: "Նախ լրացրու ստացողի էլ․ փոստը։",
 };
 
 export function getAdminUi(locale: AppLocale): AdminUiCopy {

@@ -48,6 +48,41 @@ export default function AdminTestReminderEmail({ resend, copy }: Props) {
     }
   }
 
+  async function sendNudge() {
+    reset();
+    if (!resend) {
+      setMsg("hint");
+      return;
+    }
+    if (!email.trim()) {
+      setMsg("failed");
+      setErr("no_email");
+      return;
+    }
+    setMsg("sending");
+    try {
+      const r = await fetch("/api/admin/test-reminder-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          to: email.trim(),
+          firstName: firstName.trim() || "there",
+          template: "nudge",
+        }),
+      });
+      const data = (await r.json().catch(() => ({}))) as { error?: string };
+      if (!r.ok) {
+        setMsg("failed");
+        setErr(data.error ?? String(r.status));
+        return;
+      }
+      setMsg("sent");
+    } catch {
+      setMsg("failed");
+      setErr("network");
+    }
+  }
+
   async function sendLatest() {
     reset();
     if (!resend) {
@@ -117,6 +152,14 @@ export default function AdminTestReminderEmail({ resend, copy }: Props) {
         </button>
         <button
           type="button"
+          onClick={sendNudge}
+          disabled={msg === "sending"}
+          className="rounded-xl border border-[rgb(var(--accent-2))]/30 bg-[rgb(var(--accent-2))]/10 px-4 py-2.5 text-sm font-medium text-[rgb(var(--ink))] transition hover:bg-[rgb(var(--accent-2))]/20 disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          {msg === "sending" ? copy.diagnosticsTestSending : copy.diagnosticsSendNudge}
+        </button>
+        <button
+          type="button"
           onClick={sendLatest}
           disabled={msg === "sending"}
           className="rounded-xl border border-white/10 px-4 py-2.5 text-sm text-[rgb(var(--ink-soft))] transition hover:bg-white/[0.06] disabled:cursor-not-allowed disabled:opacity-40"
@@ -133,8 +176,12 @@ export default function AdminTestReminderEmail({ resend, copy }: Props) {
         <p className="mt-3 text-sm text-rose-200/90" role="alert">
           {err === "no_subscriber"
             ? copy.diagnosticsTestNoSubscribers
-            : copy.diagnosticsTestFailed}
-          {err && err !== "no_subscriber" ? ` (${err})` : ""}
+            : err === "no_email"
+              ? copy.diagnosticsTestEmailRequired
+              : copy.diagnosticsTestFailed}
+          {err && err !== "no_subscriber" && err !== "no_email"
+            ? ` (${err})`
+            : ""}
         </p>
       ) : null}
       {msg === "hint" ? (
