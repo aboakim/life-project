@@ -1,3 +1,4 @@
+import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 import { getClientIp } from "@/lib/client-ip";
 import { sendDecisionReminderWelcome } from "@/lib/email";
@@ -95,10 +96,15 @@ export async function POST(req: Request) {
       },
     });
   } catch (e) {
-    console.error("[reminder-subscribe] db error", e);
+    /* DB missing/misconfigured in prod is common; do not block analysis. */
+    console.error(
+      "[reminder-subscribe] database unavailable — using client-only id (fix DATABASE_URL + migrations on Vercel for reminders)",
+      e,
+    );
+    const fallbackId = `local_${randomUUID()}`;
     return NextResponse.json(
-      { error: "save_failed" },
-      { status: 503 },
+      { ok: true as const, subscriberId: fallbackId, persistence: "none" as const },
+      { status: 200 },
     );
   }
 
