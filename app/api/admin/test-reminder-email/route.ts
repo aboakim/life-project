@@ -66,12 +66,19 @@ export async function POST(req: Request) {
   }
 
   const template = body.template === "nudge" ? "nudge" : "welcome";
-  const ok =
+  const result =
     template === "nudge"
       ? await sendDecisionReminderNudge({ to, firstName })
       : await sendDecisionReminderWelcome({ to, firstName });
-  if (!ok) {
-    return NextResponse.json({ error: "send_failed" }, { status: 502 });
+  if (!result.ok) {
+    return NextResponse.json(
+      { error: "send_failed", detail: result.error },
+      { status: 502 },
+    );
   }
-  return NextResponse.json({ ok: true as const, template });
+  return NextResponse.json({
+    ok: true as const,
+    template,
+    resendId: result.resendId,
+  });
 }

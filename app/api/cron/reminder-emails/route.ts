@@ -30,16 +30,22 @@ export async function GET(req: Request) {
 
   let sent = 0;
   for (const row of due) {
-    const ok = await sendDecisionReminderNudge({
+    const result = await sendDecisionReminderNudge({
       to: row.email,
       firstName: row.firstName,
     });
-    if (ok) {
+    if (result.ok) {
       await prisma.decisionReminderSubscriber.update({
         where: { id: row.id },
         data: { nextNudgeAt: null },
       });
       sent += 1;
+    } else {
+      console.error(
+        "[cron reminder-emails] nudge failed for",
+        row.email,
+        result.error,
+      );
     }
   }
 

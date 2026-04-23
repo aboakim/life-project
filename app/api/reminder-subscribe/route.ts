@@ -112,6 +112,10 @@ async function handleReminderSubscribe(req: Request): Promise<NextResponse> {
     void sendDecisionReminderWelcome({
       to: row.email,
       firstName: row.firstName,
+    }).then((r) => {
+      if (!r.ok) {
+        console.error("[reminder-subscribe] welcome email failed", r.error);
+      }
     });
   }
 

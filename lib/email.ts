@@ -99,9 +99,27 @@ export type ReminderSubscriberEmail = {
   firstName: string;
 };
 
+/** Resend success / failure with a string for logs and admin diagnostics */
+export type ReminderEmailSendResult =
+  | { ok: true; resendId?: string }
+  | { ok: false; error: string };
+
+function formatResendError(err: unknown): string {
+  if (err == null) return "unknown";
+  if (typeof err === "string") return err;
+  if (typeof err === "object" && "message" in err && typeof (err as { message: unknown }).message === "string") {
+    return (err as { message: string }).message;
+  }
+  try {
+    return JSON.stringify(err);
+  } catch {
+    return String(err);
+  }
+}
+
 export async function sendDecisionReminderWelcome(
   p: ReminderSubscriberEmail
-): Promise<boolean> {
+): Promise<ReminderEmailSendResult> {
   const key = process.env.RESEND_API_KEY;
   const from =
     process.env.RESEND_FROM_EMAIL ??
@@ -110,7 +128,7 @@ export async function sendDecisionReminderWelcome(
     if (process.env.NODE_ENV === "development") {
       console.info("[email] RESEND_API_KEY not set — skipping reminder welcome");
     }
-    return false;
+    return { ok: false, error: "RESEND_API_KEY not set" };
   }
   const site =
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://localhost:3000";
@@ -134,19 +152,24 @@ export async function sendDecisionReminderWelcome(
       text,
     });
     if (r.error) {
+      const err = formatResendError(r.error);
       console.error("[resend reminder welcome]", r.error);
-      return false;
+      return { ok: false, error: err };
     }
-    return true;
+    const resendId =
+      r.data && typeof r.data === "object" && "id" in r.data
+        ? String((r.data as { id: string }).id)
+        : undefined;
+    return { ok: true, resendId };
   } catch (e) {
     console.error("[resend reminder welcome]", e);
-    return false;
+    return { ok: false, error: e instanceof Error ? e.message : String(e) };
   }
 }
 
 export async function sendDecisionReminderNudge(
   p: ReminderSubscriberEmail
-): Promise<boolean> {
+): Promise<ReminderEmailSendResult> {
   const key = process.env.RESEND_API_KEY;
   const from =
     process.env.RESEND_FROM_EMAIL ??
@@ -155,7 +178,7 @@ export async function sendDecisionReminderNudge(
     if (process.env.NODE_ENV === "development") {
       console.info("[email] RESEND_API_KEY not set — skipping reminder nudge");
     }
-    return false;
+    return { ok: false, error: "RESEND_API_KEY not set" };
   }
   const base =
     (process.env.NEXT_PUBLIC_SITE_URL ?? "https://lifedecisions.space").replace(
@@ -191,12 +214,17 @@ export async function sendDecisionReminderNudge(
       text,
     });
     if (r.error) {
+      const err = formatResendError(r.error);
       console.error("[resend reminder nudge]", r.error);
-      return false;
+      return { ok: false, error: err };
     }
-    return true;
+    const resendId =
+      r.data && typeof r.data === "object" && "id" in r.data
+        ? String((r.data as { id: string }).id)
+        : undefined;
+    return { ok: true, resendId };
   } catch (e) {
     console.error("[resend reminder nudge]", e);
-    return false;
+    return { ok: false, error: e instanceof Error ? e.message : String(e) };
   }
 }

@@ -35,10 +35,17 @@ export default function AdminTestReminderEmail({ resend, copy }: Props) {
           firstName: firstName.trim() || "there",
         }),
       });
-      const data = (await r.json().catch(() => ({}))) as { error?: string };
+      const data = (await r.json().catch(() => ({}))) as {
+        error?: string;
+        detail?: string;
+      };
       if (!r.ok) {
         setMsg("failed");
-        setErr(data.error ?? String(r.status));
+        setErr(
+          data.detail
+            ? `${data.error ?? "error"}: ${data.detail}`
+            : (data.error ?? String(r.status)),
+        );
         return;
       }
       setMsg("sent");
@@ -70,10 +77,17 @@ export default function AdminTestReminderEmail({ resend, copy }: Props) {
           template: "nudge",
         }),
       });
-      const data = (await r.json().catch(() => ({}))) as { error?: string };
+      const data = (await r.json().catch(() => ({}))) as {
+        error?: string;
+        detail?: string;
+      };
       if (!r.ok) {
         setMsg("failed");
-        setErr(data.error ?? String(r.status));
+        setErr(
+          data.detail
+            ? `${data.error ?? "error"}: ${data.detail}`
+            : (data.error ?? String(r.status)),
+        );
         return;
       }
       setMsg("sent");
@@ -96,10 +110,17 @@ export default function AdminTestReminderEmail({ resend, copy }: Props) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ useLatestSubscriber: true }),
       });
-      const data = (await r.json().catch(() => ({}))) as { error?: string };
+      const data = (await r.json().catch(() => ({}))) as {
+        error?: string;
+        detail?: string;
+      };
       if (!r.ok) {
         setMsg("failed");
-        setErr(data.error ?? String(r.status));
+        setErr(
+          data.detail
+            ? `${data.error ?? "error"}: ${data.detail}`
+            : (data.error ?? String(r.status)),
+        );
         return;
       }
       setMsg("sent");
