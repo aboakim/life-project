@@ -18,7 +18,8 @@
     "postinstall": "node scripts/postinstall-prisma.mjs",
     "db:push": "prisma db push",
     "favicons": "node scripts/generate-favicons.mjs",
-    "video:record-site": "node scripts/record-site-promo.cjs"
+    "video:record-site": "node scripts/record-site-promo.cjs",
+    "email:test-nudge": "node scripts/resend-nudge-test.mjs"
   },
   "dependencies": {
     "@marsidev/react-turnstile": "^1.5.0",
