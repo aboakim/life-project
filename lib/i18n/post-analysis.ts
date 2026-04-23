@@ -17,9 +17,29 @@ export type PostAnalysisCopy = {
   historyEmpty: string;
   clearHistory: string;
   remindLabel: string;
+  /** @deprecated Replaced by day-specific remind buttons; kept for table fallbacks */
   remindSet: string;
+  /** @deprecated */
   remindActive: string;
+  remind3Days: string;
+  remind7Days: string;
+  remind14Days: string;
+  remindActive3: string;
+  remindActive7: string;
+  remindActive14: string;
   remindClear: string;
+  printPdfHint: string;
+  specialistTitle: string;
+  specialistLead: string;
+  specialistPhrases: [
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+  ];
+  specialistCopy: string;
   reminderBanner: string;
   reminderDismiss: string;
   expertsCta: string;
@@ -35,6 +55,7 @@ export type PostAnalysisCopy = {
   mdScore: string;
   mdTwin: string;
   mdProfessional: string;
+  mdStakes: string;
   /** Nudge users to run analyses repeatedly */
   runAnotherHint: string;
   runAnotherCta: string;
@@ -49,6 +70,21 @@ export type PostAnalysisCopy = {
   compareScoreLabel: string;
   compareSummaryLabel: string;
   compareDifferentRuns: string;
+  emailRemindSectionTitle: string;
+  emailRemindSectionLead: string;
+  emailRemindFirstName: string;
+  emailRemindLastName: string;
+  emailRemindEmail: string;
+  emailRemindSubmit: string;
+  emailRemindSubmitting: string;
+  emailRemindSuccess: string;
+  emailRemindError: string;
+  emailRemindCaptchaFailed: string;
+  emailRemindNeedTurnstile: string;
+  emailRemindPrivacy: string;
+  emailRemindDevCaptchaBypass: string;
+  emailRemindIdStored: string;
+  emailRemindScheduleNote: string;
 };
 
 const en: PostAnalysisCopy = {
@@ -81,7 +117,15 @@ const en: PostAnalysisCopy = {
   remindLabel: "Revisit this decision",
   remindSet: "Remind me in 2 weeks",
   remindActive: "Reminder set for 2 weeks from now.",
+  remind3Days: "In 3 days",
+  remind7Days: "In 7 days",
+  remind14Days: "In 14 days",
+  remindActive3: "We’ll nudge you in 3 days (this browser).",
+  remindActive7: "We’ll nudge you in 7 days (this browser).",
+  remindActive14: "We’ll nudge you in 14 days (this browser).",
   remindClear: "Clear reminder",
+  printPdfHint:
+    "Tip: in the print dialog, choose “Save as PDF” for a one-page file.",
   reminderBanner:
     "You asked to revisit a big decision — take 10 minutes to update your brief and re-run the analyzer.",
   reminderDismiss: "Dismiss",
@@ -98,6 +142,18 @@ const en: PostAnalysisCopy = {
   mdScore: "Score",
   mdTwin: "Note",
   mdProfessional: "Professional guidance",
+  mdStakes: "Subjective weight (1–10)",
+  specialistTitle: "What to ask a specialist or coach",
+  specialistLead: "Copy a line, paste it in email or chat—edit with your own details.",
+  specialistPhrases: [
+    "Given what I’ve shared, what would you suggest as the next 2–3 concrete steps—and why?",
+    "What are the main blind spots or risks in how I’m framing this decision?",
+    "If you saw five people in a similar situation, what made the difference between a good and a bad outcome?",
+    "What information would you need to give advice that’s actually tailored—not generic?",
+    "What is one early warning sign that I should slow down, get help, or change course?",
+    "If we check in in 4–6 weeks, what would ‘meaningful progress’ look like in practical terms?",
+  ],
+  specialistCopy: "Copy",
   runAnotherHint:
     "Most big decisions need a second pass — update your brief and compare the score.",
   runAnotherCta: "Run another analysis",
@@ -114,6 +170,26 @@ const en: PostAnalysisCopy = {
   compareScoreLabel: "Score",
   compareSummaryLabel: "Summary",
   compareDifferentRuns: "Choose two different entries.",
+  emailRemindSectionTitle: "Email nudges (optional)",
+  emailRemindSectionLead:
+    "Add your name and email so we know who to nudge. The “I’m not a robot” check helps keep junk out. We store your address only to send the reminder you choose below — not newsletter spam.",
+  emailRemindFirstName: "First name",
+  emailRemindLastName: "Last name",
+  emailRemindEmail: "Email",
+  emailRemindSubmit: "Save my email for reminders",
+  emailRemindSubmitting: "Saving…",
+  emailRemindSuccess: "Saved. When you tap a reminder below, we’ll also schedule an email to this address (if your host has Resend + cron configured).",
+  emailRemindError: "Could not save — try again in a moment.",
+  emailRemindCaptchaFailed: "Robot check failed — try again.",
+  emailRemindNeedTurnstile:
+    "Email reminders need Cloudflare Turnstile keys (NEXT_PUBLIC_TURNSTILE_SITE_KEY + TURNSTILE_SECRET_KEY) in the site environment.",
+  emailRemindPrivacy:
+    "By continuing, you agree we may send one-off reminder emails associated with this tool. See the site privacy policy for how data is handled.",
+  emailRemindDevCaptchaBypass:
+    "Local dev: Turnstile not set — use REMINDER_SKIP_CAPTCHA=1 on the server to test without the widget.",
+  emailRemindIdStored: "This browser is linked to your saved email — use the same device when you pick 3 / 7 / 14 days.",
+  emailRemindScheduleNote:
+    "If you saved your email above, we’ll try to send the same-day nudge by email (in addition to this browser).",
 };
 
 const hy: PostAnalysisCopy = {
@@ -164,6 +240,25 @@ const hy: PostAnalysisCopy = {
   mdScore: "Գնահատում",
   mdTwin: "Նշում",
   mdProfessional: "Մասնագիտական ուղեցույց",
+  mdStakes: "Զգացողական ծանրություն (1‒10)",
+  remind3Days: "3 օրից",
+  remind7Days: "7 օրից",
+  remind14Days: "14 օրից",
+  remindActive3: "Հիշեցումը սահմանված է 3 օրից (այս բրաուզերում)։",
+  remindActive7: "Հիշեցումը սահմանված է 7 օրից (այս բրաուզերում)։",
+  remindActive14: "Հիշեցումը սահմանված է 14 օրից (այս բրաուզերում)։",
+  printPdfHint: "Խնդրահատուկ` տպման պատուհանում ընտրիր «Պահել որպես PDF»։",
+  specialistTitle: "Ի՞նչ հարց տալ մասնագետին կամ coach-ին",
+  specialistLead: "Պատճենիր տողը, տեղակիր նամակում կամ չաթում, խմբագիր ձեր մանրամասներով։",
+  specialistPhrases: [
+    "Ինչ ես առաջարկում որպես հաջորդ 2‒3 կոնկրետ քայլ՝ հաշվի առնելով ինչ եմ գրել, և ինչու՞",
+    "Ի՞նչ «կույր կետեր» կամ ռիսկեր եմ կարող բաց թողնել, եթե այսպես եմ դնում հարցը։",
+    "Եթե հինգ մարդ նման իրավիճակում է եղել, ի՞նչն էր տարբերում լավ և վատ ելքը։",
+    "Ի՞նչ տվյալներ պետք է տաս, որ խորհուրդը կոնկրետ լինի, ոչ թե ընդհանուր։",
+    "Մի՞ ազդանշան, որ պետք է ավելի դանդաղեմ, մասնագետի դիմեմ կամ ուղի փոխեմ։",
+    "Եթե 4‒6 շաբաթից նորից խոսենք, ի՞նչն է «նշանակալի առաջընթաց» աշխարհիկ իմաստով։",
+  ],
+  specialistCopy: "Պատճենել",
   runAnotherHint:
     "Մեծ որոշումները հաճախ պահանջում են երկրորդ փորձ — թարմացրու brief-ը և համեմատիր միավորները։",
   runAnotherCta: "Նոր վերլուծություն",
@@ -180,6 +275,28 @@ const hy: PostAnalysisCopy = {
   compareScoreLabel: "Միավոր",
   compareSummaryLabel: "Ամփոփում",
   compareDifferentRuns: "Ընտրիր երկու տարբեր գրառում։",
+  emailRemindSectionTitle: "Էլ․ փոստով հիշեցում (ընտրովի)",
+  emailRemindSectionLead:
+    "Գրիր անուն, ազգանուն և էլ․ փոստ, որ իմանանք ում գրել։ «Ես ռոբոտ չեմ» ստուգումը պաշտպանում է սպամից։ Հասցեն պահում ենք միայն քո ընտրած հիշեցումն ուղարկելու համար, ոչ թե նամակագիր ցուցակի համար։",
+  emailRemindFirstName: "Անուն",
+  emailRemindLastName: "Ազգանուն",
+  emailRemindEmail: "Էլ․ փոստ",
+  emailRemindSubmit: "Պահել իմ հասցեն հիշեցումների համար",
+  emailRemindSubmitting: "Պահվում է…",
+  emailRemindSuccess:
+    "Պահվեց։ Երբ ստորև ընտրես 3 / 7 / 14 օր, կծրագրենք նաև էլ․ նամակ (եթե սերվերում միացված են Resend և cron)։",
+  emailRemindError: "Չհաջողվեց — փորձիր մի քիչ հետո։",
+  emailRemindCaptchaFailed: "Ռոբոտի ստուգումը չանցավ — կրկին փորձիր։",
+  emailRemindNeedTurnstile:
+    "Էլ․ հիշեցումների համար պետք են Cloudflare Turnstile բանալիներ (NEXT_PUBLIC_TURNSTILE_SITE_KEY և TURNSTILE_SECRET_KEY) սերվերի կարգավորումներում։",
+  emailRemindPrivacy:
+    "Շարունակելով՝ համաձայն ես, որ կարող ենք ուղարկել մեկանգամյա հիշեցումներ՝ կապված այս գործիքի հետ։ Մանրամասների համար՝ գաղտնիության քաղաքականություն։",
+  emailRemindDevCaptchaBypass:
+    "Տեղային dev՝ Turnstile չկա — սերվերում դրու REMINDER_SKIP_CAPTCHA=1, որ փորձես առանց վիջեթի։",
+  emailRemindIdStored:
+    "Այս բրաուզերը կապված է պահված հասցեի հետ — նույն սարքով ընտրիր 3 / 7 / 14 օրը։",
+  emailRemindScheduleNote:
+    "Եթե վերևում պահել ես էլ․ փոստը, կփորձենք նաև նամակով հիշեցնել (լրացուցիչ բրաուզերի հիշեցմանը)։",
 };
 
 const table: Record<AppLocale, PostAnalysisCopy> = {

@@ -11,21 +11,32 @@ import {
   clearReminder,
   getReminderDueIso,
   loadHistory,
-  setReminderWeeks,
+  setReminderInDays,
   type HistorySnapshot,
 } from "@/lib/analysis-local";
 import type { PostAnalysisCopy } from "@/lib/i18n/post-analysis";
+import type { AppLocale } from "@/lib/i18n/locale";
+import { getStoredSubscriberId } from "@/lib/reminder-subscriber-storage";
+import EmailReminderSignup from "@/components/home/EmailReminderSignup";
 
 type Props = {
   analysis: DecisionAnalysis;
   decision: string;
   context: string;
   constraints: string;
+  /** 1–10 how heavy this decision feels; drives markdown/print when set */
+  stakesLevel?: number;
   mode: "live" | "demo" | "fallback";
   pa: PostAnalysisCopy;
   expertsSearchHref: string;
   /** Load saved brief into the main form and scroll to analyzer (drives repeat runs). */
-  onLoadBrief?: (decision: string, context: string, constraints: string) => void;
+  onLoadBrief?: (
+    decision: string,
+    context: string,
+    constraints: string,
+    stakesLevel?: number,
+  ) => void;
+  locale: AppLocale;
 };
 
 export default function AnalysisResultTools({
@@ -33,10 +44,12 @@ export default function AnalysisResultTools({
   decision,
   context,
   constraints,
+  stakesLevel,
   mode,
   pa,
   expertsSearchHref,
   onLoadBrief,
+  locale,
 }: Props) {
   const [flash, setFlash] = useState<string | null>(null);
   const [history, setHistory] = useState<HistorySnapshot[]>([]);
@@ -73,19 +86,27 @@ export default function AnalysisResultTools({
 
   const md = useMemo(
     () =>
-      buildMarkdownSummary(decision, context, constraints, analysis, {
-        decision: pa.mdDecision,
-        context: pa.mdContext,
-        constraints: pa.mdConstraints,
-        summary: pa.mdSummary,
-        professional: pa.mdProfessional,
-        dimensions: pa.mdDimensions,
-        scenarios: pa.mdScenarios,
-        timeline: pa.mdTimeline,
-        score: pa.mdScore,
-        twin: pa.mdTwin,
-      }),
-    [analysis, decision, context, constraints, pa],
+      buildMarkdownSummary(
+        decision,
+        context,
+        constraints,
+        analysis,
+        {
+          decision: pa.mdDecision,
+          context: pa.mdContext,
+          constraints: pa.mdConstraints,
+          summary: pa.mdSummary,
+          professional: pa.mdProfessional,
+          dimensions: pa.mdDimensions,
+          scenarios: pa.mdScenarios,
+          timeline: pa.mdTimeline,
+          score: pa.mdScore,
+          twin: pa.mdTwin,
+          stakes: pa.mdStakes,
+        },
+        { stakesLevel },
+      ),
+    [analysis, decision, context, constraints, pa, stakesLevel],
   );
 
   const shareText = useMemo(
@@ -118,11 +139,20 @@ export default function AnalysisResultTools({
     setHistory([]);
   }, []);
 
-  const onRemind = useCallback(() => {
-    setReminderWeeks(2);
-    setFlash(pa.remindActive);
-    window.setTimeout(() => setFlash(null), 2500);
-  }, [pa.remindActive]);
+  const onRemindDays = useCallback(
+    (days: 3 | 7 | 14) => {
+      setReminderInDays(days);
+      setFlash(
+        days === 3
+          ? pa.remindActive3
+          : days === 7
+            ? pa.remindActive7
+            : pa.remindActive14,
+      );
+      window.setTimeout(() => setFlash(null), 2500);
+    },
+    [pa.remindActive14, pa.remindActive3, pa.remindActive7],
+  );
 
   const onClearRemind = useCallback(() => {
     clearReminder();
@@ -169,6 +199,9 @@ export default function AnalysisResultTools({
             {pa.printSummary}
           </button>
         </div>
+        <p className="mt-3 text-xs leading-relaxed text-[rgb(var(--ink-soft))]/90 [text-wrap:pretty]">
+          {pa.printPdfHint}
+        </p>
         <div className="mt-5 flex flex-wrap gap-3 text-sm">
           <Link
             href={expertsSearchHref}
@@ -199,10 +232,24 @@ export default function AnalysisResultTools({
           <div className="mt-2 flex flex-wrap gap-2">
             <button
               type="button"
-              onClick={onRemind}
+              onClick={() => onRemindDays(3)}
               className="rounded-xl border border-[rgb(var(--accent-2))]/35 bg-[rgb(var(--accent-2))]/10 px-4 py-2 text-sm font-medium text-[rgb(var(--ink))]"
             >
-              {pa.remindSet}
+              {pa.remind3Days}
+            </button>
+            <button
+              type="button"
+              onClick={() => onRemindDays(7)}
+              className="rounded-xl border border-[rgb(var(--accent-2))]/35 bg-[rgb(var(--accent-2))]/10 px-4 py-2 text-sm font-medium text-[rgb(var(--ink))]"
+            >
+              {pa.remind7Days}
+            </button>
+            <button
+              type="button"
+              onClick={() => onRemindDays(14)}
+              className="rounded-xl border border-[rgb(var(--accent-2))]/35 bg-[rgb(var(--accent-2))]/10 px-4 py-2 text-sm font-medium text-[rgb(var(--ink))]"
+            >
+              {pa.remind14Days}
             </button>
             {reminderIso ? (
               <button
@@ -214,7 +261,45 @@ export default function AnalysisResultTools({
               </button>
             ) : null}
           </div>
+          <p className="mt-3 text-xs leading-relaxed text-[rgb(var(--ink-soft))]/90 [text-wrap:pretty]">
+            {pa.emailRemindScheduleNote}
+          </p>
         </div>
+
+        <div className="mt-6 border-t border-white/[0.08] pt-5">
+          <h3 className="text-sm font-semibold text-[rgb(var(--ink))]">
+            {pa.emailRemindSectionTitle}
+          </h3>
+          <div className="mt-3">
+            <EmailReminderSignup pa={pa} locale={locale} />
+          </div>
+        </div>
+      </section>
+
+      <section className="glass animate-fade-up no-print rounded-3xl border border-white/[0.08] p-6 sm:p-7">
+        <h2 className="text-lg font-semibold text-[rgb(var(--ink))]">
+          {pa.specialistTitle}
+        </h2>
+        <p className="mt-2 text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
+          {pa.specialistLead}
+        </p>
+        <ul className="mt-4 space-y-2">
+          {pa.specialistPhrases.map((phrase) => (
+            <li
+              key={phrase.slice(0, 48)}
+              className="flex flex-wrap items-start justify-between gap-2 rounded-xl border border-white/[0.08] bg-black/15 px-3 py-2.5 text-sm [text-wrap:pretty]"
+            >
+              <span className="min-w-0 text-[rgb(var(--ink))]">{phrase}</span>
+              <button
+                type="button"
+                onClick={() => onCopy(phrase, pa.copied)}
+                className="shrink-0 rounded-lg border border-white/12 bg-white/[0.06] px-2.5 py-1 text-xs font-medium text-[rgb(var(--accent-2))] transition hover:bg-white/[0.1]"
+              >
+                {pa.specialistCopy}
+              </button>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section className="glass animate-fade-up no-print rounded-3xl border border-[rgb(var(--accent))]/20 bg-gradient-to-br from-[rgb(var(--accent))]/[0.07] to-transparent p-6 sm:p-7">
@@ -290,7 +375,12 @@ export default function AnalysisResultTools({
                     <button
                       type="button"
                       onClick={() =>
-                        onLoadBrief(h.decision, h.context, h.constraints)
+                        onLoadBrief(
+                          h.decision,
+                          h.context,
+                          h.constraints,
+                          h.stakesLevel,
+                        )
                       }
                       className="shrink-0 rounded-lg border border-[rgb(var(--accent-2))]/40 bg-[rgb(var(--accent-2))]/10 px-2.5 py-1 text-xs font-semibold text-[rgb(var(--accent-2))] transition hover:bg-[rgb(var(--accent-2))]/18"
                     >

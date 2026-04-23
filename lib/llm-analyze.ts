@@ -97,9 +97,19 @@ export async function analyzeWithOpenAI(
   const locale = body.language ?? "hy";
   const langName = llmLanguageLabel(locale);
 
+  const w =
+    typeof body.stakesLevel === "number" &&
+    body.stakesLevel >= 1 &&
+    body.stakesLevel <= 10
+      ? body.stakesLevel
+      : null;
+
   const userBlock = [
     `Language for ALL user-facing text fields in the JSON: ${langName}.`,
     `Decision / question:\n${body.decision.trim()}`,
+    w !== null
+      ? `Subjective weight (user slider 1=light, 10=very heavy on their mind): ${w}/10 — factor this into tone and the score rationale; do not treat it as medical anxiety.`
+      : "Subjective weight: (not provided)",
     body.context?.trim()
       ? `Extra context:\n${body.context.trim()}`
       : "Extra context: (none)",

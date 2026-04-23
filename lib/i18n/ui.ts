@@ -104,6 +104,7 @@ export type UIStrings = {
   homeDemoTitle: string;
   homeDemoExample1: string;
   homeDemoExample2: string;
+  homeDemoExample3: string;
   homeDemoCta: string;
   /** Shown with the progress bar while analysis is running */
   analyzingProgressLine: string;
@@ -138,6 +139,10 @@ export type UIStrings = {
   voiceWhisperNeedMic: string;
   /** Shown for locale hy instead of a useless in-browser STT button */
   voiceSttArmenianUseCloud: string;
+  /** 1–10 how heavy the decision feels (stress / stakes) */
+  stakesLabel: string;
+  stakesHelper: string;
+  stakesResultPrefix: string;
 };
 
 /** English trust/how blocks — reused as fallback for locales without custom copy */
@@ -176,6 +181,7 @@ const trustHowEn: Pick<
   | "homeDemoTitle"
   | "homeDemoExample1"
   | "homeDemoExample2"
+  | "homeDemoExample3"
   | "homeDemoCta"
   | "analyzingProgressLine"
 > = {
@@ -208,6 +214,7 @@ const trustHowEn: Pick<
   homeDemoTitle: "See a structured report in one click",
   homeDemoExample1: "Should I move abroad?",
   homeDemoExample2: "Quit job or stay?",
+  homeDemoExample3: "Relationship fork — stay or go?",
   homeDemoCta: "Try demo",
   analyzingProgressLine: "Analyzing your decision…",
   trustSectionTitle: "Why people use this framework",
@@ -361,6 +368,7 @@ const trustHowHy: Pick<
   | "homeDemoTitle"
   | "homeDemoExample1"
   | "homeDemoExample2"
+  | "homeDemoExample3"
   | "homeDemoCta"
   | "analyzingProgressLine"
 > = {
@@ -393,6 +401,7 @@ const trustHowHy: Pick<
   homeDemoTitle: "Ինչպես է աշխատում մեկ կտարվածով",
   homeDemoExample1: "Տեղափոխվե՞լ արտերկիր",
   homeDemoExample2: "Թողնե՞լ աշխատանքը, թե՞ մնալ",
+  homeDemoExample3: "Հարաբերություն — մնա՞լ, գնա՞լ",
   homeDemoCta: "Բացել ցուցադրում",
   analyzingProgressLine: "Վերլուծում ենք ձեր որոշումը․․․",
   trustSectionTitle: "Ինչու են ընտրում այս գործիքը",
@@ -601,6 +610,9 @@ const uiHy: Partial<UIStrings> = {
   voiceWhisperNeedMic: "Թույլտվեք միքրոֆոնը։",
   voiceSttArmenianUseCloud:
     "Բրաուզերում հայերեն խոսում→տեքստը սովորաբար չի աշխատում․ երևում է «(cloud) գրառում» — այն ավելի հավանական է աշխատի, կամ մուտքը գրե՛ք։",
+  stakesLabel: "Ինչքա՞ն ծանր է զգում այս որոշումը (1‒10)",
+  stakesHelper: "1 — թեթև, 10 — շատ ծանր. ընտրովի է, բայց օգնում է մոդելին գնահատել լարվածությունն ու դրությունը։",
+  stakesResultPrefix: "Ձեր նշած զգացողական ծանրություն",
 };
 
 const uiEn: Partial<UIStrings> = {
@@ -691,6 +703,10 @@ const uiEn: Partial<UIStrings> = {
   voiceWhisperNeedMic: "Allow microphone access.",
   voiceSttArmenianUseCloud:
     "In-browser voice typing usually doesn’t work for Armenian. If you see cloud (record), use that, or type.",
+  stakesLabel: "How heavy does this decision feel? (1–10)",
+  stakesHelper:
+    "1 = light, 10 = very heavy. Optional—helps the model weigh stress and how much is on the line.",
+  stakesResultPrefix: "Subjective weight you indicated",
 };
 
 /** American English — UI copy tuned for US spelling/idiom where it differs */
@@ -793,6 +809,10 @@ const uiRu: Partial<UIStrings> = {
   voiceWhisperNeedMic: "Разрешите доступ к микрофону.",
   voiceSttArmenianUseCloud:
     "Встроенный голосовой ввод для армянского в браузере на ПК часто не работает. Если видна «cloud (запись)», попробуйте её, или печатайте.",
+  stakesLabel: "Насколько тяжело ощущается решение? (1–10)",
+  stakesHelper:
+    "1 — легко, 10 — очень тяжело. Необязательно, но помогает учесть стресс и ставки.",
+  stakesResultPrefix: "Субъективная «тяжесть»",
 };
 
 const uiDe: Partial<UIStrings> = {
@@ -883,6 +903,10 @@ const uiDe: Partial<UIStrings> = {
   voiceWhisperNeedMic: "Mikrofon erlauben.",
   voiceSttArmenianUseCloud:
     "Armenische Spracheingabe im Desktop-Browser funktioniert meist nicht. Cloud-Aufnahme nutzen, wenn sichtbar, oder tippen.",
+  stakesLabel: "Wie schwer fühlt sich diese Entscheidung an? (1–10)",
+  stakesHelper:
+    "1 = leicht, 10 = sehr schwer. Optional—hilft dem Modell, Stress und Einsätze einzuschätzen.",
+  stakesResultPrefix: "Gewicht (subjektiv)",
 };
 
 const uiFr: Partial<UIStrings> = {
@@ -973,6 +997,10 @@ const uiFr: Partial<UIStrings> = {
   voiceWhisperNeedMic: "Autorisez le micro.",
   voiceSttArmenianUseCloud:
     "La dictée navigateur en arménien ne fonctionne en général pas. Si l’enregistrement nuage apparaît, essayez-le, ou tapez.",
+  stakesLabel: "Quel poids ressentez-vous ? (1–10)",
+  stakesHelper:
+    "1 = léger, 10 = très lourd. Facultatif—aide le modèle à intégrer le stress et les enjeux.",
+  stakesResultPrefix: "Poids ressenti (indiqué par vous)",
 };
 
 const uiEs: Partial<UIStrings> = {
@@ -1063,6 +1091,10 @@ const uiEs: Partial<UIStrings> = {
   voiceWhisperNeedMic: "Permite el micrófono.",
   voiceSttArmenianUseCloud:
     "El dictado del navegador en armenio casi nunca funciona. Si ves nube (grabar), pruébalo, o escribe.",
+  stakesLabel: "¿Qué tan pesada se siente la decisión? (1–10)",
+  stakesHelper:
+    "1 = ligero, 10 = muy pesado. Opcional—ayuda al modelo a considerar el estrés y lo que hay en juego.",
+  stakesResultPrefix: "Peso subjetivo que indicaste",
 };
 
 const uiAr: Partial<UIStrings> = {
@@ -1153,6 +1185,10 @@ const uiAr: Partial<UIStrings> = {
   voiceWhisperNeedMic: "اسمح بالوصول للميكروفون.",
   voiceSttArmenianUseCloud:
     "إدخال أرميني صوتي من المتصفح نادرًا يعمل. إن ظهر التسجيل (سحابي) جرّبه، أو اكتب.",
+  stakesLabel: "ما مدى ثقل القرار الذي تشعر به؟ (1–10)",
+  stakesHelper:
+    "1 = خفيف، 10 = ثقيل جدًا. اختياري—يساعد النموذج على وزن الضغط والمخاطر.",
+  stakesResultPrefix: "الثقل الشخصي الذي أشرتَ إليه",
 };
 
 const uiIt: Partial<UIStrings> = {
@@ -1243,6 +1279,10 @@ const uiIt: Partial<UIStrings> = {
   voiceWhisperNeedMic: "Consenti l’accesso al microfono.",
   voiceSttArmenianUseCloud:
     "L’inserimento vocale in armeno dal browser in genere non funziona. Se compare Registra (cloud), provalo, o scrivi.",
+  stakesLabel: "Quanto pesa questa decisione? (1–10)",
+  stakesHelper:
+    "1 = leggera, 10 = molto pesante. Opzionale—aiuta il modello su stress e posta in gioco.",
+  stakesResultPrefix: "Peso soggettivo indicato",
 };
 
 const table: Record<AppLocale, Partial<UIStrings>> = {
@@ -1265,6 +1305,7 @@ const HOME_I18N_FALLBACKS: Pick<
   | "homeDemoTitle"
   | "homeDemoExample1"
   | "homeDemoExample2"
+  | "homeDemoExample3"
   | "homeDemoCta"
   | "analyzingProgressLine"
 > = {
@@ -1277,6 +1318,7 @@ const HOME_I18N_FALLBACKS: Pick<
   homeDemoTitle: "See a structured report in one click",
   homeDemoExample1: "Should I move abroad?",
   homeDemoExample2: "Quit job or stay?",
+  homeDemoExample3: "Relationship fork — stay or go?",
   homeDemoCta: "Try demo",
   analyzingProgressLine: "Analyzing your decision…",
 };

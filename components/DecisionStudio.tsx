@@ -185,6 +185,7 @@ export default function DecisionStudio({
   const [decision, setDecision] = useState("");
   const [context, setContext] = useState("");
   const [constraints, setConstraints] = useState("");
+  const [stakesLevel, setStakesLevel] = useState(5);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<ApiResponse | null>(null);
@@ -270,6 +271,7 @@ export default function DecisionStudio({
           context,
           constraints,
           language: locale,
+          stakesLevel,
         }),
       });
       const data = (await res.json()) as ApiResponse;
@@ -283,6 +285,7 @@ export default function DecisionStudio({
           decision,
           context,
           constraints,
+          stakesLevel,
           analysis: data.analysis,
           mode: data.mode,
         });
@@ -379,10 +382,13 @@ export default function DecisionStudio({
   }, []);
 
   const loadBriefFromHistory = useCallback(
-    (d: string, ctx: string, cons: string) => {
+    (d: string, ctx: string, cons: string, stakes?: number) => {
       setDecision(d);
       setContext(ctx);
       setConstraints(cons);
+      if (typeof stakes === "number" && stakes >= 1 && stakes <= 10) {
+        setStakesLevel(stakes);
+      }
       window.setTimeout(() => scrollToAnalyzer(), 40);
     },
     [scrollToAnalyzer],
@@ -688,6 +694,14 @@ export default function DecisionStudio({
                     {t.homeDemoExample2} →
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    href="/analyze?preset=relationship"
+                    className="font-semibold text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+                  >
+                    {t.homeDemoExample3} →
+                  </Link>
+                </li>
               </ul>
               <Link
                 href="/analyze"
@@ -985,7 +999,7 @@ export default function DecisionStudio({
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[rgb(var(--accent-2))]">
               {sx.warmEyebrow}
             </p>
-            <div className="mt-3 flex flex-wrap gap-2">
+            <div className="mt-3 flex flex-wrap gap-2 rounded-2xl ring-1 ring-inset ring-[rgb(var(--accent-2))]/20 bg-white/[0.02] p-2">
               {(
                 [
                   ["relocate", sx.warmRelocate, warmPresets.relocate] as const,
@@ -1146,6 +1160,38 @@ export default function DecisionStudio({
                 className="w-full resize-y rounded-2xl border border-white/10 bg-white/[0.07] px-4 py-3 text-base outline-none transition focus:border-[rgb(var(--accent))]/45"
               />
 
+              <div className="mt-5">
+                <label
+                  className="block text-sm font-medium text-[rgb(var(--ink))]"
+                  htmlFor="stakes-slider"
+                >
+                  {t.stakesLabel}
+                </label>
+                <p className="mt-1 text-xs leading-relaxed text-[rgb(var(--ink-soft))]/90 [text-wrap:pretty]">
+                  {t.stakesHelper}
+                </p>
+                <div className="mt-2 flex flex-wrap items-center gap-3 sm:max-w-md">
+                  <input
+                    id="stakes-slider"
+                    type="range"
+                    min={1}
+                    max={10}
+                    value={stakesLevel}
+                    onChange={(e) =>
+                      setStakesLevel(Number(e.target.value) || 5)
+                    }
+                    disabled={loading}
+                    className="h-2 w-full min-w-[12rem] flex-1 accent-[rgb(var(--accent-2))] disabled:opacity-50"
+                  />
+                  <span
+                    className="min-w-[3ch] text-center font-display text-lg font-bold tabular-nums text-gradient"
+                    aria-live="polite"
+                  >
+                    {stakesLevel}
+                  </span>
+                </div>
+              </div>
+
               {error && (
                 <p className="mt-4 text-sm text-rose-300" role="alert">
                   {error}
@@ -1244,6 +1290,12 @@ export default function DecisionStudio({
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-[rgb(var(--ink-soft))]">
                 {a.summary}
+              </p>
+              <p className="mt-3 text-sm text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
+                {t.stakesResultPrefix} —{" "}
+                <span className="font-semibold text-[rgb(var(--ink))]">
+                  {stakesLevel}/10
+                </span>
               </p>
             </section>
 
@@ -1421,10 +1473,12 @@ export default function DecisionStudio({
                 decision={decision}
                 context={context}
                 constraints={constraints}
+                stakesLevel={stakesLevel}
                 mode={result.mode}
                 pa={pa}
                 expertsSearchHref={expertsSearchHref}
                 onLoadBrief={loadBriefFromHistory}
+                locale={locale}
               />
             ) : null}
 

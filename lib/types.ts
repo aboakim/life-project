@@ -51,5 +51,7 @@ export type AnalyzeRequestBody = {
   decision: string;
   context?: string;
   constraints?: string;
+  /** 1 = light, 10 = very heavy; optional, shapes prompts and the printed brief */
+  stakesLevel?: number;
   language?: AppLocale;
 };

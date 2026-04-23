@@ -31,6 +31,13 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "bad_request" }, { status: 400 });
   }
 
+  const stakesOpt =
+    typeof body.stakesLevel === "number" &&
+    body.stakesLevel >= 1 &&
+    body.stakesLevel <= 10
+      ? { stakesLevel: body.stakesLevel }
+      : undefined;
+
   const locale = parseLocale(body.language);
   const ui = getUi(locale);
 
@@ -51,7 +58,7 @@ export async function POST(req: Request) {
       });
     } catch (e) {
       console.error("[analyze] OpenAI path failed", e);
-      const analysis = buildDemoAnalysis(decision, locale);
+      const analysis = buildDemoAnalysis(decision, locale, stakesOpt);
       const matchedExperts = await loadMatchedExperts(
         analysis.suggestedDirectoryRole ?? "UNSPECIFIED"
       );
@@ -64,7 +71,7 @@ export async function POST(req: Request) {
     }
   }
 
-  const analysis = buildDemoAnalysis(decision, locale);
+  const analysis = buildDemoAnalysis(decision, locale, stakesOpt);
   const matchedExperts = await loadMatchedExperts(
     analysis.suggestedDirectoryRole ?? "UNSPECIFIED"
   );

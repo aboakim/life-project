@@ -95,3 +95,18 @@ model CommunityAnswer {
 
   @@index([questionId])
 }
+
+/// Optional email nudges after “remind me” — anti-spam via Turnstile at subscribe; names for salutation.
+model DecisionReminderSubscriber {
+  id          String    @id @default(cuid())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  email       String    @unique
+  firstName   String
+  lastName    String
+  locale      String?
+  /// When Resend should send the next nudge (set from /api/reminder-schedule).
+  nextNudgeAt DateTime?
+
+  @@index([nextNudgeAt])
+}

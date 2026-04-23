@@ -76,7 +76,8 @@ function demoEnglish(quote: string): Omit<DecisionAnalysis, "score" | "professio
 
 export function buildDemoAnalysis(
   decision: string,
-  locale: AppLocale
+  locale: AppLocale,
+  options?: { stakesLevel?: number },
 ): DecisionAnalysis {
   const seed = hashString(decision.trim() || "empty");
   const { quote, score } = base(decision, seed);
@@ -345,5 +346,14 @@ export function buildDemoAnalysis(
   };
 
   const b = blocks[locale];
-  return { ...b, ...professionalDemo(locale), score };
+  const merged: DecisionAnalysis = { ...b, ...professionalDemo(locale), score };
+  const w = options?.stakesLevel;
+  if (typeof w === "number" && w >= 1 && w <= 10) {
+    const tag =
+      locale === "hy"
+        ? `\n\n[Զգացողական ծանրություն՝ ${w}/10]`
+        : `\n\n[Rated decision weight: ${w}/10]`;
+    merged.summary = merged.summary + tag;
+  }
+  return merged;
 }

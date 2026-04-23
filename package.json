@@ -21,6 +21,7 @@
     "video:record-site": "node scripts/record-site-promo.cjs"
   },
   "dependencies": {
+    "@marsidev/react-turnstile": "^1.5.0",
     "@prisma/client": "^6.19.3",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
@@ -36,11 +37,11 @@
     "@types/react-dom": "^19.0.0",
     "eslint": "^9.16.0",
     "eslint-config-next": "^15.1.0",
+    "playwright": "^1.49.1",
     "postcss": "^8.4.49",
     "prisma": "^6.19.3",
     "sharp": "^0.33.5",
     "tailwindcss": "^3.4.16",
-    "typescript": "^5.7.2",
-    "playwright": "^1.49.1"
+    "typescript": "^5.7.2"
   }
 }

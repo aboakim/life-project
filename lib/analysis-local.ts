@@ -12,6 +12,8 @@ export type HistorySnapshot = {
   decision: string;
   context: string;
   constraints: string;
+  /** 1–10: how heavy the decision felt; optional for older saved entries */
+  stakesLevel?: number;
   analysis: DecisionAnalysis;
   mode: "live" | "demo" | "fallback";
 };
@@ -46,6 +48,7 @@ export function pushHistory(snapshot: Omit<HistorySnapshot, "id" | "at"> & { id?
     constraints: snapshot.constraints,
     analysis: snapshot.analysis,
     mode: snapshot.mode,
+    stakesLevel: snapshot.stakesLevel,
   };
   const prev = loadHistory().filter((h) => h.id !== id);
   const merged = [next, ...prev].slice(0, MAX_HISTORY);
@@ -73,10 +76,16 @@ export function appendJournalEntry(text: string): void {
   }
 }
 
-export function setReminderWeeks(weeks: number): void {
+/** Store a one-time “revisit” reminder, `days` from now (capped 1–365). */
+export function setReminderInDays(days: number): void {
+  const d = Math.max(1, Math.min(365, Math.floor(Number(days) || 0)));
   const due = new Date();
-  due.setDate(due.getDate() + weeks * 7);
+  due.setDate(due.getDate() + d);
   window.localStorage.setItem(REMINDER_STORAGE_KEY, due.toISOString());
+}
+
+export function setReminderWeeks(weeks: number): void {
+  setReminderInDays(Math.max(0, weeks) * 7);
 }
 
 export function clearReminder(): void {
@@ -111,9 +120,20 @@ export function buildMarkdownSummary(
     timeline: string;
     score: string;
     twin: string;
+    stakes: string;
   },
+  options?: { stakesLevel?: number },
 ): string {
   const pro = (a.professionalGuidance ?? "").trim();
+  const w = options?.stakesLevel;
+  const stakesBlock =
+    typeof w === "number" && w >= 1 && w <= 10
+      ? [
+          `## ${headings.stakes}`,
+          `${w}/10`,
+          "",
+        ]
+      : [];
   const lines = [
     `# ${headings.decision}`,
     decision.trim(),
@@ -124,6 +144,7 @@ export function buildMarkdownSummary(
     `## ${headings.constraints}`,
     constraints.trim() || "—",
     "",
+    ...stakesBlock,
     `## ${headings.summary}`,
     a.summary,
     "",

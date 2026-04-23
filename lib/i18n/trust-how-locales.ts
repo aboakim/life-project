@@ -40,6 +40,7 @@ type HomeExtra = Partial<
     | "homeDemoTitle"
     | "homeDemoExample1"
     | "homeDemoExample2"
+    | "homeDemoExample3"
     | "homeDemoCta"
     | "analyzingProgressLine"
   >

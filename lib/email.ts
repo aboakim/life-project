@@ -93,3 +93,97 @@ export async function sendContactNotifications(
 
   return { expertSent, clientSent, skipped: false };
 }
+
+export type ReminderSubscriberEmail = {
+  to: string;
+  firstName: string;
+};
+
+export async function sendDecisionReminderWelcome(
+  p: ReminderSubscriberEmail
+): Promise<boolean> {
+  const key = process.env.RESEND_API_KEY;
+  const from =
+    process.env.RESEND_FROM_EMAIL ??
+    "Life Decision Engine <onboarding@resend.dev>";
+  if (!key) {
+    if (process.env.NODE_ENV === "development") {
+      console.info("[email] RESEND_API_KEY not set — skipping reminder welcome");
+    }
+    return false;
+  }
+  const site =
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://localhost:3000";
+  const text = [
+    `Hi ${p.firstName},`,
+    ``,
+    `You're signed up for optional email nudges from Life Decision Engine.`,
+    `After you run an analysis, you can pick “remind me in 3 / 7 / 14 days” — when you do (with the same browser where you saved your email), we'll send a short reminder to this address so you can take a second look.`,
+    ``,
+    `Open the analyzer: ${site}/analyze`,
+    ``,
+    `— Life Decision Engine`,
+  ].join("\n");
+  try {
+    const { Resend } = await import("resend");
+    const resend = new Resend(key);
+    const r = await resend.emails.send({
+      from,
+      to: p.to,
+      subject: `You’re in — optional decision reminders`,
+      text,
+    });
+    if (r.error) {
+      console.error("[resend reminder welcome]", r.error);
+      return false;
+    }
+    return true;
+  } catch (e) {
+    console.error("[resend reminder welcome]", e);
+    return false;
+  }
+}
+
+export async function sendDecisionReminderNudge(
+  p: ReminderSubscriberEmail
+): Promise<boolean> {
+  const key = process.env.RESEND_API_KEY;
+  const from =
+    process.env.RESEND_FROM_EMAIL ??
+    "Life Decision Engine <onboarding@resend.dev>";
+  if (!key) {
+    if (process.env.NODE_ENV === "development") {
+      console.info("[email] RESEND_API_KEY not set — skipping reminder nudge");
+    }
+    return false;
+  }
+  const site =
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://localhost:3000";
+  const text = [
+    `Hi ${p.firstName},`,
+    ``,
+    `You asked for a nudge to revisit a decision. When you're ready, open your workspace and run the analyzer again with an updated brief:`,
+    ``,
+    `${site}/analyze`,
+    ``,
+    `— Life Decision Engine`,
+  ].join("\n");
+  try {
+    const { Resend } = await import("resend");
+    const resend = new Resend(key);
+    const r = await resend.emails.send({
+      from,
+      to: p.to,
+      subject: `Time for a second look? — Life Decision Engine`,
+      text,
+    });
+    if (r.error) {
+      console.error("[resend reminder nudge]", r.error);
+      return false;
+    }
+    return true;
+  } catch (e) {
+    console.error("[resend reminder nudge]", e);
+    return false;
+  }
+}
