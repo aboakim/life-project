@@ -117,11 +117,16 @@ export async function analyzeWithOpenAI(
       ? `Constraints / values:\n${body.constraints.trim()}`
       : "Constraints / values: (none)",
     "",
+    "Uniqueness (required):",
+    "- Every value you write (summary, each dimension, each scenario, each timeline, scoreRationale, digitalTwinNote) must be clearly about THIS user text only. Echo themes, constraints, or concrete nouns/verbs from their message (paraphrase, do not only repeat).",
+    "- Do NOT use generic self-help that could apply unchanged to a different, unrelated life question. If a sentence would still read true for another topic, remove or rewrite it to tie to their situation.",
+    "- Vary phrasing and angle across fields so the JSON does not read like the same template repeated with synonyms.",
+    "",
     "Rules:",
     "- Be structured, not chatty. No therapy diagnosis; encourage professional help for crisis.",
     "- Acknowledge uncertainty; avoid absolute predictions.",
     "- Score is a heuristic 'alignment / feasibility' estimate, not fate.",
-    "- professionalGuidance: practical referral-style guidance (types of pros, not specific names).",
+    "- professionalGuidance: practical referral-style guidance (types of pros, not specific names), tuned to the domains implied by their text.",
     JSON_INSTRUCTION,
   ].join("\n\n");
 
@@ -133,13 +138,15 @@ export async function analyzeWithOpenAI(
     },
     body: JSON.stringify({
       model: process.env.OPENAI_MODEL ?? "gpt-4o-mini",
-      temperature: 0.4,
+      temperature: 0.7,
+      presence_penalty: 0.2,
+      frequency_penalty: 0.15,
       response_format: { type: "json_object" },
       messages: [
         {
           role: "system",
           content:
-            "You are a decision analysis engine. You output careful, balanced structured analysis. You are not a lawyer, doctor, or therapist.",
+            "You are a decision analysis engine. You output careful, balanced structured analysis in the user's language. You are not a lawyer, doctor, or therapist. Each response is unique to the specific decision and context: avoid boilerplate, canned paragraphs, and repeated one-size-fits-all life advice across different sections.",
         },
         { role: "user", content: userBlock },
       ],

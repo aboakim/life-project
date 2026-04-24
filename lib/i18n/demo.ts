@@ -13,14 +13,26 @@ function hashString(s: string): number {
   return h;
 }
 
+/** Picks 1 of 3 strings so the same user input still yields different sections per key. */
+function pickText(
+  seed: number,
+  salt: string,
+  options: [string, string, string]
+): string {
+  return options[(seed ^ hashString(salt)) % 3];
+}
+
 function base(decision: string, seed: number) {
   const quote = decision.slice(0, 200) || "—";
   return { quote, score: clampScore(seed) };
 }
 
 function professionalDemo(
-  locale: AppLocale
+  locale: AppLocale,
+  quote: string,
+  seed: number
 ): Pick<DecisionAnalysis, "professionalGuidance" | "suggestedDirectoryRole"> {
+  const q = quote.slice(0, 100).trim() || "—";
   if (locale === "hy") {
     return {
       professionalGuidance:
@@ -29,8 +41,11 @@ function professionalDemo(
     };
   }
   return {
-    professionalGuidance:
-      "For a decision at this level, the right help depends on the domain: a licensed mental-health professional for distress or relationship harm; a qualified attorney for legal exposure; a financial or tax adviser for real money/contract trade-offs; an immigration professional for visa or cross-border rules; a coach for career structure; a physician for health-related forks. This tool sketches trade-offs; it is not a substitute for regulated advice where your situation requires it.",
+    professionalGuidance: pickText(seed, "prof:en", [
+      `Given the themes in your note (starting «${q}…»), the right help depends on domain: licensed mental-health support for distress or relationship harm; a qualified attorney for legal exposure; a financial or tax adviser for money/contract trade-offs; immigration counsel for cross-border rules; a coach for career structure; a physician for health-related forks. This tool sketches trade-offs, not a substitute for regulated advice where you need it.`,
+      `To match «${q}» to help: separate emotional load from material/legal facts—therapists and coaches for the human side; lawyers and planners for the structural side. This output does not know your jurisdiction; a local professional should review anything with serious downside.`,
+      `Your text «${q}» is the anchor. If the fork involves binding contracts, taxes, visas, or medical risk, treat this as a planning sketch only, and confirm details with a licensed professional in that field.`,
+    ]),
     suggestedDirectoryRole: "UNSPECIFIED" as SuggestedDirectoryRole,
   };
 }
@@ -346,7 +361,11 @@ export function buildDemoAnalysis(
   };
 
   const b = blocks[locale];
-  const merged: DecisionAnalysis = { ...b, ...professionalDemo(locale), score };
+  const merged: DecisionAnalysis = {
+    ...b,
+    ...professionalDemo(locale, quote, seed),
+    score,
+  };
   const w = options?.stakesLevel;
   if (typeof w === "number" && w >= 1 && w <= 10) {
     const tag =
