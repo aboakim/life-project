@@ -62,6 +62,12 @@ if (isProd) {
 }
 
 const nextConfig: NextConfig = {
+  experimental: {
+    optimizePackageImports: [
+      "@vercel/analytics",
+      "@vercel/speed-insights",
+    ],
+  },
   /** Wrong slug from an old example URL → canonical post slug. */
   async redirects() {
     return [

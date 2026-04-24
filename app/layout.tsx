@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import {
   Geist,
   Geist_Mono,
@@ -9,12 +10,11 @@ import {
 } from "next/font/google";
 import GlobalNav from "@/components/GlobalNav";
 import GlobalFooter from "@/components/GlobalFooter";
-import AnalyticsGate from "@/components/AnalyticsGate";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import SiteJsonLd from "@/components/SiteJsonLd";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import ConsentBanner from "@/components/ConsentBanner";
 import SkipToContent from "@/components/SkipToContent";
+import DeferredVercelMetrics from "@/components/DeferredVercelMetrics";
 import { getMetadataBase } from "@/lib/site-url";
 import "./globals.css";
 
@@ -26,35 +26,41 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-/** Display / marketing headings — modern geometric, pairs with Geist for UI body. */
+/** Display: variable file only (avoids 5 static weight files). */
 const displaySans = Outfit({
   variable: "--font-display",
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  preload: false,
 });
 
 const notoArmenian = Noto_Sans_Armenian({
   variable: "--font-arm",
   subsets: ["armenian"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
+  preload: false,
 });
 
 const notoSans = Noto_Sans({
   variable: "--font-noto",
   subsets: ["latin", "latin-ext", "cyrillic", "cyrillic-ext"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
+  preload: false,
 });
 
 const notoArabic = Noto_Sans_Arabic({
   variable: "--font-ar",
   subsets: ["arabic"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
+  preload: false,
 });
 
 export const viewport: Viewport = {
@@ -160,12 +166,7 @@ export default function RootLayout({
             ].join(""),
           }}
         />
-        {/* Google AdSense: async + crossorigin="anonymous" — respects Consent Mode defaults above. */}
-        <script
-          async
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
-          crossOrigin="anonymous"
-        />
+        {/* AdSense: loaded from <body> via next/script (lazyOnload) so it does not compete with LCP. */}
       </head>
       <body
         className={`${displaySans.variable} ${geistSans.variable} ${geistMono.variable} ${notoArmenian.variable} ${notoSans.variable} ${notoArabic.variable} font-sans text-base leading-relaxed antialiased md:text-[1.0625rem] lg:text-[1.125rem]`}
@@ -176,9 +177,14 @@ export default function RootLayout({
         {children}
         <GlobalFooter />
         <ConsentBanner />
-        <AnalyticsGate />
+        <Script
+          id="adsense-loader"
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
+          strategy="lazyOnload"
+          crossOrigin="anonymous"
+        />
         <GoogleAnalytics />
-        <SpeedInsights />
+        <DeferredVercelMetrics />
       </body>
     </html>
   );

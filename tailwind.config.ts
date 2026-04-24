@@ -9,11 +9,12 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
+        /* Geist first so Latin/English paints without waiting on Noto’s wide subsets. */
         sans: [
+          "var(--font-geist-sans)",
           "var(--font-noto)",
           "var(--font-arm)",
           "var(--font-ar)",
-          "var(--font-geist-sans)",
           "system-ui",
           "sans-serif",
         ],
