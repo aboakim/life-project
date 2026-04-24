@@ -60,6 +60,7 @@ import {
   isReminderDue,
   clearReminder,
 } from "@/lib/analysis-local";
+import { safeDecisionAnalysis } from "@/lib/safe-decision-analysis";
 import { getStoredSubscriberId } from "@/lib/reminder-subscriber-storage";
 import PreAnalysisEmailModal from "@/components/home/PreAnalysisEmailModal";
 import { buildAnalysisSpeechText } from "@/lib/tts-build-report-text";
@@ -282,14 +283,18 @@ export default function DecisionStudio({
         setError(t.networkError);
         return;
       }
-      setResult(data);
+      const analysis = safeDecisionAnalysis(data.analysis);
+      setResult({
+        ...data,
+        analysis,
+      });
       try {
         pushHistory({
           decision,
           context,
           constraints,
           stakesLevel,
-          analysis: data.analysis,
+          analysis,
           mode: data.mode,
         });
       } catch {
@@ -358,9 +363,13 @@ export default function DecisionStudio({
   useEffect(() => {
     if (!a) return;
     const id = window.setTimeout(() => {
-      document
-        .getElementById("results-main-heading")
-        ?.focus({ preventScroll: true });
+      try {
+        document
+          .getElementById("results-main-heading")
+          ?.focus({ preventScroll: true });
+      } catch {
+        /* some mobile WebKit builds throw on focus() */
+      }
     }, 420);
     return () => clearTimeout(id);
   }, [a]);

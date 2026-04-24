@@ -204,9 +204,8 @@ export function roleLabel(
       return c.filterCoach;
     case "IMMIGRATION":
       return c.filterImmigration;
-    default: {
-      const _x: never = role;
-      return _x;
-    }
+    default:
+      /* DB / API may contain a role not yet mapped here */
+      return typeof role === "string" && role ? role : c.filterPsych;
   }
 }
