@@ -104,6 +104,8 @@ export async function analyzeWithOpenAI(
       ? body.stakesLevel
       : null;
 
+  const nonce = `${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
+
   const userBlock = [
     `Language for ALL user-facing text fields in the JSON: ${langName}.`,
     `Decision / question:\n${body.decision.trim()}`,
@@ -117,10 +119,14 @@ export async function analyzeWithOpenAI(
       ? `Constraints / values:\n${body.constraints.trim()}`
       : "Constraints / values: (none)",
     "",
+    `Internal correlation id (do not mention in the JSON): ${nonce}`,
+    "",
     "Uniqueness (required):",
     "- Every value you write (summary, each dimension, each scenario, each timeline, scoreRationale, digitalTwinNote) must be clearly about THIS user text only. Echo themes, constraints, or concrete nouns/verbs from their message (paraphrase, do not only repeat).",
     "- Do NOT use generic self-help that could apply unchanged to a different, unrelated life question. If a sentence would still read true for another topic, remove or rewrite it to tie to their situation.",
     "- Vary phrasing and angle across fields so the JSON does not read like the same template repeated with synonyms.",
+    "- In dimensions.finances, dimensions.psychology, dimensions.risks, and dimensions.opportunities, each string must include at least one concrete anchor inferred from their text or context (e.g. money, time, people, place, law, health, career, relationship). If the text is vague, say what is missing instead of filling with platitudes.",
+    "- Scenarios and timeline must reference different angles (e.g. resources vs relationships vs time), not four near-identical paragraphs.",
     "",
     "Rules:",
     "- Be structured, not chatty. No therapy diagnosis; encourage professional help for crisis.",
@@ -138,7 +144,7 @@ export async function analyzeWithOpenAI(
     },
     body: JSON.stringify({
       model: process.env.OPENAI_MODEL ?? "gpt-4o-mini",
-      temperature: 0.7,
+      temperature: 0.78,
       presence_penalty: 0.2,
       frequency_penalty: 0.15,
       response_format: { type: "json_object" },
