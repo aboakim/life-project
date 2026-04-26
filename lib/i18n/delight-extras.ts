@@ -29,6 +29,26 @@ export type DelightCopy = {
   coldStartEyebrow: string;
   coldStarts: readonly [ColdStartPack, ColdStartPack, ColdStartPack, ColdStartPack];
   resultCheers: readonly [string, string, string, string, string];
+  /** Optional “off-topic” play — not part of the analyzer */
+  playCornerSummary: string;
+  playCornerDisclaimer: string;
+  playCoinLabel: string;
+  playCoinFlip: string;
+  playCoinSpinning: string;
+  playCoinYes: string;
+  playCoinNo: string;
+  playFactLabel: string;
+  playFactNext: string;
+  playFacts: readonly [
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+  ];
 };
 
 const en: DelightCopy = {
@@ -94,6 +114,26 @@ const en: DelightCopy = {
     "You gave the machine something real to chew on. Future-you likes specificity.",
     "If one line in the report stings, circle it — that is often the real fork.",
     "Share nothing you are not proud of; the rest can stay on this device forever.",
+  ],
+  playCornerSummary: "Unserious corner (optional)",
+  playCornerDisclaimer:
+    "Pure playground: not advice, not scored, not saved to your analysis. For dopamine only.",
+  playCoinLabel: "Coin flip",
+  playCoinFlip: "Flip",
+  playCoinSpinning: "…spinning…",
+  playCoinYes: "Yes",
+  playCoinNo: "No",
+  playFactLabel: "Random useless fact",
+  playFactNext: "Another fact",
+  playFacts: [
+    "Bananas are berries; strawberries are not. Taxonomy has a sense of humor.",
+    "Honey basically never spoils — archaeologists found edible jars in tombs. Unlike your unread inbox.",
+    "Wombat poop is cube-shaped. Still unrelated to your career fork. You're welcome.",
+    "Rubber ducks were a sales stunt for rubber. Now they debug code and absorb silent screams.",
+    "Clouds can weigh tons and still float — like heavy decisions before the deadline storm.",
+    "Oxford commas prevent ambiguity; they also filter friends at typography parties.",
+    "The English word “set” has a comical number of meanings. This UI stays intentionally smaller.",
+    "Your pet has statistically considered replacing you with a warm rectangle. Love remains probable.",
   ],
 };
 
@@ -167,6 +207,26 @@ const hy: DelightCopy = {
     "Մեքենային իրական նյութ տվեցիր։ Ապագա դուրը սիրում է կոնկրետություն։",
     "Եթե մեկ տողը ցավեց, շրջանագրիր այն — հաճախ դա իրական fork-ն է։",
     "Չկիսվիր այն, ինչով չես հպարտանում․ մնացածը կարող է մնալ այս սարքում։",
+  ],
+  playCornerSummary: "Ոչ-լուրջ անկյուն (ընտրովի)",
+  playCornerDisclaimer:
+    "Միայն ժամանց՝ ոչ խորհուրդ, ոչ միավոր, չի պահվում վերլուծության մեջ։ Միայն դոպամին։",
+  playCoinLabel: "Մետաղադրամ",
+  playCoinFlip: "Նետել",
+  playCoinSpinning: "… պտտվում է …",
+  playCoinYes: "Այո",
+  playCoinNo: "Ոչ",
+  playFactLabel: "Պատահական անիմաստ փաստ",
+  playFactNext: "Հաջորդը",
+  playFacts: [
+    "Բանանը բերրի է, ելակը՝ ոչ։ Դասակարգման համակարգը երբեմն կատակում է։",
+    "Մեղրը գրեթե չի փչանում՝ գերեզմաններում էլ են ուտելի անոթներ գտել։ Ոչ թե քո չկարդացած նամակները։",
+    "Վոմբատի կղանքը խորանարդաձև է։ Դեռ կապ չունի քո կարիերայի fork-ի հետ։",
+    "Ռետինե բադիկը վաճառքի հնարք էր։ Հիմա կոդ է դեբագում և կուլ է լռությունները։",
+    "Ամպերը կարող են տոննաներով կշռել ու լողալ — մեծ որոշումները նախքան ժամկետային փոթորիկը։",
+    "Oxford ստորակետը երկիմաստությունը նվազեցնում է և ընկերների ցուցակը՝ տիպոգրաֆիայի երեկույթներում։",
+    "Անգլերենում «set» բառը ունի ծիծաղելի շատ նշանակություն. այս UI-ն միտումնավոր փոքր է։",
+    "Կենդանինդ վիճակագրորեն մտածել է քեզ փոխարինել տաք ուղղանկյունով։ Սերը հավանական է մնում։",
   ],
 };
 

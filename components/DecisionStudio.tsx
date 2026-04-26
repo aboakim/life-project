@@ -9,6 +9,7 @@ import ProductSceneStrip from "@/components/home/ProductSceneStrip";
 import RevealOnScroll from "@/components/home/RevealOnScroll";
 import KonamiSurprise from "@/components/home/KonamiSurprise";
 import ShortcutsHelpModal from "@/components/home/ShortcutsHelpModal";
+import PlayCorner from "@/components/home/PlayCorner";
 import SparkShuffleStrip from "@/components/home/SparkShuffleStrip";
 import StayMomentsStrip from "@/components/home/StayMomentsStrip";
 import AmbientDriftLayer from "@/components/ui/AmbientDriftLayer";
@@ -1206,6 +1207,7 @@ export default function DecisionStudio({
           <p className="mt-3 max-w-2xl text-[11px] leading-relaxed text-[rgb(var(--ink-soft))]/75 [text-wrap:pretty]">
             {delight.shortcutTeaser}
           </p>
+          <PlayCorner copy={delight} />
           <div className="mt-10 grid gap-6 lg:grid-cols-5">
             <aside className="glass card-glow rounded-3xl p-5 lg:col-span-2 lg:p-6">
               <p className="text-sm font-semibold text-[rgb(var(--ink))]">
