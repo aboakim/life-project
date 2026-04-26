@@ -699,6 +699,43 @@ export default function DecisionStudio({
                 })}
               </div>
             </nav>
+            <nav
+              className="mt-5 rounded-2xl border border-white/[0.1] bg-black/25 p-4"
+              aria-labelledby="analyze-tools-heading"
+            >
+              <p
+                id="analyze-tools-heading"
+                className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-[rgb(var(--accent-warm))]/90"
+              >
+                {novelty.analyzeToolsEyebrow}
+              </p>
+              <ol className="mt-3 list-decimal space-y-2.5 ps-4 text-sm leading-relaxed text-[rgb(var(--ink-soft))] marker:font-semibold marker:text-[rgb(var(--accent-2))]">
+                <li>
+                  <Link
+                    href="/field-notes"
+                    className="font-semibold text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+                  >
+                    {novelty.analyzeToolFieldNotes}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/journal"
+                    className="font-semibold text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+                  >
+                    {novelty.analyzeToolJournal}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/checklists"
+                    className="font-semibold text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+                  >
+                    {novelty.analyzeToolChecklists}
+                  </Link>
+                </li>
+              </ol>
+            </nav>
           </section>
         )}
 
@@ -1178,6 +1215,16 @@ export default function DecisionStudio({
           <p className="mt-2 max-w-3xl text-sm font-medium leading-relaxed text-[rgb(var(--accent-2))]/90 [text-wrap:pretty]">
             {workspaceGreeting}
           </p>
+          <div className="mt-5 max-w-3xl rounded-2xl border border-white/[0.1] bg-white/[0.03] px-4 py-3 sm:px-5">
+            <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-[rgb(var(--accent-dim))]/90">
+              {novelty.workspaceFlowEyebrow}
+            </p>
+            <ol className="mt-2 list-decimal space-y-2 ps-4 text-sm leading-relaxed text-[rgb(var(--ink-soft))]/95 [text-wrap:pretty] marker:font-semibold marker:text-[rgb(var(--accent-2))]">
+              <li>{novelty.workspaceFlow1}</li>
+              <li>{novelty.workspaceFlow2}</li>
+              <li>{novelty.workspaceFlow3}</li>
+            </ol>
+          </div>
           <p
             className="mt-4 max-w-3xl rounded-2xl border border-[rgb(var(--accent-2))]/30 bg-white/[0.04] px-4 py-3 text-sm font-medium leading-relaxed text-[rgb(var(--ink))] [text-wrap:pretty] sm:px-5"
             role="status"

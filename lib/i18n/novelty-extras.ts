@@ -31,6 +31,16 @@ export type NoveltyCopy = {
   capsuleReveal: string;
   capsuleDelete: string;
   capsuleListAria: string;
+  /** /analyze — companion tools in a fixed order */
+  analyzeToolsEyebrow: string;
+  analyzeToolFieldNotes: string;
+  analyzeToolJournal: string;
+  analyzeToolChecklists: string;
+  /** Workspace — suggested sequential flow */
+  workspaceFlowEyebrow: string;
+  workspaceFlow1: string;
+  workspaceFlow2: string;
+  workspaceFlow3: string;
 };
 
 const MOODS_EN = [
@@ -121,6 +131,17 @@ const en: NoveltyCopy = {
   capsuleReveal: "Past-you says",
   capsuleDelete: "Remove",
   capsuleListAria: "Your sealed time capsules",
+  analyzeToolsEyebrow: "Then, in order",
+  analyzeToolFieldNotes: "Field notes lab — paste any draft for a word radar",
+  analyzeToolJournal: "Decision journal — one-line local notes",
+  analyzeToolChecklists: "Printable checklists",
+  workspaceFlowEyebrow: "Suggested order on this page",
+  workspaceFlow1:
+    "Pick a warm preset or a cold-start chip — they fill Decision, Context, and Constraints for you.",
+  workspaceFlow2:
+    "Optional: spark strip, curiosity corner, or a time capsule — side tools, same page.",
+  workspaceFlow3:
+    "Set stakes, run Analyze — your structured report appears directly under the form.",
 };
 
 const hy: NoveltyCopy = {
@@ -157,6 +178,18 @@ const hy: NoveltyCopy = {
   capsuleReveal: "Անցյալի դու ասում է",
   capsuleDelete: "Ջնջել",
   capsuleListAria: "Քո կնքված ժամանակի կապսուլաները",
+  analyzeToolsEyebrow: "Ապա, հերթականությամբ",
+  analyzeToolFieldNotes:
+    "Դաշտային նոթերի լաբոր — ցանկացած սևագիր կպցրու, ստանաս բառային ռադար",
+  analyzeToolJournal: "Որոշման օրագիր — մեկ տող, միայն տեղում",
+  analyzeToolChecklists: "Տպելի չեկլիստներ",
+  workspaceFlowEyebrow: "Առաջարկվող հերթ այս էջում",
+  workspaceFlow1:
+    "Ընտրիր տաք preset կամ cold-start չիպ — լցնում են Որոշում, Կոնտեքստ և Սահմաններ։",
+  workspaceFlow2:
+    "Ընտրովի՝ կայծերի շերտ, հետաքրքրության անկյուն կամ ժամանակի կապսուլա — կողային գործիքներ, նույն էջում։",
+  workspaceFlow3:
+    "Դրույք, «Վերլուծել» — կառուցված հաշվետվությունը հայտնվում է բանաձևի անմիջապես ներքևում։",
 };
 
 export function getNoveltyCopy(locale: AppLocale): NoveltyCopy {
