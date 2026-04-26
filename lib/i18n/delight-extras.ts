@@ -29,19 +29,22 @@ export type DelightCopy = {
   coldStartEyebrow: string;
   coldStarts: readonly [ColdStartPack, ColdStartPack, ColdStartPack, ColdStartPack];
   resultCheers: readonly [string, string, string, string, string];
-  /** Optional “off-topic” play — not part of the analyzer */
+  /** Optional light reading — not part of the analyzer (no games). */
   playCornerSummary: string;
   playCornerDisclaimer: string;
-  playCoinLabel: string;
-  playCoinFlip: string;
-  playCoinSpinning: string;
-  playCoinYes: string;
-  playCoinNo: string;
+  cornerFrameLabel: string;
+  cornerFrameNext: string;
+  cornerFrameSurprise: string;
+  cornerFrames: readonly string[];
   playFactLabel: string;
   playFactNext: string;
   /** Jump to a random fact (not always different from current — chaos is honest). */
   playFactRandom: string;
   playFacts: readonly string[];
+  cornerWordLabel: string;
+  cornerWordNext: string;
+  cornerWordSurprise: string;
+  cornerWords: readonly string[];
 };
 
 const en: DelightCopy = {
@@ -108,15 +111,33 @@ const en: DelightCopy = {
     "If one line in the report stings, circle it — that is often the real fork.",
     "Share nothing you are not proud of; the rest can stay on this device forever.",
   ],
-  playCornerSummary: "Unserious corner (optional)",
+  playCornerSummary: "Extra curiosity (optional)",
   playCornerDisclaimer:
-    "Pure playground: not advice, not scored, not saved to your analysis. For dopamine only.",
-  playCoinLabel: "Coin flip",
-  playCoinFlip: "Flip",
-  playCoinSpinning: "…spinning…",
-  playCoinYes: "Yes",
-  playCoinNo: "No",
-  playFactLabel: "Random useless fact",
+    "Light reading only — not advice, not scored, not saved with your analysis. No games, just texture.",
+  cornerFrameLabel: "Reframe prompts",
+  cornerFrameNext: "Next prompt",
+  cornerFrameSurprise: "Shuffle",
+  cornerFrames: [
+    "If you had to argue the opposite choice in two honest sentences, what would you say?",
+    "Which single assumption, if it were false, would collapse this whole fork?",
+    "What would a mentor you respect poke first in how you wrote the Context?",
+    "Which emotion drafted this brief — fatigue, pride, fear, hope — and does it still match today?",
+    "Ten years from now, which detail here will feel oddly heavy or oddly small?",
+    "What is the smallest reversible experiment you could run before committing?",
+    "If the stakes were halved, would your recommendation change? If doubled?",
+    "Who benefits if you delay — and who pays the cost of waiting?",
+    "What would ‘good enough’ look like if you stopped optimizing for applause?",
+    "Where are you mixing a prediction (“they will”) with a fact (“they did”)?",
+    "If you could only keep one constraint, which line is truly non-negotiable?",
+    "What evidence would change your mind quickly — and do you already have it?",
+    "Are you solving the stated problem or the problem that felt safer to name?",
+    "What would you advise a close friend with the same brief and zero ego?",
+    "Which option preserves optionality later — and is that what you want?",
+    "If this decision were a headline, would you be comfortable with the quote?",
+    "Where might kindness to yourself look like a boundary, not a loophole?",
+    "What is the hidden third path you have not written down yet?",
+  ],
+  playFactLabel: "Tiny world facts",
   playFactNext: "Another fact",
   playFactRandom: "Surprise me",
   playFacts: [
@@ -371,6 +392,26 @@ const en: DelightCopy = {
     "A group of porcupines is a prickle. Pointy support group.",
     "Saturn’s density is so low it would float in water — giant ringed beach ball if you had a big enough tub.",
   ],
+  cornerWordLabel: "Word hooks",
+  cornerWordNext: "Next word",
+  cornerWordSurprise: "Shuffle",
+  cornerWords: [
+    "Decide comes from Latin decidere — to cut off; choosing is a kind of pruning.",
+    "Priority was singular for centuries; ‘priorities’ often means unfocused drift in disguise.",
+    "Ambition once meant canvassing for votes; goals and politics share ancient roots.",
+    "Clue traces to a ball of thread — follow the thread through the maze you built.",
+    "Consider comes from Latin ‘with the stars’ — weigh things when the sky feels wide.",
+    "Salary stems from salt — Roman pay sometimes included it; ‘worth your salt’ is literal.",
+    "Deadline was a real line around prisons; language keeps danger in mundane words.",
+    "Robot comes from Czech robota — drudgery; naming shapes what we automate away.",
+    "Nice drifted from ‘foolish’ to ‘pleasant’; meanings migrate faster than software updates.",
+    "Disaster is ‘bad star’ in Greek roots; not every setback needs a cosmic villain.",
+    "Companion is ‘with bread’ — friends who share food etymologically win.",
+    "Mortgage is Old French for ‘death pledge’; adult vocabulary has metal undertones.",
+    "Quarantine comes from forty days — isolation as a measured interval is an old idea.",
+    "Panic honors the god Pan — sudden woodland frights named a whole feeling.",
+    "Sarcasm’s Greek root suggests tearing flesh; dry wit has surprisingly sharp etymology.",
+  ],
 };
 
 const hy: DelightCopy = {
@@ -444,15 +485,33 @@ const hy: DelightCopy = {
     "Եթե մեկ տողը ցավեց, շրջանագրիր այն — հաճախ դա իրական fork-ն է։",
     "Չկիսվիր այն, ինչով չես հպարտանում․ մնացածը կարող է մնալ այս սարքում։",
   ],
-  playCornerSummary: "Ոչ-լուրջ անկյուն (ընտրովի)",
+  playCornerSummary: "Լրացուցիչ հետաքրքրություն (ընտրովի)",
   playCornerDisclaimer:
-    "Միայն ժամանց՝ ոչ խորհուրդ, ոչ միավոր, չի պահվում վերլուծության մեջ։ Միայն դոպամին։",
-  playCoinLabel: "Մետաղադրամ",
-  playCoinFlip: "Նետել",
-  playCoinSpinning: "… պտտվում է …",
-  playCoinYes: "Այո",
-  playCoinNo: "Ոչ",
-  playFactLabel: "Պատահական անիմաստ փաստ",
+    "Միայն թեթև ընթերցում՝ ոչ խորհուրդ, ոչ միավոր, չի պահվում վերլուծության հետ։ Խաղ չէ, պարզապես տեքստուրա։",
+  cornerFrameLabel: "Վերաձևակերպման հուշումներ",
+  cornerFrameNext: "Հաջորդը",
+  cornerFrameSurprise: "Խառնել",
+  cornerFrames: [
+    "Եթե պետք լիներ երկու անկեղծ նախադասությամբ պաշտպանել հակառակ ընտրությունը, ի՞նչ կասեիր։",
+    "Ո՞ր մեկ ենթադրությունից, եթե սխալ լինի, ամբողջ fork-ը կփլվի։",
+    "Ո՞ր հուշումը հարգելի մենթորը առաջինը կքննադատեր Context-ում գրվածում։",
+    "Ո՞ր զգացմունքն է «գրել» այս brief-ը՝ հոգնածություն, հպարտություն, վախ, հույս — և այսօր դեռ համընկնում է։",
+    "Տաս տարի հետո ո՞ր մանրամասնը կթվա տարօրինակ ծանր կամ տարօրինակ փոքր։",
+    "Նախքան վերջնական որոշումը ո՞ր ամենափոքր հետարկելի փորձն ես կարող անել։",
+    "Եթե դրույքները կիսով չափ լինեն, խորհուրդդ կփոխվի՞ր։ Եթե կրկնապատիկ։",
+    "Ով է շահում հետաձգումից — և ով է վճարում սպասման գինը։",
+    "Ինչպե՞ս կտեսնեիր «բավարար լավը», եթե չփորձես օպտիմալացնել ծափների համար։",
+    "Որտե՞ղ ես խառնում կանխատեսումը («նրանք կանեն») փաստի («նրանք արեցին») հետ։",
+    "Եթե միայն մեկ սահմանափակում պահես, ո՞ր գիծն է իրականում անխորհրդելի։",
+    "Ո՞ր ապացույցը կարող է արագ փոխել միտքդ — և արդյո՞ք արդեն ունես այն։",
+    "Լուծու՞մ ես հայտարարված խնդիրը, թե այն, որն անվտանգ էր անվանել։",
+    "Ինչ կխորհրդեիր մտերիմ ընկերոջը՝ նույն brief-ով և զրոյական եգո։",
+    "Ո՞ր տարբերակը պահպանում է հետագա ընտրության ազատությունը — և դա ուզու՞մ ես։",
+    "Եթե այս որոշումը վերնագիր լիներ, հարմարավե՞տ կլիներ մեջբերումը։",
+    "Որտե՞ղ բարությունը քեզ նկատմամբ կարող է սահման լինել, ոչ թե պատուհաս։",
+    "Ո՞ր երրորդ, թաքնված ճանապարհը դեռ չես գրել։",
+  ],
+  playFactLabel: "Փոքր աշխարհի փաստեր",
   playFactNext: "Հաջորդը",
   playFactRandom: "Պատահական",
   playFacts: [
@@ -657,6 +716,26 @@ const hy: DelightCopy = {
     "Կենդանիների աշխարհում կան cube-shaped poop և parliamentary owls — taxonomy-ն արվեստ է։",
     "Մարդը կարող է հոտ զգալ անձրևը ավելի լավ չորաշրջանից հետո։",
     "Կենդանակերպերի մեծ մասը չի օգտագործում այս վերլուծիչը, բայց դու՝ այո։",
+  ],
+  cornerWordLabel: "Բառային կեռիկներ",
+  cornerWordNext: "Հաջորդը",
+  cornerWordSurprise: "Խառնել",
+  cornerWords: [
+    "Decide — լատիներեն decidere, «կտրել»․ ընտրությունը մարմնավորված կտրում է։",
+    "Priority-ն դարեր շարունակ եզակի էր․ «priorities»-ը երբեմն թաքնված ֆոկուսի բացակայություն է։",
+    "Ambition-ը նախկինում քվեարկության գործ էր․ նպատակներն ու քաղաքականությունը ընդհանուր արմատներ ունեն։",
+    "Clue-ը գնդի թելից է (clew)․ հետևիր թելին՝ քո կառուցած լաբիրինթոսում։",
+    "Consider — լատիներեն «աստղերի հետ»․ կշռիր, երբ երկինքը լայն է թվում։",
+    "Salary-ն աղից է․ հռոմեացիները երբեմն աղով են վճարվել․ «արժեքդ աղով»-ը բառացի պատմություն է։",
+    "Deadline-ը իրական գիծ էր բանտերի շուրջ․ լեզուն վտանգ է պահում ամենօրյա բառերում։",
+    "Robot — չեխերեն robota, «պարտադիր աշխատանք»․ անունը ձևավորում է, թե ինչ ենք ավտոմատացնում։",
+    "Nice-ը նախկինում «հիմար» էր նշանակում․ նշանակությունները արագ են շարժվում, քան թարմացումները։",
+    "Disaster — հունարեն «վատ աստղ»․ ոչ ամեն հետքանք պետք է կոսմիկ թշնամի ունենա։",
+    "Companion — «հացով միասին»․ ընկերները, որոնք կիսում են սնունդը, էտիմոլոգիորեն հաղթում են։",
+    "Mortgage — հին ֆրանսերեն «մահվան ուխտ»․ մեծահասակների բառապաշարը մետաղ է։",
+    "Quarantine — իտալերեն «քառասուն օր»․ մեկուսացումը ժամանակով չափելը հին գաղափար է։",
+    "Panic — հունական Pan աստծուց․ անտառային անսպասելի վախը ամբողջ զգացում է անվանել։",
+    "Sarcasm-ի հունական արմատը մարմին պատռելու պատկերացում է տալիս․ չոր հումորը սուր էտիմոլոգիա ունի։",
   ],
 };
 
