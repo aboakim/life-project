@@ -288,11 +288,11 @@ export default function GlobalNav() {
     <>
       <header className="print:hidden sticky top-0 z-[60] isolate border-b border-white/[0.08] bg-[rgb(var(--surface))]/72 pt-[env(safe-area-inset-top,0px)] backdrop-blur-3xl shadow-[0_1px_0_0_rgba(255,255,255,0.06),0_10px_40px_-12px_rgba(0,0,0,0.4)]">
       <NavRoutePrefetch />
-      <div className="mx-auto flex min-w-0 max-w-6xl flex-nowrap items-center justify-between gap-2 px-3 py-2.5 sm:gap-3 sm:px-6">
+      <div className="mx-auto grid min-w-0 max-w-6xl w-full grid-cols-[minmax(0,1fr)_auto] items-center gap-2 px-3 py-2.5 sm:gap-3 sm:px-6 md:grid-cols-[minmax(0,12rem)_minmax(0,1fr)] lg:grid-cols-[minmax(0,14rem)_minmax(0,1fr)]">
         <Link
           href="/"
           title={t.brand}
-          className="font-display flex min-w-0 max-w-[min(100%,11rem)] shrink overflow-hidden items-center gap-2 text-[0.95rem] font-extrabold leading-tight tracking-tight text-[rgb(var(--ink))] transition hover:text-[rgb(var(--accent-2))] sm:max-w-[min(100%,12rem)] md:max-w-[min(13rem,34%)] lg:max-w-[min(15rem,30%)] sm:text-lg md:text-xl"
+          className="font-display relative z-0 flex min-w-0 max-w-full overflow-hidden items-center gap-2 text-[0.95rem] font-extrabold leading-tight tracking-tight text-[rgb(var(--ink))] transition hover:text-[rgb(var(--accent-2))] sm:text-lg md:text-xl"
           onClick={() => setMobileOpen(false)}
         >
           <span
@@ -302,95 +302,97 @@ export default function GlobalNav() {
           <span className="min-w-0 truncate">{t.brand}</span>
         </Link>
 
-        {/* Desktop / tablet nav */}
-        <nav
-          className="hidden min-w-0 flex-1 flex-nowrap items-center justify-end gap-0.5 text-[0.9rem] font-medium md:flex md:text-[0.9rem] lg:text-base"
-          aria-label="Main"
-        >
-          <div className="flex min-w-0 flex-1 flex-nowrap items-center justify-end gap-0.5 overflow-x-auto scrollbar-none">
-            {primaryLinks.map((l) => (
-              <Link key={l.href} href={l.href} className={navLinkClass}>
-                {l.label}
-              </Link>
-            ))}
-          </div>
-          <NavMoreMenu label={t.navMore} links={moreLinks} />
-          <label className="flex shrink-0 items-center gap-1.5 ps-0.5">
-            <span className="sr-only">{t.langLabel}</span>
-            <select
-              value={locale}
-              aria-label={t.langLabel}
-              onChange={(e) => {
-                const v = e.target.value;
-                if (!isAppLocale(v)) return;
-                setLocale(v);
-                localStorage.setItem(LOCALE_KEY, v);
-                syncLocaleCookieClient(v);
-                document.documentElement.lang = v;
-                document.documentElement.setAttribute(
-                  "dir",
-                  isRtlLocale(v) ? "rtl" : "ltr"
-                );
-                dispatchLocaleChanged();
-              }}
-              className="max-w-[11rem] cursor-pointer rounded-lg border border-white/[0.12] bg-black/35 px-2 py-2 text-sm font-medium text-[rgb(var(--ink))] outline-none transition focus:border-[rgb(var(--accent))]/45"
-            >
-              {LOCALE_OPTIONS.map((opt) => (
-                <option key={opt.value} value={opt.value}>
-                  {opt.flag} {opt.label}
-                </option>
-              ))}
-            </select>
-          </label>
-          <Link
-            href="/experts/register"
-            className="shrink-0 rounded-xl border border-[rgb(var(--accent))]/45 bg-[rgb(var(--accent))]/16 px-4 py-2 text-sm font-semibold text-[rgb(var(--ink))] shadow-[0_0_28px_-12px_rgb(var(--accent)/0.5)] transition hover:border-[rgb(var(--accent))]/65 hover:bg-[rgb(var(--accent))]/22"
+        <div className="relative z-10 flex min-w-0 items-center justify-end gap-0.5 ps-1 md:gap-1 md:ps-2">
+          {/* Desktop / tablet nav */}
+          <nav
+            className="hidden min-w-0 flex-1 flex-nowrap items-center justify-end gap-0.5 text-[0.9rem] font-medium md:flex md:text-[0.9rem] lg:text-base"
+            aria-label="Main"
           >
-            {ec.navRegister}
-          </Link>
-        </nav>
+            <div className="flex min-w-0 max-w-full flex-nowrap items-center justify-end gap-0.5 overflow-x-auto overscroll-x-contain scrollbar-none">
+              {primaryLinks.map((l) => (
+                <Link key={l.href} href={l.href} className={navLinkClass}>
+                  {l.label}
+                </Link>
+              ))}
+            </div>
+            <NavMoreMenu label={t.navMore} links={moreLinks} />
+            <label className="flex shrink-0 items-center gap-1.5 ps-0.5">
+              <span className="sr-only">{t.langLabel}</span>
+              <select
+                value={locale}
+                aria-label={t.langLabel}
+                onChange={(e) => {
+                  const v = e.target.value;
+                  if (!isAppLocale(v)) return;
+                  setLocale(v);
+                  localStorage.setItem(LOCALE_KEY, v);
+                  syncLocaleCookieClient(v);
+                  document.documentElement.lang = v;
+                  document.documentElement.setAttribute(
+                    "dir",
+                    isRtlLocale(v) ? "rtl" : "ltr"
+                  );
+                  dispatchLocaleChanged();
+                }}
+                className="max-w-[11rem] cursor-pointer rounded-lg border border-white/[0.12] bg-black/35 px-2 py-2 text-sm font-medium text-[rgb(var(--ink))] outline-none transition focus:border-[rgb(var(--accent))]/45"
+              >
+                {LOCALE_OPTIONS.map((opt) => (
+                  <option key={opt.value} value={opt.value}>
+                    {opt.flag} {opt.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <Link
+              href="/experts/register"
+              className="shrink-0 rounded-xl border border-[rgb(var(--accent))]/45 bg-[rgb(var(--accent))]/16 px-4 py-2 text-sm font-semibold text-[rgb(var(--ink))] shadow-[0_0_28px_-12px_rgb(var(--accent)/0.5)] transition hover:border-[rgb(var(--accent))]/65 hover:bg-[rgb(var(--accent))]/22"
+            >
+              {ec.navRegister}
+            </Link>
+          </nav>
 
-        {/* Mobile menu toggle */}
-        <button
-          type="button"
-          className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-white/[0.14] bg-white/[0.06] text-[rgb(var(--ink))] transition hover:bg-white/[0.1] md:hidden"
-          aria-expanded={mobileOpen}
-          aria-controls="global-mobile-nav"
-          aria-label={mobileOpen ? "Close menu" : "Open menu"}
-          onClick={() => setMobileOpen((o) => !o)}
-        >
-          {mobileOpen ? (
-            <svg
-              className="size-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          ) : (
-            <svg
-              className="size-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          )}
-        </button>
+          {/* Mobile menu toggle */}
+          <button
+            type="button"
+            className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-white/[0.14] bg-white/[0.06] text-[rgb(var(--ink))] transition hover:bg-white/[0.1] md:hidden"
+            aria-expanded={mobileOpen}
+            aria-controls="global-mobile-nav"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            onClick={() => setMobileOpen((o) => !o)}
+          >
+            {mobileOpen ? (
+              <svg
+                className="size-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            ) : (
+              <svg
+                className="size-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            )}
+          </button>
+        </div>
       </div>
     </header>
     {mobileMenuPortal}
