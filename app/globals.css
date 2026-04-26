@@ -370,75 +370,57 @@ body::before {
   }
 }
 
-/* Pointer-tilt surfaces (see Surface3D.tsx) */
-.surface3d-perspective {
-  perspective: 1280px;
+/* 3D tilt scene (child .tilt-plane is transformed by TiltPlane.tsx) */
+.tilt-scene {
+  perspective: 1180px;
   perspective-origin: 50% 42%;
 }
-.surface3d-inner {
+.tilt-plane {
   transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tilt-scene .tilt-plane {
+    transform: none !important;
+    box-shadow: none !important;
+    transition: none !important;
+  }
 }
 
-/* Primary CTA — shallow “plate” lift toward the viewer */
-.cta-3d-shell {
-  perspective: 920px;
-  perspective-origin: 50% 120%;
-  transform-style: preserve-3d;
-}
-.cta-3d-target {
-  transform: translate3d(0, 0, 0);
-  transition:
-    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.28s ease,
-    filter 0.28s ease;
-}
-.cta-3d-shell:hover .cta-3d-target {
-  transform: rotateX(5deg) translate3d(0, -2px, 14px);
+/* “Raised” button — physical press without JS */
+.btn-extrude-3d {
   box-shadow:
-    0 28px 56px -22px rgb(var(--accent) / 0.5),
-    0 16px 40px -20px rgb(0 0 0 / 0.5);
-  filter: brightness(1.06);
+    0 1px 0 0 rgb(255 255 255 / 0.14) inset,
+    0 6px 0 0 rgb(0 0 0 / 0.12),
+    0 14px 32px -10px rgb(0 0 0 / 0.35);
+  transform: translateY(0);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background-color 0.18s ease;
+}
+.btn-extrude-3d:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 1px 0 0 rgb(255 255 255 / 0.16) inset,
+    0 8px 0 0 rgb(0 0 0 / 0.1),
+    0 22px 44px -14px rgb(0 0 0 / 0.38);
+}
+.btn-extrude-3d:active {
+  transform: translateY(1px);
+  box-shadow:
+    0 1px 0 0 rgb(255 255 255 / 0.08) inset,
+    0 3px 0 0 rgb(0 0 0 / 0.14),
+    0 8px 20px -8px rgb(0 0 0 / 0.28);
 }
 @media (prefers-reduced-motion: reduce) {
-  .cta-3d-shell:hover .cta-3d-target {
+  .btn-extrude-3d,
+  .btn-extrude-3d:hover,
+  .btn-extrude-3d:active {
     transform: none;
-    filter: none;
-  }
-}
-
-/* Secondary hero CTA — lighter tilt */
-.cta-outline-3d-shell {
-  perspective: 780px;
-  perspective-origin: 50% 100%;
-}
-.cta-outline-3d-target {
-  transform: translate3d(0, 0, 0);
-  transition: transform 0.26s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.26s ease;
-}
-.cta-outline-3d-shell:hover .cta-outline-3d-target {
-  transform: rotateX(4deg) translate3d(0, -1px, 8px);
-  box-shadow: 0 18px 40px -22px rgb(0 0 0 / 0.35);
-}
-@media (prefers-reduced-motion: reduce) {
-  .cta-outline-3d-shell:hover .cta-outline-3d-target {
-    transform: none;
-  }
-}
-
-/* Brand mark — slight Y/X rotation on header hover */
-.logo-mark-3d {
-  transform: translateZ(0) rotateY(0deg) rotateX(0deg);
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  transform-style: preserve-3d;
-}
-a:hover .logo-mark-3d,
-a:focus-visible .logo-mark-3d {
-  transform: translateZ(6px) rotateY(-14deg) rotateX(6deg);
-}
-@media (prefers-reduced-motion: reduce) {
-  a:hover .logo-mark-3d,
-  a:focus-visible .logo-mark-3d {
-    transform: none;
+    box-shadow: 0 1px 0 0 rgb(255 255 255 / 0.1) inset,
+      0 10px 28px -10px rgb(0 0 0 / 0.3);
   }
 }
 

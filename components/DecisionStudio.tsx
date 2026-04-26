@@ -14,7 +14,7 @@ import SparkShuffleStrip from "@/components/home/SparkShuffleStrip";
 import StayMomentsStrip from "@/components/home/StayMomentsStrip";
 import AmbientDriftLayer from "@/components/ui/AmbientDriftLayer";
 import OrbDecor from "@/components/ui/OrbDecor";
-import Surface3D from "@/components/ui/Surface3D";
+import TiltPlane from "@/components/ui/TiltPlane";
 import { getExpertsCopy } from "@/lib/i18n/experts-network";
 import { getPricingCopy } from "@/lib/i18n/pricing-page";
 import type { DecisionAnalysis, MatchedExpertSummary } from "@/lib/types";
@@ -738,24 +738,27 @@ export default function DecisionStudio({
                 ))}
               </div>
               <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-                <span className="cta-3d-shell inline-block [transform-style:preserve-3d]">
+                <TiltPlane
+                  className="inline-flex min-h-[52px] w-full min-w-[min(100%,18rem)] sm:w-auto"
+                  innerClassName="rounded-2xl"
+                  maxTilt={9}
+                  floatZ={10}
+                >
                   <Link
                     href="/analyze"
-                    className="cta-3d-target inline-flex min-h-[52px] min-w-[min(100%,18rem)] items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-10 py-4 text-lg font-bold text-white shadow-xl shadow-[rgb(var(--accent)/0.3)]"
+                    className="inline-flex min-h-[52px] min-w-[min(100%,18rem)] w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-10 py-4 text-lg font-bold text-white shadow-xl shadow-[rgb(var(--accent)/0.3)] transition hover:brightness-110"
                   >
                     {t.heroCtaPrimary}
                     <span aria-hidden>→</span>
                   </Link>
-                </span>
-                <span className="cta-outline-3d-shell inline-block [transform-style:preserve-3d]">
-                  <Link
-                    href="/experts"
-                    className="cta-outline-3d-target inline-flex items-center justify-center gap-2 rounded-2xl border border-white/[0.18] bg-white/[0.07] px-8 py-3.5 text-base font-bold text-[rgb(var(--ink))] hover:bg-white/[0.12]"
-                  >
-                    {t.heroCtaSecondary}
-                    <span aria-hidden>→</span>
-                  </Link>
-                </span>
+                </TiltPlane>
+                <Link
+                  href="/experts"
+                  className="btn-extrude-3d inline-flex items-center justify-center gap-2 rounded-2xl border border-white/[0.18] bg-white/[0.07] px-8 py-3.5 text-base font-bold text-[rgb(var(--ink))] transition-colors hover:bg-white/[0.12]"
+                >
+                  {t.heroCtaSecondary}
+                  <span aria-hidden>→</span>
+                </Link>
                 <Link
                   href="/pricing"
                   className="inline-flex items-center justify-center gap-2 text-base font-semibold text-[rgb(var(--accent-warm))] underline-offset-4 hover:underline"
@@ -765,15 +768,16 @@ export default function DecisionStudio({
               </div>
             </div>
 
-            <Surface3D
-              className="relative lg:pt-0.5"
-              innerClassName="relative space-y-5"
-              tiltMax={6}
-              sensitivity={0.95}
-            >
+            <div className="relative space-y-5">
               <div className="absolute -inset-4 -z-10 rounded-[1.75rem] bg-gradient-to-br from-[rgb(var(--accent))]/14 via-[rgb(var(--accent-magenta))]/8 to-[rgb(var(--accent-2))]/12 blur-xl" />
-              <HeroVisualSlider slides={heroSlideDeck} />
-              <div className="relative overflow-hidden rounded-2xl border border-white/12 bg-[rgb(var(--surface-2))]/90 shadow-2xl backdrop-blur-xl">
+              <TiltPlane
+                className="block w-full"
+                innerClassName="space-y-5"
+                maxTilt={7}
+                floatZ={14}
+              >
+                <HeroVisualSlider slides={heroSlideDeck} />
+                <div className="relative overflow-hidden rounded-2xl border border-white/12 bg-[rgb(var(--surface-2))]/90 shadow-2xl backdrop-blur-xl">
                 <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
                   <span className="text-xs font-semibold text-[rgb(var(--ink))]">
                     {t.previewCardTitle}
@@ -810,7 +814,8 @@ export default function DecisionStudio({
                   </Link>
                 </div>
               </div>
-            </Surface3D>
+              </TiltPlane>
+            </div>
           </div>
         </section>
 
@@ -1243,14 +1248,23 @@ export default function DecisionStudio({
           </p>
           <PlayCorner copy={delight} />
           <div className="mt-10 grid gap-6 lg:grid-cols-5">
-            <aside className="glass card-glow rounded-3xl p-5 lg:col-span-2 lg:p-6">
-              <p className="text-sm font-semibold text-[rgb(var(--ink))]">
-                {t.disclaimerTitle}
-              </p>
-              <p className="mt-3 text-sm leading-relaxed text-[rgb(var(--ink-soft))]">
-                {t.disclaimerBody}
-              </p>
-            </aside>
+            <div className="min-h-0 lg:col-span-2">
+              <TiltPlane
+                className="h-full min-h-[12rem]"
+                innerClassName="h-full rounded-3xl"
+                maxTilt={5}
+                floatZ={8}
+              >
+                <aside className="glass card-glow h-full min-h-[12rem] rounded-3xl p-5 lg:p-6">
+                  <p className="text-sm font-semibold text-[rgb(var(--ink))]">
+                    {t.disclaimerTitle}
+                  </p>
+                  <p className="mt-3 text-sm leading-relaxed text-[rgb(var(--ink-soft))]">
+                    {t.disclaimerBody}
+                  </p>
+                </aside>
+              </TiltPlane>
+            </div>
 
             <form
               id="analyzer"
