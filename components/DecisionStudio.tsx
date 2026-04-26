@@ -1208,14 +1208,7 @@ export default function DecisionStudio({
           </div>
         )}
 
-        {!focusLayout ? (
-          <AdSenseBanner
-            reserveWhenDisabled
-            placeholderEyebrow={t.adReservedEyebrow}
-            placeholderHint={t.adReservedHint}
-            className="my-2"
-          />
-        ) : null}
+        {!focusLayout ? <AdSenseBanner className="my-2" /> : null}
 
         {/* Workspace: disclaimer + analyzer */}
         <RevealOnScroll>
