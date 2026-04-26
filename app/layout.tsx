@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
 import {
   Geist,
   Geist_Mono,
@@ -166,7 +165,12 @@ export default function RootLayout({
             ].join(""),
           }}
         />
-        {/* AdSense: loaded from <body> via next/script (lazyOnload) so it does not compete with LCP. */}
+        {/* AdSense review expects the auto-ads code in <head>. Consent defaults above still run first. */}
+        <script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
+          crossOrigin="anonymous"
+        />
       </head>
       <body
         className={`${displaySans.variable} ${geistSans.variable} ${geistMono.variable} ${notoArmenian.variable} ${notoSans.variable} ${notoArabic.variable} font-sans text-base leading-relaxed antialiased md:text-[1.0625rem] lg:text-[1.125rem]`}
@@ -177,12 +181,6 @@ export default function RootLayout({
         {children}
         <GlobalFooter />
         <ConsentBanner />
-        <Script
-          id="adsense-loader"
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
-          strategy="lazyOnload"
-          crossOrigin="anonymous"
-        />
         <GoogleAnalytics />
         <DeferredVercelMetrics />
       </body>

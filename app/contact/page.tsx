@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 function getContactEmail(): string {
   const raw = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim();
   if (raw && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(raw)) return raw;
-  return "hello@life-decision-engine.app";
+  return "hello@lifedecisions.space";
 }
 
 type ChannelCard = {

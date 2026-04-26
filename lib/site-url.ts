@@ -2,7 +2,7 @@
  * Safe site URL for metadata, sitemap, robots.
  * Empty or invalid NEXT_PUBLIC_SITE_URL must not crash the app (new URL("") throws).
  */
-const FALLBACK = "http://localhost:3000";
+const FALLBACK = "https://lifedecisions.space";
 
 function normalizeEnvUrl(raw: string | undefined): string {
   if (raw == null) return "";
