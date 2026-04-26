@@ -708,8 +708,8 @@ export default function DecisionStudio({
           <div className="grid-view pointer-events-none absolute inset-0 opacity-[0.5]" />
           <div className="relative grid gap-12 ps-4 sm:ps-6 lg:grid-cols-[minmax(0,1fr)_minmax(280px,400px)] lg:items-center lg:ps-2">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.2] bg-white/[0.1] px-3.5 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-[rgb(var(--ink))] shadow-[0_0_32px_-10px_rgb(var(--accent)/0.45)] backdrop-blur-sm sm:text-xs">
-                <span className="size-2.5 rounded-full bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] shadow-[0_0_16px_rgb(var(--accent)/0.6)]" />
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.22] bg-white/[0.11] px-3.5 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-[rgb(var(--ink))] shadow-[0_0_32px_-10px_rgb(var(--accent)/0.45),inset_0_1px_0_0_rgba(255,255,255,0.12)] ring-1 ring-[rgb(var(--accent))]/15 backdrop-blur-sm motion-safe:transition motion-safe:duration-500 motion-safe:hover:ring-[rgb(var(--accent-2))]/25 sm:text-xs">
+                <span className="motion-safe:animate-pulse-soft size-2.5 rounded-full bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] shadow-[0_0_16px_rgb(var(--accent)/0.6)]" />
                 {t.brand}
               </div>
               <p className="mt-6 text-sm font-semibold leading-snug text-[rgb(var(--accent-2))] [text-wrap:balance] sm:text-base">
@@ -730,7 +730,7 @@ export default function DecisionStudio({
                 {t.features.map((f) => (
                   <span
                     key={f}
-                    className="rounded-full border border-white/[0.14] bg-white/[0.07] px-4 py-2 text-sm font-medium text-[rgb(var(--ink))]"
+                    className="chip-interactive rounded-full border border-white/[0.14] bg-white/[0.07] px-4 py-2 text-sm font-medium text-[rgb(var(--ink))]"
                   >
                     {f}
                   </span>
@@ -814,7 +814,7 @@ export default function DecisionStudio({
                 {t.trustMicroPoints.map((line, i) => (
                   <li
                     key={i}
-                    className="flex items-start gap-2.5 rounded-xl border border-white/[0.1] bg-black/25 px-3 py-2.5 text-sm leading-snug text-white/95"
+                    className="flex items-start gap-2.5 rounded-xl border border-white/[0.1] border-s-2 border-s-[rgb(var(--accent))]/40 bg-black/25 px-3 py-2.5 text-sm leading-snug text-white/95 transition hover:border-white/[0.16] hover:bg-white/[0.04]"
                   >
                     <span className="shrink-0 text-base" aria-hidden>
                       {i === 0 ? "🔒" : i === 1 ? "🔐" : "🤝"}

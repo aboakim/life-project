@@ -317,6 +317,59 @@ body::before {
   --wash-color: rgb(178 145 255 / 0.1);
 }
 
+/* Hairline accent under global header — slow drift when motion is OK */
+.site-header-edge {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--accent) / 0.38) 24%,
+    rgb(var(--accent-2) / 0.42) 52%,
+    rgb(var(--accent-magenta) / 0.34) 76%,
+    transparent 100%
+  );
+  background-size: 220% 100%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes header-edge-flow {
+    0%,
+    100% {
+      background-position: 0% 50%;
+      opacity: 0.85;
+    }
+    50% {
+      background-position: 100% 50%;
+      opacity: 1;
+    }
+  }
+  .site-header-edge--motion {
+    animation: header-edge-flow 16s ease-in-out infinite;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-header-edge--motion {
+    animation: none;
+    opacity: 0.9;
+  }
+}
+
+/* Hero / list chips — lift and glow on hover */
+.chip-interactive {
+  @apply transition duration-200 ease-out will-change-transform;
+}
+.chip-interactive:hover {
+  transform: translateY(-2px);
+  border-color: rgb(var(--accent) / 0.32);
+  box-shadow:
+    0 12px 36px -18px rgb(var(--accent) / 0.35),
+    0 0 0 1px rgb(255 255 255 / 0.06) inset;
+}
+@media (prefers-reduced-motion: reduce) {
+  .chip-interactive:hover {
+    transform: none;
+  }
+}
+
 /* Indeterminate “analysis running” bar */
 @keyframes home-analyzing-sweep {
   0% {

@@ -65,7 +65,7 @@ export default function HomeSectionNav({
 
   return (
     <nav
-      className="home-section-nav sticky top-[52px] z-30 min-w-0 w-full border-b border-white/[0.1] bg-[rgb(var(--surface))]/70 backdrop-blur-2xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]"
+      className="home-section-nav relative sticky top-[52px] z-30 min-w-0 w-full border-b border-white/[0.1] bg-[rgb(var(--surface))]/70 backdrop-blur-2xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:z-10 before:h-px before:bg-gradient-to-r before:from-transparent before:via-[rgb(var(--accent))]/35 before:to-transparent"
       aria-label={navAriaLabel}
     >
       <div className="mx-auto min-w-0 max-w-6xl px-3 py-2 sm:px-6 md:hidden">
@@ -74,7 +74,7 @@ export default function HomeSectionNav({
         </label>
         <select
           id="home-section-jump"
-          className="w-full min-h-[48px] cursor-pointer rounded-xl border border-white/[0.14] bg-black/25 px-3 py-2 text-sm font-medium text-[rgb(var(--ink))] outline-none transition focus:border-[rgb(var(--accent))]/45"
+          className="w-full min-h-[48px] cursor-pointer rounded-xl border border-white/[0.14] bg-gradient-to-b from-white/[0.08] to-black/30 px-3 py-2 text-sm font-medium text-[rgb(var(--ink))] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] outline-none transition focus:border-[rgb(var(--accent))]/45 focus:ring-2 focus:ring-[rgb(var(--accent))]/20"
           value={active ?? ""}
           onChange={(e) => {
             const id = e.target.value;
@@ -98,8 +98,8 @@ export default function HomeSectionNav({
               href={`#${id}`}
               className={
                 isActive
-                  ? "shrink-0 whitespace-nowrap rounded-full bg-white/[0.1] px-3.5 py-2 text-xs font-semibold text-[rgb(var(--ink))] ring-1 ring-[rgb(var(--accent))]/35"
-                  : "shrink-0 whitespace-nowrap rounded-full px-3.5 py-2 text-xs font-medium text-[rgb(var(--ink-soft))] transition hover:bg-white/[0.05] hover:text-[rgb(var(--ink))]"
+                  ? "shrink-0 whitespace-nowrap rounded-full bg-gradient-to-r from-[rgb(var(--accent))]/22 via-white/[0.1] to-[rgb(var(--accent-2))]/18 px-3.5 py-2 text-xs font-semibold text-[rgb(var(--ink))] shadow-[0_0_28px_-10px_rgb(var(--accent)/0.35)] ring-1 ring-[rgb(var(--accent))]/40"
+                  : "shrink-0 whitespace-nowrap rounded-full px-3.5 py-2 text-xs font-medium text-[rgb(var(--ink-soft))] transition duration-200 hover:bg-white/[0.06] hover:text-[rgb(var(--ink))] hover:ring-1 hover:ring-white/[0.08]"
               }
             >
               {label}
