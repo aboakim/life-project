@@ -44,7 +44,7 @@ export default function SparkShuffleStrip({
 
   return (
     <div
-      className="relative overflow-hidden rounded-3xl border border-white/[0.1] bg-gradient-to-br from-[rgb(var(--accent))]/[0.12] via-white/[0.04] to-[rgb(var(--accent-magenta))]/[0.08] px-5 py-5 shadow-[0_20px_56px_-36px_rgb(var(--accent)/0.35)] sm:px-6 sm:py-6"
+      className="relative overflow-hidden rounded-3xl border border-white/[0.12] bg-gradient-to-br from-[rgb(var(--accent))]/[0.12] via-white/[0.04] to-[rgb(var(--accent-magenta))]/[0.08] px-5 py-5 shadow-[0_20px_56px_-36px_rgb(var(--accent)/0.35),inset_0_1px_0_0_rgba(255,255,255,0.08)] ring-1 ring-inset ring-white/[0.05] sm:px-6 sm:py-6"
       aria-live="polite"
     >
       <div
@@ -69,7 +69,7 @@ export default function SparkShuffleStrip({
       <button
         type="button"
         onClick={next}
-        className="relative mt-4 inline-flex items-center gap-1.5 rounded-full border border-white/[0.14] bg-white/[0.08] px-3 py-1.5 text-[11px] font-semibold text-[rgb(var(--ink-soft))] shadow-sm transition hover:border-[rgb(var(--accent-2))]/35 hover:bg-white/[0.12] hover:text-[rgb(var(--ink))]"
+        className="relative mt-4 inline-flex items-center gap-1.5 rounded-full border border-white/[0.14] bg-white/[0.08] px-3 py-1.5 text-[11px] font-semibold text-[rgb(var(--ink-soft))] shadow-[0_2px_0_0_rgb(0_0_0/0.12),0_6px_20px_-8px_rgb(176_138_255/0.2)] transition hover:border-[rgb(var(--accent-2))]/40 hover:bg-white/[0.14] hover:text-[rgb(var(--ink))] motion-safe:hover:-translate-y-0.5 active:translate-y-px"
       >
         <span className="text-[rgb(var(--accent-2))]" aria-hidden>
           ✦

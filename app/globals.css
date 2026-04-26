@@ -424,6 +424,68 @@ body::before {
   }
 }
 
+/* Large glass panels — gentle lift on hover (no JS) */
+.panel-float-hover {
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease,
+    border-color 0.35s ease;
+}
+.panel-float-hover:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.1) inset,
+    0 32px 80px -36px rgb(0 0 0 / 0.42),
+    0 0 60px -20px rgb(176 138 255 / 0.22);
+}
+@media (prefers-reduced-motion: reduce) {
+  .panel-float-hover:hover {
+    transform: none;
+  }
+}
+
+/* Results block — soft breathing glow on the success banner */
+@keyframes results-glow-breathe {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 0 rgb(52 211 153 / 0.12),
+      0 12px 40px -20px rgb(0 0 0 / 0.25);
+  }
+  50% {
+    box-shadow:
+      0 0 36px -4px rgb(52 211 153 / 0.22),
+      0 16px 48px -18px rgb(0 0 0 / 0.3);
+  }
+}
+.results-glow-breathe {
+  animation: results-glow-breathe 5.5s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .results-glow-breathe {
+    animation: none;
+  }
+}
+
+/* Cold-start chip tray — faint inner violet pulse */
+@keyframes cold-tray-pulse {
+  0%,
+  100% {
+    box-shadow: inset 0 0 0 0 rgb(167 139 250 / 0);
+  }
+  50% {
+    box-shadow: inset 0 0 28px 0 rgb(167 139 250 / 0.09);
+  }
+}
+.cold-tray-pulse {
+  animation: cold-tray-pulse 5s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cold-tray-pulse {
+    animation: none;
+  }
+}
+
 /* Indeterminate “analysis running” bar */
 @keyframes home-analyzing-sweep {
   0% {

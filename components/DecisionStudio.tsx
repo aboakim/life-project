@@ -821,25 +821,38 @@ export default function DecisionStudio({
 
         {!focusLayout ? (
           <>
-            <div className="home-section-wash mt-6 grid gap-3 rounded-2xl border border-white/[0.12] bg-[rgb(var(--surface-elevated))]/60 px-4 py-4 sm:px-6 sm:py-5">
-              <p className="m-0 text-xs font-bold uppercase tracking-[0.16em] text-white/70">
-                {t.sectionNavTrust}
-              </p>
-              <ul className="m-0 grid list-none grid-cols-1 gap-2.5 p-0 sm:grid-cols-3 sm:gap-3">
-                {t.trustMicroPoints.map((line, i) => (
-                  <li
-                    key={i}
-                    className="flex items-start gap-2.5 rounded-xl border border-white/[0.1] border-s-2 border-s-[rgb(var(--accent))]/40 bg-black/25 px-3 py-2.5 text-sm leading-snug text-white/95 transition hover:border-white/[0.16] hover:bg-white/[0.04]"
-                  >
-                    <span className="shrink-0 text-base" aria-hidden>
-                      {i === 0 ? "🔒" : i === 1 ? "🔐" : "🤝"}
-                    </span>
-                    <span>{line}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="home-section-wash mt-4 rounded-2xl border border-white/[0.12] bg-[rgb(var(--surface-elevated))]/55 px-4 py-5 sm:px-6">
+            <TiltPlane
+              className="mt-6 block w-full"
+              innerClassName="rounded-2xl"
+              maxTilt={5}
+              floatZ={8}
+            >
+              <div className="home-section-wash grid gap-3 rounded-2xl border border-white/[0.12] bg-[rgb(var(--surface-elevated))]/60 px-4 py-4 sm:px-6 sm:py-5">
+                <p className="m-0 text-xs font-bold uppercase tracking-[0.16em] text-white/70">
+                  {t.sectionNavTrust}
+                </p>
+                <ul className="m-0 grid list-none grid-cols-1 gap-2.5 p-0 sm:grid-cols-3 sm:gap-3">
+                  {t.trustMicroPoints.map((line, i) => (
+                    <li
+                      key={i}
+                      className="flex items-start gap-2.5 rounded-xl border border-white/[0.1] border-s-2 border-s-[rgb(var(--accent))]/40 bg-black/25 px-3 py-2.5 text-sm leading-snug text-white/95 transition hover:border-white/[0.16] hover:bg-white/[0.04]"
+                    >
+                      <span className="shrink-0 text-base" aria-hidden>
+                        {i === 0 ? "🔒" : i === 1 ? "🔐" : "🤝"}
+                      </span>
+                      <span>{line}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </TiltPlane>
+            <TiltPlane
+              className="mt-4 block w-full"
+              innerClassName="rounded-2xl"
+              maxTilt={5}
+              floatZ={8}
+            >
+            <div className="home-section-wash rounded-2xl border border-white/[0.12] bg-[rgb(var(--surface-elevated))]/55 px-4 py-5 sm:px-6">
               <p className="m-0 text-xs font-bold uppercase tracking-[0.2em] text-[rgb(var(--accent-2))]">
                 {t.homeDemoEyebrow}
               </p>
@@ -874,11 +887,12 @@ export default function DecisionStudio({
               </ul>
               <Link
                 href="/analyze"
-                className="mt-4 inline-flex min-h-[48px] items-center justify-center rounded-2xl border border-white/15 bg-white/[0.1] px-6 py-3 text-sm font-bold text-white transition hover:bg-white/[0.14]"
+                className="btn-extrude-3d mt-4 inline-flex min-h-[48px] items-center justify-center rounded-2xl border border-white/15 bg-white/[0.1] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-white/[0.14]"
               >
                 {t.homeDemoCta} →
               </Link>
             </div>
+            </TiltPlane>
           </>
         ) : null}
 
@@ -888,7 +902,7 @@ export default function DecisionStudio({
           className="home-section-wash home-section-wash--overview scroll-mt-36 rounded-[1.85rem] px-3 pt-12 pb-1 sm:px-4 sm:pt-14"
           aria-labelledby="overview-heading"
         >
-          <div className="rounded-[1.75rem] border border-white/[0.12] bg-gradient-to-br from-white/[0.1] via-white/[0.04] to-transparent p-6 shadow-[0_20px_60px_-36px_rgb(var(--accent)/0.25),0_0_0_1px_rgba(255,255,255,0.05)_inset] sm:p-8">
+          <div className="panel-float-hover rounded-[1.75rem] border border-white/[0.12] bg-gradient-to-br from-white/[0.1] via-white/[0.04] to-transparent p-6 shadow-[0_20px_60px_-36px_rgb(var(--accent)/0.25),0_0_0_1px_rgba(255,255,255,0.05)_inset] sm:p-8">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[rgb(var(--accent-2))]">
               {t.atAGlanceEyebrow}
             </p>
@@ -1202,7 +1216,7 @@ export default function DecisionStudio({
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-violet-300/90">
               {delight.coldStartEyebrow}
             </p>
-            <div className="mt-3 flex flex-wrap gap-2 rounded-2xl ring-1 ring-inset ring-violet-400/20 bg-violet-500/[0.05] p-2">
+            <div className="cold-tray-pulse mt-3 flex flex-wrap gap-2 rounded-2xl ring-1 ring-inset ring-violet-400/20 bg-violet-500/[0.05] p-2">
               {delight.coldStarts.map((pack) => (
                 <button
                   key={pack.label}
@@ -1212,7 +1226,7 @@ export default function DecisionStudio({
                     setContext(pack.context);
                     setConstraints(pack.constraints);
                   }}
-                  className="rounded-full border border-white/[0.14] bg-white/[0.06] px-4 py-2 text-sm font-medium text-[rgb(var(--ink))] transition hover:border-violet-400/40 hover:bg-white/[0.1]"
+                  className="chip-interactive rounded-full border border-white/[0.14] bg-white/[0.06] px-4 py-2 text-sm font-medium text-[rgb(var(--ink))] transition-colors hover:border-violet-400/40 hover:bg-white/[0.1]"
                 >
                   {pack.label}
                 </button>
@@ -1220,29 +1234,41 @@ export default function DecisionStudio({
             </div>
           </div>
           {visitMilestoneN != null ? (
-            <div
-              className="mt-5 flex flex-col gap-3 rounded-2xl border border-amber-400/30 bg-gradient-to-r from-amber-500/[0.12] to-orange-500/[0.06] px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5"
-              role="status"
+            <TiltPlane
+              className="mt-5 block w-full"
+              innerClassName="rounded-2xl overflow-hidden"
+              maxTilt={4}
+              floatZ={6}
             >
-              <p className="text-sm leading-relaxed text-[rgb(var(--ink))] [text-wrap:pretty]">
-                {milestoneMessage(delight, visitMilestoneN)}
-              </p>
-              <button
-                type="button"
-                onClick={dismissVisitMilestone}
-                className="shrink-0 rounded-xl border border-white/15 bg-white/[0.1] px-4 py-2 text-xs font-semibold text-[rgb(var(--ink))] transition hover:bg-white/[0.14]"
+              <div
+                className="flex flex-col gap-3 rounded-2xl border border-amber-400/30 bg-gradient-to-r from-amber-500/[0.12] to-orange-500/[0.06] px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5"
+                role="status"
               >
-                {delight.milestoneDismiss}
-              </button>
-            </div>
+                <p className="text-sm leading-relaxed text-[rgb(var(--ink))] [text-wrap:pretty]">
+                  {milestoneMessage(delight, visitMilestoneN)}
+                </p>
+                <button
+                  type="button"
+                  onClick={dismissVisitMilestone}
+                  className="shrink-0 rounded-xl border border-white/15 bg-white/[0.1] px-4 py-2 text-xs font-semibold text-[rgb(var(--ink))] transition hover:bg-white/[0.14]"
+                >
+                  {delight.milestoneDismiss}
+                </button>
+              </div>
+            </TiltPlane>
           ) : null}
-          <div className="mt-8">
+          <TiltPlane
+            className="mt-8 block w-full"
+            innerClassName="rounded-3xl overflow-hidden"
+            maxTilt={6}
+            floatZ={10}
+          >
             <SparkShuffleStrip
               eyebrow={sx.sparkStripEyebrow}
               shuffleLabel={sx.sparkShuffle}
               moments={sx.sparkMoments}
             />
-          </div>
+          </TiltPlane>
           <p className="mt-3 max-w-2xl text-[11px] leading-relaxed text-[rgb(var(--ink-soft))]/75 [text-wrap:pretty]">
             {delight.shortcutTeaser}
           </p>
@@ -1269,7 +1295,7 @@ export default function DecisionStudio({
             <form
               id="analyzer"
               onSubmit={onSubmit}
-              className="glass card-glow ring-1 ring-inset ring-[rgb(var(--accent))]/25 rounded-3xl p-5 sm:p-6 lg:col-span-3"
+              className="panel-float-hover glass card-glow ring-1 ring-inset ring-[rgb(var(--accent))]/25 rounded-3xl p-5 sm:p-6 lg:col-span-3"
             >
               <h3 className="text-lg font-semibold text-[rgb(var(--ink))]">
                 {t.decision}
@@ -1429,13 +1455,20 @@ export default function DecisionStudio({
               )}
 
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-                <button
-                  type="submit"
-                  disabled={!canSubmit || formBusy}
-                  className="min-h-[48px] w-full rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-6 py-3 text-base font-semibold text-white shadow-lg shadow-[rgb(var(--accent)/0.28)] transition enabled:hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40 sm:w-auto sm:min-w-[14rem]"
+                <TiltPlane
+                  className="inline-flex w-full sm:w-auto"
+                  innerClassName="rounded-2xl"
+                  maxTilt={7}
+                  floatZ={6}
                 >
-                  {loading ? t.analyzing : t.analyze}
-                </button>
+                  <button
+                    type="submit"
+                    disabled={!canSubmit || formBusy}
+                    className="min-h-[48px] w-full rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-6 py-3 text-base font-semibold text-white shadow-lg shadow-[rgb(var(--accent)/0.28)] transition enabled:hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40 sm:min-w-[14rem]"
+                  >
+                    {loading ? t.analyzing : t.analyze}
+                  </button>
+                </TiltPlane>
                 {result ? (
                   <span className="inline-flex w-full justify-center rounded-full border border-white/15 bg-white/[0.03] px-3 py-2 text-center text-sm text-[rgb(var(--ink-soft))] sm:inline-flex sm:w-auto sm:justify-start sm:py-1.5 sm:text-xs">
                     {result.mode === "live" && t.badgeLive}
@@ -1482,7 +1515,7 @@ export default function DecisionStudio({
             <div
               id="results-main-heading"
               tabIndex={-1}
-              className="animate-fade-up rounded-2xl border border-emerald-400/35 bg-gradient-to-r from-emerald-500/20 to-cyan-500/10 px-4 py-4 sm:px-5"
+              className="results-glow-breathe animate-fade-up rounded-2xl border border-emerald-400/35 bg-gradient-to-r from-emerald-500/20 to-cyan-500/10 px-4 py-4 sm:px-5"
             >
               <h2 className="font-display text-xl font-extrabold tracking-tight text-emerald-50/95 [text-wrap:balance] sm:text-2xl">
                 <span className="me-2 text-2xl" aria-hidden>
@@ -1496,38 +1529,45 @@ export default function DecisionStudio({
                 {resultCheerLine}
               </p>
             ) : null}
-            <div className="animate-fade-up flex flex-col gap-4 rounded-2xl border border-[rgb(var(--accent-2))]/35 bg-gradient-to-br from-[rgb(var(--accent))]/14 via-white/[0.04] to-transparent px-4 py-4 shadow-[0_16px_48px_-28px_rgb(var(--accent)/0.45)] sm:px-6">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-                <p className="max-w-2xl text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
-                  {pa.runAnotherHint}
-                </p>
-                <div className="flex w-full flex-col gap-2 sm:w-auto sm:min-w-0 sm:flex-row sm:items-center sm:gap-2">
-                  <ReadAloudReportButton
-                    text={readAloudText}
-                    locale={locale}
-                    labels={{
-                      readAloud: t.readAloud,
-                      stop: t.readAloudStop,
-                    }}
-                  />
-                  <button
-                    type="button"
-                    onClick={scrollToAnalyzer}
-                    className="shrink-0 rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-[rgb(var(--accent)/0.28)] transition hover:brightness-110"
-                  >
-                    {pa.runAnotherCta}
-                  </button>
+            <TiltPlane
+              className="animate-fade-up block w-full"
+              innerClassName="rounded-2xl"
+              maxTilt={5}
+              floatZ={8}
+            >
+              <div className="flex flex-col gap-4 rounded-2xl border border-[rgb(var(--accent-2))]/35 bg-gradient-to-br from-[rgb(var(--accent))]/14 via-white/[0.04] to-transparent px-4 py-4 shadow-[0_16px_48px_-28px_rgb(var(--accent)/0.45)] sm:px-6">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+                  <p className="max-w-2xl text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
+                    {pa.runAnotherHint}
+                  </p>
+                  <div className="flex w-full flex-col gap-2 sm:w-auto sm:min-w-0 sm:flex-row sm:items-center sm:gap-2">
+                    <ReadAloudReportButton
+                      text={readAloudText}
+                      locale={locale}
+                      labels={{
+                        readAloud: t.readAloud,
+                        stop: t.readAloudStop,
+                      }}
+                    />
+                    <button
+                      type="button"
+                      onClick={scrollToAnalyzer}
+                      className="shrink-0 rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-[rgb(var(--accent)/0.28)] transition hover:brightness-110"
+                    >
+                      {pa.runAnotherCta}
+                    </button>
+                  </div>
+                </div>
+                <div className="border-t border-white/[0.08] pt-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[rgb(var(--accent-dim))]">
+                    {pa.runAnotherTrustTitle}
+                  </p>
+                  <p className="mt-2 max-w-3xl text-xs leading-relaxed text-[rgb(var(--ink-soft))]/90 [text-wrap:pretty]">
+                    {pa.runAnotherTrustBody}
+                  </p>
                 </div>
               </div>
-              <div className="border-t border-white/[0.08] pt-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[rgb(var(--accent-dim))]">
-                  {pa.runAnotherTrustTitle}
-                </p>
-                <p className="mt-2 max-w-3xl text-xs leading-relaxed text-[rgb(var(--ink-soft))]/90 [text-wrap:pretty]">
-                  {pa.runAnotherTrustBody}
-                </p>
-              </div>
-            </div>
+            </TiltPlane>
 
             <section className="glass animate-fade-up rounded-3xl p-6 sm:p-7">
               <h2 className="text-lg font-semibold text-[rgb(var(--ink))]">

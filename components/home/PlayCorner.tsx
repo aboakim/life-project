@@ -30,7 +30,7 @@ export default function PlayCorner({ copy }: Props) {
   const words = useCycler(copy.cornerWords.length);
 
   return (
-    <details className="group mt-4 rounded-2xl border border-white/[0.08] bg-black/25 px-4 py-3 ring-1 ring-inset ring-white/[0.04] open:border-violet-400/20 open:bg-violet-950/20">
+    <details className="group mt-4 rounded-2xl border border-white/[0.08] bg-black/25 px-4 py-3 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] ring-1 ring-inset ring-white/[0.04] transition-[border-color,box-shadow,background-color] duration-300 open:border-violet-400/25 open:bg-violet-950/25 open:shadow-[0_20px_48px_-28px_rgb(var(--accent)/0.22),inset_0_1px_0_0_rgba(255,255,255,0.08)]">
       <summary className="flex cursor-pointer list-none items-center justify-between gap-2 text-xs font-semibold tracking-wide text-zinc-300/95 [&::-webkit-details-marker]:hidden">
         <span className="[text-wrap:pretty]">{copy.playCornerSummary}</span>
         <span

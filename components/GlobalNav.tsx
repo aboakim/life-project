@@ -300,7 +300,7 @@ export default function GlobalNav() {
           onClick={() => setMobileOpen(false)}
         >
           <span
-            className="logo-mark-3d hidden size-9 shrink-0 rounded-xl bg-gradient-to-br from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] shadow-lg shadow-[rgb(var(--accent)/0.35)] sm:inline-block"
+            className="hidden size-9 shrink-0 rounded-xl bg-gradient-to-br from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] shadow-lg shadow-[rgb(var(--accent)/0.35)] sm:inline-block"
             aria-hidden
           />
           <span className="min-w-0 truncate">{t.brand}</span>
@@ -352,7 +352,7 @@ export default function GlobalNav() {
             <div className="flex shrink-0 justify-end">
               <Link
                 href="/experts/register"
-                className="shrink-0 rounded-xl border border-[rgb(var(--accent))]/45 bg-[rgb(var(--accent))]/16 px-3 py-2 text-sm font-semibold text-[rgb(var(--ink))] shadow-[0_0_28px_-12px_rgb(var(--accent)/0.5)] transition hover:border-[rgb(var(--accent))]/65 hover:bg-[rgb(var(--accent))]/22 lg:px-4"
+                className="btn-extrude-3d shrink-0 rounded-xl border border-[rgb(var(--accent))]/45 bg-[rgb(var(--accent))]/16 px-3 py-2 text-sm font-semibold text-[rgb(var(--ink))] shadow-[0_0_28px_-12px_rgb(var(--accent)/0.5)] transition-colors hover:border-[rgb(var(--accent))]/65 hover:bg-[rgb(var(--accent))]/22 lg:px-4"
               >
                 {ec.navRegister}
               </Link>
