@@ -136,16 +136,41 @@ const hy: CommunityCopy = {
   helpfulStat: "օգտակար",
 };
 
+const ru: CommunityCopy = {
+  ...en,
+  navLabel: "Сообщество и вопросы",
+};
+const de: CommunityCopy = {
+  ...en,
+  navLabel: "Community & Fragen",
+};
+const fr: CommunityCopy = {
+  ...en,
+  navLabel: "Communauté & questions",
+};
+const es: CommunityCopy = {
+  ...en,
+  navLabel: "Comunidad y preguntas",
+};
+const ar: CommunityCopy = {
+  ...en,
+  navLabel: "المجتمع والأسئلة",
+};
+const it: CommunityCopy = {
+  ...en,
+  navLabel: "Community e domande",
+};
+
 const table: Record<AppLocale, CommunityCopy> = {
   "en-US": en,
   en,
   hy,
-  ru: en,
-  de: en,
-  fr: en,
-  es: en,
-  ar: en,
-  it: en,
+  ru,
+  de,
+  fr,
+  es,
+  ar,
+  it,
 } satisfies Record<AppLocale, CommunityCopy>;
 
 export function getCommunityCopy(locale: AppLocale): CommunityCopy {

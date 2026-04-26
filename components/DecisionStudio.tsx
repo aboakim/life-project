@@ -246,6 +246,25 @@ export default function DecisionStudio({
   }, []);
 
   useEffect(() => {
+    if (focusLayout) return;
+    const hash = window.location.hash.replace(/^#/, "");
+    if (!hash) return;
+    const scrollToTarget = () => {
+      const el = document.getElementById(hash);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    };
+    scrollToTarget();
+    const t1 = window.setTimeout(scrollToTarget, 120);
+    const t2 = window.setTimeout(scrollToTarget, 450);
+    return () => {
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
+    };
+  }, [focusLayout]);
+
+  useEffect(() => {
     try {
       const prev = parseInt(
         window.localStorage.getItem(VISIT_COUNT_KEY) ?? "0",
@@ -536,7 +555,12 @@ export default function DecisionStudio({
       <KonamiSurprise copy={delight} />
       <OrbDecor />
       <AmbientDriftLayer />
-      <HomeSectionNav links={sectionLinks} />
+      <HomeSectionNav
+        links={sectionLinks}
+        navAriaLabel={t.homeSectionNavAria}
+        jumpLabel={t.homeSectionJumpLabel}
+        jumpPlaceholder={t.homeSectionJumpPlaceholder}
+      />
 
       {demoMode ? (
         <div className="pointer-events-none fixed start-3 end-3 top-[4.75rem] z-[30] max-w-none rounded-xl border border-white/12 bg-white/[0.06] px-3 py-2 text-center text-[11px] font-medium leading-snug text-[rgb(var(--ink-soft))] shadow-lg backdrop-blur-md sm:start-auto sm:end-4 sm:top-[4.5rem] sm:max-w-[min(100%,20rem)] sm:text-start sm:text-xs">

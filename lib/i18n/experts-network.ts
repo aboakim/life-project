@@ -170,12 +170,47 @@ const en: ExpertsCopy = {
   contactCancel: "Close",
 };
 
-const fallback = en;
+const navByLocale: Partial<
+  Record<AppLocale, Pick<ExpertsCopy, "navHome" | "navExperts" | "navRegister">>
+> = {
+  ru: {
+    navHome: "Анализатор",
+    navExperts: "Эксперты",
+    navRegister: "Стать экспертом",
+  },
+  de: {
+    navHome: "Analyzer",
+    navExperts: "Experten",
+    navRegister: "Als Expert:in registrieren",
+  },
+  fr: {
+    navHome: "Analyseur",
+    navExperts: "Experts",
+    navRegister: "Rejoindre comme expert",
+  },
+  es: {
+    navHome: "Analizador",
+    navExperts: "Expertos",
+    navRegister: "Únete como experto",
+  },
+  ar: {
+    navHome: "المحلّل",
+    navExperts: "الخبراء",
+    navRegister: "انضم كخبير",
+  },
+  it: {
+    navHome: "Analizzatore",
+    navExperts: "Esperti",
+    navRegister: "Iscriviti come esperto",
+  },
+};
 
 export function getExpertsCopy(locale: AppLocale): ExpertsCopy {
   if (locale === "hy") return hy;
   if (locale === "en" || locale === "en-US") return en;
-  return fallback;
+  const nav = navByLocale[locale];
+  if (nav) return { ...en, ...nav };
+  return en;
 }
 
 export type ExpertRoleKey =

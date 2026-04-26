@@ -76,7 +76,7 @@ function NavMoreMenu({ label, links }: { label: string; links: MoreLink[] }) {
       {open ? (
         <div
           role="menu"
-          className="absolute end-0 top-full z-[100] mt-1 min-w-[min(100vw-2rem,16rem)] max-h-[min(70vh,24rem)] overflow-y-auto rounded-xl border border-white/[0.12] bg-[rgb(var(--surface-elevated))]/[0.98] py-1 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.65)] backdrop-blur-xl"
+          className="absolute end-0 top-full z-[200] mt-1 min-w-[min(100vw-2rem,16rem)] max-h-[min(70vh,24rem)] overflow-y-auto rounded-xl border border-white/[0.12] bg-[rgb(var(--surface-elevated))]/[0.98] py-1 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.65)] backdrop-blur-xl"
         >
           {links.map((l) => (
             <Link
@@ -170,8 +170,8 @@ export default function GlobalNav() {
     { href: "/how-we-use-ai", label: sx.navHowAi },
     { href: "/playbooks", label: pa.playbooksCta },
     { href: "/community/guidelines", label: pa.guidelinesCta },
-    { href: "/faq", label: "FAQ" },
-    { href: "/about", label: "About" },
+    { href: "/faq", label: t.navFaq },
+    { href: "/about", label: t.navAbout },
   ];
 
   const primaryLinks: MoreLink[] = [
@@ -179,7 +179,7 @@ export default function GlobalNav() {
     { href: "/experts", label: ec.navExperts },
     { href: "/community", label: cq.navLabel },
     { href: "/pricing", label: pr.navPricing },
-    { href: "/blog", label: "Blog" },
+    { href: "/blog", label: t.navBlog },
   ];
 
   const mobileMenuPortal =
@@ -190,14 +190,14 @@ export default function GlobalNav() {
             className="fixed inset-0 z-[300] flex flex-col bg-[rgb(var(--surface))]"
             role="dialog"
             aria-modal="true"
-            aria-label="Site menu"
+            aria-label={t.navMobileMenuTitle}
             style={{
               paddingBottom: "max(1rem, env(safe-area-inset-bottom, 0px))",
             }}
           >
             <div className="flex shrink-0 items-center justify-between border-b border-white/[0.1] bg-[rgb(var(--surface))] px-4 py-3 pt-[max(0.75rem,env(safe-area-inset-top,0px))]">
               <span className="font-display text-lg font-bold text-[rgb(var(--ink))]">
-                Menu
+                {t.navMobileMenuTitle}
               </span>
               <button
                 type="button"
@@ -286,7 +286,7 @@ export default function GlobalNav() {
 
   return (
     <>
-      <header className="print:hidden sticky top-0 z-50 border-b border-white/[0.08] bg-[rgb(var(--surface))]/72 pt-[env(safe-area-inset-top,0px)] backdrop-blur-3xl shadow-[0_1px_0_0_rgba(255,255,255,0.06),0_10px_40px_-12px_rgba(0,0,0,0.4)]">
+      <header className="print:hidden sticky top-0 z-[60] isolate border-b border-white/[0.08] bg-[rgb(var(--surface))]/72 pt-[env(safe-area-inset-top,0px)] backdrop-blur-3xl shadow-[0_1px_0_0_rgba(255,255,255,0.06),0_10px_40px_-12px_rgba(0,0,0,0.4)]">
       <NavRoutePrefetch />
       <div className="mx-auto flex max-w-6xl flex-nowrap items-center justify-between gap-2 px-3 py-2.5 sm:gap-3 sm:px-6">
         <Link
@@ -299,7 +299,7 @@ export default function GlobalNav() {
             aria-hidden
           />
           <span className="line-clamp-2 sm:line-clamp-none md:truncate">
-            Life Decision Engine
+            {t.brand}
           </span>
         </Link>
 

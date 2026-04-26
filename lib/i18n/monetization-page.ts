@@ -103,7 +103,18 @@ const en: MonetizationCopy = {
   pricingTeaserCta: "See all revenue models",
 };
 
+const navLabelByLocale: Partial<Record<AppLocale, string>> = {
+  ru: "Доход",
+  de: "Einnahmen",
+  fr: "Revenus",
+  es: "Ingresos",
+  ar: "الإيرادات",
+  it: "Ricavi",
+};
+
 export function getMonetizeCopy(locale: AppLocale): MonetizationCopy {
   if (locale === "hy") return hy;
+  const nav = navLabelByLocale[locale];
+  if (nav) return { ...en, navLabel: nav };
   return en;
 }

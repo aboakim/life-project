@@ -18,7 +18,22 @@ type SectionId = (typeof SECTION_IDS)[number];
 
 type LinkItem = { id: SectionId; label: string };
 
-export default function HomeSectionNav({ links }: { links: LinkItem[] }) {
+type Props = {
+  links: LinkItem[];
+  /** Localized — e.g. “On this page” */
+  navAriaLabel?: string;
+  /** Screen-reader label for the jump control */
+  jumpLabel?: string;
+  /** First option in mobile jump select */
+  jumpPlaceholder?: string;
+};
+
+export default function HomeSectionNav({
+  links,
+  navAriaLabel = "On this page",
+  jumpLabel = "Jump to section",
+  jumpPlaceholder = "— On this page —",
+}: Props) {
   const pathname = usePathname();
   const [active, setActive] = useState<SectionId | null>(null);
 
@@ -51,11 +66,11 @@ export default function HomeSectionNav({ links }: { links: LinkItem[] }) {
   return (
     <nav
       className="home-section-nav sticky top-[52px] z-30 border-b border-white/[0.1] bg-[rgb(var(--surface))]/70 backdrop-blur-2xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]"
-      aria-label="On this page"
+      aria-label={navAriaLabel}
     >
       <div className="mx-auto max-w-6xl px-3 py-2 sm:px-6 md:hidden">
         <label className="sr-only" htmlFor="home-section-jump">
-          Jump to section
+          {jumpLabel}
         </label>
         <select
           id="home-section-jump"
@@ -66,7 +81,7 @@ export default function HomeSectionNav({ links }: { links: LinkItem[] }) {
             if (id) window.location.hash = id;
           }}
         >
-          <option value="">— On this page —</option>
+          <option value="">{jumpPlaceholder}</option>
           {links.map(({ id, label }) => (
             <option key={id} value={id}>
               {label}

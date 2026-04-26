@@ -336,6 +336,24 @@ const ru: SiteExtras = {
     "Сообщения показываются простым текстом после лёгких автопроверок; можем удалять спам или небезопасный контент. Это обмен мнениями, не терапия и не юридическая помощь.",
   filterLang: "Язык",
   filterAll: "Все",
+  stayStripEyebrow: "В ближайшую минуту",
+  stayMoments: [
+    "Ясность — это процесс: мы картируем компромиссы, а не «ловим вайб».",
+    "Один структурированный проход лучше часов бесцельного скролла.",
+    "Сценарии, риски и временная шкала — чтобы следующий шаг был очевиден.",
+    "Когда ставки высоки, структура — это забота о будущем себе.",
+    "Сохраните прогон и перечитайте через неделю — хорошим решениям полезен второй взгляд.",
+  ],
+  sparkStripEyebrow: "Маленькие искры",
+  sparkShuffle: "Ещё искра",
+  sparkMoments: [
+    "Противоположность решению — не «ошибка», а дрейф, которому вы перестали давать имя.",
+    "Незавершённые развилки похожи на вкладки браузера: они тихо нагружают внимание.",
+    "Иногда «пока нет» — самое смелое «да» для себя.",
+    "Опишите худший случай в одном предложении — половина силы была в тумане.",
+    "Большой выбор — скорее гипотеза, которую вы проверяете календарём.",
+    "Ни одна методичка не заменит вслух сказанное, что вы не готовы потерять.",
+  ],
 };
 
 const de: SiteExtras = {
@@ -417,6 +435,24 @@ const de: SiteExtras = {
     "Beiträge erscheinen als Klartext nach leichten automatischen Checks; Spam oder unsichere Inhalte können wir entfernen. Das ist Austausch unter Peers, keine Therapie oder Rechtsberatung.",
   filterLang: "Sprache",
   filterAll: "Alle",
+  stayStripEyebrow: "In der nächsten Minute",
+  stayMoments: [
+    "Klarheit ist ein Prozess — wir kartieren Zielkonflikte statt „Vibes“.",
+    "Ein strukturierter Durchlauf schlägt stundenloses Scrollen.",
+    "Szenarien, Risiken und eine Zeitleiste — damit der nächste Schritt offensichtlich wird.",
+    "Wenn viel auf dem Spiel steht, ist Struktur Freundlichkeit für dein zukünftiges Ich.",
+    "Speichere den Lauf und lies ihn in einer Woche erneut — gute Entscheidungen profitieren vom zweiten Blick.",
+  ],
+  sparkStripEyebrow: "Kleine Funken",
+  sparkShuffle: "Noch ein Funke",
+  sparkMoments: [
+    "Das Gegenteil einer Entscheidung ist nicht „falsch“ — es ist Drift, die du nicht mehr benennst.",
+    "Offene Entscheidungen sind wie zu viele Tabs: sie kosten leise Aufmerksamkeit.",
+    "Manchmal ist „noch nicht“ das mutigste „Ja“ an dich selbst.",
+    "Schreib den Worst Case in einem Satz — die Hälfte der Macht war der Nebel.",
+    "Eine große Wahl ist eher eine Hypothese, die du mit Kalendertagen testest.",
+    "Kein Framework ersetzt, dass du laut sagst, was du nicht verlieren willst.",
+  ],
 };
 
 const fr: SiteExtras = {
@@ -498,6 +534,24 @@ const fr: SiteExtras = {
     "Les messages apparaissent en texte brut après contrôles automatisés légers ; nous pouvons retirer spam ou contenu risqué. Échange entre pairs, pas thérapie ni conseil juridique.",
   filterLang: "Langue",
   filterAll: "Toutes",
+  stayStripEyebrow: "Dans la prochaine minute",
+  stayMoments: [
+    "La clarté est un processus — on cartographie les compromis, pas les « vibes ».",
+    "Un passage structuré vaut mieux que des heures de défilement sans fin.",
+    "Scénarios, risques et chronologie pour que la prochaine étape paraisse évidente.",
+    "Quand les enjeux sont hauts, la structure est une gentillesse envers votre futur vous.",
+    "Sauvegardez votre analyse et relisez-la une semaine plus tard — les bonnes décisions aiment le second regard.",
+  ],
+  sparkStripEyebrow: "Petites étincelles",
+  sparkShuffle: "Une autre étincelle",
+  sparkMoments: [
+    "L’inverse d’une décision n’est pas « faux » — c’est la dérive que vous ne nommez plus.",
+    "Les bifurcations ouvertes ressemblent à trop d’onglets : elles taxent discrètement votre attention.",
+    "Parfois « pas encore » est le « oui » le plus courageux que vous vous accorderez.",
+    "Écrivez le pire cas en une phrase — la moitié de sa force était le brouillard.",
+    "Un grand choix est plutôt une hypothèse que vous testez avec des jours sur le calendrier.",
+    "Aucun cadre ne remplace le fait de dire à voix haut ce que vous refusez de perdre.",
+  ],
 };
 
 const es: SiteExtras = {
@@ -579,6 +633,24 @@ const es: SiteExtras = {
     "Las publicaciones se muestran en texto plano tras controles automáticos ligeros; podemos eliminar spam o contenido inseguro. Esto es intercambio entre pares, no terapía ni asesoramiento legal.",
   filterLang: "Idioma",
   filterAll: "Todos",
+  stayStripEyebrow: "En el próximo minuto",
+  stayMoments: [
+    "La claridad es un proceso: mapeamos compensaciones, no «vibes».",
+    "Una pasada estructurada vale más que horas de scroll sin rumbo.",
+    "Escenarios, riesgos y una línea de tiempo para que el siguiente paso sea obvio.",
+    "Cuando las apuestas son altas, la estructura es amabilidad con tu yo futuro.",
+    "Guarda tu corrida y revísala en una semana — a las buenas decisiones les gusta la segunda mirada.",
+  ],
+  sparkStripEyebrow: "Chispas pequeñas",
+  sparkShuffle: "Otra chispa",
+  sparkMoments: [
+    "Lo opuesto a decidir no es «equivocarse» — es la deriva que dejas de nombrar.",
+    "Las bifurcaciones abiertas son como demasiadas pestañas: roban atención en silencio.",
+    "A veces «todavía no» es el «sí» más valiente que te das.",
+    "Escribe el peor caso en una oración — la mitad del poder era la niebla.",
+    "Una gran elección es menos un veredicto que una hipótesis que pruebas con días en el calendario.",
+    "Ningún marco reemplaza decir en voz alta lo que no estás dispuesto a perder.",
+  ],
 };
 
 const it: SiteExtras = {
@@ -660,6 +732,24 @@ const it: SiteExtras = {
     "I messaggi compaiono come testo semplice dopo controlli automatici leggeri; possiamo rimuovere spam o contenuti non sicuri. Scambio tra pari, non terapia o consulenza legale.",
   filterLang: "Lingua",
   filterAll: "Tutte",
+  stayStripEyebrow: "Nel prossimo minuto",
+  stayMoments: [
+    "La chiarezza è un processo — mappiamo i trade‑off, non «i vibe».",
+    "Un passaggio strutturato batte ore di scroll senza meta.",
+    "Scenari, rischi e una timeline così il passo successivo è ovvio.",
+    "Quando la posta in gioco è alta, la struttura è gentilezza verso il te futuro.",
+    "Salva l’analisi e rileggila tra una settimana — alle buone decisioni piace il secondo sguardo.",
+  ],
+  sparkStripEyebrow: "Piccole scintille",
+  sparkShuffle: "Altra scintilla",
+  sparkMoments: [
+    "Il contrario di una decisione non è «sbagliato» — è la deriva che smetti di nominare.",
+    "Le biforcazioni aperte sono come troppe schede: ti rubano attenzione in silenzio.",
+    "A volte «non ancora» è il «sì» più coraggioso che ti dai.",
+    "Scrivi il caso peggiore in una frase — metà potenza era nella nebbia.",
+    "Una grande scelta è meno un verdetto che un’ipotesi che testi con i giorni del calendario.",
+    "Nessun framework sostituisce dirti ad alta voce cosa non sei disposto a perdere.",
+  ],
 };
 
 const ar: SiteExtras = {
@@ -741,6 +831,24 @@ const ar: SiteExtras = {
     "تظهر المشاركات كنص عادي بعد فحوصات آلية خفيفة؛ قد نزيل محتوى غير آمن أو سبام. هذا تبادل بين الأقران لا علاجاً ولا استشارة قانونية.",
   filterLang: "اللغة",
   filterAll: "الكل",
+  stayStripEyebrow: "في الدقيقة التالية",
+  stayMoments: [
+    "الوضوح عملية — نرسم المفاضلات لا «الأجواء».",
+    "جولة منظّمة واحدة أفضل من ساعات تمرير بلا هدف.",
+    "سيناريوهات ومخاطر وجدول زمني حتى يصبح الخطوة التالية واضحة.",
+    "عندما تكون المخاطر عالية، التنظيم لطف تجاه ذاتك المستقبلية.",
+    "احفظ التشغيل وأعد القراءة بعد أسبوع — القرارات الجيدة تحب النظرة الثانية.",
+  ],
+  sparkStripEyebrow: "شرارات صغيرة",
+  sparkShuffle: "شرارة أخرى",
+  sparkMoments: [
+    "عكس القرار ليس «خطأ» — إنها انجراف تتوقف عن تسميته.",
+    "التفرعات المفتوحة مثل تبويبات كثيرة: تسرق انتباهك بهدوء.",
+    "أحياناً «ليس بعد» هي أشجع «نعم» تعطيها لنفسك.",
+    "اكتب أسوأ سيناريو في جملة — نصف قوته كان الضباب.",
+    "الخيار الكبير أقل حكماً وأكثر فرضية تختبرها بأيام التقويم.",
+    "لا إطار يحل محل أن تقول بصوت عالٍ ما لن تخسره.",
+  ],
 };
 
 const table: Record<AppLocale, SiteExtras> = {

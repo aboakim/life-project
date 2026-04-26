@@ -85,8 +85,19 @@ const en: PricingCopy = {
   checkoutCanceled: "Checkout was canceled. You can try again anytime.",
 };
 
+const navPricingByLocale: Partial<Record<AppLocale, string>> = {
+  ru: "Цены",
+  de: "Preise",
+  fr: "Tarifs",
+  es: "Precios",
+  ar: "الأسعار",
+  it: "Prezzi",
+};
+
 export function getPricingCopy(locale: AppLocale): PricingCopy {
   if (locale === "hy") return hy;
   if (locale === "en" || locale === "en-US") return en;
+  const nav = navPricingByLocale[locale];
+  if (nav) return { ...en, navPricing: nav };
   return en;
 }

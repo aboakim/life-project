@@ -42,6 +42,7 @@ export default function StayMomentsStrip({ eyebrow, moments }: Props) {
         {eyebrow}
       </p>
       <p
+        dir="auto"
         className="mt-2 min-h-[3.1rem] text-sm font-medium leading-relaxed text-[rgb(var(--ink))] [text-wrap:pretty] sm:min-h-[2.75rem] motion-safe:transition-opacity motion-safe:duration-500"
         key={reducedMotion ? "static" : i}
         aria-live="polite"

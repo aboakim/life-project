@@ -76,6 +76,17 @@ export type UIStrings = {
   sectionNavPrivacy: string;
   /** Main nav overflow — “More” menu trigger */
   navMore: string;
+  /** Top nav — blog link */
+  navBlog: string;
+  navFaq: string;
+  navAbout: string;
+  /** Mobile drawer title */
+  navMobileMenuTitle: string;
+  /** Home sticky section nav (mobile select) */
+  homeSectionNavAria: string;
+  /** Screen-reader label for the section jump control */
+  homeSectionJumpLabel: string;
+  homeSectionJumpPlaceholder: string;
   productSectionTitle: string;
   productSectionSubtitle: string;
   bentoCards: ReadonlyArray<{ pill: string; title: string; body: string }>;
@@ -567,6 +578,13 @@ const uiHy: Partial<UIStrings> = {
     "Տեղային հասցե՝ http://localhost:3000 — գործարկեք `npm run dev` ձեր համակարգչում։",
   langLabel: "Լեզու",
   navMore: "Ավելին",
+  navBlog: "Բլոգ",
+  navFaq: "Հաճախ տրվող հարցեր",
+  navAbout: "Մեր մասին",
+  navMobileMenuTitle: "Մենյու",
+  homeSectionNavAria: "Այս էջում",
+  homeSectionJumpLabel: "Անցնել բաժին",
+  homeSectionJumpPlaceholder: "— Անցնել բաժին —",
   apiHintDemo:
     "Ցուցադրական վերլուծություն։ Ավելի խորը AI վերլուծությունը միանում է շուտով։",
   apiAnalysisServiceNotice:
@@ -766,6 +784,13 @@ const uiRu: Partial<UIStrings> = {
     "Локально: http://localhost:3000 — запустите `npm run dev` на компьютере.",
   langLabel: "Язык",
   navMore: "Ещё",
+  navBlog: "Блог",
+  navFaq: "Частые вопросы",
+  navAbout: "О проекте",
+  navMobileMenuTitle: "Меню",
+  homeSectionNavAria: "На этой странице",
+  homeSectionJumpLabel: "Перейти к разделу",
+  homeSectionJumpPlaceholder: "— Перейти к разделу —",
   apiHintDemo:
     "Структурированный демо-анализ. Глубокий AI-анализ скоро снова будет доступен.",
   apiAnalysisServiceNotice:
@@ -860,6 +885,13 @@ const uiDe: Partial<UIStrings> = {
     "Lokal: http://localhost:3000 — `npm run dev` auf deinem Rechner ausführen.",
   langLabel: "Sprache",
   navMore: "Mehr",
+  navBlog: "Blog",
+  navFaq: "FAQ",
+  navAbout: "Über uns",
+  navMobileMenuTitle: "Menü",
+  homeSectionNavAria: "Auf dieser Seite",
+  homeSectionJumpLabel: "Zu Abschnitt springen",
+  homeSectionJumpPlaceholder: "— Zu Abschnitt springen —",
   apiHintDemo:
     "Strukturierte Demo-Analyse. Die vollständige KI-Analyse ist in Kürze wieder verfügbar.",
   apiAnalysisServiceNotice:
@@ -954,6 +986,13 @@ const uiFr: Partial<UIStrings> = {
     "Local : http://localhost:3000 — lancez `npm run dev` sur votre machine.",
   langLabel: "Langue",
   navMore: "Plus",
+  navBlog: "Blog",
+  navFaq: "FAQ",
+  navAbout: "À propos",
+  navMobileMenuTitle: "Menu",
+  homeSectionNavAria: "Sur cette page",
+  homeSectionJumpLabel: "Aller à la section",
+  homeSectionJumpPlaceholder: "— Aller à la section —",
   apiHintDemo:
     "Analyse de démonstration structurée. L’analyse IA complète sera de nouveau disponible sous peu.",
   apiAnalysisServiceNotice:
@@ -1048,6 +1087,13 @@ const uiEs: Partial<UIStrings> = {
     "Local: http://localhost:3000 — ejecuta `npm run dev` en tu equipo.",
   langLabel: "Idioma",
   navMore: "Más",
+  navBlog: "Blog",
+  navFaq: "Preguntas frecuentes",
+  navAbout: "Acerca de",
+  navMobileMenuTitle: "Menú",
+  homeSectionNavAria: "En esta página",
+  homeSectionJumpLabel: "Ir a la sección",
+  homeSectionJumpPlaceholder: "— Ir a la sección —",
   apiHintDemo:
     "Análisis de demostración estructurado. El análisis de IA completo volverá a estar disponible en breve.",
   apiAnalysisServiceNotice:
@@ -1142,6 +1188,13 @@ const uiAr: Partial<UIStrings> = {
     "محلي: http://localhost:3000 — شغّل `npm run dev` على جهازك.",
   langLabel: "اللغة",
   navMore: "المزيد",
+  navBlog: "المدونة",
+  navFaq: "الأسئلة الشائعة",
+  navAbout: "من نحن",
+  navMobileMenuTitle: "القائمة",
+  homeSectionNavAria: "في هذه الصفحة",
+  homeSectionJumpLabel: "الانتقال إلى قسم",
+  homeSectionJumpPlaceholder: "— الانتقال إلى قسم —",
   apiHintDemo:
     "تحليل تجريبي مُنظَّم. سيعود التحليل الكامل بالذكاء الاصطناعي للعمل قريبًا.",
   apiAnalysisServiceNotice:
@@ -1236,6 +1289,13 @@ const uiIt: Partial<UIStrings> = {
     "Locale: http://localhost:3000 — esegui `npm run dev` sul tuo PC.",
   langLabel: "Lingua",
   navMore: "Altro",
+  navBlog: "Blog",
+  navFaq: "FAQ",
+  navAbout: "Chi siamo",
+  navMobileMenuTitle: "Menu",
+  homeSectionNavAria: "In questa pagina",
+  homeSectionJumpLabel: "Vai alla sezione",
+  homeSectionJumpPlaceholder: "— Vai alla sezione —",
   apiHintDemo:
     "Analisi dimostrativa strutturata. L’analisi IA completa tornerà disponibile a breve.",
   apiAnalysisServiceNotice:
@@ -1298,6 +1358,25 @@ const table: Record<AppLocale, Partial<UIStrings>> = {
 };
 
 /** English defaults for home trust/demo copy—locales can override in `trustHow*`. */
+const NAV_LINK_FALLBACKS: Pick<
+  UIStrings,
+  | "navBlog"
+  | "navFaq"
+  | "navAbout"
+  | "navMobileMenuTitle"
+  | "homeSectionNavAria"
+  | "homeSectionJumpLabel"
+  | "homeSectionJumpPlaceholder"
+> = {
+  navBlog: "Blog",
+  navFaq: "FAQ",
+  navAbout: "About",
+  navMobileMenuTitle: "Menu",
+  homeSectionNavAria: "On this page",
+  homeSectionJumpLabel: "Jump to section",
+  homeSectionJumpPlaceholder: "— Jump to section —",
+};
+
 const HOME_I18N_FALLBACKS: Pick<
   UIStrings,
   | "trustMicroPoints"
@@ -1327,6 +1406,7 @@ export function getUi(locale: AppLocale): UIStrings {
   const row = table[locale] ?? table.en;
   if (locale === "hy") {
     return {
+      ...NAV_LINK_FALLBACKS,
       ...HOME_I18N_FALLBACKS,
       ...trustHowEn,
       ...row,
@@ -1347,5 +1427,10 @@ export function getUi(locale: AppLocale): UIStrings {
               : locale === "ar"
                 ? trustHowAr
                 : trustHowEn;
-  return { ...HOME_I18N_FALLBACKS, ...trustBase, ...row } as UIStrings;
+  return {
+    ...NAV_LINK_FALLBACKS,
+    ...HOME_I18N_FALLBACKS,
+    ...trustBase,
+    ...row,
+  } as UIStrings;
 }
