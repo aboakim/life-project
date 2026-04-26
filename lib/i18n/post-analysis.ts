@@ -62,6 +62,14 @@ export type PostAnalysisCopy = {
   /** Short trust copy after results — transparent, autonomy-first (not pressure). */
   runAnotherTrustTitle: string;
   runAnotherTrustBody: string;
+  /** After results: ask which kind of professional, then deep-link to /experts */
+  needsHelpTitle: string;
+  needsHelpLead: string;
+  needsHelpSuggestedBadge: string;
+  needsHelpUnsure: string;
+  needsHelpOpenExperts: string;
+  /** Use {role} placeholder for localized role label */
+  needsHelpOpenForRole: string;
   historyLoadBrief: string;
   nextIterationTitle: string;
   nextIterationLead: string;
@@ -183,6 +191,13 @@ const en: PostAnalysisCopy = {
   runAnotherTrustTitle: "You stay in charge",
   runAnotherTrustBody:
     "A new question is not a gimmick to keep you scrolling — it is how structured thinking actually works. Your text and results stay on this device unless you turn on email reminders or copy something out. Each run reflects only what you enter then; take a break and come back when you want a clearer view.",
+  needsHelpTitle: "What kind of support do you need next?",
+  needsHelpLead:
+    "Pick the closest match — we open the directory with the right filter and your question prefilled in search (you can shorten it on that page).",
+  needsHelpSuggestedBadge: "Suggested",
+  needsHelpUnsure: "Not sure — show all experts",
+  needsHelpOpenExperts: "Continue to directory →",
+  needsHelpOpenForRole: "View {role} in the directory →",
   historyLoadBrief: "Load brief & re-run",
   nextIterationTitle: "Before your next run",
   nextIterationLead:
@@ -314,6 +329,13 @@ const hy: PostAnalysisCopy = {
   runAnotherTrustTitle: "Քո վերահսկողությունն է",
   runAnotherTrustBody:
     "Նոր հարց տալը «կլիկ պահելու» հնարք չէ — այդպես է աշխատում կառուցված մտածելը։ Քո տեքստը և արդյունքները մնում են այս սարքում, քանի դեռ ինքդ չես միացրել էլ․ հիշեցումը կամ չես պատճենել դրսում։ Յուրաքանչյուր գործարկում արտացոլում է միայն այն, ինչ այդ պահին ես մուտքագրել — կարող ես ընդմիշտ դադար վերցնել և հետո վերադառնալ ավելի պարզ տեսանկյունով։",
+  needsHelpTitle: "Հաջորդ քայլով ի՞նչ աջակցության կարիք ունես",
+  needsHelpLead:
+    "Ընտրիր ամենամոտ տարբերակը — կբացենք մասնագետների ցանկը ճիշտ զտումով, իսկ քո հարցը կլինի որոնման դաշտում, որպեսզի կարողանաս կարճացնել։",
+  needsHelpSuggestedBadge: "Առաջարկ",
+  needsHelpUnsure: "Դեռ հստակ չեմ — բոլոր մասնագետները",
+  needsHelpOpenExperts: "Անցնել ցանկին →",
+  needsHelpOpenForRole: "Դիտել {role} ցանկում →",
   historyLoadBrief: "Բեռնել brief-ը և կրկին գործարկել",
   nextIterationTitle: "Հաջորդ գործարկումից առաջ",
   nextIterationLead:

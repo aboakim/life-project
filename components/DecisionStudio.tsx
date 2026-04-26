@@ -82,6 +82,27 @@ type ApiResponse = {
 
 const NO_MATCHED_EXPERTS: MatchedExpertSummary[] = [];
 
+const DIRECTORY_ROLE_OPTIONS: ExpertRoleKey[] = [
+  "PSYCHOLOGIST",
+  "LAWYER",
+  "FINANCIAL",
+  "PHYSICIAN",
+  "COACH",
+  "IMMIGRATION",
+];
+
+function buildExpertsNeedsHref(
+  pick: ExpertRoleKey | "UNSURE",
+  decisionText: string,
+): string {
+  const q = decisionText.trim().slice(0, 200);
+  if (pick === "UNSURE") {
+    return q ? `/experts?q=${encodeURIComponent(q)}` : "/experts";
+  }
+  const base = `/experts?role=${encodeURIComponent(pick)}`;
+  return q ? `${base}&q=${encodeURIComponent(q)}` : base;
+}
+
 function previewHref(
   section: "workspace" | "product" | "language"
 ): string {
@@ -193,6 +214,9 @@ export default function DecisionStudio({
   const [preAnalysisEmailOpen, setPreAnalysisEmailOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<ApiResponse | null>(null);
+  const [expertNeedsPick, setExpertNeedsPick] = useState<
+    ExpertRoleKey | "UNSURE" | null
+  >(null);
   const [whisperAvailable, setWhisperAvailable] = useState(false);
 
   useEffect(() => {
@@ -373,6 +397,10 @@ export default function DecisionStudio({
     }, 420);
     return () => clearTimeout(id);
   }, [a]);
+
+  useEffect(() => {
+    setExpertNeedsPick(null);
+  }, [result]);
 
   const expertsSearchHref = useMemo(() => {
     const q = decision.trim().slice(0, 160);
@@ -1349,6 +1377,72 @@ export default function DecisionStudio({
                 </p>
               </section>
             ) : null}
+
+            <section
+              className="glass animate-fade-up rounded-3xl border border-cyan-400/20 bg-gradient-to-br from-cyan-500/[0.06] to-transparent p-6 sm:p-7"
+              aria-labelledby="needs-help-heading"
+            >
+              <h2
+                id="needs-help-heading"
+                className="text-lg font-semibold text-cyan-50/95"
+              >
+                {pa.needsHelpTitle}
+              </h2>
+              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
+                {pa.needsHelpLead}
+              </p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {DIRECTORY_ROLE_OPTIONS.map((role) => {
+                  const suggested = a.suggestedDirectoryRole === role;
+                  const selected = expertNeedsPick === role;
+                  return (
+                    <button
+                      key={role}
+                      type="button"
+                      onClick={() => setExpertNeedsPick(role)}
+                      className={`inline-flex max-w-full flex-wrap items-center gap-1.5 rounded-2xl border px-3 py-2 text-left text-sm font-medium transition ${
+                        selected
+                          ? "border-cyan-400/55 bg-cyan-500/20 text-cyan-50 ring-2 ring-cyan-400/40"
+                          : "border-white/[0.12] bg-white/[0.04] text-[rgb(var(--ink))] hover:border-cyan-400/35 hover:bg-white/[0.07]"
+                      }`}
+                    >
+                      <span>{roleLabel(locale, role)}</span>
+                      {suggested ? (
+                        <span className="rounded-md bg-cyan-500/25 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-cyan-100/90">
+                          {pa.needsHelpSuggestedBadge}
+                        </span>
+                      ) : null}
+                    </button>
+                  );
+                })}
+                <button
+                  type="button"
+                  onClick={() => setExpertNeedsPick("UNSURE")}
+                  className={`rounded-2xl border px-3 py-2 text-sm font-medium transition ${
+                    expertNeedsPick === "UNSURE"
+                      ? "border-cyan-400/55 bg-cyan-500/20 text-cyan-50 ring-2 ring-cyan-400/40"
+                      : "border-white/[0.12] bg-white/[0.04] text-[rgb(var(--ink-soft))] hover:border-cyan-400/35 hover:bg-white/[0.07]"
+                  }`}
+                >
+                  {pa.needsHelpUnsure}
+                </button>
+              </div>
+              {expertNeedsPick !== null ? (
+                <div className="mt-5">
+                  <Link
+                    href={buildExpertsNeedsHref(expertNeedsPick, decision)}
+                    className="inline-flex rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-[rgb(var(--accent)/0.28)] transition hover:brightness-110"
+                  >
+                    {expertNeedsPick === "UNSURE"
+                      ? pa.needsHelpOpenExperts
+                      : pa.needsHelpOpenForRole.replace(
+                          "{role}",
+                          roleLabel(locale, expertNeedsPick),
+                        )}
+                  </Link>
+                </div>
+              ) : null}
+            </section>
 
             {matchedExperts.length > 0 ? (
               <section className="glass animate-fade-up rounded-3xl p-6 sm:p-7">
