@@ -59,6 +59,9 @@ export type PostAnalysisCopy = {
   /** Nudge users to run analyses repeatedly */
   runAnotherHint: string;
   runAnotherCta: string;
+  /** Short trust copy after results — transparent, autonomy-first (not pressure). */
+  runAnotherTrustTitle: string;
+  runAnotherTrustBody: string;
   historyLoadBrief: string;
   nextIterationTitle: string;
   nextIterationLead: string;
@@ -175,8 +178,11 @@ const en: PostAnalysisCopy = {
   ],
   specialistCopy: "Copy",
   runAnotherHint:
-    "Most big decisions need a second pass — update your brief and compare the score.",
+    "Many big forks benefit from a second pass: tweak your brief, add numbers or constraints, and see how the picture shifts — at your pace.",
   runAnotherCta: "Run another analysis",
+  runAnotherTrustTitle: "You stay in charge",
+  runAnotherTrustBody:
+    "A new question is not a gimmick to keep you scrolling — it is how structured thinking actually works. Your text and results stay on this device unless you turn on email reminders or copy something out. Each run reflects only what you enter then; take a break and come back when you want a clearer view.",
   historyLoadBrief: "Load brief & re-run",
   nextIterationTitle: "Before your next run",
   nextIterationLead:
@@ -303,8 +309,11 @@ const hy: PostAnalysisCopy = {
   ],
   specialistCopy: "Պատճենել",
   runAnotherHint:
-    "Մեծ որոշումները հաճախ պահանջում են երկրորդ փորձ — թարմացրու brief-ը և համեմատիր միավորները։",
+    "Մեծ ընտրություններին հաճախ օգնում է երկրորդ անցումը՝ խմբագրիր brief-ը, ավելացրու թվեր կամ սահմաններ, տես՝ ինչպես է փոխվում պատկերը — քո ռիթմով։",
   runAnotherCta: "Նոր վերլուծություն",
+  runAnotherTrustTitle: "Քո վերահսկողությունն է",
+  runAnotherTrustBody:
+    "Նոր հարց տալը «կլիկ պահելու» հնարք չէ — այդպես է աշխատում կառուցված մտածելը։ Քո տեքստը և արդյունքները մնում են այս սարքում, քանի դեռ ինքդ չես միացրել էլ․ հիշեցումը կամ չես պատճենել դրսում։ Յուրաքանչյուր գործարկում արտացոլում է միայն այն, ինչ այդ պահին ես մուտքագրել — կարող ես ընդմիշտ դադար վերցնել և հետո վերադառնալ ավելի պարզ տեսանկյունով։",
   historyLoadBrief: "Բեռնել brief-ը և կրկին գործարկել",
   nextIterationTitle: "Հաջորդ գործարկումից առաջ",
   nextIterationLead:

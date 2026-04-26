@@ -1314,6 +1314,14 @@ export default function DecisionStudio({
                   {pa.runAnotherCta}
                 </button>
               </div>
+              <div className="mt-4 border-t border-white/[0.08] pt-4">
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[rgb(var(--accent-dim))]">
+                  {pa.runAnotherTrustTitle}
+                </p>
+                <p className="mt-2 max-w-3xl text-xs leading-relaxed text-[rgb(var(--ink-soft))]/90 [text-wrap:pretty]">
+                  {pa.runAnotherTrustBody}
+                </p>
+              </div>
             </div>
 
             <section className="glass animate-fade-up rounded-3xl p-6 sm:p-7">
