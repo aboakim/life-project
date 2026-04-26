@@ -1321,28 +1321,30 @@ export default function DecisionStudio({
                 {t.resultsYouAreHere}
               </h2>
             </div>
-            <div className="animate-fade-up flex flex-col gap-3 rounded-2xl border border-[rgb(var(--accent-2))]/35 bg-gradient-to-br from-[rgb(var(--accent))]/14 via-white/[0.04] to-transparent px-4 py-4 shadow-[0_16px_48px_-28px_rgb(var(--accent)/0.45)] sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-6">
-              <p className="max-w-2xl text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
-                {pa.runAnotherHint}
-              </p>
-              <div className="flex w-full flex-col gap-2 sm:w-auto sm:min-w-0 sm:flex-row sm:items-center sm:gap-2">
-                <ReadAloudReportButton
-                  text={readAloudText}
-                  locale={locale}
-                  labels={{
-                    readAloud: t.readAloud,
-                    stop: t.readAloudStop,
-                  }}
-                />
-                <button
-                  type="button"
-                  onClick={scrollToAnalyzer}
-                  className="shrink-0 rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-[rgb(var(--accent)/0.28)] transition hover:brightness-110"
-                >
-                  {pa.runAnotherCta}
-                </button>
+            <div className="animate-fade-up flex flex-col gap-4 rounded-2xl border border-[rgb(var(--accent-2))]/35 bg-gradient-to-br from-[rgb(var(--accent))]/14 via-white/[0.04] to-transparent px-4 py-4 shadow-[0_16px_48px_-28px_rgb(var(--accent)/0.45)] sm:px-6">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+                <p className="max-w-2xl text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
+                  {pa.runAnotherHint}
+                </p>
+                <div className="flex w-full flex-col gap-2 sm:w-auto sm:min-w-0 sm:flex-row sm:items-center sm:gap-2">
+                  <ReadAloudReportButton
+                    text={readAloudText}
+                    locale={locale}
+                    labels={{
+                      readAloud: t.readAloud,
+                      stop: t.readAloudStop,
+                    }}
+                  />
+                  <button
+                    type="button"
+                    onClick={scrollToAnalyzer}
+                    className="shrink-0 rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-[rgb(var(--accent)/0.28)] transition hover:brightness-110"
+                  >
+                    {pa.runAnotherCta}
+                  </button>
+                </div>
               </div>
-              <div className="mt-4 border-t border-white/[0.08] pt-4">
+              <div className="border-t border-white/[0.08] pt-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[rgb(var(--accent-dim))]">
                   {pa.runAnotherTrustTitle}
                 </p>
@@ -1357,7 +1359,7 @@ export default function DecisionStudio({
                 {t.sectionSummary}
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-[rgb(var(--ink-soft))]">
-                {a.summary}
+                {typeof a.summary === "string" ? a.summary : ""}
               </p>
               <p className="mt-3 text-sm text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
                 {t.stakesResultPrefix} —{" "}

@@ -1324,7 +1324,7 @@ const HOME_I18N_FALLBACKS: Pick<
 };
 
 export function getUi(locale: AppLocale): UIStrings {
-  const row = table[locale];
+  const row = table[locale] ?? table.en;
   if (locale === "hy") {
     return {
       ...HOME_I18N_FALLBACKS,

@@ -874,7 +874,7 @@ export function buildDemoAnalysis(
     },
   };
 
-  const b = blocks[locale];
+  const b = blocks[locale] ?? blocks["en-US"];
   const merged: DecisionAnalysis = {
     ...b,
     ...professionalDemo(locale, quote, seed),
@@ -886,7 +886,9 @@ export function buildDemoAnalysis(
       locale === "hy"
         ? `\n\n[Զգացողական ծանրություն՝ ${w}/10]`
         : `\n\n[Rated decision weight: ${w}/10]`;
-    merged.summary = merged.summary + tag;
+    const base =
+      typeof merged.summary === "string" ? merged.summary : "";
+    merged.summary = base + tag;
   }
   return merged;
 }
