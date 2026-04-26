@@ -31,7 +31,7 @@ import NavRoutePrefetch from "@/components/NavRoutePrefetch";
 const LOCALE_KEY = "lde-locale";
 
 const navLinkClass =
-  "shrink-0 rounded-xl px-2.5 py-2 text-[rgb(var(--ink-soft))] transition-colors duration-200 hover:bg-white/[0.08] hover:text-[rgb(var(--ink))] sm:px-3";
+  "shrink-0 whitespace-nowrap rounded-xl px-2.5 py-2 text-[rgb(var(--ink-soft))] transition-colors duration-200 hover:bg-white/[0.08] hover:text-[rgb(var(--ink))] sm:px-3";
 
 const mobileNavLinkClass =
   "block rounded-xl px-3 py-3.5 text-base font-medium text-[rgb(var(--ink))] transition hover:bg-white/[0.08] active:bg-white/[0.1]";
@@ -302,21 +302,23 @@ export default function GlobalNav() {
           <span className="min-w-0 truncate">{t.brand}</span>
         </Link>
 
-        <div className="relative z-10 flex min-w-0 items-center justify-end gap-0.5 ps-1 md:gap-1 md:ps-2">
-          {/* Desktop / tablet nav */}
+        <div className="relative z-10 flex min-w-0 items-center justify-end gap-1 ps-1 md:gap-2 md:ps-2">
+          {/* Desktop / tablet nav — grid so primary links always get a real minmax(0,1fr) lane */}
           <nav
-            className="hidden min-w-0 flex-1 flex-nowrap items-center justify-end gap-0.5 text-[0.9rem] font-medium md:flex md:text-[0.9rem] lg:text-base"
+            className="hidden min-w-0 gap-1 text-[0.9rem] font-medium md:flex-1 md:grid md:w-full md:min-w-0 md:grid-cols-[minmax(0,1fr)_auto_auto_auto] md:items-center md:text-[0.9rem] lg:text-base"
             aria-label="Main"
           >
-            <div className="flex min-w-0 max-w-full flex-nowrap items-center justify-end gap-0.5 overflow-x-auto overscroll-x-contain scrollbar-none">
+            <div className="flex min-w-0 flex-nowrap items-center justify-end gap-0.5 overflow-x-auto overscroll-x-contain scrollbar-none md:justify-end">
               {primaryLinks.map((l) => (
                 <Link key={l.href} href={l.href} className={navLinkClass}>
                   {l.label}
                 </Link>
               ))}
             </div>
-            <NavMoreMenu label={t.navMore} links={moreLinks} />
-            <label className="flex shrink-0 items-center gap-1.5 ps-0.5">
+            <div className="flex shrink-0 justify-end">
+              <NavMoreMenu label={t.navMore} links={moreLinks} />
+            </div>
+            <label className="flex min-w-0 shrink-0 items-center justify-end gap-1.5 ps-0.5">
               <span className="sr-only">{t.langLabel}</span>
               <select
                 value={locale}
@@ -343,12 +345,14 @@ export default function GlobalNav() {
                 ))}
               </select>
             </label>
-            <Link
-              href="/experts/register"
-              className="shrink-0 rounded-xl border border-[rgb(var(--accent))]/45 bg-[rgb(var(--accent))]/16 px-4 py-2 text-sm font-semibold text-[rgb(var(--ink))] shadow-[0_0_28px_-12px_rgb(var(--accent)/0.5)] transition hover:border-[rgb(var(--accent))]/65 hover:bg-[rgb(var(--accent))]/22"
-            >
-              {ec.navRegister}
-            </Link>
+            <div className="flex shrink-0 justify-end">
+              <Link
+                href="/experts/register"
+                className="shrink-0 rounded-xl border border-[rgb(var(--accent))]/45 bg-[rgb(var(--accent))]/16 px-3 py-2 text-sm font-semibold text-[rgb(var(--ink))] shadow-[0_0_28px_-12px_rgb(var(--accent)/0.5)] transition hover:border-[rgb(var(--accent))]/65 hover:bg-[rgb(var(--accent))]/22 lg:px-4"
+              >
+                {ec.navRegister}
+              </Link>
+            </div>
           </nav>
 
           {/* Mobile menu toggle */}

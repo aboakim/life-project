@@ -65,10 +65,10 @@ export default function HomeSectionNav({
 
   return (
     <nav
-      className="home-section-nav sticky top-[52px] z-30 border-b border-white/[0.1] bg-[rgb(var(--surface))]/70 backdrop-blur-2xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]"
+      className="home-section-nav sticky top-[52px] z-30 min-w-0 w-full border-b border-white/[0.1] bg-[rgb(var(--surface))]/70 backdrop-blur-2xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]"
       aria-label={navAriaLabel}
     >
-      <div className="mx-auto max-w-6xl px-3 py-2 sm:px-6 md:hidden">
+      <div className="mx-auto min-w-0 max-w-6xl px-3 py-2 sm:px-6 md:hidden">
         <label className="sr-only" htmlFor="home-section-jump">
           {jumpLabel}
         </label>
@@ -89,7 +89,7 @@ export default function HomeSectionNav({
           ))}
         </select>
       </div>
-      <div className="mx-auto hidden max-w-6xl items-center gap-1 overflow-x-auto px-4 py-2.5 scrollbar-none sm:px-6 md:flex">
+      <div className="mx-auto hidden min-w-0 max-w-6xl items-center gap-1 overflow-x-auto overscroll-x-contain px-4 py-2.5 scrollbar-none sm:px-6 md:flex md:flex-nowrap">
         {links.map(({ id, label }) => {
           const isActive = active === id;
           return (
@@ -98,8 +98,8 @@ export default function HomeSectionNav({
               href={`#${id}`}
               className={
                 isActive
-                  ? "shrink-0 rounded-full bg-white/[0.1] px-3.5 py-2 text-xs font-semibold text-[rgb(var(--ink))] ring-1 ring-[rgb(var(--accent))]/35"
-                  : "shrink-0 rounded-full px-3.5 py-2 text-xs font-medium text-[rgb(var(--ink-soft))] transition hover:bg-white/[0.05] hover:text-[rgb(var(--ink))]"
+                  ? "shrink-0 whitespace-nowrap rounded-full bg-white/[0.1] px-3.5 py-2 text-xs font-semibold text-[rgb(var(--ink))] ring-1 ring-[rgb(var(--accent))]/35"
+                  : "shrink-0 whitespace-nowrap rounded-full px-3.5 py-2 text-xs font-medium text-[rgb(var(--ink-soft))] transition hover:bg-white/[0.05] hover:text-[rgb(var(--ink))]"
               }
             >
               {label}
