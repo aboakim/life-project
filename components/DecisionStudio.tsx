@@ -15,7 +15,10 @@ import TimeCapsuleCard from "@/components/home/TimeCapsuleCard";
 import SparkShuffleStrip from "@/components/home/SparkShuffleStrip";
 import StayMomentsStrip from "@/components/home/StayMomentsStrip";
 import LabMomentsStrip from "@/components/home/LabMomentsStrip";
+import AdSenseBanner from "@/components/ads/AdSenseBanner";
 import AmbientDriftLayer from "@/components/ui/AmbientDriftLayer";
+import ChromeHorizon from "@/components/ui/ChromeHorizon";
+import LatticeSheen from "@/components/ui/LatticeSheen";
 import OrbDecor from "@/components/ui/OrbDecor";
 import TiltPlane from "@/components/ui/TiltPlane";
 import { getExpertsCopy } from "@/lib/i18n/experts-network";
@@ -561,6 +564,12 @@ export default function DecisionStudio({
       <KonamiSurprise copy={delight} />
       <OrbDecor />
       <AmbientDriftLayer />
+      {!focusLayout ? <LatticeSheen /> : null}
+      {!focusLayout ? (
+        <div className="relative z-[8] mx-auto max-w-6xl px-4 sm:px-6">
+          <ChromeHorizon className="pt-1" />
+        </div>
+      ) : null}
       <HomeSectionNav
         links={sectionLinks}
         navAriaLabel={t.homeSectionNavAria}
@@ -1198,6 +1207,15 @@ export default function DecisionStudio({
             </Link>
           </div>
         )}
+
+        {!focusLayout ? (
+          <AdSenseBanner
+            reserveWhenDisabled
+            placeholderEyebrow={t.adReservedEyebrow}
+            placeholderHint={t.adReservedHint}
+            className="my-2"
+          />
+        ) : null}
 
         {/* Workspace: disclaimer + analyzer */}
         <RevealOnScroll>

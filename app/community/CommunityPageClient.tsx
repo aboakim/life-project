@@ -6,6 +6,7 @@ import CommunityBoard from "@/components/community/CommunityBoard";
 import MarketingPageShell from "@/components/layout/MarketingPageShell";
 import { getCommunityCopy } from "@/lib/i18n/community-page";
 import { getSiteExtras } from "@/lib/i18n/site-extras";
+import { getUi } from "@/lib/i18n/ui";
 import {
   isAppLocale,
   type AppLocale,
@@ -45,6 +46,7 @@ export default function CommunityPageClient() {
 
   const t = getCommunityCopy(locale);
   const sx = getSiteExtras(locale);
+  const ui = getUi(locale);
 
   return (
     <MarketingPageShell
@@ -52,7 +54,11 @@ export default function CommunityPageClient() {
       title={t.pageTitle}
       subtitle={t.pageSubtitle}
     >
-      <AdSenseBanner />
+      <AdSenseBanner
+        reserveWhenDisabled
+        placeholderEyebrow={ui.adReservedEyebrow}
+        placeholderHint={ui.adReservedHint}
+      />
       <CommunityBoard
         t={t}
         locale={locale}

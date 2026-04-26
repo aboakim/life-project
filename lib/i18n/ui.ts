@@ -130,6 +130,9 @@ export type UIStrings = {
   /** Home only — points users to the full-screen /analyze experience */
   homeAnalyzerPromoLine: string;
   homeAnalyzerPromoCta: string;
+  /** Reserved ad frame when AdSense env is off — layout + copy only */
+  adReservedEyebrow: string;
+  adReservedHint: string;
   sectionProfessional: string;
   sectionDirectoryExperts: string;
   expertOpenInDirectory: string;
@@ -607,6 +610,9 @@ const uiHy: Partial<UIStrings> = {
   homeAnalyzerPromoLine:
     "Ցանկանա՞ք էջ, որտեղ միայն վերլուծիչն է, առանց երկար սքրոլի․",
   homeAnalyzerPromoCta: "Բացել /analyze",
+  adReservedEyebrow: "Գովազդի տարածք",
+  adReservedHint:
+    "Այս գոտին հաշվարկված է ստանդարտ ցուցադրման չափերի համար։ AdSense-ը միացնելուց հետո այստեղ կարող են երևալ գովազդներ — երբեք քո գաղտնի դաշտերի վրա չենք դնում։",
   sectionProfessional: "Ում կարող եք դիմել (մասնագիտական ուղեցույց)",
   sectionDirectoryExperts: "Մեր ցանցում գրանցված մասնագետներ այս ուղղությամբ",
   expertOpenInDirectory: "Բացել ցանկում",
@@ -1387,6 +1393,8 @@ const HOME_I18N_FALLBACKS: Pick<
   | "homeDemoExample3"
   | "homeDemoCta"
   | "analyzingProgressLine"
+  | "adReservedEyebrow"
+  | "adReservedHint"
 > = {
   trustMicroPoints: [
     "No data stored as a public post",
@@ -1400,6 +1408,9 @@ const HOME_I18N_FALLBACKS: Pick<
   homeDemoExample3: "Relationship fork — stay or go?",
   homeDemoCta: "Try demo",
   analyzingProgressLine: "Analyzing your decision…",
+  adReservedEyebrow: "Sponsored space",
+  adReservedHint:
+    "This band is sized for standard display units. After AdSense slots are wired, ads may appear here—never over your private fields.",
 };
 
 export function getUi(locale: AppLocale): UIStrings {

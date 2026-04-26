@@ -1,4 +1,6 @@
 import type { ReactNode } from "react";
+import ChromeHorizon from "@/components/ui/ChromeHorizon";
+import LatticeSheen from "@/components/ui/LatticeSheen";
 import OrbDecor from "@/components/ui/OrbDecor";
 
 type Props = {
@@ -17,6 +19,7 @@ export default function MarketingPageShell({
   return (
     <div id="main" className="relative z-10 min-h-screen pb-28">
       <OrbDecor />
+      <LatticeSheen />
       <div className="mx-auto max-w-6xl px-4 pt-8 sm:px-6 sm:pt-10">
         <header className="animate-fade-up relative overflow-hidden rounded-[2.5rem] border border-white/[0.16] bg-gradient-to-br from-white/[0.13] via-white/[0.05] to-transparent px-6 py-10 shadow-[0_32px_100px_-48px_rgb(var(--accent)/0.42),0_0_0_1px_rgba(255,255,255,0.08)_inset] backdrop-blur-md sm:px-12 sm:py-12">
           <div className="pointer-events-none absolute inset-y-8 start-0 w-1 rounded-full bg-gradient-to-b from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] opacity-95 shadow-[0_0_24px_rgb(var(--accent)/0.5)] sm:inset-y-10" />
@@ -38,6 +41,7 @@ export default function MarketingPageShell({
             ) : null}
           </div>
         </header>
+        <ChromeHorizon className="mt-8" />
         <div className="mt-10">{children}</div>
       </div>
     </div>
