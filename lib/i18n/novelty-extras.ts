@@ -14,6 +14,12 @@ export type NoveltyCopy = {
   fieldNotesClear: string;
   fieldNotesEmpty: string;
   fieldNotesLocaleHint: string;
+  /** /field-notes — numbered how-to */
+  fieldNotesFlowEyebrow: string;
+  fieldNotesFlow1: string;
+  fieldNotesFlow2: string;
+  fieldNotesFlow3: string;
+  fieldNotesAnalyzerLink: string;
   signatureEyebrow: string;
   signatureMoodPrefix: string;
   moodNames: readonly string[];
@@ -113,6 +119,14 @@ const en: NoveltyCopy = {
   fieldNotesEmpty: "Paste something to see the radar.",
   fieldNotesLocaleHint:
     "Stopword filter adapts for English vs Armenian; other languages still get counts.",
+  fieldNotesFlowEyebrow: "Suggested order on this page",
+  fieldNotesFlow1:
+    "Paste rough or long text in the main box — it stays on this device only.",
+  fieldNotesFlow2:
+    "Watch the right panel for reading time, token counts, unique tokens, and weighted words.",
+  fieldNotesFlow3:
+    "When a line feels sharp enough, carry it into the structured analyzer (Decision or Context fields).",
+  fieldNotesAnalyzerLink: "Open analyzer →",
   signatureEyebrow: "Brief signature",
   signatureMoodPrefix: "Palette mood",
   moodNames: MOODS_EN,
@@ -160,6 +174,14 @@ const hy: NoveltyCopy = {
   fieldNotesEmpty: "Կպցրու տեքստ՝ տեսնելու «ռադարը»։",
   fieldNotesLocaleHint:
     "Կանգառային բառերի ֆիլտրը հարմարեցված է անգլերեն/հայերենի համար, մնացած լեզուներում հաշվարկները մնում են։",
+  fieldNotesFlowEyebrow: "Առաջարկվող հերթ այստեղ",
+  fieldNotesFlow1:
+    "Կպցրու կոպիտ կամ երկար տեքստը հիմնական դաշտում — մնում է միայն այս սարքում։",
+  fieldNotesFlow2:
+    "Հետևիր աջ վահանակին՝ կարդալու ժամանակ, թոքեններ, չկրկնվող թիվ, քաշով բառեր։",
+  fieldNotesFlow3:
+    "Երբ տողը բավարար սուր է զգում, տար այն կառուցված վերլուծիչ (Որոշում կամ Կոնտեքստ դաշտեր)։",
+  fieldNotesAnalyzerLink: "Բացել վերլուծիչը →",
   signatureEyebrow: "Brief-ի ստորագրություն",
   signatureMoodPrefix: "Պալիտրայի տրամադրություն",
   moodNames: MOODS_HY,

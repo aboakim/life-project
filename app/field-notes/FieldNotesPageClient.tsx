@@ -56,7 +56,27 @@ export default function FieldNotesPageClient() {
       title={nx.fieldNotesTitle}
       subtitle={nx.fieldNotesSubtitle}
     >
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,20rem)]">
+      <div className="space-y-8">
+        <div className="rounded-2xl border border-white/[0.12] bg-white/[0.04] px-4 py-4 sm:px-6 sm:py-5">
+          <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-[rgb(var(--accent-warm))]/90">
+            {nx.fieldNotesFlowEyebrow}
+          </p>
+          <ol className="mt-3 list-decimal space-y-2.5 ps-4 text-sm leading-relaxed text-[rgb(var(--ink-soft))]/95 [text-wrap:pretty] marker:font-semibold marker:text-[rgb(var(--accent-2))]">
+            <li>{nx.fieldNotesFlow1}</li>
+            <li>{nx.fieldNotesFlow2}</li>
+            <li>
+              {nx.fieldNotesFlow3}{" "}
+              <Link
+                href="/analyze"
+                className="font-semibold text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+              >
+                {nx.fieldNotesAnalyzerLink}
+              </Link>
+            </li>
+          </ol>
+        </div>
+
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,20rem)]">
         <div className="rounded-3xl border border-white/[0.12] bg-[rgb(var(--surface-elevated))]/50 p-5 shadow-xl backdrop-blur-md sm:p-6">
           <label
             htmlFor="field-notes-text"
@@ -150,13 +170,22 @@ export default function FieldNotesPageClient() {
               </dl>
             )}
           </div>
-          <Link
-            href="/"
-            className="inline-flex text-sm font-semibold text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
-          >
-            ← {ui.analyzeBackHome}
-          </Link>
+          <div className="flex flex-col gap-2">
+            <Link
+              href="/analyze"
+              className="inline-flex text-sm font-semibold text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+            >
+              {nx.fieldNotesAnalyzerLink}
+            </Link>
+            <Link
+              href="/"
+              className="inline-flex text-sm font-semibold text-[rgb(var(--ink-soft))] underline-offset-2 hover:underline"
+            >
+              ← {ui.analyzeBackHome}
+            </Link>
+          </div>
         </aside>
+      </div>
       </div>
     </MarketingPageShell>
   );
