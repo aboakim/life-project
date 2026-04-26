@@ -288,19 +288,18 @@ export default function GlobalNav() {
     <>
       <header className="print:hidden sticky top-0 z-[60] isolate border-b border-white/[0.08] bg-[rgb(var(--surface))]/72 pt-[env(safe-area-inset-top,0px)] backdrop-blur-3xl shadow-[0_1px_0_0_rgba(255,255,255,0.06),0_10px_40px_-12px_rgba(0,0,0,0.4)]">
       <NavRoutePrefetch />
-      <div className="mx-auto flex max-w-6xl flex-nowrap items-center justify-between gap-2 px-3 py-2.5 sm:gap-3 sm:px-6">
+      <div className="mx-auto flex min-w-0 max-w-6xl flex-nowrap items-center justify-between gap-2 px-3 py-2.5 sm:gap-3 sm:px-6">
         <Link
           href="/"
-          className="font-display flex min-w-0 max-w-[min(100%,12rem)] shrink-0 items-center gap-2 text-[0.95rem] font-extrabold leading-tight tracking-tight text-[rgb(var(--ink))] transition hover:text-[rgb(var(--accent-2))] sm:max-w-none sm:text-lg md:text-xl"
+          title={t.brand}
+          className="font-display flex min-w-0 max-w-[min(100%,11rem)] shrink overflow-hidden items-center gap-2 text-[0.95rem] font-extrabold leading-tight tracking-tight text-[rgb(var(--ink))] transition hover:text-[rgb(var(--accent-2))] sm:max-w-[min(100%,12rem)] md:max-w-[min(13rem,34%)] lg:max-w-[min(15rem,30%)] sm:text-lg md:text-xl"
           onClick={() => setMobileOpen(false)}
         >
           <span
             className="hidden size-9 shrink-0 rounded-xl bg-gradient-to-br from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] shadow-lg shadow-[rgb(var(--accent)/0.35)] sm:inline-block"
             aria-hidden
           />
-          <span className="line-clamp-2 sm:line-clamp-none md:truncate">
-            {t.brand}
-          </span>
+          <span className="min-w-0 truncate">{t.brand}</span>
         </Link>
 
         {/* Desktop / tablet nav */}
