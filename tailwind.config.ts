@@ -34,6 +34,7 @@ const config: Config = {
           dim: "rgb(var(--accent-dim) / <alpha-value>)",
           sky: "rgb(var(--accent-sky) / <alpha-value>)",
           mint: "rgb(var(--accent-mint) / <alpha-value>)",
+          sage: "rgb(var(--accent-sage) / <alpha-value>)",
           coral: "rgb(var(--accent-coral) / <alpha-value>)",
         },
       },

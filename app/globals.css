@@ -3,26 +3,28 @@
 @tailwind utilities;
 
 /*
- * Design system v5 — “dawn lavender”
- * Surfaces + accents tuned for a bit more hue spread (violet · teal · sky · coral)
- * while keeping light-on-mid contrast.
+ * Design system v5 — “dawn lavender” + open sage
+ * Less dominant violet in the mesh; soft green (sage / mint) balances the UI.
  */
 :root {
-  --surface: 50 46 86;
-  --surface-2: 62 56 104;
-  --surface-elevated: 76 66 118;
+  --surface: 46 52 84;
+  --surface-2: 56 62 98;
+  --surface-elevated: 68 74 110;
   --ink: 252 251 255;
-  --ink-soft: 212 210 236;
-  --accent: 178 136 255;
-  --accent-2: 68 220 206;
+  --ink-soft: 210 218 232;
+  /* Periwinkle — less saturated violet than before */
+  --accent: 154 158 255;
+  --accent-2: 72 224 188;
   --accent-warm: 255 206 160;
   --accent-coral: 255 148 198;
-  --accent-magenta: 238 172 255;
-  --accent-dim: 200 192 252;
-  --glow: 208 194 255;
+  --accent-magenta: 226 198 248;
+  --accent-dim: 192 206 248;
+  --glow: 198 210 255;
   /* Extra mesh hues (body / orbs / washes) */
   --accent-sky: 118 196 255;
-  --accent-mint: 94 228 196;
+  --accent-mint: 108 232 200;
+  /* Open, airy sage — pairs with mint for green presence */
+  --accent-sage: 132 218 178;
 }
 
 html {
@@ -46,18 +48,22 @@ body {
   @apply min-h-screen antialiased;
   color: rgb(var(--ink));
   background-color: rgb(var(--surface));
-  /* Softer grid + broader mesh — coral / sky layers add gentle hue motion */
+  /* Mesh: sage + mint forward; violet / magenta eased back */
   background-image:
     radial-gradient(circle at 1.5px 1.5px, rgb(255 255 255 / 0.055) 1px, transparent 0),
-    radial-gradient(ellipse 1180px 560px at 88% 2%, rgb(var(--accent) / 0.23), transparent 58%),
-    radial-gradient(ellipse 920px 540px at 2% 22%, rgb(var(--accent-2) / 0.17), transparent 54%),
-    radial-gradient(ellipse 720px 500px at 48% 108%, rgb(var(--accent-coral) / 0.1), transparent 52%),
-    radial-gradient(ellipse 860px 580px at 72% 96%, rgb(var(--accent-magenta) / 0.15), transparent 52%),
-    radial-gradient(ellipse 680px 440px at 10% 90%, rgb(var(--accent-warm) / 0.11), transparent 54%),
-    radial-gradient(ellipse 640px 480px at 52% -8%, rgb(var(--accent-sky) / 0.12), transparent 55%),
-    linear-gradient(172deg, rgb(46 42 82) 0%, rgb(58 50 98) 36%, rgb(52 48 88) 68%, rgb(44 42 76) 100%);
+    radial-gradient(ellipse 980px 620px at 8% 88%, rgb(var(--accent-sage) / 0.2), transparent 55%),
+    radial-gradient(ellipse 900px 520px at 2% 24%, rgb(var(--accent-mint) / 0.16), transparent 54%),
+    radial-gradient(ellipse 1000px 540px at 88% 4%, rgb(var(--accent) / 0.16), transparent 58%),
+    radial-gradient(ellipse 720px 500px at 48% 108%, rgb(var(--accent-coral) / 0.09), transparent 52%),
+    radial-gradient(ellipse 820px 560px at 78% 94%, rgb(var(--accent-magenta) / 0.09), transparent 52%),
+    radial-gradient(ellipse 680px 440px at 10% 90%, rgb(var(--accent-warm) / 0.1), transparent 54%),
+    radial-gradient(ellipse 640px 480px at 52% -8%, rgb(var(--accent-sky) / 0.11), transparent 55%),
+    linear-gradient(172deg, rgb(42 50 80) 0%, rgb(52 58 94) 38%, rgb(48 56 88) 68%, rgb(40 48 74) 100%);
   background-size:
     32px 32px,
+    auto,
+    auto,
+    auto,
     auto,
     auto,
     auto,
@@ -94,7 +100,7 @@ body::before {
 }
 
 ::selection {
-  background: rgb(152 188 255 / 0.38);
+  background: rgb(130 205 195 / 0.36);
   color: rgb(var(--ink));
 }
 
@@ -123,9 +129,9 @@ body::before {
   padding: 1px;
   background: linear-gradient(
     135deg,
-    rgb(var(--accent) / 0.58),
-    rgb(var(--accent-2) / 0.42),
-    rgb(var(--accent-magenta) / 0.38)
+    rgb(var(--accent) / 0.55),
+    rgb(var(--accent-2) / 0.45),
+    rgb(var(--accent-sage) / 0.4)
   );
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
@@ -150,7 +156,7 @@ body::before {
 }
 
 .text-gradient {
-  @apply bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-sage))] bg-clip-text text-transparent;
 }
 
 .score-ring {
@@ -349,13 +355,13 @@ body::before {
 .home-section-wash {
   background-image: radial-gradient(
     ellipse 100% 75% at 50% -15%,
-    var(--wash-color, rgb(178 145 255 / 0.14)),
+    var(--wash-color, rgb(var(--accent-sage) / 0.13)),
     transparent 62%
   );
   background-repeat: no-repeat;
 }
 .home-section-wash--hero {
-  --wash-color: rgb(175 130 255 / 0.17);
+  --wash-color: rgb(var(--accent-sage) / 0.16);
 }
 .home-section-wash--overview {
   --wash-color: rgb(68 224 205 / 0.14);
@@ -370,7 +376,7 @@ body::before {
   --wash-color: rgb(122 198 255 / 0.12);
 }
 .home-section-wash--language {
-  --wash-color: rgb(236 168 255 / 0.13);
+  --wash-color: rgb(var(--accent-mint) / 0.13);
 }
 .home-section-wash--workspace {
   --wash-color: rgb(108 214 255 / 0.12);
@@ -379,7 +385,7 @@ body::before {
   --wash-color: rgb(86 220 180 / 0.11);
 }
 .home-section-wash--results {
-  --wash-color: rgb(168 155 255 / 0.11);
+  --wash-color: rgb(var(--accent-sage) / 0.12);
 }
 
 /* Hairline accent under global header — slow drift when motion is OK */
@@ -391,8 +397,8 @@ body::before {
     rgb(var(--accent-sky) / 0.32) 18%,
     rgb(var(--accent) / 0.4) 36%,
     rgb(var(--accent-2) / 0.44) 54%,
-    rgb(var(--accent-warm) / 0.28) 72%,
-    rgb(var(--accent-magenta) / 0.36) 88%,
+    rgb(var(--accent-warm) / 0.26) 68%,
+    rgb(var(--accent-sage) / 0.38) 86%,
     transparent 100%
   );
   background-size: 220% 100%;
