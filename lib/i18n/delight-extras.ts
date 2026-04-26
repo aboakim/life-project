@@ -28,7 +28,7 @@ export type DelightCopy = {
   greetingEvening: string;
   coldStartEyebrow: string;
   coldStarts: readonly [ColdStartPack, ColdStartPack, ColdStartPack, ColdStartPack];
-  resultCheers: readonly [string, string, string, string, string];
+  resultCheers: readonly string[];
   /** Optional light reading — not part of the analyzer (no games). */
   playCornerSummary: string;
   playCornerDisclaimer: string;
@@ -110,6 +110,9 @@ const en: DelightCopy = {
     "You gave the machine something real to chew on. Future-you likes specificity.",
     "If one line in the report stings, circle it — that is often the real fork.",
     "Share nothing you are not proud of; the rest can stay on this device forever.",
+    "Two runs with different stakes levels teach more than one perfect paragraph.",
+    "Export or copy the Markdown while it is fresh — memory edits the story overnight.",
+    "If the report agrees with you on everything, add one devil’s-advocate constraint and rerun.",
   ],
   playCornerSummary: "Extra curiosity (optional)",
   playCornerDisclaimer:
@@ -136,6 +139,8 @@ const en: DelightCopy = {
     "If this decision were a headline, would you be comfortable with the quote?",
     "Where might kindness to yourself look like a boundary, not a loophole?",
     "What is the hidden third path you have not written down yet?",
+    "What would ‘enough information’ look like if you stopped waiting for a sign from the universe?",
+    "If you had to ship this decision in one hour, what would you cut from the brief first?",
   ],
   playFactLabel: "Tiny world facts",
   playFactNext: "Another fact",
@@ -391,6 +396,8 @@ const en: DelightCopy = {
     "The first computer chess program ran in the 1950s — stalemates predate streaming.",
     "A group of porcupines is a prickle. Pointy support group.",
     "Saturn’s density is so low it would float in water — giant ringed beach ball if you had a big enough tub.",
+    "The @ symbol was chosen for email because it meant ‘at’ and almost never appeared in names — UX before UX had a name.",
+    "Velcro was inspired by burdock burrs stuck to a dog’s coat — annoyance plus curiosity equals invention.",
   ],
   cornerWordLabel: "Word hooks",
   cornerWordNext: "Next word",
@@ -411,6 +418,8 @@ const en: DelightCopy = {
     "Quarantine comes from forty days — isolation as a measured interval is an old idea.",
     "Panic honors the god Pan — sudden woodland frights named a whole feeling.",
     "Sarcasm’s Greek root suggests tearing flesh; dry wit has surprisingly sharp etymology.",
+    "Algorithm comes from a Persian mathematician’s name — structured steps predate buzzwords.",
+    "Budget originally meant a small pouch — constraints were literally portable from day one.",
   ],
 };
 
@@ -484,6 +493,9 @@ const hy: DelightCopy = {
     "Մեքենային իրական նյութ տվեցիր։ Ապագա դուրը սիրում է կոնկրետություն։",
     "Եթե մեկ տողը ցավեց, շրջանագրիր այն — հաճախ դա իրական fork-ն է։",
     "Չկիսվիր այն, ինչով չես հպարտանում․ մնացածը կարող է մնալ այս սարքում։",
+    "Երկու անցում տարբեր դրույքի մակարդակով ավելի շատ է սովորեցնում, քան մեկ «կատարյալ» պարբերություն։",
+    "Արտահանիր կամ պատճենիր Markdown-ը թարմ ժամանակ — հիշողությունը գիշերը խմբագրում է պատմությունը։",
+    "Եթե զեկույցը ամեն ինչում համաձայն է քեզ հետ, ավելացրու մեկ սատանայական սահմանափակում և կրկին վազեցրու։",
   ],
   playCornerSummary: "Լրացուցիչ հետաքրքրություն (ընտրովի)",
   playCornerDisclaimer:
@@ -510,6 +522,8 @@ const hy: DelightCopy = {
     "Եթե այս որոշումը վերնագիր լիներ, հարմարավե՞տ կլիներ մեջբերումը։",
     "Որտե՞ղ բարությունը քեզ նկատմամբ կարող է սահման լինել, ոչ թե պատուհաս։",
     "Ո՞ր երրորդ, թաքնված ճանապարհը դեռ չես գրել։",
+    "Ինչպե՞ս կտեսնեիր «բավարար տեղեկություն»-ը, եթե դադարես սպասել տիեզերքից նշանի։",
+    "Եթե պետք լիներ մեկ ժամում «առաքել» այս որոշումը, brief-ից առաջինը ի՞նչ կկտրեիր։",
   ],
   playFactLabel: "Փոքր աշխարհի փաստեր",
   playFactNext: "Հաջորդը",
@@ -716,6 +730,8 @@ const hy: DelightCopy = {
     "Կենդանիների աշխարհում կան cube-shaped poop և parliamentary owls — taxonomy-ն արվեստ է։",
     "Մարդը կարող է հոտ զգալ անձրևը ավելի լավ չորաշրջանից հետո։",
     "Կենդանակերպերի մեծ մասը չի օգտագործում այս վերլուծիչը, բայց դու՝ այո։",
+    "Էլ. փոստում @-ը ընտրվել է, որովհետև գրեթե չէր հայտնվում անուններում և նշանակում էր «մոտ» — UX, երբ UX-ին դեռ անուն չկար։",
+    "Velcro-ն ոգեշնչվել է շան մորթուց կպած արջիֆներից — նյարդայնություն գումարած հետաքրքրություն՝ հայտնագործություն։",
   ],
   cornerWordLabel: "Բառային կեռիկներ",
   cornerWordNext: "Հաջորդը",
@@ -736,6 +752,8 @@ const hy: DelightCopy = {
     "Quarantine — իտալերեն «քառասուն օր»․ մեկուսացումը ժամանակով չափելը հին գաղափար է։",
     "Panic — հունական Pan աստծուց․ անտառային անսպասելի վախը ամբողջ զգացում է անվանել։",
     "Sarcasm-ի հունական արմատը մարմին պատռելու պատկերացում է տալիս․ չոր հումորը սուր էտիմոլոգիա ունի։",
+    "Algorithm բառը կապված է պարսիկ մաթեմատիկոսի անվան հետ — կառուցված քայլերը ավելի հին են, քան buzzword-ները։",
+    "Budget-ը նախկինում փոքր պարկ էր նշանակում — սահմանափակումները սկզբից էլ «տեղափոխելի» էին։",
   ],
 };
 

@@ -12,6 +12,7 @@ import ShortcutsHelpModal from "@/components/home/ShortcutsHelpModal";
 import PlayCorner from "@/components/home/PlayCorner";
 import SparkShuffleStrip from "@/components/home/SparkShuffleStrip";
 import StayMomentsStrip from "@/components/home/StayMomentsStrip";
+import LabMomentsStrip from "@/components/home/LabMomentsStrip";
 import AmbientDriftLayer from "@/components/ui/AmbientDriftLayer";
 import OrbDecor from "@/components/ui/OrbDecor";
 import TiltPlane from "@/components/ui/TiltPlane";
@@ -726,6 +727,10 @@ export default function DecisionStudio({
               <StayMomentsStrip
                 eyebrow={sx.stayStripEyebrow}
                 moments={sx.stayMoments}
+              />
+              <LabMomentsStrip
+                eyebrow={sx.labStripEyebrow}
+                moments={sx.labMoments}
               />
               <div className="mt-6 flex flex-wrap gap-2.5">
                 {t.features.map((f) => (

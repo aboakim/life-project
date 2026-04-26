@@ -61,6 +61,9 @@ export type SiteExtras = {
   sparkStripEyebrow: string;
   sparkShuffle: string;
   sparkMoments: [string, string, string, string, string, string];
+  /** Sharp-brief “lab” hints — auto-rotate, distinct from stay/spark */
+  labStripEyebrow: string;
+  labMoments: readonly [string, string, string, string, string];
 };
 
 const en: SiteExtras = {
@@ -158,6 +161,14 @@ const en: SiteExtras = {
     "A big choice is less a verdict than a hypothesis you test with calendar days.",
     "No framework replaces you saying aloud what you refuse to lose.",
   ],
+  labStripEyebrow: "Brief lab",
+  labMoments: [
+    "Name one number you are afraid to write — the model calms down when digits appear.",
+    "Constraints are not pessimism; they are guardrails that stop fantasy scenarios.",
+    "If your decision is a question, rewrite it as a sentence a stranger could score.",
+    "Paste nothing you would not show a colleague; redact names if you must.",
+    "Second pass: add one deadline and one stakeholder — watch the timeline tighten.",
+  ],
 };
 
 const hy: SiteExtras = {
@@ -254,6 +265,14 @@ const hy: SiteExtras = {
     "Գրիր ամենավատ սցենարը մեկ նախադասությամբ — նրա ուժի կեսը մառախուղն էր։",
     "Մեծ ընտրությունը դատավճիռ չէ այնքան, որքան հիպոթեզ, որ ստուգում ես օրացուցարով։",
     "Ոչ մի կաղապար չի փոխարինում այն բանին բարձրաձայն ասելուն, ինչը չես ուզում կորցնել։",
+  ],
+  labStripEyebrow: "Brief-ի լաբոր",
+  labMoments: [
+    "Նշիր մեկ թիվ, որից վախենում ես գրել — մոդելը հանգստանում է, երբ թվեր են հայտնվում։",
+    "Սահմանները չեն նշանակում պեսիմիզմ — դրանք արգելապատնեշներ են ֆանտաստիկ սցենարներից։",
+    "Եթե որոշումը հարց է, վերագրիր այն որպես նախադասություն, որ օտարն էլ կարողանա գնահատել։",
+    "Չկպցնես այն, ինչը չես ցույց տա գործընկերոջը — անունները կարող ես թաքցնել։",
+    "Երկրորդ անցում՝ ավելացրու մեկ վերջնաթիվ և մեկ շահառու — ժամանակացույցը կկարծրացնի։",
   ],
 };
 
