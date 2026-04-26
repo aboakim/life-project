@@ -4,21 +4,25 @@
 
 /*
  * Design system v5 — “dawn lavender”
- * Lighter surfaces, softer mesh; keeps contrast for light-on-mid UI.
+ * Surfaces + accents tuned for a bit more hue spread (violet · teal · sky · coral)
+ * while keeping light-on-mid contrast.
  */
 :root {
-  --surface: 56 50 88;
-  --surface-2: 68 60 105;
-  --surface-elevated: 80 70 120;
+  --surface: 50 46 86;
+  --surface-2: 62 56 104;
+  --surface-elevated: 76 66 118;
   --ink: 252 251 255;
-  --ink-soft: 214 212 238;
-  --accent: 176 138 255;
-  --accent-2: 72 215 200;
-  --accent-warm: 255 210 165;
-  --accent-coral: 255 155 195;
-  --accent-magenta: 242 168 255;
-  --accent-dim: 205 198 255;
-  --glow: 215 200 255;
+  --ink-soft: 212 210 236;
+  --accent: 178 136 255;
+  --accent-2: 68 220 206;
+  --accent-warm: 255 206 160;
+  --accent-coral: 255 148 198;
+  --accent-magenta: 238 172 255;
+  --accent-dim: 200 192 252;
+  --glow: 208 194 255;
+  /* Extra mesh hues (body / orbs / washes) */
+  --accent-sky: 118 196 255;
+  --accent-mint: 94 228 196;
 }
 
 html {
@@ -42,14 +46,16 @@ body {
   @apply min-h-screen antialiased;
   color: rgb(var(--ink));
   background-color: rgb(var(--surface));
-  /* Softer grid + broader mesh — less noise, more depth */
+  /* Softer grid + broader mesh — coral / sky layers add gentle hue motion */
   background-image:
     radial-gradient(circle at 1.5px 1.5px, rgb(255 255 255 / 0.055) 1px, transparent 0),
-    radial-gradient(ellipse 1200px 580px at 90% 0%, rgb(176 138 255 / 0.22), transparent 58%),
-    radial-gradient(ellipse 900px 520px at 0% 20%, rgb(72 215 200 / 0.16), transparent 55%),
-    radial-gradient(ellipse 880px 600px at 70% 100%, rgb(242 168 255 / 0.14), transparent 52%),
-    radial-gradient(ellipse 640px 420px at 12% 92%, rgb(255 210 165 / 0.1), transparent 55%),
-    linear-gradient(168deg, rgb(52 46 86) 0%, rgb(62 54 98) 42%, rgb(48 44 80) 100%);
+    radial-gradient(ellipse 1180px 560px at 88% 2%, rgb(var(--accent) / 0.23), transparent 58%),
+    radial-gradient(ellipse 920px 540px at 2% 22%, rgb(var(--accent-2) / 0.17), transparent 54%),
+    radial-gradient(ellipse 720px 500px at 48% 108%, rgb(var(--accent-coral) / 0.1), transparent 52%),
+    radial-gradient(ellipse 860px 580px at 72% 96%, rgb(var(--accent-magenta) / 0.15), transparent 52%),
+    radial-gradient(ellipse 680px 440px at 10% 90%, rgb(var(--accent-warm) / 0.11), transparent 54%),
+    radial-gradient(ellipse 640px 480px at 52% -8%, rgb(var(--accent-sky) / 0.12), transparent 55%),
+    linear-gradient(172deg, rgb(46 42 82) 0%, rgb(58 50 98) 36%, rgb(52 48 88) 68%, rgb(44 42 76) 100%);
   background-size:
     32px 32px,
     auto,
@@ -88,7 +94,7 @@ body::before {
 }
 
 ::selection {
-  background: rgb(186 150 255 / 0.35);
+  background: rgb(152 188 255 / 0.38);
   color: rgb(var(--ink));
 }
 
@@ -221,11 +227,23 @@ body::before {
       transform: translate(-5%, -6%) scale(1.05);
     }
   }
+  @keyframes ambient-drift-c {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(4%, -5%) scale(1.06);
+    }
+  }
   .ambient-drift-blob--a {
     animation: ambient-drift-a 38s ease-in-out infinite;
   }
   .ambient-drift-blob--b {
     animation: ambient-drift-b 44s ease-in-out 2s infinite;
+  }
+  .ambient-drift-blob--c {
+    animation: ambient-drift-c 52s ease-in-out 5s infinite;
   }
 
   @keyframes chrome-horizon-sweep {
@@ -337,31 +355,31 @@ body::before {
   background-repeat: no-repeat;
 }
 .home-section-wash--hero {
-  --wash-color: rgb(178 145 255 / 0.16);
+  --wash-color: rgb(175 130 255 / 0.17);
 }
 .home-section-wash--overview {
-  --wash-color: rgb(72 220 200 / 0.13);
+  --wash-color: rgb(68 224 205 / 0.14);
 }
 .home-section-wash--product {
-  --wash-color: rgb(178 145 255 / 0.12);
+  --wash-color: rgb(255 152 198 / 0.11);
 }
 .home-section-wash--trust {
-  --wash-color: rgb(255 218 158 / 0.11);
+  --wash-color: rgb(255 212 150 / 0.12);
 }
 .home-section-wash--how {
-  --wash-color: rgb(120 195 255 / 0.1);
+  --wash-color: rgb(122 198 255 / 0.12);
 }
 .home-section-wash--language {
-  --wash-color: rgb(248 168 255 / 0.12);
+  --wash-color: rgb(236 168 255 / 0.13);
 }
 .home-section-wash--workspace {
-  --wash-color: rgb(100 210 255 / 0.11);
+  --wash-color: rgb(108 214 255 / 0.12);
 }
 .home-section-wash--privacy {
-  --wash-color: rgb(52 211 153 / 0.1);
+  --wash-color: rgb(86 220 180 / 0.11);
 }
 .home-section-wash--results {
-  --wash-color: rgb(178 145 255 / 0.1);
+  --wash-color: rgb(168 155 255 / 0.11);
 }
 
 /* Hairline accent under global header — slow drift when motion is OK */
@@ -370,9 +388,11 @@ body::before {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgb(var(--accent) / 0.38) 24%,
-    rgb(var(--accent-2) / 0.42) 52%,
-    rgb(var(--accent-magenta) / 0.34) 76%,
+    rgb(var(--accent-sky) / 0.32) 18%,
+    rgb(var(--accent) / 0.4) 36%,
+    rgb(var(--accent-2) / 0.44) 54%,
+    rgb(var(--accent-warm) / 0.28) 72%,
+    rgb(var(--accent-magenta) / 0.36) 88%,
     transparent 100%
   );
   background-size: 220% 100%;

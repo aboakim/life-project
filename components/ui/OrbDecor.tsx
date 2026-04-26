@@ -9,6 +9,8 @@ export default function OrbDecor() {
       <div className="animate-pulse-soft absolute -right-32 top-1/3 size-[420px] rounded-full bg-[rgb(var(--accent-2)/0.2)] blur-[90px] [animation-delay:1.4s]" />
       <div className="animate-shimmer-slow absolute left-[20%] bottom-0 size-[380px] rounded-full bg-[rgb(var(--accent-magenta)/0.18)] blur-[85px]" />
       <div className="animate-pulse-soft absolute right-[15%] top-[55%] size-[340px] rounded-full bg-[rgb(var(--accent-warm)/0.14)] blur-[80px] [animation-delay:0.8s]" />
+      <div className="animate-shimmer-slow absolute left-[42%] top-[38%] size-[300px] rounded-full bg-[rgb(var(--accent-coral)/0.12)] blur-[72px] [animation-delay:0.5s]" />
+      <div className="animate-pulse-soft absolute -right-[8%] bottom-[18%] size-[360px] rounded-full bg-[rgb(var(--accent-sky)/0.14)] blur-[88px] [animation-delay:2s]" />
     </div>
   );
 }

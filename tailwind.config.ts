@@ -32,6 +32,9 @@ const config: Config = {
         accent: {
           DEFAULT: "rgb(var(--accent) / <alpha-value>)",
           dim: "rgb(var(--accent-dim) / <alpha-value>)",
+          sky: "rgb(var(--accent-sky) / <alpha-value>)",
+          mint: "rgb(var(--accent-mint) / <alpha-value>)",
+          coral: "rgb(var(--accent-coral) / <alpha-value>)",
         },
       },
     },
