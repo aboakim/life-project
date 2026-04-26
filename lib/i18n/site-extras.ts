@@ -57,6 +57,10 @@ export type SiteExtras = {
   /** Rotating one-line prompts on the home hero — encourages dwell time */
   stayStripEyebrow: string;
   stayMoments: [string, string, string, string, string];
+  /** Playful micro-thoughts by the analyzer — shuffle + slow auto-rotate */
+  sparkStripEyebrow: string;
+  sparkShuffle: string;
+  sparkMoments: [string, string, string, string, string, string];
 };
 
 const en: SiteExtras = {
@@ -144,6 +148,16 @@ const en: SiteExtras = {
     "When stakes are high, structure is kindness to your future self.",
     "Save your run and revisit in a week — good decisions like a second look.",
   ],
+  sparkStripEyebrow: "Tiny sparks",
+  sparkShuffle: "Another spark",
+  sparkMoments: [
+    'The opposite of a decision isn’t “wrong” — it’s drift you stop naming.',
+    "Unfinished forks feel like too many browser tabs: they quietly tax your RAM.",
+    'Sometimes “not yet” is the bravest yes you’ll give yourself.',
+    "Write the worst case in one sentence — half its power was the fog.",
+    "A big choice is less a verdict than a hypothesis you test with calendar days.",
+    "No framework replaces you saying aloud what you refuse to lose.",
+  ],
 };
 
 const hy: SiteExtras = {
@@ -230,6 +244,16 @@ const hy: SiteExtras = {
     "Սցենարներ, ռիսքեր, ժամանակացույց — որ հաջորդ քայլը ակնհայտ դառնա։",
     "Երբ դրույքը բարձր է, կառուցվածությունը բարություն է ապագա քեզ հանդեպ։",
     "Պահիր վերլուծությունն ու մեկ շաբաթից վերադարձիր — լավ որոշումները սիրում են երկրորդ հայացք։",
+  ],
+  sparkStripEyebrow: "Փոքր կայծեր",
+  sparkShuffle: "Այլ կայծ",
+  sparkMoments: [
+    "Որոշման հակառակը «սխալը» չէ — այն շրջանն է, որտեղ դադար ես անում անուն տալը։",
+    "Անավարտ ընտրությունները նման են բաց թողնված ներդիրների՝ աննկատ ծանրաբեռնում են ուղեղը։",
+    "Երբեմն «դեռ ոչ»-ը ամենաքաջ քայլերից մեկն է, որ տալիս ես քեզ։",
+    "Գրիր ամենավատ սցենարը մեկ նախադասությամբ — նրա ուժի կեսը մառախուղն էր։",
+    "Մեծ ընտրությունը դատավճիռ չէ այնքան, որքան հիպոթեզ, որ ստուգում ես օրացուցարով։",
+    "Ոչ մի կաղապար չի փոխարինում այն բանին բարձրաձայն ասելուն, ինչը չես ուզում կորցնել։",
   ],
 };
 

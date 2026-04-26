@@ -7,6 +7,7 @@ import HeroVisualSlider from "@/components/home/HeroVisualSlider";
 import HomeSectionNav from "@/components/home/HomeSectionNav";
 import ProductSceneStrip from "@/components/home/ProductSceneStrip";
 import RevealOnScroll from "@/components/home/RevealOnScroll";
+import SparkShuffleStrip from "@/components/home/SparkShuffleStrip";
 import StayMomentsStrip from "@/components/home/StayMomentsStrip";
 import AmbientDriftLayer from "@/components/ui/AmbientDriftLayer";
 import OrbDecor from "@/components/ui/OrbDecor";
@@ -1085,6 +1086,13 @@ export default function DecisionStudio({
                 </button>
               ))}
             </div>
+          </div>
+          <div className="mt-8">
+            <SparkShuffleStrip
+              eyebrow={sx.sparkStripEyebrow}
+              shuffleLabel={sx.sparkShuffle}
+              moments={sx.sparkMoments}
+            />
           </div>
           <div className="mt-10 grid gap-6 lg:grid-cols-5">
             <aside className="glass card-glow rounded-3xl p-5 lg:col-span-2 lg:p-6">
