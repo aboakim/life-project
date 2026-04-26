@@ -15,6 +15,7 @@ import {
   type HistorySnapshot,
 } from "@/lib/analysis-local";
 import type { PostAnalysisCopy } from "@/lib/i18n/post-analysis";
+import { getStoredSubscriberId } from "@/lib/reminder-subscriber-storage";
 
 type Props = {
   analysis: DecisionAnalysis;
@@ -145,6 +146,14 @@ export default function AnalysisResultTools({
             : pa.remindActive14,
       );
       window.setTimeout(() => setFlash(null), 2500);
+
+      const sid = getStoredSubscriberId();
+      if (!sid || sid.startsWith("local_")) return;
+      void fetch("/api/reminder-schedule", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ subscriberId: sid, days }),
+      });
     },
     [pa.remindActive14, pa.remindActive3, pa.remindActive7],
   );

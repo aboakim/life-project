@@ -40,20 +40,30 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "bad_request" }, { status: 400 });
   }
 
+  const base =
+    (process.env.NEXT_PUBLIC_SITE_URL ?? "https://lifedecisions.space").replace(
+      /\/$/,
+      "",
+    );
+
   let to: string | undefined;
   let firstName = (body.firstName?.trim() || "there").slice(0, 80);
+  let unsubscribeUrl: string | undefined;
 
   if (body.useLatestSubscriber) {
     try {
       const row = await prisma.decisionReminderSubscriber.findFirst({
         orderBy: { updatedAt: "desc" },
-        select: { email: true, firstName: true },
+        select: { email: true, firstName: true, unsubscribeToken: true },
       });
       if (!row) {
         return NextResponse.json({ error: "no_subscriber" }, { status: 400 });
       }
       to = row.email;
       firstName = row.firstName;
+      if (row.unsubscribeToken) {
+        unsubscribeUrl = `${base}/api/reminder-unsubscribe?t=${encodeURIComponent(row.unsubscribeToken)}`;
+      }
     } catch (e) {
       console.error("[test-reminder-email] db", e);
       return NextResponse.json({ error: "db_unavailable" }, { status: 503 });
@@ -68,8 +78,8 @@ export async function POST(req: Request) {
   const template = body.template === "nudge" ? "nudge" : "welcome";
   const result =
     template === "nudge"
-      ? await sendDecisionReminderNudge({ to, firstName })
-      : await sendDecisionReminderWelcome({ to, firstName });
+      ? await sendDecisionReminderNudge({ to, firstName, unsubscribeUrl })
+      : await sendDecisionReminderWelcome({ to, firstName, unsubscribeUrl });
   if (!result.ok) {
     return NextResponse.json(
       { error: "send_failed", detail: result.error },

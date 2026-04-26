@@ -97,7 +97,22 @@ export async function sendContactNotifications(
 export type ReminderSubscriberEmail = {
   to: string;
   firstName: string;
+  /** One-click stop link (includes secret token); keep out of logs. */
+  unsubscribeUrl?: string;
 };
+
+/** Plain-text footer: visually separated, easy to miss unless scrolling to the end. */
+function reminderUnsubscribeFooter(unsubscribeUrl?: string): string {
+  if (!unsubscribeUrl?.trim()) return "";
+  return [
+    "",
+    "",
+    "",
+    "— — —",
+    "Stop optional reminders (one click, no login):",
+    unsubscribeUrl.trim(),
+  ].join("\n");
+}
 
 /** Resend success / failure with a string for logs and admin diagnostics */
 export type ReminderEmailSendResult =
@@ -141,6 +156,7 @@ export async function sendDecisionReminderWelcome(
     `Open the analyzer: ${site}/analyze`,
     ``,
     `— Life Decision Engine`,
+    reminderUnsubscribeFooter(p.unsubscribeUrl),
   ].join("\n");
   try {
     const { Resend } = await import("resend");
@@ -203,6 +219,7 @@ export async function sendDecisionReminderNudge(
     `${base}/`,
     ``,
     `— Life Decision Engine`,
+    reminderUnsubscribeFooter(p.unsubscribeUrl),
   ].join("\n");
   try {
     const { Resend } = await import("resend");

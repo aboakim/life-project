@@ -23,16 +23,25 @@ export async function GET(req: Request) {
   const due = await prisma.decisionReminderSubscriber.findMany({
     where: {
       nextNudgeAt: { lte: now },
+      emailOptOutAt: null,
     },
     take: 50,
     orderBy: { nextNudgeAt: "asc" },
   });
 
   let sent = 0;
+  const base =
+    (process.env.NEXT_PUBLIC_SITE_URL ?? "https://lifedecisions.space").replace(
+      /\/$/,
+      "",
+    );
+
   for (const row of due) {
+    const unsubscribeUrl = `${base}/api/reminder-unsubscribe?t=${encodeURIComponent(row.unsubscribeToken)}`;
     const result = await sendDecisionReminderNudge({
       to: row.email,
       firstName: row.firstName,
+      unsubscribeUrl,
     });
     if (result.ok) {
       await prisma.decisionReminderSubscriber.update({

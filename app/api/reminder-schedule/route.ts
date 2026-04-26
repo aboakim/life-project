@@ -35,6 +35,16 @@ export async function POST(req: Request) {
   next.setDate(next.getDate() + days);
 
   try {
+    const row = await prisma.decisionReminderSubscriber.findUnique({
+      where: { id: subscriberId },
+      select: { emailOptOutAt: true },
+    });
+    if (!row) {
+      return NextResponse.json({ error: "not_found" }, { status: 404 });
+    }
+    if (row.emailOptOutAt) {
+      return NextResponse.json({ error: "opted_out" }, { status: 403 });
+    }
     await prisma.decisionReminderSubscriber.update({
       where: { id: subscriberId },
       data: { nextNudgeAt: next },

@@ -107,6 +107,10 @@ model DecisionReminderSubscriber {
   locale      String?
   /// When Resend should send the next nudge (set from /api/reminder-schedule).
   nextNudgeAt DateTime?
+  /// Secret token for one-click unsubscribe links in transactional email.
+  unsubscribeToken String @unique
+  /// Set when the user opens the unsubscribe link; no further nudges until they re-consent.
+  emailOptOutAt DateTime?
 
   @@index([nextNudgeAt])
 }

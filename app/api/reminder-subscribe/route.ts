@@ -1,4 +1,4 @@
-import { randomUUID } from "node:crypto";
+import { randomUUID as cryptoRandomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 import { getClientIp } from "@/lib/client-ip";
 import { sendDecisionReminderWelcome } from "@/lib/email";
@@ -87,11 +87,13 @@ async function handleReminderSubscribe(req: Request): Promise<NextResponse> {
         lastName,
         locale: locale || undefined,
         nextNudgeAt: returnIn7Days ? addDays(now, 7) : undefined,
+        unsubscribeToken: cryptoRandomUUID(),
       },
       update: {
         firstName,
         lastName,
         locale: locale || undefined,
+        emailOptOutAt: null,
         ...(returnIn7Days ? { nextNudgeAt: addDays(now, 7) } : {}),
       },
     });
@@ -101,7 +103,7 @@ async function handleReminderSubscribe(req: Request): Promise<NextResponse> {
       "[reminder-subscribe] database unavailable — using client-only id (fix DATABASE_URL + migrations on Vercel for reminders)",
       e,
     );
-    const fallbackId = `local_${randomUUID()}`;
+    const fallbackId = `local_${cryptoRandomUUID()}`;
     return NextResponse.json(
       { ok: true as const, subscriberId: fallbackId, persistence: "none" as const },
       { status: 200 },
@@ -109,9 +111,16 @@ async function handleReminderSubscribe(req: Request): Promise<NextResponse> {
   }
 
   if (!existing) {
+    const base =
+      (process.env.NEXT_PUBLIC_SITE_URL ?? "https://lifedecisions.space").replace(
+        /\/$/,
+        "",
+      );
+    const unsubscribeUrl = `${base}/api/reminder-unsubscribe?t=${encodeURIComponent(row.unsubscribeToken)}`;
     void sendDecisionReminderWelcome({
       to: row.email,
       firstName: row.firstName,
+      unsubscribeUrl,
     }).then((r) => {
       if (!r.ok) {
         console.error("[reminder-subscribe] welcome email failed", r.error);
@@ -133,7 +142,7 @@ export async function POST(req: Request) {
     return NextResponse.json(
       {
         ok: true as const,
-        subscriberId: `local_${randomUUID()}`,
+        subscriberId: `local_${cryptoRandomUUID()}`,
         persistence: "none" as const,
       },
       { status: 200 },
