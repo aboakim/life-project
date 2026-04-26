@@ -14,6 +14,7 @@ import SparkShuffleStrip from "@/components/home/SparkShuffleStrip";
 import StayMomentsStrip from "@/components/home/StayMomentsStrip";
 import AmbientDriftLayer from "@/components/ui/AmbientDriftLayer";
 import OrbDecor from "@/components/ui/OrbDecor";
+import Surface3D from "@/components/ui/Surface3D";
 import { getExpertsCopy } from "@/lib/i18n/experts-network";
 import { getPricingCopy } from "@/lib/i18n/pricing-page";
 import type { DecisionAnalysis, MatchedExpertSummary } from "@/lib/types";
@@ -737,20 +738,24 @@ export default function DecisionStudio({
                 ))}
               </div>
               <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-                <Link
-                  href="/analyze"
-                  className="inline-flex min-h-[52px] min-w-[min(100%,18rem)] items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-10 py-4 text-lg font-bold text-white shadow-xl shadow-[rgb(var(--accent)/0.3)] transition hover:brightness-110"
-                >
-                  {t.heroCtaPrimary}
-                  <span aria-hidden>→</span>
-                </Link>
-                <Link
-                  href="/experts"
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/[0.18] bg-white/[0.07] px-8 py-3.5 text-base font-bold text-[rgb(var(--ink))] transition hover:bg-white/[0.12]"
-                >
-                  {t.heroCtaSecondary}
-                  <span aria-hidden>→</span>
-                </Link>
+                <span className="cta-3d-shell inline-block [transform-style:preserve-3d]">
+                  <Link
+                    href="/analyze"
+                    className="cta-3d-target inline-flex min-h-[52px] min-w-[min(100%,18rem)] items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-10 py-4 text-lg font-bold text-white shadow-xl shadow-[rgb(var(--accent)/0.3)]"
+                  >
+                    {t.heroCtaPrimary}
+                    <span aria-hidden>→</span>
+                  </Link>
+                </span>
+                <span className="cta-outline-3d-shell inline-block [transform-style:preserve-3d]">
+                  <Link
+                    href="/experts"
+                    className="cta-outline-3d-target inline-flex items-center justify-center gap-2 rounded-2xl border border-white/[0.18] bg-white/[0.07] px-8 py-3.5 text-base font-bold text-[rgb(var(--ink))] hover:bg-white/[0.12]"
+                  >
+                    {t.heroCtaSecondary}
+                    <span aria-hidden>→</span>
+                  </Link>
+                </span>
                 <Link
                   href="/pricing"
                   className="inline-flex items-center justify-center gap-2 text-base font-semibold text-[rgb(var(--accent-warm))] underline-offset-4 hover:underline"
@@ -760,7 +765,12 @@ export default function DecisionStudio({
               </div>
             </div>
 
-            <div className="relative space-y-5">
+            <Surface3D
+              className="relative lg:pt-0.5"
+              innerClassName="relative space-y-5"
+              tiltMax={6}
+              sensitivity={0.95}
+            >
               <div className="absolute -inset-4 -z-10 rounded-[1.75rem] bg-gradient-to-br from-[rgb(var(--accent))]/14 via-[rgb(var(--accent-magenta))]/8 to-[rgb(var(--accent-2))]/12 blur-xl" />
               <HeroVisualSlider slides={heroSlideDeck} />
               <div className="relative overflow-hidden rounded-2xl border border-white/12 bg-[rgb(var(--surface-2))]/90 shadow-2xl backdrop-blur-xl">
@@ -800,7 +810,7 @@ export default function DecisionStudio({
                   </Link>
                 </div>
               </div>
-            </div>
+            </Surface3D>
           </div>
         </section>
 

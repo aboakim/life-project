@@ -300,7 +300,7 @@ export default function GlobalNav() {
           onClick={() => setMobileOpen(false)}
         >
           <span
-            className="hidden size-9 shrink-0 rounded-xl bg-gradient-to-br from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] shadow-lg shadow-[rgb(var(--accent)/0.35)] sm:inline-block"
+            className="logo-mark-3d hidden size-9 shrink-0 rounded-xl bg-gradient-to-br from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] shadow-lg shadow-[rgb(var(--accent)/0.35)] sm:inline-block"
             aria-hidden
           />
           <span className="min-w-0 truncate">{t.brand}</span>
