@@ -22,6 +22,16 @@ export default function PlayCorner({ copy }: Props) {
     setFactIdx((i) => (i + 1) % copy.playFacts.length);
   }, [copy.playFacts.length]);
 
+  const randomFact = useCallback(() => {
+    const n = copy.playFacts.length;
+    if (n <= 1) return;
+    setFactIdx((i) => {
+      let j = Math.floor(Math.random() * n);
+      if (j === i) j = (j + 1) % n;
+      return j;
+    });
+  }, [copy.playFacts.length]);
+
   return (
     <details className="group mt-4 rounded-2xl border border-white/[0.08] bg-black/25 px-4 py-3 ring-1 ring-inset ring-white/[0.04] open:border-violet-400/20 open:bg-violet-950/20">
       <summary className="flex cursor-pointer list-none items-center justify-between gap-2 text-xs font-semibold tracking-wide text-zinc-300/95 [&::-webkit-details-marker]:hidden">
@@ -77,13 +87,22 @@ export default function PlayCorner({ copy }: Props) {
           <p className="mt-2 min-h-[3rem] text-sm leading-relaxed text-zinc-200/95 [text-wrap:pretty]">
             {copy.playFacts[factIdx]}
           </p>
-          <button
-            type="button"
-            onClick={nextFact}
-            className="mt-2 rounded-lg border border-white/12 bg-white/[0.06] px-3 py-1.5 text-xs font-medium text-zinc-200 transition hover:bg-white/[0.1]"
-          >
-            {copy.playFactNext}
-          </button>
+          <div className="mt-2 flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={nextFact}
+              className="rounded-lg border border-white/12 bg-white/[0.06] px-3 py-1.5 text-xs font-medium text-zinc-200 transition hover:bg-white/[0.1]"
+            >
+              {copy.playFactNext}
+            </button>
+            <button
+              type="button"
+              onClick={randomFact}
+              className="rounded-lg border border-cyan-400/25 bg-cyan-500/10 px-3 py-1.5 text-xs font-medium text-cyan-100/95 transition hover:bg-cyan-500/18"
+            >
+              {copy.playFactRandom}
+            </button>
+          </div>
         </div>
       </div>
     </details>
