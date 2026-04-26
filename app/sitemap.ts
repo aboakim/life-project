@@ -10,6 +10,7 @@ const STATIC_PATHS: { path: string; priority: number; freq: "weekly" | "monthly"
   { path: "/experts/register", priority: 0.6, freq: "monthly" },
   { path: "/community", priority: 0.7, freq: "weekly" },
   { path: "/journal", priority: 0.6, freq: "monthly" },
+  { path: "/field-notes", priority: 0.55, freq: "monthly" },
   { path: "/checklists", priority: 0.65, freq: "monthly" },
   { path: "/how-we-use-ai", priority: 0.65, freq: "monthly" },
   { path: "/playbooks", priority: 0.65, freq: "monthly" },

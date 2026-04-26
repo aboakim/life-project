@@ -6,6 +6,7 @@ import SupportCta from "@/components/monetization/SupportCta";
 import { getCommunityCopy } from "@/lib/i18n/community-page";
 import { getExpertsCopy } from "@/lib/i18n/experts-network";
 import { getSiteExtras } from "@/lib/i18n/site-extras";
+import { getNoveltyCopy } from "@/lib/i18n/novelty-extras";
 import { getMonetizeCopy } from "@/lib/i18n/monetization-page";
 import { getPricingCopy } from "@/lib/i18n/pricing-page";
 import { getUi } from "@/lib/i18n/ui";
@@ -50,6 +51,7 @@ export default function GlobalFooter() {
   const mz = getMonetizeCopy(locale);
   const cq = getCommunityCopy(locale);
   const sx = getSiteExtras(locale);
+  const nx = getNoveltyCopy(locale);
 
   const columns: { title: string; links: { href: string; label: string }[] }[] =
     [
@@ -59,6 +61,7 @@ export default function GlobalFooter() {
           { href: "/analyze", label: ui.sectionNavAnalyzer },
           { href: "/journal", label: sx.footerJournal },
           { href: "/checklists", label: sx.footerChecklists },
+          { href: "/field-notes", label: nx.footerFieldNotes },
           { href: "/how-we-use-ai", label: sx.footerHowAi },
           { href: "/experts", label: ec.navExperts },
           { href: "/community", label: cq.navLabel },

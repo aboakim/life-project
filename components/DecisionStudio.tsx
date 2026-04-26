@@ -10,6 +10,8 @@ import RevealOnScroll from "@/components/home/RevealOnScroll";
 import KonamiSurprise from "@/components/home/KonamiSurprise";
 import ShortcutsHelpModal from "@/components/home/ShortcutsHelpModal";
 import PlayCorner from "@/components/home/PlayCorner";
+import BriefSignatureStrip from "@/components/home/BriefSignatureStrip";
+import TimeCapsuleCard from "@/components/home/TimeCapsuleCard";
 import SparkShuffleStrip from "@/components/home/SparkShuffleStrip";
 import StayMomentsStrip from "@/components/home/StayMomentsStrip";
 import LabMomentsStrip from "@/components/home/LabMomentsStrip";
@@ -49,6 +51,7 @@ import {
   milestoneMessage,
 } from "@/lib/i18n/delight-extras";
 import { getSiteExtras, getWarmPresets } from "@/lib/i18n/site-extras";
+import { getNoveltyCopy } from "@/lib/i18n/novelty-extras";
 import {
   THEMATIC_BAND_A_IMAGE,
   THEMATIC_BAND_B_IMAGE,
@@ -163,6 +166,7 @@ export default function DecisionStudio({
   const warmPresets = useMemo(() => getWarmPresets(locale), [locale]);
   const pa = useMemo(() => getPostAnalysisCopy(locale), [locale]);
   const delight = useMemo(() => getDelightCopy(locale), [locale]);
+  const novelty = useMemo(() => getNoveltyCopy(locale), [locale]);
   const presetApplied = useRef(false);
   const exNav = getExpertsCopy(locale);
   const homeBands = useMemo(() => getHomeThematicBands(locale), [locale]);
@@ -1278,6 +1282,24 @@ export default function DecisionStudio({
             {delight.shortcutTeaser}
           </p>
           <PlayCorner copy={delight} />
+          <TimeCapsuleCard
+            copy={{
+              eyebrow: novelty.capsuleEyebrow,
+              title: novelty.capsuleTitle,
+              explain: novelty.capsuleExplain,
+              placeholder: novelty.capsulePlaceholder,
+              daysLabel: novelty.capsuleDaysLabel,
+              seal7: novelty.capsuleSeal7,
+              seal14: novelty.capsuleSeal14,
+              seal30: novelty.capsuleSeal30,
+              save: novelty.capsuleSave,
+              full: novelty.capsuleFull,
+              locked: novelty.capsuleLocked,
+              reveal: novelty.capsuleReveal,
+              delete: novelty.capsuleDelete,
+              listAria: novelty.capsuleListAria,
+            }}
+          />
           <div className="mt-10 grid gap-6 lg:grid-cols-5">
             <div className="min-h-0 lg:col-span-2">
               <TiltPlane
@@ -1384,6 +1406,12 @@ export default function DecisionStudio({
                 placeholder={t.contextPh}
                 rows={3}
                 className="w-full resize-y rounded-2xl border border-white/10 bg-white/[0.07] px-4 py-3 text-base outline-none transition focus:border-[rgb(var(--accent))]/45"
+              />
+              <BriefSignatureStrip
+                source={`${decision}\n${context}`}
+                eyebrow={novelty.signatureEyebrow}
+                moodPrefix={novelty.signatureMoodPrefix}
+                moodNames={novelty.moodNames}
               />
 
               <label className="mt-5 block text-sm font-medium text-[rgb(var(--ink))]">

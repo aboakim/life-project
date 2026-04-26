@@ -17,6 +17,7 @@ import {
 } from "@/lib/i18n/locale";
 import { getPostAnalysisCopy } from "@/lib/i18n/post-analysis";
 import { getSiteExtras } from "@/lib/i18n/site-extras";
+import { getNoveltyCopy } from "@/lib/i18n/novelty-extras";
 import { getUi } from "@/lib/i18n/ui";
 import {
   readLocaleCookieClient,
@@ -162,10 +163,12 @@ export default function GlobalNav() {
   const t = getUi(locale);
   const sx = getSiteExtras(locale);
   const pa = getPostAnalysisCopy(locale);
+  const nx = getNoveltyCopy(locale);
 
   const moreLinks: MoreLink[] = [
     { href: "/monetize", label: mz.navLabel },
     { href: "/journal", label: sx.navJournal },
+    { href: "/field-notes", label: nx.navFieldNotes },
     { href: "/checklists", label: sx.navChecklists },
     { href: "/how-we-use-ai", label: sx.navHowAi },
     { href: "/playbooks", label: pa.playbooksCta },

@@ -14,6 +14,7 @@ const ROUTES = [
   "/contact",
   "/blog",
   "/faq",
+  "/field-notes",
   "/editorial-team",
   "/editorial-standards",
   "/experts/register",
