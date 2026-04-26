@@ -7,6 +7,8 @@ import HeroVisualSlider from "@/components/home/HeroVisualSlider";
 import HomeSectionNav from "@/components/home/HomeSectionNav";
 import ProductSceneStrip from "@/components/home/ProductSceneStrip";
 import RevealOnScroll from "@/components/home/RevealOnScroll";
+import KonamiSurprise from "@/components/home/KonamiSurprise";
+import ShortcutsHelpModal from "@/components/home/ShortcutsHelpModal";
 import SparkShuffleStrip from "@/components/home/SparkShuffleStrip";
 import StayMomentsStrip from "@/components/home/StayMomentsStrip";
 import AmbientDriftLayer from "@/components/ui/AmbientDriftLayer";
@@ -39,6 +41,10 @@ import {
 } from "@/lib/locale-sync";
 import type { InitialPreset } from "@/components/home/DecisionStudioShell";
 import { getHomeThematicBands } from "@/lib/i18n/home-thematic-bands";
+import {
+  getDelightCopy,
+  milestoneMessage,
+} from "@/lib/i18n/delight-extras";
 import { getSiteExtras, getWarmPresets } from "@/lib/i18n/site-extras";
 import {
   THEMATIC_BAND_A_IMAGE,
@@ -153,6 +159,7 @@ export default function DecisionStudio({
   const sx = getSiteExtras(locale);
   const warmPresets = useMemo(() => getWarmPresets(locale), [locale]);
   const pa = useMemo(() => getPostAnalysisCopy(locale), [locale]);
+  const delight = useMemo(() => getDelightCopy(locale), [locale]);
   const presetApplied = useRef(false);
   const exNav = getExpertsCopy(locale);
   const homeBands = useMemo(() => getHomeThematicBands(locale), [locale]);
@@ -218,6 +225,8 @@ export default function DecisionStudio({
   const [expertNeedsPick, setExpertNeedsPick] = useState<
     ExpertRoleKey | "UNSURE" | null
   >(null);
+  const [shortcutsOpen, setShortcutsOpen] = useState(false);
+  const [visitMilestoneN, setVisitMilestoneN] = useState<number | null>(null);
   const [whisperAvailable, setWhisperAvailable] = useState(false);
 
   useEffect(() => {
@@ -243,6 +252,10 @@ export default function DecisionStudio({
       );
       const next = Number.isFinite(prev) ? prev + 1 : 1;
       window.localStorage.setItem(VISIT_COUNT_KEY, String(next));
+      if ([5, 10, 25, 50, 100].includes(next)) {
+        const seen = window.localStorage.getItem(`lde-ms-seen-${next}`) === "1";
+        if (!seen) setVisitMilestoneN(next);
+      }
       const dismissed =
         window.localStorage.getItem(VISITOR_BANNER_DISMISS_KEY) === "1";
       if (next >= 3 && !dismissed) setVisitorBannerOpen(true);
@@ -250,6 +263,41 @@ export default function DecisionStudio({
       /* ignore */
     }
   }, []);
+
+  const dismissVisitMilestone = useCallback(() => {
+    if (visitMilestoneN != null) {
+      try {
+        window.localStorage.setItem(`lde-ms-seen-${visitMilestoneN}`, "1");
+      } catch {
+        /* ignore */
+      }
+    }
+    setVisitMilestoneN(null);
+  }, [visitMilestoneN]);
+
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (preAnalysisEmailOpen) return;
+      const el = e.target;
+      if (
+        el instanceof HTMLElement &&
+        el.closest("textarea, input, select, [contenteditable=true]")
+      ) {
+        return;
+      }
+      if (e.key === "Escape" && shortcutsOpen) {
+        e.preventDefault();
+        setShortcutsOpen(false);
+        return;
+      }
+      if (e.key === "?" || (e.shiftKey && e.key === "/")) {
+        e.preventDefault();
+        setShortcutsOpen(true);
+      }
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [preAnalysisEmailOpen, shortcutsOpen]);
 
   useEffect(() => {
     try {
@@ -350,6 +398,20 @@ export default function DecisionStudio({
 
   const a = result?.analysis;
   const matchedExperts = result?.matchedExperts ?? NO_MATCHED_EXPERTS;
+
+  const workspaceGreeting = useMemo(() => {
+    const h = new Date().getHours();
+    if (h < 12) return delight.greetingMorning;
+    if (h < 18) return delight.greetingAfternoon;
+    return delight.greetingEvening;
+  }, [delight]);
+
+  const resultCheerLine = useMemo(() => {
+    if (!a) return null;
+    const sum = a.summary?.length ?? 0;
+    const idx = (decision.length + sum) % delight.resultCheers.length;
+    return delight.resultCheers[idx] ?? null;
+  }, [a, decision, delight]);
 
   const voiceLabels = useMemo(
     () => ({
@@ -465,6 +527,12 @@ export default function DecisionStudio({
         pa={pa}
         locale={locale}
       />
+      <ShortcutsHelpModal
+        open={shortcutsOpen}
+        onClose={() => setShortcutsOpen(false)}
+        copy={delight}
+      />
+      <KonamiSurprise copy={delight} />
       <OrbDecor />
       <AmbientDriftLayer />
       <HomeSectionNav links={sectionLinks} />
@@ -1044,6 +1112,9 @@ export default function DecisionStudio({
           >
             {t.workspaceTitle}
           </h2>
+          <p className="mt-2 max-w-3xl text-sm font-medium leading-relaxed text-[rgb(var(--accent-2))]/90 [text-wrap:pretty]">
+            {workspaceGreeting}
+          </p>
           <p
             className="mt-4 max-w-3xl rounded-2xl border border-[rgb(var(--accent-2))]/30 bg-white/[0.04] px-4 py-3 text-sm font-medium leading-relaxed text-[rgb(var(--ink))] [text-wrap:pretty] sm:px-5"
             role="status"
@@ -1087,6 +1158,44 @@ export default function DecisionStudio({
               ))}
             </div>
           </div>
+          <div className="mt-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-violet-300/90">
+              {delight.coldStartEyebrow}
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2 rounded-2xl ring-1 ring-inset ring-violet-400/20 bg-violet-500/[0.05] p-2">
+              {delight.coldStarts.map((pack) => (
+                <button
+                  key={pack.label}
+                  type="button"
+                  onClick={() => {
+                    setDecision(pack.decision);
+                    setContext(pack.context);
+                    setConstraints(pack.constraints);
+                  }}
+                  className="rounded-full border border-white/[0.14] bg-white/[0.06] px-4 py-2 text-sm font-medium text-[rgb(var(--ink))] transition hover:border-violet-400/40 hover:bg-white/[0.1]"
+                >
+                  {pack.label}
+                </button>
+              ))}
+            </div>
+          </div>
+          {visitMilestoneN != null ? (
+            <div
+              className="mt-5 flex flex-col gap-3 rounded-2xl border border-amber-400/30 bg-gradient-to-r from-amber-500/[0.12] to-orange-500/[0.06] px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5"
+              role="status"
+            >
+              <p className="text-sm leading-relaxed text-[rgb(var(--ink))] [text-wrap:pretty]">
+                {milestoneMessage(delight, visitMilestoneN)}
+              </p>
+              <button
+                type="button"
+                onClick={dismissVisitMilestone}
+                className="shrink-0 rounded-xl border border-white/15 bg-white/[0.1] px-4 py-2 text-xs font-semibold text-[rgb(var(--ink))] transition hover:bg-white/[0.14]"
+              >
+                {delight.milestoneDismiss}
+              </button>
+            </div>
+          ) : null}
           <div className="mt-8">
             <SparkShuffleStrip
               eyebrow={sx.sparkStripEyebrow}
@@ -1094,6 +1203,9 @@ export default function DecisionStudio({
               moments={sx.sparkMoments}
             />
           </div>
+          <p className="mt-3 max-w-2xl text-[11px] leading-relaxed text-[rgb(var(--ink-soft))]/75 [text-wrap:pretty]">
+            {delight.shortcutTeaser}
+          </p>
           <div className="mt-10 grid gap-6 lg:grid-cols-5">
             <aside className="glass card-glow rounded-3xl p-5 lg:col-span-2 lg:p-6">
               <p className="text-sm font-semibold text-[rgb(var(--ink))]">
@@ -1329,6 +1441,11 @@ export default function DecisionStudio({
                 {t.resultsYouAreHere}
               </h2>
             </div>
+            {resultCheerLine ? (
+              <p className="mx-auto max-w-2xl text-center text-xs font-medium italic leading-relaxed text-emerald-200/85 [text-wrap:pretty]">
+                {resultCheerLine}
+              </p>
+            ) : null}
             <div className="animate-fade-up flex flex-col gap-4 rounded-2xl border border-[rgb(var(--accent-2))]/35 bg-gradient-to-br from-[rgb(var(--accent))]/14 via-white/[0.04] to-transparent px-4 py-4 shadow-[0_16px_48px_-28px_rgb(var(--accent)/0.45)] sm:px-6">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
                 <p className="max-w-2xl text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
