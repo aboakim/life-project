@@ -67,7 +67,7 @@ export default function ProductSceneStrip({
               alt={alts[i] ?? "Scene"}
               fill
               className="object-cover transition duration-500 hover:scale-[1.03]"
-              sizes="420px"
+              sizes="(max-width: 639px) min(92vw, 420px), 420px"
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[rgb(var(--accent))]/15 via-transparent to-[rgb(var(--accent-magenta))]/10" />
           </div>

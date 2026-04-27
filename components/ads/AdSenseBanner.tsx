@@ -1,6 +1,10 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import {
+  ensureAdsbygoogleScript,
+  scheduleIdle,
+} from "@/components/ads/ensure-adsbygoogle";
 
 type Props = {
   className?: string;
@@ -11,8 +15,8 @@ type Props = {
  * Set NEXT_PUBLIC_ADSENSE_CLIENT_ID=ca-pub-xxxxxxxx and NEXT_PUBLIC_ADSENSE_SLOT_HOME=xxxxxxxx
  * after site approval in https://www.google.com/adsense/
  *
- * The main site layout already loads `adsbygoogle.js` in <head>; this component
- * only pushes the inline unit once the ins node exists. Renders nothing when env is unset.
+ * Loads `adsbygoogle.js` only when this unit renders (idle-scheduled), so pages
+ * without ads do not pay the third-party script cost. Renders nothing when env is unset.
  */
 export default function AdSenseBanner({ className = "" }: Props) {
   const client = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
@@ -21,19 +25,36 @@ export default function AdSenseBanner({ className = "" }: Props) {
 
   useEffect(() => {
     if (!client || !slot || pushed.current) return;
-    const id = window.requestAnimationFrame(() => {
-      try {
-        const w = window as unknown as {
-          adsbygoogle?: unknown[];
-        };
-        w.adsbygoogle = w.adsbygoogle || [];
-        w.adsbygoogle.push({});
-        pushed.current = true;
-      } catch {
-        /* ignore */
-      }
+    let cancelled = false;
+
+    scheduleIdle(() => {
+      if (cancelled) return;
+      void (async () => {
+        try {
+          await ensureAdsbygoogleScript(client);
+          if (cancelled) return;
+          window.requestAnimationFrame(() => {
+            if (cancelled || pushed.current) return;
+            try {
+              const w = window as unknown as {
+                adsbygoogle?: unknown[];
+              };
+              w.adsbygoogle = w.adsbygoogle || [];
+              w.adsbygoogle.push({});
+              pushed.current = true;
+            } catch {
+              /* ignore */
+            }
+          });
+        } catch {
+          /* ignore */
+        }
+      })();
     });
-    return () => window.cancelAnimationFrame(id);
+
+    return () => {
+      cancelled = true;
+    };
   }, [client, slot]);
 
   if (!client || !slot) return null;

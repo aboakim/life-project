@@ -165,12 +165,11 @@ export default function RootLayout({
             ].join(""),
           }}
         />
-        {/* AdSense review expects the auto-ads code in <head>. Consent defaults above still run first. */}
-        <script
-          async
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
-          crossOrigin="anonymous"
-        />
+        {/*
+          AdSense loader is injected client-side only when <AdSenseBanner /> mounts
+          (idle-scheduled) — avoids loading ~200KB+ ad JS on pages with no ad slot.
+          Publisher id remains in metadata.other["google-adsense-account"] for verification.
+        */}
       </head>
       <body
         className={`${displaySans.variable} ${geistSans.variable} ${geistMono.variable} ${notoArmenian.variable} ${notoSans.variable} ${notoArabic.variable} font-sans text-base leading-relaxed antialiased md:text-[1.0625rem] lg:text-[1.125rem]`}
