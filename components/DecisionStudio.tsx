@@ -997,7 +997,7 @@ export default function DecisionStudio({
           <div className="relative grid gap-12 ps-4 sm:ps-6 lg:grid-cols-[minmax(0,1fr)_minmax(280px,400px)] lg:items-center lg:ps-2">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.22] bg-white/[0.11] px-3.5 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-[rgb(var(--ink))] shadow-[0_0_32px_-10px_rgb(var(--accent)/0.45),inset_0_1px_0_0_rgba(255,255,255,0.12)] ring-1 ring-[rgb(var(--accent))]/15 backdrop-blur-sm motion-safe:transition motion-safe:duration-500 motion-safe:hover:ring-[rgb(var(--accent-2))]/25 sm:text-xs">
-                <span className="motion-safe:animate-pulse-soft size-2.5 rounded-full bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] shadow-[0_0_16px_rgb(var(--accent)/0.6)]" />
+                <span className="home-brand-pulse-dot size-2.5 rounded-full bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] shadow-[0_0_16px_rgb(var(--accent)/0.6)]" />
                 {t.brand}
               </div>
               <p className="mt-6 text-sm font-semibold leading-snug text-[rgb(var(--accent-2))] [text-wrap:balance] sm:text-base">
@@ -1017,10 +1017,11 @@ export default function DecisionStudio({
                 labMoments={sx.labMoments}
               />
               <div className="mt-6 flex flex-wrap gap-2.5">
-                {t.features.map((f) => (
+                {t.features.map((f, i) => (
                   <span
                     key={f}
-                    className="chip-interactive rounded-full border border-white/[0.14] bg-white/[0.07] px-4 py-2 text-sm font-medium text-[rgb(var(--ink))]"
+                    className="home-stagger-reveal chip-interactive rounded-full border border-white/[0.14] bg-white/[0.07] px-4 py-2 text-sm font-medium text-[rgb(var(--ink))]"
+                    style={{ animationDelay: `${i * 75}ms` }}
                   >
                     {f}
                   </span>
@@ -1067,20 +1068,29 @@ export default function DecisionStudio({
               >
                 <HeroVisualSlider slides={heroSlideDeck} />
                 <div className="relative overflow-hidden rounded-2xl border border-white/12 bg-[rgb(var(--surface-2))]/90 shadow-2xl backdrop-blur-xl">
-                <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
+                  <div
+                    className="home-accent-hairline-breathe pointer-events-none absolute inset-x-8 top-0 z-10 h-px bg-gradient-to-r from-transparent via-emerald-400/45 to-transparent"
+                    aria-hidden
+                  />
+                  <div
+                    className="home-ambient-orb-drift pointer-events-none absolute -end-10 top-8 size-24 rounded-full bg-emerald-400/10 blur-3xl"
+                    aria-hidden
+                  />
+                <div className="relative flex items-center justify-between border-b border-white/10 px-4 py-3">
                   <span className="text-xs font-semibold text-[rgb(var(--ink))]">
                     {t.previewCardTitle}
                   </span>
-                  <span className="rounded-full bg-emerald-500/15 px-2 py-0.5 text-[10px] font-medium text-emerald-200/95">
+                  <span className="home-live-badge-soft rounded-full bg-emerald-500/15 px-2 py-0.5 text-[10px] font-medium text-emerald-200/95 ring-1 ring-emerald-400/25">
                     Live
                   </span>
                 </div>
-                <div className="space-y-0 divide-y divide-white/[0.06] p-2">
-                  {t.previewRows.map((row) => (
+                <div className="relative space-y-0 divide-y divide-white/[0.06] p-2">
+                  {t.previewRows.map((row, ri) => (
                     <a
                       key={row.label}
                       href={previewHref(row.section)}
-                      className="flex items-center justify-between gap-3 rounded-xl px-3 py-3 text-left transition hover:bg-white/[0.04]"
+                      className="home-stagger-reveal flex items-center justify-between gap-3 rounded-xl px-3 py-3 text-left transition hover:bg-white/[0.04]"
+                      style={{ animationDelay: `${120 + ri * 85}ms` }}
                     >
                       <span className="text-xs text-[rgb(var(--ink-soft))]">
                         {row.label}
@@ -1116,15 +1126,24 @@ export default function DecisionStudio({
               maxTilt={5}
               floatZ={8}
             >
-              <div className="home-section-wash grid gap-3 rounded-2xl border border-white/[0.12] bg-[rgb(var(--surface-elevated))]/60 px-4 py-4 sm:px-6 sm:py-5">
-                <p className="m-0 text-xs font-bold uppercase tracking-[0.16em] text-white/70">
+              <div className="relative overflow-hidden home-section-wash grid gap-3 rounded-2xl border border-white/[0.12] bg-[rgb(var(--surface-elevated))]/60 px-4 py-4 sm:px-6 sm:py-5">
+                  <div
+                    className="home-accent-hairline-breathe pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-[rgb(var(--accent))]/55 to-transparent"
+                    aria-hidden
+                  />
+                  <div
+                    className="home-ambient-orb-drift--wide pointer-events-none absolute -end-16 -top-20 size-44 rounded-full bg-[rgb(var(--accent))]/12 blur-3xl"
+                    aria-hidden
+                  />
+                <p className="relative m-0 text-xs font-bold uppercase tracking-[0.16em] text-white/70">
                   {t.sectionNavTrust}
                 </p>
-                <ul className="m-0 grid list-none grid-cols-1 gap-2.5 p-0 sm:grid-cols-3 sm:gap-3">
+                <ul className="relative m-0 grid list-none grid-cols-1 gap-2.5 p-0 sm:grid-cols-3 sm:gap-3">
                   {t.trustMicroPoints.map((line, i) => (
                     <li
                       key={i}
-                      className="flex items-start gap-2.5 rounded-xl border border-white/[0.1] border-s-2 border-s-[rgb(var(--accent))]/40 bg-black/25 px-3 py-2.5 text-sm leading-snug text-white/95 transition hover:border-white/[0.16] hover:bg-white/[0.04]"
+                      className="home-stagger-reveal flex items-start gap-2.5 rounded-xl border border-white/[0.1] border-s-2 border-s-[rgb(var(--accent))]/40 bg-black/25 px-3 py-2.5 text-sm leading-snug text-white/95 transition hover:border-white/[0.16] hover:bg-white/[0.04] motion-safe:hover:-translate-y-0.5 motion-safe:duration-300"
+                      style={{ animationDelay: `${i * 110}ms` }}
                     >
                       <span className="shrink-0 text-base" aria-hidden>
                         {i === 0 ? "🔒" : i === 1 ? "🔐" : "🤝"}
@@ -1141,14 +1160,22 @@ export default function DecisionStudio({
               maxTilt={5}
               floatZ={8}
             >
-            <div className="home-section-wash rounded-2xl border border-white/[0.12] bg-[rgb(var(--surface-elevated))]/55 px-4 py-5 sm:px-6">
-              <p className="m-0 text-xs font-bold uppercase tracking-[0.2em] text-[rgb(var(--accent-2))]">
+            <div className="relative overflow-hidden home-section-wash rounded-2xl border border-white/[0.12] bg-[rgb(var(--surface-elevated))]/55 px-4 py-5 sm:px-6">
+              <div
+                className="home-accent-hairline-breathe pointer-events-none absolute inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-[rgb(var(--accent-2))]/65 to-transparent"
+                aria-hidden
+              />
+              <div
+                className="home-ambient-orb-drift pointer-events-none absolute -bottom-12 -start-10 size-36 rounded-full bg-[rgb(var(--accent-magenta))]/14 blur-3xl"
+                aria-hidden
+              />
+              <p className="relative m-0 text-xs font-bold uppercase tracking-[0.2em] text-[rgb(var(--accent-2))]">
                 {t.homeDemoEyebrow}
               </p>
-              <p className="font-display mt-1 text-lg font-bold text-[rgb(var(--ink))] [text-wrap:balance]">
+              <p className="relative font-display mt-1 text-lg font-bold text-[rgb(var(--ink))] [text-wrap:balance]">
                 {t.homeDemoTitle}
               </p>
-              <ul className="mt-3 list-none space-y-2 p-0 text-sm">
+              <ul className="relative mt-3 list-none space-y-2 p-0 text-sm">
                 <li>
                   <Link
                     href="/analyze?preset=relocate"
@@ -1176,7 +1203,7 @@ export default function DecisionStudio({
               </ul>
               <Link
                 href="/analyze"
-                className="btn-extrude-3d mt-4 inline-flex min-h-[48px] items-center justify-center rounded-2xl border border-white/15 bg-white/[0.1] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-white/[0.14]"
+                className="relative btn-extrude-3d mt-4 inline-flex min-h-[48px] items-center justify-center rounded-2xl border border-white/15 bg-white/[0.1] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-white/[0.14]"
               >
                 {t.homeDemoCta} →
               </Link>
@@ -1191,17 +1218,25 @@ export default function DecisionStudio({
           className="home-section-wash home-section-wash--overview scroll-mt-36 rounded-[1.85rem] px-3 pt-12 pb-1 sm:px-4 sm:pt-14"
           aria-labelledby="overview-heading"
         >
-          <div className="panel-float-hover rounded-[1.75rem] border border-white/[0.12] bg-gradient-to-br from-white/[0.1] via-white/[0.04] to-transparent p-6 shadow-[0_20px_60px_-36px_rgb(var(--accent)/0.25),0_0_0_1px_rgba(255,255,255,0.05)_inset] sm:p-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[rgb(var(--accent-2))]">
+          <div className="panel-float-hover relative overflow-hidden rounded-[1.75rem] border border-white/[0.12] bg-gradient-to-br from-white/[0.1] via-white/[0.04] to-transparent p-6 shadow-[0_20px_60px_-36px_rgb(var(--accent)/0.25),0_0_0_1px_rgba(255,255,255,0.05)_inset] sm:p-8">
+            <div
+              className="home-accent-hairline-breathe pointer-events-none absolute inset-x-14 top-0 h-px bg-gradient-to-r from-transparent via-[rgb(var(--accent-2))]/60 to-transparent"
+              aria-hidden
+            />
+            <div
+              className="home-ambient-orb-drift pointer-events-none absolute -end-24 top-12 size-56 rounded-full bg-[rgb(var(--accent-sky))]/15 blur-3xl"
+              aria-hidden
+            />
+            <p className="relative text-xs font-semibold uppercase tracking-[0.2em] text-[rgb(var(--accent-2))]">
               {t.atAGlanceEyebrow}
             </p>
             <h2
               id="overview-heading"
-              className="font-display mt-2 text-[clamp(1.35rem,1rem+1.4vw,1.95rem)] font-extrabold tracking-tight text-[rgb(var(--ink))] [text-wrap:balance]"
+              className="relative font-display mt-2 text-[clamp(1.35rem,1rem+1.4vw,1.95rem)] font-extrabold tracking-tight text-[rgb(var(--ink))] [text-wrap:balance]"
             >
               {t.atAGlanceTitle}
             </h2>
-            <ul className="mt-6 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-3">
+            <ul className="relative mt-6 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-3">
               {t.atAGlanceCards.map((card, i) => {
                 const vis = getVisualStoryImage("overview", i);
                 return (
@@ -1220,7 +1255,7 @@ export default function DecisionStudio({
                 );
               })}
             </ul>
-            <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-white/[0.06] pt-6">
+            <div className="relative mt-6 flex flex-wrap items-center gap-3 border-t border-white/[0.06] pt-6">
               <Link
                 href="/analyze"
                 className="inline-flex items-center justify-center rounded-xl bg-white/[0.07] px-4 py-2.5 text-sm font-semibold text-[rgb(var(--ink))] ring-1 ring-white/10 transition hover:bg-white/[0.1]"
@@ -1621,11 +1656,19 @@ export default function DecisionStudio({
                 maxTilt={5}
                 floatZ={8}
               >
-                <aside className="glass card-glow h-full min-h-[12rem] rounded-3xl p-5 lg:p-6">
-                  <p className="text-sm font-semibold text-[rgb(var(--ink))]">
+                <aside className="relative overflow-hidden glass card-glow h-full min-h-[12rem] rounded-3xl p-5 lg:p-6">
+                  <div
+                    className="home-accent-hairline-breathe pointer-events-none absolute inset-x-8 top-0 z-10 h-px bg-gradient-to-r from-transparent via-white/35 to-transparent"
+                    aria-hidden
+                  />
+                  <div
+                    className="home-ambient-orb-drift pointer-events-none absolute -bottom-10 -start-8 size-32 rounded-full bg-[rgb(var(--accent-sage))]/18 blur-3xl"
+                    aria-hidden
+                  />
+                  <p className="relative text-sm font-semibold text-[rgb(var(--ink))]">
                     {t.disclaimerTitle}
                   </p>
-                  <p className="mt-3 text-sm leading-relaxed text-[rgb(var(--ink-soft))]">
+                  <p className="relative mt-3 text-sm leading-relaxed text-[rgb(var(--ink-soft))]">
                     {t.disclaimerBody}
                   </p>
                 </aside>
@@ -1936,7 +1979,10 @@ export default function DecisionStudio({
               className="results-glow-breathe animate-fade-up rounded-2xl border border-emerald-400/35 bg-gradient-to-r from-emerald-500/20 to-cyan-500/10 px-4 py-4 sm:px-5"
             >
               <h2 className="font-display text-xl font-extrabold tracking-tight text-emerald-50/95 [text-wrap:balance] sm:text-2xl">
-                <span className="me-2 text-2xl" aria-hidden>
+                <span
+                  className="home-check-nod me-2 inline-block text-2xl"
+                  aria-hidden
+                >
                   ✓
                 </span>
                 {t.resultsYouAreHere}

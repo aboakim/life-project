@@ -660,6 +660,72 @@ body::before {
   .home-emerald-dot-pulse {
     animation: home-emerald-dot-pulse 3.4s ease-in-out infinite;
   }
+
+  /* One-time stagger (chips, list rows, trust items) — forward fill, no infinite loop */
+  @keyframes home-stagger-reveal {
+    from {
+      opacity: 0.88;
+      transform: translateY(7px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .home-stagger-reveal {
+    animation: home-stagger-reveal 0.62s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0.88;
+  }
+
+  @keyframes home-live-badge-soft {
+    0%,
+    100% {
+      opacity: 0.82;
+      filter: brightness(1);
+    }
+    50% {
+      opacity: 1;
+      filter: brightness(1.2);
+    }
+  }
+  .home-live-badge-soft {
+    animation: home-live-badge-soft 4.2s ease-in-out infinite;
+  }
+
+  @keyframes home-check-nod {
+    0%,
+    100% {
+      transform: scale(1) rotate(0deg);
+    }
+    35% {
+      transform: scale(1.06) rotate(-8deg);
+    }
+    65% {
+      transform: scale(1.03) rotate(6deg);
+    }
+  }
+  .home-check-nod {
+    display: inline-block;
+    animation: home-check-nod 8s ease-in-out infinite;
+    transform-origin: 50% 55%;
+    will-change: transform;
+  }
+
+  @keyframes home-brand-pulse-dot {
+    0%,
+    100% {
+      opacity: 0.8;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.16);
+    }
+  }
+  .home-brand-pulse-dot {
+    animation: home-brand-pulse-dot 4.5s ease-in-out infinite;
+    will-change: transform;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -668,8 +734,16 @@ body::before {
   .home-ambient-orb-drift--wide,
   .home-glyph-twinkle,
   .home-hero-spine-breathe,
-  .home-emerald-dot-pulse {
+  .home-emerald-dot-pulse,
+  .home-stagger-reveal,
+  .home-live-badge-soft,
+  .home-check-nod,
+  .home-brand-pulse-dot {
     animation: none !important;
+  }
+  .home-stagger-reveal {
+    opacity: 1;
+    transform: none;
   }
 }
 
