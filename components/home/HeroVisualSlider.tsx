@@ -25,21 +25,17 @@ export default function HeroVisualSlider({
   const pauseRef = useRef(false);
   const n = slides.length;
 
+  /** After first paint (2 rAF), decode neighbor slides — avoids multi‑second idle wait on mobile. */
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const ric = window.requestIdleCallback?.bind(window);
-    const cancelIdle = window.cancelIdleCallback?.bind(window);
-    if (ric) {
-      const id = ric(
-        () => {
-          setIdleReady(true);
-        },
-        { timeout: 2200 },
-      );
-      return () => cancelIdle?.(id);
-    }
-    const t = window.setTimeout(() => setIdleReady(true), 220);
-    return () => window.clearTimeout(t);
+    let raf2 = 0;
+    const raf1 = window.requestAnimationFrame(() => {
+      raf2 = window.requestAnimationFrame(() => setIdleReady(true));
+    });
+    return () => {
+      window.cancelAnimationFrame(raf1);
+      window.cancelAnimationFrame(raf2);
+    };
   }, []);
 
   const showSlideImage = useCallback(

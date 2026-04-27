@@ -1,10 +1,17 @@
-/** URL ?preset= — passed from server page so we avoid client-only useSearchParams + Suspense blank flash. */
+/** URL ?preset= — shared by server parsing (optional) and client URL read. */
 export type InitialPreset = "relocate" | "job" | "relationship" | null;
+
+export function parsePresetQuery(value: string | null): InitialPreset {
+  if (!value) return null;
+  return value === "relocate" || value === "job" || value === "relationship"
+    ? value
+    : null;
+}
 
 export function initialPresetFromSearchParams(
   sp: Record<string, string | string[] | undefined>,
 ): InitialPreset {
   const raw = sp.preset;
   const v = Array.isArray(raw) ? raw[0] : raw;
-  return v === "relocate" || v === "job" || v === "relationship" ? v : null;
+  return parsePresetQuery(v ?? null);
 }

@@ -44,7 +44,10 @@ import {
   LOCALE_CHANGE_EVENT,
   dispatchLocaleChanged,
 } from "@/lib/locale-sync";
-import type { InitialPreset } from "@/lib/home/initial-preset";
+import {
+  type InitialPreset,
+  parsePresetQuery,
+} from "@/lib/home/initial-preset";
 import { getHomeThematicBands } from "@/lib/i18n/home-thematic-bands";
 import {
   getDelightCopy,
@@ -489,8 +492,15 @@ export default function DecisionStudio({
   }, []);
 
   useEffect(() => {
-    if (!initialPreset || presetApplied.current) return;
-    const pack = warmPresets[initialPreset];
+    if (presetApplied.current) return;
+    let preset: InitialPreset = initialPreset;
+    if (!preset && typeof window !== "undefined") {
+      preset = parsePresetQuery(
+        new URLSearchParams(window.location.search).get("preset"),
+      );
+    }
+    if (!preset) return;
+    const pack = warmPresets[preset];
     setDecision(pack.decision);
     setContext(pack.context);
     setConstraints(pack.constraints);

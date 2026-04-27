@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import DecisionStudioShell from "@/components/home/DecisionStudioShell";
-import { initialPresetFromSearchParams } from "@/lib/home/initial-preset";
 
 export const metadata: Metadata = {
   title: "Analyzer — Life Decision Engine",
@@ -9,20 +8,10 @@ export const metadata: Metadata = {
   alternates: { canonical: "/analyze" },
 };
 
-export default async function AnalyzePage({
-  searchParams,
-}: {
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
-}) {
-  const sp = await searchParams;
-  const initialPreset = initialPresetFromSearchParams(sp);
-
+export default function AnalyzePage() {
   return (
     <main id="main">
-      <DecisionStudioShell
-        initialPreset={initialPreset}
-        focusLayout
-      />
+      <DecisionStudioShell focusLayout />
     </main>
   );
 }
