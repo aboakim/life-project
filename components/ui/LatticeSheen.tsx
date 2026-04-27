@@ -2,7 +2,7 @@
 export default function LatticeSheen() {
   return (
     <div
-      className="pointer-events-none fixed inset-0 -z-[6] hidden overflow-hidden md:block [contain:strict]"
+      className="pointer-events-none fixed inset-0 -z-[6] overflow-hidden"
       aria-hidden
     >
       <div className="lattice-sheen-layer absolute -end-[20%] -top-[10%] size-[min(85vw,520px)] rounded-[40%] opacity-[0.14] [background:repeating-linear-gradient(105deg,rgb(255_255_255/0.09)_0_1px,transparent_1px_11px)] [mask-image:radial-gradient(closest-side,rgb(0_0_0/0.9),transparent)]" />

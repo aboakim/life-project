@@ -25,7 +25,6 @@ export default function DeferredVercelMetrics() {
     let cancelScheduled: (() => void) | undefined;
 
     const armAfterLoad = () => {
-      const narrow = window.matchMedia("(max-width: 767.98px)").matches;
       const w = window as Window & {
         requestIdleCallback?: (
           cb: IdleRequestCallback,
@@ -33,8 +32,8 @@ export default function DeferredVercelMetrics() {
         ) => number;
         cancelIdleCallback?: (handle: number) => void;
       };
-      const idleMs = narrow ? 9000 : 2200;
-      const fallbackMs = narrow ? 4200 : 900;
+      const idleMs = 2200;
+      const fallbackMs = 900;
       if (typeof w.requestIdleCallback === "function") {
         const id = w.requestIdleCallback(() => setReady(true), {
           timeout: idleMs,

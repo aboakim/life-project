@@ -27,10 +27,6 @@ export default function AdSenseBanner({ className = "" }: Props) {
     if (!client || !slot || pushed.current) return;
     let cancelled = false;
 
-    const narrow =
-      typeof window !== "undefined" &&
-      window.matchMedia("(max-width: 767.98px)").matches;
-
     scheduleIdle(
       () => {
         if (cancelled) return;
@@ -56,9 +52,7 @@ export default function AdSenseBanner({ className = "" }: Props) {
           }
         })();
       },
-      narrow
-        ? { idleTimeoutMs: 7200, fallbackDelayMs: 3200 }
-        : { idleTimeoutMs: 1800, fallbackDelayMs: 700 },
+      { idleTimeoutMs: 2200, fallbackDelayMs: 900 },
     );
 
     return () => {

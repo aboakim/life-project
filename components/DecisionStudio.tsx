@@ -5,7 +5,6 @@ import dynamic from "next/dynamic";
 import {
   useCallback,
   useEffect,
-  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -290,42 +289,8 @@ export default function DecisionStudio({
   const [whisperAvailable, setWhisperAvailable] = useState(false);
   /** Defer welcome modal until idle so LCP can paint hero first (mobile PSI). */
   const [deferWelcomeMount, setDeferWelcomeMount] = useState(false);
-  /** Defer Orb / drift / lattice until idle — reduces TBT on desktop PSI and paint cost on mobile. */
-  const [showAmbientLayers, setShowAmbientLayers] = useState(false);
-
-  useLayoutEffect(() => {
-    if (focusLayout) {
-      setShowAmbientLayers(true);
-      return;
-    }
-    const narrow = window.matchMedia("(max-width: 767.98px)").matches;
-    /** Desktop: show mesh/orbs immediately for a snappy, polished feel. */
-    if (!narrow) {
-      setShowAmbientLayers(true);
-      return;
-    }
-    const w = window as Window & {
-      requestIdleCallback?: (
-        cb: IdleRequestCallback,
-        opts?: IdleRequestOptions,
-      ) => number;
-      cancelIdleCallback?: (handle: number) => void;
-    };
-    if (typeof w.requestIdleCallback === "function") {
-      const id = w.requestIdleCallback(() => setShowAmbientLayers(true), {
-        timeout: 3400,
-      });
-      return () => w.cancelIdleCallback?.(id);
-    }
-    const t = window.setTimeout(() => setShowAmbientLayers(true), 2600);
-    return () => window.clearTimeout(t);
-  }, [focusLayout]);
-
   useEffect(() => {
     let cancel = false;
-    const narrow =
-      typeof window !== "undefined" &&
-      window.matchMedia("(max-width: 767.98px)").matches;
     const runFetch = () => {
       fetch("/api/speech/available")
         .then((r) => r.json() as Promise<{ whisper?: boolean }>)
@@ -343,8 +308,8 @@ export default function DecisionStudio({
       ) => number;
       cancelIdleCallback?: (handle: number) => void;
     };
-    const idleMs = narrow ? 6500 : 1200;
-    const fallbackMs = narrow ? 3200 : 700;
+    const idleMs = 1200;
+    const fallbackMs = 700;
     if (typeof w.requestIdleCallback === "function") {
       const id = w.requestIdleCallback(
         () => {
@@ -372,9 +337,7 @@ export default function DecisionStudio({
       return;
     }
     /**
-     * Gate on `window.load` so LCP is almost always hero / hero image first — the
-     * welcome dialog was stealing LCP and main-thread budget in PSI (desktop & mobile).
-     * After load, short boot delay + idle so the chunk hydrates off the critical path.
+     * Welcome chunk after DOM ready + brief idle — fast for real users; hero still paints first.
      */
     let cancelled = false;
     let bootTimer: number | undefined;
@@ -399,9 +362,8 @@ export default function DecisionStudio({
     const armWelcomeAfterLoad = () => {
       if (cancelled) return;
       const narrow = window.matchMedia("(max-width: 767.98px)").matches;
-      /** Mobile: long defer for PSI (LCP/TBT). Desktop: snappy after load. */
-      const bootDelayMs = narrow ? 920 : 40;
-      const idleTimeoutMs = narrow ? 5600 : 520;
+      const bootDelayMs = narrow ? 160 : 50;
+      const idleTimeoutMs = narrow ? 780 : 480;
 
       bootTimer = window.setTimeout(() => {
         if (cancelled) return;
@@ -423,24 +385,24 @@ export default function DecisionStudio({
             () => {
               if (!cancelled) setDeferWelcomeMount(true);
             },
-            narrow ? 1500 : 180,
+            narrow ? 340 : 160,
           );
         }
       }, bootDelayMs);
     };
 
-    const onLoad = () => armWelcomeAfterLoad();
+    const kick = () => armWelcomeAfterLoad();
 
-    if (document.readyState === "complete") {
-      armWelcomeAfterLoad();
+    if (document.readyState !== "loading") {
+      kick();
     } else {
-      window.addEventListener("load", onLoad, { once: true });
+      document.addEventListener("DOMContentLoaded", kick, { once: true });
     }
 
     return () => {
       cancelled = true;
       clearScheduled();
-      window.removeEventListener("load", onLoad);
+      document.removeEventListener("DOMContentLoaded", kick);
     };
   }, [focusLayout]);
 
@@ -754,9 +716,9 @@ export default function DecisionStudio({
         copy={delight}
       />
       <KonamiSurprise copy={delight} />
-      {showAmbientLayers ? <OrbDecor /> : null}
-      {showAmbientLayers ? <AmbientDriftLayer /> : null}
-      {!focusLayout && showAmbientLayers ? <LatticeSheen /> : null}
+      <OrbDecor />
+      <AmbientDriftLayer />
+      {!focusLayout ? <LatticeSheen /> : null}
       {!focusLayout ? (
         <div className="relative z-[8] mx-auto max-w-6xl px-4 sm:px-6">
           <ChromeHorizon className="pt-1" />
