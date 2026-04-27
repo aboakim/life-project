@@ -290,7 +290,7 @@ export default function DecisionStudio({
   const [whisperAvailable, setWhisperAvailable] = useState(false);
   /** Defer welcome modal until idle so LCP can paint hero first (mobile PSI). */
   const [deferWelcomeMount, setDeferWelcomeMount] = useState(false);
-  /** Mobile: skip heavy SVG/canvas ambient layers until idle (main-thread + paint). Desktop: show immediately. */
+  /** Defer Orb / drift / lattice until idle — reduces TBT on desktop PSI and paint cost on mobile. */
   const [showAmbientLayers, setShowAmbientLayers] = useState(false);
 
   useLayoutEffect(() => {
@@ -298,11 +298,7 @@ export default function DecisionStudio({
       setShowAmbientLayers(true);
       return;
     }
-    const mq = window.matchMedia("(max-width: 767.98px)");
-    if (!mq.matches) {
-      setShowAmbientLayers(true);
-      return;
-    }
+    const narrow = window.matchMedia("(max-width: 767.98px)").matches;
     const w = window as Window & {
       requestIdleCallback?: (
         cb: IdleRequestCallback,
@@ -310,13 +306,17 @@ export default function DecisionStudio({
       ) => number;
       cancelIdleCallback?: (handle: number) => void;
     };
+    const idleTimeoutMs = narrow ? 2400 : 520;
     if (typeof w.requestIdleCallback === "function") {
       const id = w.requestIdleCallback(() => setShowAmbientLayers(true), {
-        timeout: 2600,
+        timeout: idleTimeoutMs,
       });
       return () => w.cancelIdleCallback?.(id);
     }
-    const t = window.setTimeout(() => setShowAmbientLayers(true), 2600);
+    const t = window.setTimeout(
+      () => setShowAmbientLayers(true),
+      narrow ? 2400 : 420,
+    );
     return () => window.clearTimeout(t);
   }, [focusLayout]);
 

@@ -65,12 +65,12 @@ export default function WelcomeModal({ locale, onLocaleChange }: Props) {
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[200] flex items-center justify-center p-4 pb-[max(1rem,env(safe-area-inset-bottom,0px))] pt-[max(1rem,env(safe-area-inset-top,0px))] sm:p-6"
+      className="fixed inset-0 z-[200] flex justify-center md:items-center md:p-6 md:pb-[max(1rem,env(safe-area-inset-bottom,0px))] md:pt-[max(1rem,env(safe-area-inset-top,0px))] max-md:items-end max-md:p-0 max-md:pb-[env(safe-area-inset-bottom,0px)]"
       role="presentation"
     >
       <button
         type="button"
-        className="absolute inset-0 bg-black/60 max-md:backdrop-blur-none md:bg-black/55 md:backdrop-blur-[2px]"
+        className="absolute inset-0 max-md:bg-gradient-to-t max-md:from-black/70 max-md:via-black/35 max-md:to-transparent md:bg-black/55 md:backdrop-blur-[2px]"
         aria-label={w.backdropDismissAria}
         onClick={dismiss}
       />
@@ -79,7 +79,7 @@ export default function WelcomeModal({ locale, onLocaleChange }: Props) {
         aria-modal="true"
         aria-labelledby="welcome-modal-title"
         dir={rtl ? "rtl" : "ltr"}
-        className="relative z-10 max-h-[min(90vh,640px)] w-full max-w-lg overflow-y-auto rounded-2xl border border-white/[0.14] bg-[rgb(var(--surface-elevated))]/[0.97] p-6 shadow-[0_24px_80px_-24px_rgba(0,0,0,0.45)] max-md:backdrop-blur-none sm:backdrop-blur-md sm:p-8"
+        className="relative z-10 w-full max-w-lg overflow-y-auto rounded-2xl border border-white/[0.14] bg-[rgb(var(--surface-elevated))]/[0.97] p-6 shadow-[0_24px_80px_-24px_rgba(0,0,0,0.45)] backdrop-blur-md md:max-h-[min(90vh,640px)] max-md:max-h-[min(46vh,420px)] max-md:w-full max-md:max-w-none max-md:rounded-b-none max-md:rounded-t-[1.75rem] max-md:border-x-0 max-md:border-b-0 max-md:p-5 max-md:backdrop-blur-none sm:p-8"
         style={
           rtl
             ? { fontFamily: "var(--font-ar), var(--font-noto), sans-serif" }
@@ -89,7 +89,7 @@ export default function WelcomeModal({ locale, onLocaleChange }: Props) {
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
           <h2
             id="welcome-modal-title"
-            className="font-display text-2xl font-semibold tracking-tight text-[rgb(var(--ink))] sm:max-w-[calc(100%-13rem)] sm:text-3xl"
+            className="font-display text-lg font-semibold tracking-tight text-[rgb(var(--ink))] sm:max-w-[calc(100%-13rem)] sm:text-2xl md:text-3xl"
           >
             {w.title}
           </h2>
