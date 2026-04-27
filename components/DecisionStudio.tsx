@@ -201,8 +201,8 @@ function AnalysisBody({
     <p
       className={
         empty
-          ? `border-s-2 border-amber-400/35 bg-amber-500/[0.07] px-3 py-2.5 text-sm italic leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty] ${className}`
-          : `text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty] ${className}`
+          ? `border-s-2 border-amber-400/35 bg-amber-500/[0.07] px-3 py-2.5 text-sm italic leading-relaxed max-md:text-[1.0625rem] max-md:leading-[1.68] max-md:py-3 text-[rgb(var(--ink-soft))] [text-wrap:pretty] ${className}`
+          : `text-sm leading-relaxed max-md:text-[1.0625rem] max-md:leading-[1.68] text-[rgb(var(--ink-soft))] [text-wrap:pretty] ${className}`
       }
     >
       {empty ? emptyLabel : trimmed}
@@ -1995,7 +1995,7 @@ export default function DecisionStudio({
         {a && (
           <section
             id="section-results"
-            className="home-section-wash home-section-wash--results scroll-mt-28 mt-8 space-y-6 rounded-[1.85rem] border-2 border-emerald-500/30 bg-gradient-to-b from-emerald-500/[0.07] to-transparent px-3 pt-8 sm:px-4"
+            className="home-section-wash home-section-wash--results scroll-mt-28 mt-8 space-y-6 max-md:space-y-10 rounded-[1.85rem] border-2 border-emerald-500/30 bg-gradient-to-b from-emerald-500/[0.07] to-transparent px-3 max-md:px-4 pt-8 pb-4 max-md:pb-6 sm:px-4"
             aria-labelledby="results-main-heading"
           >
             <div
@@ -2133,8 +2133,8 @@ export default function DecisionStudio({
               </div>
             </TiltPlane>
 
-            <section className="glass animate-fade-up rounded-3xl p-6 sm:p-7">
-              <h2 className="text-lg font-semibold text-[rgb(var(--ink))]">
+            <section className="glass animate-fade-up rounded-3xl p-5 max-md:px-4 max-md:py-8 sm:p-7">
+              <h2 className="text-lg max-md:text-xl max-md:leading-snug font-semibold text-[rgb(var(--ink))]">
                 {t.sectionSummary}
               </h2>
               <div className="mt-3">
@@ -2143,7 +2143,7 @@ export default function DecisionStudio({
                   emptyLabel={t.analysisEmptyDetail}
                 />
               </div>
-              <p className="mt-3 text-sm text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
+              <p className="mt-3 text-sm max-md:text-[1.0625rem] max-md:leading-[1.68] text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
                 {t.stakesResultPrefix} —{" "}
                 <span className="font-semibold text-[rgb(var(--ink))]">
                   {stakesLevel}/10
@@ -2152,27 +2152,27 @@ export default function DecisionStudio({
             </section>
 
             {(a.professionalGuidance ?? "").trim() ? (
-              <section className="glass animate-fade-up rounded-3xl border border-amber-400/20 bg-gradient-to-br from-amber-500/[0.07] to-transparent p-6 sm:p-7">
-                <h2 className="text-lg font-semibold text-amber-50/95">
+              <section className="glass animate-fade-up rounded-3xl border border-amber-400/20 bg-gradient-to-br from-amber-500/[0.07] to-transparent p-5 max-md:px-4 max-md:py-8 sm:p-7">
+                <h2 className="text-lg max-md:text-xl max-md:leading-snug font-semibold text-amber-50/95">
                   {t.sectionProfessional}
                 </h2>
-                <p className="mt-3 text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty] whitespace-pre-wrap">
+                <p className="mt-3 text-sm leading-relaxed max-md:text-[1.0625rem] max-md:leading-[1.68] text-[rgb(var(--ink-soft))] [text-wrap:pretty] whitespace-pre-wrap">
                   {a.professionalGuidance}
                 </p>
               </section>
             ) : null}
 
             <section
-              className="glass animate-fade-up rounded-3xl border border-cyan-400/20 bg-gradient-to-br from-cyan-500/[0.06] to-transparent p-6 sm:p-7"
+              className="glass animate-fade-up rounded-3xl border border-cyan-400/20 bg-gradient-to-br from-cyan-500/[0.06] to-transparent p-5 max-md:px-4 max-md:py-8 sm:p-7"
               aria-labelledby="needs-help-heading"
             >
               <h2
                 id="needs-help-heading"
-                className="text-lg font-semibold text-cyan-50/95"
+                className="text-lg max-md:text-xl max-md:leading-snug font-semibold text-cyan-50/95"
               >
                 {pa.needsHelpTitle}
                 </h2>
-              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
+              <p className="mt-2 max-w-2xl text-sm leading-relaxed max-md:text-[1.0625rem] max-md:leading-[1.68] text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
                 {pa.needsHelpLead}
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
@@ -2229,8 +2229,8 @@ export default function DecisionStudio({
           </section>
 
             {matchedExperts.length > 0 ? (
-            <section className="glass animate-fade-up rounded-3xl p-6 sm:p-7">
-              <h2 className="text-lg font-semibold text-[rgb(var(--ink))]">
+            <section className="glass animate-fade-up rounded-3xl p-5 max-md:px-4 max-md:py-8 sm:p-7">
+              <h2 className="text-lg max-md:text-xl max-md:leading-snug font-semibold text-[rgb(var(--ink))]">
                   {t.sectionDirectoryExperts}
               </h2>
                 <ul className="mt-4 space-y-4">
@@ -2282,9 +2282,9 @@ export default function DecisionStudio({
               </p>
             ) : null}
 
-            <section className="glass animate-fade-up rounded-3xl p-6 sm:p-7">
-              <h2 className="text-lg font-semibold">{t.sectionDimensions}</h2>
-              <div className="mt-5 grid gap-4 sm:grid-cols-2">
+            <section className="glass animate-fade-up rounded-3xl p-5 max-md:px-4 max-md:py-8 sm:p-7">
+              <h2 className="text-lg max-md:text-xl max-md:leading-snug font-semibold">{t.sectionDimensions}</h2>
+              <div className="mt-5 grid gap-4 max-md:gap-5 sm:grid-cols-2">
                 {(
                   [
                     ["finances", t.dimFinances],
@@ -2310,9 +2310,9 @@ export default function DecisionStudio({
               </div>
             </section>
 
-            <section className="glass animate-fade-up rounded-3xl p-6 sm:p-7">
-              <h2 className="text-lg font-semibold">{t.sectionScenarios}</h2>
-              <div className="mt-5 space-y-4">
+            <section className="glass animate-fade-up rounded-3xl p-5 max-md:px-4 max-md:py-8 sm:p-7">
+              <h2 className="text-lg max-md:text-xl max-md:leading-snug font-semibold">{t.sectionScenarios}</h2>
+              <div className="mt-5 space-y-4 max-md:space-y-5">
                 <div className="rounded-2xl border border-emerald-500/25 bg-emerald-500/[0.06] p-4">
                   <h3 className="text-xs font-semibold text-emerald-300/95">
                     {t.scenBest}
@@ -2346,9 +2346,9 @@ export default function DecisionStudio({
               </div>
             </section>
 
-            <section className="glass animate-fade-up rounded-3xl p-6 sm:p-7">
-              <h2 className="text-lg font-semibold">{t.sectionTimeline}</h2>
-              <ol className="mt-5 space-y-4">
+            <section className="glass animate-fade-up rounded-3xl p-5 max-md:px-4 max-md:py-8 sm:p-7">
+              <h2 className="text-lg max-md:text-xl max-md:leading-snug font-semibold">{t.sectionTimeline}</h2>
+              <ol className="mt-5 space-y-4 max-md:space-y-5">
                 <li className="flex gap-4">
                   <span className="mt-0.5 shrink-0 rounded-full bg-gradient-to-r from-[rgb(var(--accent))]/25 to-[rgb(var(--accent-2))]/20 px-3 py-1 text-xs font-medium text-[rgb(var(--ink))]">
                     {t.timeM6}
@@ -2382,8 +2382,8 @@ export default function DecisionStudio({
               </ol>
             </section>
 
-            <section className="glass animate-fade-up rounded-3xl p-6 sm:p-7">
-              <h2 className="text-lg font-semibold">{t.sectionScore}</h2>
+            <section className="glass animate-fade-up rounded-3xl p-5 max-md:px-4 max-md:py-8 sm:p-7">
+              <h2 className="text-lg max-md:text-xl max-md:leading-snug font-semibold">{t.sectionScore}</h2>
               <div className="mt-6 grid gap-8 sm:grid-cols-[auto,1fr] sm:items-start">
                 <ScoreCircle score={a.score} sublabel={t.scoreSublabel} />
                 <AnalysisBody
@@ -2393,8 +2393,8 @@ export default function DecisionStudio({
               </div>
             </section>
 
-            <section className="glass animate-fade-up rounded-3xl p-6 sm:p-7">
-              <h2 className="text-lg font-semibold">{t.sectionTwin}</h2>
+            <section className="glass animate-fade-up rounded-3xl p-5 max-md:px-4 max-md:py-8 sm:p-7">
+              <h2 className="text-lg max-md:text-xl max-md:leading-snug font-semibold">{t.sectionTwin}</h2>
               <div className="mt-3">
                 <AnalysisBody
                   value={a.digitalTwinNote}
@@ -2418,11 +2418,11 @@ export default function DecisionStudio({
               />
             ) : null}
 
-            <section className="glass animate-fade-up rounded-3xl border border-dashed border-[rgb(var(--accent))]/35 bg-gradient-to-br from-[rgb(var(--accent))]/[0.07] to-transparent p-6 sm:p-7">
-              <h2 className="text-lg font-semibold text-[rgb(var(--ink))]">
+            <section className="glass animate-fade-up rounded-3xl border border-dashed border-[rgb(var(--accent))]/35 bg-gradient-to-br from-[rgb(var(--accent))]/[0.07] to-transparent p-5 max-md:px-4 max-md:py-8 sm:p-7">
+              <h2 className="text-lg max-md:text-xl max-md:leading-snug font-semibold text-[rgb(var(--ink))]">
                 {sx.premiumTitle}
               </h2>
-              <p className="mt-3 text-sm leading-relaxed text-[rgb(var(--ink-soft))]">
+              <p className="mt-3 text-sm leading-relaxed max-md:text-[1.0625rem] max-md:leading-[1.68] text-[rgb(var(--ink-soft))]">
                 {sx.premiumHint}
               </p>
               <div className="mt-5 flex flex-wrap items-center gap-3">
