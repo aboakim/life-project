@@ -5,7 +5,7 @@
  * Query string matches the rest of the project (`hero-slide-images` style).
  */
 const Q =
-  "ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85";
+  "ixlib=rb-4.0.3&auto=format&fit=crop&w=920&q=72";
 
 const u = (id: string) =>
   `https://images.unsplash.com/photo-${id}?${Q}`;

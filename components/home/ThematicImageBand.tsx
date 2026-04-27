@@ -39,6 +39,7 @@ export default function ThematicImageBand({
             fill
             className="object-cover"
             sizes="(max-width: 1023px) 100vw, min(384px, 49vw)"
+            quality={72}
             loading="lazy"
             draggable={false}
           />

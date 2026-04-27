@@ -69,7 +69,8 @@ export default function HeroVisualSlider({
                 alt={slide.alt}
                 fill
                 className="object-cover"
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 92vw, min(420px, 40vw)"
+                sizes="(max-width: 640px) min(100vw, 440px), (max-width: 1024px) min(92vw, 440px), min(420px, 40vw)"
+                quality={i === 0 ? 68 : 74}
                 priority={i === 0}
                 fetchPriority={i === 0 ? "high" : "low"}
                 loading={i === 0 ? "eager" : "lazy"}
