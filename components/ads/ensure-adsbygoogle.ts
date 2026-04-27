@@ -5,8 +5,13 @@
 
 const SCRIPT_MARK = "data-lde-adsbygoogle-loader";
 
-export function scheduleIdle(callback: () => void): void {
+export function scheduleIdle(
+  callback: () => void,
+  opts?: { idleTimeoutMs?: number; fallbackDelayMs?: number },
+): void {
   if (typeof window === "undefined") return;
+  const idleTimeoutMs = opts?.idleTimeoutMs ?? 2800;
+  const fallbackDelayMs = opts?.fallbackDelayMs ?? 1200;
   const w = window as Window &
     typeof globalThis & {
       requestIdleCallback?: (
@@ -15,10 +20,10 @@ export function scheduleIdle(callback: () => void): void {
       ) => number;
     };
   if (typeof w.requestIdleCallback === "function") {
-    w.requestIdleCallback(() => callback(), { timeout: 2800 });
+    w.requestIdleCallback(() => callback(), { timeout: idleTimeoutMs });
     return;
   }
-  window.setTimeout(callback, 1200);
+  window.setTimeout(callback, fallbackDelayMs);
 }
 
 export function ensureAdsbygoogleScript(clientId: string): Promise<void> {

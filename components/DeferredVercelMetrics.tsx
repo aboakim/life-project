@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 
 /**
  * Kept in a Client Component so we can `ssr: false` and avoid shipping
@@ -16,7 +17,46 @@ const SpeedInsights = dynamic(
   { ssr: false, loading: () => null },
 );
 
+/** Mount after window load + idle so first paint / TBT are not competing with Vercel scripts. */
 export default function DeferredVercelMetrics() {
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    let cancelScheduled: (() => void) | undefined;
+
+    const armAfterLoad = () => {
+      const w = window as Window & {
+        requestIdleCallback?: (
+          cb: IdleRequestCallback,
+          opts?: IdleRequestOptions,
+        ) => number;
+        cancelIdleCallback?: (handle: number) => void;
+      };
+      if (typeof w.requestIdleCallback === "function") {
+        const id = w.requestIdleCallback(() => setReady(true), {
+          timeout: 8000,
+        });
+        cancelScheduled = () => w.cancelIdleCallback?.(id);
+      } else {
+        const t = window.setTimeout(() => setReady(true), 3200);
+        cancelScheduled = () => window.clearTimeout(t);
+      }
+    };
+
+    if (document.readyState === "complete") {
+      armAfterLoad();
+    } else {
+      window.addEventListener("load", armAfterLoad, { once: true });
+    }
+
+    return () => {
+      cancelScheduled?.();
+      window.removeEventListener("load", armAfterLoad);
+    };
+  }, []);
+
+  if (!ready) return null;
+
   return (
     <>
       <AnalyticsGate />

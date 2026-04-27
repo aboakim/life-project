@@ -27,30 +27,39 @@ export default function AdSenseBanner({ className = "" }: Props) {
     if (!client || !slot || pushed.current) return;
     let cancelled = false;
 
-    scheduleIdle(() => {
-      if (cancelled) return;
-      void (async () => {
-        try {
-          await ensureAdsbygoogleScript(client);
-          if (cancelled) return;
-          window.requestAnimationFrame(() => {
-            if (cancelled || pushed.current) return;
-            try {
-              const w = window as unknown as {
-                adsbygoogle?: unknown[];
-              };
-              w.adsbygoogle = w.adsbygoogle || [];
-              w.adsbygoogle.push({});
-              pushed.current = true;
-            } catch {
-              /* ignore */
-            }
-          });
-        } catch {
-          /* ignore */
-        }
-      })();
-    });
+    const narrow =
+      typeof window !== "undefined" &&
+      window.matchMedia("(max-width: 767.98px)").matches;
+
+    scheduleIdle(
+      () => {
+        if (cancelled) return;
+        void (async () => {
+          try {
+            await ensureAdsbygoogleScript(client);
+            if (cancelled) return;
+            window.requestAnimationFrame(() => {
+              if (cancelled || pushed.current) return;
+              try {
+                const w = window as unknown as {
+                  adsbygoogle?: unknown[];
+                };
+                w.adsbygoogle = w.adsbygoogle || [];
+                w.adsbygoogle.push({});
+                pushed.current = true;
+              } catch {
+                /* ignore */
+              }
+            });
+          } catch {
+            /* ignore */
+          }
+        })();
+      },
+      narrow
+        ? { idleTimeoutMs: 5200, fallbackDelayMs: 2200 }
+        : { idleTimeoutMs: 3200, fallbackDelayMs: 1400 },
+    );
 
     return () => {
       cancelled = true;

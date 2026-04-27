@@ -2,7 +2,14 @@
 
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import HeroVisualSlider from "@/components/home/HeroVisualSlider";
 import HeroMomentStrips from "@/components/home/HeroMomentStrips";
 import HomeSectionNav from "@/components/home/HomeSectionNav";
@@ -283,19 +290,73 @@ export default function DecisionStudio({
   const [whisperAvailable, setWhisperAvailable] = useState(false);
   /** Defer welcome modal until idle so LCP can paint hero first (mobile PSI). */
   const [deferWelcomeMount, setDeferWelcomeMount] = useState(false);
+  /** Mobile: skip heavy SVG/canvas ambient layers until idle (main-thread + paint). Desktop: show immediately. */
+  const [showAmbientLayers, setShowAmbientLayers] = useState(false);
+
+  useLayoutEffect(() => {
+    if (focusLayout) {
+      setShowAmbientLayers(true);
+      return;
+    }
+    const mq = window.matchMedia("(max-width: 767.98px)");
+    if (!mq.matches) {
+      setShowAmbientLayers(true);
+      return;
+    }
+    const w = window as Window & {
+      requestIdleCallback?: (
+        cb: IdleRequestCallback,
+        opts?: IdleRequestOptions,
+      ) => number;
+      cancelIdleCallback?: (handle: number) => void;
+    };
+    if (typeof w.requestIdleCallback === "function") {
+      const id = w.requestIdleCallback(() => setShowAmbientLayers(true), {
+        timeout: 2600,
+      });
+      return () => w.cancelIdleCallback?.(id);
+    }
+    const t = window.setTimeout(() => setShowAmbientLayers(true), 2600);
+    return () => window.clearTimeout(t);
+  }, [focusLayout]);
 
   useEffect(() => {
     let cancel = false;
-    fetch("/api/speech/available")
-      .then((r) => r.json() as Promise<{ whisper?: boolean }>)
-      .then((data) => {
-        if (!cancel && data.whisper) setWhisperAvailable(true);
-      })
-      .catch(() => {
-        /* ignore */
-      });
+    const runFetch = () => {
+      fetch("/api/speech/available")
+        .then((r) => r.json() as Promise<{ whisper?: boolean }>)
+        .then((data) => {
+          if (!cancel && data.whisper) setWhisperAvailable(true);
+        })
+        .catch(() => {
+          /* ignore */
+        });
+    };
+    const w = window as Window & {
+      requestIdleCallback?: (
+        cb: IdleRequestCallback,
+        opts?: IdleRequestOptions,
+      ) => number;
+      cancelIdleCallback?: (handle: number) => void;
+    };
+    if (typeof w.requestIdleCallback === "function") {
+      const id = w.requestIdleCallback(
+        () => {
+          if (!cancel) runFetch();
+        },
+        { timeout: 4500 },
+      );
+      return () => {
+        cancel = true;
+        w.cancelIdleCallback?.(id);
+      };
+    }
+    const t = window.setTimeout(() => {
+      if (!cancel) runFetch();
+    }, 2000);
     return () => {
       cancel = true;
+      window.clearTimeout(t);
     };
   }, []);
 
@@ -306,11 +367,11 @@ export default function DecisionStudio({
     }
     /**
      * Mobile: long defer keeps hero/LCP ahead of welcome chunk + overlay paint.
-     * Desktop: shorter schedule so the welcome dialog paints earlier — improves Speed Index vs a late full-screen paint.
+     * Desktop: moderate delay balances Performance score vs Speed Index (full-screen dialog).
      */
     const narrow = window.matchMedia("(max-width: 767.98px)").matches;
-    const bootDelayMs = narrow ? 900 : 140;
-    const idleTimeoutMs = narrow ? 2800 : 550;
+    const bootDelayMs = narrow ? 1300 : 480;
+    const idleTimeoutMs = narrow ? 3200 : 950;
     let scheduled: number | undefined;
     let usedIdleCallback = false;
     const bootId = window.setTimeout(() => {
@@ -329,7 +390,7 @@ export default function DecisionStudio({
       } else {
         scheduled = window.setTimeout(
           () => setDeferWelcomeMount(true),
-          narrow ? 500 : 160,
+          narrow ? 520 : 200,
         );
       }
     }, bootDelayMs);
@@ -654,9 +715,9 @@ export default function DecisionStudio({
         copy={delight}
       />
       <KonamiSurprise copy={delight} />
-      <OrbDecor />
-      <AmbientDriftLayer />
-      {!focusLayout ? <LatticeSheen /> : null}
+      {showAmbientLayers ? <OrbDecor /> : null}
+      {showAmbientLayers ? <AmbientDriftLayer /> : null}
+      {!focusLayout && showAmbientLayers ? <LatticeSheen /> : null}
       {!focusLayout ? (
         <div className="relative z-[8] mx-auto max-w-6xl px-4 sm:px-6">
           <ChromeHorizon className="pt-1" />
