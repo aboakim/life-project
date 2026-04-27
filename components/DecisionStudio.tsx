@@ -3,16 +3,9 @@
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import DecisionBriefWizard from "@/components/home/DecisionBriefWizard";
 import HeroVisualSlider from "@/components/home/HeroVisualSlider";
 import HomeSectionNav from "@/components/home/HomeSectionNav";
 import RevealOnScroll from "@/components/home/RevealOnScroll";
-import PlayCorner from "@/components/home/PlayCorner";
-import BriefSignatureStrip from "@/components/home/BriefSignatureStrip";
-import TimeCapsuleCard from "@/components/home/TimeCapsuleCard";
-import SparkShuffleStrip from "@/components/home/SparkShuffleStrip";
-import StayMomentsStrip from "@/components/home/StayMomentsStrip";
-import LabMomentsStrip from "@/components/home/LabMomentsStrip";
 import AdSenseBanner from "@/components/ads/AdSenseBanner";
 import AmbientDriftLayer from "@/components/ui/AmbientDriftLayer";
 import ChromeHorizon from "@/components/ui/ChromeHorizon";
@@ -64,7 +57,6 @@ import {
   getTrustShortLines,
 } from "@/lib/i18n/home-visual-captions";
 import { getVisualStoryImage } from "@/lib/home/visual-story-images";
-import AnalysisResultTools from "@/components/home/AnalysisResultTools";
 import {
   pushHistory,
   isReminderDue,
@@ -105,6 +97,55 @@ const ProductSceneStrip = dynamic(
 );
 const VisualStoryCard = dynamic(
   () => import("@/components/home/VisualStoryCard"),
+);
+
+const DecisionBriefWizard = dynamic(
+  () => import("@/components/home/DecisionBriefWizard"),
+  {
+    loading: () => (
+      <div
+        className="min-h-[10rem] rounded-2xl border border-white/[0.08] bg-white/[0.03]"
+        aria-hidden
+      />
+    ),
+  },
+);
+const AnalysisResultTools = dynamic(
+  () => import("@/components/home/AnalysisResultTools"),
+);
+const StayMomentsStrip = dynamic(
+  () => import("@/components/home/StayMomentsStrip"),
+  {
+    loading: () => (
+      <div
+        className="mt-6 min-h-[5.75rem] rounded-2xl border border-white/[0.06] bg-white/[0.03]"
+        aria-hidden
+      />
+    ),
+  },
+);
+const LabMomentsStrip = dynamic(
+  () => import("@/components/home/LabMomentsStrip"),
+  {
+    loading: () => (
+      <div
+        className="mt-4 min-h-[5.75rem] rounded-2xl border border-white/[0.06] bg-white/[0.03]"
+        aria-hidden
+      />
+    ),
+  },
+);
+const SparkShuffleStrip = dynamic(
+  () => import("@/components/home/SparkShuffleStrip"),
+);
+const PlayCorner = dynamic(() => import("@/components/home/PlayCorner"), {
+  ssr: false,
+});
+const TimeCapsuleCard = dynamic(
+  () => import("@/components/home/TimeCapsuleCard"),
+);
+const BriefSignatureStrip = dynamic(
+  () => import("@/components/home/BriefSignatureStrip"),
 );
 
 const LOCALE_STORAGE_KEY = "lde-locale";
