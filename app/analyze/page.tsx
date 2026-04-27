@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import DecisionStudioShell from "@/components/home/DecisionStudioShell";
+import { initialPresetFromSearchParams } from "@/lib/home/initial-preset";
 
 export const metadata: Metadata = {
   title: "Analyzer — Life Decision Engine",
@@ -9,16 +9,20 @@ export const metadata: Metadata = {
   alternates: { canonical: "/analyze" },
 };
 
-export default function AnalyzePage() {
+export default async function AnalyzePage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const sp = await searchParams;
+  const initialPreset = initialPresetFromSearchParams(sp);
+
   return (
     <main id="main">
-      <Suspense
-        fallback={
-          <div className="relative z-10 min-h-screen bg-[rgb(var(--surface))]" />
-        }
-      >
-        <DecisionStudioShell focusLayout />
-      </Suspense>
+      <DecisionStudioShell
+        initialPreset={initialPreset}
+        focusLayout
+      />
     </main>
   );
 }

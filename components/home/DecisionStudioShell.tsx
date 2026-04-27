@@ -1,23 +1,21 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
 import DecisionStudio from "@/components/DecisionStudio";
+import type { InitialPreset } from "@/lib/home/initial-preset";
 
-export type InitialPreset = "relocate" | "job" | "relationship" | null;
+export type { InitialPreset };
 
-type ShellProps = { focusLayout?: boolean };
+type ShellProps = {
+  initialPreset?: InitialPreset;
+  focusLayout?: boolean;
+};
 
-export default function DecisionStudioShell({ focusLayout = false }: ShellProps) {
-  const searchParams = useSearchParams();
-  const raw = searchParams.get("preset");
-  const initialPreset: InitialPreset =
-    raw === "relocate" || raw === "job" || raw === "relationship"
-      ? raw
-      : null;
+/** Client wrapper — preset comes from the server page (no useSearchParams → no Suspense blank gap). */
+export default function DecisionStudioShell({
+  initialPreset = null,
+  focusLayout = false,
+}: ShellProps) {
   return (
-    <DecisionStudio
-      initialPreset={initialPreset}
-      focusLayout={focusLayout}
-    />
+    <DecisionStudio initialPreset={initialPreset} focusLayout={focusLayout} />
   );
 }

@@ -44,7 +44,7 @@ import {
   LOCALE_CHANGE_EVENT,
   dispatchLocaleChanged,
 } from "@/lib/locale-sync";
-import type { InitialPreset } from "@/components/home/DecisionStudioShell";
+import type { InitialPreset } from "@/lib/home/initial-preset";
 import { getHomeThematicBands } from "@/lib/i18n/home-thematic-bands";
 import {
   getDelightCopy,
