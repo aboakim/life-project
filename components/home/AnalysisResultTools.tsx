@@ -120,6 +120,29 @@ export default function AnalysisResultTools({
     }
   }, []);
 
+  const onShareNative = useCallback(async () => {
+    const url =
+      typeof window !== "undefined"
+        ? `${window.location.origin}${window.location.pathname}${window.location.search}`
+        : "";
+    const full = `${shareText}\n\n${url}`;
+    try {
+      if (typeof navigator !== "undefined" && typeof navigator.share === "function") {
+        await navigator.share({
+          title: "Life Decision Engine",
+          text: shareText,
+          url: url || undefined,
+        });
+        setFlash(pa.copied);
+        window.setTimeout(() => setFlash(null), 2000);
+        return;
+      }
+    } catch (e) {
+      if ((e as { name?: string }).name === "AbortError") return;
+    }
+    await onCopy(full, pa.copied);
+  }, [onCopy, pa.copied, shareText]);
+
   const onJournal = useCallback(() => {
     appendJournalEntry(md.slice(0, 12000));
     setFlash(pa.savedToJournal);
@@ -194,6 +217,13 @@ export default function AnalysisResultTools({
             className="rounded-xl border border-white/12 bg-white/[0.06] px-4 py-2 text-sm font-medium text-[rgb(var(--ink))] transition hover:bg-white/[0.1]"
           >
             {pa.shareLimited}
+          </button>
+          <button
+            type="button"
+            onClick={() => void onShareNative()}
+            className="rounded-xl border border-[rgb(var(--accent-2))]/35 bg-[rgb(var(--accent))]/12 px-4 py-2 text-sm font-semibold text-[rgb(var(--ink))] transition hover:bg-[rgb(var(--accent))]/18"
+          >
+            {pa.shareNativeCta}
           </button>
           <button
             type="button"

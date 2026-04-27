@@ -140,6 +140,8 @@ const BriefSignatureStrip = dynamic(
 const LOCALE_STORAGE_KEY = "lde-locale";
 const VISIT_COUNT_KEY = "lde-home-visits";
 const VISITOR_BANNER_DISMISS_KEY = "lde-visitor-path-dismissed";
+/** Minimum time the “analyzing” UI stays visible so the pass feels intentional (ms). */
+const ANALYSIS_UI_MIN_MS = 2200;
 
 type ApiResponse = {
   analysis: DecisionAnalysis;
@@ -282,6 +284,9 @@ export default function DecisionStudio({
   const [constraints, setConstraints] = useState("");
   const [stakesLevel, setStakesLevel] = useState(5);
   const [loading, setLoading] = useState(false);
+  const [analyzingLineIdx, setAnalyzingLineIdx] = useState(0);
+  const [socialProofIdx, setSocialProofIdx] = useState(0);
+  const analysisStartRef = useRef(0);
   const [preAnalysisEmailOpen, setPreAnalysisEmailOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<ApiResponse | null>(null);
@@ -528,6 +533,7 @@ export default function DecisionStudio({
 
   const runAnalysis = useCallback(async () => {
     if (!canSubmit) return;
+    analysisStartRef.current = Date.now();
     setLoading(true);
     setError(null);
     setResult(null);
@@ -574,9 +580,36 @@ export default function DecisionStudio({
     } catch {
       setError(t.networkError);
     } finally {
+      const elapsed = Date.now() - analysisStartRef.current;
+      const wait = Math.max(0, ANALYSIS_UI_MIN_MS - elapsed);
+      if (wait > 0) {
+        await new Promise<void>((r) => setTimeout(r, wait));
+      }
       setLoading(false);
     }
   }, [canSubmit, context, constraints, decision, locale, stakesLevel, t]);
+
+  useEffect(() => {
+    if (!loading) return;
+    setAnalyzingLineIdx(0);
+    const lines = t.analyzingPhaseLines;
+    const n = lines.length;
+    if (n <= 1) return;
+    const id = window.setInterval(() => {
+      setAnalyzingLineIdx((i) => (i + 1) % n);
+    }, 880);
+    return () => clearInterval(id);
+  }, [loading, t.analyzingPhaseLines]);
+
+  useEffect(() => {
+    if (focusLayout) return;
+    const n = t.socialProofRotator.length;
+    if (n <= 1) return;
+    const id = window.setInterval(() => {
+      setSocialProofIdx((i) => (i + 1) % n);
+    }, 9600);
+    return () => clearInterval(id);
+  }, [focusLayout, t.socialProofRotator]);
 
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -741,6 +774,17 @@ export default function DecisionStudio({
         jumpLabel={t.homeSectionJumpLabel}
         jumpPlaceholder={t.homeSectionJumpPlaceholder}
       />
+
+      {!focusLayout && t.socialProofRotator.length > 0 ? (
+        <p
+          className="relative z-[20] mx-auto max-w-2xl px-4 pt-1 text-center text-[11px] font-medium leading-snug text-[rgb(var(--ink-soft))]/[0.88] transition-opacity duration-500 [text-wrap:pretty] sm:px-6"
+          aria-live="polite"
+        >
+          {t.socialProofRotator[
+            socialProofIdx % t.socialProofRotator.length
+          ] ?? ""}
+        </p>
+      ) : null}
 
       {demoMode ? (
         <div className="pointer-events-none fixed start-3 end-3 top-[4.75rem] z-[30] max-w-none rounded-xl border border-white/12 bg-white/[0.06] px-3 py-2 text-center text-[11px] font-medium leading-snug text-[rgb(var(--ink-soft))] shadow-lg backdrop-blur-md sm:start-auto sm:end-4 sm:top-[4.5rem] sm:max-w-[min(100%,20rem)] sm:text-start sm:text-xs">
@@ -1742,8 +1786,10 @@ export default function DecisionStudio({
                   role="status"
                   aria-live="polite"
                 >
-                  <p className="text-sm font-medium text-[rgb(var(--ink))]">
-                    {t.analyzingProgressLine}
+                  <p className="min-h-[1.4em] text-sm font-medium text-[rgb(var(--ink))] [text-wrap:pretty]">
+                    {t.analyzingPhaseLines[
+                      analyzingLineIdx % t.analyzingPhaseLines.length
+                    ] ?? t.analyzingProgressLine}
                   </p>
                   <div
                     className="relative h-1.5 w-full overflow-hidden rounded-full bg-white/10"

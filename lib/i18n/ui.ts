@@ -119,6 +119,10 @@ export type UIStrings = {
   homeDemoCta: string;
   /** Shown with the progress bar while analysis is running */
   analyzingProgressLine: string;
+  /** Rotates while analyzing — richer than a single static line */
+  analyzingPhaseLines: readonly string[];
+  /** Home — honest engagement lines (no fabricated counts) */
+  socialProofRotator: readonly string[];
   /** Dedicated /analyze page */
   analyzePageTitle: string;
   analyzePageSubtitle: string;
@@ -195,6 +199,8 @@ const trustHowEn: Pick<
   | "homeDemoExample3"
   | "homeDemoCta"
   | "analyzingProgressLine"
+  | "analyzingPhaseLines"
+  | "socialProofRotator"
 > = {
   heroRibbon:
     "Private session · Structured scenarios · Experts optional",
@@ -228,6 +234,18 @@ const trustHowEn: Pick<
   homeDemoExample3: "Relationship fork — stay or go?",
   homeDemoCta: "Try now",
   analyzingProgressLine: "Analyzing your decision…",
+  analyzingPhaseLines: [
+    "Analyzing your decision…",
+    "Mapping scenarios across the next months and years…",
+    "Comparing trade-offs you actually care about…",
+    "Stress-testing a few hidden assumptions…",
+    "Turning this into a clear report…",
+  ],
+  socialProofRotator: [
+    "Built for forks where the stakes feel real—career, relocation, relationships.",
+    "Three paths and a timeline—not a generic chat paragraph.",
+    "Your words stay in this session until you copy or save them.",
+  ],
   trustSectionTitle: "Still stuck in your head?",
   trustCards: [
     {
@@ -382,6 +400,8 @@ const trustHowHy: Pick<
   | "homeDemoExample3"
   | "homeDemoCta"
   | "analyzingProgressLine"
+  | "analyzingPhaseLines"
+  | "socialProofRotator"
 > = {
   heroRibbon:
     "Անվճար կառուցված վերլուծիչ · Մասնագետների ցանց · Գաղտնիության առաջնահերթություն",
@@ -415,6 +435,18 @@ const trustHowHy: Pick<
   homeDemoExample3: "Հարաբերություն — մնա՞լ, գնա՞լ",
   homeDemoCta: "Բացել ցուցադրում",
   analyzingProgressLine: "Վերլուծում ենք ձեր որոշումը․․․",
+  analyzingPhaseLines: [
+    "Վերլուծում ենք ձեր որոշումը․․․",
+    "Քարտեզագրում ենք սցենարները ամիսներ և տարիներ առաջ․․․",
+    "Համեմատում ենք փոխարժեքները, որոնք իրականում կարևոր են․․․",
+    "Ստուգում ենք մի քանի թաքնված ենթադրություն․․․",
+    "Կազմում ենք հստակ հաշվետվություն․․․",
+  ],
+  socialProofRotator: [
+    "Ստեղծված է բարդ ուղիների համար՝ կարիերա, տեղափոխություն, հարաբերություններ։",
+    "Երեք ուղի և ժամանակացույց՝ ոչ թե ընդհանուր զրույց։",
+    "Քո տեքստը մնում է այս սեանսում, մինչև ինքդ չպահես կամ չպատճենես։",
+  ],
   trustSectionTitle: "Ինչու են ընտրում այս գործիքը",
   trustCards: [
     {
@@ -1386,6 +1418,8 @@ const HOME_I18N_FALLBACKS: Pick<
   | "homeDemoExample3"
   | "homeDemoCta"
   | "analyzingProgressLine"
+  | "analyzingPhaseLines"
+  | "socialProofRotator"
 > = {
   trustMicroPoints: [
     "No public feed of your story",
@@ -1399,6 +1433,18 @@ const HOME_I18N_FALLBACKS: Pick<
   homeDemoExample3: "Relationship fork — stay or go?",
   homeDemoCta: "Try now",
   analyzingProgressLine: "Analyzing your decision…",
+  analyzingPhaseLines: [
+    "Analyzing your decision…",
+    "Mapping scenarios across the next months and years…",
+    "Comparing trade-offs you actually care about…",
+    "Stress-testing a few hidden assumptions…",
+    "Turning this into a clear report…",
+  ],
+  socialProofRotator: [
+    "Built for forks where the stakes feel real—career, relocation, relationships.",
+    "Three paths and a timeline—not a generic chat paragraph.",
+    "Your words stay in this session until you copy or save them.",
+  ],
 };
 
 export function getUi(locale: AppLocale): UIStrings {

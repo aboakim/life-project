@@ -11,6 +11,8 @@ export type PostAnalysisCopy = {
   copyMarkdown: string;
   copied: string;
   shareLimited: string;
+  /** Web Share API when available (mobile); falls back to copy full text + URL */
+  shareNativeCta: string;
   shareFooter: string;
   printSummary: string;
   historyTitle: string;
@@ -140,6 +142,7 @@ const en: PostAnalysisCopy = {
   copyMarkdown: "Copy as Markdown",
   copied: "Copied.",
   shareLimited: "Copy short summary",
+  shareNativeCta: "Share…",
   shareFooter: "— From Life Decision Engine (lifedecisions.space). Full analysis kept private on your device.",
   printSummary: "Print this analysis",
   historyTitle: "Recent analyses (this device)",
@@ -278,6 +281,7 @@ const hy: PostAnalysisCopy = {
   copyMarkdown: "Պատճենել Markdown",
   copied: "Պատճենվեց։",
   shareLimited: "Կարճ ամփոփում",
+  shareNativeCta: "Կիսվել…",
   shareFooter:
     "— Life Decision Engine (lifedecisions.space)։ Լրիվ վերլուծությունը մնում է այս սարքում։",
   printSummary: "Տպել վերլուծությունը",
