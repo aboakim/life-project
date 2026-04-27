@@ -20,6 +20,8 @@ export default function SiteJsonLd() {
       width: 192,
       height: 192,
     },
+    /** Publisher image — reinforces brand logo URL for crawlers (same asset as logo). */
+    image: [`${base}/logo-192.png`],
     sameAs: [] as string[],
     contactPoint: [
       {

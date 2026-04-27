@@ -83,13 +83,19 @@ export const metadata: Metadata = {
   publisher: "Life Decision Engine",
   category: "decision-making, self-help, finance, careers, psychology",
   alternates: { canonical: "/" },
+  /**
+   * Favicons: Google Search uses a site icon next to the title. Minimum 48×48
+   * (we list 48 first). `shortcut` helps legacy crawlers; keep in sync with /public.
+   * @see https://developers.google.com/search/docs/appearance/favicon-in-search
+   */
   icons: {
     icon: [
       { url: "/favicon-48x48.png", type: "image/png", sizes: "48x48" },
-      { url: "/favicon.ico", sizes: "any" },
       { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
       { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
     ],
+    shortcut: "/favicon.ico",
     apple: [{ url: "/apple-icon", type: "image/png", sizes: "180x180" }],
   },
   formatDetection: { telephone: false, email: false, address: false },
