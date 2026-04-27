@@ -785,14 +785,29 @@ export default function DecisionStudio({
       />
 
       {!focusLayout && t.socialProofRotator.length > 0 ? (
-        <p
-          className="relative z-[20] mx-auto max-w-2xl px-4 pt-1 text-center text-[11px] font-medium leading-snug text-[rgb(var(--ink-soft))]/[0.88] transition-opacity duration-500 [text-wrap:pretty] sm:px-6"
+        <div
+          className="relative z-[20] mx-auto max-w-2xl px-4 pt-2 sm:px-6"
           aria-live="polite"
         >
-          {t.socialProofRotator[
-            socialProofIdx % t.socialProofRotator.length
-          ] ?? ""}
-        </p>
+          <div className="relative overflow-hidden rounded-2xl border border-white/[0.09] bg-gradient-to-b from-white/[0.1] via-white/[0.04] to-transparent px-4 py-3 shadow-[0_18px_50px_-28px_rgb(var(--accent)/0.45)] backdrop-blur-md">
+            <div
+              className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-[rgb(var(--accent))]/80 to-transparent"
+              aria-hidden
+            />
+            <div
+              className="pointer-events-none absolute -end-8 -top-10 size-28 rounded-full bg-[rgb(var(--accent-magenta))]/15 blur-3xl"
+              aria-hidden
+            />
+            <p className="relative text-center text-[12px] font-medium leading-snug tracking-wide text-[rgb(var(--ink))]/95 [text-wrap:pretty] sm:text-[13px]">
+              <span className="me-2 inline-block opacity-90" aria-hidden>
+                ◇
+              </span>
+              {t.socialProofRotator[
+                socialProofIdx % t.socialProofRotator.length
+              ] ?? ""}
+            </p>
+          </div>
+        </div>
       ) : null}
 
       {demoMode ? (
@@ -1611,35 +1626,61 @@ export default function DecisionStudio({
                 }}
               />
               {sessionRuns > 0 ? (
-                <p className="mt-3 text-[10px] font-medium uppercase tracking-[0.12em] text-[rgb(var(--accent-2))]/85">
-                  {t.sessionRunsThisVisit.replace(
-                    "{n}",
-                    String(sessionRuns),
-                  )}
-                </p>
-              ) : null}
-              <p className="mt-3 text-xs font-medium text-[rgb(var(--ink-soft))]">
-                {t.workspaceQuickFillIntro}
-              </p>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {t.workspaceQuickExamples.map((ex) => (
-                  <button
-                    key={ex.label}
-                    type="button"
-                    disabled={formBusy}
-                    onClick={() => {
-                      setDecision(ex.decision);
-                      window.requestAnimationFrame(() => {
-                        document.getElementById("decision-input")?.focus({
-                          preventScroll: false,
-                        });
-                      });
-                    }}
-                    className="rounded-full border border-white/[0.14] bg-white/[0.06] px-3.5 py-1.5 text-left text-xs font-semibold text-[rgb(var(--ink))] shadow-sm transition hover:border-[rgb(var(--accent))]/35 hover:bg-white/[0.1] disabled:opacity-40"
+                <div className="mt-4 inline-flex max-w-full items-center gap-2.5 rounded-full border border-[rgb(var(--accent-2))]/35 bg-gradient-to-r from-[rgb(var(--accent))]/14 via-[rgb(var(--accent-2))]/12 to-[rgb(var(--accent-magenta))]/10 px-4 py-2 shadow-[0_10px_36px_-18px_rgb(var(--accent)/0.55)] ring-1 ring-inset ring-white/[0.06]">
+                  <span
+                    className="flex size-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[rgb(var(--accent))]/40 to-[rgb(var(--accent-2))]/30 text-[13px] text-white shadow-inner"
+                    aria-hidden
                   >
-                    {ex.label}
-                  </button>
-                ))}
+                    ✦
+                  </span>
+                  <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-[rgb(var(--accent-2))]">
+                    {t.sessionRunsThisVisit.replace(
+                      "{n}",
+                      String(sessionRuns),
+                    )}
+                  </span>
+                </div>
+              ) : null}
+              <div className="cold-tray-pulse mt-4 rounded-2xl border border-white/[0.11] bg-gradient-to-br from-[rgb(var(--accent))]/[0.09] via-white/[0.05] to-transparent p-4 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.07)] ring-1 ring-inset ring-[rgb(var(--accent))]/15 sm:p-5">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
+                  <span
+                    className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[rgb(var(--accent))]/45 via-[rgb(var(--accent-2))]/35 to-[rgb(var(--accent-magenta))]/30 text-lg shadow-[0_12px_32px_-12px_rgb(var(--accent)/0.55)]"
+                    aria-hidden
+                  >
+                    ✨
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm font-semibold leading-snug text-[rgb(var(--ink))] [text-wrap:pretty]">
+                      {t.workspaceQuickFillIntro}
+                    </p>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {t.workspaceQuickExamples.map((ex) => (
+                        <button
+                          key={ex.label}
+                          type="button"
+                          disabled={formBusy}
+                          onClick={() => {
+                            setDecision(ex.decision);
+                            window.requestAnimationFrame(() => {
+                              document.getElementById("decision-input")?.focus({
+                                preventScroll: false,
+                              });
+                            });
+                          }}
+                          className="group relative overflow-hidden rounded-xl border border-white/[0.14] bg-black/30 px-4 py-2.5 text-left text-xs font-bold text-[rgb(var(--ink))] shadow-[0_6px_20px_-14px_rgb(0_0_0/0.8)] transition hover:border-[rgb(var(--accent-2))]/45 hover:bg-white/[0.07] disabled:opacity-40 motion-safe:hover:-translate-y-0.5 motion-safe:duration-200"
+                        >
+                          <span
+                            className="pointer-events-none absolute inset-0 opacity-0 transition group-hover:opacity-100"
+                            aria-hidden
+                          >
+                            <span className="absolute inset-0 bg-gradient-to-r from-[rgb(var(--accent))]/20 via-transparent to-[rgb(var(--accent-magenta))]/15" />
+                          </span>
+                          <span className="relative">{ex.label}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
               <p className="mt-3 text-xs leading-relaxed text-[rgb(var(--ink-soft))]/85 [text-wrap:pretty]">
                 {t.voiceInputHint}
@@ -1817,21 +1858,26 @@ export default function DecisionStudio({
               </div>
               {loading ? (
                 <div
-                  className="mt-4 space-y-2"
+                  className="relative mt-5 overflow-hidden rounded-2xl border border-[rgb(var(--accent-2))]/35 bg-gradient-to-b from-[rgb(var(--accent))]/15 via-black/35 to-black/55 p-4 shadow-[0_22px_56px_-30px_rgb(var(--accent)/0.55)] backdrop-blur-md"
                   role="status"
                   aria-live="polite"
                 >
-                  <p className="min-h-[1.4em] text-sm font-medium text-[rgb(var(--ink))] [text-wrap:pretty]">
+                  <div
+                    className="pointer-events-none absolute -start-16 top-1/2 size-40 -translate-y-1/2 rounded-full bg-[rgb(var(--accent-magenta))]/20 blur-3xl"
+                    aria-hidden
+                  />
+                  <p className="relative min-h-[1.45em] text-sm font-semibold leading-snug text-[rgb(var(--ink))] drop-shadow-[0_0_28px_rgb(var(--accent)/0.35)] [text-wrap:pretty] motion-safe:transition-opacity motion-safe:duration-300">
                     {t.analyzingPhaseLines[
                       analyzingLineIdx % t.analyzingPhaseLines.length
                     ] ?? t.analyzingProgressLine}
                   </p>
                   <div
-                    className="relative h-1.5 w-full overflow-hidden rounded-full bg-white/10"
+                    className="relative mt-4 h-2 w-full overflow-hidden rounded-full bg-black/40 shadow-[inset_0_1px_3px_rgba(0,0,0,0.45)] ring-1 ring-white/[0.06]"
                     aria-hidden
                   >
+                    <div className="absolute inset-y-0 start-0 w-full bg-gradient-to-r from-transparent via-white/[0.07] to-transparent" />
                     <div
-                      className="home-analyzing-bar-inner absolute start-0 top-0 h-full w-2/5 rounded-full bg-gradient-to-r from-[rgb(var(--accent))] to-[rgb(var(--accent-2))]"
+                      className="home-analyzing-bar-inner absolute start-0 top-0 h-full w-[42%] rounded-full bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] shadow-[0_0_24px_rgb(var(--accent)/0.55)]"
                     />
                   </div>
                 </div>
@@ -1870,60 +1916,80 @@ export default function DecisionStudio({
               </p>
             ) : null}
             <div className="mx-auto max-w-xl px-2">
-              <AmazonAssociatesCta variant="compact" locale={locale} />
+              <div className="overflow-hidden rounded-[1.35rem] border border-emerald-400/30 bg-gradient-to-b from-emerald-500/[0.14] via-black/40 to-black/55 p-[1px] shadow-[0_28px_70px_-40px_rgb(52_211_153/0.45)] backdrop-blur-md">
+                <div className="rounded-[1.3rem] bg-black/35 px-3 py-4 sm:px-5 sm:py-5">
+                  <AmazonAssociatesCta variant="compact" locale={locale} />
+                  <div
+                    className="relative my-5 flex items-center gap-3 sm:my-6"
+                    aria-hidden
+                  >
+                    <div className="h-px flex-1 bg-gradient-to-r from-transparent via-emerald-400/35 to-transparent" />
+                    <span className="flex size-2 shrink-0 rounded-full bg-emerald-400/70 shadow-[0_0_14px_rgb(52_211_153/0.65)] ring-4 ring-emerald-400/15" />
+                    <div className="h-px flex-1 bg-gradient-to-l from-transparent via-emerald-400/35 to-transparent" />
+                  </div>
+                  <div
+                    className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-5"
+                    role="group"
+                    aria-label={t.resultFeedbackPrompt}
+                  >
+                    <span className="text-center text-[13px] font-semibold tracking-wide text-emerald-100/90">
+                      {t.resultFeedbackPrompt}
+                    </span>
+                    <div className="flex items-center gap-3">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setResultHelpful("up");
+                          try {
+                            window.localStorage.setItem(
+                              "lde-feedback-last",
+                              "up",
+                            );
+                          } catch {
+                            /* ignore */
+                          }
+                        }}
+                        className={`inline-flex size-12 items-center justify-center rounded-2xl border text-xl shadow-lg transition motion-safe:active:scale-95 ${
+                          resultHelpful === "up"
+                            ? "border-emerald-400/70 bg-gradient-to-b from-emerald-500/35 to-emerald-600/20 text-emerald-50 ring-2 ring-emerald-400/45"
+                            : "border-white/18 bg-white/[0.07] text-emerald-100/95 hover:border-emerald-400/40 hover:bg-emerald-500/15"
+                        }`}
+                        aria-pressed={resultHelpful === "up"}
+                      >
+                        <span aria-hidden>👍</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setResultHelpful("down");
+                          try {
+                            window.localStorage.setItem(
+                              "lde-feedback-last",
+                              "down",
+                            );
+                          } catch {
+                            /* ignore */
+                          }
+                        }}
+                        className={`inline-flex size-12 items-center justify-center rounded-2xl border text-xl shadow-lg transition motion-safe:active:scale-95 ${
+                          resultHelpful === "down"
+                            ? "border-rose-400/55 bg-gradient-to-b from-rose-500/30 to-rose-700/20 text-rose-50 ring-2 ring-rose-400/35"
+                            : "border-white/18 bg-white/[0.07] text-rose-100/90 hover:border-rose-400/35 hover:bg-rose-500/15"
+                        }`}
+                        aria-pressed={resultHelpful === "down"}
+                      >
+                        <span aria-hidden>👎</span>
+                      </button>
+                    </div>
+                  </div>
+                  {resultHelpful ? (
+                    <p className="mt-4 text-center text-[12px] font-medium leading-relaxed text-emerald-200/95">
+                      {t.resultFeedbackThanks}
+                    </p>
+                  ) : null}
+                </div>
+              </div>
             </div>
-            <div
-              className="flex flex-wrap items-center justify-center gap-3 py-2"
-              role="group"
-              aria-label={t.resultFeedbackPrompt}
-            >
-              <span className="text-xs font-medium text-emerald-100/85">
-                {t.resultFeedbackPrompt}
-              </span>
-              <button
-                type="button"
-                onClick={() => {
-                  setResultHelpful("up");
-                  try {
-                    window.localStorage.setItem("lde-feedback-last", "up");
-                  } catch {
-                    /* ignore */
-                  }
-                }}
-                className={`inline-flex size-10 items-center justify-center rounded-xl border text-lg transition ${
-                  resultHelpful === "up"
-                    ? "border-emerald-400/55 bg-emerald-500/25 ring-2 ring-emerald-400/35"
-                    : "border-white/15 bg-white/[0.06] hover:bg-white/[0.1]"
-                }`}
-                aria-pressed={resultHelpful === "up"}
-              >
-                <span aria-hidden>👍</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setResultHelpful("down");
-                  try {
-                    window.localStorage.setItem("lde-feedback-last", "down");
-                  } catch {
-                    /* ignore */
-                  }
-                }}
-                className={`inline-flex size-10 items-center justify-center rounded-xl border text-lg transition ${
-                  resultHelpful === "down"
-                    ? "border-rose-400/45 bg-rose-500/20 ring-2 ring-rose-400/30"
-                    : "border-white/15 bg-white/[0.06] hover:bg-white/[0.1]"
-                }`}
-                aria-pressed={resultHelpful === "down"}
-              >
-                <span aria-hidden>👎</span>
-              </button>
-            </div>
-            {resultHelpful ? (
-              <p className="pb-1 text-center text-[11px] text-emerald-200/90">
-                {t.resultFeedbackThanks}
-              </p>
-            ) : null}
             <TiltPlane
               className="animate-fade-up block w-full"
               innerClassName="rounded-2xl"
