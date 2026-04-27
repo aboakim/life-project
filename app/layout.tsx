@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     template: "%s | Life Decision Engine",
   },
   description:
-    "Structured AI analysis for career, relocation, relationships: scenarios, risks, timelines, and a score—plus a global network of psychologists, lawyers, and financial professionals. Not generic chat.",
+    "Stop overthinking. Get instant AI scenarios for big life decisions—6 months to 5 years out. Private by design; talk to a pro only if you want. Not generic chat.",
   applicationName: "Life Decision Engine",
   authors: [{ name: "Life Decision Engine Editorial Team" }],
   creator: "Life Decision Engine",

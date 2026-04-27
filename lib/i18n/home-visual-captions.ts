@@ -7,9 +7,9 @@ type Triple = readonly [string, string, string];
  * Full text remains in `sr-only` next to each card.
  */
 const atEn: Triple = [
-  "Enter your decision, optional context, then run the structured analyzer.",
-  "Compare best / worst / likely with trade-offs side by side.",
-  "A score and a timeline—not therapy or legal advice. Pros are optional.",
+  "Map six months to five years ahead—not vibes, real paths.",
+  "Quit the overthinking loop in one structured pass.",
+  "Plain answers you can use—pros optional, nothing posted publicly.",
 ];
 
 const atHy: Triple = [
@@ -31,9 +31,9 @@ const trustHy: Triple = [
 ];
 
 const howEn: Triple = [
-  "Your decision + context: numbers, fears, values, deadlines.",
-  "6 months to 5 years: finance, mind, risk, upside.",
-  "Use the score as a compass; add a pro if you need one.",
+  "Say the fork you're in—facts optional, fears welcome.",
+  "Lay out paths instead of debating them silently.",
+  "See futures fast—six months to five years in one glance.",
 ];
 
 const howHy: Triple = [

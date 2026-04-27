@@ -136,9 +136,10 @@ const en: SiteExtras = {
   warmJob: "Evaluate a job offer",
   warmRel: "Relationship next step",
   demoBadge: "Local / preview mode — not production data.",
-  premiumTitle: "Export & more",
-  premiumCta: "Export PDF (soon)",
-  premiumHint: "Premium may include PDF export and deeper reviews — planned.",
+  premiumTitle: "Want deeper insights?",
+  premiumCta: "Coming soon",
+  premiumHint:
+    "Unlock advanced analysis and personalized scenarios when Premium launches.",
   moderationNote:
     "Posts appear as plain text after light automated checks; we may remove spam or unsafe content. This is peer exchange, not therapy or legal counsel.",
   filterLang: "Language",

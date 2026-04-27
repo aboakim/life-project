@@ -197,68 +197,68 @@ const trustHowEn: Pick<
   | "analyzingProgressLine"
 > = {
   heroRibbon:
-    "Free structured analyzer · Global expert directory · Private by design",
+    "Private session · Structured scenarios · Experts optional",
   sectionNavOverview: "Overview",
   sectionNavFixes: "What it fixes",
-  atAGlanceEyebrow: "Start here",
-  atAGlanceTitle: "Three quick steps",
+  atAGlanceEyebrow: "What this does",
+  atAGlanceTitle: "Struggling to choose?",
   atAGlanceCards: [
     {
-      title: "Enter your decision",
-      body: "One clear question—add context and values if you want.",
+      title: "See real outcomes",
+      body: "We map your options from six months to five years ahead—not vibes, paths.",
     },
     {
-      title: "Compare scenarios",
-      body: "Best, worst, and likely paths with trade-offs side by side.",
+      title: "Quit the spiral",
+      body: "Hours (or days) of overthinking collapse into one structured pass.",
     },
     {
-      title: "Get a clear outcome",
-      body: "Score, timeline, four lenses—talk to a pro only if you want one.",
+      title: "Walk away clear",
+      body: "Plain-language answers you can act on—therapy and legal pros stay optional.",
     },
   ],
   trustMicroPoints: [
-    "No data stored as a public post",
-    "Private analysis in your session",
-    "Optional expert help when you want a human",
+    "No public feed of your story",
+    "Analysis stays in your session",
+    "Talk to a human only if you want one",
   ],
-  homeDemoEyebrow: "Try an example",
-  homeDemoTitle: "See a structured report in one click",
+  homeDemoEyebrow: "Try now",
+  homeDemoTitle: "Preview a full report instantly",
   homeDemoExample1: "Should I move abroad?",
   homeDemoExample2: "Quit job or stay?",
   homeDemoExample3: "Relationship fork — stay or go?",
-  homeDemoCta: "Try demo",
+  homeDemoCta: "Try now",
   analyzingProgressLine: "Analyzing your decision…",
-  trustSectionTitle: "Why people use this framework",
+  trustSectionTitle: "Still stuck in your head?",
   trustCards: [
     {
-      emoji: "🧭",
-      title: "Structured logic, not opinions",
-      body: "Clear trade-offs between paths—scenarios and lenses, not vibes or generic chat.",
+      emoji: "🧠",
+      title: "Still overthinking everything?",
+      body: "You're not alone—most people burn hours or days on the same fork.",
     },
     {
-      emoji: "🔐",
-      title: "Clear trade-offs, not guesses",
-      body: "Best, worst, and likely paths with evidence—your text stays in your session.",
+      emoji: "⚡",
+      title: "Instant clarity beats looping",
+      body: "Named scenarios and timelines so you move forward instead of spinning.",
     },
     {
-      emoji: "🌍",
-      title: "Humans when you need them",
-      body: "Multilingual UI plus a growing directory of psychologists, lawyers, and financial pros.",
+      emoji: "🔒",
+      title: "Your story stays yours",
+      body: "Nothing posted as a feed—optional humans only when you want them.",
     },
   ],
   howSectionTitle: "How it works",
   howSteps: [
     {
-      title: "Describe",
-      body: "Write the decision and optional context—numbers, fears, values, deadlines.",
+      title: "Enter your situation",
+      body: "Say what's on your mind—facts, fears, deadlines optional.",
     },
     {
-      title: "Analyze",
-      body: "The engine maps finances, psychology, risks, and upside across 6 months → 5 years.",
+      title: "Choose your paths",
+      body: "Lay out the real options instead of debating them in silence.",
     },
     {
-      title: "Decide",
-      body: "Use the score and rationale as a compass—then talk to a professional if you need one.",
+      title: "Get instant scenarios",
+      body: "Six months to five years out—simple, fast, effective.",
     },
   ],
   sectionNavProduct: "Product",
@@ -269,7 +269,7 @@ const trustHowEn: Pick<
   sectionNavPrivacy: "Privacy",
   productSectionTitle: "Everything in one structured flow",
   productSectionSubtitle:
-    "A calm workspace for major choices—scenarios, lenses, timelines, and a score. Modeled after how leading product teams review decisions.",
+    "One workspace for heavy forks—see outcomes, compare trade-offs, pick what fits.",
   bentoCards: [
     {
       pill: "Scenarios",
@@ -292,7 +292,7 @@ const trustHowEn: Pick<
       body: "A percentage with rationale—not a magic answer.",
     },
   ],
-  heroCtaPrimary: "Start free analysis",
+  heroCtaPrimary: "Make a decision now",
   heroCtaSecondary: "Browse experts",
   previewCardTitle: "Workspace preview",
   previewRows: [
@@ -304,7 +304,7 @@ const trustHowEn: Pick<
   heroSlides: [
     {
       alt: "Mountain ridge above clouds at sunrise",
-      caption: "See farther—map scenarios before you commit.",
+      caption: "Stop looping—see the fork before you step.",
     },
     {
       alt: "Architectural blueprints and planning drawings on a desk",
@@ -635,10 +635,10 @@ const uiHy: Partial<UIStrings> = {
 
 const uiEn: Partial<UIStrings> = {
   brand: "Life Decision Engine",
-  heroLine1: "Make better life decisions",
-  heroAccent: "in minutes",
+  heroLine1: "Stop overthinking.",
+  heroAccent: "Decide in seconds.",
   subtitle:
-    "Compare options, see outcomes, decide clearly. Structured analysis—not random chat.",
+    "Get instant clarity on any decision using AI-powered scenarios—not random chat.",
   disclaimerTitle: "Important",
   disclaimerBody:
     "This is a support tool—not final authority. In a crisis, contact a professional. Not medical, legal, or therapeutic advice.",
@@ -671,9 +671,9 @@ const uiEn: Partial<UIStrings> = {
   badgeFallback: "Fallback mode",
   scoreSublabel: "alignment / feasibility",
   footerPremium:
-    "The core analyzer is free. Premium (via Stripe) unlocks extra depth, and future releases will add a human-coach tier.",
+    "Core analyzer stays free. Premium unlocks deeper runs and saved history—shipping next.",
   networkError: "Network error",
-  features: ["Psychology", "Finance", "Structured AI"],
+  features: ["Instant clarity", "Future scenarios", "Private session"],
   accessLocal:
     "Local URL: http://localhost:3000 — run `npm run dev` on your machine.",
   langLabel: "Language",
@@ -697,9 +697,8 @@ const uiEn: Partial<UIStrings> = {
   workspaceFillHint:
     "Type your main question in the first box, then run analysis. The report appears directly below the form.",
   resultsYouAreHere: "Your report is ready",
-  homeAnalyzerPromoLine:
-    "Want a page with only the analyzer and no long scroll?",
-  homeAnalyzerPromoCta: "Open the analyzer",
+  homeAnalyzerPromoLine: "Ready to stop guessing?",
+  homeAnalyzerPromoCta: "Try it free now",
   sectionProfessional: "Who to involve (professional guidance)",
   sectionDirectoryExperts: "Registered experts in our directory for this area",
   expertOpenInDirectory: "Open in directory",
@@ -735,7 +734,7 @@ const uiEnUs: Partial<UIStrings> = {
   accessLocal:
     "Local URL: http://localhost:3000 — run `npm run dev`, then open it in your browser.",
   footerPremium:
-    "The core analyzer is free. Premium (via Stripe) unlocks extra depth, with a human-coach tier planned for future releases.",
+    "Core analyzer stays free. Premium unlocks deeper runs and saved history—shipping next.",
 };
 
 const uiRu: Partial<UIStrings> = {
@@ -1389,16 +1388,16 @@ const HOME_I18N_FALLBACKS: Pick<
   | "analyzingProgressLine"
 > = {
   trustMicroPoints: [
-    "No data stored as a public post",
-    "Private analysis in your session",
-    "Optional expert help when you want a human",
+    "No public feed of your story",
+    "Analysis stays in your session",
+    "Talk to a human only if you want one",
   ],
-  homeDemoEyebrow: "Try an example",
-  homeDemoTitle: "See a structured report in one click",
+  homeDemoEyebrow: "Try now",
+  homeDemoTitle: "Preview a full report instantly",
   homeDemoExample1: "Should I move abroad?",
   homeDemoExample2: "Quit job or stay?",
   homeDemoExample3: "Relationship fork — stay or go?",
-  homeDemoCta: "Try demo",
+  homeDemoCta: "Try now",
   analyzingProgressLine: "Analyzing your decision…",
 };
 

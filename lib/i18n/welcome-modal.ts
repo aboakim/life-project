@@ -11,8 +11,8 @@ export type WelcomeCopy = {
 const enUs: WelcomeCopy = {
   title: "Welcome to Life Decision Engine",
   lead:
-    "This site is a calm workspace for major life choices—career, relocation, relationships—not a generic endless chat. You get structured scenarios, timelines, a score, and clear dimensions so you can compare options before you act. Run the analyzer when you’re ready, use the brief to fill fields quickly, switch language anytime, and browse the expert directory when you want a human specialist.",
-  cta: "Got it — continue",
+    "You get instant scenarios—not endless chat. Drop in your situation, see outcomes from six months to five years, then move. Switch language anytime; experts stay optional.",
+  cta: "Let's continue",
   backdropDismissAria: "Close welcome screen",
 };
 
