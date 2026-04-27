@@ -4,6 +4,7 @@ import { buildDemoAnalysis } from "@/lib/demo-analysis";
 import { getUi } from "@/lib/i18n/ui";
 import { parseLocale } from "@/lib/i18n/locale";
 import { loadMatchedExperts } from "@/lib/matched-experts";
+import { fillDecisionAnalysisGaps } from "@/lib/analysis-gap-fill";
 import { analyzeWithOpenAI } from "@/lib/llm-analyze";
 import { rateLimitAllow } from "@/lib/rate-limit";
 import type { AnalyzeRequestBody } from "@/lib/types";
@@ -50,11 +51,12 @@ export async function POST(req: Request) {
 
   if (process.env.OPENAI_API_KEY) {
     try {
-      const analysis = await analyzeWithOpenAI({
+      const raw = await analyzeWithOpenAI({
         ...body,
         decision: decision.trim(),
         language: locale,
       });
+      const analysis = fillDecisionAnalysisGaps(raw, locale);
       const matchedExperts = await loadMatchedExperts(
         analysis.suggestedDirectoryRole ?? "UNSPECIFIED"
       );
@@ -65,7 +67,10 @@ export async function POST(req: Request) {
       });
     } catch (e) {
       console.error("[analyze] OpenAI path failed", e);
-      const analysis = buildDemoAnalysis(decision, locale, demoOpts);
+      const analysis = fillDecisionAnalysisGaps(
+        buildDemoAnalysis(decision, locale, demoOpts),
+        locale,
+      );
       const matchedExperts = await loadMatchedExperts(
         analysis.suggestedDirectoryRole ?? "UNSPECIFIED"
       );
@@ -78,7 +83,10 @@ export async function POST(req: Request) {
     }
   }
 
-  const analysis = buildDemoAnalysis(decision, locale, demoOpts);
+  const analysis = fillDecisionAnalysisGaps(
+    buildDemoAnalysis(decision, locale, demoOpts),
+    locale,
+  );
   const matchedExperts = await loadMatchedExperts(
     analysis.suggestedDirectoryRole ?? "UNSPECIFIED"
   );

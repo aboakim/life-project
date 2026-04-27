@@ -7,28 +7,28 @@ import type {
 
 const JSON_INSTRUCTION = `You must respond with a single JSON object only, no markdown, with this exact shape:
 {
-  "summary": "string, 2-4 sentences",
+  "summary": "string, 2-5 sentences — NEVER empty. If input is gibberish/vague/non-decision: say so plainly here.",
   "professionalGuidance": "string, 3-6 sentences: based on the user's question, name which kinds of professionals could help (e.g. licensed psychologist/therapist, attorney, financial planner, immigration adviser, career coach, physician) and in what situations; clarify this software is not a substitute. Do not invent real people's names. Same language as other fields.",
   "suggestedDirectoryRole": "one of exactly: PSYCHOLOGIST, LAWYER, FINANCIAL, PHYSICIAN, COACH, IMMIGRATION, UNSPECIFIED — the single type from our expert directory that best matches who should help; use UNSPECIFIED if no clear fit or mixed",
   "dimensions": {
-    "finances": "string",
-    "psychology": "string",
-    "risks": "string",
-    "opportunities": "string"
+    "finances": "string — NEVER empty; if unusable input, say what is missing for a money angle",
+    "psychology": "string — NEVER empty",
+    "risks": "string — NEVER empty",
+    "opportunities": "string — NEVER empty"
   },
   "scenarios": {
-    "bestCase": "string",
-    "worstCase": "string",
-    "mostLikely": "string"
+    "bestCase": "string — NEVER empty; if no real fork, explain why a 'best' path cannot be grounded",
+    "worstCase": "string — NEVER empty",
+    "mostLikely": "string — NEVER empty"
   },
   "timeline": {
-    "months6": "string",
-    "years2": "string",
-    "years5": "string"
+    "months6": "string — NEVER empty",
+    "years2": "string — NEVER empty",
+    "years5": "string — NEVER empty"
   },
   "score": number from 0 to 100 (estimated alignment with user's stated goals, not medical/legal advice),
-  "scoreRationale": "string explaining the score briefly",
-  "digitalTwinNote": "string: what a 'future you' perspective might emphasize, hypothetical, not factual"
+  "scoreRationale": "string — NEVER empty; tie to why the score is low if input is nonsense",
+  "digitalTwinNote": "string — NEVER empty: future-you angle, hypothetical; if input unusable, say what you'd want clarified first"
 }`;
 
 const ALLOWED_ROLES: SuggestedDirectoryRole[] = [
@@ -128,10 +128,15 @@ export async function analyzeWithOpenAI(
     "- In dimensions.finances, dimensions.psychology, dimensions.risks, and dimensions.opportunities, each string must include at least one concrete anchor inferred from their text or context (e.g. money, time, people, place, law, health, career, relationship). If the text is vague, say what is missing instead of filling with platitudes.",
     "- Scenarios and timeline must reference different angles (e.g. resources vs relationships vs time), not four near-identical paragraphs.",
     "",
+    "CRITICAL — completeness (hard requirement):",
+    '- Never output "", whitespace-only, "N/A", "TBD", or a single word like "none" for: summary; every dimensions.*; every scenarios.*; every timeline.*; scoreRationale; digitalTwinNote.',
+    "- If the decision text is random characters, spam, insult-only, off-topic, or too short to be a real fork: summary must say clearly that you cannot structure a meaningful decision analysis yet. Every other field must still contain 1–3 sentences in the user's language explaining what is missing (e.g. two real options, timeframe, stakes) or why that section cannot be grounded — still reference something from their text so it is not generic boilerplate.",
+    "- Grounded refusal beats empty cells: an honest \"cannot model this yet\" paragraph in each section is mandatory over leaving keys blank.",
+    "",
     "Rules:",
     "- Be structured, not chatty. No therapy diagnosis; encourage professional help for crisis.",
     "- Acknowledge uncertainty; avoid absolute predictions.",
-    "- Score is a heuristic 'alignment / feasibility' estimate, not fate.",
+    "- Score is a heuristic 'alignment / feasibility' estimate, not fate — use low scores when the prompt is unusable.",
     "- professionalGuidance: practical referral-style guidance (types of pros, not specific names), tuned to the domains implied by their text.",
     JSON_INSTRUCTION,
   ].join("\n\n");
@@ -144,15 +149,15 @@ export async function analyzeWithOpenAI(
     },
     body: JSON.stringify({
       model: process.env.OPENAI_MODEL ?? "gpt-4o-mini",
-      temperature: 0.78,
-      presence_penalty: 0.2,
-      frequency_penalty: 0.15,
+      temperature: 0.66,
+      presence_penalty: 0.18,
+      frequency_penalty: 0.12,
       response_format: { type: "json_object" },
       messages: [
         {
           role: "system",
           content:
-            "You are a decision analysis engine. You output careful, balanced structured analysis in the user's language. You are not a lawyer, doctor, or therapist. Each response is unique to the specific decision and context: avoid boilerplate, canned paragraphs, and repeated one-size-fits-all life advice across different sections.",
+            "You are a decision analysis engine. You output careful, balanced structured JSON in the user's language. You are not a lawyer, doctor, or therapist. Completeness is mandatory: never emit empty strings in user-facing fields — if the input is unusable, state that explicitly in every section rather than leaving blanks. Each response must be anchored to the user's actual words; avoid canned life advice that could apply to unrelated questions.",
         },
         { role: "user", content: userBlock },
       ],

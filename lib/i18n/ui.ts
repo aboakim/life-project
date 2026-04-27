@@ -699,7 +699,7 @@ const uiHy: Partial<UIStrings> = {
     "Շնորհակալություն — սա օգնում է մեզ բարելավել փորձը։",
   sessionRunsThisVisit: "Այս այցելությամբ՝ {n} կառուցված վերլուծություն",
   analysisEmptyDetail:
-    "Այս տեղը չի լցվել ձեր մուտքից։ Սովորաբար այդպես է լինում, երբ հարցը շատ ընդհանուր է, պատահական կամ իրական որոշում չէ՝ փորձեք նորից՝ մեկ կամ երկու նախադասությամբ հստակ գրել, թե ինչի միջև եք ընտրում։",
+    "Այս բլոկում մոդելավորված բովանդակություն չկա՝ հիմնականում երբ մուտքագրումը նախադասություն-որոշում չէ (մնացել է ընդհանուր, պատահական կամ օֆթոփիկ)։ Նորից գրեք համառոտ՝ ի՞նչ եք ընտրելու, «Ա» ընդդեմ «Բ», ինչն եք ամենաշատը այս պահում կշռում (ժամանակ, փող, ռիսկ, մարդիկ)։",
 };
 
 const uiEn: Partial<UIStrings> = {
@@ -814,7 +814,7 @@ const uiEn: Partial<UIStrings> = {
   resultFeedbackThanks: "Thanks — that helps us improve the experience.",
   sessionRunsThisVisit: "This visit: {n} structured run(s)",
   analysisEmptyDetail:
-    "Nothing was generated here from your input. That often happens when the prompt is too vague, random, or not a concrete decision — try rewriting it as one or two sentences about what you’re actually choosing between.",
+    "No substantive answer filled this slot—usually because the prompt isn’t a real fork (too vague, noisy, random, or off-topic). Rewrite as one or two sentences: what decision you face, Option A vs Option B, and what you optimize for (time, money, risk, relationships).",
 };
 
 /** American English — UI copy tuned for US spelling/idiom where it differs */
@@ -1531,7 +1531,7 @@ const HOME_I18N_FALLBACKS: Pick<
   resultFeedbackThanks: "Thanks — that helps us improve the experience.",
   sessionRunsThisVisit: "This visit: {n} structured run(s)",
   analysisEmptyDetail:
-    "Nothing was generated here from your input. That often happens when the prompt is too vague, random, or not a concrete decision — try rewriting it as one or two sentences about what you’re actually choosing between.",
+    "No substantive answer filled this slot—usually because the prompt isn’t a real fork (too vague, noisy, random, or off-topic). Rewrite as one or two sentences: what decision you face, Option A vs Option B, and what you optimize for (time, money, risk, relationships).",
 };
 
 export function getUi(locale: AppLocale): UIStrings {
