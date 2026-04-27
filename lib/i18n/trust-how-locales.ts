@@ -24,6 +24,7 @@ type TrustHowCore = Pick<
   | "previewRows"
   | "workspaceTitle"
   | "heroSlides"
+  | "heroCarouselAriaLabel"
   | "productStripEyebrow"
   | "productStripAria"
   | "productStripAlts"
@@ -174,6 +175,8 @@ export const trustHowRu: TrustHowPick = {
         "Запишите, отложите, перечитайте — ясность часто приходит со второго взгляда.",
     },
   ],
+  heroCarouselAriaLabel:
+    "Карусель изображений — проведите пальцем влево или вправо по фото, чтобы сменить слайд, или используйте кнопки ниже.",
   productStripEyebrow: "Моменты",
   productStripAria: "Иллюстрации к потоку продукта",
   productStripAlts: [
@@ -322,6 +325,8 @@ export const trustHowDe: TrustHowPick = {
         "Aufs Schreiben kommt ein zweiter Blick — Klarheit kommt oft später.",
     },
   ],
+  heroCarouselAriaLabel:
+    "Bildkarussell — wischen Sie auf den Fotos nach links oder rechts, um den Slide zu wechseln, oder nutzen Sie die Steuerung darunter.",
   productStripEyebrow: "Momente",
   productStripAria: "Illustrationen zum Produktfluss",
   productStripAlts: [
@@ -459,6 +464,8 @@ export const trustHowFr: TrustHowPick = {
         "Écrivez, posez, relisez — la clarté arrive souvent au second regard.",
     },
   ],
+  heroCarouselAriaLabel:
+    "Carrousel d’images — balayez vers la gauche ou la droite sur les photos pour changer de slide, ou utilisez les commandes ci-dessous.",
   productStripEyebrow: "Moments",
   productStripAria: "Illustrations du parcours produit",
   productStripAlts: [
@@ -596,6 +603,8 @@ export const trustHowEs: TrustHowPick = {
         "Escríbelo, déjalo reposar y vuelve a leer — la claridad suele llegar en la segunda lectura.",
     },
   ],
+  heroCarouselAriaLabel:
+    "Carrusel de imágenes — desliza a la izquierda o derecha sobre las fotos para cambiar de diapositiva, o usa los controles de abajo.",
   productStripEyebrow: "Momentos",
   productStripAria: "Ilustraciones del recorrido del producto",
   productStripAlts: [
@@ -733,6 +742,8 @@ export const trustHowIt: TrustHowPick = {
         "Scrivi, aspetta, rileggi — la chiarezza spesso arriva al secondo sguardo.",
     },
   ],
+  heroCarouselAriaLabel:
+    "Carosello di immagini — scorri a sinistra o a destra sulle foto per cambiare slide, oppure usa i controlli sotto.",
   productStripEyebrow: "Momenti",
   productStripAria: "Illustrazioni del percorso prodotto",
   productStripAlts: [
@@ -870,6 +881,8 @@ export const trustHowAr: TrustHowPick = {
         "اكتب، أرِحْ نظرك، ثم أعد القراءة — الوضوح غالباً يأتي في النظرة الثانية.",
     },
   ],
+  heroCarouselAriaLabel:
+    "عرض شرائح للصور — مرّر بإصبعك يميناً أو يساراً على الصور لتغيير الشريحة، أو استخدم الأزرار بالأسفل.",
   productStripEyebrow: "لحظات",
   productStripAria: "رسوم لمسار المنتج",
   productStripAlts: [

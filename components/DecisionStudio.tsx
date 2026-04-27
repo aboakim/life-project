@@ -1091,7 +1091,10 @@ export default function DecisionStudio({
                 maxTilt={7}
                 floatZ={14}
               >
-                <HeroVisualSlider slides={heroSlideDeck} />
+                <HeroVisualSlider
+                  slides={heroSlideDeck}
+                  ariaLabel={t.heroCarouselAriaLabel}
+                />
                 <div className="relative overflow-hidden rounded-2xl border border-white/12 bg-[rgb(var(--surface-2))]/90 shadow-2xl backdrop-blur-xl">
                   <div
                     className="home-accent-hairline-breathe pointer-events-none absolute inset-x-8 top-0 z-10 h-px bg-gradient-to-r from-transparent via-emerald-400/45 to-transparent"

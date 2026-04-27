@@ -104,6 +104,8 @@ export type UIStrings = {
   workspaceTitle: string;
   /** Hero image carousel — same length as `HERO_SLIDE_IMAGE_URLS` */
   heroSlides: ReadonlyArray<{ alt: string; caption: string }>;
+  /** Accessible name for the swipeable image strip */
+  heroCarouselAriaLabel: string;
   productStripEyebrow: string;
   productStripAria: string;
   productStripAlts: readonly [string, string, string, string, string, string];
@@ -198,6 +200,7 @@ const trustHowEn: Pick<
   | "previewRows"
   | "workspaceTitle"
   | "heroSlides"
+  | "heroCarouselAriaLabel"
   | "productStripEyebrow"
   | "productStripAria"
   | "productStripAlts"
@@ -365,6 +368,8 @@ const trustHowEn: Pick<
       caption: "Write it down, sleep on it. Clarity often comes on the second look.",
     },
   ],
+  heroCarouselAriaLabel:
+    "Image carousel — swipe left or right on the photos to change slides, or use the controls below.",
   productStripEyebrow: "Moments",
   productStripAria: "Illustrative scenes for the product flow",
   productStripAlts: [
@@ -401,6 +406,7 @@ const trustHowHy: Pick<
   | "previewRows"
   | "workspaceTitle"
   | "heroSlides"
+  | "heroCarouselAriaLabel"
   | "productStripEyebrow"
   | "productStripAria"
   | "productStripAlts"
@@ -569,6 +575,8 @@ const trustHowHy: Pick<
         "Գրիր, մի քանի ժամ կամ օր հետո նորից կարդա — պարզությունը հաճախ երկրորդ հայացքով է գալիս։",
     },
   ],
+  heroCarouselAriaLabel:
+    "Նկարների կարուզել — քաշեք ձախ կամ աջ նկարի վրա՝ սլայդը փոխելու համար, կամ օգտագործեք ներքևի կոճակները։",
   productStripEyebrow: "Պահեր",
   productStripAria: "Նկարագրական տեսարաններ արտադրանքի հոսքի համար",
   productStripAlts: [

@@ -11,18 +11,23 @@ export type HeroSlide = {
 
 type Props = {
   slides: readonly HeroSlide[];
+  /** Accessible name for the swipeable image area */
+  ariaLabel: string;
   /** ms between auto-advance; 0 disables */
   autoMs?: number;
 };
 
 export default function HeroVisualSlider({
   slides,
+  ariaLabel,
   autoMs = 5200,
 }: Props) {
   const [index, setIndex] = useState(0);
   /** After idle, mount images for carousel neighbors (not all slides — saves decode / network on first paint). */
   const [idleReady, setIdleReady] = useState(false);
   const pauseRef = useRef(false);
+  /** Touch swipe on the image strip only (not the arrow/dot bar). */
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
   const n = slides.length;
 
   /** After first paint (2 rAF), decode neighbor slides — avoids multi‑second idle wait on mobile. */
@@ -58,6 +63,50 @@ export default function HeroVisualSlider({
     setIndex(i);
   }, []);
 
+  const SWIPE_MIN_PX = 48;
+
+  const onTouchStart = useCallback(
+    (e: React.TouchEvent) => {
+      if (n <= 1) return;
+      pauseRef.current = true;
+      const t = e.touches[0];
+      touchStartRef.current = { x: t.clientX, y: t.clientY };
+    },
+    [n],
+  );
+
+  const endTouchSwipe = useCallback(
+    (clientX: number, clientY: number) => {
+      pauseRef.current = false;
+      const start = touchStartRef.current;
+      touchStartRef.current = null;
+      if (!start || n <= 1) return;
+      const dx = clientX - start.x;
+      const dy = clientY - start.y;
+      const absDx = Math.abs(dx);
+      const absDy = Math.abs(dy);
+      // Prefer page scroll when the gesture is mostly vertical.
+      if (absDx < SWIPE_MIN_PX || absDx < absDy * 1.15) return;
+      if (dx > 0) go(-1);
+      else go(1);
+    },
+    [go, n],
+  );
+
+  const onTouchEnd = useCallback(
+    (e: React.TouchEvent) => {
+      const t = e.changedTouches[0];
+      if (!t) return;
+      endTouchSwipe(t.clientX, t.clientY);
+    },
+    [endTouchSwipe],
+  );
+
+  const onTouchCancel = useCallback(() => {
+    pauseRef.current = false;
+    touchStartRef.current = null;
+  }, []);
+
   useEffect(() => {
     if (n <= 1 || autoMs <= 0) return;
     const id = window.setInterval(() => {
@@ -78,9 +127,16 @@ export default function HeroVisualSlider({
         pauseRef.current = false;
       }}
     >
-      <div className="relative aspect-[4/5] w-full sm:aspect-[3/4] lg:aspect-[4/5]">
+      <div
+        className="relative aspect-[4/5] w-full touch-pan-y select-none sm:aspect-[3/4] lg:aspect-[4/5]"
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+        onTouchCancel={onTouchCancel}
+        role="region"
+        aria-label={ariaLabel}
+      >
         <div
-          className="flex h-full w-full transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+          className="flex h-full w-full transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
           style={{ transform: `translate3d(-${index * 100}%,0,0)` }}
         >
           {slides.map((slide, i) => (
