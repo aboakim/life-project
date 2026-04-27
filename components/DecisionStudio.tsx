@@ -791,15 +791,18 @@ export default function DecisionStudio({
         >
           <div className="relative overflow-hidden rounded-2xl border border-white/[0.09] bg-gradient-to-b from-white/[0.1] via-white/[0.04] to-transparent px-4 py-3 shadow-[0_18px_50px_-28px_rgb(var(--accent)/0.45)] backdrop-blur-md">
             <div
-              className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-[rgb(var(--accent))]/80 to-transparent"
+              className="home-accent-hairline-breathe pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-[rgb(var(--accent))]/80 to-transparent"
               aria-hidden
             />
             <div
-              className="pointer-events-none absolute -end-8 -top-10 size-28 rounded-full bg-[rgb(var(--accent-magenta))]/15 blur-3xl"
+              className="home-ambient-orb-drift pointer-events-none absolute -end-8 -top-10 size-28 rounded-full bg-[rgb(var(--accent-magenta))]/15 blur-3xl"
               aria-hidden
             />
             <p className="relative text-center text-[12px] font-medium leading-snug tracking-wide text-[rgb(var(--ink))]/95 [text-wrap:pretty] sm:text-[13px]">
-              <span className="me-2 inline-block opacity-90" aria-hidden>
+              <span
+                className="home-glyph-twinkle me-2 inline-block opacity-90"
+                aria-hidden
+              >
                 ◇
               </span>
               {t.socialProofRotator[
@@ -988,7 +991,7 @@ export default function DecisionStudio({
           id="section-hero"
           className="home-section-wash home-section-wash--hero relative overflow-hidden rounded-[1.75rem] border border-white/[0.16] bg-gradient-to-br from-white/[0.1] via-white/[0.05] to-[rgb(var(--surface-elevated))]/55 p-4 shadow-[0_28px_80px_-48px_rgb(var(--accent)/0.35),0_0_0_1px_rgba(255,255,255,0.1)_inset] backdrop-blur-sm sm:rounded-[2.5rem] sm:p-10 lg:p-14"
         >
-          <div className="pointer-events-none absolute inset-y-10 start-3 w-[5px] rounded-full bg-gradient-to-b from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] opacity-90 shadow-[0_0_20px_rgb(var(--accent)/0.4)] sm:start-5 sm:w-1.5" />
+          <div className="home-hero-spine-breathe pointer-events-none absolute inset-y-10 start-3 w-[5px] rounded-full bg-gradient-to-b from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] opacity-90 shadow-[0_0_20px_rgb(var(--accent)/0.4)] sm:start-5 sm:w-1.5" />
           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(118deg,rgb(var(--accent)/0.1),transparent_40%,rgb(var(--accent-2)/0.07),transparent_60%,rgb(var(--accent-magenta)/0.08))]" />
           <div className="grid-view pointer-events-none absolute inset-0 opacity-[0.5]" />
           <div className="relative grid gap-12 ps-4 sm:ps-6 lg:grid-cols-[minmax(0,1fr)_minmax(280px,400px)] lg:items-center lg:ps-2">
@@ -1428,11 +1431,11 @@ export default function DecisionStudio({
         {!focusLayout && (
           <div className="group relative mb-6 flex flex-col gap-4 overflow-hidden rounded-[1.35rem] border border-[rgb(var(--accent-2))]/35 bg-gradient-to-br from-[rgb(var(--accent))]/[0.14] via-white/[0.05] to-[rgb(var(--accent-magenta))]/[0.08] p-5 shadow-[0_24px_70px_-44px_rgb(var(--accent)/0.55)] ring-1 ring-inset ring-white/[0.07] backdrop-blur-sm sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:p-6">
             <div
-              className="pointer-events-none absolute inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-[rgb(var(--accent-2))]/85 to-transparent"
+              className="home-accent-hairline-breathe pointer-events-none absolute inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-[rgb(var(--accent-2))]/85 to-transparent"
               aria-hidden
             />
             <div
-              className="pointer-events-none absolute -end-20 -top-24 size-56 rounded-full bg-[rgb(var(--accent-magenta))]/20 blur-3xl"
+              className="home-ambient-orb-drift--wide pointer-events-none absolute -end-20 -top-24 size-56 rounded-full bg-[rgb(var(--accent-magenta))]/20 blur-3xl"
               aria-hidden
             />
             <p className="relative text-sm font-semibold leading-relaxed text-[rgb(var(--ink))] [text-wrap:pretty] sm:text-[0.9375rem]">
@@ -1461,11 +1464,11 @@ export default function DecisionStudio({
         >
           <div className="relative mb-8 max-w-3xl overflow-hidden rounded-[1.35rem] border border-white/[0.1] bg-gradient-to-br from-[rgb(var(--accent))]/[0.07] via-white/[0.04] to-transparent px-5 py-6 shadow-[0_22px_60px_-38px_rgb(var(--accent)/0.42)] backdrop-blur-sm ring-1 ring-inset ring-[rgb(var(--accent))]/12 sm:px-7 sm:py-7">
             <div
-              className="pointer-events-none absolute inset-x-14 top-0 h-px bg-gradient-to-r from-transparent via-[rgb(var(--accent-2))]/80 to-transparent"
+              className="home-accent-hairline-breathe pointer-events-none absolute inset-x-14 top-0 h-px bg-gradient-to-r from-transparent via-[rgb(var(--accent-2))]/80 to-transparent"
               aria-hidden
             />
             <div
-              className="pointer-events-none absolute -bottom-16 -start-12 size-48 rounded-full bg-[rgb(var(--accent))]/12 blur-3xl"
+              className="home-ambient-orb-drift pointer-events-none absolute -bottom-16 -start-12 size-48 rounded-full bg-[rgb(var(--accent))]/12 blur-3xl"
               aria-hidden
             />
             <h2
@@ -1635,11 +1638,11 @@ export default function DecisionStudio({
               className="relative overflow-hidden panel-float-hover glass card-glow ring-1 ring-inset ring-[rgb(var(--accent))]/25 rounded-3xl p-5 sm:p-6 lg:col-span-3"
             >
               <div
-                className="pointer-events-none absolute inset-x-10 top-0 z-10 h-[2px] rounded-full bg-gradient-to-r from-transparent via-[rgb(var(--accent))]/75 to-transparent opacity-95"
+                className="home-accent-hairline-breathe pointer-events-none absolute inset-x-10 top-0 z-10 h-[2px] rounded-full bg-gradient-to-r from-transparent via-[rgb(var(--accent))]/75 to-transparent opacity-95"
                 aria-hidden
               />
               <div
-                className="pointer-events-none absolute -top-24 end-0 size-44 rounded-full bg-[rgb(var(--accent-magenta))]/18 blur-3xl"
+                className="home-ambient-orb-drift--wide pointer-events-none absolute -top-24 end-0 size-44 rounded-full bg-[rgb(var(--accent-magenta))]/18 blur-3xl"
                 aria-hidden
               />
               <h3 className="relative text-lg font-semibold text-[rgb(var(--ink))]">
@@ -1892,7 +1895,7 @@ export default function DecisionStudio({
                   aria-live="polite"
                 >
                   <div
-                    className="pointer-events-none absolute -start-16 top-1/2 size-40 -translate-y-1/2 rounded-full bg-[rgb(var(--accent-magenta))]/20 blur-3xl"
+                    className="pointer-events-none absolute -start-16 top-1/2 size-40 -translate-y-1/2 rounded-full bg-[rgb(var(--accent-magenta))]/20 blur-3xl animate-shimmer-slow"
                     aria-hidden
                   />
                   <p className="relative min-h-[1.45em] text-sm font-semibold leading-snug text-[rgb(var(--ink))] drop-shadow-[0_0_28px_rgb(var(--accent)/0.35)] [text-wrap:pretty] motion-safe:transition-opacity motion-safe:duration-300">
@@ -1953,7 +1956,7 @@ export default function DecisionStudio({
                     aria-hidden
                   >
                     <div className="h-px flex-1 bg-gradient-to-r from-transparent via-emerald-400/35 to-transparent" />
-                    <span className="flex size-2 shrink-0 rounded-full bg-emerald-400/70 shadow-[0_0_14px_rgb(52_211_153/0.65)] ring-4 ring-emerald-400/15" />
+                    <span className="home-emerald-dot-pulse flex size-2 shrink-0 rounded-full bg-emerald-400/70 shadow-[0_0_14px_rgb(52_211_153/0.65)] ring-4 ring-emerald-400/15" />
                     <div className="h-px flex-1 bg-gradient-to-l from-transparent via-emerald-400/35 to-transparent" />
                   </div>
                   <div

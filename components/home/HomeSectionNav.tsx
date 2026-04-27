@@ -98,8 +98,8 @@ export default function HomeSectionNav({
               href={`#${id}`}
               className={
                 isActive
-                  ? "shrink-0 whitespace-nowrap rounded-full bg-gradient-to-r from-[rgb(var(--accent))]/22 via-white/[0.1] to-[rgb(var(--accent-2))]/18 px-3.5 py-2 text-xs font-semibold text-[rgb(var(--ink))] shadow-[0_0_28px_-10px_rgb(var(--accent)/0.35)] ring-1 ring-[rgb(var(--accent))]/40"
-                  : "shrink-0 whitespace-nowrap rounded-full px-3.5 py-2 text-xs font-medium text-[rgb(var(--ink-soft))] transition duration-200 hover:bg-white/[0.06] hover:text-[rgb(var(--ink))] hover:ring-1 hover:ring-white/[0.08]"
+                  ? "shrink-0 whitespace-nowrap rounded-full bg-gradient-to-r from-[rgb(var(--accent))]/22 via-white/[0.1] to-[rgb(var(--accent-2))]/18 px-3.5 py-2 text-xs font-semibold text-[rgb(var(--ink))] shadow-[0_0_28px_-10px_rgb(var(--accent)/0.35)] ring-1 ring-[rgb(var(--accent))]/40 transition-[box-shadow,transform,background-color] duration-300 ease-out motion-safe:active:scale-[0.97]"
+                  : "shrink-0 whitespace-nowrap rounded-full px-3.5 py-2 text-xs font-medium text-[rgb(var(--ink-soft))] transition-[color,background-color,box-shadow,transform] duration-300 ease-out hover:bg-white/[0.06] hover:text-[rgb(var(--ink))] hover:ring-1 hover:ring-white/[0.08] motion-safe:active:scale-[0.97]"
               }
             >
               {label}
