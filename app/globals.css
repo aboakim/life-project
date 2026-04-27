@@ -302,6 +302,28 @@ body::before {
   }
 }
 
+/*
+ * Phones / tablets: infinite blur animations are a major source of scroll/paint jank.
+ * Gradients stay; motion pauses so first paint feels smooth.
+ */
+@media (max-width: 1023px) {
+  .animate-pulse-soft,
+  .animate-shimmer-slow {
+    animation: none !important;
+    opacity: 0.62;
+  }
+  .ambient-drift-blob {
+    animation: none !important;
+  }
+  .lattice-sheen-layer {
+    animation: none !important;
+  }
+  .chrome-horizon-sweep,
+  .chrome-horizon-glow {
+    animation: none !important;
+  }
+}
+
 /* Scroll-in sections — one-time reveal */
 .reveal-on-scroll {
   opacity: 0;
