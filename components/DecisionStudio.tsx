@@ -1426,15 +1426,26 @@ export default function DecisionStudio({
         )}
 
         {!focusLayout && (
-          <div className="mb-6 flex flex-col gap-3 rounded-2xl border-2 border-dashed border-[rgb(var(--accent-2))]/40 bg-gradient-to-r from-[rgb(var(--accent))]/[0.1] to-[rgb(var(--accent-magenta))]/[0.08] p-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-5 sm:py-4">
-            <p className="text-sm font-medium leading-relaxed text-[rgb(var(--ink))] [text-wrap:pretty]">
+          <div className="group relative mb-6 flex flex-col gap-4 overflow-hidden rounded-[1.35rem] border border-[rgb(var(--accent-2))]/35 bg-gradient-to-br from-[rgb(var(--accent))]/[0.14] via-white/[0.05] to-[rgb(var(--accent-magenta))]/[0.08] p-5 shadow-[0_24px_70px_-44px_rgb(var(--accent)/0.55)] ring-1 ring-inset ring-white/[0.07] backdrop-blur-sm sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:p-6">
+            <div
+              className="pointer-events-none absolute inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-[rgb(var(--accent-2))]/85 to-transparent"
+              aria-hidden
+            />
+            <div
+              className="pointer-events-none absolute -end-20 -top-24 size-56 rounded-full bg-[rgb(var(--accent-magenta))]/20 blur-3xl"
+              aria-hidden
+            />
+            <p className="relative text-sm font-semibold leading-relaxed text-[rgb(var(--ink))] [text-wrap:pretty] sm:text-[0.9375rem]">
               {t.homeAnalyzerPromoLine}
             </p>
             <Link
               href="/analyze"
-              className="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-xl bg-white/[0.12] px-4 py-2.5 text-sm font-bold text-white ring-1 ring-white/20 transition hover:bg-white/[0.18]"
+              className="relative inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-5 py-3 text-sm font-bold text-white shadow-[0_12px_36px_-14px_rgb(var(--accent)/0.55)] ring-1 ring-white/20 transition hover:brightness-110 motion-safe:hover:scale-[1.02] motion-safe:active:scale-[0.98]"
             >
-              {t.homeAnalyzerPromoCta} →
+              {t.homeAnalyzerPromoCta}{" "}
+              <span className="inline-block motion-safe:transition-transform motion-safe:group-hover:translate-x-0.5" aria-hidden>
+                →
+              </span>
             </Link>
           </div>
         )}
@@ -1448,16 +1459,26 @@ export default function DecisionStudio({
           className="home-section-wash home-section-wash--workspace scroll-mt-32 rounded-[1.85rem] px-3 pt-16 pb-1 sm:px-4 sm:pt-20"
           aria-labelledby="workspace-heading"
         >
-          <h2
-            id="workspace-heading"
-            className="font-display text-[clamp(1.55rem,1.05rem+2vw,2.35rem)] font-extrabold tracking-tight text-[rgb(var(--ink))] [text-wrap:balance]"
-          >
-            {t.workspaceTitle}
-          </h2>
-          <p className="mt-2 max-w-3xl text-sm font-medium leading-relaxed text-[rgb(var(--accent-2))]/90 [text-wrap:pretty]">
-            {workspaceGreeting}
-          </p>
-          <div className="mt-5 max-w-3xl rounded-2xl border border-white/[0.1] bg-white/[0.03] px-4 py-3 sm:px-5">
+          <div className="relative mb-8 max-w-3xl overflow-hidden rounded-[1.35rem] border border-white/[0.1] bg-gradient-to-br from-[rgb(var(--accent))]/[0.07] via-white/[0.04] to-transparent px-5 py-6 shadow-[0_22px_60px_-38px_rgb(var(--accent)/0.42)] backdrop-blur-sm ring-1 ring-inset ring-[rgb(var(--accent))]/12 sm:px-7 sm:py-7">
+            <div
+              className="pointer-events-none absolute inset-x-14 top-0 h-px bg-gradient-to-r from-transparent via-[rgb(var(--accent-2))]/80 to-transparent"
+              aria-hidden
+            />
+            <div
+              className="pointer-events-none absolute -bottom-16 -start-12 size-48 rounded-full bg-[rgb(var(--accent))]/12 blur-3xl"
+              aria-hidden
+            />
+            <h2
+              id="workspace-heading"
+              className="relative font-display text-[clamp(1.55rem,1.05rem+2vw,2.35rem)] font-extrabold tracking-tight text-[rgb(var(--ink))] [text-wrap:balance]"
+            >
+              {t.workspaceTitle}
+            </h2>
+            <p className="relative mt-3 max-w-3xl text-sm font-medium leading-relaxed text-[rgb(var(--accent-2))]/95 [text-wrap:pretty] sm:text-[0.9375rem]">
+              {workspaceGreeting}
+            </p>
+          </div>
+          <div className="max-w-3xl rounded-2xl border border-white/[0.1] bg-white/[0.03] px-4 py-3 sm:px-5">
             <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-[rgb(var(--accent-dim))]/90">
               {novelty.workspaceFlowEyebrow}
             </p>
@@ -1503,7 +1524,7 @@ export default function DecisionStudio({
                     setContext(pack.context);
                     setConstraints(pack.constraints);
                   }}
-                  className="rounded-full border border-white/[0.14] bg-white/[0.07] px-4 py-2 text-sm font-medium text-[rgb(var(--ink))] transition hover:border-[rgb(var(--accent-2))]/35 hover:bg-white/[0.1]"
+                  className="rounded-full border border-white/[0.14] bg-white/[0.07] px-4 py-2 text-sm font-medium text-[rgb(var(--ink))] shadow-sm transition hover:border-[rgb(var(--accent-2))]/45 hover:bg-white/[0.11] hover:shadow-[0_14px_36px_-22px_rgb(var(--accent)/0.4)] motion-safe:hover:-translate-y-0.5 motion-safe:duration-200"
                 >
                   {label}
                 </button>
@@ -1524,7 +1545,7 @@ export default function DecisionStudio({
                     setContext(pack.context);
                     setConstraints(pack.constraints);
                   }}
-                  className="chip-interactive rounded-full border border-white/[0.14] bg-white/[0.06] px-4 py-2 text-sm font-medium text-[rgb(var(--ink))] transition-colors hover:border-violet-400/40 hover:bg-white/[0.1]"
+                  className="chip-interactive rounded-full border border-white/[0.14] bg-white/[0.06] px-4 py-2 text-sm font-medium text-[rgb(var(--ink))] shadow-sm transition-colors hover:border-violet-400/50 hover:bg-white/[0.12] hover:shadow-[0_14px_36px_-22px_rgb(139_92_246/0.35)] motion-safe:hover:-translate-y-0.5 motion-safe:duration-200"
                 >
                   {pack.label}
                 </button>
@@ -1611,9 +1632,17 @@ export default function DecisionStudio({
             <form
               id="analyzer"
               onSubmit={onSubmit}
-              className="panel-float-hover glass card-glow ring-1 ring-inset ring-[rgb(var(--accent))]/25 rounded-3xl p-5 sm:p-6 lg:col-span-3"
+              className="relative overflow-hidden panel-float-hover glass card-glow ring-1 ring-inset ring-[rgb(var(--accent))]/25 rounded-3xl p-5 sm:p-6 lg:col-span-3"
             >
-              <h3 className="text-lg font-semibold text-[rgb(var(--ink))]">
+              <div
+                className="pointer-events-none absolute inset-x-10 top-0 z-10 h-[2px] rounded-full bg-gradient-to-r from-transparent via-[rgb(var(--accent))]/75 to-transparent opacity-95"
+                aria-hidden
+              />
+              <div
+                className="pointer-events-none absolute -top-24 end-0 size-44 rounded-full bg-[rgb(var(--accent-magenta))]/18 blur-3xl"
+                aria-hidden
+              />
+              <h3 className="relative text-lg font-semibold text-[rgb(var(--ink))]">
                 {t.decision}
               </h3>
 
@@ -1843,7 +1872,7 @@ export default function DecisionStudio({
                   <button
                     type="submit"
                     disabled={!canSubmit || formBusy}
-                    className="min-h-[48px] w-full rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-6 py-3 text-base font-semibold text-white shadow-lg shadow-[rgb(var(--accent)/0.28)] transition enabled:hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40 sm:min-w-[14rem]"
+                    className="min-h-[48px] w-full rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-6 py-3 text-base font-semibold text-white shadow-lg shadow-[rgb(var(--accent)/0.32)] ring-1 ring-white/15 transition enabled:hover:brightness-110 enabled:hover:shadow-[0_20px_50px_-18px_rgb(var(--accent)/0.5)] motion-safe:enabled:hover:scale-[1.02] motion-safe:enabled:active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40 sm:min-w-[14rem]"
                   >
                     {loading ? t.analyzing : t.analyze}
                   </button>
