@@ -6,7 +6,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import DecisionBriefWizard from "@/components/home/DecisionBriefWizard";
 import HeroVisualSlider from "@/components/home/HeroVisualSlider";
 import HomeSectionNav from "@/components/home/HomeSectionNav";
-import ProductSceneStrip from "@/components/home/ProductSceneStrip";
 import RevealOnScroll from "@/components/home/RevealOnScroll";
 import PlayCorner from "@/components/home/PlayCorner";
 import BriefSignatureStrip from "@/components/home/BriefSignatureStrip";
@@ -41,7 +40,6 @@ import {
   PRODUCT_STRIP_IMAGE_URLS,
 } from "@/lib/home/hero-slide-images";
 import { getDecisionBriefCopy } from "@/lib/i18n/decision-brief";
-import WelcomeModal from "@/components/home/WelcomeModal";
 import {
   LOCALE_CHANGE_EVENT,
   dispatchLocaleChanged,
@@ -58,9 +56,6 @@ import {
   THEMATIC_BAND_A_IMAGE,
   THEMATIC_BAND_B_IMAGE,
 } from "@/lib/home/thematic-banners";
-import ThematicImageBand from "@/components/home/ThematicImageBand";
-import WhatItFixesSection from "@/components/home/WhatItFixesSection";
-import VisualStoryCard from "@/components/home/VisualStoryCard";
 import { getPostAnalysisCopy } from "@/lib/i18n/post-analysis";
 import { getSolveSectionCopy } from "@/lib/i18n/home-solve-section";
 import {
@@ -77,7 +72,6 @@ import {
 } from "@/lib/analysis-local";
 import { safeDecisionAnalysis } from "@/lib/safe-decision-analysis";
 import { getStoredSubscriberId } from "@/lib/reminder-subscriber-storage";
-import PreAnalysisEmailModal from "@/components/home/PreAnalysisEmailModal";
 import { buildAnalysisSpeechText } from "@/lib/tts-build-report-text";
 import VoiceDictateButton from "@/components/home/VoiceDictateButton";
 import VoiceWhisperButton from "@/components/home/VoiceWhisperButton";
@@ -90,6 +84,27 @@ const KonamiSurprise = dynamic(
 const ShortcutsHelpModal = dynamic(
   () => import("@/components/home/ShortcutsHelpModal"),
   { ssr: false, loading: () => null },
+);
+
+const WelcomeModal = dynamic(() => import("@/components/home/WelcomeModal"), {
+  ssr: false,
+  loading: () => null,
+});
+const PreAnalysisEmailModal = dynamic(
+  () => import("@/components/home/PreAnalysisEmailModal"),
+  { ssr: false, loading: () => null },
+);
+const WhatItFixesSection = dynamic(
+  () => import("@/components/home/WhatItFixesSection"),
+);
+const ThematicImageBand = dynamic(
+  () => import("@/components/home/ThematicImageBand"),
+);
+const ProductSceneStrip = dynamic(
+  () => import("@/components/home/ProductSceneStrip"),
+);
+const VisualStoryCard = dynamic(
+  () => import("@/components/home/VisualStoryCard"),
 );
 
 const LOCALE_STORAGE_KEY = "lde-locale";
@@ -246,6 +261,8 @@ export default function DecisionStudio({
   const [shortcutsOpen, setShortcutsOpen] = useState(false);
   const [visitMilestoneN, setVisitMilestoneN] = useState<number | null>(null);
   const [whisperAvailable, setWhisperAvailable] = useState(false);
+  /** Defer welcome modal until idle so LCP can paint hero first (mobile PSI). */
+  const [deferWelcomeMount, setDeferWelcomeMount] = useState(false);
 
   useEffect(() => {
     let cancel = false;
@@ -261,6 +278,28 @@ export default function DecisionStudio({
       cancel = true;
     };
   }, []);
+
+  useEffect(() => {
+    if (focusLayout) {
+      setDeferWelcomeMount(true);
+      return;
+    }
+    const w = window as Window & {
+      requestIdleCallback?: (
+        cb: IdleRequestCallback,
+        opts?: IdleRequestOptions,
+      ) => number;
+      cancelIdleCallback?: (handle: number) => void;
+    };
+    if (typeof w.requestIdleCallback === "function") {
+      const id = w.requestIdleCallback(() => setDeferWelcomeMount(true), {
+        timeout: 2200,
+      });
+      return () => w.cancelIdleCallback?.(id);
+    }
+    const tid = window.setTimeout(() => setDeferWelcomeMount(true), 450);
+    return () => window.clearTimeout(tid);
+  }, [focusLayout]);
 
   useEffect(() => {
     if (focusLayout) return;
@@ -553,7 +592,9 @@ export default function DecisionStudio({
           : undefined
       }
     >
-      <WelcomeModal locale={locale} onLocaleChange={setLocale} />
+      {deferWelcomeMount ? (
+        <WelcomeModal locale={locale} onLocaleChange={setLocale} />
+      ) : null}
       <PreAnalysisEmailModal
         open={preAnalysisEmailOpen}
         onClose={() => setPreAnalysisEmailOpen(false)}
