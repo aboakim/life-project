@@ -304,7 +304,13 @@ export default function DecisionStudio({
       setDeferWelcomeMount(true);
       return;
     }
-    /** Let hero / LCP paint first (mobile PSI); then load welcome chunk on idle. */
+    /**
+     * Mobile: long defer keeps hero/LCP ahead of welcome chunk + overlay paint.
+     * Desktop: shorter schedule so the welcome dialog paints earlier — improves Speed Index vs a late full-screen paint.
+     */
+    const narrow = window.matchMedia("(max-width: 767.98px)").matches;
+    const bootDelayMs = narrow ? 900 : 140;
+    const idleTimeoutMs = narrow ? 2800 : 550;
     let scheduled: number | undefined;
     let usedIdleCallback = false;
     const bootId = window.setTimeout(() => {
@@ -318,12 +324,15 @@ export default function DecisionStudio({
       if (typeof w.requestIdleCallback === "function") {
         usedIdleCallback = true;
         scheduled = w.requestIdleCallback(() => setDeferWelcomeMount(true), {
-          timeout: 2800,
+          timeout: idleTimeoutMs,
         });
       } else {
-        scheduled = window.setTimeout(() => setDeferWelcomeMount(true), 500);
+        scheduled = window.setTimeout(
+          () => setDeferWelcomeMount(true),
+          narrow ? 500 : 160,
+        );
       }
-    }, 900);
+    }, bootDelayMs);
     return () => {
       window.clearTimeout(bootId);
       if (scheduled == null) return;
