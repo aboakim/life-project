@@ -284,21 +284,35 @@ export default function DecisionStudio({
       setDeferWelcomeMount(true);
       return;
     }
-    const w = window as Window & {
-      requestIdleCallback?: (
-        cb: IdleRequestCallback,
-        opts?: IdleRequestOptions,
-      ) => number;
-      cancelIdleCallback?: (handle: number) => void;
+    /** Let hero / LCP paint first (mobile PSI); then load welcome chunk on idle. */
+    let scheduled: number | undefined;
+    let usedIdleCallback = false;
+    const bootId = window.setTimeout(() => {
+      const w = window as Window & {
+        requestIdleCallback?: (
+          cb: IdleRequestCallback,
+          opts?: IdleRequestOptions,
+        ) => number;
+        cancelIdleCallback?: (handle: number) => void;
+      };
+      if (typeof w.requestIdleCallback === "function") {
+        usedIdleCallback = true;
+        scheduled = w.requestIdleCallback(() => setDeferWelcomeMount(true), {
+          timeout: 2800,
+        });
+      } else {
+        scheduled = window.setTimeout(() => setDeferWelcomeMount(true), 500);
+      }
+    }, 900);
+    return () => {
+      window.clearTimeout(bootId);
+      if (scheduled == null) return;
+      const w = window as Window & {
+        cancelIdleCallback?: (handle: number) => void;
+      };
+      if (usedIdleCallback) w.cancelIdleCallback?.(scheduled);
+      else window.clearTimeout(scheduled);
     };
-    if (typeof w.requestIdleCallback === "function") {
-      const id = w.requestIdleCallback(() => setDeferWelcomeMount(true), {
-        timeout: 2200,
-      });
-      return () => w.cancelIdleCallback?.(id);
-    }
-    const tid = window.setTimeout(() => setDeferWelcomeMount(true), 450);
-    return () => window.clearTimeout(tid);
   }, [focusLayout]);
 
   useEffect(() => {

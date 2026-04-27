@@ -114,23 +114,9 @@ export default function WelcomeModal({ locale, onLocaleChange }: Props) {
             </select>
           </label>
         </div>
-        <p className="mt-4 text-sm leading-relaxed text-[rgb(var(--ink-soft))] sm:text-base">
+        <p className="mt-4 text-sm leading-relaxed text-[rgb(var(--ink-soft))] sm:text-base [text-wrap:pretty]">
           {w.lead}
         </p>
-        <p className="mt-5 text-xs font-medium uppercase tracking-wide text-[rgb(var(--ink-soft))]">
-          {w.bulletsEyebrow}
-        </p>
-        <ul className="mt-3 space-y-3 text-sm text-[rgb(var(--ink))] sm:text-[15px]">
-          {w.bullets.map((b, i) => (
-            <li key={i} className="flex gap-3">
-              <span
-                className="mt-2 shrink-0 size-1.5 rounded-full bg-[rgb(var(--accent))] shadow-[0_0_10px_rgb(var(--accent)/0.5)]"
-                aria-hidden
-              />
-              <span className="leading-relaxed">{b}</span>
-            </li>
-          ))}
-        </ul>
         <button
           type="button"
           onClick={dismiss}
