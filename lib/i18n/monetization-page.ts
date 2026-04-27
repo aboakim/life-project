@@ -45,7 +45,7 @@ const hy: MonetizationCopy = {
     {
       tag: "Գործընկերներ",
       title: "Թափանցիկ affiliate",
-      body: "Փոխադարձման, ապահովագրության կամ ուսման հղումներ՝ միայն բաց disclosure-ով, որ վստահությունը չտուժվի։",
+      body: "Օրինակ՝ Amazon Associates — գլխավոր էջում և այստեղ կան հղումներ․ նույն գինը ձեզ համար, մեզ համար՝ որակավորված գնումներից եկամուտ։ Մնացած հղումները (փոխադարձում, ապահովագրություն) նույնպես միայն բաց disclosure-ով։",
     },
     {
       tag: "Համայնք",
@@ -87,7 +87,7 @@ const en: MonetizationCopy = {
     {
       tag: "Partners",
       title: "Transparent affiliates",
-      body: "Relocation, insurance, learning links—only with clear disclosure so the product stays trustworthy.",
+      body: "Amazon Associates links on the home page and here—same prices for you; we earn on qualifying purchases. Other partner links (relocation, insurance, learning) stay clearly labeled too.",
     },
     {
       tag: "Community",

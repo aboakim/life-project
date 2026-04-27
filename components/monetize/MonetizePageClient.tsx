@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import AmazonAssociatesCta from "@/components/monetization/AmazonAssociatesCta";
 import MarketingPageShell from "@/components/layout/MarketingPageShell";
 import PageLocalePicker from "@/components/layout/PageLocalePicker";
 import { getMonetizeCopy } from "@/lib/i18n/monetization-page";
@@ -53,6 +54,8 @@ export default function MonetizePageClient() {
       <p className="mb-10 max-w-3xl rounded-2xl border border-amber-500/20 bg-amber-500/[0.06] px-4 py-3 text-xs leading-relaxed text-amber-100/90 [text-wrap:pretty]">
         {t.disclaimer}
       </p>
+
+      <AmazonAssociatesCta locale={locale} className="mb-10 max-w-3xl" />
 
       <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {t.cards.map((c) => (

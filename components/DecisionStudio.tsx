@@ -14,6 +14,7 @@ import HeroMomentStrips from "@/components/home/HeroMomentStrips";
 import HomeSectionNav from "@/components/home/HomeSectionNav";
 import RevealOnScroll from "@/components/home/RevealOnScroll";
 import AdSenseBanner from "@/components/ads/AdSenseBanner";
+import AmazonAssociatesCta from "@/components/monetization/AmazonAssociatesCta";
 import AmbientDriftLayer from "@/components/ui/AmbientDriftLayer";
 import ChromeHorizon from "@/components/ui/ChromeHorizon";
 import LatticeSheen from "@/components/ui/LatticeSheen";
@@ -1370,6 +1371,11 @@ export default function DecisionStudio({
           </div>
         )}
 
+        {!focusLayout ? (
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <AmazonAssociatesCta variant="compact" locale={locale} />
+          </div>
+        ) : null}
         {!focusLayout ? <AdSenseBanner className="my-2" /> : null}
 
         {/* Workspace: disclaimer + analyzer */}
