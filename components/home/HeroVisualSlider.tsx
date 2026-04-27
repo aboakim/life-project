@@ -20,8 +20,36 @@ export default function HeroVisualSlider({
   autoMs = 5200,
 }: Props) {
   const [index, setIndex] = useState(0);
+  /** After idle, mount images for carousel neighbors (not all slides — saves decode / network on first paint). */
+  const [idleReady, setIdleReady] = useState(false);
   const pauseRef = useRef(false);
   const n = slides.length;
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const ric = window.requestIdleCallback?.bind(window);
+    const cancelIdle = window.cancelIdleCallback?.bind(window);
+    if (ric) {
+      const id = ric(
+        () => {
+          setIdleReady(true);
+        },
+        { timeout: 2200 },
+      );
+      return () => cancelIdle?.(id);
+    }
+    const t = window.setTimeout(() => setIdleReady(true), 220);
+    return () => window.clearTimeout(t);
+  }, []);
+
+  const showSlideImage = useCallback(
+    (i: number) => {
+      if (i === index) return true;
+      if (!idleReady) return false;
+      return i === (index + 1) % n || i === (index - 1 + n) % n;
+    },
+    [idleReady, index, n],
+  );
 
   const go = useCallback(
     (dir: -1 | 1) => {
@@ -64,18 +92,26 @@ export default function HeroVisualSlider({
               key={`${slide.src}-${i}`}
               className="relative h-full min-w-full shrink-0"
             >
-              <Image
-                src={slide.src}
-                alt={slide.alt}
-                fill
-                className="object-cover"
-                sizes="(max-width: 640px) min(100vw, 440px), (max-width: 1024px) min(92vw, 440px), min(420px, 40vw)"
-                quality={i === 0 ? 68 : 74}
-                priority={i === 0}
-                fetchPriority={i === 0 ? "high" : "low"}
-                loading={i === 0 ? "eager" : "lazy"}
-                draggable={false}
-              />
+              {showSlideImage(i) ? (
+                <Image
+                  src={slide.src}
+                  alt={slide.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) min(100vw, 440px), (max-width: 1024px) min(92vw, 440px), min(420px, 40vw)"
+                  quality={i === 0 ? 65 : 72}
+                  priority={i === 0}
+                  fetchPriority={i === 0 ? "high" : "low"}
+                  loading={i === 0 ? "eager" : "lazy"}
+                  decoding={i === 0 ? "sync" : "async"}
+                  draggable={false}
+                />
+              ) : (
+                <div
+                  className="absolute inset-0 bg-[rgb(var(--surface-2))]"
+                  aria-hidden
+                />
+              )}
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[rgb(28_24_52/0.9)] via-[rgb(40_36_70/0.32)] to-[rgb(var(--accent)/0.12)]" />
               <p className="absolute bottom-0 left-0 right-0 px-4 pb-4 pt-12 text-center text-[13px] font-medium leading-snug text-white/95 [text-wrap:balance] sm:px-5 sm:pb-5 sm:text-sm">
                 {slide.caption}

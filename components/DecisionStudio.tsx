@@ -4,6 +4,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import HeroVisualSlider from "@/components/home/HeroVisualSlider";
+import HeroMomentStrips from "@/components/home/HeroMomentStrips";
 import HomeSectionNav from "@/components/home/HomeSectionNav";
 import RevealOnScroll from "@/components/home/RevealOnScroll";
 import AdSenseBanner from "@/components/ads/AdSenseBanner";
@@ -112,28 +113,6 @@ const DecisionBriefWizard = dynamic(
 );
 const AnalysisResultTools = dynamic(
   () => import("@/components/home/AnalysisResultTools"),
-);
-const StayMomentsStrip = dynamic(
-  () => import("@/components/home/StayMomentsStrip"),
-  {
-    loading: () => (
-      <div
-        className="mt-6 min-h-[5.75rem] rounded-2xl border border-white/[0.06] bg-white/[0.03]"
-        aria-hidden
-      />
-    ),
-  },
-);
-const LabMomentsStrip = dynamic(
-  () => import("@/components/home/LabMomentsStrip"),
-  {
-    loading: () => (
-      <div
-        className="mt-4 min-h-[5.75rem] rounded-2xl border border-white/[0.06] bg-white/[0.03]"
-        aria-hidden
-      />
-    ),
-  },
 );
 const SparkShuffleStrip = dynamic(
   () => import("@/components/home/SparkShuffleStrip"),
@@ -878,13 +857,11 @@ export default function DecisionStudio({
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty] md:text-xl md:leading-relaxed">
                 {t.subtitle}
               </p>
-              <StayMomentsStrip
-                eyebrow={sx.stayStripEyebrow}
-                moments={sx.stayMoments}
-              />
-              <LabMomentsStrip
-                eyebrow={sx.labStripEyebrow}
-                moments={sx.labMoments}
+              <HeroMomentStrips
+                stayEyebrow={sx.stayStripEyebrow}
+                stayMoments={sx.stayMoments}
+                labEyebrow={sx.labStripEyebrow}
+                labMoments={sx.labMoments}
               />
               <div className="mt-6 flex flex-wrap gap-2.5">
                 {t.features.map((f) => (

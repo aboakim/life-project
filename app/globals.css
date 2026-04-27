@@ -361,11 +361,6 @@ body::before {
   );
   background-repeat: no-repeat;
 }
-/* Skip hero: LCP lives there; defer layout/paint cost for below-the-fold blocks. */
-.home-section-wash:not(.home-section-wash--hero) {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 520px;
-}
 .home-section-wash--hero {
   --wash-color: rgb(var(--accent-sage) / 0.16);
 }
