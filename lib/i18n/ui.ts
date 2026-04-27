@@ -169,6 +169,8 @@ export type UIStrings = {
   resultFeedbackThanks: string;
   /** Session-only counter; use `{n}` placeholder */
   sessionRunsThisVisit: string;
+  /** When a structured field (scenario, timeline, twin, etc.) returned no text */
+  analysisEmptyDetail: string;
 };
 
 /** English trust/how blocks — reused as fallback for locales without custom copy */
@@ -696,6 +698,8 @@ const uiHy: Partial<UIStrings> = {
   resultFeedbackThanks:
     "Շնորհակալություն — սա օգնում է մեզ բարելավել փորձը։",
   sessionRunsThisVisit: "Այս այցելությամբ՝ {n} կառուցված վերլուծություն",
+  analysisEmptyDetail:
+    "Այս տեղը չի լցվել ձեր մուտքից։ Սովորաբար այդպես է լինում, երբ հարցը շատ ընդհանուր է, պատահական կամ իրական որոշում չէ՝ փորձեք նորից՝ մեկ կամ երկու նախադասությամբ հստակ գրել, թե ինչի միջև եք ընտրում։",
 };
 
 const uiEn: Partial<UIStrings> = {
@@ -809,6 +813,8 @@ const uiEn: Partial<UIStrings> = {
   resultFeedbackPrompt: "Was this helpful?",
   resultFeedbackThanks: "Thanks — that helps us improve the experience.",
   sessionRunsThisVisit: "This visit: {n} structured run(s)",
+  analysisEmptyDetail:
+    "Nothing was generated here from your input. That often happens when the prompt is too vague, random, or not a concrete decision — try rewriting it as one or two sentences about what you’re actually choosing between.",
 };
 
 /** American English — UI copy tuned for US spelling/idiom where it differs */
@@ -1478,6 +1484,7 @@ const HOME_I18N_FALLBACKS: Pick<
   | "resultFeedbackPrompt"
   | "resultFeedbackThanks"
   | "sessionRunsThisVisit"
+  | "analysisEmptyDetail"
 > = {
   trustMicroPoints: [
     "No public feed of your story",
@@ -1523,6 +1530,8 @@ const HOME_I18N_FALLBACKS: Pick<
   resultFeedbackPrompt: "Was this helpful?",
   resultFeedbackThanks: "Thanks — that helps us improve the experience.",
   sessionRunsThisVisit: "This visit: {n} structured run(s)",
+  analysisEmptyDetail:
+    "Nothing was generated here from your input. That often happens when the prompt is too vague, random, or not a concrete decision — try rewriting it as one or two sentences about what you’re actually choosing between.",
 };
 
 export function getUi(locale: AppLocale): UIStrings {

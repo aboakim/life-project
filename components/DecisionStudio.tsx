@@ -185,6 +185,31 @@ function previewHref(
   return `#${m[section]}`;
 }
 
+/** Non-empty analysis text, or an explicit localized explanation instead of a blank shell */
+function AnalysisBody({
+  value,
+  emptyLabel,
+  className = "",
+}: {
+  value: string;
+  emptyLabel: string;
+  className?: string;
+}) {
+  const trimmed = value.trim();
+  const empty = trimmed.length === 0;
+  return (
+    <p
+      className={
+        empty
+          ? `border-s-2 border-amber-400/35 bg-amber-500/[0.07] px-3 py-2.5 text-sm italic leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty] ${className}`
+          : `text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty] ${className}`
+      }
+    >
+      {empty ? emptyLabel : trimmed}
+    </p>
+  );
+}
+
 function ScoreCircle({
   score,
   sublabel,
@@ -2112,9 +2137,12 @@ export default function DecisionStudio({
               <h2 className="text-lg font-semibold text-[rgb(var(--ink))]">
                 {t.sectionSummary}
               </h2>
-              <p className="mt-3 text-sm leading-relaxed text-[rgb(var(--ink-soft))]">
-                {typeof a.summary === "string" ? a.summary : ""}
-              </p>
+              <div className="mt-3">
+                <AnalysisBody
+                  value={typeof a.summary === "string" ? a.summary : ""}
+                  emptyLabel={t.analysisEmptyDetail}
+                />
+              </div>
               <p className="mt-3 text-sm text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
                 {t.stakesResultPrefix} —{" "}
                 <span className="font-semibold text-[rgb(var(--ink))]">
@@ -2272,9 +2300,11 @@ export default function DecisionStudio({
                     <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[rgb(var(--accent-dim))]">
                       {label}
                     </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-[rgb(var(--ink-soft))]">
-                      {a.dimensions[key]}
-                    </p>
+                    <AnalysisBody
+                      value={a.dimensions[key]}
+                      emptyLabel={t.analysisEmptyDetail}
+                      className="mt-2"
+                    />
                   </div>
                 ))}
               </div>
@@ -2287,25 +2317,31 @@ export default function DecisionStudio({
                   <h3 className="text-xs font-semibold text-emerald-300/95">
                     {t.scenBest}
                   </h3>
-                  <p className="mt-2 text-sm text-[rgb(var(--ink-soft))]">
-                    {a.scenarios.bestCase}
-                  </p>
+                  <AnalysisBody
+                    value={a.scenarios.bestCase}
+                    emptyLabel={t.analysisEmptyDetail}
+                    className="mt-2"
+                  />
                 </div>
                 <div className="rounded-2xl border border-rose-500/25 bg-rose-500/[0.06] p-4">
                   <h3 className="text-xs font-semibold text-rose-300/95">
                     {t.scenWorst}
                   </h3>
-                  <p className="mt-2 text-sm text-[rgb(var(--ink-soft))]">
-                    {a.scenarios.worstCase}
-                  </p>
+                  <AnalysisBody
+                    value={a.scenarios.worstCase}
+                    emptyLabel={t.analysisEmptyDetail}
+                    className="mt-2"
+                  />
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
                   <h3 className="text-xs font-semibold text-[rgb(var(--ink))]">
                     {t.scenLikely}
                   </h3>
-                  <p className="mt-2 text-sm text-[rgb(var(--ink-soft))]">
-                    {a.scenarios.mostLikely}
-                  </p>
+                  <AnalysisBody
+                    value={a.scenarios.mostLikely}
+                    emptyLabel={t.analysisEmptyDetail}
+                    className="mt-2"
+                  />
                 </div>
               </div>
             </section>
@@ -2317,44 +2353,54 @@ export default function DecisionStudio({
                   <span className="mt-0.5 shrink-0 rounded-full bg-gradient-to-r from-[rgb(var(--accent))]/25 to-[rgb(var(--accent-2))]/20 px-3 py-1 text-xs font-medium text-[rgb(var(--ink))]">
                     {t.timeM6}
                   </span>
-                  <p className="text-sm leading-relaxed text-[rgb(var(--ink-soft))]">
-                    {a.timeline.months6}
-                  </p>
+                  <AnalysisBody
+                    value={a.timeline.months6}
+                    emptyLabel={t.analysisEmptyDetail}
+                    className="min-w-0 flex-1"
+                  />
                 </li>
                 <li className="flex gap-4">
                   <span className="mt-0.5 shrink-0 rounded-full bg-gradient-to-r from-[rgb(var(--accent))]/25 to-[rgb(var(--accent-2))]/20 px-3 py-1 text-xs font-medium text-[rgb(var(--ink))]">
                     {t.timeY2}
                   </span>
-                  <p className="text-sm leading-relaxed text-[rgb(var(--ink-soft))]">
-                    {a.timeline.years2}
-                  </p>
+                  <AnalysisBody
+                    value={a.timeline.years2}
+                    emptyLabel={t.analysisEmptyDetail}
+                    className="min-w-0 flex-1"
+                  />
                 </li>
                 <li className="flex gap-4">
                   <span className="mt-0.5 shrink-0 rounded-full bg-gradient-to-r from-[rgb(var(--accent))]/25 to-[rgb(var(--accent-2))]/20 px-3 py-1 text-xs font-medium text-[rgb(var(--ink))]">
                     {t.timeY5}
                   </span>
-                  <p className="text-sm leading-relaxed text-[rgb(var(--ink-soft))]">
-                    {a.timeline.years5}
-                  </p>
+                  <AnalysisBody
+                    value={a.timeline.years5}
+                    emptyLabel={t.analysisEmptyDetail}
+                    className="min-w-0 flex-1"
+                  />
                 </li>
               </ol>
             </section>
 
             <section className="glass animate-fade-up rounded-3xl p-6 sm:p-7">
               <h2 className="text-lg font-semibold">{t.sectionScore}</h2>
-              <div className="mt-6 grid gap-8 sm:grid-cols-[auto,1fr] sm:items-center">
+              <div className="mt-6 grid gap-8 sm:grid-cols-[auto,1fr] sm:items-start">
                 <ScoreCircle score={a.score} sublabel={t.scoreSublabel} />
-                <p className="text-sm leading-relaxed text-[rgb(var(--ink-soft))]">
-                  {a.scoreRationale}
-                </p>
+                <AnalysisBody
+                  value={a.scoreRationale}
+                  emptyLabel={t.analysisEmptyDetail}
+                />
               </div>
             </section>
 
             <section className="glass animate-fade-up rounded-3xl p-6 sm:p-7">
               <h2 className="text-lg font-semibold">{t.sectionTwin}</h2>
-              <p className="mt-3 text-sm leading-relaxed text-[rgb(var(--ink-soft))]">
-                {a.digitalTwinNote}
-              </p>
+              <div className="mt-3">
+                <AnalysisBody
+                  value={a.digitalTwinNote}
+                  emptyLabel={t.analysisEmptyDetail}
+                />
+              </div>
             </section>
 
             {result ? (
