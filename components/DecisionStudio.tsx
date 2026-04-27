@@ -287,6 +287,10 @@ export default function DecisionStudio({
   const [analyzingLineIdx, setAnalyzingLineIdx] = useState(0);
   const [socialProofIdx, setSocialProofIdx] = useState(0);
   const analysisStartRef = useRef(0);
+  const [sessionRuns, setSessionRuns] = useState(0);
+  const [resultHelpful, setResultHelpful] = useState<"up" | "down" | null>(
+    null,
+  );
   const [preAnalysisEmailOpen, setPreAnalysisEmailOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<ApiResponse | null>(null);
@@ -559,6 +563,7 @@ export default function DecisionStudio({
         ...data,
         analysis,
       });
+      setSessionRuns((n) => n + 1);
       try {
         pushHistory({
           decision,
@@ -623,6 +628,10 @@ export default function DecisionStudio({
 
   const a = result?.analysis;
   const matchedExperts = result?.matchedExperts ?? NO_MATCHED_EXPERTS;
+
+  useEffect(() => {
+    setResultHelpful(null);
+  }, [a?.summary]);
 
   const workspaceGreeting = useMemo(() => {
     const h = new Date().getHours();
@@ -1415,11 +1424,6 @@ export default function DecisionStudio({
           </div>
         )}
 
-        {!focusLayout ? (
-          <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <AmazonAssociatesCta variant="compact" locale={locale} />
-          </div>
-        ) : null}
         {!focusLayout ? <AdSenseBanner className="my-2" /> : null}
 
         {/* Workspace: disclaimer + analyzer */}
@@ -1606,6 +1610,37 @@ export default function DecisionStudio({
                   setConstraints(cons);
                 }}
               />
+              {sessionRuns > 0 ? (
+                <p className="mt-3 text-[10px] font-medium uppercase tracking-[0.12em] text-[rgb(var(--accent-2))]/85">
+                  {t.sessionRunsThisVisit.replace(
+                    "{n}",
+                    String(sessionRuns),
+                  )}
+                </p>
+              ) : null}
+              <p className="mt-3 text-xs font-medium text-[rgb(var(--ink-soft))]">
+                {t.workspaceQuickFillIntro}
+              </p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {t.workspaceQuickExamples.map((ex) => (
+                  <button
+                    key={ex.label}
+                    type="button"
+                    disabled={formBusy}
+                    onClick={() => {
+                      setDecision(ex.decision);
+                      window.requestAnimationFrame(() => {
+                        document.getElementById("decision-input")?.focus({
+                          preventScroll: false,
+                        });
+                      });
+                    }}
+                    className="rounded-full border border-white/[0.14] bg-white/[0.06] px-3.5 py-1.5 text-left text-xs font-semibold text-[rgb(var(--ink))] shadow-sm transition hover:border-[rgb(var(--accent))]/35 hover:bg-white/[0.1] disabled:opacity-40"
+                  >
+                    {ex.label}
+                  </button>
+                ))}
+              </div>
               <p className="mt-3 text-xs leading-relaxed text-[rgb(var(--ink-soft))]/85 [text-wrap:pretty]">
                 {t.voiceInputHint}
               </p>
@@ -1832,6 +1867,61 @@ export default function DecisionStudio({
             {resultCheerLine ? (
               <p className="mx-auto max-w-2xl text-center text-xs font-medium italic leading-relaxed text-emerald-200/85 [text-wrap:pretty]">
                 {resultCheerLine}
+              </p>
+            ) : null}
+            <div className="mx-auto max-w-xl px-2">
+              <AmazonAssociatesCta variant="compact" locale={locale} />
+            </div>
+            <div
+              className="flex flex-wrap items-center justify-center gap-3 py-2"
+              role="group"
+              aria-label={t.resultFeedbackPrompt}
+            >
+              <span className="text-xs font-medium text-emerald-100/85">
+                {t.resultFeedbackPrompt}
+              </span>
+              <button
+                type="button"
+                onClick={() => {
+                  setResultHelpful("up");
+                  try {
+                    window.localStorage.setItem("lde-feedback-last", "up");
+                  } catch {
+                    /* ignore */
+                  }
+                }}
+                className={`inline-flex size-10 items-center justify-center rounded-xl border text-lg transition ${
+                  resultHelpful === "up"
+                    ? "border-emerald-400/55 bg-emerald-500/25 ring-2 ring-emerald-400/35"
+                    : "border-white/15 bg-white/[0.06] hover:bg-white/[0.1]"
+                }`}
+                aria-pressed={resultHelpful === "up"}
+              >
+                <span aria-hidden>👍</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setResultHelpful("down");
+                  try {
+                    window.localStorage.setItem("lde-feedback-last", "down");
+                  } catch {
+                    /* ignore */
+                  }
+                }}
+                className={`inline-flex size-10 items-center justify-center rounded-xl border text-lg transition ${
+                  resultHelpful === "down"
+                    ? "border-rose-400/45 bg-rose-500/20 ring-2 ring-rose-400/30"
+                    : "border-white/15 bg-white/[0.06] hover:bg-white/[0.1]"
+                }`}
+                aria-pressed={resultHelpful === "down"}
+              >
+                <span aria-hidden>👎</span>
+              </button>
+            </div>
+            {resultHelpful ? (
+              <p className="pb-1 text-center text-[11px] text-emerald-200/90">
+                {t.resultFeedbackThanks}
               </p>
             ) : null}
             <TiltPlane

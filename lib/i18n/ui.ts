@@ -1,4 +1,7 @@
 import type { AppLocale } from "./locale";
+
+/** Tap-to-fill prompts in the analyzer workspace */
+export type WorkspaceQuickExample = { label: string; decision: string };
 import {
   trustHowAr,
   trustHowDe,
@@ -158,6 +161,14 @@ export type UIStrings = {
   stakesLabel: string;
   stakesHelper: string;
   stakesResultPrefix: string;
+  /** Above the decision field — quick-start chips */
+  workspaceQuickFillIntro: string;
+  workspaceQuickExamples: readonly WorkspaceQuickExample[];
+  /** After results — micro feedback */
+  resultFeedbackPrompt: string;
+  resultFeedbackThanks: string;
+  /** Session-only counter; use `{n}` placeholder */
+  sessionRunsThisVisit: string;
 };
 
 /** English trust/how blocks — reused as fallback for locales without custom copy */
@@ -663,6 +674,28 @@ const uiHy: Partial<UIStrings> = {
   stakesLabel: "Ինչքա՞ն ծանր է զգում այս որոշումը (1‒10)",
   stakesHelper: "1 — թեթև, 10 — շատ ծանր. ընտրովի է, բայց օգնում է մոդելին գնահատել լարվածությունն ու դրությունը։",
   stakesResultPrefix: "Ձեր նշած զգացողական ծանրություն",
+  workspaceQuickFillIntro:
+    "Սկսիր պատրաստ օրինակից (սեղմիր՝ լցնել հարցի դաշտը)՝",
+  workspaceQuickExamples: [
+    {
+      label: "Թողնե՞լ աշխատանքը",
+      decision: "Արժե՞ թողնել աշխատանքը նոր առաջարկի համար։",
+    },
+    {
+      label: "Տեղափոխվե՞լ",
+      decision:
+        "Արժե՞ տեղափոխվել այլ երկիր աշխատանքի կամ ընտանիքի պատճառով։",
+    },
+    {
+      label: "Բիզնե՞ս կողմից",
+      decision:
+        "Արժե՞ սկսել փոքր բիզնես կողմից՝ պահելով հիմնական աշխատանքը։",
+    },
+  ],
+  resultFeedbackPrompt: "Օգնու՞մ էր",
+  resultFeedbackThanks:
+    "Շնորհակալություն — սա օգնում է մեզ բարելավել փորձը։",
+  sessionRunsThisVisit: "Այս այցելությամբ՝ {n} կառուցված վերլուծություն",
 };
 
 const uiEn: Partial<UIStrings> = {
@@ -756,6 +789,26 @@ const uiEn: Partial<UIStrings> = {
   stakesHelper:
     "1 = light, 10 = very heavy. Optional—helps the model weigh stress and how much is on the line.",
   stakesResultPrefix: "Subjective weight you indicated",
+  workspaceQuickFillIntro: "Start from a realistic prompt (tap to fill):",
+  workspaceQuickExamples: [
+    {
+      label: "Quit job?",
+      decision: "Should I quit my job for a new offer?",
+    },
+    {
+      label: "Move abroad?",
+      decision:
+        "Should I move to another country for work or family reasons?",
+    },
+    {
+      label: "Side business?",
+      decision:
+        "Should I start a small business on the side while keeping my job?",
+    },
+  ],
+  resultFeedbackPrompt: "Was this helpful?",
+  resultFeedbackThanks: "Thanks — that helps us improve the experience.",
+  sessionRunsThisVisit: "This visit: {n} structured run(s)",
 };
 
 /** American English — UI copy tuned for US spelling/idiom where it differs */
@@ -1420,6 +1473,11 @@ const HOME_I18N_FALLBACKS: Pick<
   | "analyzingProgressLine"
   | "analyzingPhaseLines"
   | "socialProofRotator"
+  | "workspaceQuickFillIntro"
+  | "workspaceQuickExamples"
+  | "resultFeedbackPrompt"
+  | "resultFeedbackThanks"
+  | "sessionRunsThisVisit"
 > = {
   trustMicroPoints: [
     "No public feed of your story",
@@ -1445,6 +1503,26 @@ const HOME_I18N_FALLBACKS: Pick<
     "Three paths and a timeline—not a generic chat paragraph.",
     "Your words stay in this session until you copy or save them.",
   ],
+  workspaceQuickFillIntro: "Start from a realistic prompt (tap to fill):",
+  workspaceQuickExamples: [
+    {
+      label: "Quit job?",
+      decision: "Should I quit my job for a new offer?",
+    },
+    {
+      label: "Move abroad?",
+      decision:
+        "Should I move to another country for work or family reasons?",
+    },
+    {
+      label: "Side business?",
+      decision:
+        "Should I start a small business on the side while keeping my job?",
+    },
+  ],
+  resultFeedbackPrompt: "Was this helpful?",
+  resultFeedbackThanks: "Thanks — that helps us improve the experience.",
+  sessionRunsThisVisit: "This visit: {n} structured run(s)",
 };
 
 export function getUi(locale: AppLocale): UIStrings {
