@@ -8,8 +8,8 @@ import { useEffect, useState } from "react";
  *  - NEXT_PUBLIC_GA_MEASUREMENT_ID is set to a valid G-XXXXXXX id
  *  - running in production (avoids dev noise + double counting)
  *
- * Scripts load after first interaction or a long idle timeout so Lighthouse
- * mobile/desktop main-thread scores are not dominated by gtag during TBT.
+ * Scripts load after first interaction or a short idle fallback so gtag does
+ * not compete with the first interactions, but real users still get GA soon.
  *
  * Consent note: the Google Consent Mode v2 "default: denied" block runs
  * in the <head> of app/layout.tsx BEFORE this loader, so gtag fires with
@@ -25,7 +25,7 @@ export default function GoogleAnalytics() {
   useEffect(() => {
     if (!validId || process.env.NODE_ENV !== "production") return;
     const enable = () => setLoadScripts(true);
-    const t = window.setTimeout(enable, 12_000);
+    const t = window.setTimeout(enable, 4500);
     window.addEventListener("pointerdown", enable, { once: true, passive: true });
     window.addEventListener("keydown", enable, { once: true });
     window.addEventListener("scroll", enable, { once: true, passive: true });

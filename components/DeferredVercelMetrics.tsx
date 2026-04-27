@@ -34,11 +34,11 @@ export default function DeferredVercelMetrics() {
       };
       if (typeof w.requestIdleCallback === "function") {
         const id = w.requestIdleCallback(() => setReady(true), {
-          timeout: 8000,
+          timeout: 2200,
         });
         cancelScheduled = () => w.cancelIdleCallback?.(id);
       } else {
-        const t = window.setTimeout(() => setReady(true), 3200);
+        const t = window.setTimeout(() => setReady(true), 900);
         cancelScheduled = () => window.clearTimeout(t);
       }
     };
