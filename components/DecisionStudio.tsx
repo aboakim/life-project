@@ -366,42 +366,74 @@ export default function DecisionStudio({
       return;
     }
     /**
-     * Mobile: long defer keeps hero/LCP ahead of welcome chunk + overlay paint.
-     * Desktop: moderate delay balances Performance score vs Speed Index (full-screen dialog).
+     * Gate on `window.load` so LCP is almost always hero / hero image first — the
+     * welcome dialog was stealing LCP and main-thread budget in PSI (desktop & mobile).
+     * After load, short boot delay + idle so the chunk hydrates off the critical path.
      */
-    const narrow = window.matchMedia("(max-width: 767.98px)").matches;
-    const bootDelayMs = narrow ? 1300 : 480;
-    const idleTimeoutMs = narrow ? 3200 : 950;
-    let scheduled: number | undefined;
-    let usedIdleCallback = false;
-    const bootId = window.setTimeout(() => {
+    let cancelled = false;
+    let bootTimer: number | undefined;
+    let idleHandle: number | undefined;
+    let fallbackTimer: number | undefined;
+
+    const clearScheduled = () => {
+      if (bootTimer != null) window.clearTimeout(bootTimer);
+      if (fallbackTimer != null) window.clearTimeout(fallbackTimer);
       const w = window as Window & {
-        requestIdleCallback?: (
-          cb: IdleRequestCallback,
-          opts?: IdleRequestOptions,
-        ) => number;
         cancelIdleCallback?: (handle: number) => void;
       };
-      if (typeof w.requestIdleCallback === "function") {
-        usedIdleCallback = true;
-        scheduled = w.requestIdleCallback(() => setDeferWelcomeMount(true), {
-          timeout: idleTimeoutMs,
-        });
-      } else {
-        scheduled = window.setTimeout(
-          () => setDeferWelcomeMount(true),
-          narrow ? 520 : 200,
-        );
+      if (idleHandle != null) {
+        if (typeof w.cancelIdleCallback === "function") {
+          w.cancelIdleCallback(idleHandle);
+        } else {
+          window.clearTimeout(idleHandle);
+        }
       }
-    }, bootDelayMs);
+    };
+
+    const armWelcomeAfterLoad = () => {
+      if (cancelled) return;
+      const narrow = window.matchMedia("(max-width: 767.98px)").matches;
+      const bootDelayMs = narrow ? 420 : 120;
+      const idleTimeoutMs = narrow ? 5400 : 2800;
+
+      bootTimer = window.setTimeout(() => {
+        if (cancelled) return;
+        const w = window as Window & {
+          requestIdleCallback?: (
+            cb: IdleRequestCallback,
+            opts?: IdleRequestOptions,
+          ) => number;
+        };
+        if (typeof w.requestIdleCallback === "function") {
+          idleHandle = w.requestIdleCallback(
+            () => {
+              if (!cancelled) setDeferWelcomeMount(true);
+            },
+            { timeout: idleTimeoutMs },
+          );
+        } else {
+          fallbackTimer = window.setTimeout(
+            () => {
+              if (!cancelled) setDeferWelcomeMount(true);
+            },
+            narrow ? 980 : 340,
+          );
+        }
+      }, bootDelayMs);
+    };
+
+    const onLoad = () => armWelcomeAfterLoad();
+
+    if (document.readyState === "complete") {
+      armWelcomeAfterLoad();
+    } else {
+      window.addEventListener("load", onLoad, { once: true });
+    }
+
     return () => {
-      window.clearTimeout(bootId);
-      if (scheduled == null) return;
-      const w = window as Window & {
-        cancelIdleCallback?: (handle: number) => void;
-      };
-      if (usedIdleCallback) w.cancelIdleCallback?.(scheduled);
-      else window.clearTimeout(scheduled);
+      cancelled = true;
+      clearScheduled();
+      window.removeEventListener("load", onLoad);
     };
   }, [focusLayout]);
 

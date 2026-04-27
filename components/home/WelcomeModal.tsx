@@ -70,7 +70,7 @@ export default function WelcomeModal({ locale, onLocaleChange }: Props) {
     >
       <button
         type="button"
-        className="absolute inset-0 bg-black/55 backdrop-blur-[2px]"
+        className="absolute inset-0 bg-black/60 max-md:backdrop-blur-none md:bg-black/55 md:backdrop-blur-[2px]"
         aria-label={w.backdropDismissAria}
         onClick={dismiss}
       />
@@ -79,7 +79,7 @@ export default function WelcomeModal({ locale, onLocaleChange }: Props) {
         aria-modal="true"
         aria-labelledby="welcome-modal-title"
         dir={rtl ? "rtl" : "ltr"}
-        className="relative z-10 max-h-[min(90vh,640px)] w-full max-w-lg overflow-y-auto rounded-2xl border border-white/[0.14] bg-[rgb(var(--surface-elevated))]/[0.97] p-6 shadow-[0_24px_80px_-24px_rgba(0,0,0,0.45)] backdrop-blur-md sm:p-8"
+        className="relative z-10 max-h-[min(90vh,640px)] w-full max-w-lg overflow-y-auto rounded-2xl border border-white/[0.14] bg-[rgb(var(--surface-elevated))]/[0.97] p-6 shadow-[0_24px_80px_-24px_rgba(0,0,0,0.45)] max-md:backdrop-blur-none sm:backdrop-blur-md sm:p-8"
         style={
           rtl
             ? { fontFamily: "var(--font-ar), var(--font-noto), sans-serif" }
