@@ -249,9 +249,11 @@ const trustHowEn: Pick<
   analyzingProgressLine: "Analyzing your decision…",
   analyzingPhaseLines: [
     "Analyzing your decision…",
+    "Naming trade-offs that actually matter to you—not generic slogans…",
     "Mapping scenarios across the next months and years…",
-    "Comparing trade-offs you actually care about…",
+    "Comparing paths on money, nerves, and time—not vibes alone…",
     "Stress-testing a few hidden assumptions…",
+    "Sanity-checking whether the story feels too tidy…",
     "Turning this into a clear report…",
   ],
   socialProofRotator: [
@@ -450,9 +452,11 @@ const trustHowHy: Pick<
   analyzingProgressLine: "Վերլուծում ենք ձեր որոշումը․․․",
   analyzingPhaseLines: [
     "Վերլուծում ենք ձեր որոշումը․․․",
+    "Տալիս ենք անուն այն փոխարժեքներին, որոնք իրականում կապված են քեզ հետ․․․",
     "Քարտեզագրում ենք սցենարները ամիսներ և տարիներ առաջ․․․",
-    "Համեմատում ենք փոխարժեքները, որոնք իրականում կարևոր են․․․",
+    "Համեմատում ենք փող, նյարդեր և ժամանակ՝ ոչ թե ընդհանուր զգացմունքային բառեր․․․",
     "Ստուգում ենք մի քանի թաքնված ենթադրություն․․․",
+    "Տեսնում ենք՝ պատմությունը չե՞ն կարգավորված չափ զգույշ․․․",
     "Կազմում ենք հստակ հաշվետվություն․․․",
   ],
   socialProofRotator: [
@@ -693,6 +697,11 @@ const uiHy: Partial<UIStrings> = {
       decision:
         "Արժե՞ սկսել փոքր բիզնես կողմից՝ պահելով հիմնական աշխատանքը։",
     },
+    {
+      label: "Մնա՞լ, գնա՞լ",
+      decision:
+        "Արժե՞ շարունակել այս հարաբերությունը, թե՞ ավարտել։",
+    },
   ],
   resultFeedbackPrompt: "Օգնու՞մ էր",
   resultFeedbackThanks:
@@ -808,6 +817,11 @@ const uiEn: Partial<UIStrings> = {
       label: "Side business?",
       decision:
         "Should I start a small business on the side while keeping my job?",
+    },
+    {
+      label: "Stay or go?",
+      decision:
+        "Should I stay in this relationship or end it?",
     },
   ],
   resultFeedbackPrompt: "Was this helpful?",
@@ -1500,9 +1514,11 @@ const HOME_I18N_FALLBACKS: Pick<
   analyzingProgressLine: "Analyzing your decision…",
   analyzingPhaseLines: [
     "Analyzing your decision…",
+    "Naming trade-offs that actually matter to you—not generic slogans…",
     "Mapping scenarios across the next months and years…",
-    "Comparing trade-offs you actually care about…",
+    "Comparing paths on money, nerves, and time—not vibes alone…",
     "Stress-testing a few hidden assumptions…",
+    "Sanity-checking whether the story feels too tidy…",
     "Turning this into a clear report…",
   ],
   socialProofRotator: [
@@ -1525,6 +1541,11 @@ const HOME_I18N_FALLBACKS: Pick<
       label: "Side business?",
       decision:
         "Should I start a small business on the side while keeping my job?",
+    },
+    {
+      label: "Stay or go?",
+      decision:
+        "Should I stay in this relationship or end it?",
     },
   ],
   resultFeedbackPrompt: "Was this helpful?",

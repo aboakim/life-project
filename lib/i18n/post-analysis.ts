@@ -13,7 +13,16 @@ export type PostAnalysisCopy = {
   shareLimited: string;
   /** Web Share API when available (mobile); falls back to copy full text + URL */
   shareNativeCta: string;
+  /** One-tap “viral” blurb + real summary snippet (honest; no fake metrics) */
+  shareViralButton: string;
+  shareViralCopied: string;
+  shareViralHint: string;
   shareFooter: string;
+  /** Above action buttons — retention without dark patterns */
+  afterReportTitle: string;
+  afterReportLead: string;
+  afterReportTryAgain: string;
+  afterReportCompare: string;
   printSummary: string;
   historyTitle: string;
   historyEmpty: string;
@@ -143,7 +152,16 @@ const en: PostAnalysisCopy = {
   copied: "Copied.",
   shareLimited: "Copy short summary",
   shareNativeCta: "Share…",
+  shareViralButton: "Copy share hook",
+  shareViralCopied: "Share hook copied.",
+  shareViralHint:
+    "Paste into any app — your summary snippet is real; we never invent crowd stats.",
   shareFooter: "— From Life Decision Engine (lifedecisions.space). Full analysis kept private on your device.",
+  afterReportTitle: "Keep going",
+  afterReportLead:
+    "Most forks get sharper on a second pass—or once you can compare two saved runs side by side.",
+  afterReportTryAgain: "Refine & analyze again",
+  afterReportCompare: "Compare two saved runs",
   printSummary: "Print this analysis",
   historyTitle: "Recent analyses (this device)",
   historyEmpty: "No saved history yet — run another analysis to build a short list here.",
@@ -282,8 +300,17 @@ const hy: PostAnalysisCopy = {
   copied: "Պատճենվեց։",
   shareLimited: "Կարճ ամփոփում",
   shareNativeCta: "Կիսվել…",
+  shareViralButton: "Պատճենել կիսման տողը",
+  shareViralCopied: "Տողը պատճենվեց։",
+  shareViralHint:
+    "Տեղադրիր ցանկացած հավելվածում՝ ամփոփման հատվածը իրական է, վարկածային թիվներ չենք ավելացնում։",
   shareFooter:
     "— Life Decision Engine (lifedecisions.space)։ Լրիվ վերլուծությունը մնում է այս սարքում։",
+  afterReportTitle: "Շարունակիր",
+  afterReportLead:
+    "Շատ ուղիներ երկրորդ անցումից հետո են ստանում հստակություն — կամ երբ երկու պահված վերլուծություն ես համեմատում։",
+  afterReportTryAgain: "Խմբագրել և նորից վերլուծել",
+  afterReportCompare: "Համեմատել երկու պահված վերլուծություն",
   printSummary: "Տպել վերլուծությունը",
   historyTitle: "Վերջին վերլուծություններ (այս սարքում)",
   historyEmpty: "Դեռ պատմություն չկա — գործարկիր նոր վերլուծություն։",

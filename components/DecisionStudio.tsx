@@ -1023,18 +1023,18 @@ export default function DecisionStudio({
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.22] bg-white/[0.11] px-3.5 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-[rgb(var(--ink))] shadow-[0_0_32px_-10px_rgb(var(--accent)/0.45),inset_0_1px_0_0_rgba(255,255,255,0.12)] ring-1 ring-[rgb(var(--accent))]/15 backdrop-blur-sm motion-safe:transition motion-safe:duration-500 motion-safe:hover:ring-[rgb(var(--accent-2))]/25 sm:text-xs">
                 <span className="home-brand-pulse-dot size-2.5 rounded-full bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] shadow-[0_0_16px_rgb(var(--accent)/0.6)]" />
-                {t.brand}
-              </div>
+              {t.brand}
+            </div>
               <p className="mt-6 text-sm font-semibold leading-snug text-[rgb(var(--accent-2))] [text-wrap:balance] sm:text-base">
-                {t.heroRibbon}
-              </p>
+              {t.heroRibbon}
+            </p>
               <h1 className="font-display mt-5 text-[clamp(2.1rem,1.15rem+4vw,4rem)] font-extrabold leading-[1.02] tracking-tight [text-wrap:balance]">
-                <span className="text-[rgb(var(--ink))]">{t.heroLine1}</span>{" "}
-                <span className="text-gradient">{t.heroAccent}</span>
-              </h1>
+              <span className="text-[rgb(var(--ink))]">{t.heroLine1}</span>{" "}
+              <span className="text-gradient">{t.heroAccent}</span>
+            </h1>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty] md:text-xl md:leading-relaxed">
-                {t.subtitle}
-              </p>
+              {t.subtitle}
+            </p>
               <HeroMomentStrips
                 stayEyebrow={sx.stayStripEyebrow}
                 stayMoments={sx.stayMoments}
@@ -1043,15 +1043,15 @@ export default function DecisionStudio({
               />
               <div className="mt-6 flex flex-wrap gap-2.5">
                 {t.features.map((f, i) => (
-                  <span
-                    key={f}
+                <span
+                  key={f}
                     className="home-stagger-reveal chip-interactive rounded-full border border-white/[0.14] bg-white/[0.07] px-4 py-2 text-sm font-medium text-[rgb(var(--ink))]"
                     style={{ animationDelay: `${i * 75}ms` }}
-                  >
-                    {f}
-                  </span>
-                ))}
-              </div>
+                >
+                  {f}
+                </span>
+              ))}
+            </div>
               <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                 <TiltPlane
                   className="inline-flex min-h-[52px] w-full min-w-[min(100%,18rem)] sm:w-auto"
@@ -1067,19 +1067,19 @@ export default function DecisionStudio({
                     <span aria-hidden>→</span>
                   </Link>
                 </TiltPlane>
-                <Link
-                  href="/experts"
+              <Link
+                href="/experts"
                   className="btn-extrude-3d inline-flex items-center justify-center gap-2 rounded-2xl border border-white/[0.18] bg-white/[0.07] px-8 py-3.5 text-base font-bold text-[rgb(var(--ink))] transition-colors hover:bg-white/[0.12]"
-                >
+              >
                   {t.heroCtaSecondary}
-                  <span aria-hidden>→</span>
-                </Link>
-                <Link
-                  href="/pricing"
+                <span aria-hidden>→</span>
+              </Link>
+              <Link
+                href="/pricing"
                   className="inline-flex items-center justify-center gap-2 text-base font-semibold text-[rgb(var(--accent-warm))] underline-offset-4 hover:underline"
-                >
-                  {pr.navPricing}
-                </Link>
+              >
+                {pr.navPricing}
+              </Link>
               </div>
             </div>
 
@@ -1177,7 +1177,7 @@ export default function DecisionStudio({
                     </li>
                   ))}
                 </ul>
-              </div>
+          </div>
             </TiltPlane>
             <TiltPlane
               className="mt-4 block w-full"
@@ -1260,7 +1260,7 @@ export default function DecisionStudio({
               className="relative font-display mt-2 text-[clamp(1.35rem,1rem+1.4vw,1.95rem)] font-extrabold tracking-tight text-[rgb(var(--ink))] [text-wrap:balance]"
             >
               {t.atAGlanceTitle}
-            </h2>
+          </h2>
             <ul className="relative mt-6 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-3">
               {t.atAGlanceCards.map((card, i) => {
                 const vis = getVisualStoryImage("overview", i);
@@ -1289,7 +1289,7 @@ export default function DecisionStudio({
               </Link>
               <span className="text-xs text-[rgb(var(--ink-soft))]/90">
                 {t.sectionNavProduct} → {t.sectionNavHow} → {t.sectionNavAnalyzer}
-              </span>
+                </span>
             </div>
           </div>
         </section>
@@ -1455,34 +1455,34 @@ export default function DecisionStudio({
           </p>
           <nav
             className="mt-8 rounded-2xl border border-white/[0.12] bg-gradient-to-br from-white/[0.08] to-white/[0.03] p-4 shadow-[0_24px_64px_-32px_rgb(var(--accent)/0.2)] backdrop-blur-sm sm:p-6"
-            aria-label={t.langLabel}
-          >
+          aria-label={t.langLabel}
+        >
             <div className="flex flex-wrap gap-2">
-              {LOCALE_OPTIONS.map((opt) => {
-                const active = locale === opt.value;
-                return (
-                  <button
-                    key={opt.value}
-                    type="button"
-                    onClick={() => setLocale(opt.value)}
-                    className={
-                      active
-                        ? "rounded-xl border border-[rgb(var(--accent))]/50 bg-gradient-to-r from-[rgb(var(--accent))]/25 to-[rgb(var(--accent-2))]/18 px-3 py-2 text-sm font-semibold text-white shadow-[0_0_24px_-8px_rgb(var(--accent))]"
+            {LOCALE_OPTIONS.map((opt) => {
+              const active = locale === opt.value;
+              return (
+                <button
+                  key={opt.value}
+                  type="button"
+                  onClick={() => setLocale(opt.value)}
+                  className={
+                    active
+                      ? "rounded-xl border border-[rgb(var(--accent))]/50 bg-gradient-to-r from-[rgb(var(--accent))]/25 to-[rgb(var(--accent-2))]/18 px-3 py-2 text-sm font-semibold text-white shadow-[0_0_24px_-8px_rgb(var(--accent))]"
                         : "rounded-xl border border-white/[0.12] bg-white/[0.06] px-3 py-2 text-sm text-[rgb(var(--ink-soft))] transition hover:border-[rgb(var(--accent-2))]/30 hover:bg-white/[0.1] hover:text-[rgb(var(--ink))]"
-                    }
-                  >
-                    <span className="me-1.5 opacity-90" aria-hidden>
-                      {opt.flag}
-                    </span>
-                    {opt.label}
-                  </button>
-                );
-              })}
-            </div>
+                  }
+                >
+                  <span className="me-1.5 opacity-90" aria-hidden>
+                    {opt.flag}
+                  </span>
+                  {opt.label}
+                </button>
+              );
+            })}
+          </div>
             <p className="mt-4 text-xs text-[rgb(var(--ink-soft))]/85">
               ({LOCALE_OPTIONS.length} locales)
             </p>
-          </nav>
+        </nav>
         </section>
         </RevealOnScroll>
         </>
@@ -1673,7 +1673,7 @@ export default function DecisionStudio({
               listAria: novelty.capsuleListAria,
             }}
           />
-          <div className="mt-10 grid gap-6 lg:grid-cols-5">
+        <div className="mt-10 grid gap-6 lg:grid-cols-5">
             <div className="min-h-0 lg:col-span-2">
               <TiltPlane
                 className="h-full min-h-[12rem]"
@@ -1691,18 +1691,18 @@ export default function DecisionStudio({
                     aria-hidden
                   />
                   <p className="relative text-sm font-semibold text-[rgb(var(--ink))]">
-                    {t.disclaimerTitle}
-                  </p>
+              {t.disclaimerTitle}
+            </p>
                   <p className="relative mt-3 text-sm leading-relaxed text-[rgb(var(--ink-soft))]">
-                    {t.disclaimerBody}
-                  </p>
-                </aside>
+              {t.disclaimerBody}
+            </p>
+          </aside>
               </TiltPlane>
             </div>
 
-            <form
-              id="analyzer"
-              onSubmit={onSubmit}
+          <form
+            id="analyzer"
+            onSubmit={onSubmit}
               className="relative overflow-hidden panel-float-hover glass card-glow ring-1 ring-inset ring-[rgb(var(--accent))]/25 rounded-3xl p-5 sm:p-6 lg:col-span-3"
             >
               <div
@@ -1714,7 +1714,7 @@ export default function DecisionStudio({
                 aria-hidden
               />
               <h3 className="relative text-lg font-semibold text-[rgb(var(--ink))]">
-                {t.decision}
+              {t.decision}
               </h3>
 
               <DecisionBriefWizard
@@ -1811,19 +1811,19 @@ export default function DecisionStudio({
                     labels={voiceLabels}
                   />
                 </div>
-                <textarea
+            <textarea
                   id="decision-input"
-                  value={decision}
-                  onChange={(e) => setDecision(e.target.value)}
-                  placeholder={t.decisionPh}
-                  rows={4}
+              value={decision}
+              onChange={(e) => setDecision(e.target.value)}
+              placeholder={t.decisionPh}
+              rows={4}
                   className="w-full resize-y rounded-2xl border border-white/10 bg-white/[0.07] px-4 py-3 text-base leading-relaxed text-[rgb(var(--ink))] placeholder:text-[rgb(var(--ink-soft))]/65 outline-none transition focus:border-[rgb(var(--accent))]/45 focus:ring-2 focus:ring-[rgb(var(--accent))]/15"
-                />
+            />
               </div>
 
-              <label className="mt-5 block text-sm font-medium text-[rgb(var(--ink))]">
-                {t.context}
-              </label>
+            <label className="mt-5 block text-sm font-medium text-[rgb(var(--ink))]">
+              {t.context}
+            </label>
               <div className="mb-1.5 flex flex-wrap items-start justify-end gap-2">
                 <VoiceWhisperButton
                   locale={locale}
@@ -1846,11 +1846,11 @@ export default function DecisionStudio({
                   labels={voiceLabels}
                 />
               </div>
-              <textarea
-                value={context}
-                onChange={(e) => setContext(e.target.value)}
-                placeholder={t.contextPh}
-                rows={3}
+            <textarea
+              value={context}
+              onChange={(e) => setContext(e.target.value)}
+              placeholder={t.contextPh}
+              rows={3}
                 className="w-full resize-y rounded-2xl border border-white/10 bg-white/[0.07] px-4 py-3 text-base outline-none transition focus:border-[rgb(var(--accent))]/45"
               />
               <BriefSignatureStrip
@@ -1858,11 +1858,11 @@ export default function DecisionStudio({
                 eyebrow={novelty.signatureEyebrow}
                 moodPrefix={novelty.signatureMoodPrefix}
                 moodNames={novelty.moodNames}
-              />
+            />
 
-              <label className="mt-5 block text-sm font-medium text-[rgb(var(--ink))]">
-                {t.constraints}
-              </label>
+            <label className="mt-5 block text-sm font-medium text-[rgb(var(--ink))]">
+              {t.constraints}
+            </label>
               <div className="mb-1.5 flex flex-wrap items-start justify-end gap-2">
                 <VoiceWhisperButton
                   locale={locale}
@@ -1887,11 +1887,11 @@ export default function DecisionStudio({
                   labels={voiceLabels}
                 />
               </div>
-              <textarea
-                value={constraints}
-                onChange={(e) => setConstraints(e.target.value)}
-                placeholder={t.constraintsPh}
-                rows={2}
+            <textarea
+              value={constraints}
+              onChange={(e) => setConstraints(e.target.value)}
+              placeholder={t.constraintsPh}
+              rows={2}
                 className="w-full resize-y rounded-2xl border border-white/10 bg-white/[0.07] px-4 py-3 text-base outline-none transition focus:border-[rgb(var(--accent))]/45"
               />
 
@@ -1927,11 +1927,11 @@ export default function DecisionStudio({
                 </div>
               </div>
 
-              {error && (
-                <p className="mt-4 text-sm text-rose-300" role="alert">
-                  {error}
-                </p>
-              )}
+            {error && (
+              <p className="mt-4 text-sm text-rose-300" role="alert">
+                {error}
+              </p>
+            )}
 
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                 <TiltPlane
@@ -1940,22 +1940,22 @@ export default function DecisionStudio({
                   maxTilt={7}
                   floatZ={6}
                 >
-                  <button
-                    type="submit"
+              <button
+                type="submit"
                     disabled={!canSubmit || formBusy}
                     className="min-h-[48px] w-full rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-6 py-3 text-base font-semibold text-white shadow-lg shadow-[rgb(var(--accent)/0.32)] ring-1 ring-white/15 transition enabled:hover:brightness-110 enabled:hover:shadow-[0_20px_50px_-18px_rgb(var(--accent)/0.5)] motion-safe:enabled:hover:scale-[1.02] motion-safe:enabled:active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40 sm:min-w-[14rem]"
-                  >
-                    {loading ? t.analyzing : t.analyze}
-                  </button>
+              >
+                {loading ? t.analyzing : t.analyze}
+              </button>
                 </TiltPlane>
                 {result ? (
                   <span className="inline-flex w-full justify-center rounded-full border border-white/15 bg-white/[0.03] px-3 py-2 text-center text-sm text-[rgb(var(--ink-soft))] sm:inline-flex sm:w-auto sm:justify-start sm:py-1.5 sm:text-xs">
-                    {result.mode === "live" && t.badgeLive}
-                    {result.mode === "demo" && t.badgeDemo}
-                    {result.mode === "fallback" && t.badgeFallback}
-                  </span>
+                  {result.mode === "live" && t.badgeLive}
+                  {result.mode === "demo" && t.badgeDemo}
+                  {result.mode === "fallback" && t.badgeFallback}
+                </span>
                 ) : null}
-              </div>
+            </div>
               {loading ? (
                 <div
                   className="relative mt-5 overflow-hidden rounded-2xl border border-[rgb(var(--accent-2))]/35 bg-gradient-to-b from-[rgb(var(--accent))]/15 via-black/35 to-black/55 p-4 shadow-[0_22px_56px_-30px_rgb(var(--accent)/0.55)] backdrop-blur-md"
@@ -1982,12 +1982,12 @@ export default function DecisionStudio({
                   </div>
                 </div>
               ) : null}
-              {(result?.hint || result?.warning) && (
+            {(result?.hint || result?.warning) && (
                 <p className="mt-3 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2 text-xs leading-relaxed text-[rgb(var(--ink-soft))]">
-                  {result.warning ?? result.hint}
-                </p>
-              )}
-            </form>
+                {result.warning ?? result.hint}
+              </p>
+            )}
+          </form>
           </div>
         </section>
         </RevealOnScroll>
@@ -2004,12 +2004,12 @@ export default function DecisionStudio({
               className="results-glow-breathe animate-fade-up rounded-2xl border border-emerald-400/35 bg-gradient-to-r from-emerald-500/20 to-cyan-500/10 px-4 py-4 sm:px-5"
             >
               <h2 className="font-display text-xl font-extrabold tracking-tight text-emerald-50/95 [text-wrap:balance] sm:text-2xl">
-                <span
+              <span
                   className="home-check-nod me-2 inline-block text-2xl"
-                  aria-hidden
-                >
+                aria-hidden
+              >
                   ✓
-                </span>
+              </span>
                 {t.resultsYouAreHere}
               </h2>
             </div>
@@ -2171,7 +2171,7 @@ export default function DecisionStudio({
                 className="text-lg font-semibold text-cyan-50/95"
               >
                 {pa.needsHelpTitle}
-              </h2>
+                </h2>
               <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
                 {pa.needsHelpLead}
               </p>
@@ -2224,15 +2224,15 @@ export default function DecisionStudio({
                           roleLabel(locale, expertNeedsPick),
                         )}
                   </Link>
-                </div>
+            </div>
               ) : null}
-            </section>
+          </section>
 
             {matchedExperts.length > 0 ? (
-              <section className="glass animate-fade-up rounded-3xl p-6 sm:p-7">
-                <h2 className="text-lg font-semibold text-[rgb(var(--ink))]">
+            <section className="glass animate-fade-up rounded-3xl p-6 sm:p-7">
+              <h2 className="text-lg font-semibold text-[rgb(var(--ink))]">
                   {t.sectionDirectoryExperts}
-                </h2>
+              </h2>
                 <ul className="mt-4 space-y-4">
                   {matchedExperts.map((e) => (
                     <li
@@ -2263,7 +2263,7 @@ export default function DecisionStudio({
                     </li>
                   ))}
                 </ul>
-              </section>
+            </section>
             ) : null}
 
             {matchedExperts.length === 0 &&
@@ -2413,6 +2413,7 @@ export default function DecisionStudio({
                 mode={result.mode}
                 pa={pa}
                 expertsSearchHref={expertsSearchHref}
+                onRefineRun={scrollToAnalyzer}
                 onLoadBrief={loadBriefFromHistory}
               />
             ) : null}

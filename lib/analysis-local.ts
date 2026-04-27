@@ -188,3 +188,15 @@ export function buildShareLimitedText(
   const block = `${head}\n\n${rest}${summary.length > maxLen ? "…" : ""}\n\n${footer}`;
   return block.slice(0, maxLen + 200);
 }
+
+/** Ready-to-paste social hook — keep honest; snippet is truncated summary, not fabricated stats */
+export function buildShareViralText(summary: string, footer: string): string {
+  const gist = summary.trim().slice(0, 260);
+  return [
+    "I ran a real-life fork through Life Decision Engine — here’s the gist 👀",
+    "",
+    gist + (summary.trim().length > 260 ? "…" : ""),
+    "",
+    footer.trim(),
+  ].join("\n");
+}

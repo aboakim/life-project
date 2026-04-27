@@ -7,6 +7,7 @@ import {
   appendJournalEntry,
   buildMarkdownSummary,
   buildShareLimitedText,
+  buildShareViralText,
   clearHistory,
   clearReminder,
   getReminderDueIso,
@@ -27,6 +28,8 @@ type Props = {
   mode: "live" | "demo" | "fallback";
   pa: PostAnalysisCopy;
   expertsSearchHref: string;
+  /** Scroll to analyzer + focus decision (second-pass retention). */
+  onRefineRun?: () => void;
   /** Load saved brief into the main form and scroll to analyzer (drives repeat runs). */
   onLoadBrief?: (
     decision: string,
@@ -45,6 +48,7 @@ export default function AnalysisResultTools({
   mode,
   pa,
   expertsSearchHref,
+  onRefineRun,
   onLoadBrief,
 }: Props) {
   const [flash, setFlash] = useState<string | null>(null);
@@ -108,6 +112,11 @@ export default function AnalysisResultTools({
   const shareText = useMemo(
     () => buildShareLimitedText(decision, analysis.summary, pa.shareFooter),
     [decision, analysis.summary, pa.shareFooter],
+  );
+
+  const shareViralText = useMemo(
+    () => buildShareViralText(analysis.summary, pa.shareFooter),
+    [analysis.summary, pa.shareFooter],
   );
 
   const onCopy = useCallback(async (text: string, msg: string) => {
@@ -191,6 +200,31 @@ export default function AnalysisResultTools({
     <>
       <section className="glass animate-fade-up no-print rounded-3xl p-6 sm:p-7">
         <h2 className="text-lg font-semibold text-[rgb(var(--ink))]">{pa.actionsTitle}</h2>
+        <div className="mt-4 rounded-2xl border border-[rgb(var(--accent-2))]/25 bg-gradient-to-br from-[rgb(var(--accent))]/[0.08] to-transparent px-4 py-4 sm:px-5">
+          <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[rgb(var(--accent-2))]/95">
+            {pa.afterReportTitle}
+          </p>
+          <p className="mt-2 text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
+            {pa.afterReportLead}
+          </p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {onRefineRun ? (
+              <button
+                type="button"
+                onClick={onRefineRun}
+                className="rounded-xl border border-white/14 bg-white/[0.07] px-4 py-2 text-sm font-semibold text-[rgb(var(--ink))] transition hover:bg-white/[0.11]"
+              >
+                {pa.afterReportTryAgain}
+              </button>
+            ) : null}
+            <a
+              href="#compare-two-runs"
+              className="inline-flex items-center rounded-xl border border-[rgb(var(--accent-2))]/35 bg-[rgb(var(--accent-2))]/10 px-4 py-2 text-sm font-semibold text-[rgb(var(--accent-2))] transition hover:bg-[rgb(var(--accent-2))]/16"
+            >
+              {pa.afterReportCompare}
+            </a>
+          </div>
+        </div>
         {flash ? (
           <p className="mt-2 text-sm text-emerald-200/95" role="status">
             {flash}
@@ -227,6 +261,13 @@ export default function AnalysisResultTools({
           </button>
           <button
             type="button"
+            onClick={() => onCopy(shareViralText, pa.shareViralCopied)}
+            className="rounded-xl border border-white/12 bg-white/[0.06] px-4 py-2 text-sm font-semibold text-[rgb(var(--accent-warm))] transition hover:bg-white/[0.1]"
+          >
+            {pa.shareViralButton}
+          </button>
+          <button
+            type="button"
             onClick={onPrint}
             className="rounded-xl border border-white/12 bg-white/[0.06] px-4 py-2 text-sm font-medium text-[rgb(var(--ink))] transition hover:bg-white/[0.1]"
           >
@@ -234,6 +275,9 @@ export default function AnalysisResultTools({
           </button>
         </div>
         <p className="mt-3 text-xs leading-relaxed text-[rgb(var(--ink-soft))]/90 [text-wrap:pretty]">
+          {pa.shareViralHint}
+        </p>
+        <p className="mt-2 text-xs leading-relaxed text-[rgb(var(--ink-soft))]/90 [text-wrap:pretty]">
           {pa.printPdfHint}
         </p>
         <div className="mt-5 flex flex-wrap gap-3 text-sm">
@@ -424,7 +468,10 @@ export default function AnalysisResultTools({
         )}
       </section>
 
-      <section className="glass animate-fade-up no-print rounded-3xl p-6 sm:p-7">
+      <section
+        id="compare-two-runs"
+        className="glass animate-fade-up no-print scroll-mt-28 rounded-3xl p-6 sm:p-7"
+      >
         <h2 className="text-lg font-semibold text-[rgb(var(--ink))]">
           {pa.compareTitle}
         </h2>
