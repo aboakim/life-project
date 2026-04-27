@@ -57,7 +57,7 @@ export default function AdSenseBanner({ className = "" }: Props) {
         })();
       },
       narrow
-        ? { idleTimeoutMs: 2800, fallbackDelayMs: 900 }
+        ? { idleTimeoutMs: 7200, fallbackDelayMs: 3200 }
         : { idleTimeoutMs: 1800, fallbackDelayMs: 700 },
     );
 

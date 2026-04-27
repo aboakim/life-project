@@ -313,16 +313,19 @@ export default function DecisionStudio({
     };
     if (typeof w.requestIdleCallback === "function") {
       const id = w.requestIdleCallback(() => setShowAmbientLayers(true), {
-        timeout: 900,
+        timeout: 3400,
       });
       return () => w.cancelIdleCallback?.(id);
     }
-    const t = window.setTimeout(() => setShowAmbientLayers(true), 640);
+    const t = window.setTimeout(() => setShowAmbientLayers(true), 2600);
     return () => window.clearTimeout(t);
   }, [focusLayout]);
 
   useEffect(() => {
     let cancel = false;
+    const narrow =
+      typeof window !== "undefined" &&
+      window.matchMedia("(max-width: 767.98px)").matches;
     const runFetch = () => {
       fetch("/api/speech/available")
         .then((r) => r.json() as Promise<{ whisper?: boolean }>)
@@ -340,12 +343,14 @@ export default function DecisionStudio({
       ) => number;
       cancelIdleCallback?: (handle: number) => void;
     };
+    const idleMs = narrow ? 6500 : 1200;
+    const fallbackMs = narrow ? 3200 : 700;
     if (typeof w.requestIdleCallback === "function") {
       const id = w.requestIdleCallback(
         () => {
           if (!cancel) runFetch();
         },
-        { timeout: 1200 },
+        { timeout: idleMs },
       );
       return () => {
         cancel = true;
@@ -354,7 +359,7 @@ export default function DecisionStudio({
     }
     const t = window.setTimeout(() => {
       if (!cancel) runFetch();
-    }, 700);
+    }, fallbackMs);
     return () => {
       cancel = true;
       window.clearTimeout(t);
@@ -394,9 +399,9 @@ export default function DecisionStudio({
     const armWelcomeAfterLoad = () => {
       if (cancelled) return;
       const narrow = window.matchMedia("(max-width: 767.98px)").matches;
-      /** Tighter schedule so the site feels responsive; still after `load` for LCP. */
-      const bootDelayMs = narrow ? 140 : 40;
-      const idleTimeoutMs = narrow ? 900 : 520;
+      /** Mobile: long defer for PSI (LCP/TBT). Desktop: snappy after load. */
+      const bootDelayMs = narrow ? 920 : 40;
+      const idleTimeoutMs = narrow ? 5600 : 520;
 
       bootTimer = window.setTimeout(() => {
         if (cancelled) return;
@@ -418,7 +423,7 @@ export default function DecisionStudio({
             () => {
               if (!cancelled) setDeferWelcomeMount(true);
             },
-            narrow ? 380 : 180,
+            narrow ? 1500 : 180,
           );
         }
       }, bootDelayMs);
