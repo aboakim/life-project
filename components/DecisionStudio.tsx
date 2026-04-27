@@ -1,14 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import DecisionBriefWizard from "@/components/home/DecisionBriefWizard";
 import HeroVisualSlider from "@/components/home/HeroVisualSlider";
 import HomeSectionNav from "@/components/home/HomeSectionNav";
 import ProductSceneStrip from "@/components/home/ProductSceneStrip";
 import RevealOnScroll from "@/components/home/RevealOnScroll";
-import KonamiSurprise from "@/components/home/KonamiSurprise";
-import ShortcutsHelpModal from "@/components/home/ShortcutsHelpModal";
 import PlayCorner from "@/components/home/PlayCorner";
 import BriefSignatureStrip from "@/components/home/BriefSignatureStrip";
 import TimeCapsuleCard from "@/components/home/TimeCapsuleCard";
@@ -83,6 +82,15 @@ import { buildAnalysisSpeechText } from "@/lib/tts-build-report-text";
 import VoiceDictateButton from "@/components/home/VoiceDictateButton";
 import VoiceWhisperButton from "@/components/home/VoiceWhisperButton";
 import ReadAloudReportButton from "@/components/home/ReadAloudReportButton";
+
+const KonamiSurprise = dynamic(
+  () => import("@/components/home/KonamiSurprise"),
+  { ssr: false, loading: () => null },
+);
+const ShortcutsHelpModal = dynamic(
+  () => import("@/components/home/ShortcutsHelpModal"),
+  { ssr: false, loading: () => null },
+);
 
 const LOCALE_STORAGE_KEY = "lde-locale";
 const VISIT_COUNT_KEY = "lde-home-visits";

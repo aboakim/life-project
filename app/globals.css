@@ -11,14 +11,15 @@
   --surface-2: 56 62 98;
   --surface-elevated: 68 74 110;
   --ink: 252 251 255;
-  --ink-soft: 210 218 232;
+  /* Brighter muted text — WCAG AA on tinted panels vs prior lavender-gray */
+  --ink-soft: 226 232 246;
   /* Periwinkle — less saturated violet than before */
   --accent: 154 158 255;
   --accent-2: 72 224 188;
   --accent-warm: 255 206 160;
   --accent-coral: 255 148 198;
   --accent-magenta: 226 198 248;
-  --accent-dim: 192 206 248;
+  --accent-dim: 200 212 252;
   --glow: 198 210 255;
   /* Extra mesh hues (body / orbs / washes) */
   --accent-sky: 118 196 255;

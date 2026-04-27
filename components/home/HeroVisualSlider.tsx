@@ -69,9 +69,10 @@ export default function HeroVisualSlider({
                 alt={slide.alt}
                 fill
                 className="object-cover"
-                sizes="(max-width: 1024px) 100vw, min(420px, 40vw)"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 92vw, min(420px, 40vw)"
                 priority={i === 0}
-                loading="eager"
+                fetchPriority={i === 0 ? "high" : "low"}
+                loading={i === 0 ? "eager" : "lazy"}
                 draggable={false}
               />
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[rgb(28_24_52/0.9)] via-[rgb(40_36_70/0.32)] to-[rgb(var(--accent)/0.12)]" />
