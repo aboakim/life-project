@@ -48,6 +48,13 @@ export type UIStrings = {
   scoreSublabel: string;
   footerPremium: string;
   networkError: string;
+  /** Too many analyze requests (HTTP 429) */
+  analyzeRateLimited: string;
+  /** Invalid body (HTTP 400) */
+  analyzeBadRequest: string;
+  /** Response not OK or unreadable JSON */
+  analyzeUnexpected: string;
+  analyzeRetryCta: string;
   features: [string, string, string];
   accessLocal: string;
   langLabel: string;
@@ -629,7 +636,15 @@ const uiHy: Partial<UIStrings> = {
   scoreSublabel: "համապատասխանություն / իրականացվողություն",
   footerPremium:
     "Միջուկային վերլուծությունն անվճար է։ Premium փաթեթը (Stripe-ի միջոցով) բացում է լրացուցիչ խորություն, իսկ հետագայում՝ իրական coach/հոգեբանի շերտ։",
-  networkError: "Ցանցի սխալ",
+  networkError:
+    "Ցանց չկա կամ սերվերը չի արձագանքում։ Ստուգեք ինտերնետը և կրկին փորձեք։",
+  analyzeRateLimited:
+    "Չափից շատ փորձեր այս սարքից։ Սպասեք մի քանի րոպե և կրկին փորձեք։",
+  analyzeBadRequest:
+    "Հարցումը սխալ է։ Ստուգեք դաշտերը և կրկին փորձեք։",
+  analyzeUnexpected:
+    "Վերլուծությունը չավարտվեց։ Կրկին փորձեք մի փոքր հետո։",
+  analyzeRetryCta: "Կրկին փորձել",
   features: ["Սցենարներ", "Ռիսկեր և ֆինանսներ", "Որոշման միավոր %"],
   accessLocal:
     "Տեղային հասցե՝ http://localhost:3000 — գործարկեք `npm run dev` ձեր համակարգչում։",
@@ -758,7 +773,8 @@ const uiEn: Partial<UIStrings> = {
   scoreSublabel: "alignment / feasibility",
   footerPremium:
     "Core analyzer stays free. Premium unlocks deeper runs and saved history—shipping next.",
-  networkError: "Network error",
+  networkError:
+    "Can't reach the server. Check your connection and try again.",
   features: ["Instant clarity", "Future scenarios", "Private session"],
   accessLocal:
     "Local URL: http://localhost:3000 — run `npm run dev` on your machine.",
@@ -1507,6 +1523,10 @@ const HOME_I18N_FALLBACKS: Pick<
   | "resultFeedbackThanks"
   | "sessionRunsThisVisit"
   | "analysisEmptyDetail"
+  | "analyzeRateLimited"
+  | "analyzeBadRequest"
+  | "analyzeUnexpected"
+  | "analyzeRetryCta"
 > = {
   trustMicroPoints: [
     "No public feed of your story",
@@ -1561,6 +1581,13 @@ const HOME_I18N_FALLBACKS: Pick<
   sessionRunsThisVisit: "This visit: {n} structured run(s)",
   analysisEmptyDetail:
     "No substantive answer filled this slot—usually because the prompt isn’t a real fork (too vague, noisy, random, or off-topic). Rewrite as one or two sentences: what decision you face, Option A vs Option B, and what you optimize for (time, money, risk, relationships).",
+  analyzeRateLimited:
+    "Too many attempts from this device right now. Wait a few minutes, then try again.",
+  analyzeBadRequest:
+    "Something in the request was invalid. Check your fields and try again.",
+  analyzeUnexpected:
+    "The analysis didn’t finish. Please try again in a moment.",
+  analyzeRetryCta: "Try again",
 };
 
 export function getUi(locale: AppLocale): UIStrings {

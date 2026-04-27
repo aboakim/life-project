@@ -578,14 +578,33 @@ export default function DecisionStudio({
           stakesLevel,
         }),
       });
-      const data = (await res.json()) as ApiResponse;
-      if (!res.ok) {
-        setError(t.networkError);
+
+      let data: unknown;
+      try {
+        data = await res.json();
+      } catch {
+        setError(t.analyzeUnexpected);
         return;
       }
-      const analysis = safeDecisionAnalysis(data.analysis);
+
+      if (!res.ok) {
+        const code =
+          typeof data === "object" &&
+          data !== null &&
+          "error" in data &&
+          typeof (data as { error: unknown }).error === "string"
+            ? (data as { error: string }).error
+            : "";
+        if (code === "rate_limited") setError(t.analyzeRateLimited);
+        else if (code === "bad_request") setError(t.analyzeBadRequest);
+        else setError(t.analyzeUnexpected);
+        return;
+      }
+
+      const payload = data as ApiResponse;
+      const analysis = safeDecisionAnalysis(payload.analysis);
       setResult({
-        ...data,
+        ...payload,
         analysis,
       });
       setSessionRuns((n) => n + 1);
@@ -596,7 +615,7 @@ export default function DecisionStudio({
           constraints,
           stakesLevel,
           analysis,
-          mode: data.mode,
+          mode: payload.mode,
         });
       } catch {
         /* ignore */
@@ -618,6 +637,15 @@ export default function DecisionStudio({
       setLoading(false);
     }
   }, [canSubmit, context, constraints, decision, locale, stakesLevel, t]);
+
+  const beginAnalysis = useCallback(() => {
+    if (!canSubmit) return;
+    if (!getStoredSubscriberId()) {
+      setPreAnalysisEmailOpen(true);
+      return;
+    }
+    void runAnalysis();
+  }, [canSubmit, runAnalysis]);
 
   useEffect(() => {
     if (!loading) return;
@@ -643,12 +671,7 @@ export default function DecisionStudio({
 
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!canSubmit) return;
-    if (!getStoredSubscriberId()) {
-      setPreAnalysisEmailOpen(true);
-      return;
-    }
-    void runAnalysis();
+    beginAnalysis();
   }
 
   const a = result?.analysis;
@@ -1930,11 +1953,24 @@ export default function DecisionStudio({
                 </div>
               </div>
 
-            {error && (
-              <p className="mt-4 text-sm text-rose-300" role="alert">
-                {error}
-              </p>
-            )}
+            {error ? (
+              <div
+                className="mt-4 flex flex-col gap-3 rounded-2xl border border-rose-400/30 bg-rose-500/[0.09] px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4"
+                role="alert"
+              >
+                <p className="text-sm leading-relaxed text-rose-100/95 [text-wrap:pretty] max-md:text-[15px] max-md:leading-[1.55]">
+                  {error}
+                </p>
+                <button
+                  type="button"
+                  disabled={formBusy || !canSubmit}
+                  onClick={() => beginAnalysis()}
+                  className="shrink-0 rounded-xl border border-rose-300/40 bg-rose-500/15 px-4 py-2.5 text-sm font-semibold text-rose-50 transition enabled:hover:border-rose-200/55 enabled:hover:bg-rose-500/25 disabled:cursor-not-allowed disabled:opacity-45"
+                >
+                  {t.analyzeRetryCta}
+                </button>
+              </div>
+            ) : null}
 
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                 <TiltPlane
