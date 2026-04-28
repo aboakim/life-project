@@ -23,78 +23,39 @@ async function safeLoadMatchedExperts(role: SuggestedDirectoryRole) {
   }
 }
 
-export async function POST(req: Request) {
-  let body: AnalyzeRequestBody;
-  try {
-    body = (await req.json()) as AnalyzeRequestBody;
-  } catch {
-    return NextResponse.json({ error: "bad_request" }, { status: 400 });
-  }
-
-  const decision = typeof body.decision === "string" ? body.decision : "";
-  if (!decision.trim()) {
-    return NextResponse.json({ error: "bad_request" }, { status: 400 });
-  }
-
+function normalizeDemoOpts(body: AnalyzeRequestBody) {
   const stakesOpt =
     typeof body.stakesLevel === "number" &&
     body.stakesLevel >= 1 &&
     body.stakesLevel <= 10
       ? { stakesLevel: body.stakesLevel }
       : undefined;
-
-  const demoOpts = {
+  return {
     ...stakesOpt,
     context: typeof body.context === "string" ? body.context : undefined,
     constraints:
       typeof body.constraints === "string" ? body.constraints : undefined,
   };
+}
 
-  const locale = parseLocale(body.language);
-  const ui = getUi(locale);
-  const ip = getClientIp(req);
+export async function POST(req: Request) {
+  try {
+    const body = (await req.json()) as AnalyzeRequestBody;
+    const decisionRaw = typeof body.decision === "string" ? body.decision : "";
+    const decision = decisionRaw.trim() || "Need help structuring a decision.";
+    const locale = parseLocale(body.language);
+    const ui = getUi(locale);
+    const demoOpts = normalizeDemoOpts(body);
+    const ip = getClientIp(req);
 
-  // On shared/mobile IPs prefer graceful fallback over a hard 429.
-  if (!rateLimitAllow(`analyze:${ip}`, RATE_MAX, RATE_WINDOW_MS)) {
-    const analysis = fillDecisionAnalysisGaps(
-      buildDemoAnalysis(decision.trim(), locale, demoOpts),
-      locale,
-    );
-    const matchedExperts = await safeLoadMatchedExperts(
-      analysis.suggestedDirectoryRole ?? "UNSPECIFIED",
-    );
-    return NextResponse.json({
-      analysis,
-      mode: "fallback" as const,
-      warning: ui.apiAnalysisServiceNotice,
-      matchedExperts,
-    });
-  }
-
-  if (process.env.OPENAI_API_KEY) {
-    try {
-      const raw = await analyzeWithOpenAI({
-        ...body,
-        decision: decision.trim(),
-        language: locale,
-      });
-      const analysis = fillDecisionAnalysisGaps(raw, locale);
-      const matchedExperts = await safeLoadMatchedExperts(
-        analysis.suggestedDirectoryRole ?? "UNSPECIFIED"
-      );
-      return NextResponse.json({
-        analysis,
-        mode: "live" as const,
-        matchedExperts,
-      });
-    } catch (e) {
-      console.error("[analyze] OpenAI path failed", e);
+    // On shared/mobile IPs prefer graceful fallback over a hard 429.
+    if (!rateLimitAllow(`analyze:${ip}`, RATE_MAX, RATE_WINDOW_MS)) {
       const analysis = fillDecisionAnalysisGaps(
         buildDemoAnalysis(decision, locale, demoOpts),
         locale,
       );
       const matchedExperts = await safeLoadMatchedExperts(
-        analysis.suggestedDirectoryRole ?? "UNSPECIFIED"
+        analysis.suggestedDirectoryRole ?? "UNSPECIFIED",
       );
       return NextResponse.json({
         analysis,
@@ -103,19 +64,66 @@ export async function POST(req: Request) {
         matchedExperts,
       });
     }
-  }
 
-  const analysis = fillDecisionAnalysisGaps(
-    buildDemoAnalysis(decision, locale, demoOpts),
-    locale,
-  );
-  const matchedExperts = await safeLoadMatchedExperts(
-    analysis.suggestedDirectoryRole ?? "UNSPECIFIED"
-  );
-  return NextResponse.json({
-    analysis,
-    mode: "demo" as const,
-    hint: ui.apiHintDemo,
-    matchedExperts,
-  });
+    if (process.env.OPENAI_API_KEY) {
+      try {
+        const raw = await analyzeWithOpenAI({
+          ...body,
+          decision,
+          language: locale,
+        });
+        const analysis = fillDecisionAnalysisGaps(raw, locale);
+        const matchedExperts = await safeLoadMatchedExperts(
+          analysis.suggestedDirectoryRole ?? "UNSPECIFIED",
+        );
+        return NextResponse.json({
+          analysis,
+          mode: "live" as const,
+          matchedExperts,
+        });
+      } catch (e) {
+        console.error("[analyze] OpenAI path failed", e);
+        const analysis = fillDecisionAnalysisGaps(
+          buildDemoAnalysis(decision, locale, demoOpts),
+          locale,
+        );
+        const matchedExperts = await safeLoadMatchedExperts(
+          analysis.suggestedDirectoryRole ?? "UNSPECIFIED",
+        );
+        return NextResponse.json({
+          analysis,
+          mode: "fallback" as const,
+          warning: ui.apiAnalysisServiceNotice,
+          matchedExperts,
+        });
+      }
+    }
+
+    const analysis = fillDecisionAnalysisGaps(
+      buildDemoAnalysis(decision, locale, demoOpts),
+      locale,
+    );
+    const matchedExperts = await safeLoadMatchedExperts(
+      analysis.suggestedDirectoryRole ?? "UNSPECIFIED",
+    );
+    return NextResponse.json({
+      analysis,
+      mode: "demo" as const,
+      hint: ui.apiHintDemo,
+      matchedExperts,
+    });
+  } catch {
+    const locale = parseLocale("en");
+    const ui = getUi(locale);
+    const analysis = fillDecisionAnalysisGaps(
+      buildDemoAnalysis("Need help structuring a decision.", locale, {}),
+      locale,
+    );
+    return NextResponse.json({
+      analysis,
+      mode: "fallback" as const,
+      warning: ui.apiAnalysisServiceNotice,
+      matchedExperts: [],
+    }, { status: 200 });
+  }
 }
