@@ -142,13 +142,14 @@ const VISIT_COUNT_KEY = "lde-home-visits";
 const VISITOR_BANNER_DISMISS_KEY = "lde-visitor-path-dismissed";
 /** Minimum time the “analyzing” UI stays visible so the pass feels intentional (ms). */
 const ANALYSIS_UI_MIN_MS = 2200;
+const ANALYSIS_REQUEST_TIMEOUT_MS = 25000;
 
 type ApiResponse = {
   analysis: DecisionAnalysis;
   mode: "live" | "demo" | "fallback";
   hint?: string;
   warning?: string;
-  matchedExperts?: MatchedExpertSummary[];
+  matchedExperts?: MatchedExpertSummary[] ;
 };
 
 const NO_MATCHED_EXPERTS: MatchedExpertSummary[] = [];
@@ -566,10 +567,17 @@ export default function DecisionStudio({
     setLoading(true);
     setError(null);
     setResult(null);
+    let timeoutId: number | null = null;
     try {
+      const controller = new AbortController();
+      timeoutId = window.setTimeout(
+        () => controller.abort(),
+        ANALYSIS_REQUEST_TIMEOUT_MS,
+      );
       const res = await fetch("/api/analyze", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        signal: controller.signal,
         body: JSON.stringify({
           decision,
           context,
@@ -578,33 +586,27 @@ export default function DecisionStudio({
           stakesLevel,
         }),
       });
-
-      let data: unknown;
-      try {
-        data = await res.json();
-      } catch {
-        setError(t.analyzeUnexpected);
-        return;
-      }
-
+      const raw = (await res.json().catch(() => null)) as ApiResponse | null;
       if (!res.ok) {
-        const code =
-          typeof data === "object" &&
-          data !== null &&
-          "error" in data &&
-          typeof (data as { error: unknown }).error === "string"
-            ? (data as { error: string }).error
+        const errObj =
+          raw && typeof raw === "object"
+            ? (raw as Record<string, unknown>)
+            : null;
+        const serverMessage =
+          errObj !== null
+            ? typeof errObj.error === "string"
+              ? errObj.error
+              : typeof errObj.message === "string"
+                ? errObj.message
+                : ""
             : "";
-        if (code === "rate_limited") setError(t.analyzeRateLimited);
-        else if (code === "bad_request") setError(t.analyzeBadRequest);
-        else setError(t.analyzeUnexpected);
+        setError(serverMessage.trim() || t.networkError);
         return;
       }
-
-      const payload = data as ApiResponse;
-      const analysis = safeDecisionAnalysis(payload.analysis);
+      const data = raw as ApiResponse;
+      const analysis = safeDecisionAnalysis(data.analysis);
       setResult({
-        ...payload,
+        ...data,
         analysis,
       });
       setSessionRuns((n) => n + 1);
@@ -615,7 +617,7 @@ export default function DecisionStudio({
           constraints,
           stakesLevel,
           analysis,
-          mode: payload.mode,
+          mode: data.mode,
         });
       } catch {
         /* ignore */
@@ -629,6 +631,7 @@ export default function DecisionStudio({
     } catch {
       setError(t.networkError);
     } finally {
+      if (timeoutId !== null) window.clearTimeout(timeoutId);
       const elapsed = Date.now() - analysisStartRef.current;
       const wait = Math.max(0, ANALYSIS_UI_MIN_MS - elapsed);
       if (wait > 0) {
@@ -637,15 +640,6 @@ export default function DecisionStudio({
       setLoading(false);
     }
   }, [canSubmit, context, constraints, decision, locale, stakesLevel, t]);
-
-  const beginAnalysis = useCallback(() => {
-    if (!canSubmit) return;
-    if (!getStoredSubscriberId()) {
-      setPreAnalysisEmailOpen(true);
-      return;
-    }
-    void runAnalysis();
-  }, [canSubmit, runAnalysis]);
 
   useEffect(() => {
     if (!loading) return;
@@ -671,7 +665,12 @@ export default function DecisionStudio({
 
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    beginAnalysis();
+    if (!canSubmit) return;
+    if (!getStoredSubscriberId()) {
+      setPreAnalysisEmailOpen(true);
+      return;
+    }
+    void runAnalysis();
   }
 
   const a = result?.analysis;
@@ -1953,24 +1952,24 @@ export default function DecisionStudio({
                 </div>
               </div>
 
-            {error ? (
+            {error && (
               <div
-                className="mt-4 flex flex-col gap-3 rounded-2xl border border-rose-400/30 bg-rose-500/[0.09] px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4"
+                className="mt-4 flex flex-wrap items-center gap-3 rounded-xl border border-rose-400/30 bg-rose-500/[0.08] px-3 py-2.5"
                 role="alert"
               >
-                <p className="text-sm leading-relaxed text-rose-100/95 [text-wrap:pretty] max-md:text-[15px] max-md:leading-[1.55]">
-                  {error}
-                </p>
-                <button
-                  type="button"
-                  disabled={formBusy || !canSubmit}
-                  onClick={() => beginAnalysis()}
-                  className="shrink-0 rounded-xl border border-rose-300/40 bg-rose-500/15 px-4 py-2.5 text-sm font-semibold text-rose-50 transition enabled:hover:border-rose-200/55 enabled:hover:bg-rose-500/25 disabled:cursor-not-allowed disabled:opacity-45"
-                >
-                  {t.analyzeRetryCta}
-                </button>
+                <p className="text-sm text-rose-200">{error}</p>
+                {!loading ? (
+                  <button
+                    type="button"
+                    onClick={runAnalysis}
+                    disabled={!canSubmit || formBusy}
+                    className="rounded-lg border border-rose-300/35 bg-rose-500/20 px-2.5 py-1 text-xs font-semibold text-rose-100 transition hover:bg-rose-500/30 disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    {t.analyze}
+                  </button>
+                ) : null}
               </div>
-            ) : null}
+            )}
 
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                 <TiltPlane
