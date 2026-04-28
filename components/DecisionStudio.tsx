@@ -76,6 +76,8 @@ import {
 import { safeDecisionAnalysis } from "@/lib/safe-decision-analysis";
 import { getStoredSubscriberId } from "@/lib/reminder-subscriber-storage";
 import { buildAnalysisSpeechText } from "@/lib/tts-build-report-text";
+import { buildDemoAnalysis } from "@/lib/demo-analysis";
+import { fillDecisionAnalysisGaps } from "@/lib/analysis-gap-fill";
 import VoiceDictateButton from "@/components/home/VoiceDictateButton";
 import VoiceWhisperButton from "@/components/home/VoiceWhisperButton";
 import ReadAloudReportButton from "@/components/home/ReadAloudReportButton";
@@ -173,6 +175,28 @@ function buildExpertsNeedsHref(
   }
   const base = `/experts?role=${encodeURIComponent(pick)}`;
   return q ? `${base}&q=${encodeURIComponent(q)}` : base;
+}
+
+function buildClientFallbackResult(
+  decision: string,
+  context: string,
+  constraints: string,
+  locale: AppLocale,
+  stakesLevel: number,
+): ApiResponse {
+  const analysis = fillDecisionAnalysisGaps(
+    buildDemoAnalysis(decision, locale, {
+      context,
+      constraints,
+      stakesLevel,
+    }),
+    locale,
+  );
+  return {
+    analysis,
+    mode: "fallback",
+    matchedExperts: NO_MATCHED_EXPERTS,
+  };
 }
 
 function previewHref(
@@ -629,7 +653,22 @@ export default function DecisionStudio({
         });
       }, 150);
     } catch {
-      setError(t.networkError);
+      const fallback = buildClientFallbackResult(
+        decision,
+        context,
+        constraints,
+        locale,
+        stakesLevel,
+      );
+      setResult(fallback);
+      setError(null);
+      setSessionRuns((n) => n + 1);
+      setTimeout(() => {
+        document.getElementById("section-results")?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 150);
     } finally {
       if (timeoutId !== null) window.clearTimeout(timeoutId);
       const elapsed = Date.now() - analysisStartRef.current;

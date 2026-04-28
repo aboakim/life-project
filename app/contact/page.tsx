@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import MarketingPageShell from "@/components/layout/MarketingPageShell";
+import ContactMailtoForm from "@/components/contact/ContactMailtoForm";
 
 export const metadata: Metadata = {
   title: "Contact — Life Decision Engine",
@@ -133,89 +134,7 @@ export default function ContactPage() {
             message pre-filled. No data is collected or stored by our
             servers from this form.
           </p>
-          <form
-            action={`mailto:${email}`}
-            method="post"
-            encType="text/plain"
-            className="mt-6 space-y-4 rounded-3xl border border-white/[0.08] bg-gradient-to-b from-white/[0.04] to-transparent p-5 sm:p-6"
-          >
-            <div>
-              <label
-                htmlFor="contact-name"
-                className="block text-sm font-medium text-[rgb(var(--ink))]"
-              >
-                Your name
-              </label>
-              <input
-                id="contact-name"
-                name="name"
-                required
-                autoComplete="name"
-                className="mt-2 w-full rounded-xl border border-white/10 bg-black/25 px-4 py-2.5 text-sm text-[rgb(var(--ink))] placeholder:text-[rgb(var(--ink-soft))]/65 outline-none transition focus:border-[rgb(var(--accent))]/45 focus:ring-2 focus:ring-[rgb(var(--accent))]/15"
-                placeholder="Jane Smith"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="contact-email"
-                className="block text-sm font-medium text-[rgb(var(--ink))]"
-              >
-                Your email
-              </label>
-              <input
-                id="contact-email"
-                type="email"
-                name="email"
-                required
-                autoComplete="email"
-                className="mt-2 w-full rounded-xl border border-white/10 bg-black/25 px-4 py-2.5 text-sm text-[rgb(var(--ink))] placeholder:text-[rgb(var(--ink-soft))]/65 outline-none transition focus:border-[rgb(var(--accent))]/45"
-                placeholder="jane@example.com"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="contact-subject"
-                className="block text-sm font-medium text-[rgb(var(--ink))]"
-              >
-                Subject
-              </label>
-              <select
-                id="contact-subject"
-                name="subject"
-                className="mt-2 w-full rounded-xl border border-white/10 bg-black/25 px-4 py-2.5 text-sm text-[rgb(var(--ink))] outline-none transition focus:border-[rgb(var(--accent))]/45"
-                defaultValue="Product support"
-              >
-                <option>Product support</option>
-                <option>Privacy / data request</option>
-                <option>Expert partnership</option>
-                <option>Press / media</option>
-                <option>Other</option>
-              </select>
-            </div>
-            <div>
-              <label
-                htmlFor="contact-message"
-                className="block text-sm font-medium text-[rgb(var(--ink))]"
-              >
-                Message
-              </label>
-              <textarea
-                id="contact-message"
-                name="message"
-                required
-                rows={5}
-                className="mt-2 w-full resize-y rounded-xl border border-white/10 bg-black/25 px-4 py-3 text-sm leading-relaxed text-[rgb(var(--ink))] placeholder:text-[rgb(var(--ink-soft))]/65 outline-none transition focus:border-[rgb(var(--accent))]/45"
-                placeholder="How can we help?"
-              />
-            </div>
-            <button
-              type="submit"
-              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[rgb(var(--accent)/0.28)] transition hover:brightness-110"
-            >
-              Send message
-              <span aria-hidden="true">→</span>
-            </button>
-          </form>
+          <ContactMailtoForm email={email} />
         </section>
 
         <section>
