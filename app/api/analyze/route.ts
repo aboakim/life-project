@@ -7,19 +7,23 @@ import { loadMatchedExperts } from "@/lib/matched-experts";
 import { fillDecisionAnalysisGaps } from "@/lib/analysis-gap-fill";
 import { analyzeWithOpenAI } from "@/lib/llm-analyze";
 import { rateLimitAllow } from "@/lib/rate-limit";
-import type { AnalyzeRequestBody } from "@/lib/types";
+import type { AnalyzeRequestBody, SuggestedDirectoryRole } from "@/lib/types";
 
 export const runtime = "nodejs";
 
 const RATE_WINDOW_MS = 10 * 60 * 1000;
-const RATE_MAX = 32;
+const RATE_MAX = 64;
+
+async function safeLoadMatchedExperts(role: SuggestedDirectoryRole) {
+  try {
+    return await loadMatchedExperts(role);
+  } catch (e) {
+    console.error("[analyze] loadMatchedExperts failed", e);
+    return [];
+  }
+}
 
 export async function POST(req: Request) {
-  const ip = getClientIp(req);
-  if (!rateLimitAllow(`analyze:${ip}`, RATE_MAX, RATE_WINDOW_MS)) {
-    return NextResponse.json({ error: "rate_limited" }, { status: 429 });
-  }
-
   let body: AnalyzeRequestBody;
   try {
     body = (await req.json()) as AnalyzeRequestBody;
@@ -48,6 +52,24 @@ export async function POST(req: Request) {
 
   const locale = parseLocale(body.language);
   const ui = getUi(locale);
+  const ip = getClientIp(req);
+
+  // On shared/mobile IPs prefer graceful fallback over a hard 429.
+  if (!rateLimitAllow(`analyze:${ip}`, RATE_MAX, RATE_WINDOW_MS)) {
+    const analysis = fillDecisionAnalysisGaps(
+      buildDemoAnalysis(decision.trim(), locale, demoOpts),
+      locale,
+    );
+    const matchedExperts = await safeLoadMatchedExperts(
+      analysis.suggestedDirectoryRole ?? "UNSPECIFIED",
+    );
+    return NextResponse.json({
+      analysis,
+      mode: "fallback" as const,
+      warning: ui.apiAnalysisServiceNotice,
+      matchedExperts,
+    });
+  }
 
   if (process.env.OPENAI_API_KEY) {
     try {
@@ -57,7 +79,7 @@ export async function POST(req: Request) {
         language: locale,
       });
       const analysis = fillDecisionAnalysisGaps(raw, locale);
-      const matchedExperts = await loadMatchedExperts(
+      const matchedExperts = await safeLoadMatchedExperts(
         analysis.suggestedDirectoryRole ?? "UNSPECIFIED"
       );
       return NextResponse.json({
@@ -71,7 +93,7 @@ export async function POST(req: Request) {
         buildDemoAnalysis(decision, locale, demoOpts),
         locale,
       );
-      const matchedExperts = await loadMatchedExperts(
+      const matchedExperts = await safeLoadMatchedExperts(
         analysis.suggestedDirectoryRole ?? "UNSPECIFIED"
       );
       return NextResponse.json({
@@ -87,7 +109,7 @@ export async function POST(req: Request) {
     buildDemoAnalysis(decision, locale, demoOpts),
     locale,
   );
-  const matchedExperts = await loadMatchedExperts(
+  const matchedExperts = await safeLoadMatchedExperts(
     analysis.suggestedDirectoryRole ?? "UNSPECIFIED"
   );
   return NextResponse.json({
