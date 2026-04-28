@@ -143,7 +143,8 @@ const VISIT_COUNT_KEY = "lde-home-visits";
 const VISITOR_BANNER_DISMISS_KEY = "lde-visitor-path-dismissed";
 /** Minimum time the “analyzing” UI stays visible so the pass feels intentional (ms). */
 const ANALYSIS_UI_MIN_MS = 2200;
-const ANALYSIS_REQUEST_TIMEOUT_MS = 60000;
+const ANALYSIS_REQUEST_TIMEOUT_MS = 12000;
+const ANALYSIS_LIVE_DEADLINE_MS = 4200;
 
 type ApiResponse = {
   analysis: DecisionAnalysis;
@@ -611,7 +612,7 @@ export default function DecisionStudio({
         () => controller.abort(),
         ANALYSIS_REQUEST_TIMEOUT_MS,
       );
-      const res = await fetch("/api/analyze", {
+      const requestPromise = fetch("/api/analyze", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         signal: controller.signal,
@@ -623,6 +624,16 @@ export default function DecisionStudio({
           stakesLevel,
         }),
       });
+      const resOrTimeout = await Promise.race([
+        requestPromise,
+        new Promise<"timeout">((resolve) => {
+          window.setTimeout(() => resolve("timeout"), ANALYSIS_LIVE_DEADLINE_MS);
+        }),
+      ]);
+      if (resOrTimeout === "timeout") {
+        return;
+      }
+      const res = resOrTimeout;
       const raw = (await res.json().catch(() => null)) as ApiResponse | null;
       if (!res.ok) {
         return;
