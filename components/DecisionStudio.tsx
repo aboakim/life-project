@@ -142,7 +142,7 @@ const VISIT_COUNT_KEY = "lde-home-visits";
 const VISITOR_BANNER_DISMISS_KEY = "lde-visitor-path-dismissed";
 /** Minimum time the “analyzing” UI stays visible so the pass feels intentional (ms). */
 const ANALYSIS_UI_MIN_MS = 2200;
-const ANALYSIS_REQUEST_TIMEOUT_MS = 25000;
+const ANALYSIS_REQUEST_TIMEOUT_MS = 60000;
 
 type ApiResponse = {
   analysis: DecisionAnalysis;

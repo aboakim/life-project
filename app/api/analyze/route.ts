@@ -7,12 +7,21 @@ import { loadMatchedExperts } from "@/lib/matched-experts";
 import { fillDecisionAnalysisGaps } from "@/lib/analysis-gap-fill";
 import { analyzeWithOpenAI } from "@/lib/llm-analyze";
 import { rateLimitAllow } from "@/lib/rate-limit";
-import type { AnalyzeRequestBody } from "@/lib/types";
+import type { AnalyzeRequestBody, SuggestedDirectoryRole } from "@/lib/types";
 
 export const runtime = "nodejs";
 
 const RATE_WINDOW_MS = 10 * 60 * 1000;
 const RATE_MAX = 64;
+
+async function safeLoadMatchedExperts(role: SuggestedDirectoryRole) {
+  try {
+    return await loadMatchedExperts(role);
+  } catch (e) {
+    console.error("[analyze] loadMatchedExperts failed", e);
+    return [];
+  }
+}
 
 export async function POST(req: Request) {
   let body: AnalyzeRequestBody;
@@ -51,7 +60,7 @@ export async function POST(req: Request) {
       buildDemoAnalysis(decision.trim(), locale, demoOpts),
       locale,
     );
-    const matchedExperts = await loadMatchedExperts(
+    const matchedExperts = await safeLoadMatchedExperts(
       analysis.suggestedDirectoryRole ?? "UNSPECIFIED",
     );
     return NextResponse.json({
@@ -70,7 +79,7 @@ export async function POST(req: Request) {
         language: locale,
       });
       const analysis = fillDecisionAnalysisGaps(raw, locale);
-      const matchedExperts = await loadMatchedExperts(
+      const matchedExperts = await safeLoadMatchedExperts(
         analysis.suggestedDirectoryRole ?? "UNSPECIFIED"
       );
       return NextResponse.json({
@@ -84,7 +93,7 @@ export async function POST(req: Request) {
         buildDemoAnalysis(decision, locale, demoOpts),
         locale,
       );
-      const matchedExperts = await loadMatchedExperts(
+      const matchedExperts = await safeLoadMatchedExperts(
         analysis.suggestedDirectoryRole ?? "UNSPECIFIED"
       );
       return NextResponse.json({
@@ -100,7 +109,7 @@ export async function POST(req: Request) {
     buildDemoAnalysis(decision, locale, demoOpts),
     locale,
   );
-  const matchedExperts = await loadMatchedExperts(
+  const matchedExperts = await safeLoadMatchedExperts(
     analysis.suggestedDirectoryRole ?? "UNSPECIFIED"
   );
   return NextResponse.json({
