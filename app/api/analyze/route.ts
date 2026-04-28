@@ -3,7 +3,6 @@ import { getClientIp } from "@/lib/client-ip";
 import { buildDemoAnalysis } from "@/lib/demo-analysis";
 import { getUi } from "@/lib/i18n/ui";
 import { parseLocale } from "@/lib/i18n/locale";
-import { loadMatchedExperts } from "@/lib/matched-experts";
 import { fillDecisionAnalysisGaps } from "@/lib/analysis-gap-fill";
 import { analyzeWithOpenAI } from "@/lib/llm-analyze";
 import { rateLimitAllow } from "@/lib/rate-limit";
@@ -16,6 +15,7 @@ const RATE_MAX = 64;
 
 async function safeLoadMatchedExperts(role: SuggestedDirectoryRole) {
   try {
+    const { loadMatchedExperts } = await import("@/lib/matched-experts");
     return await loadMatchedExperts(role);
   } catch (e) {
     console.error("[analyze] loadMatchedExperts failed", e);
