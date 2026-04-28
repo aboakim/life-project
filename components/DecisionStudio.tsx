@@ -74,9 +74,8 @@ import {
   clearReminder,
 } from "@/lib/analysis-local";
 import { safeDecisionAnalysis } from "@/lib/safe-decision-analysis";
+import { getStoredSubscriberId } from "@/lib/reminder-subscriber-storage";
 import { buildAnalysisSpeechText } from "@/lib/tts-build-report-text";
-import { buildDemoAnalysis } from "@/lib/demo-analysis";
-import { fillDecisionAnalysisGaps } from "@/lib/analysis-gap-fill";
 import VoiceDictateButton from "@/components/home/VoiceDictateButton";
 import VoiceWhisperButton from "@/components/home/VoiceWhisperButton";
 import ReadAloudReportButton from "@/components/home/ReadAloudReportButton";
@@ -143,8 +142,7 @@ const VISIT_COUNT_KEY = "lde-home-visits";
 const VISITOR_BANNER_DISMISS_KEY = "lde-visitor-path-dismissed";
 /** Minimum time the “analyzing” UI stays visible so the pass feels intentional (ms). */
 const ANALYSIS_UI_MIN_MS = 2200;
-const ANALYSIS_REQUEST_TIMEOUT_MS = 12000;
-const ANALYSIS_LIVE_DEADLINE_MS = 4200;
+const ANALYSIS_REQUEST_TIMEOUT_MS = 25000;
 
 type ApiResponse = {
   analysis: DecisionAnalysis;
@@ -175,28 +173,6 @@ function buildExpertsNeedsHref(
   }
   const base = `/experts?role=${encodeURIComponent(pick)}`;
   return q ? `${base}&q=${encodeURIComponent(q)}` : base;
-}
-
-function buildClientFallbackResult(
-  decision: string,
-  context: string,
-  constraints: string,
-  locale: AppLocale,
-  stakesLevel: number,
-): ApiResponse {
-  const analysis = fillDecisionAnalysisGaps(
-    buildDemoAnalysis(decision, locale, {
-      context,
-      constraints,
-      stakesLevel,
-    }),
-    locale,
-  );
-  return {
-    analysis,
-    mode: "fallback",
-    matchedExperts: NO_MATCHED_EXPERTS,
-  };
 }
 
 function previewHref(
@@ -590,21 +566,7 @@ export default function DecisionStudio({
     analysisStartRef.current = Date.now();
     setLoading(true);
     setError(null);
-    const instantFallback = buildClientFallbackResult(
-      decision,
-      context,
-      constraints,
-      locale,
-      stakesLevel,
-    );
-    setResult(instantFallback);
-    setSessionRuns((n) => n + 1);
-    setTimeout(() => {
-      document.getElementById("section-results")?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }, 120);
+    setResult(null);
     let timeoutId: number | null = null;
     try {
       const controller = new AbortController();
@@ -612,7 +574,7 @@ export default function DecisionStudio({
         () => controller.abort(),
         ANALYSIS_REQUEST_TIMEOUT_MS,
       );
-      const requestPromise = fetch("/api/analyze", {
+      const res = await fetch("/api/analyze", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         signal: controller.signal,
@@ -624,18 +586,21 @@ export default function DecisionStudio({
           stakesLevel,
         }),
       });
-      const resOrTimeout = await Promise.race([
-        requestPromise,
-        new Promise<"timeout">((resolve) => {
-          window.setTimeout(() => resolve("timeout"), ANALYSIS_LIVE_DEADLINE_MS);
-        }),
-      ]);
-      if (resOrTimeout === "timeout") {
-        return;
-      }
-      const res = resOrTimeout;
       const raw = (await res.json().catch(() => null)) as ApiResponse | null;
       if (!res.ok) {
+        const errObj =
+          raw && typeof raw === "object"
+            ? (raw as Record<string, unknown>)
+            : null;
+        const serverMessage =
+          errObj !== null
+            ? typeof errObj.error === "string"
+              ? errObj.error
+              : typeof errObj.message === "string"
+                ? errObj.message
+                : ""
+            : "";
+        setError(serverMessage.trim() || t.networkError);
         return;
       }
       const data = raw as ApiResponse;
@@ -644,6 +609,7 @@ export default function DecisionStudio({
         ...data,
         analysis,
       });
+      setSessionRuns((n) => n + 1);
       try {
         pushHistory({
           decision,
@@ -663,8 +629,7 @@ export default function DecisionStudio({
         });
       }, 150);
     } catch {
-      // Keep the already rendered instant fallback.
-      setError(null);
+      setError(t.networkError);
     } finally {
       if (timeoutId !== null) window.clearTimeout(timeoutId);
       const elapsed = Date.now() - analysisStartRef.current;
@@ -701,6 +666,10 @@ export default function DecisionStudio({
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!canSubmit) return;
+    if (!getStoredSubscriberId()) {
+      setPreAnalysisEmailOpen(true);
+      return;
+    }
     void runAnalysis();
   }
 
