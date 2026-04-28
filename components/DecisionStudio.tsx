@@ -612,19 +612,22 @@ export default function DecisionStudio({
       });
       const raw = (await res.json().catch(() => null)) as ApiResponse | null;
       if (!res.ok) {
-        const errObj =
-          raw && typeof raw === "object"
-            ? (raw as Record<string, unknown>)
-            : null;
-        const serverMessage =
-          errObj !== null
-            ? typeof errObj.error === "string"
-              ? errObj.error
-              : typeof errObj.message === "string"
-                ? errObj.message
-                : ""
-            : "";
-        setError(serverMessage.trim() || t.networkError);
+        const fallback = buildClientFallbackResult(
+          decision,
+          context,
+          constraints,
+          locale,
+          stakesLevel,
+        );
+        setResult(fallback);
+        setError(null);
+        setSessionRuns((n) => n + 1);
+        setTimeout(() => {
+          document.getElementById("section-results")?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }, 150);
         return;
       }
       const data = raw as ApiResponse;
