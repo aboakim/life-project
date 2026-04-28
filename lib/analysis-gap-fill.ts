@@ -2,8 +2,8 @@ import { getUi } from "@/lib/i18n/ui";
 import type { AppLocale } from "@/lib/i18n/locale";
 import type { DecisionAnalysis } from "@/lib/types";
 
-function filled(s: string): boolean {
-  return s.trim().length > 0;
+function filled(s: unknown): boolean {
+  return typeof s === "string" && s.trim().length > 0;
 }
 
 /**
@@ -15,7 +15,7 @@ export function fillDecisionAnalysisGaps(
   locale: AppLocale,
 ): DecisionAnalysis {
   const fb = getUi(locale).analysisEmptyDetail;
-  const gap = (s: string) => (filled(s) ? s : fb);
+  const gap = (s: unknown) => (filled(s) ? String(s).trim() : fb);
 
   return {
     ...a,
