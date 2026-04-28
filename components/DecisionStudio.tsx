@@ -76,6 +76,8 @@ import {
 import { safeDecisionAnalysis } from "@/lib/safe-decision-analysis";
 import { getStoredSubscriberId } from "@/lib/reminder-subscriber-storage";
 import { buildAnalysisSpeechText } from "@/lib/tts-build-report-text";
+import { buildDemoAnalysis } from "@/lib/demo-analysis";
+import { fillDecisionAnalysisGaps } from "@/lib/analysis-gap-fill";
 import VoiceDictateButton from "@/components/home/VoiceDictateButton";
 import VoiceWhisperButton from "@/components/home/VoiceWhisperButton";
 import ReadAloudReportButton from "@/components/home/ReadAloudReportButton";
@@ -142,7 +144,6 @@ const VISIT_COUNT_KEY = "lde-home-visits";
 const VISITOR_BANNER_DISMISS_KEY = "lde-visitor-path-dismissed";
 /** Minimum time the “analyzing” UI stays visible so the pass feels intentional (ms). */
 const ANALYSIS_UI_MIN_MS = 2200;
-const ANALYSIS_REQUEST_TIMEOUT_MS = 25000;
 
 type ApiResponse = {
   analysis: DecisionAnalysis;
@@ -173,6 +174,28 @@ function buildExpertsNeedsHref(
   }
   const base = `/experts?role=${encodeURIComponent(pick)}`;
   return q ? `${base}&q=${encodeURIComponent(q)}` : base;
+}
+
+function buildClientFallbackResult(
+  decision: string,
+  context: string,
+  constraints: string,
+  locale: AppLocale,
+  stakesLevel: number,
+): ApiResponse {
+  const analysis = fillDecisionAnalysisGaps(
+    buildDemoAnalysis(decision, locale, {
+      context,
+      constraints,
+      stakesLevel,
+    }),
+    locale,
+  );
+  return {
+    analysis,
+    mode: "fallback",
+    matchedExperts: NO_MATCHED_EXPERTS,
+  };
 }
 
 function previewHref(
@@ -567,17 +590,10 @@ export default function DecisionStudio({
     setLoading(true);
     setError(null);
     setResult(null);
-    let timeoutId: number | null = null;
     try {
-      const controller = new AbortController();
-      timeoutId = window.setTimeout(
-        () => controller.abort(),
-        ANALYSIS_REQUEST_TIMEOUT_MS,
-      );
       const res = await fetch("/api/analyze", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        signal: controller.signal,
         body: JSON.stringify({
           decision,
           context,
@@ -629,9 +645,23 @@ export default function DecisionStudio({
         });
       }, 150);
     } catch {
-      setError(t.networkError);
+      const fallback = buildClientFallbackResult(
+        decision,
+        context,
+        constraints,
+        locale,
+        stakesLevel,
+      );
+      setResult(fallback);
+      setError(null);
+      setSessionRuns((n) => n + 1);
+      setTimeout(() => {
+        document.getElementById("section-results")?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 150);
     } finally {
-      if (timeoutId !== null) window.clearTimeout(timeoutId);
       const elapsed = Date.now() - analysisStartRef.current;
       const wait = Math.max(0, ANALYSIS_UI_MIN_MS - elapsed);
       if (wait > 0) {
