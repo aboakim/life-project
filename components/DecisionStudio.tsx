@@ -589,7 +589,21 @@ export default function DecisionStudio({
     analysisStartRef.current = Date.now();
     setLoading(true);
     setError(null);
-    setResult(null);
+    const instantFallback = buildClientFallbackResult(
+      decision,
+      context,
+      constraints,
+      locale,
+      stakesLevel,
+    );
+    setResult(instantFallback);
+    setSessionRuns((n) => n + 1);
+    setTimeout(() => {
+      document.getElementById("section-results")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 120);
     let timeoutId: number | null = null;
     try {
       const controller = new AbortController();
@@ -611,22 +625,6 @@ export default function DecisionStudio({
       });
       const raw = (await res.json().catch(() => null)) as ApiResponse | null;
       if (!res.ok) {
-        const fallback = buildClientFallbackResult(
-          decision,
-          context,
-          constraints,
-          locale,
-          stakesLevel,
-        );
-        setResult(fallback);
-        setError(null);
-        setSessionRuns((n) => n + 1);
-        setTimeout(() => {
-          document.getElementById("section-results")?.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
-        }, 150);
         return;
       }
       const data = raw as ApiResponse;
@@ -635,7 +633,6 @@ export default function DecisionStudio({
         ...data,
         analysis,
       });
-      setSessionRuns((n) => n + 1);
       try {
         pushHistory({
           decision,
@@ -655,22 +652,8 @@ export default function DecisionStudio({
         });
       }, 150);
     } catch {
-      const fallback = buildClientFallbackResult(
-        decision,
-        context,
-        constraints,
-        locale,
-        stakesLevel,
-      );
-      setResult(fallback);
+      // Keep the already rendered instant fallback.
       setError(null);
-      setSessionRuns((n) => n + 1);
-      setTimeout(() => {
-        document.getElementById("section-results")?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }, 150);
     } finally {
       if (timeoutId !== null) window.clearTimeout(timeoutId);
       const elapsed = Date.now() - analysisStartRef.current;
