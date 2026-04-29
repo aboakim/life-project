@@ -2508,35 +2508,50 @@ export default function DecisionStudio({
 
             <section className="glass animate-fade-up rounded-3xl p-6 sm:p-7">
               <h2 className="text-lg font-semibold">{t.sectionTimeline}</h2>
-              <ol className="mt-5 space-y-4">
-                <li className="flex gap-4">
-                  <span className="mt-0.5 shrink-0 rounded-full bg-gradient-to-r from-[rgb(var(--accent))]/25 to-[rgb(var(--accent-2))]/20 px-3 py-1 text-xs font-medium text-[rgb(var(--ink))]">
-                    {t.timeM6}
-                  </span>
+              <ol className="mt-5 space-y-5">
+                <li className="flex flex-col items-center gap-3 sm:flex-row sm:items-start sm:gap-5">
+                  <div
+                    className="flex size-[5.75rem] shrink-0 flex-col items-center justify-center rounded-full border border-white/[0.12] bg-gradient-to-br from-[rgb(var(--accent))]/22 via-[rgb(var(--accent-2))]/14 to-[rgb(var(--accent-magenta))]/12 px-2 text-center shadow-[0_14px_36px_-22px_rgb(var(--accent)/0.55)] ring-1 ring-white/[0.06]"
+                    aria-hidden
+                  >
+                    <span className="text-[10px] font-semibold uppercase leading-tight tracking-wide text-[rgb(var(--ink-soft))]/90">
+                      {t.timeM6}
+                    </span>
+                  </div>
                   <AnalysisBody
                     value={a.timeline.months6}
                     emptyLabel={t.analysisEmptyDetail}
-                    className="min-w-0 flex-1"
+                    className="min-w-0 w-full flex-1 text-center sm:text-start"
                   />
                 </li>
-                <li className="flex gap-4">
-                  <span className="mt-0.5 shrink-0 rounded-full bg-gradient-to-r from-[rgb(var(--accent))]/25 to-[rgb(var(--accent-2))]/20 px-3 py-1 text-xs font-medium text-[rgb(var(--ink))]">
-                    {t.timeY2}
-                  </span>
+                <li className="flex flex-col items-center gap-3 sm:flex-row sm:items-start sm:gap-5">
+                  <div
+                    className="flex h-[6.25rem] w-[4.25rem] shrink-0 flex-col items-center justify-center rounded-[1.75rem] border border-white/[0.12] bg-gradient-to-b from-[rgb(var(--accent))]/22 via-[rgb(var(--accent-2))]/14 to-[rgb(var(--accent-magenta))]/12 px-2 text-center shadow-[0_14px_36px_-22px_rgb(var(--accent)/0.55)] ring-1 ring-white/[0.06]"
+                    aria-hidden
+                  >
+                    <span className="text-[10px] font-semibold uppercase leading-tight tracking-wide text-[rgb(var(--ink-soft))]/90">
+                      {t.timeY2}
+                    </span>
+                  </div>
                   <AnalysisBody
                     value={a.timeline.years2}
                     emptyLabel={t.analysisEmptyDetail}
-                    className="min-w-0 flex-1"
+                    className="min-w-0 w-full flex-1 text-center sm:text-start"
                   />
                 </li>
-                <li className="flex gap-4">
-                  <span className="mt-0.5 shrink-0 rounded-full bg-gradient-to-r from-[rgb(var(--accent))]/25 to-[rgb(var(--accent-2))]/20 px-3 py-1 text-xs font-medium text-[rgb(var(--ink))]">
-                    {t.timeY5}
-                  </span>
+                <li className="flex flex-col items-center gap-3 sm:flex-row sm:items-start sm:gap-5">
+                  <div
+                    className="flex h-[6.25rem] w-[4.25rem] shrink-0 flex-col items-center justify-center rounded-[1.75rem] border border-white/[0.12] bg-gradient-to-b from-[rgb(var(--accent))]/22 via-[rgb(var(--accent-2))]/14 to-[rgb(var(--accent-magenta))]/12 px-2 text-center shadow-[0_14px_36px_-22px_rgb(var(--accent)/0.55)] ring-1 ring-white/[0.06]"
+                    aria-hidden
+                  >
+                    <span className="text-[10px] font-semibold uppercase leading-tight tracking-wide text-[rgb(var(--ink-soft))]/90">
+                      {t.timeY5}
+                    </span>
+                  </div>
                   <AnalysisBody
                     value={a.timeline.years5}
                     emptyLabel={t.analysisEmptyDetail}
-                    className="min-w-0 flex-1"
+                    className="min-w-0 w-full flex-1 text-center sm:text-start"
                   />
                 </li>
               </ol>
