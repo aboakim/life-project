@@ -1085,7 +1085,7 @@ export default function DecisionStudio({
                 <button
                   type="button"
                   onClick={scrollToAnalyzer}
-                  className="touch-manipulation inline-flex min-h-[54px] items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-6 py-3 text-base font-extrabold text-white/90 shadow-lg shadow-[rgb(var(--accent)/0.35)] ring-1 ring-white/20 transition md:hover:brightness-110 motion-safe:active:scale-[0.98]"
+                  className="touch-manipulation inline-flex min-h-[60px] items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-fuchsia-500 via-violet-500 to-indigo-500 px-7 py-3.5 text-lg font-extrabold text-white/95 shadow-lg shadow-fuchsia-500/30 ring-1 ring-white/25 transition md:hover:brightness-110 motion-safe:active:scale-[0.98]"
                 >
                   {t.heroCtaPrimary}
                   <span aria-hidden>→</span>
