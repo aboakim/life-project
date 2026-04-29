@@ -361,6 +361,7 @@ export default function DecisionStudio({
   const [shortcutsOpen, setShortcutsOpen] = useState(false);
   const [visitMilestoneN, setVisitMilestoneN] = useState<number | null>(null);
   const [whisperAvailable, setWhisperAvailable] = useState(false);
+  const [mobileLensIdx, setMobileLensIdx] = useState(0);
   /** Defer welcome modal until idle so LCP can paint hero first (mobile PSI). */
   const [deferWelcomeMount, setDeferWelcomeMount] = useState(false);
   useEffect(() => {
@@ -2353,32 +2354,120 @@ export default function DecisionStudio({
               </p>
             ) : null}
 
-            <section className="glass animate-fade-up rounded-3xl p-6 sm:p-7">
+            <section className="glass animate-fade-up rounded-3xl p-4 sm:p-7">
               <h2 className="text-lg font-semibold">{t.sectionDimensions}</h2>
-              <div className="mt-5 grid gap-4 sm:grid-cols-2">
-                {(
-                  [
-                    ["finances", t.dimFinances],
-                    ["psychology", t.dimPsychology],
-                    ["risks", t.dimRisks],
-                    ["opportunities", t.dimOpportunities],
-                  ] as const
-                ).map(([key, label]) => (
-                  <div
-                    key={key}
-                    className="rounded-2xl border border-white/[0.06] bg-gradient-to-br from-white/[0.05] to-transparent p-4"
-                  >
-                    <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[rgb(var(--accent-dim))]">
-                      {label}
-                    </h3>
-                    <AnalysisBody
-                      value={a.dimensions[key]}
-                      emptyLabel={t.analysisEmptyDetail}
-                      className="mt-2"
-                    />
-                  </div>
-                ))}
-              </div>
+              {(() => {
+                const dimensionCards = [
+                  {
+                    key: "finances",
+                    label: t.dimFinances,
+                    emoji: "💼",
+                    bg: getVisualStoryImage("overview", 0).src,
+                  },
+                  {
+                    key: "psychology",
+                    label: t.dimPsychology,
+                    emoji: "🧠",
+                    bg: getVisualStoryImage("trust", 1).src,
+                  },
+                  {
+                    key: "risks",
+                    label: t.dimRisks,
+                    emoji: "🛡️",
+                    bg: getVisualStoryImage("how", 2).src,
+                  },
+                  {
+                    key: "opportunities",
+                    label: t.dimOpportunities,
+                    emoji: "✨",
+                    bg: getVisualStoryImage("overview", 2).src,
+                  },
+                ] as const;
+
+                const currentMobile =
+                  dimensionCards[mobileLensIdx] ?? dimensionCards[0];
+
+                return (
+                  <>
+                    <div className="mt-4 flex gap-2 overflow-x-auto pb-1 sm:hidden">
+                      {dimensionCards.map((item, idx) => (
+                        <button
+                          key={item.key}
+                          type="button"
+                          onClick={() => setMobileLensIdx(idx)}
+                          className={`shrink-0 rounded-full border px-3 py-1.5 text-xs font-semibold transition ${
+                            idx === mobileLensIdx
+                              ? "border-[rgb(var(--accent-2))]/55 bg-[rgb(var(--accent-2))]/18 text-[rgb(var(--ink))]"
+                              : "border-white/[0.14] bg-white/[0.03] text-[rgb(var(--ink-soft))]"
+                          }`}
+                          aria-pressed={idx === mobileLensIdx}
+                        >
+                          <span className="me-1" aria-hidden>
+                            {item.emoji}
+                          </span>
+                          {item.label}
+                        </button>
+                      ))}
+                    </div>
+
+                    <div className="mt-3 sm:hidden">
+                      <article className="relative overflow-hidden rounded-2xl border border-white/10">
+                        <div
+                          className="absolute inset-0 bg-cover bg-center opacity-45"
+                          style={{ backgroundImage: `url(${currentMobile.bg})` }}
+                          aria-hidden
+                        />
+                        <div
+                          className="absolute inset-0 bg-gradient-to-b from-[rgb(10_16_34/0.55)] via-[rgb(10_16_34/0.75)] to-[rgb(10_16_34/0.92)]"
+                          aria-hidden
+                        />
+                        <div className="relative p-4">
+                          <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-cyan-100/90">
+                            {currentMobile.label}
+                          </h3>
+                          <AnalysisBody
+                            value={a.dimensions[currentMobile.key]}
+                            emptyLabel={t.analysisEmptyDetail}
+                            className="mt-2 text-[15px] leading-relaxed text-white/95"
+                          />
+                        </div>
+                      </article>
+                    </div>
+
+                    <div className="mt-5 hidden gap-4 sm:grid sm:grid-cols-2">
+                      {dimensionCards.map((item) => (
+                        <article
+                          key={item.key}
+                          className="group relative overflow-hidden rounded-2xl border border-white/[0.09] shadow-[0_20px_54px_-36px_rgb(0_0_0/0.65)]"
+                        >
+                          <div
+                            className="absolute inset-0 bg-cover bg-center opacity-40 transition duration-500 group-hover:scale-[1.03]"
+                            style={{ backgroundImage: `url(${item.bg})` }}
+                            aria-hidden
+                          />
+                          <div
+                            className="absolute inset-0 bg-gradient-to-b from-[rgb(8_14_30/0.52)] via-[rgb(8_14_30/0.74)] to-[rgb(8_14_30/0.94)]"
+                            aria-hidden
+                          />
+                          <div className="relative p-4 sm:p-5">
+                            <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-cyan-100/90">
+                              <span className="me-1.5" aria-hidden>
+                                {item.emoji}
+                              </span>
+                              {item.label}
+                            </h3>
+                            <AnalysisBody
+                              value={a.dimensions[item.key]}
+                              emptyLabel={t.analysisEmptyDetail}
+                              className="mt-2 text-[15px] leading-relaxed text-white/95"
+                            />
+                          </div>
+                        </article>
+                      ))}
+                    </div>
+                  </>
+                );
+              })()}
             </section>
 
             <section className="glass animate-fade-up rounded-3xl p-6 sm:p-7">
