@@ -23,6 +23,7 @@ export default function HeroVisualSlider({
   autoMs = 0,
 }: Props) {
   const [index, setIndex] = useState(0);
+  const manualNavigationEnabled = false;
   /** After idle, mount images for carousel neighbors (not all slides — saves decode / network on first paint). */
   const [idleReady, setIdleReady] = useState(false);
   const pauseRef = useRef(false);
@@ -54,25 +55,27 @@ export default function HeroVisualSlider({
 
   const go = useCallback(
     (dir: -1 | 1) => {
+      if (!manualNavigationEnabled) return;
       setIndex((i) => (i + dir + n) % n);
     },
-    [n]
+    [manualNavigationEnabled, n]
   );
 
   const goTo = useCallback((i: number) => {
+    if (!manualNavigationEnabled) return;
     setIndex(i);
-  }, []);
+  }, [manualNavigationEnabled]);
 
   const SWIPE_MIN_PX = 48;
 
   const onTouchStart = useCallback(
     (e: React.TouchEvent) => {
-      if (n <= 1) return;
+      if (!manualNavigationEnabled || n <= 1) return;
       pauseRef.current = true;
       const t = e.touches[0];
       touchStartRef.current = { x: t.clientX, y: t.clientY };
     },
-    [n],
+    [manualNavigationEnabled, n],
   );
 
   const endTouchSwipe = useCallback(
@@ -80,7 +83,7 @@ export default function HeroVisualSlider({
       pauseRef.current = false;
       const start = touchStartRef.current;
       touchStartRef.current = null;
-      if (!start || n <= 1) return;
+      if (!manualNavigationEnabled || !start || n <= 1) return;
       const dx = clientX - start.x;
       const dy = clientY - start.y;
       const absDx = Math.abs(dx);
@@ -90,7 +93,7 @@ export default function HeroVisualSlider({
       if (dx > 0) go(-1);
       else go(1);
     },
-    [go, n],
+    [go, manualNavigationEnabled, n],
   );
 
   const onTouchEnd = useCallback(
@@ -177,7 +180,8 @@ export default function HeroVisualSlider({
         <button
           type="button"
           onClick={() => go(-1)}
-          className="inline-flex size-9 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/[0.06] text-lg text-white/90 transition hover:bg-white/[0.12]"
+          disabled={!manualNavigationEnabled}
+          className="inline-flex size-9 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/[0.06] text-lg text-white/90 transition hover:bg-white/[0.12] disabled:cursor-not-allowed disabled:opacity-45"
           aria-label="Previous slide"
         >
           ‹
@@ -188,10 +192,11 @@ export default function HeroVisualSlider({
               key={i}
               type="button"
               onClick={() => goTo(i)}
+              disabled={!manualNavigationEnabled}
               className={
                 i === index
-                  ? "h-2 w-6 rounded-full bg-gradient-to-r from-[rgb(var(--accent))] to-[rgb(var(--accent-2))] shadow-[0_0_16px_rgb(var(--accent)/0.5)] transition"
-                  : "h-2 w-2 rounded-full bg-white/25 transition hover:bg-white/45"
+                  ? "h-2 w-6 rounded-full bg-gradient-to-r from-[rgb(var(--accent))] to-[rgb(var(--accent-2))] shadow-[0_0_16px_rgb(var(--accent)/0.5)] transition disabled:cursor-not-allowed"
+                  : "h-2 w-2 rounded-full bg-white/25 transition hover:bg-white/45 disabled:cursor-not-allowed disabled:opacity-45"
               }
               aria-label={`Go to slide ${i + 1}`}
               aria-current={i === index}
@@ -201,7 +206,8 @@ export default function HeroVisualSlider({
         <button
           type="button"
           onClick={() => go(1)}
-          className="inline-flex size-9 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/[0.06] text-lg text-white/90 transition hover:bg-white/[0.12]"
+          disabled={!manualNavigationEnabled}
+          className="inline-flex size-9 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/[0.06] text-lg text-white/90 transition hover:bg-white/[0.12] disabled:cursor-not-allowed disabled:opacity-45"
           aria-label="Next slide"
         >
           ›
