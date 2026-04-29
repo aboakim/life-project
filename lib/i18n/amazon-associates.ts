@@ -11,8 +11,8 @@ export type AmazonAffiliateUi = {
 
 const en: AmazonAffiliateUi = {
   eyebrow: "Amazon Associates",
-  headline: "Support this site when you shop on Amazon",
-  body: "If you already use Amazon, start from our link — same checkout and prices for you; we earn a small commission on qualifying purchases. It helps keep this engine running.",
+  headline: "Go through this Amazon link",
+  body: "Go through this link to Amazon and you will find what you want to buy right now.",
   disclosure:
     "As an Amazon Associate, Life Decision Engine earns from qualifying purchases.",
   cta: "Shop on Amazon",
@@ -20,8 +20,8 @@ const en: AmazonAffiliateUi = {
 
 const hy: AmazonAffiliateUi = {
   eyebrow: "Amazon Associates",
-  headline: "Աջակցեք այս նախագծին՝ Amazon-ով գնելիս",
-  body: "Եթե արդեն գնումներ եք անում Amazon-ում, սկսեք այս հղումով․ նույն գները և checkout-ը ձեզ համար, իսկ մենք ստանում ենք փոքր միջնորդավար որակավորված գնումներից։ Սա օգնում է պահել հարթակը։",
+  headline: "Գնա այս Amazon հղումով",
+  body: "Գնա այս լինկով Amazon և կգտնես այն, ինչ հիմա ուզում ես ձեռք բերել։",
   disclosure:
     "Amazon Associate — Life Decision Engine-ը ստանում է եկամուտ որակավորված գնումներից։",
   cta: "Գնել Amazon-ում",
