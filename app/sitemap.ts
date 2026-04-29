@@ -29,11 +29,14 @@ const STATIC_PATHS: { path: string; priority: number; freq: "weekly" | "monthly"
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = getSiteUrlString().replace(/\/$/, "");
-  const now = new Date();
 
   const statics = STATIC_PATHS.map(({ path, priority, freq }) => ({
     url: `${base}${path}`,
-    lastModified: now,
+    /**
+     * Omit `lastModified` for static marketing pages.
+     * Using `new Date()` on every deploy made every URL look freshly rewritten daily,
+     * which can confuse crawl scheduling signals without reflecting real edits.
+     */
     changeFrequency: freq,
     priority,
   }));
@@ -47,7 +50,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const tags = getAllTagSlugs().map((tag) => ({
     url: `${base}/blog/tag/${tag}`,
-    lastModified: now,
+    /**
+     * Tag index pages change when posts change, but we don't track per-tag timestamps yet.
+     * Prefer omitting a fake `lastModified` over claiming "now" on every build.
+     */
     changeFrequency: "weekly" as const,
     priority: 0.5,
   }));
