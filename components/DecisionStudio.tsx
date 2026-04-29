@@ -1999,7 +1999,7 @@ export default function DecisionStudio({
               <button
                 type="submit"
                     disabled={!canSubmit || formBusy}
-                    className="min-h-[48px] w-full rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-6 py-3 text-base font-semibold text-white shadow-lg shadow-[rgb(var(--accent)/0.32)] ring-1 ring-white/15 transition enabled:hover:brightness-110 enabled:hover:shadow-[0_20px_50px_-18px_rgb(var(--accent)/0.5)] motion-safe:enabled:hover:scale-[1.02] motion-safe:enabled:active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40 sm:min-w-[14rem]"
+                    className="touch-manipulation min-h-[48px] w-full rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-6 py-3 text-base font-semibold text-white shadow-lg shadow-[rgb(var(--accent)/0.32)] ring-1 ring-white/15 transition md:enabled:hover:brightness-110 md:enabled:hover:shadow-[0_20px_50px_-18px_rgb(var(--accent)/0.5)] md:motion-safe:enabled:hover:scale-[1.02] motion-safe:enabled:active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40 sm:min-w-[14rem]"
               >
                 {loading ? t.analyzing : t.analyze}
               </button>
