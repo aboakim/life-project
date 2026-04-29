@@ -23,7 +23,6 @@ export default function HeroVisualSlider({
   autoMs = 0,
 }: Props) {
   const [index, setIndex] = useState(0);
-  const manualNavigationEnabled = false;
   /** After idle, mount images for carousel neighbors (not all slides — saves decode / network on first paint). */
   const [idleReady, setIdleReady] = useState(false);
   const pauseRef = useRef(false);
@@ -55,27 +54,25 @@ export default function HeroVisualSlider({
 
   const go = useCallback(
     (dir: -1 | 1) => {
-      if (!manualNavigationEnabled) return;
       setIndex((i) => (i + dir + n) % n);
     },
-    [manualNavigationEnabled, n]
+    [n]
   );
 
   const goTo = useCallback((i: number) => {
-    if (!manualNavigationEnabled) return;
     setIndex(i);
-  }, [manualNavigationEnabled]);
+  }, []);
 
   const SWIPE_MIN_PX = 48;
 
   const onTouchStart = useCallback(
     (e: React.TouchEvent) => {
-      if (!manualNavigationEnabled || n <= 1) return;
+      if (n <= 1) return;
       pauseRef.current = true;
       const t = e.touches[0];
       touchStartRef.current = { x: t.clientX, y: t.clientY };
     },
-    [manualNavigationEnabled, n],
+    [n],
   );
 
   const endTouchSwipe = useCallback(
@@ -83,7 +80,7 @@ export default function HeroVisualSlider({
       pauseRef.current = false;
       const start = touchStartRef.current;
       touchStartRef.current = null;
-      if (!manualNavigationEnabled || !start || n <= 1) return;
+      if (!start || n <= 1) return;
       const dx = clientX - start.x;
       const dy = clientY - start.y;
       const absDx = Math.abs(dx);
@@ -93,7 +90,7 @@ export default function HeroVisualSlider({
       if (dx > 0) go(-1);
       else go(1);
     },
-    [go, manualNavigationEnabled, n],
+    [go, n],
   );
 
   const onTouchEnd = useCallback(
