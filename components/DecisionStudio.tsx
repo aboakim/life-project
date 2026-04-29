@@ -1081,6 +1081,16 @@ export default function DecisionStudio({
               <p className="mt-6 text-sm font-semibold leading-snug text-[rgb(var(--accent-2))] [text-wrap:balance] sm:text-base">
               {t.heroRibbon}
             </p>
+              <div className="mt-4">
+                <button
+                  type="button"
+                  onClick={scrollToAnalyzer}
+                  className="touch-manipulation inline-flex min-h-[48px] items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-5 py-2.5 text-sm font-extrabold text-white shadow-lg shadow-[rgb(var(--accent)/0.35)] ring-1 ring-white/20 transition md:hover:brightness-110 motion-safe:active:scale-[0.98]"
+                >
+                  {t.heroCtaPrimary}
+                  <span aria-hidden>→</span>
+                </button>
+              </div>
               <h1 className="font-display mt-5 text-[clamp(2.1rem,1.15rem+4vw,4rem)] font-extrabold leading-[1.02] tracking-tight [text-wrap:balance]">
               <span className="text-[rgb(var(--ink))]">{t.heroLine1}</span>{" "}
               <span className="text-gradient">{t.heroAccent}</span>
