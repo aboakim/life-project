@@ -73,6 +73,7 @@ import {
   isReminderDue,
   clearReminder,
 } from "@/lib/analysis-local";
+import { getStoredSubscriberId } from "@/lib/reminder-subscriber-storage";
 import { safeDecisionAnalysis } from "@/lib/safe-decision-analysis";
 import { buildAnalysisSpeechText } from "@/lib/tts-build-report-text";
 import { buildDemoAnalysis } from "@/lib/demo-analysis";
@@ -694,6 +695,10 @@ export default function DecisionStudio({
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!canSubmit) return;
+    if (!getStoredSubscriberId()) {
+      setPreAnalysisEmailOpen(true);
+      return;
+    }
     void runAnalysis();
   }
 
