@@ -20,7 +20,7 @@ type Props = {
 export default function HeroVisualSlider({
   slides,
   ariaLabel,
-  autoMs = 5200,
+  autoMs = 0,
 }: Props) {
   const [index, setIndex] = useState(0);
   /** After idle, mount images for carousel neighbors (not all slides — saves decode / network on first paint). */
