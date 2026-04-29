@@ -180,8 +180,7 @@ export default function HeroVisualSlider({
         <button
           type="button"
           onClick={() => go(-1)}
-          disabled={!manualNavigationEnabled}
-          className="inline-flex size-9 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/[0.06] text-lg text-white/90 transition hover:bg-white/[0.12] disabled:cursor-not-allowed disabled:opacity-45"
+          className="inline-flex size-9 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/[0.06] text-lg text-white/90 transition hover:bg-white/[0.12]"
           aria-label="Previous slide"
         >
           ‹
@@ -192,11 +191,10 @@ export default function HeroVisualSlider({
               key={i}
               type="button"
               onClick={() => goTo(i)}
-              disabled={!manualNavigationEnabled}
               className={
                 i === index
-                  ? "h-2 w-6 rounded-full bg-gradient-to-r from-[rgb(var(--accent))] to-[rgb(var(--accent-2))] shadow-[0_0_16px_rgb(var(--accent)/0.5)] transition disabled:cursor-not-allowed"
-                  : "h-2 w-2 rounded-full bg-white/25 transition hover:bg-white/45 disabled:cursor-not-allowed disabled:opacity-45"
+                  ? "h-2 w-6 rounded-full bg-gradient-to-r from-[rgb(var(--accent))] to-[rgb(var(--accent-2))] shadow-[0_0_16px_rgb(var(--accent)/0.5)] transition"
+                  : "h-2 w-2 rounded-full bg-white/25 transition hover:bg-white/45"
               }
               aria-label={`Go to slide ${i + 1}`}
               aria-current={i === index}
@@ -206,8 +204,7 @@ export default function HeroVisualSlider({
         <button
           type="button"
           onClick={() => go(1)}
-          disabled={!manualNavigationEnabled}
-          className="inline-flex size-9 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/[0.06] text-lg text-white/90 transition hover:bg-white/[0.12] disabled:cursor-not-allowed disabled:opacity-45"
+          className="inline-flex size-9 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/[0.06] text-lg text-white/90 transition hover:bg-white/[0.12]"
           aria-label="Next slide"
         >
           ›
