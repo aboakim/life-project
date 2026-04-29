@@ -1090,7 +1090,7 @@ export default function DecisionStudio({
                 <button
                   type="button"
                   onClick={scrollToAnalyzer}
-                  className="touch-manipulation inline-flex min-h-[60px] items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-fuchsia-500 via-violet-500 to-indigo-500 px-7 py-3.5 text-lg font-extrabold text-white/95 shadow-lg shadow-fuchsia-500/30 ring-1 ring-white/25 transition md:hover:brightness-110 motion-safe:active:scale-[0.98]"
+                  className="touch-manipulation inline-flex min-h-[64px] items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-fuchsia-500 via-violet-500 to-indigo-500 px-8 py-4 text-xl font-extrabold text-white/95 shadow-lg shadow-fuchsia-500/30 ring-1 ring-white/25 transition md:hover:brightness-110 motion-safe:active:scale-[0.98]"
                 >
                   {t.heroCtaPrimary}
                   <span aria-hidden>→</span>
