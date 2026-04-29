@@ -141,8 +141,20 @@ const BriefSignatureStrip = dynamic(
 const LOCALE_STORAGE_KEY = "lde-locale";
 const VISIT_COUNT_KEY = "lde-home-visits";
 const VISITOR_BANNER_DISMISS_KEY = "lde-visitor-path-dismissed";
-/** Minimum time the “analyzing” UI stays visible so the pass feels intentional (ms). */
-const ANALYSIS_UI_MIN_MS = 2200;
+/** Optional floor so the analyzing strip doesn’t flash sub‑frame (ms). 0 = no artificial wait. */
+const ANALYSIS_UI_MIN_MS = 0;
+
+/** Scroll after React commits results: double rAF waits for layout; instant avoids slow smooth scroll. */
+function scrollSectionResultsIntoView() {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      document.getElementById("section-results")?.scrollIntoView({
+        behavior: "instant",
+        block: "start",
+      });
+    });
+  });
+}
 
 type ApiResponse = {
   analysis: DecisionAnalysis;
@@ -613,12 +625,7 @@ export default function DecisionStudio({
         setResult(fallback);
         setError(null);
         setSessionRuns((n) => n + 1);
-        setTimeout(() => {
-          document.getElementById("section-results")?.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
-        }, 150);
+        scrollSectionResultsIntoView();
         return;
       }
       const analysis = safeDecisionAnalysis(data.analysis);
@@ -639,12 +646,7 @@ export default function DecisionStudio({
       } catch {
         /* ignore */
       }
-      setTimeout(() => {
-        document.getElementById("section-results")?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }, 150);
+      scrollSectionResultsIntoView();
     } catch {
       const fallback = buildClientFallbackResult(
         decision,
@@ -656,12 +658,7 @@ export default function DecisionStudio({
       setResult(fallback);
       setError(null);
       setSessionRuns((n) => n + 1);
-      setTimeout(() => {
-        document.getElementById("section-results")?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }, 150);
+      scrollSectionResultsIntoView();
     } finally {
       const elapsed = Date.now() - analysisStartRef.current;
       const wait = Math.max(0, ANALYSIS_UI_MIN_MS - elapsed);
@@ -757,16 +754,23 @@ export default function DecisionStudio({
 
   useEffect(() => {
     if (!a) return;
-    const id = window.setTimeout(() => {
-      try {
-        document
-          .getElementById("results-main-heading")
-          ?.focus({ preventScroll: true });
-      } catch {
-        /* some mobile WebKit builds throw on focus() */
-      }
-    }, 420);
-    return () => clearTimeout(id);
+    let cancelled = false;
+    const id = requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (cancelled) return;
+        try {
+          document
+            .getElementById("results-main-heading")
+            ?.focus({ preventScroll: true });
+        } catch {
+          /* some mobile WebKit builds throw on focus() */
+        }
+      });
+    });
+    return () => {
+      cancelled = true;
+      cancelAnimationFrame(id);
+    };
   }, [a]);
 
   useEffect(() => {
