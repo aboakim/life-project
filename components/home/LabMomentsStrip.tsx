@@ -31,7 +31,7 @@ export default function LabMomentsStrip({ eyebrow, moments }: Props) {
     return () => window.clearInterval(t);
   }, [moments.length, reducedMotion]);
 
-  const line = moments[reducedMotion ? 0 : i] ?? moments[0];
+  const line = moments[i] ?? moments[0];
 
   return (
     <div
@@ -54,15 +54,19 @@ export default function LabMomentsStrip({ eyebrow, moments }: Props) {
       >
         {line}
       </p>
-      <div className="relative mt-3 flex gap-1.5" aria-hidden>
+      <div className="relative mt-3 flex gap-1.5">
         {moments.map((_, di) => (
-          <span
+          <button
+            type="button"
             key={di}
+            onClick={() => setI(di)}
             className={
-              di === (reducedMotion ? 0 : i)
+              di === i
                 ? "h-1.5 w-5 rounded-full bg-[rgb(var(--accent-2))]/85 transition-all duration-300"
-                : "h-1.5 w-1.5 rounded-full bg-white/18 transition-all duration-300"
+                : "h-1.5 w-1.5 rounded-full bg-white/18 transition-all duration-300 hover:bg-white/35"
             }
+            aria-label={`Show brief hint ${di + 1}`}
+            aria-current={di === i}
           />
         ))}
       </div>
