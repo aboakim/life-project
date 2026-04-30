@@ -82,7 +82,13 @@ export const metadata: Metadata = {
   creator: "Life Decision Engine",
   publisher: "Life Decision Engine",
   category: "decision-making, self-help, finance, careers, psychology",
-  alternates: { canonical: "/" },
+  alternates: {
+    canonical: "/",
+    languages: {
+      "x-default": "/",
+      "en-US": "/",
+    },
+  },
   /**
    * Favicons: Google Search uses a site icon next to the title. Minimum 48×48
    * (we list 48 first). `shortcut` helps legacy crawlers; keep in sync with /public.
