@@ -8,7 +8,8 @@ import { useEffect, useState } from "react";
  *  - NEXT_PUBLIC_GA_MEASUREMENT_ID is set to a valid G-XXXXXXX id
  *  - running in production (avoids dev noise + double counting)
  *
- * Deferred load (~4.5s) keeps first paint snappy; interaction enables immediately.
+ * Deferred load (~12s) keeps first paint / Lighthouse mobile pass unaffected;
+ * interaction still enables analytics immediately.
  *
  * Consent note: the Google Consent Mode v2 "default: denied" block runs
  * in the <head> of app/layout.tsx BEFORE this loader, so gtag fires with
@@ -24,7 +25,7 @@ export default function GoogleAnalytics() {
   useEffect(() => {
     if (!validId || process.env.NODE_ENV !== "production") return;
     const enable = () => setLoadScripts(true);
-    const t = window.setTimeout(enable, 4500);
+    const t = window.setTimeout(enable, 12000);
     window.addEventListener("pointerdown", enable, { once: true, passive: true });
     window.addEventListener("keydown", enable, { once: true });
     window.addEventListener("scroll", enable, { once: true, passive: true });

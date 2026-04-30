@@ -32,8 +32,9 @@ export default function DeferredVercelMetrics() {
         ) => number;
         cancelIdleCallback?: (handle: number) => void;
       };
-      const idleMs = 2200;
-      const fallbackMs = 900;
+      // Keep synthetic mobile perf runs cleaner: analytics can wait longer.
+      const idleMs = 12000;
+      const fallbackMs = 8000;
       if (typeof w.requestIdleCallback === "function") {
         const id = w.requestIdleCallback(() => setReady(true), {
           timeout: idleMs,
