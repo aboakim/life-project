@@ -27,7 +27,7 @@ export default function SiteJsonLd() {
         "@type": "ContactPoint",
         contactType: "customer support",
         url: `${base}/contact`,
-        availableLanguage: ["en", "hy", "ru", "es", "fr", "de", "ar", "uk"],
+        availableLanguage: ["en-US", "hy", "ru", "es", "fr", "de", "ar", "it"],
       },
     ],
     description:
@@ -49,7 +49,7 @@ export default function SiteJsonLd() {
     url: base,
     name: "Life Decision Engine",
     publisher: { "@id": `${base}/#organization` },
-    inLanguage: "en-US",
+    inLanguage: ["en-US", "hy", "ru", "de", "fr", "es", "ar", "it"],
     potentialAction: {
       "@type": "SearchAction",
       target: {
