@@ -11,8 +11,11 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: "Decision Engine",
     description:
       "Structured AI analysis for big life decisions — scenarios, lenses, timelines, and a decision score.",
+    id: "/",
     start_url: "/",
+    scope: "/",
     display: "standalone",
+    display_override: ["standalone", "minimal-ui"],
     background_color: "#201c3a",
     theme_color: "#201c3a",
     icons: [
