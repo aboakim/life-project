@@ -12,6 +12,8 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
+    // Explicit host hint (safe, optional) helps some crawlers resolve canonical host.
+    host: base,
     sitemap: `${base}/sitemap.xml`,
   };
 }
