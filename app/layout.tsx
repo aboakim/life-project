@@ -126,6 +126,7 @@ export const metadata: Metadata = {
     description:
       "Best/worst/likely scenarios, finance & psychology lenses, 6-month to 5-year view, decision score. Experts worldwide.",
     type: "website",
+    url: "/",
     locale: "en_US",
     siteName: "Life Decision Engine",
   },
