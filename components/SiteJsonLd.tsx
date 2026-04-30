@@ -22,7 +22,6 @@ export default function SiteJsonLd() {
     },
     /** Publisher image — reinforces brand logo URL for crawlers (same asset as logo). */
     image: [`${base}/logo-192.png`],
-    sameAs: [] as string[],
     contactPoint: [
       {
         "@type": "ContactPoint",
