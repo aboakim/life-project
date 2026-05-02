@@ -19,8 +19,12 @@ export type PricingCopy = {
   deployHint: string;
   checkoutSuccess: string;
   checkoutCanceled: string;
-  /** Shown next to Premium pricing — share / referral offer */
-  premiumReferralPromo: string;
+  /** Large line beside the price — share / free month hook */
+  premiumShareHeadline: string;
+  /** Below the price row — how many people to refer */
+  premiumReferralDetail: string;
+  /** Next to Subscribe; toggles social share panel */
+  ctaShare: string;
   premiumShareIntro: string;
   /** Short line prepended when sharing (tweet, WhatsApp, email body) */
   premiumShareBlurb: string;
@@ -67,8 +71,10 @@ const hy: PricingCopy = {
   checkoutSuccess:
     "Շնորհակալություն։ Բաժանորդագրությունը հաստատվում է Stripe-ի միջոցով — էլ. փոստով կստանաք հաստատում։",
   checkoutCanceled: "Վճարումը չեղարկվեց։ Կարող եք կրկին փորձել ցանկացած ժամանակ։",
-  premiumReferralPromo:
-    "Կիսվեք կայքով 20 ընկերների հետ (նրանք պետք է գան ձեր հղումով) — և ստացեք Premium 1 ամիս անվճար։",
+  premiumShareHeadline: "Կիսվեք — 1 ամիս Premium անվճար",
+  premiumReferralDetail:
+    "Անվճար ամիս ստանալու համար պետք է ձեր հղումով կայք այցելեն նվազագույն 20 հոգի (ընկերներ, ծանոթներ)։ Նրանք պետք է բացեն հենց ձեր ուղարկած հղումը։",
+  ctaShare: "Կիսվել",
   premiumShareIntro:
     "Կիսվեք հղումով ցանկացած կայքից և բոլոր սոցցանցերում՝ Facebook, Instagram, X, LinkedIn, Telegram, WhatsApp, Reddit, Threads և այլն։",
   premiumShareBlurb:
@@ -116,8 +122,10 @@ const en: PricingCopy = {
   checkoutSuccess:
     "Thank you. Your subscription is confirmed via Stripe — check your email for the receipt.",
   checkoutCanceled: "Checkout was canceled. You can try again anytime.",
-  premiumReferralPromo:
-    "Share the site with 20 friends (they must visit through your link) — and get 1 month of Premium free.",
+  premiumShareHeadline: "Share — 1 month of Premium free",
+  premiumReferralDetail:
+    "To earn the free month, at least 20 people must visit the site through your link (friends, colleagues, etc.). They need to open the exact URL you send them.",
+  ctaShare: "Share",
   premiumShareIntro:
     "Share your link from any page on the site across socials: Facebook, Instagram, X, LinkedIn, Telegram, WhatsApp, Reddit, Threads, and more.",
   premiumShareBlurb:

@@ -21,6 +21,7 @@ export default function PricingPageClient() {
   const [note, setNote] = useState<string | null>(null);
   const [checkoutBanner, setCheckoutBanner] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [shareOpen, setShareOpen] = useState(false);
 
   useEffect(() => {
     const raw = localStorage.getItem(LOCALE_KEY);
@@ -144,22 +145,26 @@ export default function PricingPageClient() {
           <h2 className="text-lg font-semibold text-[rgb(var(--ink))]">
             {t.premiumTitle}
           </h2>
-          <p className="mt-1 text-3xl font-bold text-gradient">
-            {t.premiumPrice}
-            <span className="text-base font-normal text-[rgb(var(--ink-soft))]">
-              {" "}
-              / {t.premiumDesc}
-            </span>
-          </p>
+          <div className="mt-2 flex flex-col gap-3 sm:mt-1 sm:flex-row sm:items-start sm:justify-between sm:gap-5">
+            <p className="text-3xl font-bold text-gradient sm:shrink-0">
+              {t.premiumPrice}
+              <span className="text-base font-normal text-[rgb(var(--ink-soft))]">
+                {" "}
+                / {t.premiumDesc}
+              </span>
+            </p>
+            <p className="font-display text-xl font-semibold leading-snug tracking-tight text-[rgb(var(--ink))] [text-wrap:balance] sm:max-w-[min(100%,14.5rem)] sm:text-end sm:text-2xl">
+              {t.premiumShareHeadline}
+            </p>
+          </div>
           <div
-            className="mt-4 rounded-2xl border border-[rgb(var(--accent-2))]/30 bg-gradient-to-br from-[rgb(var(--accent-2))]/[0.08] to-transparent px-4 py-3 text-sm leading-relaxed [text-wrap:pretty]"
+            className="mt-4 rounded-2xl border border-[rgb(var(--accent-2))]/30 bg-gradient-to-br from-[rgb(var(--accent-2))]/[0.08] to-transparent px-4 py-3 text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]"
             role="note"
           >
             <p className="font-medium text-[rgb(var(--ink))]">
-              {t.premiumReferralPromo}
+              {t.premiumReferralDetail}
             </p>
           </div>
-          <PremiumShareRow t={t} />
           <ul className="mt-6 space-y-3 text-sm text-[rgb(var(--ink-soft))]">
             {t.premiumBullets.map((b) => (
               <li key={b} className="flex gap-2">
@@ -168,14 +173,26 @@ export default function PricingPageClient() {
               </li>
             ))}
           </ul>
-          <button
-            type="button"
-            onClick={onUpgrade}
-            disabled={loading}
-            className="mt-8 w-full rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] to-[rgb(var(--accent-2))] py-3 text-sm font-semibold text-white shadow-lg shadow-[rgb(124_92_255/0.2)] transition enabled:hover:brightness-110 disabled:opacity-60"
-          >
-            {loading ? "…" : t.ctaUpgrade}
-          </button>
+          <div className="mt-8 flex flex-col gap-2 sm:flex-row sm:items-stretch">
+            <button
+              type="button"
+              onClick={onUpgrade}
+              disabled={loading}
+              className="min-h-[2.75rem] flex-1 rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] to-[rgb(var(--accent-2))] py-3 text-sm font-semibold text-white shadow-lg shadow-[rgb(124_92_255/0.2)] transition enabled:hover:brightness-110 disabled:opacity-60"
+            >
+              {loading ? "…" : t.ctaUpgrade}
+            </button>
+            <button
+              type="button"
+              onClick={() => setShareOpen((o) => !o)}
+              aria-expanded={shareOpen}
+              aria-controls="premium-share-panel"
+              className="min-h-[2.75rem] shrink-0 rounded-2xl border border-white/18 bg-white/[0.05] px-5 py-3 text-sm font-semibold text-[rgb(var(--ink))] transition hover:border-white/25 hover:bg-white/[0.08] sm:px-6"
+            >
+              {t.ctaShare}
+            </button>
+          </div>
+          <PremiumShareRow t={t} open={shareOpen} />
           {note ? (
             <p className="mt-4 rounded-xl border border-amber-500/25 bg-amber-500/10 px-3 py-2 text-xs leading-relaxed text-amber-100/95">
               {note}

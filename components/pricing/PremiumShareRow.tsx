@@ -6,9 +6,11 @@ import { getSiteUrlString } from "@/lib/site-url";
 
 type Props = {
   t: PricingCopy;
+  /** Social buttons render only after the user opens Share */
+  open: boolean;
 };
 
-export default function PremiumShareRow({ t }: Props) {
+export default function PremiumShareRow({ t, open }: Props) {
   const [siteUrl, setSiteUrl] = useState(getSiteUrlString);
   const [copied, setCopied] = useState(false);
   const [canNativeShare, setCanNativeShare] = useState(false);
@@ -71,8 +73,10 @@ export default function PremiumShareRow({ t }: Props) {
   const linkClass =
     "inline-flex items-center justify-center rounded-xl border border-white/12 bg-white/[0.04] px-3 py-2 text-xs font-medium text-[rgb(var(--ink))] transition hover:border-white/20 hover:bg-white/[0.08]";
 
+  if (!open) return null;
+
   return (
-    <div className="mt-4 space-y-3">
+    <div className="mt-4 space-y-3" id="premium-share-panel" role="region">
       <p className="text-xs leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
         {t.premiumShareIntro}
       </p>
