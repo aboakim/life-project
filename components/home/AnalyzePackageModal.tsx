@@ -95,13 +95,22 @@ export default function AnalyzePackageModal({
                 </li>
               ))}
             </ul>
-            <button
-              type="button"
-              onClick={onSelectPremium}
-              className="mt-6 w-full rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] to-[rgb(var(--accent-2))] py-3 text-sm font-bold text-white transition hover:brightness-110"
-            >
-              {t.ctaUpgrade} ({t.ctaShare})
-            </button>
+            <div className="mt-6 grid gap-2 sm:grid-cols-2">
+              <button
+                type="button"
+                onClick={onSelectPremium}
+                className="w-full rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-magenta))] to-[rgb(var(--accent-2))] py-3 text-sm font-bold text-white shadow-[0_14px_40px_-18px_rgb(var(--accent)/0.9)] transition hover:brightness-110"
+              >
+                {t.ctaUpgrade}
+              </button>
+              <button
+                type="button"
+                onClick={onSelectPremium}
+                className="w-full rounded-2xl border border-pink-300/35 bg-gradient-to-r from-fuchsia-500/90 via-pink-500/90 to-orange-400/90 py-3 text-sm font-bold text-white shadow-[0_16px_44px_-20px_rgba(236,72,153,0.9)] transition hover:brightness-110"
+              >
+                {t.ctaShare}
+              </button>
+            </div>
           </section>
         </div>
       </div>
