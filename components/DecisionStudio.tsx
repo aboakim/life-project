@@ -81,6 +81,7 @@ import { fillDecisionAnalysisGaps } from "@/lib/analysis-gap-fill";
 import VoiceDictateButton from "@/components/home/VoiceDictateButton";
 import VoiceWhisperButton from "@/components/home/VoiceWhisperButton";
 import ReadAloudReportButton from "@/components/home/ReadAloudReportButton";
+import AnalyzePackageModal from "@/components/home/AnalyzePackageModal";
 
 const KonamiSurprise = dynamic(
   () => import("@/components/home/KonamiSurprise"),
@@ -362,6 +363,7 @@ export default function DecisionStudio({
   const [visitMilestoneN, setVisitMilestoneN] = useState<number | null>(null);
   const [whisperAvailable, setWhisperAvailable] = useState(false);
   const [mobileLensIdx, setMobileLensIdx] = useState(0);
+  const [packageModalOpen, setPackageModalOpen] = useState(false);
   /** Defer welcome modal until idle so LCP can paint hero first (mobile PSI). */
   const [deferWelcomeMount, setDeferWelcomeMount] = useState(false);
   useEffect(() => {
@@ -812,6 +814,24 @@ export default function DecisionStudio({
     }, 30);
   }, []);
 
+  const onAnalyzeCtaClick = useCallback(
+    (e?: React.MouseEvent<HTMLElement>) => {
+      e?.preventDefault();
+      setPackageModalOpen(true);
+    },
+    [],
+  );
+
+  const onPickFreePackage = useCallback(() => {
+    setPackageModalOpen(false);
+    scrollToAnalyzer();
+  }, [scrollToAnalyzer]);
+
+  const onPickPremiumPackage = useCallback(() => {
+    setPackageModalOpen(false);
+    window.location.href = "/pricing";
+  }, []);
+
   const loadBriefFromHistory = useCallback(
     (d: string, ctx: string, cons: string, stakes?: number) => {
       setDecision(d);
@@ -837,6 +857,13 @@ export default function DecisionStudio({
       {deferWelcomeMount ? (
         <WelcomeModal locale={locale} onLocaleChange={setLocale} />
       ) : null}
+      <AnalyzePackageModal
+        open={packageModalOpen}
+        t={pr}
+        onClose={() => setPackageModalOpen(false)}
+        onSelectFree={onPickFreePackage}
+        onSelectPremium={onPickPremiumPackage}
+      />
       <PreAnalysisEmailModal
         open={preAnalysisEmailOpen}
         onClose={() => setPreAnalysisEmailOpen(false)}
@@ -1090,7 +1117,7 @@ export default function DecisionStudio({
               <div className="mt-4">
                 <button
                   type="button"
-                  onClick={scrollToAnalyzer}
+                  onClick={onAnalyzeCtaClick}
                   className="touch-manipulation inline-flex min-h-[64px] items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-fuchsia-500 via-violet-500 to-indigo-500 px-8 py-4 text-xl font-extrabold text-white/95 shadow-lg shadow-fuchsia-500/30 ring-1 ring-white/25 transition md:hover:brightness-110 motion-safe:active:scale-[0.98]"
                 >
                   {t.heroCtaPrimary}
@@ -1130,6 +1157,7 @@ export default function DecisionStudio({
                 >
                   <Link
                     href="/analyze"
+                    onClick={onAnalyzeCtaClick}
                     className="inline-flex min-h-[52px] min-w-[min(100%,18rem)] w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-10 py-4 text-lg font-bold text-white shadow-xl shadow-[rgb(var(--accent)/0.3)] transition hover:brightness-110"
                   >
                     {t.heroCtaPrimary}
@@ -1300,6 +1328,7 @@ export default function DecisionStudio({
               </ul>
               <Link
                 href="/analyze"
+                onClick={onAnalyzeCtaClick}
                 className="relative btn-extrude-3d mt-4 inline-flex min-h-[48px] items-center justify-center rounded-2xl border border-white/15 bg-white/[0.1] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-white/[0.14]"
               >
                 {t.homeDemoCta} →
@@ -1355,6 +1384,7 @@ export default function DecisionStudio({
             <div className="relative mt-6 flex flex-wrap items-center gap-3 border-t border-white/[0.06] pt-6">
               <Link
                 href="/analyze"
+                onClick={onAnalyzeCtaClick}
                 className="inline-flex items-center justify-center rounded-xl bg-white/[0.07] px-4 py-2.5 text-sm font-semibold text-[rgb(var(--ink))] ring-1 ring-white/10 transition hover:bg-white/[0.1]"
               >
                 {t.heroCtaPrimary}
@@ -1575,6 +1605,7 @@ export default function DecisionStudio({
             </p>
             <Link
               href="/analyze"
+              onClick={onAnalyzeCtaClick}
               className="relative inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-5 py-3 text-sm font-bold text-white shadow-[0_12px_36px_-14px_rgb(var(--accent)/0.55)] ring-1 ring-white/20 transition hover:brightness-110 motion-safe:hover:scale-[1.02] motion-safe:active:scale-[0.98]"
             >
               {t.homeAnalyzerPromoCta}{" "}
@@ -2671,6 +2702,7 @@ export default function DecisionStudio({
             <div className="pointer-events-auto mx-auto max-w-6xl border-t border-white/10 bg-[rgb(var(--surface))]/92 px-4 pt-2 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-md">
               <Link
                 href="/analyze"
+                onClick={onAnalyzeCtaClick}
                 className="flex min-h-[52px] w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] text-base font-bold text-white shadow-lg shadow-[rgb(var(--accent)/0.25)] transition hover:brightness-110"
               >
                 {t.heroCtaPrimary}

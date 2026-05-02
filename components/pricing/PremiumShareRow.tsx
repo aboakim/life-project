@@ -8,9 +8,10 @@ type Props = {
   t: PricingCopy;
   /** Social buttons render only after the user opens Share */
   open: boolean;
+  onClose: () => void;
 };
 
-export default function PremiumShareRow({ t, open }: Props) {
+export default function PremiumShareRow({ t, open, onClose }: Props) {
   const [siteUrl, setSiteUrl] = useState(getSiteUrlString);
   const [copied, setCopied] = useState(false);
   const [canNativeShare, setCanNativeShare] = useState(false);
@@ -70,82 +71,82 @@ export default function PremiumShareRow({ t, open }: Props) {
     }
   }, [siteUrl, t.premiumShareBlurb, t.shareEmailSubject]);
 
-  const linkClass =
-    "inline-flex items-center justify-center rounded-xl border border-white/12 bg-white/[0.04] px-3 py-2 text-xs font-medium text-[rgb(var(--ink))] transition hover:border-white/20 hover:bg-white/[0.08]";
+  const rowClass =
+    "inline-flex w-full items-center justify-between rounded-xl border border-white/12 bg-white/[0.04] px-3 py-2.5 text-sm font-medium text-[rgb(var(--ink))] transition hover:border-white/20 hover:bg-white/[0.08]";
 
   if (!open) return null;
 
   return (
-    <div className="mt-4 space-y-3" id="premium-share-panel" role="region">
-      <p className="text-xs leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
-        {t.premiumShareIntro}
-      </p>
-      <div className="flex flex-wrap gap-2">
-        {canNativeShare ? (
-          <button type="button" onClick={onNative} className={linkClass}>
-            {t.shareNative}
+    <div
+      className="fixed inset-0 z-[95] flex items-center justify-center p-4"
+      id="premium-share-panel"
+      role="region"
+    >
+      <button
+        type="button"
+        onClick={onClose}
+        aria-label="Close share options"
+        className="absolute inset-0 bg-black/60 backdrop-blur-[2px]"
+      />
+      <div className="relative z-[96] w-full max-w-sm rounded-3xl border border-white/15 bg-[rgb(var(--surface))]/95 p-4 shadow-2xl shadow-black/45">
+        <div className="mb-3 flex items-center justify-between">
+          <p className="text-sm font-semibold text-[rgb(var(--ink))]">
+            {t.premiumShareIntro}
+          </p>
+          <button
+            type="button"
+            onClick={onClose}
+            className="rounded-lg border border-white/15 px-2 py-1 text-xs text-[rgb(var(--ink-soft))] hover:bg-white/10"
+          >
+            ✕
           </button>
+        </div>
+        <div className="space-y-2">
+          {canNativeShare ? (
+            <button type="button" onClick={onNative} className={rowClass}>
+              <span>[S] {t.shareNative}</span>
+              <span aria-hidden>→</span>
+            </button>
+          ) : null}
+          <a href={urls.facebook} target="_blank" rel="noopener noreferrer" className={rowClass}>
+            <span>[F] {t.shareFacebook}</span>
+            <span aria-hidden>↗</span>
+          </a>
+          <a href={urls.x} target="_blank" rel="noopener noreferrer" className={rowClass}>
+            <span>[X] {t.shareX}</span>
+            <span aria-hidden>↗</span>
+          </a>
+          <a href={urls.linkedin} target="_blank" rel="noopener noreferrer" className={rowClass}>
+            <span>[in] {t.shareLinkedIn}</span>
+            <span aria-hidden>↗</span>
+          </a>
+          <a href={urls.whatsapp} target="_blank" rel="noopener noreferrer" className={rowClass}>
+            <span>[WA] {t.shareWhatsApp}</span>
+            <span aria-hidden>↗</span>
+          </a>
+          <a href={urls.telegram} target="_blank" rel="noopener noreferrer" className={rowClass}>
+            <span>[TG] {t.shareTelegram}</span>
+            <span aria-hidden>↗</span>
+          </a>
+          <a href={urls.reddit} target="_blank" rel="noopener noreferrer" className={rowClass}>
+            <span>[R] {t.shareReddit}</span>
+            <span aria-hidden>↗</span>
+          </a>
+          <a href={urls.email} className={rowClass}>
+            <span>[Mail] {t.shareEmail}</span>
+            <span aria-hidden>↗</span>
+          </a>
+          <button type="button" onClick={onCopy} className={rowClass}>
+            <span>[Link] {t.copySiteLink}</span>
+            <span aria-hidden>→</span>
+          </button>
+        </div>
+        {copied ? (
+          <p className="mt-3 text-xs text-emerald-300/95" role="status">
+            {t.siteLinkCopied}
+          </p>
         ) : null}
-        <a
-          href={urls.facebook}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={linkClass}
-        >
-          {t.shareFacebook}
-        </a>
-        <a
-          href={urls.x}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={linkClass}
-        >
-          {t.shareX}
-        </a>
-        <a
-          href={urls.linkedin}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={linkClass}
-        >
-          {t.shareLinkedIn}
-        </a>
-        <a
-          href={urls.whatsapp}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={linkClass}
-        >
-          {t.shareWhatsApp}
-        </a>
-        <a
-          href={urls.telegram}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={linkClass}
-        >
-          {t.shareTelegram}
-        </a>
-        <a
-          href={urls.reddit}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={linkClass}
-        >
-          {t.shareReddit}
-        </a>
-        <a href={urls.email} className={linkClass}>
-          {t.shareEmail}
-        </a>
-        <button type="button" onClick={onCopy} className={linkClass}>
-          {t.copySiteLink}
-        </button>
       </div>
-      {copied ? (
-        <p className="text-xs text-emerald-300/95" role="status">
-          {t.siteLinkCopied}
-        </p>
-      ) : null}
     </div>
   );
 }

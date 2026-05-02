@@ -192,7 +192,11 @@ export default function PricingPageClient() {
               {t.ctaShare}
             </button>
           </div>
-          <PremiumShareRow t={t} open={shareOpen} />
+          <PremiumShareRow
+            t={t}
+            open={shareOpen}
+            onClose={() => setShareOpen(false)}
+          />
           {note ? (
             <p className="mt-4 rounded-xl border border-amber-500/25 bg-amber-500/10 px-3 py-2 text-xs leading-relaxed text-amber-100/95">
               {note}
