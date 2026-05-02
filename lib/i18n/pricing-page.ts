@@ -19,6 +19,22 @@ export type PricingCopy = {
   deployHint: string;
   checkoutSuccess: string;
   checkoutCanceled: string;
+  /** Shown next to Premium pricing — share / referral offer */
+  premiumReferralPromo: string;
+  premiumShareIntro: string;
+  /** Short line prepended when sharing (tweet, WhatsApp, email body) */
+  premiumShareBlurb: string;
+  copySiteLink: string;
+  siteLinkCopied: string;
+  shareNative: string;
+  shareFacebook: string;
+  shareX: string;
+  shareLinkedIn: string;
+  shareWhatsApp: string;
+  shareTelegram: string;
+  shareReddit: string;
+  shareEmail: string;
+  shareEmailSubject: string;
 };
 
 const hy: PricingCopy = {
@@ -51,6 +67,23 @@ const hy: PricingCopy = {
   checkoutSuccess:
     "Շնորհակալություն։ Բաժանորդագրությունը հաստատվում է Stripe-ի միջոցով — էլ. փոստով կստանաք հաստատում։",
   checkoutCanceled: "Վճարումը չեղարկվեց։ Կարող եք կրկին փորձել ցանկացած ժամանակ։",
+  premiumReferralPromo:
+    "Կիսվեք կայքով 20 ընկերների հետ (նրանք պետք է գան ձեր հղումով) — և ստացեք Premium 1 ամիս անվճար։",
+  premiumShareIntro:
+    "Կիսվեք հղումով ցանկացած կայքից և բոլոր սոցցանցերում՝ Facebook, Instagram, X, LinkedIn, Telegram, WhatsApp, Reddit, Threads և այլն։",
+  premiumShareBlurb:
+    "Մեծ կյանքի որոշում կայացնե՞լ։ Ստուգեք այս կառուցված AI-ն։",
+  copySiteLink: "Պատճենել կայքի հղումը",
+  siteLinkCopied: "Հղումը պատճենվեց։",
+  shareNative: "Կիսվել…",
+  shareFacebook: "Facebook",
+  shareX: "X",
+  shareLinkedIn: "LinkedIn",
+  shareWhatsApp: "WhatsApp",
+  shareTelegram: "Telegram",
+  shareReddit: "Reddit",
+  shareEmail: "Էլ. փոստ",
+  shareEmailSubject: "Life Decision Engine",
 };
 
 const en: PricingCopy = {
@@ -83,6 +116,23 @@ const en: PricingCopy = {
   checkoutSuccess:
     "Thank you. Your subscription is confirmed via Stripe — check your email for the receipt.",
   checkoutCanceled: "Checkout was canceled. You can try again anytime.",
+  premiumReferralPromo:
+    "Share the site with 20 friends (they must visit through your link) — and get 1 month of Premium free.",
+  premiumShareIntro:
+    "Share your link from any page on the site across socials: Facebook, Instagram, X, LinkedIn, Telegram, WhatsApp, Reddit, Threads, and more.",
+  premiumShareBlurb:
+    "Making a big life decision? Try this structured AI decision engine.",
+  copySiteLink: "Copy site link",
+  siteLinkCopied: "Link copied.",
+  shareNative: "Share…",
+  shareFacebook: "Facebook",
+  shareX: "X",
+  shareLinkedIn: "LinkedIn",
+  shareWhatsApp: "WhatsApp",
+  shareTelegram: "Telegram",
+  shareReddit: "Reddit",
+  shareEmail: "Email",
+  shareEmailSubject: "Life Decision Engine",
 };
 
 const navPricingByLocale: Partial<Record<AppLocale, string>> = {

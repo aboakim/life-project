@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import MarketingPageShell from "@/components/layout/MarketingPageShell";
 import PageLocalePicker from "@/components/layout/PageLocalePicker";
+import PremiumShareRow from "@/components/pricing/PremiumShareRow";
 import { getMonetizeCopy } from "@/lib/i18n/monetization-page";
 import { getPricingCopy } from "@/lib/i18n/pricing-page";
 import { DEFAULT_LOCALE } from "@/lib/locale-default";
@@ -150,6 +151,15 @@ export default function PricingPageClient() {
               / {t.premiumDesc}
             </span>
           </p>
+          <div
+            className="mt-4 rounded-2xl border border-[rgb(var(--accent-2))]/30 bg-gradient-to-br from-[rgb(var(--accent-2))]/[0.08] to-transparent px-4 py-3 text-sm leading-relaxed [text-wrap:pretty]"
+            role="note"
+          >
+            <p className="font-medium text-[rgb(var(--ink))]">
+              {t.premiumReferralPromo}
+            </p>
+          </div>
+          <PremiumShareRow t={t} />
           <ul className="mt-6 space-y-3 text-sm text-[rgb(var(--ink-soft))]">
             {t.premiumBullets.map((b) => (
               <li key={b} className="flex gap-2">
