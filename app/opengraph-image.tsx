@@ -5,7 +5,7 @@ import { ImageResponse } from "next/og";
  * 1200×630 is the recommended size for Twitter/LinkedIn/Facebook preview.
  */
 export const alt =
-  "Life Decision Engine — structured AI analysis for big life decisions";
+  "Life Decision Engine — AI scenarios, decision score, Premium & referral offer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const runtime = "edge";
@@ -69,25 +69,27 @@ export default function OgImage() {
         >
           <div
             style={{
-              fontSize: 72,
-              lineHeight: 1.05,
+              fontSize: 64,
+              lineHeight: 1.08,
               fontWeight: 800,
               letterSpacing: "-0.02em",
               color: "white",
             }}
           >
-            Structured AI for the decisions that shape years.
+            See farther before you commit — not generic chat.
           </div>
           <div
             style={{
-              fontSize: 30,
-              lineHeight: 1.35,
-              color: "rgb(196,194,232)",
+              fontSize: 27,
+              lineHeight: 1.4,
+              color: "rgb(200,218,236)",
               fontWeight: 500,
+              maxWidth: 920,
             }}
           >
-            Scenarios, lenses, timelines, and a decision score — paired with a
-            worldwide network of human experts.
+            Scenarios, risk lenses, timelines & a decision score (6 months–5
+            years). Free to start · Premium $4.99/mo · Refer 20 visits → 1 month
+            free. Human experts optional, worldwide.
           </div>
         </div>
 
@@ -102,7 +104,7 @@ export default function OgImage() {
           }}
         >
           <span style={{ fontWeight: 600 }}>lifedecisions.space</span>
-          <span>Career · Relocation · Relationships · Money</span>
+          <span>Career · Money · Relocation · Relationships</span>
         </div>
       </div>
     ),

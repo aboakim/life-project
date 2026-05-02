@@ -31,7 +31,7 @@ export default function SiteJsonLd() {
       },
     ],
     description:
-      "A structured workspace for big life decisions — scenarios, lenses, timelines, and a score. Paired with a human expert directory.",
+      "Structured AI for major life decisions: scenarios, lenses, timelines, and a decision score. Free core, Premium subscription, and a refer-20-visits promotion. Optional directory of human experts.",
     knowsAbout: [
       "decision analysis",
       "career decisions",
