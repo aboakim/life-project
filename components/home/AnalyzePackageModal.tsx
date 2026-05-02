@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import SocialShareModal from "@/components/sharing/SocialShareModal";
 import type { PricingCopy } from "@/lib/i18n/pricing-page";
 
 type Props = {
@@ -17,6 +19,12 @@ export default function AnalyzePackageModal({
   onSelectFree,
   onSelectPremium,
 }: Props) {
+  const [shareOpen, setShareOpen] = useState(false);
+
+  useEffect(() => {
+    if (!open) setShareOpen(false);
+  }, [open]);
+
   if (!open) return null;
 
   return (
@@ -105,15 +113,24 @@ export default function AnalyzePackageModal({
               </button>
               <button
                 type="button"
-                onClick={onSelectPremium}
-                className="w-full rounded-2xl border border-pink-300/35 bg-gradient-to-r from-fuchsia-500/90 via-pink-500/90 to-orange-400/90 py-3 text-sm font-bold text-white shadow-[0_16px_44px_-20px_rgba(236,72,153,0.9)] transition hover:brightness-110"
+                onClick={() => setShareOpen(true)}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-pink-300/40 bg-gradient-to-r from-fuchsia-500 via-pink-500 to-orange-400 py-3 text-sm font-bold text-white shadow-[0_16px_44px_-20px_rgba(236,72,153,0.85)] transition hover:brightness-110"
               >
+                <span aria-hidden className="text-base">
+                  ↗
+                </span>
                 {t.ctaShare}
               </button>
             </div>
           </section>
         </div>
       </div>
+      <SocialShareModal
+        t={t}
+        open={shareOpen}
+        onClose={() => setShareOpen(false)}
+        elevated
+      />
     </div>
   );
 }

@@ -187,8 +187,9 @@ export default function PricingPageClient() {
               onClick={() => setShareOpen((o) => !o)}
               aria-expanded={shareOpen}
               aria-controls="premium-share-panel"
-              className="min-h-[2.75rem] shrink-0 rounded-2xl border border-white/18 bg-white/[0.05] px-5 py-3 text-sm font-semibold text-[rgb(var(--ink))] transition hover:border-white/25 hover:bg-white/[0.08] sm:px-6"
+              className="inline-flex min-h-[2.75rem] shrink-0 items-center justify-center gap-2 rounded-2xl border border-pink-300/40 bg-gradient-to-r from-fuchsia-500 via-pink-500 to-orange-400 px-5 py-3 text-sm font-bold text-white shadow-[0_14px_40px_-18px_rgba(236,72,153,0.75)] transition hover:brightness-110 sm:px-6"
             >
+              <span aria-hidden>↗</span>
               {t.ctaShare}
             </button>
           </div>
