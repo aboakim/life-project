@@ -95,12 +95,13 @@ function IconReddit() {
   );
 }
 
-function IconEmail() {
+/** Official-style Instagram glyph (white on brand gradient). */
+function IconInstagram() {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden>
       <path
         fill="currentColor"
-        d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
       />
     </svg>
   );
@@ -167,11 +168,8 @@ export default function SocialShareModal({
       whatsapp: `https://api.whatsapp.com/send?text=${body}`,
       telegram: `https://t.me/share/url?url=${u}&text=${title}`,
       reddit: `https://www.reddit.com/submit?url=${u}&title=${title}`,
-      email: `mailto:?subject=${encodeURIComponent(
-        t.shareEmailSubject,
-      )}&body=${body}`,
     };
-  }, [fullText, siteUrl, t.premiumShareBlurb, t.shareEmailSubject]);
+  }, [fullText, siteUrl, t.premiumShareBlurb]);
 
   const onCopy = useCallback(async () => {
     try {
@@ -195,6 +193,17 @@ export default function SocialShareModal({
       /* absent or user cancelled */
     }
   }, [siteUrl, t.premiumShareBlurb, t.shareEmailSubject]);
+
+  const onInstagram = useCallback(async () => {
+    try {
+      await navigator.clipboard.writeText(fullText);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+      window.open("https://www.instagram.com/", "_blank", "noopener,noreferrer");
+    } catch {
+      /* ignore */
+    }
+  }, [fullText]);
 
   const rowClass =
     "inline-flex w-full items-center gap-3 rounded-xl border border-white/12 bg-white/[0.04] px-3 py-2.5 text-sm font-medium text-[rgb(var(--ink))] transition hover:border-white/22 hover:bg-white/[0.08]";
@@ -326,15 +335,15 @@ export default function SocialShareModal({
               ↗
             </span>
           </a>
-          <a href={urls.email} className={rowClass}>
-            <IconBox className="bg-slate-500 text-white">
-              <IconEmail />
+          <button type="button" onClick={onInstagram} className={rowClass}>
+            <IconBox className="bg-gradient-to-br from-[#f09433] via-[#dc2743] to-[#bc1888] text-white">
+              <IconInstagram />
             </IconBox>
-            <span className="flex-1 text-start">{t.shareEmail}</span>
+            <span className="flex-1 text-start">{t.shareInstagram}</span>
             <span aria-hidden className="text-[rgb(var(--ink-soft))]">
               ↗
             </span>
-          </a>
+          </button>
           <button type="button" onClick={onCopy} className={rowClass}>
             <IconBox className="bg-gradient-to-br from-violet-500 to-teal-500 text-white">
               <IconLink />

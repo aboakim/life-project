@@ -37,7 +37,7 @@ export type PricingCopy = {
   shareWhatsApp: string;
   shareTelegram: string;
   shareReddit: string;
-  shareEmail: string;
+  shareInstagram: string;
   shareEmailSubject: string;
 };
 
@@ -88,7 +88,7 @@ const hy: PricingCopy = {
   shareWhatsApp: "WhatsApp",
   shareTelegram: "Telegram",
   shareReddit: "Reddit",
-  shareEmail: "Էլ. փոստ",
+  shareInstagram: "Ինստագրամ",
   shareEmailSubject: "Life Decision Engine",
 };
 
@@ -139,7 +139,7 @@ const en: PricingCopy = {
   shareWhatsApp: "WhatsApp",
   shareTelegram: "Telegram",
   shareReddit: "Reddit",
-  shareEmail: "Email",
+  shareInstagram: "Instagram",
   shareEmailSubject: "Life Decision Engine",
 };
 
