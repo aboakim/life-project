@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import MarketingPageShell from "@/components/layout/MarketingPageShell";
+import PageEducation from "@/components/layout/PageEducation";
 import { getPlaybooksPage } from "@/lib/i18n/playbooks-page";
 import {
   isAppLocale,
@@ -81,6 +82,92 @@ export default function PlaybooksPageClient() {
           ← Home
         </Link>
       </p>
+
+      <PageEducation
+        intro={
+          <>
+            <p>
+              A playbook is a curated reading path for one specific kind of
+              decision. Instead of leaving you to wander through 22 separate
+              blog posts, a playbook stitches the three or four most useful
+              articles together in the order an editor would actually
+              recommend reading them — first the one that frames the
+              decision, then the one that handles the most common
+              objections, then the one that gives you a checklist or a
+              first concrete step.
+            </p>
+            <p>
+              Three playbook tracks are live today: relocation (moving
+              countries or cities), career (offers, promotions, layoffs,
+              switching industries), and relationships (cohabiting,
+              breakups, family conversations). More are added when we have
+              at least three articles deep enough to warrant a path.
+            </p>
+          </>
+        }
+        sections={[
+          {
+            heading: "How playbooks are curated",
+            body: (
+              <p>
+                The editorial team picks articles that pass three filters:
+                they describe a decision (not a feeling), they include at
+                least one named framework or example, and they have been
+                read end-to-end by a human editor in the past 90 days.
+                Articles older than that are re-read and either re-listed
+                or quietly retired. We do not auto-list every blog post by
+                tag.
+              </p>
+            ),
+          },
+          {
+            heading: "How to use a playbook",
+            body: (
+              <ol className="list-decimal space-y-2 ps-5 marker:font-semibold marker:text-[rgb(var(--accent-2))]">
+                <li>
+                  Pick the playbook closest to the decision in front of
+                  you. Skim the three to four articles in order; they are
+                  short.
+                </li>
+                <li>
+                  Open the analyzer in a new tab and run a short brief —
+                  one paragraph of your own situation — alongside the
+                  reading. The combination is more useful than either
+                  alone.
+                </li>
+                <li>
+                  Save what you learn into the{" "}
+                  <Link
+                    href="/journal"
+                    className="font-medium text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+                  >
+                    decision journal
+                  </Link>{" "}
+                  as a one-line prediction. Read it back in three months.
+                </li>
+              </ol>
+            ),
+          },
+          {
+            heading: "Who playbooks are for",
+            body: (
+              <p>
+                Anyone facing a real decision in the next 90 days. They are
+                less useful as general inspiration reading; the articles are
+                action-oriented and assume you have skin in the game.
+                Casual readers usually prefer the{" "}
+                <Link
+                  href="/blog"
+                  className="font-medium text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+                >
+                  blog
+                </Link>{" "}
+                index, which is sortable by tag.
+              </p>
+            ),
+          },
+        ]}
+      />
     </MarketingPageShell>
   );
 }
