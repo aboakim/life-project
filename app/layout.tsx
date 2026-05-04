@@ -23,6 +23,7 @@ const ADSENSE_CLIENT = "ca-pub-3541461663112540";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  adjustFontFallback: true,
 });
 
 /** Display: variable file only (avoids 5 static weight files). */
@@ -73,11 +74,11 @@ export const metadata: Metadata = {
   metadataBase: getMetadataBase(),
   title: {
     default:
-      "Life Decision Engine — AI scenarios & decision score for major life choices",
+      "Life Decision Engine — AI decision analysis for big life choices (USA & worldwide)",
     template: "%s | Life Decision Engine",
   },
   description:
-    "Stop overthinking. AI scenarios, risk lenses, and a decision score for big choices—6 months to 5 years out. Free to start; Premium $4.99/mo; share with 20 friends via your link for 1 month free. Private by design. Optional human experts.",
+    "Stop overthinking. Get instant AI scenarios for big life decisions—6 months to 5 years out. Private by design; talk to a pro only if you want. Not generic chat.",
   applicationName: "Life Decision Engine",
   authors: [{ name: "Life Decision Engine Editorial Team" }],
   creator: "Life Decision Engine",
@@ -131,7 +132,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Life Decision Engine — structured AI for major life decisions",
     description:
-      "Scenarios, lenses, timelines & a decision score (6 mo–5 yr). Free core, Premium $4.99/mo, refer 20 visits for 1 month free. Worldwide expert directory — optional.",
+      "Best/worst/likely scenarios, finance & psychology lenses, 6-month to 5-year view, decision score. Experts worldwide.",
     type: "website",
     url: "/",
     locale: "en_US",
@@ -139,9 +140,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Life Decision Engine — AI scenarios, score & expert network",
+    title: "Life Decision Engine — AI + global expert network",
     description:
-      "Big life choices without generic chat: scenarios, risk lenses, timeline clarity. Free to try; Premium $4.99/mo; share with 20 for a free month.",
+      "Make big decisions with scenarios, risk lenses, and optional human experts.",
   },
   other: {
     "google-adsense-account": ADSENSE_CLIENT,
