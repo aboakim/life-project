@@ -30,16 +30,28 @@ const BASE = (process.env.PROMO_SITE_URL || "https://lifedecisions.space").repla
 );
 const OUT = path.join(__dirname, "..", "ad-creative", "output");
 
-/** Section B (short) from SITE-PROMO-VOICEOVER-AND-MP4-EXPORT.txt — plain ASCII for SAPI. */
+/**
+ * Plain ASCII for Windows SAPI. Mirrors the live home hero hook
+ * ("Stop overthinking. Decide in seconds.") plus a tour of the analyzer,
+ * lenses, timeline, score, experts directory, blog, and community — so the
+ * recording and the spoken script describe the same product surface.
+ */
 const NARRATION_EN = [
-  "Life Decision Engine, at life decisions dot space, is a site for people facing big life decisions,",
-  "a job, a move, or a hard relationship choice.",
-  "It is built to give you structure, not random chat, but a clear report.",
-  "You enter your question. You get several scenarios, a money and mind look at the trade offs,",
-  "a timeline from a few months to a few years, and a score with an explanation.",
-  "There is also a community, a blog, and a list of real experts when you want a human, not a screen.",
-  "The tool is for thinking in order. It does not replace a therapist or a lawyer.",
-  "Try the free flow at life decisions dot space.",
+  "Stop overthinking. Decide in seconds.",
+  "Life Decision Engine, at life decisions dot space, gives you instant clarity",
+  "on big life decisions, using structured A I scenarios, not random chat.",
+  "You enter your question, the context, and your limits.",
+  "It is private. It runs in your browser. No sign up to start.",
+  "You get several scenarios — a better path, a rough path, a likely path.",
+  "It looks at your case through clear lenses: money, mind, risk, and opportunity.",
+  "A timeline shows the next few months, a couple of years, and longer.",
+  "And a score, with a written reason — to give you a compass, not a guess.",
+  "When you need a human in the loop, there is a directory of psychologists,",
+  "lawyers, and money experts. There is also a blog with longer playbooks,",
+  "a community space, and explainers for privacy and how the tool uses A I.",
+  "The core analyzer is free.",
+  "Open life decisions dot space, and make your next step with a plan,",
+  "not just a feeling.",
 ].join(" ");
 
 function sleep(ms) {
