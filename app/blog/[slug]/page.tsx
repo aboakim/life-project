@@ -170,16 +170,47 @@ function buildArticleJsonLd(post: BlogPost): Record<string, unknown> {
     description: post.description,
     datePublished: post.publishedAt,
     dateModified: post.updatedAt || post.publishedAt,
+    /**
+     * Google Rich Results expects an Article to carry at least one
+     * image (≥1200px wide) for full eligibility. We point at the
+     * site-wide opengraph-image (1200×630, dynamically rendered via
+     * Next.js OpenGraph route) so every post has a valid image
+     * reference even though it isn't a per-post hero photo.
+     */
+    image: [`${base}/opengraph-image`],
     author: {
       "@type": "Organization",
       name: post.author,
       url: `${base}/editorial-team`,
       "@id": `${base}/#editorial-team`,
     },
+    /**
+     * Mirror the author into `editor` so validators that don't follow
+     * @id references still see an editor entity attached to the
+     * Article. Same E-E-A-T signal, two surfaces.
+     */
+    editor: {
+      "@type": "Organization",
+      name: post.author,
+      "@id": `${base}/#editorial-team`,
+    },
     publisher: {
       "@type": "Organization",
       name: "Life Decision Engine",
       "@id": `${base}/#organization`,
+      /**
+       * Inline the publisher logo as an ImageObject too; some
+       * Schema.org validators don't resolve `@id` cross-references
+       * reliably and complain about a missing publisher.logo on
+       * Articles. Inlining keeps validation green without
+       * duplicating data semantically (the @id still ties them).
+       */
+      logo: {
+        "@type": "ImageObject",
+        url: `${base}/logo-192.png`,
+        width: 192,
+        height: 192,
+      },
     },
     mainEntityOfPage: {
       "@type": "WebPage",
@@ -189,6 +220,7 @@ function buildArticleJsonLd(post: BlogPost): Record<string, unknown> {
     articleSection: post.hero?.eyebrow ?? "Decision-making",
     wordCount: post.readingMinutes * 200,
     inLanguage: "en-US",
+    isFamilyFriendly: true,
   };
 }
 
