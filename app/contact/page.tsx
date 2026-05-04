@@ -149,6 +149,20 @@ export default function ContactPage() {
           </p>
         </section>
 
+        <section>
+          <h2 className="text-base font-semibold text-[rgb(var(--ink))]">
+            Where we operate
+          </h2>
+          <p className="mt-3">
+            Life Decision Engine is an independent project, operated from
+            Yerevan, Armenia, and serves users worldwide in 8+ languages.
+            For payments and invoicing, billing is handled by Stripe; card
+            details never reach our servers. We do not maintain a public
+            walk-in office — email is the official channel for all
+            correspondence, including privacy and data requests.
+          </p>
+        </section>
+
         <p className="pt-4">
           <Link
             href="/"

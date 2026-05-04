@@ -2632,19 +2632,12 @@ export default function DecisionStudio({
                 {sx.premiumHint}
               </p>
               <div className="mt-5 flex flex-wrap items-center gap-3">
-                <button
-                  type="button"
-                  disabled
-                  className="cursor-not-allowed rounded-2xl border border-white/15 bg-white/[0.06] px-5 py-2.5 text-sm font-semibold text-[rgb(var(--ink-soft))]/80"
+                <Link
+                  href="/pricing"
+                  className="rounded-2xl border border-[rgb(var(--accent))]/35 bg-[rgb(var(--accent))]/10 px-5 py-2.5 text-sm font-semibold text-[rgb(var(--ink))] transition hover:border-[rgb(var(--accent))]/60"
                   title={sx.premiumHint}
                 >
                   {sx.premiumCta}
-                </button>
-                <Link
-                  href="/pricing"
-                  className="text-sm font-semibold text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
-                >
-                  {pr.navPricing} →
                 </Link>
               </div>
             </section>

@@ -327,7 +327,42 @@ export default async function BlogArticlePage({
             </Link>
           </div>
 
-          <div className="mt-12 flex flex-wrap items-center justify-between gap-3 border-t border-white/[0.08] pt-6 text-sm">
+          <aside
+            aria-label="Editorial transparency"
+            className="mt-12 rounded-2xl border border-white/[0.08] bg-white/[0.03] p-5 text-xs leading-relaxed text-[rgb(var(--ink-soft))] sm:p-6"
+          >
+            <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[rgb(var(--accent-dim))]">
+              Editorial transparency
+            </p>
+            <p className="mt-3">
+              This article is published by the{" "}
+              <Link
+                href="/editorial-team"
+                className="font-medium text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+              >
+                Life Decision Engine editorial team
+              </Link>{" "}
+              under our{" "}
+              <Link
+                href="/editorial-standards"
+                className="font-medium text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+              >
+                editorial standards
+              </Link>
+              . AI tooling may assist drafting and structuring; every article
+              is reviewed by a human editor before publishing — see{" "}
+              <Link
+                href="/how-we-use-ai"
+                className="font-medium text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+              >
+                how we use AI
+              </Link>
+              . This article is general guidance, not medical, legal, or
+              financial advice.
+            </p>
+          </aside>
+
+          <div className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-white/[0.08] pt-6 text-sm">
             <Link
               href="/blog"
               className="font-medium text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"

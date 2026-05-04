@@ -137,9 +137,9 @@ const en: SiteExtras = {
   warmRel: "Relationship next step",
   demoBadge: "Local / preview mode — not production data.",
   premiumTitle: "Want deeper insights?",
-  premiumCta: "Coming soon",
+  premiumCta: "See Premium plans",
   premiumHint:
-    "Unlock advanced analysis and personalized scenarios when Premium launches.",
+    "Premium unlocks deeper runs, saved history, and priority support — see what is included.",
   moderationNote:
     "Posts appear as plain text after light automated checks; we may remove spam or unsafe content. This is peer exchange, not therapy or legal counsel.",
   filterLang: "Language",
@@ -242,9 +242,10 @@ const hy: SiteExtras = {
   warmJob: "Գնահատել առաջարկը",
   warmRel: "Հարաբերության հաջորդ քայլ",
   demoBadge: "Տեղական / նախադիտում — production տվյալներ չեն։",
-  premiumTitle: "Արտահանում և ավելին",
-  premiumCta: "PDF արտահանում (շուտով)",
-  premiumHint: "Premium-ով կարող է լինել PDF և խորացված վերանայում — նախատեսված է։",
+  premiumTitle: "Ավելի խորը վերլուծությո՞ւն",
+  premiumCta: "Տեսնել Premium փաթեթները",
+  premiumHint:
+    "Premium-ով՝ ավելի խորը վերլուծություններ, պահպանված պատմություն և առաջնահերթ աջակցություն։",
   moderationNote:
     "Հաղորդագրությունները երևում են պարզ տեքստով․ կարող ենք ջնջել սպամ կամ վտանգավոր բովանդակություն։ Սա հասարակական փոխանակում է, ոչ թե թերապիա կամ իրավունք։",
   filterLang: "Լեզու",
@@ -348,10 +349,10 @@ const ru: SiteExtras = {
   warmJob: "Оценить оффер",
   warmRel: "Следующий шаг в отношениях",
   demoBadge: "Локальный / предпросмотр — не боевые данные.",
-  premiumTitle: "Экспорт и другое",
-  premiumCta: "Экспорт PDF (скоро)",
+  premiumTitle: "Нужны более глубокие отчёты?",
+  premiumCta: "Посмотреть тарифы Premium",
   premiumHint:
-    "Premium может включать экспорт PDF и более глубокие обзоры — в планах.",
+    "Premium открывает более глубокие прогоны, сохранённую историю и приоритетную поддержку.",
   moderationNote:
     "Сообщения показываются простым текстом после лёгких автопроверок; можем удалять спам или небезопасный контент. Это обмен мнениями, не терапия и не юридическая помощь.",
   filterLang: "Язык",
@@ -447,10 +448,10 @@ const de: SiteExtras = {
   warmJob: "Angebot prüfen",
   warmRel: "Nächster Schritt Beziehung",
   demoBadge: "Lokal / Vorschau — keine Produktionsdaten.",
-  premiumTitle: "Export & mehr",
-  premiumCta: "PDF exportieren (bald)",
+  premiumTitle: "Tiefere Analysen gewünscht?",
+  premiumCta: "Premium‑Pläne ansehen",
   premiumHint:
-    "Premium kann PDF‑Export und tiefere Reviews umfassen — geplant.",
+    "Premium schaltet tiefere Läufe, gespeicherte Verläufe und Priority‑Support frei.",
   moderationNote:
     "Beiträge erscheinen als Klartext nach leichten automatischen Checks; Spam oder unsichere Inhalte können wir entfernen. Das ist Austausch unter Peers, keine Therapie oder Rechtsberatung.",
   filterLang: "Sprache",
@@ -546,10 +547,10 @@ const fr: SiteExtras = {
   warmJob: "Évaluer une offre",
   warmRel: "Étape suivante en couple",
   demoBadge: "Mode local / aperçu — pas des données de production.",
-  premiumTitle: "Export et plus",
-  premiumCta: "Export PDF (bientôt)",
+  premiumTitle: "Envie d’analyses plus poussées ?",
+  premiumCta: "Voir les offres Premium",
   premiumHint:
-    "L’offre Premium pourrait inclure export PDF et revues plus poussées — prévu.",
+    "Premium déverrouille des analyses plus profondes, l’historique sauvegardé et un support prioritaire.",
   moderationNote:
     "Les messages apparaissent en texte brut après contrôles automatisés légers ; nous pouvons retirer spam ou contenu risqué. Échange entre pairs, pas thérapie ni conseil juridique.",
   filterLang: "Langue",
@@ -645,10 +646,10 @@ const es: SiteExtras = {
   warmJob: "Evaluar oferta",
   warmRel: "Siguiente paso en la relación",
   demoBadge: "Modo local / vista previa — no datos de producción.",
-  premiumTitle: "Exportar y más",
-  premiumCta: "Exportar PDF (pronto)",
+  premiumTitle: "¿Quieres análisis más profundos?",
+  premiumCta: "Ver planes Premium",
   premiumHint:
-    "Premium puede incluir exportación PDF y revisiones más profundas — previsto.",
+    "Premium desbloquea análisis más profundos, historial guardado y soporte prioritario.",
   moderationNote:
     "Las publicaciones se muestran en texto plano tras controles automáticos ligeros; podemos eliminar spam o contenido inseguro. Esto es intercambio entre pares, no terapía ni asesoramiento legal.",
   filterLang: "Idioma",
@@ -744,10 +745,10 @@ const it: SiteExtras = {
   warmJob: "Valuta offerta",
   warmRel: "Prossimo passo nella relazione",
   demoBadge: "Modalità locale/anteprima — non dati di produzione.",
-  premiumTitle: "Export e altro",
-  premiumCta: "Esporta PDF (presto)",
+  premiumTitle: "Vuoi analisi più approfondite?",
+  premiumCta: "Vedi i piani Premium",
   premiumHint:
-    "Premium potrebbe includere export PDF e revisioni più profonde — in programma.",
+    "Premium sblocca analisi più approfondite, cronologia salvata e supporto prioritario.",
   moderationNote:
     "I messaggi compaiono come testo semplice dopo controlli automatici leggeri; possiamo rimuovere spam o contenuti non sicuri. Scambio tra pari, non terapia o consulenza legale.",
   filterLang: "Lingua",
@@ -843,10 +844,10 @@ const ar: SiteExtras = {
   warmJob: "تقييم العرض",
   warmRel: "خطوة تالية في العلاقة",
   demoBadge: "وضع محلي / معاينة — ليست بيانات إنتاج.",
-  premiumTitle: "التصدير وأكثر",
-  premiumCta: "تصدير PDF (قريباً)",
+  premiumTitle: "هل تريد تحليلات أعمق؟",
+  premiumCta: "اطّلع على خطط Premium",
   premiumHint:
-    "قد تشمل الخطة المدفوعة تصدير PDF ومراجعات أعمق — قيد التخطيط.",
+    "تتيح Premium تحليلات أعمق وسجلًا محفوظًا ودعمًا ذا أولوية.",
   moderationNote:
     "تظهر المشاركات كنص عادي بعد فحوصات آلية خفيفة؛ قد نزيل محتوى غير آمن أو سبام. هذا تبادل بين الأقران لا علاجاً ولا استشارة قانونية.",
   filterLang: "اللغة",
