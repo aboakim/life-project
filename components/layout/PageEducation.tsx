@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { ReactElement, ReactNode } from "react";
 
 export type EducationSection = {
   heading: string;
@@ -8,6 +8,13 @@ export type EducationSection = {
 export type EducationFaqItem = {
   q: string;
   a: ReactNode;
+  /**
+   * Plain-text answer for the FAQPage JSON-LD `acceptedAnswer.text` field.
+   * Optional — when omitted, we recursively extract text content from `a`.
+   * Provide this when the answer contains complex JSX (links, lists) and
+   * you want a hand-tuned schema string.
+   */
+  plainAnswer?: string;
 };
 
 type Props = {
@@ -23,12 +30,56 @@ type Props = {
 };
 
 /**
+ * Recursively extract visible text from a ReactNode tree.
+ *
+ * Used to derive the plain-text answer that goes into FAQPage JSON-LD
+ * when the caller didn't provide an explicit `plainAnswer`. Works for
+ * strings, numbers, arrays, fragments, and most native elements; ignores
+ * booleans/null/undefined and falls through props.children for elements.
+ */
+function extractText(node: ReactNode): string {
+  if (node == null || typeof node === "boolean") return "";
+  if (typeof node === "string") return node;
+  if (typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(extractText).join("");
+  if (typeof node === "object" && "props" in (node as object)) {
+    const props = (node as ReactElement<{ children?: ReactNode }>).props;
+    if (props && "children" in props) return extractText(props.children);
+  }
+  return "";
+}
+
+function buildFaqJsonLd(faq: EducationFaqItem[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faq.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text:
+          item.plainAnswer ??
+          (typeof item.a === "string" ? item.a : extractText(item.a)).replace(
+            /\s+/g,
+            " ",
+          ).trim(),
+      },
+    })),
+  };
+}
+
+/**
  * Shared "About this page" educational block.
  *
  * Provides the substantial publisher content AdSense reviewers expect on every
  * indexable page (≥ ~500 words of unique editorial copy beside any UI widget).
  * Each instance is composed of unique per-page props — same component, distinct
  * content — so we keep visual consistency without creating duplicate content.
+ *
+ * When `faq` is non-empty we also emit FAQPage JSON-LD so Google can surface
+ * rich FAQ snippets in search and AdSense reviewers see the strong E-E-A-T
+ * signal of structured Q&A on the page.
  */
 export default function PageEducation({
   intro,
@@ -37,11 +88,21 @@ export default function PageEducation({
   footer,
   className = "",
 }: Props) {
+  const hasFaq = faq && faq.length > 0;
+  const faqLd = hasFaq ? buildFaqJsonLd(faq) : null;
+
   return (
     <section
       aria-label="About this page"
       className={`mt-12 max-w-3xl space-y-10 text-[15px] leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty] ${className}`.trim()}
     >
+      {faqLd ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+        />
+      ) : null}
+
       {intro ? (
         <div className="space-y-4 rounded-3xl border border-white/[0.08] bg-white/[0.03] p-5 sm:p-6">
           <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[rgb(var(--accent-dim))]">
@@ -68,7 +129,7 @@ export default function PageEducation({
         </div>
       ) : null}
 
-      {faq && faq.length > 0 ? (
+      {hasFaq ? (
         <div className="space-y-5">
           <h2 className="text-base font-semibold text-[rgb(var(--ink))]">
             Frequently asked
