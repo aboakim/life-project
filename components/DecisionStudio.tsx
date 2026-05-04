@@ -1616,7 +1616,9 @@ export default function DecisionStudio({
           </div>
         )}
 
-        {!focusLayout ? <AdSenseBanner className="my-2" /> : null}
+        {/* Top ad — visible on `/` and `/analyze` (free tier). Renders only when
+            NEXT_PUBLIC_ADSENSE_SLOT_HOME is set (i.e. post-AdSense-approval). */}
+        <AdSenseBanner placement="top" className="my-2" />
 
         {/* Workspace: disclaimer + analyzer */}
         <RevealOnScroll>
@@ -2094,6 +2096,10 @@ export default function DecisionStudio({
           </div>
         </section>
         </RevealOnScroll>
+
+        {/* Inline ad — between the analyzer form and the results panel. Renders
+            only when NEXT_PUBLIC_ADSENSE_SLOT_INLINE is set. */}
+        <AdSenseBanner placement="inline" className="my-4" />
 
         {a && (
           <section
@@ -2647,6 +2653,11 @@ export default function DecisionStudio({
             </footer>
           </section>
         )}
+
+        {/* Footer ad — between the premium CTA / results block and the privacy
+            section. Renders only when NEXT_PUBLIC_ADSENSE_SLOT_FOOTER is set. */}
+        <AdSenseBanner placement="footer" className="my-4" />
+
         <RevealOnScroll>
         <section
           id="section-privacy"
