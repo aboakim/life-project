@@ -297,6 +297,8 @@ export default function ChecklistsPageClient() {
               a: "Relocation, a job offer, and a relationship-or-cohabitation conversation cover the three decisions that most often arrive with a hard deadline and a paper trail. Other decisions (kids, health, retirement) deserve longer essays rather than checklists, and live on the blog.",
             },
           ]}
+          lastReviewed="May 5, 2026"
+          lastReviewedISO="2026-05-05"
         />
       </div>
     </MarketingPageShell>

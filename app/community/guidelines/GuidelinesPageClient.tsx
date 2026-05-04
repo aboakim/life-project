@@ -170,6 +170,8 @@ export default function GuidelinesPageClient() {
               a: "Posts older than 18 months may be archived (still indexable, marked as historical) so the active board reflects current, answerable threads. You can request earlier deletion of your own post by writing to /contact and including the post text.",
             },
           ]}
+          lastReviewed="May 5, 2026"
+          lastReviewedISO="2026-05-05"
         />
       </div>
     </MarketingPageShell>

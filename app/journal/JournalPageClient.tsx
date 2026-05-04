@@ -293,6 +293,8 @@ export default function JournalPageClient() {
               a: "Most of the value shows up between entry 10 and entry 30. If after a month you have written nothing, the page is honest feedback that the format is not your style — try a paper notebook or a recurring weekly note instead.",
             },
           ]}
+          lastReviewed="May 5, 2026"
+          lastReviewedISO="2026-05-05"
         />
       </div>
     </MarketingPageShell>

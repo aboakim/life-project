@@ -185,6 +185,8 @@ export default function PlaybooksPageClient() {
             a: "After working through a playbook, the next step is usually a short conversation with someone who has skin in the same game. The experts directory lists psychologists, lawyers, financial planners, and immigration counsel who take 30 to 60 minute first conversations.",
           },
         ]}
+        lastReviewed="May 5, 2026"
+        lastReviewedISO="2026-05-05"
       />
     </MarketingPageShell>
   );

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { ReactElement, ReactNode } from "react";
 
 export type EducationSection = {
@@ -26,6 +27,21 @@ type Props = {
   faq?: EducationFaqItem[];
   /** Optional bottom CTA / cross-link block. */
   footer?: ReactNode;
+  /**
+   * Human-readable last-reviewed date (e.g. "May 5, 2026"). When provided
+   * we render a small editorial byline ("Curated by Editorial Team · Last
+   * reviewed …") at the foot of the section. This is a strong E-E-A-T
+   * signal: Google explicitly weighs author + date metadata when ranking
+   * informational content, and AdSense reviewers read it as a sign that
+   * the page has an accountable editor rather than being abandoned.
+   */
+  lastReviewed?: string;
+  /**
+   * ISO 8601 date for the same review (e.g. "2026-05-05"). Used in the
+   * machine-readable `<time dateTime>` attribute. Optional but
+   * recommended; falls back to omitting the attribute if missing.
+   */
+  lastReviewedISO?: string;
   className?: string;
 };
 
@@ -86,6 +102,8 @@ export default function PageEducation({
   sections,
   faq,
   footer,
+  lastReviewed,
+  lastReviewedISO,
   className = "",
 }: Props) {
   const hasFaq = faq && faq.length > 0;
@@ -153,6 +171,34 @@ export default function PageEducation({
       ) : null}
 
       {footer ? <div className="pt-2">{footer}</div> : null}
+
+      {lastReviewed ? (
+        <p className="border-t border-white/[0.06] pt-5 text-xs text-[rgb(var(--ink-soft))]/80 [text-wrap:pretty]">
+          Curated by the{" "}
+          <Link
+            href="/editorial-team"
+            className="font-medium text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+            rel="author"
+          >
+            Life Decision Engine Editorial Team
+          </Link>
+          {" · "}
+          Last reviewed{" "}
+          {lastReviewedISO ? (
+            <time dateTime={lastReviewedISO}>{lastReviewed}</time>
+          ) : (
+            lastReviewed
+          )}
+          .{" "}
+          <Link
+            href="/editorial-standards"
+            className="text-[rgb(var(--ink-soft))] underline-offset-2 hover:text-[rgb(var(--ink))] hover:underline"
+          >
+            Our editorial standards
+          </Link>
+          .
+        </p>
+      ) : null}
     </section>
   );
 }

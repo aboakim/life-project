@@ -203,6 +203,8 @@ export default function HowWeUseAiPageClient() {
               a: "The analyzer itself is the AI tool, so opting out means not using it. The blog posts are AI-drafted and human-edited; if you only want fully human-written content, the experts directory and the community board are the right places.",
             },
           ]}
+          lastReviewed="May 5, 2026"
+          lastReviewedISO="2026-05-05"
         />
       </div>
     </MarketingPageShell>

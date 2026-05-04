@@ -289,6 +289,8 @@ export default function FieldNotesPageClient() {
             a: "Yes — the metrics on the right panel are derived from your text and are yours to keep, copy, or share. There is no proprietary scoring layered on top.",
           },
         ]}
+        lastReviewed="May 5, 2026"
+        lastReviewedISO="2026-05-05"
       />
       </div>
     </MarketingPageShell>

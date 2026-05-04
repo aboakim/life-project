@@ -205,6 +205,8 @@ export default function CommunityPageClient() {
             experts directory.
           </p>
         }
+        lastReviewed="May 5, 2026"
+        lastReviewedISO="2026-05-05"
       />
     </MarketingPageShell>
   );

@@ -197,6 +197,8 @@ export default function ExpertsPageEducation() {
             body before paying for an extended engagement.
           </p>
         }
+        lastReviewed="May 5, 2026"
+        lastReviewedISO="2026-05-05"
       />
     </section>
   );

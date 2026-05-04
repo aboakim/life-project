@@ -1648,6 +1648,136 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "decision-fatigue-and-big-life-choices",
+    title:
+      "Decision fatigue: why your evening choices are worse, and what to do about it",
+    description:
+      "Why your willpower drains as the day goes on, how decision fatigue distorts big life choices, and five practical ways to protect the calls that matter.",
+    tags: [
+      "decision-making",
+      "psychology",
+      "framework",
+      "career",
+      "values",
+    ],
+    readingMinutes: 9,
+    publishedAt: "2026-05-05",
+    author: "Life Decision Engine",
+    hero: {
+      eyebrow: "Decision psychology",
+      lede: "By 9 p.m. you have already made a few thousand small calls. The big one you've been postponing is now the worst-resourced decision you'll make all day.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "Most people think of a big life decision as a single moment — the night you finally sit down with a notebook, or the conversation you have on a Sunday walk. In reality, that moment lands at the end of a long string of smaller calls: what to wear, what to eat, which message to answer first, which colleague to push back on, what to tell your kid about screen time. Each of those small calls quietly draws from the same finite reservoir of cognitive energy as the big one. By the time you sit down to think clearly, the reservoir is half empty — and the decision you make from that state is rarely the decision you would have made fresh.",
+      },
+      {
+        kind: "p",
+        text: "Researchers call this decision fatigue. It is a real, measurable phenomenon, and it explains a surprising amount of why otherwise thoughtful adults end up with choices they later cannot defend.",
+      },
+      { kind: "h2", text: "What decision fatigue actually is" },
+      {
+        kind: "p",
+        text: "Decision fatigue is the deteriorating quality of decisions made by an individual after a long session of decision making. The classic study, by Roy Baumeister and colleagues at Florida State, watched shoppers configure complex products (cars, suits, kitchens) and showed that the longer the session, the more people defaulted to the recommended option, gave up on customisation, or made impulsive choices they later regretted. A separate, much-cited 2011 study of Israeli parole boards found that prisoners appearing first thing in the morning or right after a meal break were dramatically more likely to be granted parole than those appearing late in a session — same prisoners, same evidence, different time on the clock.",
+      },
+      {
+        kind: "p",
+        text: "The mechanism is contested at the edges, but the practical lesson holds across studies: as you accumulate decisions, you (a) become more risk-averse on the difficult ones, (b) become more impulsive on the easy ones, and (c) increasingly accept the default rather than evaluating alternatives. None of those modes is what you want when the call in front of you actually matters.",
+      },
+      {
+        kind: "h2",
+        text: "How it shows up in big life decisions, not just lunch orders",
+      },
+      {
+        kind: "p",
+        text: "Decision fatigue is usually discussed in low-stakes contexts (snack choices, online shopping). The danger in big decisions is exactly that we don't recognise the pattern. A few examples we hear repeatedly from people who use the analyzer:",
+      },
+      {
+        kind: "ul",
+        items: [
+          "The relocation that gets approved at 11 p.m. after a fight, because the alternative — having the conversation again next week — feels like more work than booking the flight.",
+          "The job offer accepted on the same call it was extended, because the recruiter pushed for an answer and the candidate had already made twenty smaller calls that day.",
+          "The breakup postponed for the fourth Sunday in a row, because the person knows they can't think clearly, but doesn't yet have language for why.",
+          "The mortgage signed during the lunch break in a busy week, because the bank's deadline overlaps with the candidate presentation at 3 p.m.",
+        ],
+      },
+      {
+        kind: "p",
+        text: "In each case the decision itself isn't the problem — it might even be the right one. The problem is that it was made at a moment when the person could not have known whether it was right or not, because the cognitive equipment they would have used to know was already exhausted.",
+      },
+      { kind: "h2", text: "Five symptoms of decision fatigue" },
+      {
+        kind: "p",
+        text: "Most of us are bad at noticing this in ourselves until we name it. Some warning signs to watch for:",
+      },
+      {
+        kind: "ol",
+        items: [
+          "You're picking the option that ends the conversation, not the one that fits the situation. Closing a tab is not the same as making a choice.",
+          "You're justifying a default by listing things you didn't think of an hour earlier — almost always a sign that you're rationalising rather than reasoning.",
+          "Small choices feel disproportionately heavy. If picking what to eat tonight feels harder than usual, your willpower budget is probably drawn down. Don't push that into a bigger choice.",
+          "You're snapping at people who didn't earn it. Irritability is one of the cleanest external markers of low cognitive reserve.",
+          "You're suddenly drawn to a totally new option that wasn't on the list. The brain reaches for novelty when it's tired; it confuses 'different' for 'progress.'",
+        ],
+      },
+      {
+        kind: "h2",
+        text: "Five practical strategies that actually help",
+      },
+      { kind: "h3", text: "1. Make the big decision at the start of the day" },
+      {
+        kind: "p",
+        text: "This is the simplest, highest-leverage rule and the one most people skip. Whatever the call is — sending the resignation email, calling the lawyer, signing the offer — do it in the first two hours after you wake, on a day when you have not already had a hard meeting. If the deadline is later, draft the decision in the morning and execute it in the morning the next day. The 24-hour delay almost never costs you the deal, and it dramatically lifts the quality of the decision.",
+      },
+      { kind: "h3", text: "2. Reduce the surface of small decisions on D-day" },
+      {
+        kind: "p",
+        text: "Plan your wardrobe the night before. Eat the same breakfast. Reschedule one-to-one meetings if you can. Tell colleagues you are off Slack until 11. The point is not minimalism for its own sake — it is to reserve the small willpower budget you have for the only call that actually needs it. Mark Zuckerberg's grey-T-shirt thing was easy to mock; the underlying logic is sound.",
+      },
+      { kind: "h3", text: "3. Externalise the thinking before you decide" },
+      {
+        kind: "p",
+        text: "A decision held in your head is a decision you keep re-running. Each re-run consumes willpower. Write the decision down — one sentence for the question, one sentence per option, one sentence for what you would tell a close friend in your shoes. The act of writing externalises the cycle and the loop ends. If the written version still looks coherent in the morning, the decision is probably ready.",
+      },
+      { kind: "h3", text: "4. Use a structured framework instead of free thought" },
+      {
+        kind: "p",
+        text: "Decision fatigue hits unstructured thinking hardest. A structured framework — scenarios, lenses, a timeline, a score — replaces willpower with process. You don't have to muster the energy to imagine the worst case fresh; the framework prompts you to write it. The free analyzer at the top of the homepage runs that exact loop in about ten minutes, which is well within the willpower budget of most adults at most times of the day.",
+      },
+      {
+        kind: "h3",
+        text: "5. Build a single 'no' rule for late-night escalation",
+      },
+      {
+        kind: "p",
+        text: "Before the situation arrives, agree with yourself: I do not commit to a life decision after 9 p.m. The rule is simple and brittle on purpose; the brittleness is what saves you. When the email arrives, when the partner pushes for an answer, when the recruiter says we need to know tonight — the answer is the rule, not a new round of thinking. Almost no genuinely good decision requires a same-evening commitment. The ones that do are usually engineered pressure, not real urgency.",
+      },
+      { kind: "h2", text: "When to push through vs. when to delay" },
+      {
+        kind: "p",
+        text: "Sometimes you genuinely have to decide today, in a tired state. A surgical consent form. A custody handover deadline. A counter-offer that closes at midnight. In those cases, fall back to two specific moves. First, narrow the choice: do not let yourself reconsider the alternatives you already crossed out earlier in the day. Second, take a fifteen-minute break with food, water, and zero screens before signing — not as a relaxation hack but because basic blood-sugar restoration measurably improves choice quality in fatigued conditions.",
+      },
+      {
+        kind: "p",
+        text: "If, on the other hand, the deadline is movable by even 12 hours, move it. The cost of explaining the delay is almost always smaller than the cost of a decision made from an exhausted state.",
+      },
+      { kind: "h2", text: "Where this fits with the rest of the site" },
+      {
+        kind: "p",
+        text: "The analyzer at the top of the homepage was designed for exactly the moment when decision fatigue is highest: the evening you finally sit down to think about something hard. The structure does some of the cognitive work for you — you don't have to remember to imagine three scenarios or apply four lenses, the page asks. That is not a magic shortcut; it is just a way to make the equipment you have left in the tank stretch further. Use it as a first pass, then sleep on the result, then revisit it in the morning before you commit to anything.",
+      },
+      {
+        kind: "p",
+        text: "If the call genuinely requires a professional — a lawyer, a doctor, a financial planner, a therapist — bring the analyzer's output to that meeting. The first 15 minutes of any expert conversation are usually intake; a structured one-pager skips that and lets you start with the actual question.",
+      },
+      {
+        kind: "quote",
+        text: "Most bad life decisions are not bad ideas. They are good ideas made at the wrong hour.",
+      },
+    ],
+  },
 ];
 
 export function getPostBySlug(slug: string): BlogPost | undefined {

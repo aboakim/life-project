@@ -350,6 +350,8 @@ export default function RegisterExpertForm() {
             a: "Reply to the welcome email or write to /contact with the change. Self-serve editing is on the roadmap; today, edits go through an editor so the listing quality stays consistent.",
           },
         ]}
+        lastReviewed="May 5, 2026"
+        lastReviewedISO="2026-05-05"
       />
     </MarketingPageShell>
   );
