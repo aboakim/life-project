@@ -13,6 +13,26 @@ type Props = {
   elevated?: boolean;
 };
 
+/** Opens the network’s share UI in a centered popup so the user stays on our site. */
+function openShareComposer(url: string) {
+  if (typeof window === "undefined") return;
+  const w = Math.min(640, window.screen.width - 48);
+  const h = Math.min(720, window.screen.height - 96);
+  const sx = window.screenX ?? window.screenLeft ?? 0;
+  const sy = window.screenY ?? window.screenTop ?? 0;
+  const sw = window.outerWidth ?? document.documentElement.clientWidth ?? 1024;
+  const sh = window.outerHeight ?? document.documentElement.clientHeight ?? 768;
+  const left = Math.max(0, sx + (sw - w) / 2);
+  const top = Math.max(0, sy + (sh - h) / 2);
+  const feat = `popup=yes,noopener,noreferrer,width=${Math.floor(w)},height=${Math.floor(h)},left=${Math.floor(left)},top=${Math.floor(top)},scrollbars=yes,resizable=yes`;
+  const win = window.open(url, "lde_share", feat);
+  if (!win || win.closed) {
+    window.open(url, "_blank", "noopener,noreferrer");
+  } else {
+    win.focus();
+  }
+}
+
 function IconBox({
   children,
   className,
@@ -199,7 +219,7 @@ export default function SocialShareModal({
       await navigator.clipboard.writeText(fullText);
       setCopied(true);
       window.setTimeout(() => setCopied(false), 2000);
-      window.open("https://www.instagram.com/", "_blank", "noopener,noreferrer");
+      openShareComposer("https://www.instagram.com/");
     } catch {
       /* ignore */
     }
@@ -251,11 +271,10 @@ export default function SocialShareModal({
               </span>
             </button>
           ) : null}
-          <a
-            href={urls.facebook}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            type="button"
             className={rowClass}
+            onClick={() => openShareComposer(urls.facebook)}
           >
             <IconBox className="bg-[#1877F2] text-white">
               <IconFacebook />
@@ -264,12 +283,11 @@ export default function SocialShareModal({
             <span aria-hidden className="text-[rgb(var(--ink-soft))]">
               ↗
             </span>
-          </a>
-          <a
-            href={urls.x}
-            target="_blank"
-            rel="noopener noreferrer"
+          </button>
+          <button
+            type="button"
             className={rowClass}
+            onClick={() => openShareComposer(urls.x)}
           >
             <IconBox className="bg-black text-white">
               <IconX />
@@ -278,12 +296,11 @@ export default function SocialShareModal({
             <span aria-hidden className="text-[rgb(var(--ink-soft))]">
               ↗
             </span>
-          </a>
-          <a
-            href={urls.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
+          </button>
+          <button
+            type="button"
             className={rowClass}
+            onClick={() => openShareComposer(urls.linkedin)}
           >
             <IconBox className="bg-[#0A66C2] text-white">
               <IconLinkedIn />
@@ -292,12 +309,11 @@ export default function SocialShareModal({
             <span aria-hidden className="text-[rgb(var(--ink-soft))]">
               ↗
             </span>
-          </a>
-          <a
-            href={urls.whatsapp}
-            target="_blank"
-            rel="noopener noreferrer"
+          </button>
+          <button
+            type="button"
             className={rowClass}
+            onClick={() => openShareComposer(urls.whatsapp)}
           >
             <IconBox className="bg-[#25D366] text-white">
               <IconWhatsApp />
@@ -306,12 +322,11 @@ export default function SocialShareModal({
             <span aria-hidden className="text-[rgb(var(--ink-soft))]">
               ↗
             </span>
-          </a>
-          <a
-            href={urls.telegram}
-            target="_blank"
-            rel="noopener noreferrer"
+          </button>
+          <button
+            type="button"
             className={rowClass}
+            onClick={() => openShareComposer(urls.telegram)}
           >
             <IconBox className="bg-[#26A5E4] text-white">
               <IconTelegram />
@@ -320,12 +335,11 @@ export default function SocialShareModal({
             <span aria-hidden className="text-[rgb(var(--ink-soft))]">
               ↗
             </span>
-          </a>
-          <a
-            href={urls.reddit}
-            target="_blank"
-            rel="noopener noreferrer"
+          </button>
+          <button
+            type="button"
             className={rowClass}
+            onClick={() => openShareComposer(urls.reddit)}
           >
             <IconBox className="bg-[#FF4500] text-white">
               <IconReddit />
@@ -334,7 +348,7 @@ export default function SocialShareModal({
             <span aria-hidden className="text-[rgb(var(--ink-soft))]">
               ↗
             </span>
-          </a>
+          </button>
           <button type="button" onClick={onInstagram} className={rowClass}>
             <IconBox className="bg-gradient-to-br from-[#f09433] via-[#dc2743] to-[#bc1888] text-white">
               <IconInstagram />
