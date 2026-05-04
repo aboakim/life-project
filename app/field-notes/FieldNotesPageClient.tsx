@@ -271,6 +271,24 @@ export default function FieldNotesPageClient() {
             ),
           },
         ]}
+        faq={[
+          {
+            q: "Does my text leave the browser?",
+            a: "No. The text you paste is analyzed entirely client-side using a small statistics module bundled into the page. There is no upload, no server call, and no logging — you can confirm it by opening your browser's network tab while typing.",
+          },
+          {
+            q: "What language does the analyzer support?",
+            a: "The tokenizer treats Latin and Armenian alphabets natively and works for most European languages out of the box. For non-Latin scripts that aren't Armenian, raw word counts still work, but the top-word ranking may include common stop-words because the per-language stop-list isn't loaded.",
+          },
+          {
+            q: "How accurate is the reading-time estimate?",
+            a: "It assumes 220 words per minute, which is the median for adult silent reading on a screen. Treat it as a rough planning number rather than a precise stopwatch — managers reading on a phone are faster, students reading dense material are slower.",
+          },
+          {
+            q: "Can I use this output in a public document?",
+            a: "Yes — the metrics on the right panel are derived from your text and are yours to keep, copy, or share. There is no proprietary scoring layered on top.",
+          },
+        ]}
       />
       </div>
     </MarketingPageShell>

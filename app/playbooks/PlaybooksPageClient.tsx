@@ -167,6 +167,24 @@ export default function PlaybooksPageClient() {
             ),
           },
         ]}
+        faq={[
+          {
+            q: "How is a playbook different from the blog index?",
+            a: "The blog index lists every article we've published, sorted by date or tag. A playbook is a curated, opinionated path of three to four articles for one specific decision — chosen by an editor in a deliberate reading order rather than alphabetical or chronological.",
+          },
+          {
+            q: "Are playbooks free?",
+            a: "Yes. Every article in every playbook is free to read with no signup. The playbook itself is also free; we don't gate the reading order behind a paywall.",
+          },
+          {
+            q: "Can I suggest a new playbook track?",
+            a: "Yes. Reach out via the contact page with the decision you'd want a playbook for and a sentence on why you're stuck. We add a new track when we have at least three articles deep enough to make the path useful.",
+          },
+          {
+            q: "What if I want a real human's opinion after reading?",
+            a: "After working through a playbook, the next step is usually a short conversation with someone who has skin in the same game. The experts directory lists psychologists, lawyers, financial planners, and immigration counsel who take 30 to 60 minute first conversations.",
+          },
+        ]}
       />
     </MarketingPageShell>
   );

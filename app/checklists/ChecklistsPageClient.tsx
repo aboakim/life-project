@@ -279,6 +279,24 @@ export default function ChecklistsPageClient() {
               ),
             },
           ]}
+          faq={[
+            {
+              q: "Can I print the checklists?",
+              a: "Yes. Each page has a Print button that opens your browser's print dialog. From there you can send to a paper printer or save as a PDF — both produce a clean one-pager without the site chrome.",
+            },
+            {
+              q: "Are these checklists translated?",
+              a: "Yes. The labels and items follow the same eight-language localization as the rest of the site (English, Armenian, Russian, German, French, Spanish, Italian, Arabic). Switch language in the header and the printable view follows.",
+            },
+            {
+              q: "Can I edit a checklist before printing?",
+              a: "There is no built-in editor; the items are picked deliberately and we don't want to invite drift. If you need to add a personal item, print to PDF and annotate it with a free PDF reader (Preview, Adobe Reader, or any browser).",
+            },
+            {
+              q: "Why these three checklists and not more?",
+              a: "Relocation, a job offer, and a relationship-or-cohabitation conversation cover the three decisions that most often arrive with a hard deadline and a paper trail. Other decisions (kids, health, retirement) deserve longer essays rather than checklists, and live on the blog.",
+            },
+          ]}
         />
       </div>
     </MarketingPageShell>
