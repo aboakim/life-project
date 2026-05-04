@@ -1,22 +1,25 @@
 /**
- * Curated Unsplash URLs — order matches `heroSlides` captions (see lib/i18n/ui.ts).
- * ixlib helps stable delivery from images.unsplash.com.
+ * Self-hosted hero slides. Mirrored once from images.unsplash.com (curated set)
+ * into /public/hero/ so they share the Vercel edge cache with the page HTML —
+ * eliminates a third-party DNS+TLS hop and the cold-region image optimizer
+ * miss that was pushing LCP into the "needs improvement" range (≥3s) for the
+ * US/EU. `next/image` still re-encodes (AVIF/WebP) and srcset-resizes them.
  */
 export const HERO_SLIDE_IMAGE_URLS = [
-  // 0 · scenarios / horizon — see farther before you commit
-  "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=880&q=65",
+  // 0 · scenarios / horizon — see farther before you commit (LCP slide)
+  "/hero/slide-0.jpg",
   // 1 · structured lens, not guesswork — plans & measurement
-  "https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=880&q=65",
+  "/hero/slide-1.jpg",
   // 2 · humans in the loop — expertise
-  "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=880&q=65",
+  "/hero/slide-2.jpg",
   // 3 · calm workspace — career, relocation, life forks
-  "https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-4.0.3&auto=format&fit=crop&w=880&q=65",
+  "/hero/slide-3.jpg",
   // 4 · score & timeline — clarity / metrics (not decorative stars)
-  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=880&q=65",
+  "/hero/slide-4.jpg",
   // 5 · fork in the road — name the paths
-  "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=880&q=65",
-  // 6 · reflection — write, pause, revisit (verified 200; prior id returned 404)
-  "https://images.unsplash.com/photo-1416339306562-f3d12fefd36f?ixlib=rb-4.0.3&auto=format&fit=crop&w=880&q=65",
+  "/hero/slide-5.jpg",
+  // 6 · reflection — write, pause, revisit
+  "/hero/slide-6.jpg",
 ] as const;
 
 export const PRODUCT_STRIP_IMAGE_URLS = [
