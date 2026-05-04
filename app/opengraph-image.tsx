@@ -3,6 +3,10 @@ import { ImageResponse } from "next/og";
 /**
  * Site-wide OpenGraph image — matches home hero copy and visual language
  * (accent gradients, dark base). 1200×630 for Twitter/LinkedIn/Telegram.
+ *
+ * Version: v2 (2026-05) — hero copy aligned to "Stop overthinking. Decide in seconds."
+ * Bumping the version invalidates the Next.js content hash so social platforms
+ * fetch a fresh preview instead of reusing the previous deploy's cached image.
  */
 export const alt =
   "Life Decision Engine — Stop overthinking. Decide in seconds.";
@@ -92,7 +96,7 @@ export default function OgImage() {
               flexDirection: "row",
               flexWrap: "wrap",
               alignItems: "baseline",
-              gap: "10px 14px",
+              gap: "10px 22px",
             }}
           >
             <span
