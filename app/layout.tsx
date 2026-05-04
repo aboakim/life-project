@@ -73,12 +73,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: getMetadataBase(),
   title: {
-    default:
-      "Life Decision Engine — AI decision analysis for big life choices (USA & worldwide)",
+    default: "Life Decision Engine — Stop overthinking. Decide in seconds.",
     template: "%s | Life Decision Engine",
   },
   description:
-    "Stop overthinking. Get instant AI scenarios for big life decisions—6 months to 5 years out. Private by design; talk to a pro only if you want. Not generic chat.",
+    "Get instant clarity on any decision using AI-powered scenarios—not random chat. Private session · Structured scenarios · Experts optional.",
   applicationName: "Life Decision Engine",
   authors: [{ name: "Life Decision Engine Editorial Team" }],
   creator: "Life Decision Engine",
@@ -130,9 +129,9 @@ export const metadata: Metadata = {
     "United States",
   ],
   openGraph: {
-    title: "Life Decision Engine — structured AI for major life decisions",
+    title: "Life Decision Engine — Stop overthinking. Decide in seconds.",
     description:
-      "Best/worst/likely scenarios, finance & psychology lenses, 6-month to 5-year view, decision score. Experts worldwide.",
+      "Get instant clarity on any decision using AI-powered scenarios—not random chat. Private session · Structured scenarios · Experts optional.",
     type: "website",
     url: "/",
     locale: "en_US",
@@ -140,9 +139,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Life Decision Engine — AI + global expert network",
+    title: "Life Decision Engine — Stop overthinking. Decide in seconds.",
     description:
-      "Make big decisions with scenarios, risk lenses, and optional human experts.",
+      "Get instant clarity on any decision using AI-powered scenarios—not random chat. Private session · Structured scenarios · Experts optional.",
   },
   other: {
     "google-adsense-account": ADSENSE_CLIENT,

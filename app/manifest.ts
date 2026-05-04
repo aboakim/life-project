@@ -10,7 +10,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Life Decision Engine",
     short_name: "Decision Engine",
     description:
-      "Structured AI analysis for big life decisions — scenarios, lenses, timelines, and a decision score.",
+      "Stop overthinking. Decide in seconds. AI-powered scenarios—not random chat. Private session · Structured scenarios · Experts optional.",
     id: "/",
     start_url: "/",
     scope: "/",

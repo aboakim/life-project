@@ -31,7 +31,7 @@ export default function SiteJsonLd() {
       },
     ],
     description:
-      "Structured AI for major life decisions: scenarios, lenses, timelines, and a decision score. Free core, Premium subscription, and a refer-20-visits promotion. Optional directory of human experts.",
+      "Get instant clarity on any decision using AI-powered scenarios—not random chat. Private session, structured scenarios, experts optional.",
     knowsAbout: [
       "decision analysis",
       "career decisions",

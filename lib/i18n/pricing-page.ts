@@ -78,7 +78,7 @@ const hy: PricingCopy = {
   premiumShareIntro:
     "Կիսվեք հղումով ցանկացած կայքից և բոլոր սոցցանցերում՝ Facebook, Instagram, X, LinkedIn, Telegram, WhatsApp, Reddit, Threads և այլն։",
   premiumShareBlurb:
-    "Մեծ կյանքի որոշում կայացնե՞լ։ Ստուգեք այս կառուցված AI-ն։",
+    "Կայացրո՛ր լավ կյանքի որոշումներ րոպեների մեջ։ Համեմատի՛ր տարբերակները, տե՛ս արդյունքները, հստա՛ր որոշի՛ր. կառուցված վերլուծություն, ոչ պատահական chat։",
   copySiteLink: "Պատճենել կայքի հղումը",
   siteLinkCopied: "Հղումը պատճենվեց։",
   shareNative: "Կիսվել…",
@@ -89,7 +89,8 @@ const hy: PricingCopy = {
   shareTelegram: "Telegram",
   shareReddit: "Reddit",
   shareInstagram: "Ինստագրամ",
-  shareEmailSubject: "Life Decision Engine",
+  shareEmailSubject:
+    "Կյանքի որոշումների AI — կայացրո՛ր լավ որոշումներ րոպեների մեջ",
 };
 
 const en: PricingCopy = {
@@ -129,7 +130,7 @@ const en: PricingCopy = {
   premiumShareIntro:
     "Share your link from any page on the site across socials: Facebook, Instagram, X, LinkedIn, Telegram, WhatsApp, Reddit, Threads, and more.",
   premiumShareBlurb:
-    "Making a big life decision? Try this structured AI decision engine.",
+    "Stop overthinking. Decide in seconds. Get instant clarity on any decision using AI-powered scenarios—not random chat.",
   copySiteLink: "Copy site link",
   siteLinkCopied: "Link copied.",
   shareNative: "Share…",
@@ -140,7 +141,8 @@ const en: PricingCopy = {
   shareTelegram: "Telegram",
   shareReddit: "Reddit",
   shareInstagram: "Instagram",
-  shareEmailSubject: "Life Decision Engine",
+  shareEmailSubject:
+    "Life Decision Engine — Stop overthinking. Decide in seconds.",
 };
 
 const navPricingByLocale: Partial<Record<AppLocale, string>> = {
