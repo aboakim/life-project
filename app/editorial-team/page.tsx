@@ -99,7 +99,14 @@ export default function EditorialTeamPage() {
             </li>
             <li>
               The psychology of large decisions — regret, ambiguity, the
-              role of emotion, decision fatigue.
+              role of emotion,{" "}
+              <Link
+                href="/blog/decision-fatigue-and-big-life-choices"
+                className="font-medium text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+              >
+                decision fatigue
+              </Link>
+              .
             </li>
           </ul>
         </section>
