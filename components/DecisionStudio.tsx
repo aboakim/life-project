@@ -439,8 +439,14 @@ export default function DecisionStudio({
     const armWelcomeAfterLoad = () => {
       if (cancelled) return;
       const narrow = window.matchMedia("(max-width: 767.98px)").matches;
-      const bootDelayMs = narrow ? 160 : 50;
-      const idleTimeoutMs = narrow ? 780 : 480;
+      /**
+       * Desktop Lighthouse was scoring TBT ~2.5s partly because the welcome
+       * chunk hydrates in the same window as the giant DecisionStudio tree.
+       * Mobile keeps a snappier delay; desktop waits longer so LCP + first
+       * hydration burst finish before we mount the modal portal.
+       */
+      const bootDelayMs = narrow ? 160 : 380;
+      const idleTimeoutMs = narrow ? 780 : 2800;
 
       bootTimer = window.setTimeout(() => {
         if (cancelled) return;
@@ -462,7 +468,7 @@ export default function DecisionStudio({
             () => {
               if (!cancelled) setDeferWelcomeMount(true);
             },
-            narrow ? 340 : 160,
+            narrow ? 340 : 960,
           );
         }
       }, bootDelayMs);

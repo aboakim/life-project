@@ -155,7 +155,13 @@ export default function HeroVisualSlider({
                   priority={i === 0}
                   fetchPriority={i === 0 ? "high" : "low"}
                   loading={i === 0 ? "eager" : "lazy"}
-                  decoding={i === 0 ? "sync" : "async"}
+                  /**
+                   * `sync` decode blocks the main thread and inflates TBT in
+                   * Lighthouse even when LCP is only ~100ms later. `async`
+                   * keeps decode off the critical path; priority + eager fetch
+                   * still prioritise the LCP image.
+                   */
+                  decoding="async"
                   draggable={false}
                 />
               ) : (
