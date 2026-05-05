@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import {
   Geist,
   Geist_Mono,
@@ -179,19 +180,21 @@ export default function RootLayout({
             ].join(""),
           }}
         />
-        {/*
-          AdSense loader is injected client-side only when <AdSenseBanner /> mounts
-          (idle-scheduled) — avoids loading ~200KB+ ad JS on pages with no ad slot.
-          Publisher id remains in metadata.other["google-adsense-account"] for verification.
-
-          No preconnect to Unsplash/fonts.gstatic: hero & body images use next/image → same-origin
-          /_next/image (edge fetches upstream). Extra third-party preconnects add TLS work on slow
-          links without helping the browser’s first paint path.
-        */}
       </head>
       <body
         className={`${displaySans.variable} ${geistSans.variable} ${geistMono.variable} ${notoArmenian.variable} ${notoSans.variable} ${notoArabic.variable} font-sans text-base leading-relaxed antialiased md:text-[1.0625rem] lg:text-[1.125rem]`}
       >
+        {/*
+          Site-wide AdSense bootstrap (matches AdSense → Verify code snippet).
+          afterInteractive: after hydration, non-blocking. Consent default in <head>
+          runs first. ensureAdsbygoogleScript skips if this tag already exists.
+        */}
+        <Script
+          id="adsense-adsbygoogle"
+          strategy="afterInteractive"
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(ADSENSE_CLIENT)}`}
+          crossOrigin="anonymous"
+        />
         <SkipToContent />
         <SiteJsonLd />
         <GlobalNav />
