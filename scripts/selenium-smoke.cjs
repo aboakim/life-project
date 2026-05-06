@@ -90,7 +90,11 @@ async function run() {
     }
 
     // GSC sometimes lists space-shaped dupes; middleware should 301 to hyphens.
-    await driver.get(`${BASE}/blog/parenting%20decision%20framework`);
+    const spaceyArticle = new URL(
+      "/blog/parenting decision framework",
+      `${BASE}/`,
+    ).href;
+    await driver.get(spaceyArticle);
     await driver.wait(until.elementLocated(By.css("body")), 20000);
     let blogUrl = await driver.getCurrentUrl();
     if (!/\/blog\/parenting-decision-framework(?:\?|#|$)/.test(blogUrl)) {
@@ -101,7 +105,8 @@ async function run() {
       console.log("PASS: blog space-slug redirects to canonical");
     }
 
-    await driver.get(`${BASE}/blog/tag/remote%20work`);
+    const spaceyTag = new URL("/blog/tag/remote work", `${BASE}/`).href;
+    await driver.get(spaceyTag);
     await driver.wait(until.elementLocated(By.css("body")), 20000);
     blogUrl = await driver.getCurrentUrl();
     if (!/\/blog\/tag\/remote-work(?:\?|#|$)/.test(blogUrl)) {

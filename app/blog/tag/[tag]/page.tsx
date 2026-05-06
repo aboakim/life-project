@@ -6,7 +6,7 @@ import NewsletterCta from "@/components/blog/NewsletterCta";
 import {
   getAllTagSlugs,
   getPostsByTagSlug,
-  normalizeBlogSegment,
+  canonicalBlogPathSegment,
   tagToSlug,
 } from "@/lib/blog/posts";
 import { getSiteUrlString } from "@/lib/site-url";
@@ -31,7 +31,7 @@ export async function generateMetadata({
   const posts = getPostsByTagSlug(tag);
   if (posts.length === 0) return { title: "Tag not found" };
 
-  const canonicalTag = normalizeBlogSegment(tag);
+  const canonicalTag = canonicalBlogPathSegment(tag);
   const label = humaniseTag(canonicalTag);
   return {
     title: `${label} — articles | Life Decision Engine`,
@@ -62,7 +62,7 @@ export default async function TagPage({
   const posts = getPostsByTagSlug(tag);
   if (posts.length === 0) notFound();
 
-  const canonicalTag = normalizeBlogSegment(tag);
+  const canonicalTag = canonicalBlogPathSegment(tag);
   const label = humaniseTag(canonicalTag);
   const base = getSiteUrlString().replace(/\/$/, "");
 

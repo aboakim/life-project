@@ -14,7 +14,7 @@ import {
   getAllSlugs,
   getPostBySlug,
   getRelatedPosts,
-  normalizeBlogSegment,
+  canonicalBlogPathSegment,
   tagToSlug,
 } from "@/lib/blog/posts";
 import { getSiteUrlString } from "@/lib/site-url";
@@ -58,7 +58,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) return { title: "Article not found" };
-  const canonicalSlug = normalizeBlogSegment(slug);
+  const canonicalSlug = canonicalBlogPathSegment(slug);
   return {
     title: `${post.title} — Life Decision Engine`,
     description: post.description,

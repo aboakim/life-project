@@ -7,9 +7,13 @@
  * topics so the site has authentic, indexable content for AdSense review.
  */
 
-import { normalizeBlogSegment, tagToSlug } from "./slug-normalize";
+import { canonicalBlogPathSegment, tagToSlug } from "./slug-normalize";
 
-export { normalizeBlogSegment, tagToSlug } from "./slug-normalize";
+export {
+  canonicalBlogPathSegment,
+  normalizeBlogSegment,
+  tagToSlug,
+} from "./slug-normalize";
 
 export type BlogBlock =
   | { kind: "p"; text: string }
@@ -1785,7 +1789,7 @@ export const BLOG_POSTS: BlogPost[] = [
 ];
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
-  const key = normalizeBlogSegment(slug);
+  const key = canonicalBlogPathSegment(slug);
   if (!key) return undefined;
   return BLOG_POSTS.find((p) => p.slug === key);
 }
@@ -1811,7 +1815,7 @@ export function getAllTagSlugs(): string[] {
 
 /** All posts for a given tag slug (hyphen / space / casing variants). */
 export function getPostsByTagSlug(slug: string): BlogPost[] {
-  const target = normalizeBlogSegment(slug);
+  const target = canonicalBlogPathSegment(slug);
   if (!target) return [];
   return getAllPosts().filter((p) =>
     p.tags.some((t) => tagToSlug(t) === target),

@@ -17,3 +17,26 @@ export function tagToSlug(tag: string): string {
 export function normalizeBlogSegment(segment: string): string {
   return tagToSlug(segment.replace(/-/g, " "));
 }
+
+/**
+ * Decode `%20`, `+`, and occasional double-encoding before slugify.
+ * Without this, literal `%20` in a path segment becomes `20` after `[^a-z0-9...]` stripping.
+ */
+export function safeDecodeUrlSegment(segment: string): string {
+  let s = segment.replace(/\+/g, " ");
+  for (let i = 0; i < 3; i++) {
+    try {
+      const next = decodeURIComponent(s);
+      if (next === s) break;
+      s = next;
+    } catch {
+      break;
+    }
+  }
+  return s;
+}
+
+/** Segment as stored in canonical URLs: decode → hyphenated lowercase. */
+export function canonicalBlogPathSegment(segment: string): string {
+  return normalizeBlogSegment(safeDecodeUrlSegment(segment));
+}

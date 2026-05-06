@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 
-import { normalizeBlogSegment } from "@/lib/blog/slug-normalize";
+import { canonicalBlogPathSegment } from "@/lib/blog/slug-normalize";
 
 /**
  * Reject common probe/scan paths early (defense in depth; not a full WAF).
@@ -56,11 +56,11 @@ function redirectIfBlogPathNeedsNormalization(
 
   if (segments.length === 2 && segments[1] !== "tag") {
     const raw = segments[1];
-    const norm = normalizeBlogSegment(raw);
+    const norm = canonicalBlogPathSegment(raw);
     if (norm && norm !== raw) normalized = `/blog/${norm}`;
   } else if (segments.length === 3 && segments[1] === "tag") {
     const raw = segments[2];
-    const norm = normalizeBlogSegment(raw);
+    const norm = canonicalBlogPathSegment(raw);
     if (norm && norm !== raw) normalized = `/blog/tag/${norm}`;
   }
 
