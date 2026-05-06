@@ -27,7 +27,8 @@
     "db:push": "prisma db push",
     "favicons": "node scripts/generate-favicons.mjs",
     "video:record-site": "node scripts/record-site-promo.cjs",
-    "email:test-nudge": "node scripts/resend-nudge-test.mjs"
+    "email:test-nudge": "node scripts/resend-nudge-test.mjs",
+    "test:selenium": "node scripts/selenium-smoke.cjs"
   },
   "dependencies": {
     "@marsidev/react-turnstile": "^1.5.0",
@@ -49,6 +50,7 @@
     "playwright": "^1.49.1",
     "postcss": "^8.4.49",
     "prisma": "^6.19.3",
+    "selenium-webdriver": "^4.43.0",
     "sharp": "^0.33.5",
     "tailwindcss": "^3.4.16",
     "typescript": "^5.7.2"
