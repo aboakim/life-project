@@ -3,7 +3,7 @@ import Link from "next/link";
 import MarketingPageShell from "@/components/layout/MarketingPageShell";
 import NewsletterCta from "@/components/blog/NewsletterCta";
 import BlogSearch, { type BlogSearchItem } from "@/components/blog/BlogSearch";
-import { getAllPosts, getAllTagSlugs } from "@/lib/blog/posts";
+import { getAllPosts, getAllTagSlugs, tagToSlug } from "@/lib/blog/posts";
 import { getSiteUrlString } from "@/lib/site-url";
 
 export const metadata: Metadata = {
@@ -108,7 +108,7 @@ export default function BlogIndexPage() {
             {tagSlugs.map((t) => (
               <li key={t}>
                 <Link
-                  href={`/blog/tag/${t}`}
+                  href={`/blog/tag/${tagToSlug(t)}`}
                   className="inline-flex rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs text-[rgb(var(--ink-soft))] transition hover:border-[rgb(var(--accent))]/35 hover:text-[rgb(var(--ink))]"
                 >
                   #{humaniseTag(t)}

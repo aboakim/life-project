@@ -88,6 +88,29 @@ async function run() {
     } else {
       console.log("PASS: /ads.txt mentions AdSense");
     }
+
+    // GSC sometimes lists space-shaped dupes; middleware should 301 to hyphens.
+    await driver.get(`${BASE}/blog/parenting%20decision%20framework`);
+    await driver.wait(until.elementLocated(By.css("body")), 20000);
+    let blogUrl = await driver.getCurrentUrl();
+    if (!/\/blog\/parenting-decision-framework(?:\?|#|$)/.test(blogUrl)) {
+      failures.push(
+        `blog redirect: expected .../parenting-decision-framework; got ${blogUrl}`,
+      );
+    } else {
+      console.log("PASS: blog space-slug redirects to canonical");
+    }
+
+    await driver.get(`${BASE}/blog/tag/remote%20work`);
+    await driver.wait(until.elementLocated(By.css("body")), 20000);
+    blogUrl = await driver.getCurrentUrl();
+    if (!/\/blog\/tag\/remote-work(?:\?|#|$)/.test(blogUrl)) {
+      failures.push(
+        `tag redirect: expected .../blog/tag/remote-work; got ${blogUrl}`,
+      );
+    } else {
+      console.log("PASS: tag space-slug redirects to canonical");
+    }
   } finally {
     await driver.quit();
   }

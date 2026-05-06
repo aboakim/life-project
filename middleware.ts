@@ -1,5 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 
+import { normalizeBlogSegment } from "@/lib/blog/slug-normalize";
+
 /**
  * Reject common probe/scan paths early (defense in depth; not a full WAF).
  * Does not replace Vercel firewall, dependency updates, or secrets hygiene.
@@ -39,10 +41,41 @@ function isBlockedPath(pathname: string): boolean {
   return false;
 }
 
+/**
+ * 301 space / odd-casing blog URLs to a single hyphenated lowercase slug so
+ * crawlers consolidate on the canonical path (see GSC "Discovered" dupes).
+ */
+function redirectIfBlogPathNeedsNormalization(
+  request: NextRequest,
+): NextResponse | null {
+  const pathname = request.nextUrl.pathname;
+  const segments = pathname.split("/").filter(Boolean);
+  if (segments[0] !== "blog") return null;
+
+  let normalized: string | null = null;
+
+  if (segments.length === 2 && segments[1] !== "tag") {
+    const raw = segments[1];
+    const norm = normalizeBlogSegment(raw);
+    if (norm && norm !== raw) normalized = `/blog/${norm}`;
+  } else if (segments.length === 3 && segments[1] === "tag") {
+    const raw = segments[2];
+    const norm = normalizeBlogSegment(raw);
+    if (norm && norm !== raw) normalized = `/blog/tag/${norm}`;
+  }
+
+  if (!normalized) return null;
+  const url = request.nextUrl.clone();
+  url.pathname = normalized;
+  return NextResponse.redirect(url, 301);
+}
+
 export function middleware(request: NextRequest) {
   if (isBlockedPath(request.nextUrl.pathname)) {
     return new NextResponse(null, { status: 404 });
   }
+  const blogRedirect = redirectIfBlogPathNeedsNormalization(request);
+  if (blogRedirect) return blogRedirect;
   return NextResponse.next();
 }
 

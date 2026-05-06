@@ -6,6 +6,7 @@ import NewsletterCta from "@/components/blog/NewsletterCta";
 import {
   getAllTagSlugs,
   getPostsByTagSlug,
+  normalizeBlogSegment,
   tagToSlug,
 } from "@/lib/blog/posts";
 import { getSiteUrlString } from "@/lib/site-url";
@@ -30,11 +31,12 @@ export async function generateMetadata({
   const posts = getPostsByTagSlug(tag);
   if (posts.length === 0) return { title: "Tag not found" };
 
-  const label = humaniseTag(tag);
+  const canonicalTag = normalizeBlogSegment(tag);
+  const label = humaniseTag(canonicalTag);
   return {
     title: `${label} — articles | Life Decision Engine`,
     description: `Long-form essays tagged “${label}”: frameworks and scripts for real-world ${label.toLowerCase()} decisions.`,
-    alternates: { canonical: `/blog/tag/${tag}` },
+    alternates: { canonical: `/blog/tag/${canonicalTag}` },
     openGraph: {
       title: `${label} — Life Decision Engine`,
       description: `Articles on ${label.toLowerCase()} from Life Decision Engine.`,
@@ -60,7 +62,8 @@ export default async function TagPage({
   const posts = getPostsByTagSlug(tag);
   if (posts.length === 0) notFound();
 
-  const label = humaniseTag(tag);
+  const canonicalTag = normalizeBlogSegment(tag);
+  const label = humaniseTag(canonicalTag);
   const base = getSiteUrlString().replace(/\/$/, "");
 
   const breadcrumbJsonLd = {
@@ -73,7 +76,7 @@ export default async function TagPage({
         "@type": "ListItem",
         position: 3,
         name: label,
-        item: `${base}/blog/tag/${tag}`,
+        item: `${base}/blog/tag/${canonicalTag}`,
       },
     ],
   };

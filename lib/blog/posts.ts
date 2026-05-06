@@ -7,6 +7,10 @@
  * topics so the site has authentic, indexable content for AdSense review.
  */
 
+import { normalizeBlogSegment, tagToSlug } from "./slug-normalize";
+
+export { normalizeBlogSegment, tagToSlug } from "./slug-normalize";
+
 export type BlogBlock =
   | { kind: "p"; text: string }
   | { kind: "h2"; text: string }
@@ -1781,7 +1785,9 @@ export const BLOG_POSTS: BlogPost[] = [
 ];
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
-  return BLOG_POSTS.find((p) => p.slug === slug);
+  const key = normalizeBlogSegment(slug);
+  if (!key) return undefined;
+  return BLOG_POSTS.find((p) => p.slug === key);
 }
 
 export function getAllPosts(): BlogPost[] {
@@ -1803,19 +1809,10 @@ export function getAllTagSlugs(): string[] {
   return [...seen].sort();
 }
 
-/** Turn a human tag ("decision-making") into a safe URL slug. */
-export function tagToSlug(tag: string): string {
-  return tag
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-");
-}
-
-/** All posts for a given tag slug (case-insensitive). */
+/** All posts for a given tag slug (hyphen / space / casing variants). */
 export function getPostsByTagSlug(slug: string): BlogPost[] {
-  const target = slug.toLowerCase();
+  const target = normalizeBlogSegment(slug);
+  if (!target) return [];
   return getAllPosts().filter((p) =>
     p.tags.some((t) => tagToSlug(t) === target),
   );
