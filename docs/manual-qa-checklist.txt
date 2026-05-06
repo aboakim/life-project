@@ -1,0 +1,88 @@
+ՁԵՐՔՈՎ QA — Life Decision Engine
+================================
+
+Սա իմ անձնական ստուգման ցուցակն է։ Սկսել եմ՝ 2026-05-05։
+Լիովին չեմ անցել՝ շատ կետեր դեռ բաց են։
+
+Լեգենդա
+  [x]  արդեն նայել/կիսատ արել եմ
+  [ ]  դեռ չեմ ստուգել
+
+
+1. DEPLOY ԵՎ ՀԻՄՔԵՐ
+-------------------
+[x] lifedecisions.space բացվում է, HTTPS OK
+[x] ads.txt — 200 OK, pub ID ճիշտ
+[x] robots.txt Allow, sitemap հղում կա
+[ ] www.lifedecisions.space — redirect կամ cert (չեմ ստուգել)
+[ ] Vercel production vs preview — խառնաշփոթ չկա՞
+
+
+2. ADSENSE / VERIFY
+-------------------
+[x] Meta google-adsense-account տեսել եմ (view-source կամ Elements)
+[x] ads.txt տողը AdSense UI-ի հետ նույնն է
+[x] adsbygoogle.js ավելացված է layout-ում (deploy-ից հետո կրկին նայել)
+[ ] AdSense "Needs attention" — request review դեռ չեմ սեղմել
+[ ] Search Console site: նոր blog post — դեռ ամբողջությամբ չի երևում
+
+
+3. ԳԼԽԱՎՈՐ / ANALYZE
+--------------------
+[x] Home բացվում է, hero երևում է
+[ ] Analyze CTA, package modal, free path, scroll to input
+[ ] Locale փոխելուց հետո refresh
+[ ] Voice / Whisper եթե browser չի աջակցում
+[ ] Mobile Safari
+
+
+4. BLOG
+-------
+[x] Նոր post slug browser-ով բացել եմ
+[ ] Բոլոր հին slug-եր 404 չեն
+[ ] Tag էջեր, sitemap թիվ
+
+
+5. EXPERTS / COMMUNITY / TOOLS
+------------------------------
+[ ] /experts editorial block SSR (միայն աչքով եմ նայել)
+[ ] Community post և դատարկ վիճակ
+[ ] /field-notes մեծ տեքստ
+[ ] /checklists տպելու նախադիտում
+[ ] /experts/register validation
+
+
+6. I18N (8 ԼԵԶՈՒ)
+-----------------
+[x] Header լեզու՝ միայն en մոտավոր նայել եմ
+[ ] hy, ru, de, fr, es, ar, it — ըստ էջերի
+[ ] ar RTL, breakpoints
+
+
+7. ՕՐԵՆՔԱՅԻՆ / TRUST
+--------------------
+[x] /privacy, /terms — արագ նայել եմ
+[ ] /editorial-standards, /disclaimer — ամբողջությամբ չեմ կարդացել
+[ ] Contact / email deliverability
+
+
+8. PERFORMANCE
+--------------
+[x] PageSpeed մի անգամ, desktop ցածր էր, կոդում փոփոխություն կար
+[ ] Նույն էջը PSI deploy-ից հետո
+[ ] Search Console Core Web Vitals
+
+
+9. EDGE CASES (ՀԻՄԱ ՉԵՄ ԱՆԻ)
+----------------------------
+[ ] API error երբ AI down
+[ ] Ad env vars դատարկ — UI չքայքայվի
+[ ] Cookie reject + ads
+
+
+ՆՇՈՒՄՆԵՐ
+---------
+- Search Console indexing quota — վաղը կրկին մեկ URL
+- Vercel preview domain AdSense ցանկից հանել
+
+Վերջին թարմացում՝ ձեռքով, ոչ CI։
