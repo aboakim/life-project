@@ -13,6 +13,8 @@ export default function SiteJsonLd() {
     "@type": "Organization",
     "@id": `${base}/#organization`,
     name: "Life Decision Engine",
+    /** Helps Google match brand queries like “life decisions” / informal spellings. */
+    alternateName: ["Life Decisions"],
     url: base,
     logo: {
       "@type": "ImageObject",
@@ -31,7 +33,7 @@ export default function SiteJsonLd() {
       },
     ],
     description:
-      "Get instant clarity on any decision using AI-powered scenarios—not random chat. Private session, structured scenarios, experts optional.",
+      "Big life decisions, clearer — structured AI scenarios, private sessions, experts optional.",
     knowsAbout: [
       "decision analysis",
       "career decisions",
@@ -48,6 +50,7 @@ export default function SiteJsonLd() {
     "@id": `${base}/#website`,
     url: base,
     name: "Life Decision Engine",
+    alternateName: ["Life Decisions"],
     publisher: { "@id": `${base}/#organization` },
     inLanguage: ["en-US", "hy", "ru", "de", "fr", "es", "ar", "it"],
     potentialAction: {
@@ -56,6 +59,7 @@ export default function SiteJsonLd() {
         "@type": "EntryPoint",
         urlTemplate: `${base}/blog?q={search_term_string}`,
       },
+      /** Expected by Google for SearchAction / sitelinks search box validation. */
       "query-input": "required name=search_term_string",
     },
   };

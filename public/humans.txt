@@ -1,6 +1,6 @@
 /* TEAM */
   Name: Life Decision Engine Editorial Team
-  Site: https://life-decision-engine.com
+  Site: https://lifedecisions.space
   Role: Editorial, product, and engineering
 
 /* SITE */

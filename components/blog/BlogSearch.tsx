@@ -15,6 +15,8 @@ export type BlogSearchItem = {
 
 type Props = {
   posts: BlogSearchItem[];
+  /** From `/blog?q=` so JSON-LD SearchAction URLs show matching results (also shareable). */
+  initialQuery?: string;
 };
 
 function formatDate(iso: string): string {
@@ -35,8 +37,8 @@ function formatDate(iso: string): string {
  * emits the full ItemList JSON-LD before hydration so crawlers still see
  * every article without executing JS.
  */
-export default function BlogSearch({ posts }: Props) {
-  const [q, setQ] = useState("");
+export default function BlogSearch({ posts, initialQuery = "" }: Props) {
+  const [q, setQ] = useState(() => initialQuery.trim());
 
   const filtered = useMemo(() => {
     const needle = q.trim().toLowerCase();

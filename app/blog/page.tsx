@@ -26,7 +26,16 @@ function humaniseTag(slug: string): string {
     .join(" ");
 }
 
-export default function BlogIndexPage() {
+export default async function BlogIndexPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string | string[] }>;
+}) {
+  const sp = await searchParams;
+  const rawQ = sp.q;
+  const initialQuery =
+    typeof rawQ === "string" ? rawQ : Array.isArray(rawQ) ? rawQ[0] ?? "" : "";
+
   const posts = getAllPosts();
   const tagSlugs = getAllTagSlugs();
   const base = getSiteUrlString().replace(/\/$/, "");
@@ -119,7 +128,7 @@ export default function BlogIndexPage() {
         </section>
       ) : null}
 
-      <BlogSearch posts={searchItems} />
+      <BlogSearch posts={searchItems} initialQuery={initialQuery} />
 
       <NewsletterCta className="mt-16" />
 

@@ -78,7 +78,7 @@ export const metadata: Metadata = {
     template: "%s | Life Decision Engine",
   },
   description:
-    "Get instant clarity on any decision using AI-powered scenarios—not random chat. Private session · Structured scenarios · Experts optional.",
+    "Big life decisions, clearer — lifedecisions.space. AI scenarios (not random chat); private sessions, structured frameworks, experts optional.",
   applicationName: "Life Decision Engine",
   authors: [{ name: "Life Decision Engine Editorial Team" }],
   creator: "Life Decision Engine",
@@ -120,6 +120,7 @@ export const metadata: Metadata = {
   },
   keywords: [
     "life decisions",
+    "lifedecisions",
     "decision analysis",
     "AI coaching",
     "relocation decision",
@@ -132,7 +133,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Life Decision Engine — Stop overthinking. Decide in seconds.",
     description:
-      "Get instant clarity on any decision using AI-powered scenarios—not random chat. Private session · Structured scenarios · Experts optional.",
+      "Big life decisions, clearer — lifedecisions.space. AI scenarios (not random chat); private sessions, structured frameworks, experts optional.",
     type: "website",
     url: "/",
     locale: "en_US",
@@ -142,7 +143,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Life Decision Engine — Stop overthinking. Decide in seconds.",
     description:
-      "Get instant clarity on any decision using AI-powered scenarios—not random chat. Private session · Structured scenarios · Experts optional.",
+      "Big life decisions, clearer — lifedecisions.space. AI scenarios (not random chat); private sessions, structured frameworks, experts optional.",
   },
   other: {
     "google-adsense-account": ADSENSE_CLIENT,
