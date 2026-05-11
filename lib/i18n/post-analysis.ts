@@ -97,6 +97,9 @@ export type PostAnalysisCopy = {
   emailRemindFirstName: string;
   emailRemindLastName: string;
   emailRemindEmail: string;
+  /** Optional loyalty / status miles — stored for reminder email personalization only. */
+  emailRemindMilesLabel: string;
+  emailRemindMilesHint: string;
   emailRemindSubmit: string;
   emailRemindSubmitting: string;
   emailRemindSuccess: string;
@@ -105,6 +108,8 @@ export type PostAnalysisCopy = {
   /** bad_request (e.g. anti-spam field touched by autofill) */
   emailRemindBlockedRequest: string;
   emailRemindCaptchaFailed: string;
+  /** miles field: not a valid integer in range */
+  emailRemindInvalidMiles: string;
   emailRemindNeedTurnstile: string;
   emailRemindPrivacy: string;
   emailRemindDevCaptchaBypass: string;
@@ -238,6 +243,9 @@ const en: PostAnalysisCopy = {
   emailRemindFirstName: "First name",
   emailRemindLastName: "Last name",
   emailRemindEmail: "Email",
+  emailRemindMilesLabel: "Miles balance (optional)",
+  emailRemindMilesHint:
+    "Reward-program or status miles you’re tracking — we only mention this number in your reminder emails (not sold or shared). Whole numbers, 0–999,999.",
   emailRemindSubmit: "Save my email for reminders",
   emailRemindSubmitting: "Saving…",
   emailRemindSuccess:
@@ -250,6 +258,8 @@ const en: PostAnalysisCopy = {
   emailRemindBlockedRequest:
     "The request was blocked. Refresh the page and try again — password managers sometimes auto-fill a hidden anti-spam field.",
   emailRemindCaptchaFailed: "Robot check failed — try again.",
+  emailRemindInvalidMiles:
+    "Miles must be a whole number between 0 and 999,999 (or leave blank).",
   emailRemindNeedTurnstile:
     "Optional: add Cloudflare Turnstile (NEXT_PUBLIC_TURNSTILE_SITE_KEY + TURNSTILE_SECRET_KEY) for stronger bot protection; the form works without it using consent + a hidden bot trap.",
   emailRemindFallbackNote:
@@ -386,6 +396,9 @@ const hy: PostAnalysisCopy = {
   emailRemindFirstName: "Անուն",
   emailRemindLastName: "Ազգանուն",
   emailRemindEmail: "Էլ․ փոստ",
+  emailRemindMilesLabel: "Մայլերի մնացորդ (ընտրովի)",
+  emailRemindMilesHint:
+    "Եթե հետևում ես մայլեր (reward/status), գրիր ընթացիկ թիվը — հիշեցնող նամակում միայն այդ պայմանական մասը կօգտագործենք (չենք վաճառում)։ Միայն ամբողջ թիվ, 0–999,999։",
   emailRemindSubmit: "Պահել իմ հասցեն հիշեցումների համար",
   emailRemindSubmitting: "Պահվում է…",
   emailRemindSuccess:
@@ -398,6 +411,8 @@ const hy: PostAnalysisCopy = {
   emailRemindBlockedRequest:
     "Հարցումը արգելափակվեց. թարմացրու էջը և կրկին փորձիր — գաղտնաբառերի կառավարիչները երբեմն լցնում են թաքնված դաշտը։",
   emailRemindCaptchaFailed: "Ռոբոտի ստուգումը չանցավ — կրկին փորձիր։",
+  emailRemindInvalidMiles:
+    "Մայլերը լինի ամբողջ թիվ 0–999,999 միջակայքում (կամ թողնիր դատարկ)։",
   emailRemindNeedTurnstile:
     "Ընտրովի՝ Cloudflare Turnstile (NEXT_PUBLIC_TURNSTILE_SITE_KEY + TURNSTILE_SECRET_KEY)՝ ավելի ուժեղ պաշտպանություն. ձևը աշխատում է նաև առանց դրանց՝ համաձայնություն + թաքնված դաշտ։",
   emailRemindFallbackNote:

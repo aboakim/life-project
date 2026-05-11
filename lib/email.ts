@@ -99,6 +99,8 @@ export type ReminderSubscriberEmail = {
   firstName: string;
   /** One-click stop link (includes secret token); keep out of logs. */
   unsubscribeUrl?: string;
+  /** Saved from optional signup field — included in email body only when set. */
+  miles?: number | null;
 };
 
 /** Plain-text footer: visually separated, easy to miss unless scrolling to the end. */
@@ -147,10 +149,14 @@ export async function sendDecisionReminderWelcome(
   }
   const site =
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://localhost:3000";
+  const milesLine =
+    p.miles != null && p.miles >= 0
+      ? `\nWe saved the miles balance you entered (${p.miles.toLocaleString("en-US")}) — we’ll only use it to personalize optional reminders like this one, never for ads lists.`
+      : "";
   const text = [
     `Hi ${p.firstName},`,
     ``,
-    `Thanks for saving your details for optional reminders from Life Decision Engine.`,
+    `Thanks for saving your details for optional reminders from Life Decision Engine.${milesLine}`,
     `We only send email when you’ve explicitly asked: either the optional “come back in about 7 days” choice on the form, or after you pick 3 / 7 / 14 days in the analyzer on this browser. We don’t run a newsletter or bulk promos from this signup.`,
     ``,
     `Open the analyzer: ${site}/analyze`,
@@ -201,6 +207,10 @@ export async function sendDecisionReminderNudge(
       /\/$/,
       "",
     );
+  const milesNote =
+    p.miles != null && p.miles >= 0
+      ? `You told us you’re tracking about ${p.miles.toLocaleString("en-US")} miles — when you’re ready, the structured analyzer is still here to pair that travel momentum with a clear fork.`
+      : "";
   const text = [
     `Hi ${p.firstName},`,
     ``,
@@ -211,7 +221,7 @@ export async function sendDecisionReminderNudge(
     `Most people realize it too late.`,
     ``,
     `You have a chance to see it in advance.`,
-    ``,
+    ...(milesNote ? [milesNote] : []),
     `Your decision is still here—`,
     `ready to show you what happens next.`,
     ``,

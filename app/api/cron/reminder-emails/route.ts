@@ -42,6 +42,7 @@ export async function GET(req: Request) {
       to: row.email,
       firstName: row.firstName,
       unsubscribeUrl,
+      miles: row.miles,
     });
     if (result.ok) {
       await prisma.decisionReminderSubscriber.update({

@@ -10,6 +10,7 @@ type Body = {
   to?: string;
   firstName?: string;
   useLatestSubscriber?: boolean;
+  miles?: number | null;
   /** @default "welcome" — "nudge" = 7-day copy (`sendDecisionReminderNudge`) */
   template?: "welcome" | "nudge";
 };
@@ -49,18 +50,20 @@ export async function POST(req: Request) {
   let to: string | undefined;
   let firstName = (body.firstName?.trim() || "there").slice(0, 80);
   let unsubscribeUrl: string | undefined;
+  let miles: number | null | undefined = body.miles;
 
   if (body.useLatestSubscriber) {
     try {
       const row = await prisma.decisionReminderSubscriber.findFirst({
         orderBy: { updatedAt: "desc" },
-        select: { email: true, firstName: true, unsubscribeToken: true },
+        select: { email: true, firstName: true, unsubscribeToken: true, miles: true },
       });
       if (!row) {
         return NextResponse.json({ error: "no_subscriber" }, { status: 400 });
       }
       to = row.email;
       firstName = row.firstName;
+      miles = row.miles;
       if (row.unsubscribeToken) {
         unsubscribeUrl = `${base}/api/reminder-unsubscribe?t=${encodeURIComponent(row.unsubscribeToken)}`;
       }
@@ -78,8 +81,8 @@ export async function POST(req: Request) {
   const template = body.template === "nudge" ? "nudge" : "welcome";
   const result =
     template === "nudge"
-      ? await sendDecisionReminderNudge({ to, firstName, unsubscribeUrl })
-      : await sendDecisionReminderWelcome({ to, firstName, unsubscribeUrl });
+      ? await sendDecisionReminderNudge({ to, firstName, unsubscribeUrl, miles })
+      : await sendDecisionReminderWelcome({ to, firstName, unsubscribeUrl, miles });
   if (!result.ok) {
     return NextResponse.json(
       { error: "send_failed", detail: result.error },

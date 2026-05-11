@@ -34,6 +34,7 @@ export default function EmailReminderSignup({
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [milesRaw, setMilesRaw] = useState("");
   const [honeypot, setHoneypot] = useState("");
   const [consentReminders, setConsentReminders] = useState(false);
   const [returnIn7Days, setReturnIn7Days] = useState(true);
@@ -42,10 +43,15 @@ export default function EmailReminderSignup({
   const [formMsg, setFormMsg] = useState<string | null>(null);
 
   const needTurnstile = Boolean(siteKey);
+  const milesInvalid =
+    milesRaw.trim() !== "" &&
+    (!/^\d+$/.test(milesRaw.trim()) ||
+      Number(milesRaw.trim()) > 999_999);
   const canSubmit =
     !loading &&
     (isPre || consentReminders) &&
     (isPre || honeypot === "") &&
+    !milesInvalid &&
     firstName.trim().length > 0 &&
     lastName.trim().length > 0 &&
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()) &&
@@ -58,6 +64,9 @@ export default function EmailReminderSignup({
       setLoading(true);
       setFormMsg(null);
       const sendReturn7 = isPre ? true : returnIn7Days;
+      const milesTrim = milesRaw.trim();
+      const milesPayload =
+        milesTrim === "" ? null : Number(milesTrim);
       try {
         const res = await fetch("/api/reminder-subscribe", {
           method: "POST",
@@ -71,6 +80,7 @@ export default function EmailReminderSignup({
             honeypot: isPre ? "" : honeypot,
             returnIn7Days: sendReturn7,
             turnstileToken: siteKey ? turnstileToken ?? "" : "",
+            miles: milesPayload,
           }),
         });
         const raw = await res.text();
@@ -91,6 +101,8 @@ export default function EmailReminderSignup({
             setFormMsg(pa.emailRemindNeedConsent);
           } else if (data.error === "rate_limited") {
             setFormMsg(pa.emailRemindRateLimited);
+          } else if (data.error === "invalid_miles") {
+            setFormMsg(pa.emailRemindInvalidMiles);
           } else if (data.error === "bad_request") {
             setFormMsg(pa.emailRemindBlockedRequest);
           } else {
@@ -123,11 +135,13 @@ export default function EmailReminderSignup({
       isPre,
       lastName,
       locale,
+      milesRaw,
       onPreAnalysisComplete,
       onRegistered,
       pa.emailRemindBlockedRequest,
       pa.emailRemindCaptchaFailed,
       pa.emailRemindError,
+      pa.emailRemindInvalidMiles,
       pa.emailRemindNeedConsent,
       pa.emailRemindRateLimited,
       pa.emailRemindSuccess,
@@ -180,6 +194,23 @@ export default function EmailReminderSignup({
           className="mt-1 w-full rounded-xl border border-white/[0.12] bg-black/25 px-3 py-2 text-sm text-[rgb(var(--ink))] outline-none focus:border-[rgb(var(--accent))]/45"
         />
       </label>
+      <label className="block text-xs font-medium text-[rgb(var(--ink))]">
+        {pa.emailRemindMilesLabel}
+        <input
+          value={milesRaw}
+          onChange={(e) => setMilesRaw(e.target.value.replace(/\D/g, "").slice(0, 6))}
+          type="text"
+          inputMode="numeric"
+          pattern="[0-9]*"
+          autoComplete="off"
+          placeholder="—"
+          aria-describedby="lde-miles-hint"
+          className="mt-1 w-full rounded-xl border border-white/[0.12] bg-black/25 px-3 py-2 text-sm text-[rgb(var(--ink))] outline-none focus:border-[rgb(var(--accent))]/45"
+        />
+      </label>
+      <p id="lde-miles-hint" className="text-[11px] leading-relaxed text-[rgb(var(--ink-soft))]/90 [text-wrap:pretty]">
+        {pa.emailRemindMilesHint}
+      </p>
       {!isPre ? (
         <div
           className="absolute start-0 top-0 h-px w-px overflow-hidden opacity-0"

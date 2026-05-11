@@ -21,6 +21,27 @@ function addDays(from: Date, days: number): Date {
   return d;
 }
 
+/** Whole number 0..999_999 or null if omitted. */
+function parseMilesFromBody(body: Record<string, unknown>): number | null | "invalid" {
+  if (
+    !("miles" in body) ||
+    body.miles === "" ||
+    body.miles === null ||
+    body.miles === undefined
+  ) {
+    return null;
+  }
+  const raw = body.miles;
+  const n =
+    typeof raw === "number"
+      ? raw
+      : Number(String(raw).trim().replace(/,/g, ""));
+  if (!Number.isFinite(n) || n < 0) return "invalid";
+  if (!Number.isInteger(n)) return "invalid";
+  if (n > 999_999) return "invalid";
+  return n;
+}
+
 async function handleReminderSubscribe(req: Request): Promise<NextResponse> {
   const ip = getClientIp(req);
   if (!rateLimitAllow(`reminder-sub:${ip}`, MAX_PER_HOUR, WINDOW_MS)) {
@@ -47,6 +68,11 @@ async function handleReminderSubscribe(req: Request): Promise<NextResponse> {
   const honeypot =
     typeof body.honeypot === "string" ? body.honeypot.trim() : "";
   const returnIn7Days = body.returnIn7Days === true;
+
+  const milesParsed = parseMilesFromBody(body);
+  if (milesParsed === "invalid") {
+    return NextResponse.json({ error: "invalid_miles" }, { status: 400 });
+  }
 
   if (!consentOptIn) {
     return NextResponse.json({ error: "consent_required" }, { status: 400 });
@@ -86,6 +112,7 @@ async function handleReminderSubscribe(req: Request): Promise<NextResponse> {
         firstName,
         lastName,
         locale: locale || undefined,
+        miles: milesParsed,
         nextNudgeAt: returnIn7Days ? addDays(now, 7) : undefined,
         unsubscribeToken: cryptoRandomUUID(),
       },
@@ -94,6 +121,7 @@ async function handleReminderSubscribe(req: Request): Promise<NextResponse> {
         lastName,
         locale: locale || undefined,
         emailOptOutAt: null,
+        miles: milesParsed,
         ...(returnIn7Days ? { nextNudgeAt: addDays(now, 7) } : {}),
       },
     });
@@ -121,6 +149,7 @@ async function handleReminderSubscribe(req: Request): Promise<NextResponse> {
       to: row.email,
       firstName: row.firstName,
       unsubscribeUrl,
+      miles: row.miles,
     }).then((r) => {
       if (!r.ok) {
         console.error("[reminder-subscribe] welcome email failed", r.error);

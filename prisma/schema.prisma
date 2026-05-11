@@ -111,6 +111,8 @@ model DecisionReminderSubscriber {
   unsubscribeToken String @unique
   /// Set when the user opens the unsubscribe link; no further nudges until they re-consent.
   emailOptOutAt DateTime?
+  /// Optional loyalty / status miles the subscriber saves for personalized reminder copy only.
+  miles       Int?
 
   @@index([nextNudgeAt])
 }
