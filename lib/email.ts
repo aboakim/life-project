@@ -3,6 +3,31 @@
  * Without RESEND_API_KEY, notifications are skipped (logged in dev).
  */
 
+import { getSiteUrlString } from "./site-url";
+
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function reminderSiteBase(): string {
+  return getSiteUrlString().replace(/\/$/, "");
+}
+
+/** Top-of-email logo; clients that render HTML (e.g. Gmail) show this. */
+function reminderLogoHtml(base: string): string {
+  const home = `${base}/`;
+  const src = `${base}/logo-192.png`;
+  return `<p style="margin:0 0 20px"><a href="${escapeHtml(home)}" style="text-decoration:none"><img src="${escapeHtml(src)}" width="56" height="56" alt="Life Decision Engine" style="display:block;border-radius:12px" /></a></p>`;
+}
+
+function reminderEmailHtmlDocument(innerBody: string): string {
+  return `<!DOCTYPE html><html><head><meta charset="utf-8"/></head><body style="font-family:system-ui,-apple-system,Segoe UI,sans-serif;font-size:16px;line-height:1.55;color:#1a1a1a;max-width:560px;margin:0;padding:16px">${innerBody}</body></html>`;
+}
+
 export type ContactEmailPayload = {
   expertEmail: string;
   expertName: string;
@@ -147,11 +172,14 @@ export async function sendDecisionReminderWelcome(
     }
     return { ok: false, error: "RESEND_API_KEY not set" };
   }
-  const site =
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://localhost:3000";
+  const base = reminderSiteBase();
   const milesLine =
     p.miles != null && p.miles >= 0
       ? `\nWe saved the miles balance you entered (${p.miles.toLocaleString("en-US")}) — we’ll only use it to personalize optional reminders like this one, never for ads lists.`
+      : "";
+  const milesP =
+    p.miles != null && p.miles >= 0
+      ? `<p>We saved the miles balance you entered (${escapeHtml(p.miles.toLocaleString("en-US"))}) — we’ll only use it to personalize optional reminders like this one, never for ads lists.</p>`
       : "";
   const text = [
     `Hi ${p.firstName},`,
@@ -159,11 +187,24 @@ export async function sendDecisionReminderWelcome(
     `Thanks for saving your details for optional reminders from Life Decision Engine.${milesLine}`,
     `We only send email when you’ve explicitly asked: either the optional “come back in about 7 days” choice on the form, or after you pick 3 / 7 / 14 days in the analyzer on this browser. We don’t run a newsletter or bulk promos from this signup.`,
     ``,
-    `Open the analyzer: ${site}/analyze`,
+    `Open the analyzer: ${base}/analyze`,
     ``,
     `— Life Decision Engine`,
     reminderUnsubscribeFooter(p.unsubscribeUrl),
   ].join("\n");
+  const analyzeUrl = `${base}/analyze`;
+  const html = reminderEmailHtmlDocument(
+    [
+      reminderLogoHtml(base),
+      `<p>Hi ${escapeHtml(p.firstName)},</p>`,
+      `<p>Thanks for saving your details for optional reminders from Life Decision Engine.</p>`,
+      milesP,
+      `<p>We only send email when you’ve explicitly asked: either the optional “come back in about 7 days” choice on the form, or after you pick 3 / 7 / 14 days in the analyzer on this browser. We don’t run a newsletter or bulk promos from this signup.</p>`,
+      `<p><a href="${escapeHtml(analyzeUrl)}">Open the analyzer</a></p>`,
+      `<p>— Life Decision Engine</p>`,
+      `<pre style="font-family:inherit;font-size:13px;color:#555;white-space:pre-wrap;margin-top:24px">${escapeHtml(reminderUnsubscribeFooter(p.unsubscribeUrl))}</pre>`,
+    ].join(""),
+  );
   try {
     const { Resend } = await import("resend");
     const resend = new Resend(key);
@@ -172,6 +213,7 @@ export async function sendDecisionReminderWelcome(
       to: p.to,
       subject: `You’re in — optional decision reminders`,
       text,
+      html,
     });
     if (r.error) {
       const err = formatResendError(r.error);
@@ -202,15 +244,12 @@ export async function sendDecisionReminderNudge(
     }
     return { ok: false, error: "RESEND_API_KEY not set" };
   }
-  const base =
-    (process.env.NEXT_PUBLIC_SITE_URL ?? "https://lifedecisions.space").replace(
-      /\/$/,
-      "",
-    );
+  const base = reminderSiteBase();
   const milesNote =
     p.miles != null && p.miles >= 0
       ? `You told us you’re tracking about ${p.miles.toLocaleString("en-US")} miles — when you’re ready, the structured analyzer is still here to pair that travel momentum with a clear fork.`
       : "";
+  const milesP = milesNote ? `<p>${escapeHtml(milesNote)}</p>` : "";
   const text = [
     `Hi ${p.firstName},`,
     ``,
@@ -231,6 +270,22 @@ export async function sendDecisionReminderNudge(
     `— Life Decision Engine`,
     reminderUnsubscribeFooter(p.unsubscribeUrl),
   ].join("\n");
+  const homeUrl = `${base}/`;
+  const html = reminderEmailHtmlDocument(
+    [
+      reminderLogoHtml(base),
+      `<p>Hi ${escapeHtml(p.firstName)},</p>`,
+      `<p><strong>What if you're making the wrong decision?</strong></p>`,
+      `<p>Not right now… but the one that could affect your next few years.</p>`,
+      `<p>Most people realize it too late.</p>`,
+      `<p>You have a chance to see it in advance.</p>`,
+      milesP,
+      `<p>Your decision is still here—<br/>ready to show you what happens next.</p>`,
+      `<p><a href="${escapeHtml(homeUrl)}">Try it now 👇</a></p>`,
+      `<p>— Life Decision Engine</p>`,
+      `<pre style="font-family:inherit;font-size:13px;color:#555;white-space:pre-wrap;margin-top:24px">${escapeHtml(reminderUnsubscribeFooter(p.unsubscribeUrl))}</pre>`,
+    ].join(""),
+  );
   try {
     const { Resend } = await import("resend");
     const resend = new Resend(key);
@@ -239,6 +294,7 @@ export async function sendDecisionReminderNudge(
       to: p.to,
       subject: `What if you're making the wrong decision? — Life Decision Engine`,
       text,
+      html,
     });
     if (r.error) {
       const err = formatResendError(r.error);
