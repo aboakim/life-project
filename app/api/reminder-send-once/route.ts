@@ -69,10 +69,14 @@ export async function POST(req: Request) {
   }
 
   let body: Body;
+  const raw = await req.text();
+  if (!raw.trim()) {
+    return NextResponse.json({ error: "empty_body" }, { status: 400 });
+  }
   try {
-    body = (await req.json()) as Body;
+    body = JSON.parse(raw) as Body;
   } catch {
-    return NextResponse.json({ error: "bad_request" }, { status: 400 });
+    return NextResponse.json({ error: "invalid_json" }, { status: 400 });
   }
 
   const to = body.to?.trim();
