@@ -34,8 +34,8 @@ function loadDotenv(name) {
 loadDotenv(".env.local");
 loadDotenv(".env");
 
-const to = process.argv[2]?.trim() || "albertakimyan1@gmail.com";
-const firstName = process.argv[3]?.trim() || "Albert";
+const to = process.argv[2]?.trim();
+const firstName = process.argv[3]?.trim() || "there";
 const key = process.env.RESEND_API_KEY?.trim();
 const from =
   process.env.RESEND_FROM_EMAIL?.trim() ||
@@ -64,6 +64,13 @@ const text = [
 ].join("\n");
 
 const subject = `What if you're making the wrong decision? — Life Decision Engine`;
+
+if (!to || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to)) {
+  console.error(
+    "Usage: node scripts/resend-nudge-test.mjs <email> [firstName]\nExample: node scripts/resend-nudge-test.mjs you@example.com Alex",
+  );
+  process.exit(1);
+}
 
 if (!key) {
   console.error(
