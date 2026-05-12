@@ -21,6 +21,19 @@ function addDays(from: Date, days: number): Date {
   return d;
 }
 
+/** When user enters miles (no ~7 day opt-in), schedule one nudge this many days out. */
+const MILES_FOLLOWUP_DAYS = 3;
+
+function computeNextNudgeAt(
+  now: Date,
+  returnIn7Days: boolean,
+  miles: number | null,
+): Date | undefined {
+  if (returnIn7Days) return addDays(now, 7);
+  if (miles != null) return addDays(now, MILES_FOLLOWUP_DAYS);
+  return undefined;
+}
+
 /** Whole number 0..999_999 or null if omitted. */
 function parseMilesFromBody(body: Record<string, unknown>): number | null | "invalid" {
   if (
@@ -105,6 +118,7 @@ async function handleReminderSubscribe(req: Request): Promise<NextResponse> {
       where: { email },
     });
     const now = new Date();
+    const nextAt = computeNextNudgeAt(now, returnIn7Days, milesParsed);
     row = await prisma.decisionReminderSubscriber.upsert({
       where: { email },
       create: {
@@ -113,7 +127,7 @@ async function handleReminderSubscribe(req: Request): Promise<NextResponse> {
         lastName,
         locale: locale || undefined,
         miles: milesParsed,
-        nextNudgeAt: returnIn7Days ? addDays(now, 7) : undefined,
+        nextNudgeAt: nextAt,
         unsubscribeToken: cryptoRandomUUID(),
       },
       update: {
@@ -122,7 +136,7 @@ async function handleReminderSubscribe(req: Request): Promise<NextResponse> {
         locale: locale || undefined,
         emailOptOutAt: null,
         miles: milesParsed,
-        ...(returnIn7Days ? { nextNudgeAt: addDays(now, 7) } : {}),
+        ...(nextAt !== undefined ? { nextNudgeAt: nextAt } : {}),
       },
     });
   } catch (e) {

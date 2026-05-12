@@ -119,7 +119,11 @@ export default function EmailReminderSignup({
           return;
         }
         setFormMsg(
-          sendReturn7 ? pa.emailRemindSuccess7d : pa.emailRemindSuccess,
+          sendReturn7
+            ? pa.emailRemindSuccess7d
+            : milesPayload != null
+              ? pa.emailRemindSuccessMiles3d
+              : pa.emailRemindSuccess,
         );
       } catch {
         setFormMsg(pa.emailRemindError);
@@ -146,6 +150,7 @@ export default function EmailReminderSignup({
       pa.emailRemindRateLimited,
       pa.emailRemindSuccess,
       pa.emailRemindSuccess7d,
+      pa.emailRemindSuccessMiles3d,
       returnIn7Days,
       turnstileToken,
     ],
@@ -194,23 +199,40 @@ export default function EmailReminderSignup({
           className="mt-1 w-full rounded-xl border border-white/[0.12] bg-black/25 px-3 py-2 text-sm text-[rgb(var(--ink))] outline-none focus:border-[rgb(var(--accent))]/45"
         />
       </label>
-      <label className="block text-xs font-medium text-[rgb(var(--ink))]">
-        {pa.emailRemindMilesLabel}
-        <input
-          value={milesRaw}
-          onChange={(e) => setMilesRaw(e.target.value.replace(/\D/g, "").slice(0, 6))}
-          type="text"
-          inputMode="numeric"
-          pattern="[0-9]*"
-          autoComplete="off"
-          placeholder="—"
-          aria-describedby="lde-miles-hint"
-          className="mt-1 w-full rounded-xl border border-white/[0.12] bg-black/25 px-3 py-2 text-sm text-[rgb(var(--ink))] outline-none focus:border-[rgb(var(--accent))]/45"
+      <div className="flex gap-3 rounded-2xl border border-white/[0.12] bg-gradient-to-br from-white/[0.06] to-black/20 p-3 sm:p-4">
+        <img
+          src="/logo-192.png"
+          alt=""
+          width={48}
+          height={48}
+          decoding="async"
+          className="size-12 shrink-0 rounded-xl border border-white/10 bg-white/[0.06] object-contain shadow-[0_8px_24px_-12px_rgb(var(--accent)/0.35)]"
         />
-      </label>
-      <p id="lde-miles-hint" className="text-[11px] leading-relaxed text-[rgb(var(--ink-soft))]/90 [text-wrap:pretty]">
-        {pa.emailRemindMilesHint}
-      </p>
+        <div className="min-w-0 flex-1 space-y-2">
+          <label className="block text-xs font-medium text-[rgb(var(--ink))]">
+            {pa.emailRemindMilesLabel}
+            <input
+              value={milesRaw}
+              onChange={(e) =>
+                setMilesRaw(e.target.value.replace(/\D/g, "").slice(0, 6))
+              }
+              type="text"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              autoComplete="off"
+              placeholder="—"
+              aria-describedby="lde-miles-hint"
+              className="mt-1 w-full rounded-xl border border-white/[0.12] bg-black/25 px-3 py-2 text-sm text-[rgb(var(--ink))] outline-none focus:border-[rgb(var(--accent))]/45"
+            />
+          </label>
+          <p
+            id="lde-miles-hint"
+            className="text-[11px] leading-relaxed text-[rgb(var(--ink-soft))]/90 [text-wrap:pretty]"
+          >
+            {pa.emailRemindMilesHint}
+          </p>
+        </div>
+      </div>
       {!isPre ? (
         <div
           className="absolute start-0 top-0 h-px w-px overflow-hidden opacity-0"
