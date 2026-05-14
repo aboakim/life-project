@@ -15,6 +15,7 @@ export type AdminUiCopy = {
   overviewStatQuestions: string;
   overviewVisitorsTitle: string;
   overviewVisitorsEmpty: string;
+  overviewAccessLogError: string;
   overviewSubsTitle: string;
   overviewSubsHint: string;
   overviewSubsEmpty: string;
@@ -89,6 +90,8 @@ const enUS: AdminUiCopy = {
   overviewVisitorsTitle: "Recent visits (latest 400)",
   overviewVisitorsEmpty:
     "No access rows yet. After deploy, set SITE_ACCESS_LOG_SECRET and redeploy; new document GETs will appear here (not prefetch/RSC fetches).",
+  overviewAccessLogError:
+    "Visit log query failed — run `prisma migrate deploy` on this database (SiteAccessLog table) or check DATABASE_URL.",
   overviewSubsTitle: "Reminder subscribers (latest 150)",
   overviewSubsHint:
     "PII — keep ADMIN_SECRET private. nextNudgeAt shows the scheduled optional email time when set.",
@@ -169,6 +172,8 @@ const hy: AdminUiCopy = {
   overviewVisitorsTitle: "Վերջին այցելություններ (400)",
   overviewVisitorsEmpty:
     "Դեռ մուտքի տող չկա։ Deploy-ից հետո ավելացրեք SITE_ACCESS_LOG_SECRET և նորից deploy — նոր document GET-երը կերևան (ոչ prefetch/RSC)։",
+  overviewAccessLogError:
+    "Մուտքերի աղյուսակը չի բացվել — գործարկեք prisma migrate deploy այս տվյալների բազայում (SiteAccessLog) կամ ստուգեք DATABASE_URL։",
   overviewSubsTitle: "Հիշեցման բաժանորդներ (150)",
   overviewSubsHint:
     "Անձնական տվյալներ — ADMIN_SECRET-ը գաղտնի պահեք։ nextNudgeAt-ը՝ հաջորդ ընտրովի նամակի ժամ, եթե կա։",

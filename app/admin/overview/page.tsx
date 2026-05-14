@@ -47,7 +47,6 @@ export default async function AdminOverviewPage() {
     subscriberCount,
     subscriberWithMiles,
     questionVisibleCount,
-    accessRows,
     reminderRows,
   ] = await Promise.all([
     prisma.contactRequest.count(),
@@ -56,18 +55,6 @@ export default async function AdminOverviewPage() {
       where: { miles: { not: null } },
     }),
     prisma.communityQuestion.count({ where: { status: "visible" } }),
-    prisma.siteAccessLog.findMany({
-      orderBy: { createdAt: "desc" },
-      take: 400,
-      select: {
-        id: true,
-        createdAt: true,
-        path: true,
-        country: true,
-        referer: true,
-        ua: true,
-      },
-    }),
     prisma.decisionReminderSubscriber.findMany({
       orderBy: { createdAt: "desc" },
       take: 150,
@@ -84,6 +71,33 @@ export default async function AdminOverviewPage() {
       },
     }),
   ]);
+
+  let accessRows: {
+    id: string;
+    createdAt: Date;
+    path: string;
+    country: string | null;
+    referer: string | null;
+    ua: string | null;
+  }[] = [];
+  let accessLogQueryFailed = false;
+  try {
+    accessRows = await prisma.siteAccessLog.findMany({
+      orderBy: { createdAt: "desc" },
+      take: 400,
+      select: {
+        id: true,
+        createdAt: true,
+        path: true,
+        country: true,
+        referer: true,
+        ua: true,
+      },
+    });
+  } catch {
+    accessLogQueryFailed = true;
+    accessRows = [];
+  }
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
@@ -117,6 +131,11 @@ export default async function AdminOverviewPage() {
       <h2 className="mt-10 text-lg font-semibold text-[rgb(var(--ink))]">
         {a.overviewVisitorsTitle}
       </h2>
+      {accessLogQueryFailed ? (
+        <p className="mt-2 rounded-xl border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-xs text-amber-100/95">
+          {a.overviewAccessLogError}
+        </p>
+      ) : null}
       <div className="mt-3 overflow-x-auto rounded-2xl border border-white/10">
         <table className="w-full min-w-[760px] text-left text-sm">
           <thead className="border-b border-white/10 bg-black/30">

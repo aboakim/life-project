@@ -18,18 +18,21 @@ export default function AdminNav({
     <nav className="flex flex-wrap gap-1 border-b border-white/10 pb-3">
       <Link
         href="/admin"
+        prefetch={false}
         className={`${base} ${current === "requests" ? on : off}`}
       >
         {copy.navRequests}
       </Link>
       <Link
         href="/admin/overview"
+        prefetch={false}
         className={`${base} ${current === "overview" ? on : off}`}
       >
         {copy.navOverview}
       </Link>
       <Link
         href="/admin/diagnostics"
+        prefetch={false}
         className={`${base} ${current === "diagnostics" ? on : off}`}
       >
         {copy.navDiagnostics}
