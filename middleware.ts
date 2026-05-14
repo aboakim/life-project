@@ -86,16 +86,19 @@ export function middleware(request: NextRequest, event: NextFetchEvent) {
     const origin = request.nextUrl.origin;
     const payload = buildSiteAccessLogPayload(request);
     const secret = readSiteAccessLogSecret();
-    event.waitUntil(
-      fetch(`${origin}/api/internal/site-access-log`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${secret}`,
-        },
-        body: JSON.stringify(payload),
-      }).catch(() => undefined),
-    );
+    const p = fetch(`${origin}/api/internal/site-access-log`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${secret}`,
+      },
+      body: JSON.stringify(payload),
+    }).catch(() => undefined);
+    if (typeof event.waitUntil === "function") {
+      event.waitUntil(p);
+    } else {
+      void p;
+    }
   }
 
   return NextResponse.next();

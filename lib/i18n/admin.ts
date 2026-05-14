@@ -47,6 +47,7 @@ export type AdminUiCopy = {
   colFrom: string;
   colMessage: string;
   empty: string;
+  adminDataError: string;
   secretMissing: string;
   loginTitle: string;
   loginHint: string;
@@ -127,6 +128,8 @@ const enUS: AdminUiCopy = {
   colFrom: "From",
   colMessage: "Message",
   empty: "No requests yet.",
+  adminDataError:
+    "Could not load contact requests from the database. Check DATABASE_URL, run migrations, and see deployment logs.",
   secretMissing:
     "Set ADMIN_SECRET in your host (at least 16 characters), save it, then redeploy Production. If you already added it, open Vercel → Deployments → your latest Production deployment → Redeploy.",
   loginTitle: "Admin sign-in",
@@ -209,6 +212,8 @@ const hy: AdminUiCopy = {
   colFrom: "Ումից",
   colMessage: "Հաղորդագրություն",
   empty: "Դեռ հարցումներ չկան։",
+  adminDataError:
+    "Կապի հարցումները չեն բացվել տվյալների բազայից։ Ստուգեք DATABASE_URL, migration-ները և deployment լոգերը։",
   secretMissing:
     "Սահմանեք ADMIN_SECRET հոսթում (առնվազն 16 նիշ), պահեք, ապա Production-ը նորից deploy արեք։ Եթե արդեն եք ավելացրել՝ Vercel → Deployments → վերջին Production deploy → Redeploy։",
   loginTitle: "Ադմին մուտք",

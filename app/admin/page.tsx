@@ -57,20 +57,27 @@ export default async function AdminPage() {
     return <AdminLogin copy={a} />;
   }
 
-  const requests = (await prisma.contactRequest.findMany({
-    orderBy: { createdAt: "desc" },
-    take: 200,
-    include: {
-      expert: {
-        select: {
-          name: true,
-          email: true,
-          country: true,
-          role: true,
+  let requests: Row[] = [];
+  let requestsLoadError: string | null = null;
+  try {
+    requests = (await prisma.contactRequest.findMany({
+      orderBy: { createdAt: "desc" },
+      take: 200,
+      include: {
+        expert: {
+          select: {
+            name: true,
+            email: true,
+            country: true,
+            role: true,
+          },
         },
       },
-    },
-  })) as Row[];
+    })) as Row[];
+  } catch (e) {
+    console.error("[admin] contactRequest.findMany", e);
+    requestsLoadError = a.adminDataError;
+  }
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
@@ -92,6 +99,11 @@ export default async function AdminPage() {
         <AdminNav current="requests" copy={a} />
       </div>
 
+      {requestsLoadError ? (
+        <p className="mt-6 rounded-xl border border-rose-500/30 bg-rose-500/10 px-4 py-3 text-sm text-rose-100/95">
+          {requestsLoadError}
+        </p>
+      ) : (
       <div className="mt-8 overflow-x-auto rounded-2xl border border-white/10">
         <table className="w-full min-w-[720px] text-left text-sm">
           <thead className="border-b border-white/10 bg-black/30">
@@ -153,6 +165,7 @@ export default async function AdminPage() {
           </tbody>
         </table>
       </div>
+      )}
     </div>
   );
 }
