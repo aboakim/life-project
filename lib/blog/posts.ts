@@ -3,8 +3,8 @@
  * Using plain JS/TS objects (no MDX dependency) keeps the MVP fast
  * and lets us render content as typed paragraphs/lists/headings.
  *
- * NOTE: Keep each post 600-1200 words. Cover real decision-making
- * topics so the site has authentic, indexable content for AdSense review.
+ * NOTE: Prefer substantive posts (often 1200+ words). Thin duplicate pages
+ * hurt reviews; original frameworks and examples help AdSense and readers.
  */
 
 import { canonicalBlogPathSegment, tagToSlug } from "./slug-normalize";
@@ -1783,6 +1783,285 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         kind: "quote",
         text: "Most bad life decisions are not bad ideas. They are good ideas made at the wrong hour.",
+      },
+    ],
+  },
+  {
+    slug: "second-order-thinking-for-life-decisions",
+    title: "Second-order thinking: what happens after what happens",
+    description:
+      "First-order thinking asks what a choice does today. Second-order thinking asks what it unlocks, constrains, or costs a year from now — and how to use that lens without paralysing yourself.",
+    tags: ["decision-making", "framework", "strategy"],
+    readingMinutes: 11,
+    publishedAt: "2026-05-15",
+    author: "Life Decision Engine Editorial Team",
+    hero: {
+      eyebrow: "Beyond pros and cons",
+      lede: "Every attractive option has a shadow price paid later. Naming that price early is how adults stop confusing luck with judgment.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "First-order thinking sounds like this: if I take the job, my salary goes up. If I move, my rent goes down. If I end the relationship, the arguing stops. Those statements are often true — and almost always incomplete. Second-order thinking adds the next layer: after the salary bump, what does my calendar look like? After the cheaper rent, what does my commute do to my evenings? After the arguing stops, what fills the silence?",
+      },
+      {
+        kind: "p",
+        text: "The goal is not to become a cynic who sees doom everywhere. The goal is to become someone who can love an option and still see its invoice. In AdSense terms (and human terms), that is what Google tends to mean by “value”: pages that help a reader think more clearly, not pages that repeat slogans.",
+      },
+      { kind: "h2", text: "A simple definition you can actually use" },
+      {
+        kind: "p",
+        text: "Howard Marks popularised second-level thinking for investors, but the idea transfers cleanly to life decisions. Ask two stacked questions:",
+      },
+      {
+        kind: "ol",
+        items: [
+          "What happens immediately if I choose A vs B? (first order)",
+          "What does that outcome change about my constraints, identity, and options one to three years later? (second order)",
+        ],
+      },
+      {
+        kind: "p",
+        text: "The second question is where people under-index. We are good at imagining the party on day one of a new job; we are worse at imagining the third year of being on call, or the way a golden handcuffs bonus quietly narrows what you can ethically walk away from later.",
+      },
+      { kind: "h2", text: "Three worked mini-examples" },
+      {
+        kind: "h3",
+        text: "Accepting a title cut for “balance”",
+      },
+      {
+        kind: "p",
+        text: "First order: less stress, fewer meetings, more sleep. Second order: slower promotion path, different peer group, possible signal to future employers that you “stepped back.” None of those second-order points mean you should refuse — they mean you should price them consciously. If the sleep is worth the career delta, take it. If you are using “balance” as a polite word for fear, pause.",
+      },
+      {
+        kind: "h3",
+        text: "Buying the smaller house in the better school district",
+      },
+      {
+        kind: "p",
+        text: "First order: smaller mortgage, tighter kitchen, shorter commute maybe. Second order: different friendships on the street, different pressure on kids to perform, different liquidity if someone gets sick. Schools are not a single variable; they sit inside a neighbourhood ecosystem. Second-order thinking is what stops you from optimising one spreadsheet cell while ignoring the household system.",
+      },
+      {
+        kind: "h3",
+        text: "Staying in a stable job while building a side project",
+      },
+      {
+        kind: "p",
+        text: "First order: income continuity, slower nights. Second order: intellectual split focus, possible IP conflicts, relationship strain, and the subtle risk that the side project becomes a fantasy you never ship because the day job is just comfortable enough. Again — not an argument against the path. It is an argument for naming the trade honestly on paper before month nine arrives.",
+      },
+      { kind: "h2", text: "How to do this without freezing" },
+      {
+        kind: "p",
+        text: "Second-order thinking becomes paralysis when you treat every branch as equally likely. Use three scenarios (best / likely / worst) and attach rough probabilities in plain language: “unlikely but catastrophic,” “plausible,” “optimistic tail.” You are not building a Monte Carlo model in your kitchen; you are preventing the brain from treating every downside headline as equally real.",
+      },
+      {
+        kind: "ul",
+        items: [
+          "Write second-order effects as bullet points, not essays — one line each.",
+          "Separate reversible from irreversible. Reversible choices deserve lighter second-order scrutiny.",
+          "Ask one outsider: “What am I not seeing because I want this too much?”",
+        ],
+      },
+      {
+        kind: "h2",
+        text: "How this connects to the analyzer on the homepage",
+      },
+      {
+        kind: "p",
+        text: "The free tool is built to force scenarios and lenses before you score. That sequence is second-order thinking with training wheels: you cannot skip straight to “it feels right” without passing through at least one explicit downstream picture. Export your notes after a session and keep them — reviewers (human or algorithmic) like sites where tools and articles reinforce each other instead of contradicting each other.",
+      },
+      {
+        kind: "quote",
+        text: "A smart decision is not the one that flatters you today. It is the one you can still explain to yourself after the second wave of consequences arrives.",
+      },
+    ],
+  },
+  {
+    slug: "pre-mortem-before-a-major-life-change",
+    title: "Run a pre-mortem before a major life change (template included)",
+    description:
+      "Borrowed from project management, a pre-mortem imagines failure in advance so you can patch the plan while you still have options — ideal before moves, job changes, or big commitments.",
+    tags: ["decision-making", "risk", "framework"],
+    readingMinutes: 10,
+    publishedAt: "2026-05-15",
+    updatedAt: "2026-05-15",
+    author: "Life Decision Engine Editorial Team",
+    hero: {
+      eyebrow: "Risk rehearsal",
+      lede: "Hope asks what will go right. A pre-mortem respectfully asks what will go wrong — then assigns owners and dates to the fixes.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "Gary Klein introduced the pre-mortem to help teams surface risks without blame. The format is simple: imagine it is a year from now and the decision failed. Tell the story of how it failed. Then walk backwards to what you could have done this month to prevent each chapter of that story.",
+      },
+      {
+        kind: "p",
+        text: "For personal life decisions, the same structure works better than vague anxiety. Anxiety loops; narratives end. A pre-mortem turns “I am scared” into “I am scared of three specific things, and two of them have mitigations.”",
+      },
+      { kind: "h2", text: "The 45-minute version (solo)" },
+      {
+        kind: "ol",
+        items: [
+          "Pick a decision with a clear date (“we move on August 1” / “I sign by Friday”).",
+          "Set a timer for 10 minutes and write a failure story in past tense: “By next spring, we regretted X because…” Do not edit while writing.",
+          "Circle the top five causes mentioned in the story.",
+          "For each cause, write one mitigation you control, one you half-control (partner, employer), and one you do not control (market, health).",
+          "Pick two mitigations to schedule this week. Put them on a calendar, not a to-do list.",
+        ],
+      },
+      {
+        kind: "h2",
+        text: "The 60-minute version (with a partner or co-decider)",
+      },
+      {
+        kind: "p",
+        text: "Each person writes a separate failure story silently, then you read them aloud. The overlap is your risk map; the differences are your communication gaps. Many “big fights after the move” were visible in mismatched pre-mortems months earlier — one person feared isolation, the other feared money. Both fears can be true; the pre-mortem makes them discussable without assigning villain roles.",
+      },
+      { kind: "h2", text: "Common failure stories worth rehearsing" },
+      {
+        kind: "ul",
+        items: [
+          "We underestimated cash runway by three months.",
+          "We assumed remote work policy would stay flexible.",
+          "We ignored the health insurance gap between jobs.",
+          "We moved for a partner’s career and did not negotiate what happens if that career shifts again.",
+          "We optimised for short-term relief and traded away long-term optionality without noticing.",
+        ],
+      },
+      {
+        kind: "h2",
+        text: "When a pre-mortem should change the decision vs. the plan",
+      },
+      {
+        kind: "p",
+        text: "If the mitigations are cheap and high-leverage — an emergency fund top-up, a contract review, a two-week trial visit — you usually keep the decision and improve the plan. If the mitigations are impossible or depend on someone else changing character, the pre-mortem is telling you something louder. Character-based bets rarely belong in the “likely case” column.",
+      },
+      {
+        kind: "p",
+        text: "For reviewers evaluating site depth, this article plus the interactive analyzer shows the same theme from two angles: education and tooling. That pairing is closer to what “helpful content” systems reward than a dozen thin pages that repeat keywords.",
+      },
+    ],
+  },
+  {
+    slug: "how-to-document-a-life-decision-for-your-future-self",
+    title: "How to document a life decision for your future self",
+    description:
+      "A one-page decision memo captures assumptions, tradeoffs, and emotional context so you do not rewrite history later — useful for careers, money, and relationships.",
+    tags: ["decision-making", "journaling", "career"],
+    readingMinutes: 9,
+    publishedAt: "2026-05-16",
+    author: "Life Decision Engine Editorial Team",
+    hero: {
+      eyebrow: "Paper beats memory",
+      lede: "Your future self is not smarter than you; they are just forgetful. Write them a letter while the evidence is still warm.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "Most regret is not about choosing wrong; it is about not being able to reconstruct why you chose. Without a record, the brain fills the gap with whatever story flatters the present mood. A decision memo is an anti-regret device: boring, short, and shockingly effective.",
+      },
+      { kind: "h2", text: "What goes on the page" },
+      {
+        kind: "ul",
+        items: [
+          "The question in one sentence, with a date.",
+          "The options you seriously considered (not every fantasy).",
+          "The top three facts you believed at decision time — with sources if any.",
+          "The tradeoffs you accepted on purpose (not the ones you pretended did not exist).",
+          "What would make you revisit the decision early (triggers).",
+          "One paragraph of emotional context in plain language (“I am exhausted,” “I am excited,” “I am scared of repeating my parents’ pattern”).",
+        ],
+      },
+      {
+        kind: "h2",
+        text: "Why triggers matter more than predictions",
+      },
+      {
+        kind: "p",
+        text: "You cannot predict the future. You can predict a narrow class of signals that should reopen the file: “If savings drop below X,” “If we fight more than three nights a week for a month,” “If the side income does not hit Y by December.” Triggers protect you from both sunk-cost stubbornness and panic flipping.",
+      },
+      {
+        kind: "h2",
+        text: "Where to store it",
+      },
+      {
+        kind: "p",
+        text: "Email it to yourself with a clear subject line, keep a PDF in cloud storage, or print one copy for a physical folder. The medium matters less than the fact that it is retrievable on a bad day. Couples sometimes keep two memos — individual and joint — which sounds formal until the first stressful month arrives and both versions still exist.",
+      },
+      {
+        kind: "h2",
+        text: "Ethical note on sensitive decisions",
+      },
+      {
+        kind: "p",
+        text: "If the decision touches health, abuse, or legal exposure, a memo is not a substitute for professional help. It is a complement: it helps you speak clearly in the first session instead of burning half the hour on backstory. Never include information you would not want read aloud in a courtroom unless your lawyer tells you otherwise.",
+      },
+      {
+        kind: "quote",
+        text: "Clarity for your future self is a kindness. It is also a defence against your own storytelling.",
+      },
+    ],
+  },
+  {
+    slug: "signs-you-are-deciding-from-fear-not-from-values",
+    title: "Signs you are deciding from fear (not from values)",
+    description:
+      "Fear and values can both feel urgent. Learn the behavioural tells — language patterns, timing, and bodily cues — so you can pause before you commit.",
+    tags: ["psychology", "decision-making", "relationships"],
+    readingMinutes: 10,
+    publishedAt: "2026-05-16",
+    author: "Life Decision Engine Editorial Team",
+    hero: {
+      eyebrow: "Emotional hygiene",
+      lede: "Fear says decide now. Values usually say decide clearly. Those are not the same voice.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "Fear is a survival system; values are a navigation system. Both can produce strong gut feelings, which is why people confuse them. The practical difference is that fear optimises for short-term relief and closure, while values optimise for alignment over a horizon you can name.",
+      },
+      { kind: "h2", text: "Language tells" },
+      {
+        kind: "ul",
+        items: [
+          "You keep saying “I can’t afford to” without running numbers — fear. Saying “the runway is X months if Y happens” — values plus facts.",
+          "You describe the other option as humiliating without naming what you would learn — fear.",
+          "You negotiate against yourself before anyone else speaks — fear.",
+          "You use absolutes: always, never, ruined — often fear shorthand.",
+        ],
+      },
+      {
+        kind: "h2",
+        text: "Timing tells",
+      },
+      {
+        kind: "p",
+        text: "Fear loves artificial deadlines supplied by other people. Values tolerate delay when delay buys information. If you have not once asked “what changes if we decide Friday vs Monday?” you may be under time pressure that is manufactured, not real.",
+      },
+      {
+        kind: "h2",
+        text: "Body tells",
+      },
+      {
+        kind: "p",
+        text: "A tight chest and shallow breath while typing an email you will regret is data. So is the odd calm after you finally tell the truth. None of this replaces reasoning — it feeds it. If your body is screaming while your spreadsheet looks fine, your spreadsheet may be missing a variable that matters to you personally.",
+      },
+      {
+        kind: "h2",
+        text: "What to do for twenty minutes before you commit",
+      },
+      {
+        kind: "ol",
+        items: [
+          "Rewrite the decision as if advising your best friend — third person strips some fear.",
+          "Ask what you would choose if no one would ever know. If the answer flips, you were partly optimising for reputation.",
+          "Run one scenario where the feared outcome happens and you survive it — not catastrophising, just narrating survival steps.",
+        ],
+      },
+      {
+        kind: "p",
+        text: "Sites that earn trust with reviewers usually combine emotional literacy articles like this one with concrete tools elsewhere on the domain. If you add more content later, keep the same standard: specific language, real tradeoffs, and no empty word count.",
       },
     ],
   },
