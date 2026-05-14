@@ -1,6 +1,5 @@
 import { cookies } from "next/headers";
 import type { Metadata } from "next";
-import Link from "next/link";
 import type { ExpertRole } from "@prisma/client";
 import { getAdminGate } from "@/lib/admin-session";
 import { getAdminUi } from "@/lib/i18n/admin";
@@ -11,6 +10,7 @@ import {
 import { prisma } from "@/lib/prisma";
 import AdminLogin from "./AdminLogin";
 import AdminLogoutButton from "./AdminLogoutButton";
+import AdminNav from "./AdminNav";
 
 export async function generateMetadata(): Promise<Metadata> {
   const store = await cookies();
@@ -84,14 +84,12 @@ export default async function AdminPage() {
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
-          <Link
-            href="/admin/diagnostics"
-            className="text-sm font-medium text-[rgb(var(--accent-2))] underline-offset-4 hover:underline"
-          >
-            {a.navDiagnostics}
-          </Link>
           <AdminLogoutButton label={a.logOut} />
         </div>
+      </div>
+
+      <div className="mt-6">
+        <AdminNav current="requests" copy={a} />
       </div>
 
       <div className="mt-8 overflow-x-auto rounded-2xl border border-white/10">

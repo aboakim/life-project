@@ -1,6 +1,11 @@
-import { NextResponse, type NextRequest } from "next/server";
+import { NextResponse, type NextFetchEvent, type NextRequest } from "next/server";
 
 import { canonicalBlogPathSegment } from "@/lib/blog/slug-normalize";
+import {
+  buildSiteAccessLogPayload,
+  readSiteAccessLogSecret,
+  shouldRecordSiteAccess,
+} from "@/lib/site-access-log";
 
 /**
  * Reject common probe/scan paths early (defense in depth; not a full WAF).
@@ -70,12 +75,29 @@ function redirectIfBlogPathNeedsNormalization(
   return NextResponse.redirect(url, 301);
 }
 
-export function middleware(request: NextRequest) {
+export function middleware(request: NextRequest, event: NextFetchEvent) {
   if (isBlockedPath(request.nextUrl.pathname)) {
     return new NextResponse(null, { status: 404 });
   }
   const blogRedirect = redirectIfBlogPathNeedsNormalization(request);
   if (blogRedirect) return blogRedirect;
+
+  if (shouldRecordSiteAccess(request)) {
+    const origin = request.nextUrl.origin;
+    const payload = buildSiteAccessLogPayload(request);
+    const secret = readSiteAccessLogSecret();
+    event.waitUntil(
+      fetch(`${origin}/api/internal/site-access-log`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${secret}`,
+        },
+        body: JSON.stringify(payload),
+      }).catch(() => undefined),
+    );
+  }
+
   return NextResponse.next();
 }
 

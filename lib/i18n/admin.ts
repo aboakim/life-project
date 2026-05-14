@@ -3,7 +3,32 @@ import type { AppLocale } from "@/lib/i18n/locale";
 export type AdminUiCopy = {
   pageTitle: string;
   pageSubtitle: string;
+  navRequests: string;
+  navOverview: string;
   navDiagnostics: string;
+  overviewTitle: string;
+  overviewSubtitle: string;
+  overviewDisclaimer: string;
+  overviewStatContacts: string;
+  overviewStatSubs: string;
+  overviewStatSubsMiles: string;
+  overviewStatQuestions: string;
+  overviewVisitorsTitle: string;
+  overviewVisitorsEmpty: string;
+  overviewSubsTitle: string;
+  overviewSubsHint: string;
+  overviewSubsEmpty: string;
+  colPathShort: string;
+  colCountry: string;
+  colReferer: string;
+  colUa: string;
+  colSubCreated: string;
+  colSubName: string;
+  colSubEmail: string;
+  colSubMiles: string;
+  colSubLocale: string;
+  colSubNudge: string;
+  subOptOut: string;
   diagnosticsTitle: string;
   diagnosticsSubtitle: string;
   diagnosticsSecretLabel: string;
@@ -49,7 +74,36 @@ const enUS: AdminUiCopy = {
   pageTitle: "Contact requests",
   pageSubtitle:
     "Expert leads (latest 200). Emails also sent via Resend when configured.",
+  navRequests: "Expert leads",
+  navOverview: "Overview",
   navDiagnostics: "Diagnostics",
+  overviewTitle: "Site overview",
+  overviewSubtitle:
+    "Counts from your database, reminder subscribers (with miles), and recent page GETs when access logging is enabled.",
+  overviewDisclaimer:
+    "Access rows are written from Edge middleware using Vercel’s x-vercel-ip-country (when present), path, referer, and a short User-Agent. Set SITE_ACCESS_LOG_SECRET (≥16 chars) on the host to enable logging; without it, no rows are stored. Prune old SiteAccessLog rows periodically if traffic is high.",
+  overviewStatContacts: "Contact requests (all time)",
+  overviewStatSubs: "Reminder subscribers",
+  overviewStatSubsMiles: "Subscribers with miles saved",
+  overviewStatQuestions: "Community questions (visible)",
+  overviewVisitorsTitle: "Recent visits (latest 400)",
+  overviewVisitorsEmpty:
+    "No access rows yet. After deploy, set SITE_ACCESS_LOG_SECRET and redeploy; new document GETs will appear here (not prefetch/RSC fetches).",
+  overviewSubsTitle: "Reminder subscribers (latest 150)",
+  overviewSubsHint:
+    "PII — keep ADMIN_SECRET private. nextNudgeAt shows the scheduled optional email time when set.",
+  overviewSubsEmpty: "No reminder subscribers yet.",
+  colPathShort: "Path",
+  colCountry: "Country",
+  colReferer: "Referer",
+  colUa: "User-Agent",
+  colSubCreated: "Created",
+  colSubName: "Name",
+  colSubEmail: "Email",
+  colSubMiles: "Miles",
+  colSubLocale: "Locale",
+  colSubNudge: "Next nudge / opt-out",
+  subOptOut: "opted out",
   diagnosticsTitle: "Integration status",
   diagnosticsSubtitle:
     "Booleans only — API keys and secrets are never shown. Full stack traces and provider errors appear in your deployment logs.",
@@ -72,7 +126,7 @@ const enUS: AdminUiCopy = {
   empty: "No requests yet.",
   secretMissing:
     "Set ADMIN_SECRET in your host (at least 16 characters), save it, then redeploy Production. If you already added it, open Vercel → Deployments → your latest Production deployment → Redeploy.",
-  loginTitle: "Admin — contact requests",
+  loginTitle: "Admin sign-in",
   loginHint: "Enter the server ADMIN_SECRET.",
   signIn: "Sign in",
   signingIn: "…",
@@ -100,7 +154,36 @@ const hy: AdminUiCopy = {
   pageTitle: "Կապի հարցումներ",
   pageSubtitle:
     "Մասնագետների հարցումներ (վերջին 200)։ Նամակները Resend-ով, եթե կարգավորված է։",
+  navRequests: "Մասնագետների հարցումներ",
+  navOverview: "Ընդհանուր",
   navDiagnostics: "Դիագնոստիկա",
+  overviewTitle: "Կայքի ընդհանուր պատկեր",
+  overviewSubtitle:
+    "Թվեր տվյալների բազայից, հիշեցման բաժանորդներ (մայլերով) և վերջին page GET-երը, երբ մուտքերի գրանցումը միացված է։",
+  overviewDisclaimer:
+    "Մուտքերի տողերը գրում է Edge middleware-ը՝ օգտագործելով Vercel-ի x-vercel-ip-country (երբ կա), path, referer և կարճ User-Agent։ HOST-ում սահմանեք SITE_ACCESS_LOG_SECRET (≥16 նիշ)՝ գրանցումը միացնելու համար, առանց դրա տողեր չեն պահվում։ Բարձր տրաֆիկի դեպքում պարբերաբար մաքրեք հին SiteAccessLog տողերը։",
+  overviewStatContacts: "Կապի հարցումներ (ընդամենը)",
+  overviewStatSubs: "Հիշեցման բաժանորդներ",
+  overviewStatSubsMiles: "Մայլ պահած բաժանորդներ",
+  overviewStatQuestions: "Համայնքի հարցեր (տեսանելի)",
+  overviewVisitorsTitle: "Վերջին այցելություններ (400)",
+  overviewVisitorsEmpty:
+    "Դեռ մուտքի տող չկա։ Deploy-ից հետո ավելացրեք SITE_ACCESS_LOG_SECRET և նորից deploy — նոր document GET-երը կերևան (ոչ prefetch/RSC)։",
+  overviewSubsTitle: "Հիշեցման բաժանորդներ (150)",
+  overviewSubsHint:
+    "Անձնական տվյալներ — ADMIN_SECRET-ը գաղտնի պահեք։ nextNudgeAt-ը՝ հաջորդ ընտրովի նամակի ժամ, եթե կա։",
+  overviewSubsEmpty: "Դեռ բաժանորդներ չկան։",
+  colPathShort: "Ճանապարհ",
+  colCountry: "Երկիր",
+  colReferer: "Referer",
+  colUa: "User-Agent",
+  colSubCreated: "Ստեղծված",
+  colSubName: "Անուն",
+  colSubEmail: "Էլ. փոստ",
+  colSubMiles: "Մայլ",
+  colSubLocale: "Լոկալ",
+  colSubNudge: "Հաջորդ nudge / opt-out",
+  subOptOut: "հրաժարված",
   diagnosticsTitle: "Ինտեգրացիայի կարգավիճակ",
   diagnosticsSubtitle:
     "Միայն այո/ոչ — API բանալիները երբեք ցուցադրվում չեն։ Մանրամասն սխալները՝ deployment լոգերում։",
@@ -123,7 +206,7 @@ const hy: AdminUiCopy = {
   empty: "Դեռ հարցումներ չկան։",
   secretMissing:
     "Սահմանեք ADMIN_SECRET հոսթում (առնվազն 16 նիշ), պահեք, ապա Production-ը նորից deploy արեք։ Եթե արդեն եք ավելացրել՝ Vercel → Deployments → վերջին Production deploy → Redeploy։",
-  loginTitle: "Ադմին — կապի հարցումներ",
+  loginTitle: "Ադմին մուտք",
   loginHint: "Մուտքագրեք սերվերի ADMIN_SECRET-ը։",
   signIn: "Մուտք",
   signingIn: "…",

@@ -1,9 +1,9 @@
 import { cookies } from "next/headers";
 import type { Metadata } from "next";
-import Link from "next/link";
 import AdminTestReminderEmail from "../AdminTestReminderEmail";
 import AdminLogin from "../AdminLogin";
 import AdminLogoutButton from "../AdminLogoutButton";
+import AdminNav from "../AdminNav";
 import { getAdminGate } from "@/lib/admin-session";
 import type { AdminUiCopy } from "@/lib/i18n/admin";
 import { getAdminUi } from "@/lib/i18n/admin";
@@ -92,14 +92,12 @@ export default async function AdminDiagnosticsPage() {
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
-          <Link
-            href="/admin"
-            className="text-sm font-medium text-[rgb(var(--accent-2))] underline-offset-4 hover:underline"
-          >
-            ← {a.pageTitle}
-          </Link>
           <AdminLogoutButton label={a.logOut} />
         </div>
+      </div>
+
+      <div className="mt-6">
+        <AdminNav current="diagnostics" copy={a} />
       </div>
 
       <ul className="mt-8 rounded-2xl border border-white/10 bg-black/25 px-4">
