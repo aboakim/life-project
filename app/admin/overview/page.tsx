@@ -42,35 +42,61 @@ export default async function AdminOverviewPage() {
     return <AdminLogin copy={a} />;
   }
 
-  const [
-    contactCount,
-    subscriberCount,
-    subscriberWithMiles,
-    questionVisibleCount,
-    reminderRows,
-  ] = await Promise.all([
-    prisma.contactRequest.count(),
-    prisma.decisionReminderSubscriber.count(),
-    prisma.decisionReminderSubscriber.count({
-      where: { miles: { not: null } },
-    }),
-    prisma.communityQuestion.count({ where: { status: "visible" } }),
-    prisma.decisionReminderSubscriber.findMany({
-      orderBy: { createdAt: "desc" },
-      take: 150,
-      select: {
-        id: true,
-        createdAt: true,
-        firstName: true,
-        lastName: true,
-        email: true,
-        miles: true,
-        locale: true,
-        nextNudgeAt: true,
-        emailOptOutAt: true,
-      },
-    }),
-  ]);
+  let contactCount: number | null = 0;
+  let subscriberCount: number | null = 0;
+  let subscriberWithMiles: number | null = 0;
+  let questionVisibleCount: number | null = 0;
+  let reminderRows: {
+    id: string;
+    createdAt: Date;
+    firstName: string;
+    lastName: string;
+    email: string;
+    miles: number | null;
+    locale: string | null;
+    nextNudgeAt: Date | null;
+    emailOptOutAt: Date | null;
+  }[] = [];
+  let overviewDataError: string | null = null;
+
+  try {
+    const [c, sc, swm, qvc, rr] = await Promise.all([
+      prisma.contactRequest.count(),
+      prisma.decisionReminderSubscriber.count(),
+      prisma.decisionReminderSubscriber.count({
+        where: { miles: { not: null } },
+      }),
+      prisma.communityQuestion.count({ where: { status: "visible" } }),
+      prisma.decisionReminderSubscriber.findMany({
+        orderBy: { createdAt: "desc" },
+        take: 150,
+        select: {
+          id: true,
+          createdAt: true,
+          firstName: true,
+          lastName: true,
+          email: true,
+          miles: true,
+          locale: true,
+          nextNudgeAt: true,
+          emailOptOutAt: true,
+        },
+      }),
+    ]);
+    contactCount = c;
+    subscriberCount = sc;
+    subscriberWithMiles = swm;
+    questionVisibleCount = qvc;
+    reminderRows = rr;
+  } catch (e) {
+    console.error("[admin/overview] stats", e);
+    overviewDataError = a.overviewDataError;
+    contactCount = null;
+    subscriberCount = null;
+    subscriberWithMiles = null;
+    questionVisibleCount = null;
+    reminderRows = [];
+  }
 
   let accessRows: {
     id: string;
@@ -116,6 +142,12 @@ export default async function AdminOverviewPage() {
       <div className="mt-6">
         <AdminNav current="overview" copy={a} />
       </div>
+
+      {overviewDataError ? (
+        <p className="mt-4 rounded-xl border border-rose-500/30 bg-rose-500/10 px-4 py-3 text-sm text-rose-100/95">
+          {overviewDataError}
+        </p>
+      ) : null}
 
       <p className="mt-4 text-xs leading-relaxed text-[rgb(var(--ink-soft))]">
         {a.overviewDisclaimer}
@@ -269,14 +301,14 @@ export default async function AdminOverviewPage() {
   );
 }
 
-function StatCard({ label, value }: { label: string; value: number }) {
+function StatCard({ label, value }: { label: string; value: number | null }) {
   return (
     <div className="rounded-2xl border border-white/10 bg-black/20 px-4 py-3">
       <p className="text-xs font-medium uppercase tracking-wide text-[rgb(var(--ink-soft))]">
         {label}
       </p>
       <p className="mt-1 text-2xl font-semibold tabular-nums text-[rgb(var(--ink))]">
-        {value}
+        {value === null ? "—" : value}
       </p>
     </div>
   );

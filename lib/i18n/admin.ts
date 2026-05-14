@@ -8,6 +8,7 @@ export type AdminUiCopy = {
   navDiagnostics: string;
   overviewTitle: string;
   overviewSubtitle: string;
+  overviewDataError: string;
   overviewDisclaimer: string;
   overviewStatContacts: string;
   overviewStatSubs: string;
@@ -40,6 +41,7 @@ export type AdminUiCopy = {
   diagnosticsResend: string;
   diagnosticsStripe: string;
   diagnosticsDatabase: string;
+  diagnosticsDatabaseHint: string;
   diagnosticsConfigured: string;
   diagnosticsMissing: string;
   colDate: string;
@@ -82,6 +84,8 @@ const enUS: AdminUiCopy = {
   overviewTitle: "Site overview",
   overviewSubtitle:
     "Counts from your database, reminder subscribers (with miles), and recent page GETs when access logging is enabled.",
+  overviewDataError:
+    "Could not load overview stats from the database. Set DATABASE_URL on the host (Vercel → Environment Variables → Production), run migrations, then Redeploy.",
   overviewDisclaimer:
     "Access rows are written from Edge middleware using Vercel’s x-vercel-ip-country (when present), path, referer, and a short User-Agent. Set SITE_ACCESS_LOG_SECRET (≥16 chars) on the host to enable logging; without it, no rows are stored. Prune old SiteAccessLog rows periodically if traffic is high.",
   overviewStatContacts: "Contact requests (all time)",
@@ -121,6 +125,8 @@ const enUS: AdminUiCopy = {
   diagnosticsResend: "Resend (expert contact email)",
   diagnosticsStripe: "Stripe (billing webhook)",
   diagnosticsDatabase: "Database (Prisma)",
+  diagnosticsDatabaseHint:
+    "If this shows Not set, add DATABASE_URL in Vercel → Settings → Environment Variables (enable it for Production and Preview if you use preview URLs), save, then Redeploy. Use your Neon/Postgres connection string.",
   diagnosticsConfigured: "Configured",
   diagnosticsMissing: "Not set",
   colDate: "Date",
@@ -166,6 +172,8 @@ const hy: AdminUiCopy = {
   overviewTitle: "Կայքի ընդհանուր պատկեր",
   overviewSubtitle:
     "Թվեր տվյալների բազայից, հիշեցման բաժանորդներ (մայլերով) և վերջին page GET-երը, երբ մուտքերի գրանցումը միացված է։",
+  overviewDataError:
+    "Overview-ի թվերը չեն բացվել տվյալների բազայից։ Ավելացրեք DATABASE_URL Vercel-ում (Environment Variables → Production), migration-ները գործարկեք, հետո Redeploy։",
   overviewDisclaimer:
     "Մուտքերի տողերը գրում է Edge middleware-ը՝ օգտագործելով Vercel-ի x-vercel-ip-country (երբ կա), path, referer և կարճ User-Agent։ HOST-ում սահմանեք SITE_ACCESS_LOG_SECRET (≥16 նիշ)՝ գրանցումը միացնելու համար, առանց դրա տողեր չեն պահվում։ Բարձր տրաֆիկի դեպքում պարբերաբար մաքրեք հին SiteAccessLog տողերը։",
   overviewStatContacts: "Կապի հարցումներ (ընդամենը)",
@@ -205,6 +213,8 @@ const hy: AdminUiCopy = {
   diagnosticsResend: "Resend (մասնագետի նամակ)",
   diagnosticsStripe: "Stripe (ապառիչ)",
   diagnosticsDatabase: "Տվյալների բազա (Prisma)",
+  diagnosticsDatabaseHint:
+    "Եթե գրված է «Չկա», ավելացրեք DATABASE_URL Vercel → Settings → Environment Variables-ում (Production և Preview, եթե օգտագործում եք), պահեք, հետո Redeploy։ Օգտագործեք Neon/Postgres connection string։",
   diagnosticsConfigured: "Կա",
   diagnosticsMissing: "Չկա",
   colDate: "Ամսաթիվ",

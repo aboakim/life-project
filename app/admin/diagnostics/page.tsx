@@ -107,6 +107,12 @@ export default async function AdminDiagnosticsPage() {
         <StatusRow label={a.diagnosticsDatabase} ok={database} copy={a} />
       </ul>
 
+      {!database ? (
+        <p className="mt-4 rounded-xl border border-amber-500/25 bg-amber-500/10 px-4 py-3 text-sm leading-relaxed text-amber-100/95">
+          {a.diagnosticsDatabaseHint}
+        </p>
+      ) : null}
+
       <div className="mt-8 rounded-2xl border border-white/10 bg-black/20 p-4">
         <p className="text-sm text-[rgb(var(--ink-soft))]">{a.diagnosticsLogsHint}</p>
         {logsUrl ? (
