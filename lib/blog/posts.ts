@@ -2330,6 +2330,197 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "48-hour-rule-before-life-altering-commitments",
+    title: "The 48-hour “no signature” rule before life-altering commitments",
+    description:
+      "A simple guardrail used by judges, pilots, and negotiators — applied to mortgages, weddings, resignations, and anything you cannot Ctrl+Z.",
+    tags: ["decision-making", "psychology", "framework"],
+    readingMinutes: 8,
+    publishedAt: "2026-05-20",
+    author: "Life Decision Engine Editorial Team",
+    hero: {
+      eyebrow: "Cooling-off",
+      lede: "If the deal is good on Tuesday, it is almost always still good on Thursday. If it vanishes because you slept, it was never yours.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "Pressure loves a tired brain. Salespeople know it; recruiters know it; your own anxiety knows it. A 48-hour no-signature rule is not superstition — it is a commitment device that buys sleep, a second reader, and one sober look at the document in daylight.",
+      },
+      {
+        kind: "h2",
+        text: "What counts as “life-altering” for this rule",
+      },
+      {
+        kind: "ul",
+        items: [
+          "Anything with a multi-year financial tail: mortgage, car lease with exit penalties, private student loans.",
+          "Anything that changes legal status: marriage, business partnership, immigration filings.",
+          "Anything that burns reputation: public resignation letter, viral post, lawsuit threat.",
+        ],
+      },
+      {
+        kind: "h2",
+        text: "What the rule is not",
+      },
+      {
+        kind: "p",
+        text: "It is not an excuse to ghost people. You can still say yes emotionally and ask for the contract by email with a review window. It is not medical triage — if a clinician needs consent now, you follow clinical reality, not blog advice.",
+      },
+      {
+        kind: "h2",
+        text: "How to say it without sounding flaky",
+      },
+      {
+        kind: "p",
+        text: "Script: “I decide major commitments on paper after one sleep cycle. If this offer is real, it will survive 48 hours — and I will respond in writing by end of week.” Serious counterparties respect that. The ones who melt down are often the ones saving you from a mistake.",
+      },
+      {
+        kind: "quote",
+        text: "Urgency is a colour on the map, not a compass direction.",
+      },
+    ],
+  },
+  {
+    slug: "why-late-night-thinking-distorts-big-decisions",
+    title: "Why late-night thinking distorts big decisions (and what to do instead)",
+    description:
+      "Circadian rhythm, sleep debt, and rumination loops quietly change risk tolerance. Schedule the fork for a morning you did not doom-scroll first.",
+    tags: ["psychology", "sleep", "decision-making"],
+    readingMinutes: 9,
+    publishedAt: "2026-05-20",
+    author: "Life Decision Engine Editorial Team",
+    hero: {
+      eyebrow: "Chronobiology meets judgment",
+      lede: "The voice at 1:14 a.m. is not your wisest board member. It is your tired board member with a megaphone.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "Sleep deprivation measurably shifts risk perception: people become more impulsive on small gambles and more catastrophic on big ones — sometimes in the same hour. Add phone light suppressing melatonin and you have a chemistry set where “clarity” is advertised but not delivered.",
+      },
+      { kind: "h2", text: "What actually changes after midnight" },
+      {
+        kind: "ul",
+        items: [
+          "Working memory shrinks — you hold fewer variables at once, so decisions simplify into binaries you will regret.",
+          "Emotional salience spikes — the annoying email from Tuesday feels like a referendum on your worth.",
+          "Social inhibition drops — you send the text you would not send at 9 a.m.",
+        ],
+      },
+      {
+        kind: "h2",
+        text: "A protocol that works for adults with jobs",
+      },
+      {
+        kind: "ol",
+        items: [
+          "After 10 p.m., you may journal questions — you may not answer them.",
+          "If something must be drafted, draft in notes without recipients in the “To” field.",
+          "Put the decision on the calendar for the first free 30 minutes after breakfast within 72 hours.",
+        ],
+      },
+      {
+        kind: "h2",
+        text: "Pair this with the analyzer deliberately",
+      },
+      {
+        kind: "p",
+        text: "Run the structured analyzer in the morning, not because the math changes, but because the numbers you type — savings, months of runway, relationship years — will be more honest when you are not bargaining with exhaustion. The tool cannot fix biology; it can make morning-you’s work visible to night-you in advance.",
+      },
+    ],
+  },
+  {
+    slug: "when-two-life-dreams-cannot-coexist",
+    title: "When two life dreams cannot coexist: grieving the path you did not take",
+    description:
+      "Choosing is also closing. Naming the grief of unlived futures makes the commitment you pick feel less like betrayal and more like adulthood.",
+    tags: ["psychology", "values", "career"],
+    readingMinutes: 10,
+    publishedAt: "2026-05-21",
+    author: "Life Decision Engine Editorial Team",
+    hero: {
+      eyebrow: "Parallel universes",
+      lede: "You are allowed to miss the self who would have lived in Berlin, had three kids by thirty, or stayed in academia — and still choose otherwise.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "Western self-help often frames decisions as optimisation: pick the best option and celebrate. Real humans experience mutual exclusivity as loss. The artist who takes the stable job grieves studio time. The parent who stops at one child grieves the noise of a larger table. Ignoring that grief does not make you rational — it makes you brittle.",
+      },
+      { kind: "h2", text: "Write an obituary for the unchosen path" },
+      {
+        kind: "p",
+        text: "One page, past tense: “The version of me who moved to Tokyo in 2027 died because…” Be specific about what you will miss — language, friendships, pace of life — not vague romance. Naming the sacrifice honours it and stops it from haunting you as a fantasy that grows shinier every year.",
+      },
+      {
+        kind: "h2",
+        text: "Beware the Instagram afterlife",
+      },
+      {
+        kind: "p",
+        text: "Social media shows curated highlights of the paths you skipped. That feed is not evidence that you chose wrong; it is evidence that other humans post on good hair days. Muting accounts that trigger revisionism is not weakness — it is environmental design for mental health.",
+      },
+      {
+        kind: "h2",
+        text: "How this connects to values work",
+      },
+      {
+        kind: "p",
+        text: "If your chosen path still aligns with two or three named values after the obituary exercise, you have something sturdy. If alignment disappears, you may be living someone else’s optimised life. That is worth revisiting — not nightly, but in a scheduled review with a therapist or coach if possible.",
+      },
+    ],
+  },
+  {
+    slug: "invisible-options-and-hidden-opportunity-cost",
+    title: "Invisible options: the opportunity cost of paths that never made your list",
+    description:
+      "Menus are designed — by employers, families, algorithms — to hide exits. Here is how to surface “option zero” before you optimise inside a cage.",
+    tags: ["decision-making", "career", "framework"],
+    readingMinutes: 10,
+    publishedAt: "2026-05-21",
+    author: "Life Decision Engine Editorial Team",
+    hero: {
+      eyebrow: "Menu design",
+      lede: "If every alternative sounds like a variation of the same job title, you have not finished brainstorming — you have started decorating.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "Real opportunity cost includes options you never wrote down because nobody in your circle models them: sabbatical, geographic arbitrage, part-time specialist work, returning to school at forty, leaving prestige for craft. Those paths feel “unreal” until you meet one person living them — which is exactly why they stay off the spreadsheet.",
+      },
+      { kind: "h2", text: "Three sources of invisible options" },
+      {
+        kind: "ul",
+        items: [
+          "Identity protection — “people like me don’t…”",
+          "Parental scripts absorbed as facts.",
+          "Algorithmic feeds that reinforce a single industry’s vocabulary.",
+        ],
+      },
+      {
+        kind: "h2",
+        text: "A forcing question that widens the menu",
+      },
+      {
+        kind: "p",
+        text: "Ask: “If money were boringly handled for five years, what would I try for eighteen months?” The clause matters — it removes survival panic long enough to hear quieter desires. You are not committing; you are listening.",
+      },
+      {
+        kind: "h2",
+        text: "Why we built scenarios into the analyzer",
+      },
+      {
+        kind: "p",
+        text: "Scenarios are not predictions; they are permission slips to imagine lives you were trained not to price. When readers tell us the tool “found” an option they had dismissed, they usually mean the third scenario slot forced language they had been avoiding. That is the opposite of thin content — it is structured imagination with guardrails.",
+      },
+      {
+        kind: "quote",
+        text: "The cheapest option is often the one nobody remembered to price.",
+      },
+    ],
+  },
 ];
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
