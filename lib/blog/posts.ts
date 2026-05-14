@@ -2065,6 +2065,271 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "one-way-vs-two-way-door-decisions",
+    title: "One-way vs two-way doors: which life decisions are actually reversible?",
+    description:
+      "Borrowing a useful distinction from business strategy: some choices are cheap to undo; others burn bridges. Learn how to classify your fork so you stop over-studying reversible moves and under-studying irreversible ones.",
+    tags: ["decision-making", "framework", "risk"],
+    readingMinutes: 9,
+    publishedAt: "2026-05-17",
+    author: "Life Decision Engine Editorial Team",
+    hero: {
+      eyebrow: "Reversibility",
+      lede: "Not every big decision is heavy. Some only feel heavy because you treat a two-way door like a vault.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "Jeff Bezos popularised “one-way vs two-way doors” for organisational speed: most decisions are two-way — you can walk them back with limited cost — and only a few are one-way, where undoing is expensive or impossible. Individuals rarely hear this language, so they treat every emotional fork like a one-way door. The result is paralysis on reversible moves and reckless speed on the rare true one-way choices.",
+      },
+      { kind: "h2", text: "Two-way doors in adult life (examples)" },
+      {
+        kind: "ul",
+        items: [
+          "Trying a new role internally for six months before quitting the company.",
+          "Renting in a neighbourhood for a year before buying there.",
+          "Starting a side project with a defined time box and kill criteria.",
+          "Taking a course before committing to a full degree.",
+        ],
+      },
+      {
+        kind: "p",
+        text: "None of these is “free,” but each preserves optionality. The mistake is to confuse emotional discomfort with structural irreversibility. Quitting might feel final on day one; structurally, if you kept your network and savings intact, it may still be a two-way door.",
+      },
+      { kind: "h2", text: "One-way doors (treat with extra ceremony)" },
+      {
+        kind: "ul",
+        items: [
+          "Having a child — not reversible in any meaningful sense.",
+          "Selling a unique asset you cannot re-buy at the same terms.",
+          "Burning a relationship in public when reconciliation would matter later.",
+          "Waiving legal rights without understanding the document.",
+        ],
+      },
+      {
+        kind: "h2",
+        text: "A three-question test you can run in five minutes",
+      },
+      {
+        kind: "ol",
+        items: [
+          "If I change my mind in 90 days, what is the recovery cost in money, time, and relationships?",
+          "Does this choice foreclose other choices I might still value?",
+          "Am I choosing under manufactured urgency? If yes, default toward delay unless the door is truly one-way.",
+        ],
+      },
+      {
+        kind: "p",
+        text: "Use the homepage analyzer for two-way-door decisions when you need speed with structure; reserve slow, multi-human review for one-way doors. That pairing is how serious sites separate tooling from therapy — and how readers learn to trust the boundary.",
+      },
+    ],
+  },
+  {
+    slug: "satisficing-vs-maximizing-for-life-decisions",
+    title: "Satisficing vs maximising: when “good enough” is the rational move",
+    description:
+      "Herbert Simon’s satisficing idea applies far beyond economics. Learn when to stop searching for the perfect option before search costs exceed the upside.",
+    tags: ["decision-making", "psychology", "framework"],
+    readingMinutes: 10,
+    publishedAt: "2026-05-17",
+    author: "Life Decision Engine Editorial Team",
+    hero: {
+      eyebrow: "Search cost",
+      lede: "Maximisers optimise until the deadline. Satisficers pick the first option that clears a bar. Big life decisions need a hybrid — a bar, then a stop rule.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "Maximising feels responsible: compare every school, every neighbourhood, every job posting. In reality, after a point, extra comparison mostly increases regret and delays action without improving expected outcomes. Satisficing — setting a quality bar and choosing the first option that clears it — is not laziness; it is respect for finite attention.",
+      },
+      { kind: "h2", text: "Where maximising pays off" },
+      {
+        kind: "p",
+        text: "High-stakes, low-frequency, information-rich domains reward deeper search: cancer treatment centres, custody agreements, founding equity splits. Here the cost of a mistake dwarfs the cost of another week of diligence.",
+      },
+      { kind: "h2", text: "Where satisficing usually wins" },
+      {
+        kind: "ul",
+        items: [
+          "Choosing among five good rental flats when any would work for a year.",
+          "Picking a gym, a dentist, or a therapist from a vetted shortlist — fit matters, but perfection is noise.",
+          "Selecting a wedding venue once basic constraints are met — additional tours rarely change happiness a year later.",
+        ],
+      },
+      {
+        kind: "h2",
+        text: "A practical stop rule",
+      },
+      {
+        kind: "p",
+        text: "Before you research, define: minimum acceptable outcome, maximum time budget, maximum number of alternatives you will seriously entertain. When you hit any limit, you decide from the set in front of you. If that feels cruel, notice that the alternative is often to decide from exhaustion instead of criteria.",
+      },
+      {
+        kind: "quote",
+        text: "The goal is not the perfect choice. The goal is a choice you can live with that was made with open eyes.",
+      },
+    ],
+  },
+  {
+    slug: "decision-retrospective-after-six-months",
+    title: "Run a decision retrospective after six months (without rewriting history)",
+    description:
+      "A lightweight retrospective helps you learn from outcomes without turning into self-punishment — useful for career moves, money calls, and relationships.",
+    tags: ["decision-making", "journaling", "career"],
+    readingMinutes: 9,
+    publishedAt: "2026-05-18",
+    author: "Life Decision Engine Editorial Team",
+    hero: {
+      eyebrow: "Learning loop",
+      lede: "Outcomes are noisy. Process quality is still worth grading — on paper, with rules.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "Six months is long enough for first consequences to appear, short enough that you still remember what you believed at decision time. A retrospective is not a court where you convict your past self; it is an engineering postmortem for life choices.",
+      },
+      { kind: "h2", text: "The four prompts" },
+      {
+        kind: "ol",
+        items: [
+          "What actually happened vs what I expected? (facts, not vibes)",
+          "Which assumptions were right, which were wrong, and which remain unknown?",
+          "If I could send one paragraph of advice back in time, what would it say?",
+          "What would I do differently in process — not in outcome — next time?",
+        ],
+      },
+      {
+        kind: "h2",
+        text: "Why separating outcome from process matters",
+      },
+      {
+        kind: "p",
+        text: "Good decisions can produce bad outcomes because of luck. Bad decisions can produce good outcomes the same way. If you only judge by outcome, you will learn the wrong lessons. Process review asks whether your past self had access to information they should have gathered — not whether the universe rewarded them.",
+      },
+      {
+        kind: "h2",
+        text: "When not to do this alone",
+      },
+      {
+        kind: "p",
+        text: "If the decision involved another person’s safety, autonomy, or shared finances, consider running the retrospective with a neutral third party (therapist, mediator, planner). The article stays general; your situation may need professional framing.",
+      },
+    ],
+  },
+  {
+    slug: "when-to-trust-advice-from-friends-and-family",
+    title: "When to trust advice from friends and family — and when to ignore it",
+    description:
+      "Love and proximity are not the same as domain expertise. A framework for weighting informal advice without damaging relationships.",
+    tags: ["relationships", "decision-making", "career"],
+    readingMinutes: 10,
+    publishedAt: "2026-05-18",
+    author: "Life Decision Engine Editorial Team",
+    hero: {
+      eyebrow: "Signal vs noise",
+      lede: "They care about you. That does not automatically mean they modelled your tradeoffs correctly.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "Friends and family often give fast, confident advice because they love you and want the pain to stop. That impulse is human. It is also structurally biased toward risk aversion, tradition, and their own unfinished business projected onto your story.",
+      },
+      { kind: "h2", text: "Weight advice by three axes" },
+      {
+        kind: "ul",
+        items: [
+          "Incentive alignment — do they bear any cost if they are wrong?",
+          "Domain recency — have they made this class of decision in the last decade under similar constraints?",
+          "Information quality — do they know facts you have not shared, or are they reacting to mood?",
+        ],
+      },
+      {
+        kind: "h2",
+        text: "Scripts that preserve warmth while setting boundaries",
+      },
+      {
+        kind: "p",
+        text: "Try: “I am collecting perspectives this week; I will decide after I sleep on the write-up.” That honours the relationship without committing to obedience. If someone cannot tolerate delay, that is data about their anxiety, not about your choice.",
+      },
+      {
+        kind: "h2",
+        text: "When expert advice still wins",
+      },
+      {
+        kind: "p",
+        text: "Tax, immigration, clinical mental health, securities law — these are not opinion markets. Use loved ones for emotional containment and values reflection; use licensed professionals for specialised truth claims.",
+      },
+    ],
+  },
+  {
+    slug: "cognitive-biases-that-distort-big-life-choices",
+    title: "Five cognitive biases that distort big life choices (and simple counter-moves)",
+    description:
+      "Anchoring, confirmation, availability, loss aversion, and the planning fallacy show up in every kitchen-table decision. Here is how to spot them without a PhD.",
+    tags: ["psychology", "decision-making", "framework"],
+    readingMinutes: 11,
+    publishedAt: "2026-05-19",
+    author: "Life Decision Engine Editorial Team",
+    hero: {
+      eyebrow: "Bias kit",
+      lede: "You cannot remove bias. You can make it visible enough that it stops driving the bus.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "Knowing bias names is less useful than having counter-moves you will actually do when tired. Below are five that show up constantly in reader mail.",
+      },
+      {
+        kind: "h2",
+        text: "1. Anchoring",
+      },
+      {
+        kind: "p",
+        text: "The first number you hear colonises the negotiation — salary, house price, child support expectations. Counter-move: write your own anchor on paper before you open any email or listing. Your anchor should cite at least two independent sources.",
+      },
+      {
+        kind: "h2",
+        text: "2. Confirmation bias",
+      },
+      {
+        kind: "p",
+        text: "You search for reasons the option you like is wise. Counter-move: spend twenty minutes writing the strongest case for the option you dislike. If you cannot make it sound coherent, you have not understood it yet.",
+      },
+      {
+        kind: "h2",
+        text: "3. Availability",
+      },
+      {
+        kind: "p",
+        text: "Recent headlines feel more probable than they are. Counter-move: ask for base rates — how often does this outcome happen to people like me, not on Twitter, but in boring datasets?",
+      },
+      {
+        kind: "h2",
+        text: "4. Loss aversion",
+      },
+      {
+        kind: "p",
+        text: "Losses hurt about twice as much as equivalent gains feel good — Kahneman and Tversky’s classic finding. That skew makes people cling to mediocre status quos. Counter-move: frame the status quo as an active choice with its own risks, not as zero.",
+      },
+      {
+        kind: "h2",
+        text: "5. Planning fallacy",
+      },
+      {
+        kind: "p",
+        text: "We underestimate time and cost for our own projects while believing others are late. Counter-move: take your best-case timeline and multiply by 1.5 for personal projects; ask someone who has done the exact thing what surprised them.",
+      },
+      {
+        kind: "h2",
+        text: "Why this site keeps publishing bias primers",
+      },
+      {
+        kind: "p",
+        text: "The analyzer is essentially bias scaffolding: scenarios fight availability, lenses fight confirmation, timelines fight planning fallacy. Articles like this one explain the “why” so the tool does not feel like a black box. That transparency is part of what “helpful content” systems reward.",
+      },
+    ],
+  },
 ];
 
 export function getPostBySlug(slug: string): BlogPost | undefined {

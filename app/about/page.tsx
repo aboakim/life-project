@@ -49,6 +49,54 @@ export default function AboutPage() {
 
         <section>
           <h2 className="text-base font-semibold text-[rgb(var(--ink))]">
+            How we create and review content
+          </h2>
+          <p className="mt-3">
+            The{" "}
+            <Link
+              href="/blog"
+              className="font-medium text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+            >
+              blog
+            </Link>{" "}
+            is written and edited by humans on our editorial team. Articles are
+            meant as general education — frameworks, psychology, and tradeoffs —
+            not personalised advice for your situation. We date posts at
+            publication, revise when facts or safety guidance change, and keep
+            tone direct rather than click-driven.
+          </p>
+          <p className="mt-3">
+            The{" "}
+            <Link
+              href="/analyze"
+              className="font-medium text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+            >
+              analyzer
+            </Link>{" "}
+            uses AI to help you structure your own thinking (scenarios, lenses,
+            timelines). It does not know your jurisdiction, health history, or
+            contracts. When output touches legal, medical, or financial
+            territory, we treat the tool as a draft for you and a qualified
+            professional — see our{" "}
+            <Link
+              href="/privacy"
+              className="font-medium text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+            >
+              Privacy Policy
+            </Link>{" "}
+            and{" "}
+            <Link
+              href="/terms"
+              className="font-medium text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+            >
+              Terms of Service
+            </Link>{" "}
+            for how data is handled.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-base font-semibold text-[rgb(var(--ink))]">
             What we build
           </h2>
           <ul className="mt-3 list-disc space-y-2 ps-5">

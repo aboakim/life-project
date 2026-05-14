@@ -9,12 +9,12 @@ import { getSiteUrlString } from "@/lib/site-url";
 export const metadata: Metadata = {
   title: "Blog — Life Decision Engine",
   description:
-    "Essays and frameworks for big life decisions: career changes, relocation, relationships, finance, psychology.",
+    "Long-form guides and frameworks for major life decisions: career, relocation, relationships, money, psychology, bias, and risk — written to complement the structured analyzer on the homepage.",
   alternates: { canonical: "/blog" },
   openGraph: {
     title: "Blog — Life Decision Engine",
     description:
-      "Long-form essays on big life decisions — career, relocation, relationships, finance, psychology.",
+      "In-depth articles on decision-making: scenarios, retrospectives, bias, relationships, and career forks — designed to be useful on first read.",
     type: "website",
   },
 };
