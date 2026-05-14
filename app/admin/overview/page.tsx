@@ -107,22 +107,24 @@ export default async function AdminOverviewPage() {
     ua: string | null;
   }[] = [];
   let accessLogQueryFailed = false;
-  try {
-    accessRows = await prisma.siteAccessLog.findMany({
-      orderBy: { createdAt: "desc" },
-      take: 400,
-      select: {
-        id: true,
-        createdAt: true,
-        path: true,
-        country: true,
-        referer: true,
-        ua: true,
-      },
-    });
-  } catch {
-    accessLogQueryFailed = true;
-    accessRows = [];
+  if (!overviewDataError) {
+    try {
+      accessRows = await prisma.siteAccessLog.findMany({
+        orderBy: { createdAt: "desc" },
+        take: 400,
+        select: {
+          id: true,
+          createdAt: true,
+          path: true,
+          country: true,
+          referer: true,
+          ua: true,
+        },
+      });
+    } catch {
+      accessLogQueryFailed = true;
+      accessRows = [];
+    }
   }
 
   return (
