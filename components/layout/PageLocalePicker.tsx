@@ -5,6 +5,7 @@ import {
   type AppLocale,
   isRtlLocale,
 } from "@/lib/i18n/locale";
+import LocaleFlag from "@/components/LocaleFlag";
 import { getUi } from "@/lib/i18n/ui";
 import { dispatchLocaleChanged } from "@/lib/locale-sync";
 
@@ -56,9 +57,10 @@ export default function PageLocalePicker({
                   : "rounded-xl border border-white/12 bg-black/35 px-3 py-2 text-sm text-[rgb(var(--ink-soft))] transition hover:border-amber-400/25 hover:bg-white/[0.05] hover:text-[rgb(var(--ink))]"
               }
             >
-              <span className="me-1.5 opacity-90" aria-hidden>
-                {opt.flag}
-              </span>
+              <LocaleFlag
+                flagCode={opt.flagCode}
+                className="me-1.5 h-3.5 w-5 opacity-90"
+              />
               {opt.label}
             </button>
           );

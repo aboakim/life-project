@@ -9,12 +9,8 @@ import { getCommunityCopy } from "@/lib/i18n/community-page";
 import { getMonetizeCopy } from "@/lib/i18n/monetization-page";
 import { getPricingCopy } from "@/lib/i18n/pricing-page";
 import { DEFAULT_LOCALE } from "@/lib/locale-default";
-import {
-  LOCALE_OPTIONS,
-  isAppLocale,
-  isRtlLocale,
-  type AppLocale,
-} from "@/lib/i18n/locale";
+import { isAppLocale, isRtlLocale, type AppLocale } from "@/lib/i18n/locale";
+import LocaleSelect from "@/components/LocaleSelect";
 import { getPostAnalysisCopy } from "@/lib/i18n/post-analysis";
 import { getSiteExtras } from "@/lib/i18n/site-extras";
 import { getNoveltyCopy } from "@/lib/i18n/novelty-extras";
@@ -25,7 +21,7 @@ import {
 } from "@/lib/locale-cookie";
 import {
   LOCALE_CHANGE_EVENT,
-  dispatchLocaleChanged,
+  applyClientLocaleChange,
 } from "@/lib/locale-sync";
 import NavRoutePrefetch from "@/components/NavRoutePrefetch";
 
@@ -232,30 +228,17 @@ export default function GlobalNav() {
                 <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[rgb(var(--ink-soft))]">
                   {t.langLabel}
                 </p>
-                <select
+                <LocaleSelect
                   value={locale}
                   aria-label={t.langLabel}
-                  onChange={(e) => {
-                    const v = e.target.value;
+                  className="mt-2"
+                  triggerClassName="min-h-[48px] rounded-xl border-white/[0.14] bg-black/40 px-3 text-base"
+                  onChange={(v) => {
                     if (!isAppLocale(v)) return;
                     setLocale(v);
-                    localStorage.setItem(LOCALE_KEY, v);
-                    syncLocaleCookieClient(v);
-                    document.documentElement.lang = v;
-                    document.documentElement.setAttribute(
-                      "dir",
-                      isRtlLocale(v) ? "rtl" : "ltr"
-                    );
-                    dispatchLocaleChanged();
+                    applyClientLocaleChange(v);
                   }}
-                  className="mt-2 w-full min-h-[48px] cursor-pointer rounded-xl border border-white/[0.14] bg-black/40 px-3 py-2 text-base font-medium text-[rgb(var(--ink))] outline-none"
-                >
-                  {LOCALE_OPTIONS.map((opt) => (
-                    <option key={opt.value} value={opt.value}>
-                      {opt.flag} {opt.label}
-                    </option>
-                  ))}
-                </select>
+                />
               </div>
 
               <p className="mt-6 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[rgb(var(--ink-soft))]">
@@ -325,33 +308,19 @@ export default function GlobalNav() {
             <div className="flex shrink-0 justify-end">
               <NavMoreMenu label={t.navMore} links={moreLinks} />
             </div>
-            <label className="flex min-w-0 shrink-0 items-center justify-end gap-1.5 ps-0.5">
-              <span className="sr-only">{t.langLabel}</span>
-              <select
+            <div className="flex min-w-0 shrink-0 items-center justify-end ps-0.5">
+              <LocaleSelect
                 value={locale}
                 aria-label={t.langLabel}
-                onChange={(e) => {
-                  const v = e.target.value;
+                className="max-w-[11rem]"
+                triggerClassName="max-w-[11rem]"
+                onChange={(v) => {
                   if (!isAppLocale(v)) return;
                   setLocale(v);
-                  localStorage.setItem(LOCALE_KEY, v);
-                  syncLocaleCookieClient(v);
-                  document.documentElement.lang = v;
-                  document.documentElement.setAttribute(
-                    "dir",
-                    isRtlLocale(v) ? "rtl" : "ltr"
-                  );
-                  dispatchLocaleChanged();
+                  applyClientLocaleChange(v);
                 }}
-                className="max-w-[11rem] cursor-pointer rounded-lg border border-white/[0.12] bg-black/35 px-2 py-2 text-sm font-medium text-[rgb(var(--ink))] outline-none transition focus:border-[rgb(var(--accent))]/45"
-              >
-                {LOCALE_OPTIONS.map((opt) => (
-                  <option key={opt.value} value={opt.value}>
-                    {opt.flag} {opt.label}
-                  </option>
-                ))}
-              </select>
-            </label>
+              />
+            </div>
             <div className="flex shrink-0 justify-end">
               <Link
                 href="/experts/register"

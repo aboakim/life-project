@@ -2,12 +2,8 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import {
-  LOCALE_OPTIONS,
-  type AppLocale,
-  isAppLocale,
-  isRtlLocale,
-} from "@/lib/i18n/locale";
+import { type AppLocale, isAppLocale, isRtlLocale } from "@/lib/i18n/locale";
+import LocaleSelect from "@/components/LocaleSelect";
 import { getUi } from "@/lib/i18n/ui";
 import { getWelcomeCopy } from "@/lib/i18n/welcome-modal";
 
@@ -93,26 +89,20 @@ export default function WelcomeModal({ locale, onLocaleChange }: Props) {
           >
             {w.title}
           </h2>
-          <label className="flex shrink-0 flex-col gap-1.5 sm:items-end">
+          <div className="flex shrink-0 flex-col gap-1.5 sm:items-end">
             <span className="text-[10px] font-medium uppercase tracking-wide text-[rgb(var(--ink-soft))]">
               {t.langLabel}
             </span>
-            <select
+            <LocaleSelect
               value={locale}
               aria-label={t.langLabel}
-              onChange={(e) => {
-                const v = e.target.value;
+              className="w-full min-w-[12rem] sm:w-auto"
+              triggerClassName="w-full min-w-[12rem] shadow-inner sm:w-auto"
+              onChange={(v) => {
                 if (isAppLocale(v)) onLocaleChange(v);
               }}
-              className="w-full min-w-[12rem] cursor-pointer rounded-lg border border-white/[0.14] bg-black/35 px-3 py-2 text-sm text-[rgb(var(--ink))] shadow-inner outline-none transition focus:border-[rgb(var(--accent))]/45 focus:ring-1 focus:ring-[rgb(var(--accent))]/30 sm:w-auto"
-            >
-              {LOCALE_OPTIONS.map((opt) => (
-                <option key={opt.value} value={opt.value}>
-                  {opt.flag} {opt.label}
-                </option>
-              ))}
-            </select>
-          </label>
+            />
+          </div>
         </div>
         <p className="mt-4 text-sm leading-relaxed text-[rgb(var(--ink-soft))] sm:text-base [text-wrap:pretty]">
           {w.lead}

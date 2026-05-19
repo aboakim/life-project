@@ -24,6 +24,7 @@ import { getExpertsCopy } from "@/lib/i18n/experts-network";
 import { getPricingCopy } from "@/lib/i18n/pricing-page";
 import type { DecisionAnalysis, MatchedExpertSummary } from "@/lib/types";
 import { roleLabel, type ExpertRoleKey } from "@/lib/i18n/experts-network";
+import LocaleFlag from "@/components/LocaleFlag";
 import {
   LOCALE_OPTIONS,
   type AppLocale,
@@ -1052,9 +1053,10 @@ export default function DecisionStudio({
                           : "rounded-xl border border-white/[0.12] bg-white/[0.06] px-3 py-2 text-sm text-[rgb(var(--ink-soft))] transition hover:border-[rgb(var(--accent-2))]/30 hover:bg-white/[0.1] hover:text-[rgb(var(--ink))]"
                       }
                     >
-                      <span className="me-1.5 opacity-90" aria-hidden>
-                        {opt.flag}
-                      </span>
+                      <LocaleFlag
+                        flagCode={opt.flagCode}
+                        className="me-1.5 h-3.5 w-5 opacity-90"
+                      />
                       {opt.label}
                     </button>
                   );
@@ -1579,9 +1581,10 @@ export default function DecisionStudio({
                         : "rounded-xl border border-white/[0.12] bg-white/[0.06] px-3 py-2 text-sm text-[rgb(var(--ink-soft))] transition hover:border-[rgb(var(--accent-2))]/30 hover:bg-white/[0.1] hover:text-[rgb(var(--ink))]"
                   }
                 >
-                  <span className="me-1.5 opacity-90" aria-hidden>
-                    {opt.flag}
-                  </span>
+                  <LocaleFlag
+                    flagCode={opt.flagCode}
+                    className="me-1.5 h-3.5 w-5 opacity-90"
+                  />
                   {opt.label}
                 </button>
               );

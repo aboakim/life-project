@@ -51,14 +51,21 @@ export function llmLanguageLabel(locale: AppLocale): string {
 export const LOCALE_OPTIONS: {
   value: AppLocale;
   label: string;
+  /** Emoji fallback where img flags are not used */
   flag: string;
+  /** ISO 3166-1 alpha-2 for flagcdn.com (works in native selects on Windows) */
+  flagCode: string;
 }[] = [
-  { value: "en-US", label: "English (US)", flag: "🇺🇸" },
-  { value: "hy", label: "Հայերեն", flag: "🇦🇲" },
-  { value: "ru", label: "Русский", flag: "🇷🇺" },
-  { value: "de", label: "Deutsch", flag: "🇩🇪" },
-  { value: "fr", label: "Français", flag: "🇫🇷" },
-  { value: "es", label: "Español", flag: "🇪🇸" },
-  { value: "ar", label: "العربية", flag: "🇸🇦" },
-  { value: "it", label: "Italiano", flag: "🇮🇹" },
+  { value: "en-US", label: "English (US)", flag: "🇺🇸", flagCode: "us" },
+  { value: "hy", label: "Հայերեն", flag: "🇦🇲", flagCode: "am" },
+  { value: "ru", label: "Русский", flag: "🇷🇺", flagCode: "ru" },
+  { value: "de", label: "Deutsch", flag: "🇩🇪", flagCode: "de" },
+  { value: "fr", label: "Français", flag: "🇫🇷", flagCode: "fr" },
+  { value: "es", label: "Español", flag: "🇪🇸", flagCode: "es" },
+  { value: "ar", label: "العربية", flag: "🇸🇦", flagCode: "sa" },
+  { value: "it", label: "Italiano", flag: "🇮🇹", flagCode: "it" },
 ];
+
+export function localeFlagSrc(flagCode: string, width = 40): string {
+  return `https://flagcdn.com/w${width}/${flagCode}.png`;
+}

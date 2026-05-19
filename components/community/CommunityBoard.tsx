@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import type { CommunityCopy } from "@/lib/i18n/community-page";
-import { LOCALE_OPTIONS } from "@/lib/i18n/locale";
+import LocaleSelect from "@/components/LocaleSelect";
 
 type Answer = {
   id: string;
@@ -224,18 +224,13 @@ export default function CommunityBoard({
       <div className="flex flex-wrap items-center gap-3">
         <label className="flex items-center gap-2 text-sm text-[rgb(var(--ink))]">
           <span>{filterLangLabel}</span>
-          <select
+          <LocaleSelect
             value={langFilter}
-            onChange={(e) => setLangFilter(e.target.value)}
-            className="cursor-pointer rounded-xl border border-white/12 bg-black/35 px-3 py-2 text-sm text-[rgb(var(--ink))] outline-none focus:border-[rgb(var(--accent))]/45"
-          >
-            <option value="all">{filterAllLabel}</option>
-            {LOCALE_OPTIONS.map((opt) => (
-              <option key={opt.value} value={opt.value}>
-                {opt.flag} {opt.label}
-              </option>
-            ))}
-          </select>
+            aria-label={filterLangLabel}
+            allOption={{ value: "all", label: filterAllLabel }}
+            className="min-w-[10rem]"
+            onChange={setLangFilter}
+          />
         </label>
         <label className="flex items-center gap-2 text-sm text-[rgb(var(--ink))]">
           <span>{t.topicLabel}</span>
