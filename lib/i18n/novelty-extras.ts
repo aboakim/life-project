@@ -1,4 +1,12 @@
 import type { AppLocale } from "./locale";
+import {
+  noveltyAr,
+  noveltyDe,
+  noveltyEs,
+  noveltyFr,
+  noveltyIt,
+  noveltyRu,
+} from "./novelty-locales";
 
 export type NoveltyCopy = {
   navFieldNotes: string;
@@ -214,7 +222,16 @@ const hy: NoveltyCopy = {
     "Դրույք, «Վերլուծել» — կառուցված հաշվետվությունը հայտնվում է բանաձևի անմիջապես ներքևում։",
 };
 
+const noveltyTable: Partial<Record<AppLocale, NoveltyCopy>> = {
+  ru: noveltyRu,
+  de: noveltyDe,
+  fr: noveltyFr,
+  es: noveltyEs,
+  it: noveltyIt,
+  ar: noveltyAr,
+};
+
 export function getNoveltyCopy(locale: AppLocale): NoveltyCopy {
   if (locale === "hy") return hy;
-  return en;
+  return noveltyTable[locale] ?? en;
 }

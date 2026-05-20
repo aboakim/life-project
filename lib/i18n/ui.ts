@@ -1,4 +1,5 @@
 import type { AppLocale } from "./locale";
+import { homeI18nByLocale } from "./home-i18n-locales";
 
 /** Tap-to-fill prompts in the analyzer workspace */
 export type WorkspaceQuickExample = { label: string; decision: string };
@@ -1588,9 +1589,10 @@ export function getUi(locale: AppLocale): UIStrings {
               : locale === "ar"
                 ? trustHowAr
                 : trustHowEn;
+  const homeI18n = homeI18nByLocale[locale] ?? HOME_I18N_FALLBACKS;
   return {
     ...NAV_LINK_FALLBACKS,
-    ...HOME_I18N_FALLBACKS,
+    ...homeI18n,
     ...trustBase,
     ...row,
   } as UIStrings;

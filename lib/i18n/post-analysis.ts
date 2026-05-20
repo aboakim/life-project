@@ -1,4 +1,12 @@
 import type { AppLocale } from "./locale";
+import {
+  postAnalysisAr,
+  postAnalysisDe,
+  postAnalysisEs,
+  postAnalysisFr,
+  postAnalysisIt,
+  postAnalysisRu,
+} from "./post-analysis-locales";
 
 export type PostAnalysisCopy = {
   followUpTitle: string;
@@ -451,12 +459,12 @@ const table: Record<AppLocale, PostAnalysisCopy> = {
   "en-US": en,
   en,
   hy,
-  ru: { ...en, expertsCta: "Эксперты", playbooksCta: "Гайды", guidelinesCta: "Правила сообщества", remindSet: "Напомнить через 2 недели", reminderDismiss: "Скрыть", copyMarkdown: "Копировать Markdown", saveToJournal: "В дневник", followUpTitle: "Следующие вопросы", assumptionsTitle: "Проверьте допущения", actionsTitle: "Сохранить и поделиться" },
-  de: { ...en, expertsCta: "Experten", playbooksCta: "Playbooks", guidelinesCta: "Community-Regeln", remindSet: "In 2 Wochen erinnern", reminderDismiss: "Schließen", copyMarkdown: "Markdown kopieren", saveToJournal: "Ins Tagebuch", followUpTitle: "Nächste Fragen", assumptionsTitle: "Annahmen prüfen", actionsTitle: "Speichern & teilen" },
-  fr: { ...en, expertsCta: "Experts", playbooksCta: "Guides", guidelinesCta: "Règles communauté", remindSet: "Rappel dans 2 semaines", reminderDismiss: "Fermer", copyMarkdown: "Copier Markdown", saveToJournal: "Au journal", followUpTitle: "Questions suivantes", assumptionsTitle: "Tester les hypothèses", actionsTitle: "Garder & partager" },
-  es: { ...en, expertsCta: "Expertos", playbooksCta: "Guías", guidelinesCta: "Normas de la comunidad", remindSet: "Recordar en 2 semanas", reminderDismiss: "Cerrar", copyMarkdown: "Copiar Markdown", saveToJournal: "Al diario", followUpTitle: "Siguientes preguntas", assumptionsTitle: "Comprobar supuestos", actionsTitle: "Guardar y compartir" },
-  it: { ...en, expertsCta: "Esperti", playbooksCta: "Guide", guidelinesCta: "Regole community", remindSet: "Promemoria tra 2 settimane", reminderDismiss: "Chiudi", copyMarkdown: "Copia Markdown", saveToJournal: "Nel diario", followUpTitle: "Prossime domande", assumptionsTitle: "Verifica le ipotesi", actionsTitle: "Salva e condividi" },
-  ar: { ...en, expertsCta: "الخبراء", playbooksCta: "أدلة", guidelinesCta: "إرشادات المجتمع", remindSet: "تذكير خلال أسبوعين", reminderDismiss: "إغلاق", copyMarkdown: "نسخ Markdown", saveToJournal: "إلى اليوميات", followUpTitle: "أسئلة تالية", assumptionsTitle: "اختبر الافتراضات", actionsTitle: "احفظ وشارك" },
+  ru: postAnalysisRu,
+  de: postAnalysisDe,
+  fr: postAnalysisFr,
+  es: postAnalysisEs,
+  it: postAnalysisIt,
+  ar: postAnalysisAr,
 };
 
 export function getPostAnalysisCopy(locale: AppLocale): PostAnalysisCopy {

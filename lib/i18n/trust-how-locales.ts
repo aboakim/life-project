@@ -196,6 +196,7 @@ export const trustHowRu: TrustHowPick = {
   homeDemoTitle: "Как выглядит отчёт в один клик",
   homeDemoExample1: "Стоит ли уехать жить за границу?",
   homeDemoExample2: "Уволиться или остаться?",
+  homeDemoExample3: "В отношениях — остаться или уйти?",
   homeDemoCta: "Демо",
   analyzingProgressLine: "Анализируем ваше решение…",
 };

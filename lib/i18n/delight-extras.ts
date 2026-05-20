@@ -1,4 +1,5 @@
 import type { AppLocale } from "./locale";
+import { delightUiByLocale } from "./delight-ui-locales";
 
 export type ColdStartPack = {
   label: string;
@@ -770,7 +771,10 @@ const table: Record<AppLocale, DelightCopy> = {
 };
 
 export function getDelightCopy(locale: AppLocale): DelightCopy {
-  return table[locale] ?? en;
+  const base = table[locale] ?? en;
+  const ui = delightUiByLocale[locale];
+  if (!ui) return base;
+  return { ...base, ...ui };
 }
 
 export function milestoneMessage(

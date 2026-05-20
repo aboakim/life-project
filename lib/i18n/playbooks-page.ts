@@ -1,4 +1,12 @@
 import type { AppLocale } from "./locale";
+import {
+  playbooksAr,
+  playbooksDe,
+  playbooksEs,
+  playbooksFr,
+  playbooksIt,
+  playbooksRu,
+} from "./playbooks-locales";
 
 export type PlaybooksCard = {
   title: string;
@@ -93,12 +101,12 @@ const table: Record<AppLocale, PlaybooksPageCopy> = {
   "en-US": en,
   en,
   hy,
-  ru: en,
-  de: en,
-  fr: en,
-  es: en,
-  it: en,
-  ar: en,
+  ru: playbooksRu,
+  de: playbooksDe,
+  fr: playbooksFr,
+  es: playbooksEs,
+  it: playbooksIt,
+  ar: playbooksAr,
 };
 
 export function getPlaybooksPage(locale: AppLocale): PlaybooksPageCopy {

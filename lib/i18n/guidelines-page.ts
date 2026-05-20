@@ -1,4 +1,12 @@
 import type { AppLocale } from "./locale";
+import {
+  guidelinesAr,
+  guidelinesDe,
+  guidelinesEs,
+  guidelinesFr,
+  guidelinesIt,
+  guidelinesRu,
+} from "./guidelines-locales";
 
 export type GuidelinesPageCopy = {
   eyebrow: string;
@@ -69,12 +77,12 @@ const table: Record<AppLocale, GuidelinesPageCopy> = {
   "en-US": en,
   en,
   hy,
-  ru: en,
-  de: en,
-  fr: en,
-  es: en,
-  it: en,
-  ar: en,
+  ru: guidelinesRu,
+  de: guidelinesDe,
+  fr: guidelinesFr,
+  es: guidelinesEs,
+  it: guidelinesIt,
+  ar: guidelinesAr,
 };
 
 export function getGuidelinesPage(locale: AppLocale): GuidelinesPageCopy {

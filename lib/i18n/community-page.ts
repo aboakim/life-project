@@ -1,4 +1,12 @@
 import type { AppLocale } from "./locale";
+import {
+  communityAr,
+  communityDe,
+  communityEs,
+  communityFr,
+  communityIt,
+  communityRu,
+} from "./community-locales";
 
 export type CommunityCopy = {
   navLabel: string;
@@ -136,30 +144,12 @@ const hy: CommunityCopy = {
   helpfulStat: "օգտակար",
 };
 
-const ru: CommunityCopy = {
-  ...en,
-  navLabel: "Сообщество и вопросы",
-};
-const de: CommunityCopy = {
-  ...en,
-  navLabel: "Community & Fragen",
-};
-const fr: CommunityCopy = {
-  ...en,
-  navLabel: "Communauté & questions",
-};
-const es: CommunityCopy = {
-  ...en,
-  navLabel: "Comunidad y preguntas",
-};
-const ar: CommunityCopy = {
-  ...en,
-  navLabel: "المجتمع والأسئلة",
-};
-const it: CommunityCopy = {
-  ...en,
-  navLabel: "Community e domande",
-};
+const ru = communityRu;
+const de = communityDe;
+const fr = communityFr;
+const es = communityEs;
+const ar = communityAr;
+const it = communityIt;
 
 const table: Record<AppLocale, CommunityCopy> = {
   "en-US": en,
