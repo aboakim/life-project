@@ -33,11 +33,15 @@ export default function TiltPlane({
   const rootRef = useRef<HTMLDivElement>(null);
   const planeRef = useRef<HTMLDivElement>(null);
   const reducedRef = useRef(false);
+  const coarsePointerRef = useRef(false);
   const leaveTimerRef = useRef<number | null>(null);
 
   useLayoutEffect(() => {
     reducedRef.current = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
+    ).matches;
+    coarsePointerRef.current = window.matchMedia(
+      "(pointer: coarse)",
     ).matches;
   }, []);
 
@@ -50,7 +54,7 @@ export default function TiltPlane({
 
   const onLeave = useCallback(() => {
     const plane = planeRef.current;
-    if (!plane || reducedRef.current) return;
+    if (!plane || reducedRef.current || coarsePointerRef.current) return;
     if (leaveTimerRef.current) window.clearTimeout(leaveTimerRef.current);
     plane.style.transition =
       "transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.55s ease";
@@ -66,7 +70,8 @@ export default function TiltPlane({
     (e: React.MouseEvent<HTMLDivElement>) => {
       const root = rootRef.current;
       const plane = planeRef.current;
-      if (!root || !plane || reducedRef.current) return;
+      if (!root || !plane || reducedRef.current || coarsePointerRef.current)
+        return;
       const r = root.getBoundingClientRect();
       const x = (e.clientX - r.left) / r.width - 0.5;
       const y = (e.clientY - r.top) / r.height - 0.5;

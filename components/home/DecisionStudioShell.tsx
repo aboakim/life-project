@@ -1,17 +1,9 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import DecisionStudioSkeleton from "@/components/home/DecisionStudioSkeleton";
+import DecisionStudio from "@/components/DecisionStudio";
 import type { InitialPreset } from "@/lib/home/initial-preset";
 
 export type { InitialPreset };
-
-const DecisionStudio = dynamic(
-  () => import("@/components/DecisionStudio"),
-  {
-    loading: () => <DecisionStudioSkeleton />,
-  },
-);
 
 type ShellProps = {
   initialPreset?: InitialPreset;
@@ -20,7 +12,7 @@ type ShellProps = {
 
 /**
  * Client wrapper — preset comes from the server page (no useSearchParams → no Suspense blank gap).
- * Dynamic import splits the large DecisionStudio bundle so mobile PSI parses less JS up front.
+ * Eager import keeps the hero carousel (LCP image) off the extra dynamic-chunk round trip.
  */
 export default function DecisionStudioShell({
   initialPreset = null,

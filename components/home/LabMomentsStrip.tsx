@@ -24,11 +24,32 @@ export default function LabMomentsStrip({ eyebrow, moments }: Props) {
 
   useEffect(() => {
     if (reducedMotion) return;
-    const t = window.setInterval(
-      () => setI((v) => (v + 1) % moments.length),
-      INTERVAL_MS,
-    );
-    return () => window.clearInterval(t);
+    let intervalId = 0;
+    const start = () => {
+      intervalId = window.setInterval(
+        () => setI((v) => (v + 1) % moments.length),
+        INTERVAL_MS,
+      );
+    };
+    const w = window as Window & {
+      requestIdleCallback?: (
+        cb: IdleRequestCallback,
+        opts?: IdleRequestOptions,
+      ) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+    if (typeof w.requestIdleCallback === "function") {
+      const idleId = w.requestIdleCallback(start, { timeout: 4000 });
+      return () => {
+        w.cancelIdleCallback?.(idleId);
+        if (intervalId) window.clearInterval(intervalId);
+      };
+    }
+    const fallback = window.setTimeout(start, 2500);
+    return () => {
+      window.clearTimeout(fallback);
+      if (intervalId) window.clearInterval(intervalId);
+    };
   }, [moments.length, reducedMotion]);
 
   const line = moments[i] ?? moments[0];
