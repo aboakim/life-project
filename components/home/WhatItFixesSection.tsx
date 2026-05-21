@@ -45,7 +45,9 @@ export default function WhatItFixesSection({ copy, dir = "ltr" }: Props) {
                       fill
                       className="object-cover transition duration-500 group-hover:scale-[1.02]"
                       sizes="(min-width: 1024px) 340px, (min-width: 640px) min(46vw, 440px), min(94vw, 560px)"
-                      quality={72}
+                      quality={68}
+                      loading="lazy"
+                      fetchPriority="low"
                     />
                   </div>
                   <div className="isolate border-t border-neutral-200 bg-white px-3 py-3 sm:px-4 sm:py-3.5">

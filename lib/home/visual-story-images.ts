@@ -1,21 +1,14 @@
 /**
- * 12 unique Unsplash images for story + “What it fixes” cards.
- * IDs are disjoint from `HERO_SLIDE_IMAGE_URLS`, `PRODUCT_STRIP_IMAGE_URLS`,
- * and `thematic-banners` so the home page never repeats the same photo.
- * Query string matches the rest of the project (`hero-slide-images` style).
+ * Self-hosted story + “What it fixes” card images (/public/home/).
+ * Disjoint from hero slides, product strip, and thematic bands.
  */
-const Q =
-  "ixlib=rb-4.0.3&auto=format&fit=crop&w=920&q=72";
-
-const u = (id: string) =>
-  `https://images.unsplash.com/photo-${id}?${Q}`;
 
 /** Overview: focus, remote collaboration, big picture */
 const overview = {
   src: [
-    u("1507679799987-c73779587ccf"),
-    u("1600880292203-757bb62b4baf"),
-    u("1449614115178-cb924f730780"),
+    "/home/story-overview-0.jpg",
+    "/home/story-overview-1.jpg",
+    "/home/story-overview-2.jpg",
   ],
   alt: [
     "Person typing on a laptop on a light desk, neutral background",
@@ -27,9 +20,9 @@ const overview = {
 /** Trust: calm nature, small rituals, space to think */
 const trust = {
   src: [
-    u("1454625233598-f29d597eea1e"),
-    u("1416339306562-f3d12fefd36f"),
-    u("1495978866932-92dbc079e62e"),
+    "/home/story-trust-0.jpg",
+    "/home/story-trust-1.jpg",
+    "/home/story-trust-2.jpg",
   ],
   alt: [
     "Calm water reflecting mountains under soft light",
@@ -41,9 +34,9 @@ const trust = {
 /** How: data, long path, shared learning */
 const how = {
   src: [
-    u("1461988320302-91bde64fc8e4"),
-    u("1479030574009-1e48577746e8"),
-    u("1417325384643-aac51acc9e5d"),
+    "/home/story-how-0.jpg",
+    "/home/story-how-1.jpg",
+    "/home/story-how-2.jpg",
   ],
   alt: [
     "Laptop in a light-filled room, shopping or planning on screen",
@@ -54,9 +47,9 @@ const how = {
 
 const fixes = {
   src: [
-    u("1482938289607-e9573fc25ebb"),
-    u("1449182325215-d517de72c42d"),
-    u("1540538581514-1d465aaad58c"),
+    "/home/story-fixes-0.jpg",
+    "/home/story-fixes-1.jpg",
+    "/home/story-fixes-2.jpg",
   ],
   alt: [
     "Colleagues working on laptops in a bright open office",

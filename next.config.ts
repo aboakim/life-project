@@ -88,13 +88,6 @@ const nextConfig: NextConfig = {
   images: {
     /** Longer CDN cache for optimized derivatives (repeat visits / PSI cache audit). */
     minimumCacheTTL: 60 * 60 * 24 * 30,
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-        pathname: "/**",
-      },
-    ],
   },
   async headers() {
     return [

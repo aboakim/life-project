@@ -82,7 +82,9 @@ export default function VisualStoryCard({
             fill
             className="object-cover transition duration-500 group-hover:scale-[1.02]"
             sizes="(min-width: 1024px) 340px, (min-width: 640px) min(46vw, 440px), min(94vw, 540px)"
-            quality={72}
+            quality={68}
+            loading="lazy"
+            fetchPriority="low"
           />
         ) : (
           <PosterBackdrop />
