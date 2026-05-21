@@ -375,6 +375,14 @@ const ru: SiteExtras = {
     "Большой выбор — скорее гипотеза, которую вы проверяете календарём.",
     "Ни одна методичка не заменит вслух сказанное, что вы не готовы потерять.",
   ],
+  labStripEyebrow: "Лаборатория брифа",
+  labMoments: [
+    "Назовите одну цифру, которую боитесь записать — модель успокаивается, когда появляются числа.",
+    "Ограничения — не пессимизм; это ограждения от фантазийных сценариев.",
+    "Если решение — вопрос, переформулируйте его предложением, которое оценит незнакомец.",
+    "Не вставляйте то, что не показали бы коллеге; имена можно скрыть.",
+    "Второй проход: добавьте дедлайн и одного стейкхолдера — сроки станут жёстче.",
+  ],
 };
 
 const de: SiteExtras = {
@@ -473,6 +481,14 @@ const de: SiteExtras = {
     "Schreib den Worst Case in einem Satz — die Hälfte der Macht war der Nebel.",
     "Eine große Wahl ist eher eine Hypothese, die du mit Kalendertagen testest.",
     "Kein Framework ersetzt, dass du laut sagst, was du nicht verlieren willst.",
+  ],
+  labStripEyebrow: "Brief-Labor",
+  labMoments: [
+    "Nenne eine Zahl, die du nicht schreiben willst — das Modell beruhigt sich bei Ziffern.",
+    "Grenzen sind kein Pessimismus; sie sind Leitplanken gegen Fantasieszenarien.",
+    "Ist deine Entscheidung eine Frage, schreib sie als Satz, den ein Fremder bewerten könnte.",
+    "Füge nichts ein, was du einem Kollegen nicht zeigen würdest; Namen schwärzen.",
+    "Zweiter Durchlauf: eine Deadline und eine Stakeholder-Person — die Timeline wird enger.",
   ],
 };
 
@@ -573,6 +589,14 @@ const fr: SiteExtras = {
     "Un grand choix est plutôt une hypothèse que vous testez avec des jours sur le calendrier.",
     "Aucun cadre ne remplace le fait de dire à voix haut ce que vous refusez de perdre.",
   ],
+  labStripEyebrow: "Labo de brief",
+  labMoments: [
+    "Nommez un chiffre que vous craignez d’écrire — le modèle se calme quand les chiffres apparaissent.",
+    "Les contraintes ne sont pas du pessimisme ; ce sont des garde-fous contre les scénarios fantaisistes.",
+    "Si votre décision est une question, réécrivez-la en phrase qu’un inconnu pourrait noter.",
+    "Ne collez rien que vous ne montreriez pas à un collègue ; anonymisez si besoin.",
+    "Deuxième passe : une échéance et un stakeholder — la timeline se resserre.",
+  ],
 };
 
 const es: SiteExtras = {
@@ -671,6 +695,14 @@ const es: SiteExtras = {
     "Escribe el peor caso en una oración — la mitad del poder era la niebla.",
     "Una gran elección es menos un veredicto que una hipótesis que pruebas con días en el calendario.",
     "Ningún marco reemplaza decir en voz alta lo que no estás dispuesto a perder.",
+  ],
+  labStripEyebrow: "Laboratorio de brief",
+  labMoments: [
+    "Nombra un número que temes escribir — el modelo se calma cuando aparecen cifras.",
+    "Las restricciones no son pesimismo; son barandillas contra escenarios de fantasía.",
+    "Si tu decisión es una pregunta, reescríbela como frase que un desconocido pueda puntuar.",
+    "No pegues lo que no mostrarías a un colega; redacta nombres si hace falta.",
+    "Segunda pasada: una fecha límite y un stakeholder — la línea temporal se aprieta.",
   ],
 };
 
@@ -771,6 +803,14 @@ const it: SiteExtras = {
     "Una grande scelta è meno un verdetto che un’ipotesi che testi con i giorni del calendario.",
     "Nessun framework sostituisce dirti ad alta voce cosa non sei disposto a perdere.",
   ],
+  labStripEyebrow: "Lab del brief",
+  labMoments: [
+    "Nomina un numero che temi di scrivere — il modello si calma quando compaiono le cifre.",
+    "I vincoli non sono pessimismo; sono guardrail contro scenari fantasia.",
+    "Se la decisione è una domanda, riscrivila come frase che uno sconosciuto potrebbe valutare.",
+    "Non incollare ciò che non mostreresti a un collega; oscura i nomi se serve.",
+    "Secondo passaggio: una scadenza e uno stakeholder — la timeline si stringe.",
+  ],
 };
 
 const ar: SiteExtras = {
@@ -869,6 +909,14 @@ const ar: SiteExtras = {
     "اكتب أسوأ سيناريو في جملة — نصف قوته كان الضباب.",
     "الخيار الكبير أقل حكماً وأكثر فرضية تختبرها بأيام التقويم.",
     "لا إطار يحل محل أن تقول بصوت عالٍ ما لن تخسره.",
+  ],
+  labStripEyebrow: "مختبر الملخص",
+  labMoments: [
+    "سمِّ رقماً تخاف كتابته — يهدأ النموذج عندما تظهر الأرقام.",
+    "القيود ليست تشاؤماً؛ إنها حواجز تمنع سيناريوهات خيالية.",
+    "إن كان قرارك سؤالاً، أعد صياغته جملة يستطيع غريب تقييمها.",
+    "لا تلصق ما لن تُظهره لزميل؛ احذف الأسماء إن لزم.",
+    "مرور ثانٍ: موعد نهائي وصاحب مصلحة واحد — يضيق الجدول الزمني.",
   ],
 };
 
