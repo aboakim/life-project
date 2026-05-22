@@ -10,15 +10,9 @@ import {
   useState,
 } from "react";
 import HeroVisualSlider from "@/components/home/HeroVisualSlider";
-import HeroMomentStrips from "@/components/home/HeroMomentStrips";
-import HomeSectionNav from "@/components/home/HomeSectionNav";
 import RevealOnScroll from "@/components/home/RevealOnScroll";
 import AdSenseBanner from "@/components/ads/AdSenseBanner";
 import AmazonAssociatesCta from "@/components/monetization/AmazonAssociatesCta";
-import AmbientDriftLayer from "@/components/ui/AmbientDriftLayer";
-import ChromeHorizon from "@/components/ui/ChromeHorizon";
-import LatticeSheen from "@/components/ui/LatticeSheen";
-import OrbDecor from "@/components/ui/OrbDecor";
 import TiltPlane from "@/components/ui/TiltPlane";
 import { getExpertsCopy } from "@/lib/i18n/experts-network";
 import { getPricingCopy } from "@/lib/i18n/pricing-page";
@@ -112,6 +106,31 @@ const ProductSceneStrip = dynamic(
 );
 const VisualStoryCard = dynamic(
   () => import("@/components/home/VisualStoryCard"),
+);
+
+const HeroMomentStrips = dynamic(
+  () => import("@/components/home/HeroMomentStrips"),
+  { loading: () => <div className="mt-6 h-28" aria-hidden /> },
+);
+const OrbDecor = dynamic(() => import("@/components/ui/OrbDecor"), {
+  ssr: false,
+  loading: () => null,
+});
+const AmbientDriftLayer = dynamic(
+  () => import("@/components/ui/AmbientDriftLayer"),
+  { ssr: false, loading: () => null },
+);
+const LatticeSheen = dynamic(() => import("@/components/ui/LatticeSheen"), {
+  ssr: false,
+  loading: () => null,
+});
+const ChromeHorizon = dynamic(() => import("@/components/ui/ChromeHorizon"), {
+  ssr: false,
+  loading: () => null,
+});
+const HomeSectionNav = dynamic(
+  () => import("@/components/home/HomeSectionNav"),
+  { loading: () => null },
 );
 
 const DecisionBriefWizard = dynamic(
@@ -1190,12 +1209,7 @@ export default function DecisionStudio({
 
             <div className="relative space-y-5">
               <div className="absolute -inset-4 -z-10 rounded-[1.75rem] bg-gradient-to-br from-[rgb(var(--accent))]/14 via-[rgb(var(--accent-magenta))]/8 to-[rgb(var(--accent-2))]/12 blur-xl" />
-              <TiltPlane
-                className="block w-full"
-                innerClassName="space-y-5"
-                maxTilt={7}
-                floatZ={14}
-              >
+              <div className="block w-full space-y-5">
                 <HeroVisualSlider
                   slides={heroSlideDeck}
                   ariaLabel={t.heroCarouselAriaLabel}
@@ -1246,7 +1260,7 @@ export default function DecisionStudio({
                   </Link>
                 </div>
               </div>
-              </TiltPlane>
+              </div>
             </div>
           </div>
         </section>

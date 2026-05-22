@@ -156,6 +156,11 @@ export default function HeroVisualSlider({
                   fetchPriority={i === 0 ? "high" : "low"}
                   loading={i === 0 ? "eager" : "lazy"}
                   /**
+                   * Slide 0: self-hosted static file — skip /_next/image so
+                   * preload + fallback <img> share one URL (faster cold LCP).
+                   */
+                  unoptimized={i === 0}
+                  /**
                    * `sync` decode blocks the main thread and inflates TBT in
                    * Lighthouse even when LCP is only ~100ms later. `async`
                    * keeps decode off the critical path; priority + eager fetch

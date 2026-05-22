@@ -187,12 +187,12 @@ export default function RootLayout({
       >
         {/*
           Site-wide AdSense bootstrap (matches AdSense → Verify code snippet).
-          afterInteractive: after hydration, non-blocking. Consent default in <head>
+          lazyOnload: after load + idle-friendly; Consent default in <head>
           runs first. ensureAdsbygoogleScript skips if this tag already exists.
         */}
         <Script
           id="adsense-adsbygoogle"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(ADSENSE_CLIENT)}`}
           crossOrigin="anonymous"
         />
