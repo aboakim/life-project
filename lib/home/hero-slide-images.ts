@@ -2,6 +2,9 @@
  * Self-hosted home images under /public/hero and /public/home.
  * Mirrored via `node scripts/mirror-home-images.mjs` — no runtime Unsplash hop.
  */
+/** Smaller derivative for server-rendered home LCP (`scripts/optimize-hero-lcp.mjs`). */
+export const HERO_LCP_IMAGE_URL = "/hero/slide-0-lcp.jpg";
+
 export const HERO_SLIDE_IMAGE_URLS = [
   "/hero/slide-0.jpg",
   "/hero/slide-1.jpg",

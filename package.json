@@ -27,6 +27,7 @@
     "db:push": "prisma db push",
     "favicons": "node scripts/generate-favicons.mjs",
     "mirror:home-images": "node scripts/mirror-home-images.mjs",
+    "optimize:hero-lcp": "node scripts/optimize-hero-lcp.mjs",
     "video:record-site": "node scripts/record-site-promo.cjs",
     "email:test-nudge": "node scripts/resend-nudge-test.mjs",
     "test:selenium": "node scripts/selenium-smoke.cjs"

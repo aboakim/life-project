@@ -1,19 +1,17 @@
-import { Suspense } from "react";
 import { preload } from "react-dom";
-import DecisionStudioShell from "@/components/home/DecisionStudioShell";
-import HomeHeroFallback from "@/components/home/HomeHeroFallback";
-import { HERO_SLIDE_IMAGE_URLS } from "@/lib/home/hero-slide-images";
+import HomeHeroStatic from "@/components/home/HomeHeroStatic";
+import DeferredHomeStudio from "@/components/home/DeferredHomeStudio";
+import { HERO_LCP_IMAGE_URL } from "@/lib/home/hero-slide-images";
 
-/** LCP image — same URL as fallback <img> and carousel slide 0 (unoptimized). */
-preload(HERO_SLIDE_IMAGE_URLS[0], { as: "image", fetchPriority: "high" });
+/** LCP — small static JPEG in initial HTML (no client bundle). */
+preload(HERO_LCP_IMAGE_URL, { as: "image", fetchPriority: "high" });
 
 /** Static route — `?preset=` is applied client-side in DecisionStudio (no searchParams → faster prerender). */
 export default function Home() {
   return (
     <main id="main">
-      <Suspense fallback={<HomeHeroFallback />}>
-        <DecisionStudioShell />
-      </Suspense>
+      <HomeHeroStatic />
+      <DeferredHomeStudio />
     </main>
   );
 }

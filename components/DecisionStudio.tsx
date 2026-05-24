@@ -294,11 +294,17 @@ function ScoreCircle({
   );
 }
 
-type Props = { initialPreset?: InitialPreset; focusLayout?: boolean };
+type Props = {
+  initialPreset?: InitialPreset;
+  focusLayout?: boolean;
+  /** Home: static server hero already painted — skip duplicate carousel. */
+  skipHero?: boolean;
+};
 
 export default function DecisionStudio({
   initialPreset = null,
   focusLayout = false,
+  skipHero = false,
 }: Props) {
   const [locale, setLocale] = useState<AppLocale>(DEFAULT_LOCALE);
   const t = getUi(locale);
@@ -1124,7 +1130,7 @@ export default function DecisionStudio({
 
         {!focusLayout && (
         <>
-        {/* Hero — split layout like leading SaaS landings */}
+        {!skipHero ? (
         <section
           id="section-hero"
           className="home-section-wash home-section-wash--hero relative overflow-hidden rounded-[1.75rem] border border-white/[0.16] bg-gradient-to-br from-white/[0.1] via-white/[0.05] to-[rgb(var(--surface-elevated))]/55 p-4 shadow-[0_28px_80px_-48px_rgb(var(--accent)/0.35),0_0_0_1px_rgba(255,255,255,0.1)_inset] backdrop-blur-sm sm:rounded-[2.5rem] sm:p-10 lg:p-14"
@@ -1264,11 +1270,12 @@ export default function DecisionStudio({
             </div>
           </div>
         </section>
+        ) : null}
 
         {!focusLayout ? (
           <>
             <TiltPlane
-              className="mt-6 block w-full"
+              className={`block w-full ${skipHero ? "mt-0" : "mt-6"}`}
               innerClassName="rounded-2xl"
               maxTilt={5}
               floatZ={8}
