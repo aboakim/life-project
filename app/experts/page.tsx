@@ -4,9 +4,9 @@ import ExpertsMarketplace from "./ExpertsMarketplace";
 import ExpertsPageEducation from "./ExpertsPageEducation";
 
 export const metadata: Metadata = {
-  title: "Մասնագետների ցանց — համաշխարհային",
+  title: "Experts directory — psychologists, lawyers, planners",
   description:
-    "Հոգեբաններ, իրավաբաններ, ֆինանսիստներ։ Գրանցում և կապ աշխարհի ցանկացած վայրից։",
+    "Curated directory of independent professionals for major life decisions. Register your practice or browse by role, country, and language.",
   alternates: { canonical: "/experts" },
 };
 

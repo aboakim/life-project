@@ -57,7 +57,14 @@ export default function PrivacyPage() {
             Cookies & advertising (Google AdSense)
           </h2>
           <p className="mt-2">
-            We may display ads through{" "}
+            See also our dedicated{" "}
+            <Link
+              href="/cookies"
+              className="font-medium text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+            >
+              Cookie Policy
+            </Link>
+            . We may display ads through{" "}
             <strong className="text-[rgb(var(--ink))]">
               Google AdSense
             </strong>

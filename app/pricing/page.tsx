@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PricingPageClient from "./PricingPageClient";
+import PricingPageEducation from "./PricingPageEducation";
 
 export const metadata: Metadata = {
   title: "Pricing — Free and Premium plans · Life Decision Engine",
@@ -9,5 +10,10 @@ export const metadata: Metadata = {
 };
 
 export default function PricingPage() {
-  return <PricingPageClient />;
+  return (
+    <>
+      <PricingPageClient />
+      <PricingPageEducation />
+    </>
+  );
 }

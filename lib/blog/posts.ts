@@ -421,9 +421,10 @@ export const BLOG_POSTS: BlogPost[] = [
     description:
       "A structured tool helps you think. A professional helps you decide. A practical guide to when it is time, and how to walk in prepared.",
     tags: ["experts", "psychology", "finance", "legal"],
-    readingMinutes: 5,
+    readingMinutes: 8,
     publishedAt: "2026-04-02",
-    author: "Life Decision Engine",
+    updatedAt: "2026-05-25",
+    author: "Life Decision Engine Editorial Team",
     hero: {
       eyebrow: "Experts",
       lede: "Frameworks help you think clearly. People with a license help you decide wisely. Knowing which is which is the skill.",
@@ -432,6 +433,10 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         kind: "p",
         text: "A common mistake people make with decision tools — ours included — is treating them as a final answer. They are not. They are a way to arrive at a specific, well-shaped question. The value of that is enormous when you bring it into a session with a qualified professional. The 50-minute therapy hour, the 30-minute lawyer call, the 45-minute financial planner meeting — they all work better when you walk in with structure.",
+      },
+      {
+        kind: "p",
+        text: "This guide is practical, not exhaustive. It does not tell you which therapist to hire or which lawyer is cheapest. It tells you when the cost of staying in your head has exceeded the cost of a qualified hour — and how to use the Life Decision Engine report or a one-page brief so that hour is not wasted on backstory.",
       },
       { kind: "h2", text: "When to talk to a therapist" },
       {
@@ -462,6 +467,22 @@ export const BLOG_POSTS: BlogPost[] = [
           "A decision whose financial consequences stretch 10+ years.",
           "You can clearly state what you want but not how to get there tax-efficiently.",
         ],
+      },
+      {
+        kind: "h2",
+        text: "Red flags that mean “book the human now”",
+      },
+      {
+        kind: "p",
+        text: "Some situations look like indecision but are actually risk management failures: signing a contract tomorrow without reading it, moving money you do not understand, or making a health choice based on a forum thread. If the downside includes jail, bankruptcy, deportation, or hospitalisation, the framework on this site is preparation — the professional is the decision layer.",
+      },
+      {
+        kind: "h2",
+        text: "Using our experts directory",
+      },
+      {
+        kind: "p",
+        text: "The directory at /experts lists independent professionals who opted in with a bio and contact form. We review listings for basic quality but do not supervise their advice. Filter by role and language, send a short message with your question and timeline, and bring your analyzer scenarios if you have them.",
       },
       { kind: "h2", text: "How to walk in prepared" },
       {
@@ -2518,6 +2539,54 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         kind: "quote",
         text: "The cheapest option is often the one nobody remembered to price.",
+      },
+    ],
+  },
+  {
+    slug: "what-you-will-find-on-lifedecisions-space",
+    title: "What you will find on Life Decision Engine (a reader’s map)",
+    description:
+      "A tour of the site for new visitors and reviewers: blog, analyzer, experts, policies, and how we keep content original.",
+    tags: ["decision-making", "editorial"],
+    readingMinutes: 9,
+    publishedAt: "2026-05-25",
+    author: "Life Decision Engine Editorial Team",
+    hero: {
+      eyebrow: "Site guide",
+      lede: "If you landed here from search or an ad review, this page explains what we publish and why it is worth your time.",
+    },
+    body: [
+      {
+        kind: "p",
+        text: "Life Decision Engine is a publisher and a tool. The publisher side is dozens of original articles about career moves, relocation, relationships, money, and the psychology of regret. The tool side is a structured analyzer that turns your question into scenarios, four lenses, a timeline, and a score — private to you, not posted to a feed.",
+      },
+      { kind: "h2", text: "Start with the blog if you are reading" },
+      {
+        kind: "p",
+        text: "The blog is English-language long-form content. Each piece is written to stand alone: a framework, worked examples, and a closing section on limits. We do not publish scraped news or AI-only pages without human editing. Editorial standards and team pages describe how we source and correct material.",
+      },
+      { kind: "h2", text: "Use the analyzer when you have a live decision" },
+      {
+        kind: "p",
+        text: "The home page and /analyze URL run the same engine. You enter your decision, context, and constraints; the report appears below the form. Free tier covers most personal use; Premium adds history and deeper runs. The output is educational — pair it with a human when money, law, or health is on the line.",
+      },
+      { kind: "h2", text: "Trust, legal, and contact pages" },
+      {
+        kind: "ul",
+        items: [
+          "Privacy, cookies, and terms explain data, AdSense, and subscriptions.",
+          "Content policy describes what we publish and how community posts are moderated.",
+          "Contact lists hello@lifedecisions.space and expected response times.",
+          "About and FAQ answer who operates the site and what it is not.",
+        ],
+      },
+      {
+        kind: "h2",
+        text: "Why this page exists",
+      },
+      {
+        kind: "p",
+        text: "Search engines and human reviewers sometimes need a single map of value before diving into product UI. This article is that map. If something on the site is thin, outdated, or wrong, tell us via contact — we correct on a published schedule, not silently.",
       },
     ],
   },

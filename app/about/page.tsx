@@ -141,6 +141,48 @@ export default function AboutPage() {
 
         <section>
           <h2 className="text-base font-semibold text-[rgb(var(--ink))]">
+            Our content program
+          </h2>
+          <p className="mt-3">
+            We publish for readers making real decisions — not for search
+            engines alone. The site includes more than thirty original blog
+            essays (typically eight to eleven minutes of reading each), server-visible
+            guides on every major product URL, an{" "}
+            <Link
+              href="/content-policy"
+              className="font-medium text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+            >
+              content policy
+            </Link>
+            , and transparent pages on{" "}
+            <Link
+              href="/how-we-use-ai"
+              className="font-medium text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+            >
+              how AI is used
+            </Link>
+            . Legal and privacy pages explain cookies, AdSense, and your
+            rights. If you are reviewing the site for advertising or
+            partnership, start with the{" "}
+            <Link
+              href="/editorial-standards"
+              className="font-medium text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+            >
+              editorial standards
+            </Link>{" "}
+            and{" "}
+            <Link
+              href="/editorial-team"
+              className="font-medium text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+            >
+              editorial team
+            </Link>{" "}
+            pages.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-base font-semibold text-[rgb(var(--ink))]">
             Our editorial principles
           </h2>
           <ul className="mt-3 list-disc space-y-2 ps-5">

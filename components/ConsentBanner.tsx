@@ -2,6 +2,13 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { DEFAULT_LOCALE } from "@/lib/locale-default";
+import { isAppLocale, type AppLocale } from "@/lib/i18n/locale";
+import { readLocaleCookieClient } from "@/lib/locale-cookie";
+import { getTrustNav } from "@/lib/i18n/trust-nav";
+import { LOCALE_CHANGE_EVENT } from "@/lib/locale-sync";
+
+const LOCALE_KEY = "lde-locale";
 
 /**
  * GDPR / AdSense-compliant consent banner.
@@ -53,10 +60,28 @@ function pushConsent(update: ConsentUpdatePayload): void {
 }
 
 export default function ConsentBanner() {
+  const [locale, setLocale] = useState<AppLocale>(DEFAULT_LOCALE);
+  const tn = getTrustNav(locale);
   // undefined = still reading storage; null = no decision yet; "accepted" | "rejected" = resolved
   const [decision, setDecision] = useState<
     undefined | null | "accepted" | "rejected"
   >(undefined);
+
+  useEffect(() => {
+    const raw = window.localStorage.getItem(LOCALE_KEY);
+    const fromCookie = readLocaleCookieClient();
+    if (raw && isAppLocale(raw)) setLocale(raw);
+    else if (fromCookie) setLocale(fromCookie);
+  }, []);
+
+  useEffect(() => {
+    function sync() {
+      const raw = localStorage.getItem(LOCALE_KEY);
+      if (raw && isAppLocale(raw)) setLocale(raw);
+    }
+    window.addEventListener(LOCALE_CHANGE_EVENT, sync);
+    return () => window.removeEventListener(LOCALE_CHANGE_EVENT, sync);
+  }, []);
 
   useEffect(() => {
     try {
@@ -131,21 +156,18 @@ export default function ConsentBanner() {
         id="consent-banner-title"
         className="text-sm font-semibold text-[rgb(var(--ink))]"
       >
-        Cookies and your privacy
+        {tn.consentTitle}
       </p>
       <p
         id="consent-banner-body"
         className="mt-1.5 text-xs leading-relaxed text-[rgb(var(--ink-soft))]/95 sm:text-sm"
       >
-        We use essential cookies so the site works, and — with your permission
-        — analytics and advertising cookies (Google Analytics, Google AdSense)
-        to understand how the site is used and to keep it free. You can change
-        your choice anytime.{" "}
+        {tn.consentBody}{" "}
         <Link
           href="/privacy"
           className="font-medium text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
         >
-          Read our privacy policy
+          {tn.consentPrivacyLink}
         </Link>
         .
       </p>
@@ -155,14 +177,14 @@ export default function ConsentBanner() {
           onClick={reject}
           className="order-2 inline-flex h-10 items-center justify-center rounded-xl border border-white/15 bg-white/[0.03] px-4 text-sm font-medium text-[rgb(var(--ink))]/95 transition hover:border-white/25 hover:bg-white/[0.06] sm:order-1"
         >
-          Reject non-essential
+          {tn.consentReject}
         </button>
         <button
           type="button"
           onClick={accept}
           className="order-1 inline-flex h-10 items-center justify-center rounded-xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-5 text-sm font-semibold text-white shadow-lg shadow-[rgb(var(--accent)/0.25)] transition hover:brightness-110 sm:order-2"
         >
-          Accept all
+          {tn.consentAccept}
         </button>
       </div>
     </div>

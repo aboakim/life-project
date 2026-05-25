@@ -83,6 +83,11 @@ const nextConfig: NextConfig = {
         destination: "/blog/how-to-decide-to-leave-a-stable-job",
         permanent: true,
       },
+      {
+        source: "/blog/rent-vs-buy-a-home-framework",
+        destination: "/blog/buying-vs-renting-a-home",
+        permanent: true,
+      },
     ];
   },
   images: {

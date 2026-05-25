@@ -143,6 +143,48 @@ export default function EditorialTeamPage() {
 
         <section>
           <h2 className="text-base font-semibold text-[rgb(var(--ink))]">
+            Contributing editors
+          </h2>
+          <p className="mt-2">
+            Articles carry the team byline because most pieces are edited by
+            more than one person. These roles describe who is accountable for
+            which part of the work:
+          </p>
+          <ul className="mt-4 space-y-4">
+            <li className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-4">
+              <p className="font-semibold text-[rgb(var(--ink))]">
+                Lead editor — career &amp; relocation
+              </p>
+              <p className="mt-1 text-sm">
+                Outlines long-form posts, runs scenario frameworks, and signs
+                off on job-offer and move-abroad articles before publication.
+              </p>
+            </li>
+            <li className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-4">
+              <p className="font-semibold text-[rgb(var(--ink))]">
+                Research editor — money &amp; housing
+              </p>
+              <p className="mt-1 text-sm">
+                Checks numbers, cites primary sources, and coordinates review
+                with financial planners from the expert directory on regulated
+                topics.
+              </p>
+            </li>
+            <li className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-4">
+              <p className="font-semibold text-[rgb(var(--ink))]">
+                Product &amp; safety editor
+              </p>
+              <p className="mt-1 text-sm">
+                Maintains analyzer copy, disclaimers, and multilingual UI text
+                so tools stay accurate in English, Armenian, and six other
+                interface languages.
+              </p>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 className="text-base font-semibold text-[rgb(var(--ink))]">
             How to reach us
           </h2>
           <p className="mt-2">

@@ -10,6 +10,7 @@ import { getNoveltyCopy } from "@/lib/i18n/novelty-extras";
 import { getMonetizeCopy } from "@/lib/i18n/monetization-page";
 import { getPricingCopy } from "@/lib/i18n/pricing-page";
 import { getUi } from "@/lib/i18n/ui";
+import { getTrustNav } from "@/lib/i18n/trust-nav";
 import { DEFAULT_LOCALE } from "@/lib/locale-default";
 import {
   isAppLocale,
@@ -52,11 +53,12 @@ export default function GlobalFooter() {
   const cq = getCommunityCopy(locale);
   const sx = getSiteExtras(locale);
   const nx = getNoveltyCopy(locale);
+  const tn = getTrustNav(locale);
 
   const columns: { title: string; links: { href: string; label: string }[] }[] =
     [
       {
-        title: "Product",
+        title: tn.footerColProduct,
         links: [
           { href: "/analyze", label: ui.sectionNavAnalyzer },
           { href: "/journal", label: sx.footerJournal },
@@ -70,25 +72,27 @@ export default function GlobalFooter() {
         ],
       },
       {
-        title: "Learn",
+        title: tn.footerColLearn,
         links: [
-          { href: "/blog", label: "Blog" },
-          { href: "/playbooks", label: "Playbooks" },
-          { href: "/faq", label: "FAQ" },
+          { href: "/blog", label: ui.navBlog },
+          { href: "/playbooks", label: tn.navPlaybooks },
+          { href: "/faq", label: tn.navFaq },
           { href: "/community/guidelines", label: "Community guidelines" },
-          { href: "/about", label: "About" },
-          { href: "/editorial-team", label: "Editorial Team" },
+          { href: "/about", label: tn.navAbout },
+          { href: "/editorial-team", label: tn.navEditorialTeam },
           { href: "/experts/register", label: ec.navRegister },
         ],
       },
       {
-        title: "Company & legal",
+        title: tn.footerColLegal,
         links: [
-          { href: "/contact", label: "Contact" },
-          { href: "/editorial-standards", label: "Editorial Standards" },
-          { href: "/privacy", label: "Privacy Policy" },
-          { href: "/terms", label: "Terms of Service" },
-          { href: "/disclaimer", label: "Disclaimer" },
+          { href: "/contact", label: tn.navContact },
+          { href: "/editorial-standards", label: tn.navEditorialStandards },
+          { href: "/privacy", label: tn.navPrivacy },
+          { href: "/cookies", label: tn.navCookies },
+          { href: "/content-policy", label: tn.navContentPolicy },
+          { href: "/terms", label: tn.navTerms },
+          { href: "/disclaimer", label: tn.navDisclaimer },
         ],
       },
     ];
@@ -102,12 +106,10 @@ export default function GlobalFooter() {
               Life Decision Engine
             </p>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-[rgb(var(--ink-soft))]">
-              A structured workspace for big life decisions — scenarios,
-              lenses, timelines, and a score. Built to help you think clearly,
-              not to replace professionals.
+              {tn.footerTagline}
             </p>
             <p className="mt-5 text-xs text-[rgb(var(--ink-soft))]/75">
-              Not medical, legal, or therapeutic advice.
+              {tn.footerDisclaimer}
             </p>
             <SupportCta className="mt-5" />
           </div>

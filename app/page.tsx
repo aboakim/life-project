@@ -1,5 +1,6 @@
 import { preload } from "react-dom";
 import HomeHeroStatic from "@/components/home/HomeHeroStatic";
+import HomePublisherStatic from "@/components/home/HomePublisherStatic";
 import DeferredHomeStudio from "@/components/home/DeferredHomeStudio";
 import { HERO_LCP_IMAGE_URL } from "@/lib/home/hero-slide-images";
 
@@ -11,6 +12,7 @@ export default function Home() {
   return (
     <main id="main">
       <HomeHeroStatic />
+      <HomePublisherStatic />
       <DeferredHomeStudio />
     </main>
   );
