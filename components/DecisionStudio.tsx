@@ -679,7 +679,7 @@ export default function DecisionStudio({
           analysis,
           mode: data.mode,
         });
-      } catch {
+    } catch {
         /* ignore */
       }
       scrollSectionResultsIntoView();
@@ -2150,7 +2150,7 @@ export default function DecisionStudio({
                   ✓
               </span>
                 {t.resultsYouAreHere}
-              </h2>
+                </h2>
             </div>
             {resultCheerLine ? (
               <p className="mx-auto max-w-2xl text-center text-xs font-medium italic leading-relaxed text-emerald-200/85 [text-wrap:pretty]">
@@ -2168,7 +2168,7 @@ export default function DecisionStudio({
                     <div className="h-px flex-1 bg-gradient-to-r from-transparent via-emerald-400/35 to-transparent" />
                     <span className="home-emerald-dot-pulse flex size-2 shrink-0 rounded-full bg-emerald-400/70 shadow-[0_0_14px_rgb(52_211_153/0.65)] ring-4 ring-emerald-400/15" />
                     <div className="h-px flex-1 bg-gradient-to-l from-transparent via-emerald-400/35 to-transparent" />
-                  </div>
+              </div>
                   <div
                     className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-5"
                     role="group"
@@ -2222,8 +2222,8 @@ export default function DecisionStudio({
                       >
                         <span aria-hidden>👎</span>
                       </button>
-                    </div>
-                  </div>
+            </div>
+        </div>
                   {resultHelpful ? (
                     <p className="mt-4 text-center text-[12px] font-medium leading-relaxed text-emerald-200/95">
                       {t.resultFeedbackThanks}
@@ -2522,16 +2522,16 @@ export default function DecisionStudio({
                                 {item.emoji}
                               </span>
                               {item.label}
-                            </h3>
+                    </h3>
                             <AnalysisBody
                               value={a.dimensions[item.key]}
                               emptyLabel={t.analysisEmptyDetail}
                               className="mt-2 text-[15px] leading-relaxed text-white/95"
                             />
-                          </div>
+                  </div>
                         </article>
-                      ))}
-                    </div>
+                ))}
+              </div>
                   </>
                 );
               })()}
@@ -2582,8 +2582,8 @@ export default function DecisionStudio({
                     aria-hidden
                   >
                     <span className="text-[10px] font-semibold uppercase leading-tight tracking-wide text-[rgb(var(--ink-soft))]/90">
-                      {t.timeM6}
-                    </span>
+                    {t.timeM6}
+                  </span>
                   </div>
                   <AnalysisBody
                     value={a.timeline.months6}
@@ -2597,8 +2597,8 @@ export default function DecisionStudio({
                     aria-hidden
                   >
                     <span className="text-[10px] font-semibold uppercase leading-tight tracking-wide text-[rgb(var(--ink-soft))]/90">
-                      {t.timeY2}
-                    </span>
+                    {t.timeY2}
+                  </span>
                   </div>
                   <AnalysisBody
                     value={a.timeline.years2}
@@ -2612,8 +2612,8 @@ export default function DecisionStudio({
                     aria-hidden
                   >
                     <span className="text-[10px] font-semibold uppercase leading-tight tracking-wide text-[rgb(var(--ink-soft))]/90">
-                      {t.timeY5}
-                    </span>
+                    {t.timeY5}
+                  </span>
                   </div>
                   <AnalysisBody
                     value={a.timeline.years5}

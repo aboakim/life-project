@@ -77,7 +77,10 @@ export default function GlobalFooter() {
           { href: "/blog", label: ui.navBlog },
           { href: "/playbooks", label: tn.navPlaybooks },
           { href: "/faq", label: tn.navFaq },
-          { href: "/community/guidelines", label: "Community guidelines" },
+          {
+            href: "/community/guidelines",
+            label: tn.navCommunityGuidelines,
+          },
           { href: "/about", label: tn.navAbout },
           { href: "/editorial-team", label: tn.navEditorialTeam },
           { href: "/experts/register", label: ec.navRegister },

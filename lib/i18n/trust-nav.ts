@@ -17,6 +17,7 @@ export type TrustNavCopy = {
   navDisclaimer: string;
   navCookies: string;
   navContentPolicy: string;
+  navCommunityGuidelines: string;
   consentTitle: string;
   consentBody: string;
   consentPrivacyLink: string;
@@ -42,6 +43,7 @@ const en: TrustNavCopy = {
   navDisclaimer: "Disclaimer",
   navCookies: "Cookie Policy",
   navContentPolicy: "Content Policy",
+  navCommunityGuidelines: "Community guidelines",
   consentTitle: "Cookies and your privacy",
   consentBody:
     "We use essential cookies so the site works, and — with your permission — analytics and advertising cookies (Google Analytics, Google AdSense) to understand how the site is used and to keep it free. You can change your choice anytime.",
@@ -69,6 +71,7 @@ const hy: TrustNavCopy = {
   navDisclaimer: "Հրաժարակ",
   navCookies: "Cookie քաղաքականություն",
   navContentPolicy: "Բովանդակության քաղաքականություն",
+  navCommunityGuidelines: "Համայնքի կանոններ",
   consentTitle: "Cookie-ներ և ձեր գաղտնիությունը",
   consentBody:
     "Մենք օգտագործում ենք անհրաժեշտ cookie-ներ, իսկ ձեր թույլտվությամբ՝ վերլուծության և գովազդի cookie-ներ (Google Analytics, Google AdSense)։",
@@ -96,6 +99,7 @@ const ru: TrustNavCopy = {
   navDisclaimer: "Отказ от ответственности",
   navCookies: "Cookies",
   navContentPolicy: "Контент",
+  navCommunityGuidelines: "Правила сообщества",
   consentTitle: "Cookies и конфиденциальность",
   consentBody:
     "Мы используем необходимые cookies, а с вашего разрешения — аналитику и рекламу (Google Analytics, Google AdSense).",
@@ -104,10 +108,114 @@ const ru: TrustNavCopy = {
   consentAccept: "Принять все",
 };
 
-const de: TrustNavCopy = { ...en, footerColProduct: "Produkt", footerColLearn: "Lernen", footerColLegal: "Rechtliches", navAbout: "Über uns", navContact: "Kontakt", navPrivacy: "Datenschutz", navTerms: "AGB", navCookies: "Cookies", navContentPolicy: "Inhalte" };
-const fr: TrustNavCopy = { ...en, footerColProduct: "Produit", footerColLearn: "Apprendre", footerColLegal: "Légal", navAbout: "À propos", navContact: "Contact", navPrivacy: "Confidentialité", navTerms: "Conditions", navCookies: "Cookies", navContentPolicy: "Contenu" };
-const es: TrustNavCopy = { ...en, footerColProduct: "Producto", footerColLearn: "Aprender", footerColLegal: "Legal", navAbout: "Acerca de", navContact: "Contacto", navPrivacy: "Privacidad", navTerms: "Términos", navCookies: "Cookies", navContentPolicy: "Contenido" };
-const it: TrustNavCopy = { ...en, footerColProduct: "Prodotto", footerColLearn: "Impara", footerColLegal: "Legale", navAbout: "Chi siamo", navContact: "Contatto", navPrivacy: "Privacy", navTerms: "Termini", navCookies: "Cookie", navContentPolicy: "Contenuti" };
+const de: TrustNavCopy = {
+  ...en,
+  footerColProduct: "Produkt",
+  footerColLearn: "Lernen",
+  footerColLegal: "Rechtliches",
+  footerTagline:
+    "Strukturierter Raum für große Lebensentscheidungen — Szenarien, Linsen, Zeitachsen und eine Bewertung.",
+  footerDisclaimer: "Kein medizinischer, rechtlicher oder therapeutischer Rat.",
+  navFaq: "FAQ",
+  navPlaybooks: "Leitfäden",
+  navAbout: "Über uns",
+  navContact: "Kontakt",
+  navEditorialTeam: "Redaktion",
+  navEditorialStandards: "Redaktionsstandards",
+  navPrivacy: "Datenschutz",
+  navTerms: "AGB",
+  navDisclaimer: "Haftungsausschluss",
+  navCookies: "Cookies",
+  navContentPolicy: "Inhaltsrichtlinie",
+  navCommunityGuidelines: "Community-Richtlinien",
+  consentTitle: "Cookies und Ihre Privatsphäre",
+  consentBody:
+    "Wir verwenden notwendige Cookies; mit Ihrer Erlaubnis Analytics und Werbung (Google Analytics, Google AdSense).",
+  consentPrivacyLink: "Datenschutzerklärung",
+  consentReject: "Nicht erforderliche ablehnen",
+  consentAccept: "Alle akzeptieren",
+};
+const fr: TrustNavCopy = {
+  ...en,
+  footerColProduct: "Produit",
+  footerColLearn: "Apprendre",
+  footerColLegal: "Légal",
+  footerTagline:
+    "Espace structuré pour les grandes décisions — scénarios, lentilles, chronologie et score.",
+  footerDisclaimer: "Pas un avis médical, juridique ou thérapeutique.",
+  navFaq: "FAQ",
+  navPlaybooks: "Guides",
+  navAbout: "À propos",
+  navContact: "Contact",
+  navEditorialTeam: "Équipe éditoriale",
+  navEditorialStandards: "Normes éditoriales",
+  navPrivacy: "Confidentialité",
+  navTerms: "Conditions",
+  navDisclaimer: "Avertissement",
+  navCookies: "Cookies",
+  navContentPolicy: "Politique de contenu",
+  navCommunityGuidelines: "Règles de la communauté",
+  consentTitle: "Cookies et confidentialité",
+  consentBody:
+    "Cookies essentiels ; avec votre accord, analytics et publicité (Google Analytics, Google AdSense).",
+  consentPrivacyLink: "Politique de confidentialité",
+  consentReject: "Refuser les non essentiels",
+  consentAccept: "Tout accepter",
+};
+const es: TrustNavCopy = {
+  ...en,
+  footerColProduct: "Producto",
+  footerColLearn: "Aprender",
+  footerColLegal: "Legal",
+  footerTagline:
+    "Espacio estructurado para grandes decisiones — escenarios, lentes, cronología y puntuación.",
+  footerDisclaimer: "No es asesoramiento médico, legal ni terapéutico.",
+  navFaq: "FAQ",
+  navPlaybooks: "Guías",
+  navAbout: "Acerca de",
+  navContact: "Contacto",
+  navEditorialTeam: "Equipo editorial",
+  navEditorialStandards: "Estándares editoriales",
+  navPrivacy: "Privacidad",
+  navTerms: "Términos",
+  navDisclaimer: "Aviso legal",
+  navCookies: "Cookies",
+  navContentPolicy: "Política de contenido",
+  navCommunityGuidelines: "Normas de la comunidad",
+  consentTitle: "Cookies y privacidad",
+  consentBody:
+    "Cookies esenciales; con su permiso, analítica y publicidad (Google Analytics, Google AdSense).",
+  consentPrivacyLink: "Política de privacidad",
+  consentReject: "Rechazar no esenciales",
+  consentAccept: "Aceptar todo",
+};
+const it: TrustNavCopy = {
+  ...en,
+  footerColProduct: "Prodotto",
+  footerColLearn: "Impara",
+  footerColLegal: "Legale",
+  footerTagline:
+    "Spazio strutturato per grandi decisioni — scenari, lenti, cronologia e punteggio.",
+  footerDisclaimer: "Non è consulenza medica, legale o terapeutica.",
+  navFaq: "FAQ",
+  navPlaybooks: "Guide",
+  navAbout: "Chi siamo",
+  navContact: "Contatto",
+  navEditorialTeam: "Team editoriale",
+  navEditorialStandards: "Standard editoriali",
+  navPrivacy: "Privacy",
+  navTerms: "Termini",
+  navDisclaimer: "Disclaimer",
+  navCookies: "Cookie",
+  navContentPolicy: "Politica dei contenuti",
+  navCommunityGuidelines: "Linee guida community",
+  consentTitle: "Cookie e privacy",
+  consentBody:
+    "Cookie essenziali; con il tuo consenso, analytics e pubblicità (Google Analytics, Google AdSense).",
+  consentPrivacyLink: "Informativa privacy",
+  consentReject: "Rifiuta non essenziali",
+  consentAccept: "Accetta tutto",
+};
 const ar: TrustNavCopy = {
   ...en,
   footerColProduct: "المنتج",
@@ -119,7 +227,11 @@ const ar: TrustNavCopy = {
   navTerms: "الشروط",
   navCookies: "ملفات تعريف الارتباط",
   navContentPolicy: "سياسة المحتوى",
+  navCommunityGuidelines: "إرشادات المجتمع",
   consentTitle: "ملفات تعريف الارتباط والخصوصية",
+  consentBody:
+    "نستخدم ملفات تعريف ارتباط أساسية؛ وبإذنك — التحليلات والإعلانات (Google Analytics وGoogle AdSense).",
+  consentPrivacyLink: "سياسة الخصوصية",
   consentReject: "رفض غير الضروري",
   consentAccept: "قبول الكل",
 };
