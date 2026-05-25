@@ -1371,7 +1371,7 @@ export default function DecisionStudio({
 
         <RevealOnScroll>
         <section
-          id="section-overview"
+          id={skipHero ? "section-at-a-glance" : "section-overview"}
           className="home-section-wash home-section-wash--overview scroll-mt-36 rounded-[1.85rem] px-3 pt-12 pb-1 sm:px-4 sm:pt-14"
           aria-labelledby="overview-heading"
         >

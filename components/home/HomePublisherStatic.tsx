@@ -30,8 +30,9 @@ export default async function HomePublisherStatic({ locale: localeProp }: Props 
 
   return (
     <section
+      id="section-overview"
       aria-label="About Life Decision Engine"
-      className="relative z-[1] mx-auto max-w-3xl px-4 pb-10 pt-2 sm:px-6"
+      className="relative z-[1] mx-auto max-w-3xl scroll-mt-[7.5rem] px-4 pb-10 pt-2 sm:px-6"
       dir={isRtlLocale(locale) ? "rtl" : undefined}
     >
       <div className="space-y-6 rounded-3xl border border-white/[0.1] bg-white/[0.04] p-6 text-[15px] leading-relaxed text-[rgb(var(--ink-soft))] sm:p-8">

@@ -16,6 +16,8 @@ import ConsentBanner from "@/components/ConsentBanner";
 import SkipToContent from "@/components/SkipToContent";
 import DeferredVercelMetrics from "@/components/DeferredVercelMetrics";
 import LocaleRefreshBridge from "@/components/LocaleRefreshBridge";
+import { isRtlLocale } from "@/lib/i18n/locale";
+import { getServerPageLocale } from "@/lib/i18n/trust-pages/server-locale";
 import { getMetadataBase } from "@/lib/site-url";
 import "./globals.css";
 
@@ -151,13 +153,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getServerPageLocale();
+  const dir = isRtlLocale(locale) ? "rtl" : "ltr";
+
   return (
-    <html lang="en-US">
+    <html lang={locale} dir={dir} suppressHydrationWarning>
       <head>
         {/*
           Google Consent Mode v2 default: denied for all ad/analytics storage

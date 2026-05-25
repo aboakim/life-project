@@ -23,8 +23,8 @@ export default async function Home() {
         fetchPriority="high"
       />
       <HomeHeroStatic locale={locale} />
-      <HomePublisherStatic locale={locale} />
       <HomeSectionNavStatic locale={locale} />
+      <HomePublisherStatic locale={locale} />
       <HomeSocialProofStatic locale={locale} />
       <DeferredHomeStudio />
     </main>
