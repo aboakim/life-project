@@ -8,18 +8,47 @@ const DecisionStudioShell = dynamic(
   { ssr: false, loading: () => null },
 );
 
+function shouldLoadOnIntent(target: EventTarget | null): boolean {
+  if (!(target instanceof Element)) return false;
+  return Boolean(
+    target.closest(
+      'a[href="/analyze"], a[href^="#section-"], #section-workspace, [data-load-studio]',
+    ),
+  );
+}
+
 /**
- * Loads the ~300kB home studio chunk after first paint / idle so LCP and FCP
- * stay on the server-rendered hero instead of blocking on hydration.
+ * Loads the ~300kB home studio chunk after idle or explicit intent (scroll to
+ * analyzer / click Analyze) so FCP, LCP, and INP stay on server-rendered HTML.
  */
 export default function DeferredHomeStudio() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
+    if (ready) return;
     let cancelled = false;
     let cancelScheduled: (() => void) | undefined;
 
-    const arm = () => {
+    const go = () => {
+      if (!cancelled) setReady(true);
+    };
+
+    const onIntent = (e: Event) => {
+      if (shouldLoadOnIntent(e.target)) go();
+    };
+
+    const onScroll = () => {
+      const el = document.getElementById("section-workspace");
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 1.2) go();
+    };
+
+    window.addEventListener("pointerdown", onIntent, { passive: true });
+    window.addEventListener("keydown", onIntent);
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    const armIdle = () => {
       const w = window as Window & {
         requestIdleCallback?: (
           cb: IdleRequestCallback,
@@ -27,30 +56,29 @@ export default function DeferredHomeStudio() {
         ) => number;
         cancelIdleCallback?: (handle: number) => void;
       };
-      const go = () => {
-        if (!cancelled) setReady(true);
-      };
       if (typeof w.requestIdleCallback === "function") {
-        const id = w.requestIdleCallback(go, { timeout: 2200 });
+        const id = w.requestIdleCallback(go, { timeout: 4000 });
         cancelScheduled = () => w.cancelIdleCallback?.(id);
       } else {
-        const t = window.setTimeout(go, 400);
+        const t = window.setTimeout(go, 1200);
         cancelScheduled = () => window.clearTimeout(t);
       }
     };
 
     if (document.readyState === "complete") {
-      arm();
+      armIdle();
     } else {
-      window.addEventListener("load", arm, { once: true });
+      window.addEventListener("load", armIdle, { once: true });
     }
 
     return () => {
       cancelled = true;
       cancelScheduled?.();
-      window.removeEventListener("load", arm);
+      window.removeEventListener("pointerdown", onIntent);
+      window.removeEventListener("keydown", onIntent);
+      window.removeEventListener("load", armIdle);
     };
-  }, []);
+  }, [ready]);
 
   if (!ready) return null;
 

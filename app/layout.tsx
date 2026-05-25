@@ -15,6 +15,7 @@ import SiteJsonLd from "@/components/SiteJsonLd";
 import ConsentBanner from "@/components/ConsentBanner";
 import SkipToContent from "@/components/SkipToContent";
 import DeferredVercelMetrics from "@/components/DeferredVercelMetrics";
+import LocaleRefreshBridge from "@/components/LocaleRefreshBridge";
 import { getMetadataBase } from "@/lib/site-url";
 import "./globals.css";
 
@@ -198,6 +199,7 @@ export default function RootLayout({
         />
         <SkipToContent />
         <SiteJsonLd />
+        <LocaleRefreshBridge />
         <GlobalNav />
         {children}
         <GlobalFooter />

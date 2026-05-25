@@ -4,7 +4,7 @@ import {
   LDE_LOCALE_COOKIE_NAME,
   localeFromCookieValue,
 } from "@/lib/locale-cookie";
-import { isRtlLocale } from "@/lib/i18n/locale";
+import { isRtlLocale, type AppLocale } from "@/lib/i18n/locale";
 import { getUi } from "@/lib/i18n/ui";
 import { getHomePublisherCopy } from "@/lib/i18n/trust-pages/get-copy";
 import { getTrustLinkLabels } from "@/lib/i18n/trust-pages/link-labels";
@@ -14,11 +14,14 @@ import TrustInlineText from "@/components/trust/TrustInlineText";
  * Server-rendered publisher block on `/` — visible without the deferred
  * DecisionStudio bundle (AdSense "publisher content" signal).
  */
-export default async function HomePublisherStatic() {
-  const jar = await cookies();
-  const locale = localeFromCookieValue(
-    jar.get(LDE_LOCALE_COOKIE_NAME)?.value,
-  );
+type Props = { locale?: AppLocale };
+
+export default async function HomePublisherStatic({ locale: localeProp }: Props = {}) {
+  const locale =
+    localeProp ??
+    localeFromCookieValue(
+      (await cookies()).get(LDE_LOCALE_COOKIE_NAME)?.value,
+    );
   const t = getUi(locale);
   const copy = getHomePublisherCopy(locale);
   const labels = getTrustLinkLabels(locale);

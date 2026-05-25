@@ -920,14 +920,16 @@ export default function DecisionStudio({
           <ChromeHorizon className="pt-1" />
         </div>
       ) : null}
-      <HomeSectionNav
-        links={sectionLinks}
-        navAriaLabel={t.homeSectionNavAria}
-        jumpLabel={t.homeSectionJumpLabel}
-        jumpPlaceholder={t.homeSectionJumpPlaceholder}
-      />
+      {!skipHero ? (
+        <HomeSectionNav
+          links={sectionLinks}
+          navAriaLabel={t.homeSectionNavAria}
+          jumpLabel={t.homeSectionJumpLabel}
+          jumpPlaceholder={t.homeSectionJumpPlaceholder}
+        />
+      ) : null}
 
-      {!focusLayout && t.socialProofRotator.length > 0 ? (
+      {!skipHero && !focusLayout && t.socialProofRotator.length > 0 ? (
         <div
           className="relative z-[20] mx-auto max-w-2xl px-4 pt-2 sm:px-6"
           aria-live="polite"

@@ -4,7 +4,7 @@ import {
   LDE_LOCALE_COOKIE_NAME,
   localeFromCookieValue,
 } from "@/lib/locale-cookie";
-import { isRtlLocale } from "@/lib/i18n/locale";
+import { isRtlLocale, type AppLocale } from "@/lib/i18n/locale";
 import { getUi } from "@/lib/i18n/ui";
 import { getExpertsCopy } from "@/lib/i18n/experts-network";
 import { getPricingCopy } from "@/lib/i18n/pricing-page";
@@ -14,14 +14,17 @@ function previewHref(section: string): string {
   return `#section-${section}`;
 }
 
+type Props = { locale?: AppLocale };
+
 /**
  * Full server-rendered home hero — LCP image + copy without the 300kB client bundle.
  */
-export default async function HomeHeroStatic() {
-  const jar = await cookies();
-  const locale = localeFromCookieValue(
-    jar.get(LDE_LOCALE_COOKIE_NAME)?.value,
-  );
+export default async function HomeHeroStatic({ locale: localeProp }: Props = {}) {
+  const locale =
+    localeProp ??
+    localeFromCookieValue(
+      (await cookies()).get(LDE_LOCALE_COOKIE_NAME)?.value,
+    );
   const t = getUi(locale);
   const slide = t.heroSlides[0]!;
   const exNav = getExpertsCopy(locale);
@@ -117,7 +120,7 @@ export default async function HomeHeroStatic() {
                       width={380}
                       height={475}
                       fetchPriority="high"
-                      decoding="async"
+                      decoding="sync"
                       className="absolute inset-0 h-full w-full object-cover"
                     />
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[rgb(28_24_52/0.9)] via-[rgb(40_36_70/0.32)] to-[rgb(var(--accent)/0.12)]" />
