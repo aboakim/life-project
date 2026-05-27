@@ -12,6 +12,8 @@ export function shouldRecordSiteAccess(request: NextRequest): boolean {
   if (request.method !== "GET") return false;
   const pathname = request.nextUrl.pathname;
   if (!pathname.startsWith("/") || pathname.length > 512) return false;
+  // Home page is hot-path for Core Web Vitals; keep middleware work minimal.
+  if (pathname === "/") return false;
   if (pathname.startsWith("/admin")) return false;
   if (pathname.startsWith("/api")) return false;
   if (pathname.startsWith("/_next")) return false;
