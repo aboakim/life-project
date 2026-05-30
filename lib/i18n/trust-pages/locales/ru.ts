@@ -377,6 +377,15 @@ const about: TrustPageCopy = {
       ],
     },
     {
+      heading: "Основатель",
+      blocks: [
+        {
+          kind: "p",
+          text: "Основателем и создателем Life Decision Engine является Альберт Акимян (Albert Akimyan, Ալբերտ Ակիմյան). Он руководит продуктом, редакционными рамками и движком анализа решений на lifedecisions.space.",
+        },
+      ],
+    },
+    {
       heading: "Что мы строим",
       blocks: [
         {

@@ -377,6 +377,15 @@ const about: TrustPageCopy = {
       ],
     },
     {
+      heading: "المؤسّس",
+      blocks: [
+        {
+          kind: "p",
+          text: "أسس Life Decision Engine وابتكره ألبرت أكيميان (Albert Akimyan، Ալբերտ Ակիմյան). يقود المنتج والأطر التحريرية ومحرّك تحليل القرارات على lifedecisions.space.",
+        },
+      ],
+    },
+    {
       heading: "ما نبنيه",
       blocks: [
         {

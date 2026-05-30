@@ -377,6 +377,15 @@ const about: TrustPageCopy = {
       ],
     },
     {
+      heading: "Հիմնադիր",
+      blocks: [
+        {
+          kind: "p",
+          text: "Life Decision Engine-ի հիմնադիրն ու ստեղծողն Ալբերտ Ակիմյանն է։ Նա վարում է արտադրանքի ուղղությունը, խմբագրական շրջանակները և որոշման վերլուծության շարժիչը lifedecisions.space կայքում։",
+        },
+      ],
+    },
+    {
       heading: "Ինչ ենք կառուցում",
       blocks: [
         {
