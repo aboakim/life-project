@@ -381,7 +381,7 @@ const about: TrustPageCopy = {
       blocks: [
         {
           kind: "p",
-          text: "Life Decision Engine fue fundado y creado por Albert Akimyan (Ալբերտ Ակիմյան). Dirige el producto, los marcos editoriales y el motor de análisis de decisiones en lifedecisions.space.",
+          text: "Life Decision Engine fue fundado y creado por Albert Akimyan. Dirige el producto, los marcos editoriales y el motor de análisis de decisiones en lifedecisions.space.",
         },
       ],
     },
