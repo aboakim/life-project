@@ -286,16 +286,16 @@ const trustHowEn: Pick<
   howSectionTitle: "How it works",
   howSteps: [
     {
-      title: "Enter your situation",
-      body: "Say what's on your mind—facts, fears, deadlines optional.",
+      title: "Describe the decision in your own words",
+      body: "Write or speak what you are weighing—stakes, fears, money, people involved, and any deadline. No polished essay required.",
     },
     {
-      title: "Choose your paths",
-      body: "Lay out the real options instead of debating them in silence.",
+      title: "See best, likely, and worst paths together",
+      body: "The engine compares options on money, emotional load, risk, and upside—mapped from six months to five years out.",
     },
     {
-      title: "Get instant scenarios",
-      body: "Six months to five years out—simple, fast, effective.",
+      title: "Walk away with a report you can use",
+      body: "Scenarios, timeline, and a clarity score you can copy for therapy, legal review, a partner talk, or your own notes.",
     },
   ],
   sectionNavProduct: "Product",
@@ -492,16 +492,16 @@ const trustHowHy: Pick<
   howSectionTitle: "Ինչպես է աշխատում",
   howSteps: [
     {
-      title: "1 · Նկարագրել",
-      body: "Գրեք որոշումը և կոնտեքստը՝ թվեր, վախեր, արժեքներ, ժամկետներ։",
+      title: "Նկարագրեք որոշումը ձեր բառերով",
+      body: "Գրեք կամ ասեք, թե ինչ եք կշռում՝ դրամ, վախ, մարդիկ, ժամկետ։ Կատարյալ տեքստ պետք չէ։",
     },
     {
-      title: "2 · Վերլուծել",
-      body: "Շարժիչը քարտեզագրում է ֆինանսները, հոգեբանությունը, ռիսկերը և շանսերը՝ 6 ամիսից մինչև 5 տարի։",
+      title: "Տեսեք լավ, հավանական և վատ ուղիները միասին",
+      body: "Շարժիչը համեմատում է տարբերակները՝ գումար, էմոցիա, ռիսկ, հնարավորություն՝ 6 ամիսից մինչև 5 տարի։",
     },
     {
-      title: "3 · Որոշել",
-      body: "Օգտագործեք միավորը որպես կողմնացույց․ անհրաժեշտության դեպքում դիմեք մասնագետի։",
+      title: "Ստացեք հաշվետվություն, որ կարող եք օգտագործել",
+      body: "Սցենարներ, ժամանակացույց և միավոր՝ պատճենելու թերապևտի, փաստաբանի, զրույցի կամ նոթերի համար։",
     },
   ],
   sectionNavProduct: "Արտադրանք",
