@@ -7,7 +7,7 @@ import {
 import { isRtlLocale, type AppLocale } from "@/lib/i18n/locale";
 import { getUi } from "@/lib/i18n/ui";
 import { getPricingCopy } from "@/lib/i18n/pricing-page";
-import { HERO_LCP_IMAGE_URL } from "@/lib/home/hero-slide-images";
+import { HERO_LCP_IMAGE_URL, HERO_VIDEO_URL } from "@/lib/home/hero-slide-images";
 
 type Props = { locale?: AppLocale };
 
@@ -169,14 +169,15 @@ export default async function HomeHeroStatic({ locale: localeProp }: Props = {})
             <div className="relative space-y-4">
               <div className="relative overflow-hidden rounded-2xl border border-white/[0.12] shadow-[0_20px_60px_-28px_rgb(var(--accent)/0.4)]">
                 <div className="relative aspect-[5/4] w-full">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={HERO_LCP_IMAGE_URL}
-                    alt={slide.alt}
-                    width={380}
-                    height={304}
-                    fetchPriority="high"
-                    decoding="sync"
+                  <video
+                    src={HERO_VIDEO_URL}
+                    poster={HERO_LCP_IMAGE_URL}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    aria-label={slide.alt}
                     className="absolute inset-0 h-full w-full object-cover"
                   />
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[rgb(20_18_40/0.85)] via-transparent to-transparent" />
