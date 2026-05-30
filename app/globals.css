@@ -26,18 +26,33 @@
   --accent-mint: 108 232 200;
   /* Open, airy sage — pairs with mint for green presence */
   --accent-sage: 132 218 178;
+  /* GlobalNav height — keep section nav flush under header when sticky */
+  --site-header-height: 3.25rem;
+  --home-section-nav-height: 2.75rem;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --site-header-height: 3.5rem;
+  }
 }
 
 html {
   /* Snappy browser navigation; in-app jumps still use scrollIntoView where needed */
   scroll-behavior: auto;
-  /* Sticky header + optional section nav; extra on small screens */
-  scroll-padding-top: max(6.5rem, env(safe-area-inset-top, 0px) + 5rem);
+  /* Sticky GlobalNav + home section nav */
+  scroll-padding-top: calc(
+    env(safe-area-inset-top, 0px) + var(--site-header-height) +
+      var(--home-section-nav-height) + 0.5rem
+  );
 }
 
 @media (min-width: 768px) {
   html {
-    scroll-padding-top: max(6.5rem, env(safe-area-inset-top, 0px) + 3rem);
+    scroll-padding-top: calc(
+      env(safe-area-inset-top, 0px) + var(--site-header-height) +
+        var(--home-section-nav-height) + 0.25rem
+    );
   }
 }
 
@@ -88,6 +103,32 @@ body {
 }
 .scrollbar-none::-webkit-scrollbar {
   display: none;
+}
+
+/** Home page section nav — sticks flush under GlobalNav for the full scroll. */
+.home-section-nav-shell {
+  position: sticky;
+  top: calc(env(safe-area-inset-top, 0px) + var(--site-header-height));
+  z-index: 50;
+  width: 100%;
+  min-width: 0;
+}
+
+.home-section-nav {
+  min-height: var(--home-section-nav-height);
+  border-bottom: 1px solid rgb(255 255 255 / 0.1);
+  background: rgb(var(--surface) / 0.94);
+  box-shadow:
+    inset 0 1px 0 0 rgb(255 255 255 / 0.05),
+    0 8px 28px -18px rgb(0 0 0 / 0.45);
+  backdrop-filter: blur(20px);
+}
+
+.home-section-scroll-mt {
+  scroll-margin-top: calc(
+    env(safe-area-inset-top, 0px) + var(--site-header-height) +
+      var(--home-section-nav-height) + 0.75rem
+  );
 }
 
 body::before {

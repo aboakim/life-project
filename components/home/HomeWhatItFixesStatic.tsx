@@ -20,7 +20,7 @@ export default function HomeWhatItFixesStatic({ locale }: Props) {
     <section
       id="section-what-it-fixes"
       aria-labelledby="home-fixes-heading"
-      className="relative z-[1] scroll-mt-[7.5rem] px-4 py-10 sm:px-6 sm:py-14"
+      className="relative z-[1] home-section-scroll-mt px-4 py-10 sm:px-6 sm:py-14"
       dir={rtl ? "rtl" : undefined}
     >
       <div className="mx-auto max-w-6xl rounded-[1.75rem] border border-white/[0.1] bg-white/[0.03] p-5 sm:p-8 lg:p-10">

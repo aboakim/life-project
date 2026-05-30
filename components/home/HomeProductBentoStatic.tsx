@@ -11,7 +11,7 @@ export default function HomeProductBentoStatic({ locale }: Props) {
     <section
       id="section-product"
       aria-labelledby="home-product-heading"
-      className="relative z-[1] scroll-mt-[7.5rem] px-4 py-10 sm:px-6 sm:py-14"
+      className="relative z-[1] home-section-scroll-mt px-4 py-10 sm:px-6 sm:py-14"
       dir={rtl ? "rtl" : undefined}
     >
       <div className="mx-auto max-w-6xl">

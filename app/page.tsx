@@ -27,8 +27,8 @@ export default async function Home() {
         href={HERO_LCP_IMAGE_URL}
         fetchPriority="high"
       />
-      <HomeHeroStatic locale={locale} />
       <HomeSectionNavStatic locale={locale} />
+      <HomeHeroStatic locale={locale} />
       <HomeAtAGlanceStatic locale={locale} />
       <HomeWhatItFixesStatic locale={locale} />
       <HomeProductBentoStatic locale={locale} />

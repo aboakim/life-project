@@ -12,7 +12,7 @@ export default function HomeAtAGlanceStatic({ locale }: Props) {
     <section
       id="section-overview"
       aria-labelledby="home-overview-heading"
-      className="relative z-[1] scroll-mt-[7.5rem] px-4 pb-6 pt-4 sm:px-6"
+      className="relative z-[1] home-section-scroll-mt px-4 pb-6 pt-4 sm:px-6"
       dir={rtl ? "rtl" : undefined}
     >
       <div className="mx-auto max-w-6xl">

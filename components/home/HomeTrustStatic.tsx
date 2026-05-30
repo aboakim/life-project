@@ -12,7 +12,7 @@ export default function HomeTrustStatic({ locale }: Props) {
     <section
       id="section-trust"
       aria-labelledby="home-trust-heading"
-      className="relative z-[1] scroll-mt-[7.5rem] px-4 py-10 sm:px-6 sm:py-14"
+      className="relative z-[1] home-section-scroll-mt px-4 py-10 sm:px-6 sm:py-14"
       dir={rtl ? "rtl" : undefined}
     >
       <div className="mx-auto max-w-6xl rounded-[1.75rem] border border-white/[0.1] bg-gradient-to-br from-[rgb(var(--accent))]/8 via-transparent to-[rgb(var(--accent-magenta))]/6 p-6 sm:p-10">
