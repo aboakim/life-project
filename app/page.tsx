@@ -1,7 +1,12 @@
 import { preload } from "react-dom";
 import HomeHeroStatic from "@/components/home/HomeHeroStatic";
-import HomePublisherStatic from "@/components/home/HomePublisherStatic";
 import HomeSectionNavStatic from "@/components/home/HomeSectionNavStatic";
+import HomeAtAGlanceStatic from "@/components/home/HomeAtAGlanceStatic";
+import HomeWhatItFixesStatic from "@/components/home/HomeWhatItFixesStatic";
+import HomeProductBentoStatic from "@/components/home/HomeProductBentoStatic";
+import HomeTrustStatic from "@/components/home/HomeTrustStatic";
+import HomeHowItWorksStatic from "@/components/home/HomeHowItWorksStatic";
+import HomePublisherStatic from "@/components/home/HomePublisherStatic";
 import HomeSocialProofStatic from "@/components/home/HomeSocialProofStatic";
 import DeferredHomeStudio from "@/components/home/DeferredHomeStudio";
 import { HERO_LCP_IMAGE_URL } from "@/lib/home/hero-slide-images";
@@ -24,6 +29,11 @@ export default async function Home() {
       />
       <HomeHeroStatic locale={locale} />
       <HomeSectionNavStatic locale={locale} />
+      <HomeAtAGlanceStatic locale={locale} />
+      <HomeWhatItFixesStatic locale={locale} />
+      <HomeProductBentoStatic locale={locale} />
+      <HomeTrustStatic locale={locale} />
+      <HomeHowItWorksStatic locale={locale} />
       <HomePublisherStatic locale={locale} />
       <HomeSocialProofStatic locale={locale} />
       <DeferredHomeStudio />
