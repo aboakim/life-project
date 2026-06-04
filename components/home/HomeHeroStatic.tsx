@@ -96,12 +96,12 @@ export default async function HomeHeroStatic({ locale: localeProp }: Props = {})
       <div className="relative z-[1] mx-auto max-w-6xl px-4 pb-4 pt-6 sm:px-6 sm:pt-10">
         <section
           id="section-hero"
-          className="home-hero-panel home-section-wash home-section-wash--hero relative overflow-hidden rounded-[1.75rem] border border-white/[0.14] bg-gradient-to-br from-white/[0.09] via-white/[0.04] to-[rgb(var(--surface-elevated))]/50 p-5 sm:rounded-[2.25rem] sm:p-10 lg:p-12"
+          className="home-hero-panel home-section-wash home-section-wash--hero relative overflow-hidden rounded-[1.75rem] border border-white/[0.14] bg-gradient-to-br from-white/[0.09] via-white/[0.04] to-[rgb(var(--surface-elevated))]/50 p-5 max-md:border-white/[0.1] max-md:bg-[rgb(var(--surface-2))] max-md:bg-none sm:rounded-[2.25rem] sm:p-10 lg:p-12"
         >
           <div className="home-hero-panel__tint pointer-events-none absolute inset-0 bg-[linear-gradient(125deg,rgb(var(--accent)/0.08),transparent_45%,rgb(var(--accent-magenta)/0.06))]" />
           <div className="relative grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(260px,380px)] lg:items-center lg:gap-12">
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.18] bg-white/[0.08] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-[rgb(var(--accent-2))] sm:text-[11px]">
+            <div className="home-hero-copy relative z-[1]">
+              <div className="home-hero-ribbon inline-flex items-center gap-2 rounded-full border border-white/[0.18] bg-white/[0.08] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-[rgb(var(--accent-2))] sm:text-[11px]">
                 <span className="size-2 rounded-full bg-[rgb(var(--accent))] shadow-[0_0_10px_rgb(var(--accent)/0.6)]" />
                 {t.heroRibbon}
               </div>
@@ -146,7 +146,7 @@ export default async function HomeHeroStatic({ locale: localeProp }: Props = {})
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                 <Link
                   href="/analyze"
-                  className="inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-8 py-3.5 text-base font-bold text-white shadow-xl shadow-[rgb(var(--accent)/0.28)] transition hover:brightness-110 sm:w-auto"
+                  className="home-hero-cta inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-8 py-3.5 text-base font-bold text-white shadow-xl shadow-[rgb(var(--accent)/0.28)] transition hover:brightness-110 sm:w-auto"
                 >
                   {t.heroCtaPrimary}
                   <span aria-hidden>→</span>
