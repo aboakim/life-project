@@ -25,10 +25,21 @@ export default function HeroVisualSlider({
   const [index, setIndex] = useState(0);
   /** After idle, mount images for carousel neighbors (not all slides — saves decode / network on first paint). */
   const [idleReady, setIdleReady] = useState(false);
+  /** On phone, keep every slide mounted so horizontal swipe never flashes the page wash. */
+  const [mobileCarousel, setMobileCarousel] = useState(false);
   const pauseRef = useRef(false);
   /** Touch swipe on the image strip only (not the arrow/dot bar). */
   const touchStartRef = useRef<{ x: number; y: number } | null>(null);
   const n = slides.length;
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(max-width: 767px)");
+    const sync = () => setMobileCarousel(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
 
   /** After first paint (2 rAF), decode neighbor slides — avoids multi‑second idle wait on mobile. */
   useEffect(() => {
@@ -45,11 +56,12 @@ export default function HeroVisualSlider({
 
   const showSlideImage = useCallback(
     (i: number) => {
+      if (mobileCarousel) return true;
       if (i === index) return true;
       if (!idleReady) return false;
       return i === (index + 1) % n || i === (index - 1 + n) % n;
     },
-    [idleReady, index, n],
+    [mobileCarousel, idleReady, index, n],
   );
 
   const go = useCallback(
@@ -119,7 +131,7 @@ export default function HeroVisualSlider({
 
   return (
     <div
-      className="relative overflow-hidden rounded-2xl border border-white/[0.14] bg-[rgb(var(--surface-2))] shadow-[0_24px_80px_-32px_rgb(var(--accent)/0.45)]"
+      className="home-hero-carousel-shell relative overflow-hidden rounded-2xl border border-white/[0.14] shadow-[0_24px_80px_-32px_rgb(var(--accent)/0.45)]"
       onMouseEnter={() => {
         pauseRef.current = true;
       }}
@@ -171,11 +183,14 @@ export default function HeroVisualSlider({
                 />
               ) : (
                 <div
-                  className="absolute inset-0 bg-[rgb(var(--surface-2))]"
+                  className="absolute inset-0 bg-[rgb(20_18_38)]"
                   aria-hidden
                 />
               )}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[rgb(28_24_52/0.9)] via-[rgb(40_36_70/0.32)] to-[rgb(var(--accent)/0.12)]" />
+              <div
+                className="pointer-events-none absolute inset-x-0 bottom-0 h-[46%] bg-gradient-to-t from-[rgb(20_18_38)] via-[rgb(20_18_38/0.65)] to-transparent"
+                aria-hidden
+              />
               <p className="absolute bottom-0 left-0 right-0 px-4 pb-4 pt-12 text-center text-[13px] font-medium leading-snug text-white/95 [text-wrap:balance] sm:px-5 sm:pb-5 sm:text-sm">
                 {slide.caption}
               </p>

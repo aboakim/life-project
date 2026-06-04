@@ -1135,11 +1135,11 @@ export default function DecisionStudio({
         {!skipHero ? (
         <section
           id="section-hero"
-          className="home-section-wash home-section-wash--hero relative overflow-hidden rounded-[1.75rem] border border-white/[0.16] bg-gradient-to-br from-white/[0.1] via-white/[0.05] to-[rgb(var(--surface-elevated))]/55 p-4 shadow-[0_28px_80px_-48px_rgb(var(--accent)/0.35),0_0_0_1px_rgba(255,255,255,0.1)_inset] backdrop-blur-sm sm:rounded-[2.5rem] sm:p-10 lg:p-14"
+          className="home-hero-panel home-section-wash home-section-wash--hero relative overflow-hidden rounded-[1.75rem] border border-white/[0.16] bg-gradient-to-br from-white/[0.1] via-white/[0.05] to-[rgb(var(--surface-elevated))]/55 p-4 shadow-[0_28px_80px_-48px_rgb(var(--accent)/0.35),0_0_0_1px_rgba(255,255,255,0.1)_inset] backdrop-blur-sm sm:rounded-[2.5rem] sm:p-10 lg:p-14"
         >
-          <div className="home-hero-spine-breathe pointer-events-none absolute inset-y-10 start-3 w-[5px] rounded-full bg-gradient-to-b from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] opacity-90 shadow-[0_0_20px_rgb(var(--accent)/0.4)] sm:start-5 sm:w-1.5" />
-          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(118deg,rgb(var(--accent)/0.1),transparent_40%,rgb(var(--accent-2)/0.07),transparent_60%,rgb(var(--accent-magenta)/0.08))]" />
-          <div className="grid-view pointer-events-none absolute inset-0 opacity-[0.5]" />
+          <div className="home-hero-spine-breathe pointer-events-none absolute inset-y-10 start-3 w-[5px] rounded-full bg-gradient-to-b from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] opacity-90 shadow-[0_0_20px_rgb(var(--accent)/0.4)] sm:start-5 sm:w-1.5 max-md:hidden" />
+          <div className="home-hero-panel__tint pointer-events-none absolute inset-0 bg-[linear-gradient(118deg,rgb(var(--accent)/0.1),transparent_40%,rgb(var(--accent-2)/0.07),transparent_60%,rgb(var(--accent-magenta)/0.08))]" />
+          <div className="grid-view pointer-events-none absolute inset-0 opacity-[0.5] max-md:hidden" />
           <div className="relative grid gap-12 ps-4 sm:ps-6 lg:grid-cols-[minmax(0,1fr)_minmax(280px,400px)] lg:items-center lg:ps-2">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.22] bg-white/[0.11] px-3.5 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-[rgb(var(--ink))] shadow-[0_0_32px_-10px_rgb(var(--accent)/0.45),inset_0_1px_0_0_rgba(255,255,255,0.12)] ring-1 ring-[rgb(var(--accent))]/15 backdrop-blur-sm motion-safe:transition motion-safe:duration-500 motion-safe:hover:ring-[rgb(var(--accent-2))]/25 sm:text-xs">
@@ -1215,8 +1215,11 @@ export default function DecisionStudio({
               </div>
             </div>
 
-            <div className="relative space-y-5">
-              <div className="absolute -inset-4 -z-10 rounded-[1.75rem] bg-gradient-to-br from-[rgb(var(--accent))]/14 via-[rgb(var(--accent-magenta))]/8 to-[rgb(var(--accent-2))]/12 blur-xl" />
+            <div className="home-hero-media-column relative isolate z-[1] space-y-5">
+              <div
+                className="pointer-events-none absolute -inset-4 -z-10 hidden rounded-[1.75rem] bg-gradient-to-br from-[rgb(var(--accent))]/14 via-[rgb(var(--accent-magenta))]/8 to-[rgb(var(--accent-2))]/12 blur-xl md:block"
+                aria-hidden
+              />
               <div className="block w-full space-y-5">
                 <HeroVisualSlider
                   slides={heroSlideDeck}

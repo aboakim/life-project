@@ -403,24 +403,43 @@ body::before {
   );
   background-repeat: no-repeat;
 }
+/* Neutral violet wash — sage/mint reads as “mystery green” behind hero media on mobile */
 .home-section-wash--hero {
-  --wash-color: rgb(var(--accent-sage) / 0.16);
+  --wash-color: rgb(120 128 168 / 0.14);
 }
 
 /*
- * Home hero video — opaque shell so body mesh / section washes never bleed
- * through on mobile Safari (semi-transparent parents + video compositing).
+ * Hero media (video + carousel) — opaque stack so body mesh / sage washes never
+ * show through during scroll or horizontal swipe on iOS Safari.
  */
-.home-hero-video-shell {
+.home-hero-video-shell,
+.home-hero-carousel-shell {
   isolation: isolate;
   background-color: rgb(20 18 38);
 }
-.home-hero-video-shell__media {
+.home-hero-video-shell__media,
+.home-hero-carousel-shell__track {
   isolation: isolate;
   background-color: rgb(20 18 38);
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 .home-hero-video-shell__media video {
   background-color: rgb(20 18 38);
+}
+.home-hero-carousel-shell__slide {
+  background-color: rgb(20 18 38);
+}
+
+/* Mobile hero panel: solid surface — no translucent wash over the video column */
+@media (max-width: 767px) {
+  .home-hero-panel {
+    background-color: rgb(var(--surface-2)) !important;
+    background-image: none !important;
+  }
+  .home-hero-panel__tint {
+    display: none;
+  }
 }
 .home-section-wash--overview {
   --wash-color: rgb(68 224 205 / 0.14);

@@ -96,9 +96,9 @@ export default async function HomeHeroStatic({ locale: localeProp }: Props = {})
       <div className="relative z-[1] mx-auto max-w-6xl px-4 pb-4 pt-6 sm:px-6 sm:pt-10">
         <section
           id="section-hero"
-          className="home-section-wash home-section-wash--hero relative overflow-hidden rounded-[1.75rem] border border-white/[0.14] bg-gradient-to-br from-white/[0.09] via-white/[0.04] to-[rgb(var(--surface-elevated))]/50 p-5 sm:rounded-[2.25rem] sm:p-10 lg:p-12"
+          className="home-hero-panel home-section-wash home-section-wash--hero relative overflow-hidden rounded-[1.75rem] border border-white/[0.14] bg-gradient-to-br from-white/[0.09] via-white/[0.04] to-[rgb(var(--surface-elevated))]/50 p-5 sm:rounded-[2.25rem] sm:p-10 lg:p-12"
         >
-          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(125deg,rgb(var(--accent)/0.08),transparent_45%,rgb(var(--accent-magenta)/0.06))]" />
+          <div className="home-hero-panel__tint pointer-events-none absolute inset-0 bg-[linear-gradient(125deg,rgb(var(--accent)/0.08),transparent_45%,rgb(var(--accent-magenta)/0.06))]" />
           <div className="relative grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(260px,380px)] lg:items-center lg:gap-12">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.18] bg-white/[0.08] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-[rgb(var(--accent-2))] sm:text-[11px]">
@@ -166,18 +166,17 @@ export default async function HomeHeroStatic({ locale: localeProp }: Props = {})
               </div>
             </div>
 
-            <div className="relative space-y-4">
+            <div className="home-hero-media-column relative isolate z-[1] space-y-4">
               <div className="home-hero-video-shell relative overflow-hidden rounded-2xl border border-white/[0.12] shadow-[0_20px_60px_-28px_rgb(var(--accent)/0.4)]">
                 <div className="home-hero-video-shell__media relative aspect-[5/4] w-full overflow-hidden">
-                  {/* Opaque poster layer — keeps background from showing through before/during video on mobile */}
                   <img
                     src={HERO_LCP_IMAGE_URL}
-                    alt=""
-                    aria-hidden
+                    alt={slide.alt}
                     decoding="async"
                     fetchPriority="high"
-                    className="absolute inset-0 z-0 h-full w-full object-cover"
+                    className="absolute inset-0 z-[1] h-full w-full object-cover md:z-0"
                   />
+                  {/* Video only on md+ — iOS scroll/swipe compositing flashes sage page wash through video */}
                   <video
                     src={HERO_VIDEO_URL}
                     poster={HERO_LCP_IMAGE_URL}
@@ -187,7 +186,7 @@ export default async function HomeHeroStatic({ locale: localeProp }: Props = {})
                     playsInline
                     preload="metadata"
                     aria-label={slide.alt}
-                    className="absolute inset-0 z-[1] h-full w-full object-cover"
+                    className="absolute inset-0 z-[1] hidden h-full w-full object-cover md:block"
                   />
                   <div
                     className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-[44%] bg-gradient-to-t from-[rgb(20_18_38)] via-[rgb(20_18_38/0.72)] to-transparent"
