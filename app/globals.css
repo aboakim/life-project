@@ -424,8 +424,12 @@ body::before {
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
 }
-.home-hero-video-shell__media video {
+.home-hero-video-shell__media video,
+.home-hero-video-shell__video {
   background-color: rgb(20 18 38);
+  opacity: 1;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 .home-hero-carousel-shell__slide {
   background-color: rgb(20 18 38);

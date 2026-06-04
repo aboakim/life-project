@@ -169,14 +169,15 @@ export default async function HomeHeroStatic({ locale: localeProp }: Props = {})
             <div className="home-hero-media-column relative isolate z-[1] space-y-4">
               <div className="home-hero-video-shell relative overflow-hidden rounded-2xl border border-white/[0.12] shadow-[0_20px_60px_-28px_rgb(var(--accent)/0.4)] max-md:border-white/[0.1]">
                 <div className="home-hero-video-shell__media relative aspect-[5/4] w-full overflow-hidden">
+                  {/* Poster under video — fast LCP; opaque shell blocks page wash (see globals.css) */}
                   <img
                     src={HERO_LCP_IMAGE_URL}
-                    alt={slide.alt}
+                    alt=""
+                    aria-hidden
                     decoding="async"
                     fetchPriority="high"
-                    className="absolute inset-0 z-[1] h-full w-full object-cover contrast-[1.02] saturate-[1.04] md:z-0 md:contrast-100 md:saturate-100"
+                    className="absolute inset-0 z-0 h-full w-full object-cover"
                   />
-                  {/* Video only on md+ — iOS scroll/swipe compositing flashes sage page wash through video */}
                   <video
                     src={HERO_VIDEO_URL}
                     poster={HERO_LCP_IMAGE_URL}
@@ -186,7 +187,7 @@ export default async function HomeHeroStatic({ locale: localeProp }: Props = {})
                     playsInline
                     preload="metadata"
                     aria-label={slide.alt}
-                    className="absolute inset-0 z-[1] hidden h-full w-full object-cover md:block"
+                    className="home-hero-video-shell__video absolute inset-0 z-[1] h-full w-full object-cover"
                   />
                   <div
                     className="home-hero-video-shell__caption-scrim pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-[44%] bg-gradient-to-t from-[rgb(20_18_38)] via-[rgb(20_18_38/0.72)] to-transparent"
