@@ -188,10 +188,10 @@ export default function HeroVisualSlider({
                 />
               )}
               <div
-                className="pointer-events-none absolute inset-x-0 bottom-0 h-[46%] bg-gradient-to-t from-[rgb(20_18_38)] via-[rgb(20_18_38/0.65)] to-transparent"
+                className="home-hero-video-shell__caption-scrim pointer-events-none absolute inset-x-0 bottom-0 h-[46%] bg-gradient-to-t from-[rgb(20_18_38)] via-[rgb(20_18_38/0.65)] to-transparent"
                 aria-hidden
               />
-              <p className="absolute bottom-0 left-0 right-0 px-4 pb-4 pt-12 text-center text-[13px] font-medium leading-snug text-white/95 [text-wrap:balance] sm:px-5 sm:pb-5 sm:text-sm">
+              <p className="home-hero-video-shell__caption absolute bottom-0 left-0 right-0 px-4 py-3 text-center text-[13px] font-medium leading-snug text-white [text-wrap:balance] sm:px-5 sm:text-sm md:pb-5 md:pt-12 md:text-white/95">
                 {slide.caption}
               </p>
             </div>

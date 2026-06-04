@@ -437,8 +437,27 @@ body::before {
     background-color: rgb(var(--surface-2)) !important;
     background-image: none !important;
   }
+  .home-hero-panel.home-section-wash {
+    --wash-color: transparent;
+  }
   .home-hero-panel__tint {
     display: none;
+  }
+  /* Neutral plate behind media — no teal/cyan accent box-shadow halo */
+  .home-hero-media-column {
+    background-color: rgb(var(--surface-2));
+    border-radius: 1rem;
+  }
+  .home-hero-video-shell,
+  .home-hero-carousel-shell {
+    box-shadow: 0 10px 28px -14px rgb(0 0 0 / 0.55) !important;
+  }
+  .home-hero-video-shell__caption-scrim {
+    display: none;
+  }
+  .home-hero-video-shell__caption {
+    background-color: rgb(20 18 38 / 0.94);
+    text-shadow: 0 1px 2px rgb(0 0 0 / 0.35);
   }
 }
 .home-section-wash--overview {

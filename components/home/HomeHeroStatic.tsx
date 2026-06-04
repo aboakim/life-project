@@ -167,14 +167,14 @@ export default async function HomeHeroStatic({ locale: localeProp }: Props = {})
             </div>
 
             <div className="home-hero-media-column relative isolate z-[1] space-y-4">
-              <div className="home-hero-video-shell relative overflow-hidden rounded-2xl border border-white/[0.12] shadow-[0_20px_60px_-28px_rgb(var(--accent)/0.4)]">
+              <div className="home-hero-video-shell relative overflow-hidden rounded-2xl border border-white/[0.12] shadow-[0_20px_60px_-28px_rgb(var(--accent)/0.4)] max-md:border-white/[0.1]">
                 <div className="home-hero-video-shell__media relative aspect-[5/4] w-full overflow-hidden">
                   <img
                     src={HERO_LCP_IMAGE_URL}
                     alt={slide.alt}
                     decoding="async"
                     fetchPriority="high"
-                    className="absolute inset-0 z-[1] h-full w-full object-cover md:z-0"
+                    className="absolute inset-0 z-[1] h-full w-full object-cover contrast-[1.02] saturate-[1.04] md:z-0 md:contrast-100 md:saturate-100"
                   />
                   {/* Video only on md+ — iOS scroll/swipe compositing flashes sage page wash through video */}
                   <video
@@ -189,10 +189,10 @@ export default async function HomeHeroStatic({ locale: localeProp }: Props = {})
                     className="absolute inset-0 z-[1] hidden h-full w-full object-cover md:block"
                   />
                   <div
-                    className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-[44%] bg-gradient-to-t from-[rgb(20_18_38)] via-[rgb(20_18_38/0.72)] to-transparent"
+                    className="home-hero-video-shell__caption-scrim pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-[44%] bg-gradient-to-t from-[rgb(20_18_38)] via-[rgb(20_18_38/0.72)] to-transparent"
                     aria-hidden
                   />
-                  <p className="absolute bottom-0 left-0 right-0 z-[3] px-4 pb-4 text-center text-xs font-medium leading-snug text-white/95 sm:text-sm">
+                  <p className="home-hero-video-shell__caption absolute bottom-0 left-0 right-0 z-[3] px-4 py-3 text-center text-xs font-medium leading-snug text-white sm:text-sm md:pb-4 md:text-white/95">
                     {slide.caption}
                   </p>
                 </div>
