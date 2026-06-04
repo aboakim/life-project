@@ -167,8 +167,17 @@ export default async function HomeHeroStatic({ locale: localeProp }: Props = {})
             </div>
 
             <div className="relative space-y-4">
-              <div className="relative overflow-hidden rounded-2xl border border-white/[0.12] shadow-[0_20px_60px_-28px_rgb(var(--accent)/0.4)]">
-                <div className="relative aspect-[5/4] w-full">
+              <div className="home-hero-video-shell relative overflow-hidden rounded-2xl border border-white/[0.12] shadow-[0_20px_60px_-28px_rgb(var(--accent)/0.4)]">
+                <div className="home-hero-video-shell__media relative aspect-[5/4] w-full overflow-hidden">
+                  {/* Opaque poster layer — keeps background from showing through before/during video on mobile */}
+                  <img
+                    src={HERO_LCP_IMAGE_URL}
+                    alt=""
+                    aria-hidden
+                    decoding="async"
+                    fetchPriority="high"
+                    className="absolute inset-0 z-0 h-full w-full object-cover"
+                  />
                   <video
                     src={HERO_VIDEO_URL}
                     poster={HERO_LCP_IMAGE_URL}
@@ -178,10 +187,13 @@ export default async function HomeHeroStatic({ locale: localeProp }: Props = {})
                     playsInline
                     preload="metadata"
                     aria-label={slide.alt}
-                    className="absolute inset-0 h-full w-full object-cover"
+                    className="absolute inset-0 z-[1] h-full w-full object-cover"
                   />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[rgb(20_18_40/0.85)] via-transparent to-transparent" />
-                  <p className="absolute bottom-0 left-0 right-0 px-4 pb-4 text-center text-xs font-medium leading-snug text-white/95 sm:text-sm">
+                  <div
+                    className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-[44%] bg-gradient-to-t from-[rgb(20_18_38)] via-[rgb(20_18_38/0.72)] to-transparent"
+                    aria-hidden
+                  />
+                  <p className="absolute bottom-0 left-0 right-0 z-[3] px-4 pb-4 text-center text-xs font-medium leading-snug text-white/95 sm:text-sm">
                     {slide.caption}
                   </p>
                 </div>

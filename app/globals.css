@@ -406,6 +406,22 @@ body::before {
 .home-section-wash--hero {
   --wash-color: rgb(var(--accent-sage) / 0.16);
 }
+
+/*
+ * Home hero video — opaque shell so body mesh / section washes never bleed
+ * through on mobile Safari (semi-transparent parents + video compositing).
+ */
+.home-hero-video-shell {
+  isolation: isolate;
+  background-color: rgb(20 18 38);
+}
+.home-hero-video-shell__media {
+  isolation: isolate;
+  background-color: rgb(20 18 38);
+}
+.home-hero-video-shell__media video {
+  background-color: rgb(20 18 38);
+}
 .home-section-wash--overview {
   --wash-color: rgb(68 224 205 / 0.14);
 }
