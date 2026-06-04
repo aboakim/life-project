@@ -131,7 +131,7 @@ export default function HeroVisualSlider({
 
   return (
     <div
-      className="home-hero-carousel-shell relative overflow-hidden rounded-2xl border border-white/[0.14] shadow-[0_24px_80px_-32px_rgb(var(--accent)/0.45)]"
+      className="home-hero-carousel-shell relative overflow-hidden rounded-2xl border border-white/[0.14] shadow-[0_24px_80px_-32px_rgb(var(--accent)/0.45)] max-md:shadow-[0_10px_28px_-14px_rgb(0_0_0/0.55)]"
       onMouseEnter={() => {
         pauseRef.current = true;
       }}

@@ -27,7 +27,7 @@ function ReportMock({
   const rtl = isRtlLocale(locale);
   return (
     <div
-      className="overflow-hidden rounded-2xl border border-white/[0.14] bg-[rgb(var(--surface-2))] shadow-[0_24px_70px_-32px_rgb(var(--accent)/0.5)]"
+      className="overflow-hidden rounded-2xl border border-white/[0.14] bg-[rgb(var(--surface-2))] shadow-[0_24px_70px_-32px_rgb(var(--accent)/0.5)] max-md:shadow-[0_16px_40px_-24px_rgb(0_0_0/0.5)]"
       dir={rtl ? "rtl" : undefined}
     >
       <div className="border-b border-white/10 bg-white/[0.06] px-4 py-3">
@@ -122,7 +122,7 @@ export default async function HomeHeroStatic({ locale: localeProp }: Props = {})
                     className="flex items-start gap-2.5 text-sm text-[rgb(var(--ink-soft))] sm:text-[15px]"
                   >
                     <span
-                      className="mt-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/15 text-[10px] text-emerald-300 ring-1 ring-emerald-400/20"
+                      className="home-hero-check mt-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/15 text-[10px] text-emerald-300 ring-1 ring-emerald-400/20"
                       aria-hidden
                     >
                       ✓
@@ -167,7 +167,7 @@ export default async function HomeHeroStatic({ locale: localeProp }: Props = {})
             </div>
 
             <div className="home-hero-media-column relative isolate z-[1] space-y-4">
-              <div className="home-hero-video-shell relative overflow-hidden rounded-2xl border border-white/[0.12] shadow-[0_20px_60px_-28px_rgb(var(--accent)/0.4)] max-md:border-white/[0.1]">
+              <div className="home-hero-video-shell relative overflow-hidden rounded-2xl border border-white/[0.12] shadow-[0_20px_60px_-28px_rgb(var(--accent)/0.4)] max-md:border-white/[0.1] max-md:shadow-[0_10px_28px_-14px_rgb(0_0_0/0.55)]">
                 <div className="home-hero-video-shell__media relative aspect-[5/4] w-full overflow-hidden">
                   {/* Poster under video — fast LCP; opaque shell blocks page wash (see globals.css) */}
                   <img
