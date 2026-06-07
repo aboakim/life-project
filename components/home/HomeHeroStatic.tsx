@@ -8,6 +8,7 @@ import { isRtlLocale, type AppLocale } from "@/lib/i18n/locale";
 import { getUi } from "@/lib/i18n/ui";
 import { getPricingCopy } from "@/lib/i18n/pricing-page";
 import { HERO_LCP_IMAGE_URL, HERO_VIDEO_URL } from "@/lib/home/hero-slide-images";
+import HomeHeroVideoDeferred from "@/components/home/HomeHeroVideoDeferred";
 
 type Props = { locale?: AppLocale };
 
@@ -178,16 +179,10 @@ export default async function HomeHeroStatic({ locale: localeProp }: Props = {})
                     fetchPriority="high"
                     className="absolute inset-0 z-0 h-full w-full object-cover"
                   />
-                  <video
+                  <HomeHeroVideoDeferred
                     src={HERO_VIDEO_URL}
                     poster={HERO_LCP_IMAGE_URL}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="metadata"
-                    aria-label={slide.alt}
-                    className="home-hero-video-shell__video absolute inset-0 z-[1] h-full w-full object-cover"
+                    ariaLabel={slide.alt}
                   />
                   <div
                     className="home-hero-video-shell__caption-scrim pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-[44%] bg-gradient-to-t from-[rgb(20_18_38)] via-[rgb(20_18_38/0.72)] to-transparent"
