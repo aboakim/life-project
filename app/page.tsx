@@ -24,8 +24,8 @@ export default function Home() {
 
   return (
     <main id="main">
-      <HomeHeroStatic locale={locale} />
       <HomeSectionNavStatic locale={locale} />
+      <HomeHeroStatic locale={locale} />
       <HomeAtAGlanceStatic locale={locale} />
       <HomeWhatItFixesStatic locale={locale} />
       <HomeProductBentoStatic locale={locale} />
