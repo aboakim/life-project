@@ -2592,20 +2592,26 @@ export const BLOG_POSTS: BlogPost[] = [
   },
 ];
 
+/** Slugs with a 301 redirect — exclude from sitemap and blog index. */
+const INDEX_EXCLUDED_SLUGS = new Set(["rent-vs-buy-a-home-framework"]);
+
 export function getPostBySlug(slug: string): BlogPost | undefined {
   const key = canonicalBlogPathSegment(slug);
   if (!key) return undefined;
+  if (INDEX_EXCLUDED_SLUGS.has(key)) return undefined;
   return BLOG_POSTS.find((p) => p.slug === key);
 }
 
 export function getAllPosts(): BlogPost[] {
-  return [...BLOG_POSTS].sort((a, b) =>
-    a.publishedAt < b.publishedAt ? 1 : -1,
-  );
+  return [...BLOG_POSTS]
+    .filter((p) => !INDEX_EXCLUDED_SLUGS.has(p.slug))
+    .sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1));
 }
 
 export function getAllSlugs(): string[] {
-  return BLOG_POSTS.map((p) => p.slug);
+  return BLOG_POSTS.filter((p) => !INDEX_EXCLUDED_SLUGS.has(p.slug)).map(
+    (p) => p.slug,
+  );
 }
 
 /** All unique, lowercase, URL-safe tag slugs across posts. */

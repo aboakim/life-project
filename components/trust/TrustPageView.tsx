@@ -1,9 +1,24 @@
 import Link from "next/link";
 import MarketingPageShell from "@/components/layout/MarketingPageShell";
 import TrustInlineText from "@/components/trust/TrustInlineText";
-import type { TrustBlock, TrustPageCopy } from "@/lib/i18n/trust-pages/types";
+import type { TrustBlock, TrustFaqItem, TrustPageCopy } from "@/lib/i18n/trust-pages/types";
 import { getTrustLinkLabels } from "@/lib/i18n/trust-pages/link-labels";
 import type { AppLocale } from "@/lib/i18n/locale";
+
+function buildFaqJsonLd(faq: TrustFaqItem[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faq.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a.replace(/\{[^}]+\}/g, "").replace(/\s+/g, " ").trim(),
+      },
+    })),
+  };
+}
 
 function renderBlock(
   block: TrustBlock,
@@ -52,6 +67,8 @@ type Props = {
 
 export default function TrustPageView({ copy, locale }: Props) {
   const labels = getTrustLinkLabels(locale);
+  const faqLd =
+    copy.faq && copy.faq.length > 0 ? buildFaqJsonLd(copy.faq) : null;
 
   return (
     <MarketingPageShell
@@ -59,6 +76,12 @@ export default function TrustPageView({ copy, locale }: Props) {
       title={copy.title}
       subtitle={<p>{copy.subtitle}</p>}
     >
+      {faqLd ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+        />
+      ) : null}
       <div className="max-w-3xl space-y-8 text-sm leading-relaxed text-[rgb(var(--ink-soft))]">
         {copy.sections.map((section) => (
           <section key={section.heading}>
@@ -70,6 +93,25 @@ export default function TrustPageView({ copy, locale }: Props) {
             )}
           </section>
         ))}
+        {copy.faq && copy.faq.length > 0 ? (
+          <section aria-label="FAQ">
+            <h2 className="text-base font-semibold text-[rgb(var(--ink))]">
+              Quick answers
+            </h2>
+            <dl className="mt-4 space-y-6">
+              {copy.faq.map((item) => (
+                <div key={item.q}>
+                  <dt className="font-medium text-[rgb(var(--ink))]">
+                    {item.q}
+                  </dt>
+                  <dd className="mt-2">
+                    <TrustInlineText text={item.a} labels={labels} />
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+        ) : null}
         {copy.backHome ? (
           <p className="pt-4">
             <Link

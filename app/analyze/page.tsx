@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import DecisionStudioShell from "@/components/home/DecisionStudioShell";
 import AnalyzePageEducation from "@/app/analyze/AnalyzePageEducation";
+import { toolPageMetadata } from "@/lib/site-page-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = toolPageMetadata({
   title: "Analyzer — Life Decision Engine",
   description:
-    "Structured life-decision analysis: your question, context, and values → scenarios, four lenses, a timeline, and a score. Your report appears right below the form.",
-  alternates: { canonical: "/analyze" },
-};
+    "Structured life-decision analysis: your question, context, and values → scenarios, four lenses, a timeline, and a score.",
+  canonical: "/analyze",
+});
 
 export default function AnalyzePage() {
   return (

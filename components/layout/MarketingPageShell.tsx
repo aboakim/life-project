@@ -17,7 +17,7 @@ export default function MarketingPageShell({
   children,
 }: Props) {
   return (
-    <div id="main" className="relative z-10 min-h-screen pb-28">
+    <main id="main" className="relative z-10 min-h-screen pb-28">
       <OrbDecor />
       <LatticeSheen />
       <div className="mx-auto max-w-6xl px-4 pt-8 sm:px-6 sm:pt-10">
@@ -44,6 +44,6 @@ export default function MarketingPageShell({
         <ChromeHorizon className="mt-8" />
         <div className="mt-10">{children}</div>
       </div>
-    </div>
+    </main>
   );
 }

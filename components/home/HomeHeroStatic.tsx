@@ -176,6 +176,7 @@ export default function HomeHeroStatic({ locale: localeProp }: Props = {}) {
                       fetchPriority="high"
                       width={840}
                       height={672}
+                      sizes="(min-width: 1024px) 380px, 100vw"
                       className="h-full w-full object-cover"
                     />
                   </picture>

@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
 import HowWeUseAiEducation from "@/lib/page-education/HowWeUseAiEducation";
 import HowWeUseAiPageClient from "./HowWeUseAiPageClient";
+import { toolPageMetadata } from "@/lib/site-page-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = toolPageMetadata({
   title: "How we use AI — Life Decision Engine",
   description:
     "Transparency: how the structured analyzer works, consent, ads, and limits.",
-  alternates: { canonical: "/how-we-use-ai" },
-};
+  canonical: "/how-we-use-ai",
+});
 
 export default function HowWeUseAiPage() {
   return (
     <>
-      <HowWeUseAiPageClient />
       <HowWeUseAiEducation />
+      <HowWeUseAiPageClient />
     </>
   );
 }

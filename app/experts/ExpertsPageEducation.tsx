@@ -13,7 +13,7 @@ export default async function ExpertsPageEducation() {
     <PublisherEducationView
       copy={copy}
       locale={locale}
-      className="pb-16 pt-2 sm:pb-24 sm:pt-4"
+      className="border-b border-white/[0.08] pb-12 sm:pb-16"
     />
   );
 }

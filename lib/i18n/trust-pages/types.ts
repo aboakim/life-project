@@ -47,6 +47,8 @@ export type TrustLinkKey =
   | "adsTxt"
   | "googleAdsCookies";
 
+export type TrustFaqItem = { q: string; a: string };
+
 export type TrustPageCopy = {
   metaTitle: string;
   metaDescription: string;
@@ -54,6 +56,7 @@ export type TrustPageCopy = {
   title: string;
   subtitle: string;
   sections: TrustSection[];
+  faq?: TrustFaqItem[];
   backHome?: string;
 };
 

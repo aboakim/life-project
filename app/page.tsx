@@ -30,8 +30,8 @@ export default function Home() {
       <HomeWhatItFixesStatic locale={locale} />
       <HomeProductBentoStatic locale={locale} />
       <HomeTrustStatic locale={locale} />
-      <HomeHowItWorksStatic locale={locale} />
       <HomePublisherStatic locale={locale} />
+      <HomeHowItWorksStatic locale={locale} />
       <HomeSocialProofStatic locale={locale} />
       <DeferredHomeStudio />
     </main>

@@ -261,65 +261,72 @@ const contact: TrustPageCopy = {
 const faq: TrustPageCopy = {
   metaTitle: "FAQ",
   metaDescription:
-    "Answers about the Life Decision Engine analyzer, privacy, payments, and experts directory.",
+    "Answers about the Life Decision Engine analyzer, privacy, payments, experts directory, and editorial policies.",
   eyebrow: "Help",
   title: "Frequently asked questions",
   subtitle:
-    "Short answers. Full legal text: {privacy}, {terms}, {disclaimer}.",
+    "Short answers about how the site works. Full legal text: {privacy}, {terms}, {disclaimer}.",
   sections: [
     {
-      heading: "Analyzer",
+      heading: "What this site is",
       blocks: [
         {
           kind: "p",
-          text: "Is this professional advice? No — it is an educational tool. Can I share a report with my therapist or lawyer? Yes; the scenario summary often helps sessions focus on the real fork in the road.",
+          text: "Life Decision Engine publishes original decision frameworks on {blog} and runs a structured {analyze} tool. When a licensed human is appropriate, browse {experts}. We are a publisher and toolmaker — not a social network or emergency service.",
         },
       ],
     },
     {
-      heading: "Privacy",
+      heading: "Privacy and data",
       blocks: [
         {
           kind: "p",
-          text: "We do not publish or sell your decision text. Details: {privacy} and {cookies}.",
+          text: "We do not publish or sell your decision text. Analyzer briefs are processed under zero-retention API settings where available. Details: {privacy} and {cookies}.",
         },
       ],
     },
     {
-      heading: "Payments",
+      heading: "Payments and ads",
       blocks: [
         {
           kind: "p",
-          text: "The free tier delivers a complete structured report. Premium adds history and deeper runs — see {pricing}.",
+          text: "The free tier delivers a complete structured report. Premium adds history and deeper runs — see {pricing}. Display ads, when enabled, follow Consent Mode and are documented in {monetize}.",
         },
       ],
     },
+  ],
+  faq: [
     {
-      heading: "Experts",
-      blocks: [
-        {
-          kind: "p",
-          text: "The directory lists third-party professionals you contact directly. We do not guarantee outcomes. {experts} and {expertsRegister}.",
-        },
-      ],
+      q: "Is the analyzer professional advice?",
+      a: "No. It is an educational tool that structures scenarios and trade-offs. It does not diagnose medical, legal, or financial conditions. Always confirm high-stakes decisions with a licensed professional.",
     },
     {
-      heading: "Editorial",
-      blocks: [
-        {
-          kind: "p",
-          text: "Articles are written by the {editorialTeam} under {editorialStandards}.",
-        },
-      ],
+      q: "Can I share my report with a therapist or lawyer?",
+      a: "Yes. The scenario summary often helps sessions focus on the real fork in the road. You control what you share.",
     },
     {
-      heading: "Other questions",
-      blocks: [
-        {
-          kind: "p",
-          text: "Did not find an answer? Write {contact} or see {about}.",
-        },
-      ],
+      q: "Will my analyzer brief train an AI model?",
+      a: "No. Briefs are sent to the model provider in zero-retention mode where available. See {howWeUseAi} for the full disclosure.",
+    },
+    {
+      q: "How do experts listings work?",
+      a: "The {experts} directory lists third-party professionals you contact directly. We do not guarantee outcomes or set fees. Apply at {expertsRegister}.",
+    },
+    {
+      q: "Who writes the blog articles?",
+      a: "Articles are drafted with AI assistance and reviewed by the {editorialTeam} under {editorialStandards} before publishing.",
+    },
+    {
+      q: "How do I request a correction?",
+      a: "Write {contact} with the page URL and the error. We aim to respond within five business days.",
+    },
+    {
+      q: "Is community Q&A moderated?",
+      a: "Yes. {community} posts are rate-limited and reviewed for spam and policy violations. See {communityGuidelines}.",
+    },
+    {
+      q: "Did not find your answer?",
+      a: "Email hello@lifedecisions.space or use {contact}. For company background, see {about}.",
     },
   ],
 };
@@ -327,18 +334,32 @@ const faq: TrustPageCopy = {
 const editorialTeam: TrustPageCopy = {
   metaTitle: "Editorial Team",
   metaDescription:
-    "Who maintains Life Decision Engine decision frameworks and {blog} content.",
+    "Who maintains Life Decision Engine decision frameworks, blog articles, and review standards.",
   eyebrow: "Publisher",
   title: "Editorial Team",
   subtitle:
-    "The people who design, review, and update frameworks and articles.",
+    "The people who design, review, and update frameworks and articles on lifedecisions.space.",
   sections: [
     {
-      heading: "Role",
+      heading: "Who we are",
       blocks: [
         {
           kind: "p",
-          text: "The editorial team defines analyzer structure, writes and reviews {blog} articles, and works to {editorialStandards}.",
+          text: "Life Decision Engine is edited by Albert Akimyan (founder) and a small editorial group that maintains the {analyze} structure, {blog} articles, {community} guidelines, and {experts} directory standards.",
+        },
+      ],
+    },
+    {
+      heading: "What the team does",
+      blocks: [
+        {
+          kind: "ul",
+          items: [
+            "Defines analyzer prompt templates and safety boundaries ({howWeUseAi}).",
+            "Reviews AI-drafted articles for factual accuracy, tone, and YMYL sensitivity before publishing.",
+            "Updates decision frameworks when law, markets, or research materially change.",
+            "Moderates community posts and expert listings within five business days.",
+          ],
         },
       ],
     },
@@ -347,25 +368,16 @@ const editorialTeam: TrustPageCopy = {
       blocks: [
         {
           kind: "p",
-          text: "Advertisers and {experts} listings do not control editorial conclusions. Articles are labelled when a commercial relationship exists.",
+          text: "Advertisers, affiliate partners, and {experts} listings do not control editorial conclusions. Sponsored placements are labelled. Revenue transparency: {monetize}.",
         },
       ],
     },
     {
-      heading: "Review",
+      heading: "Corrections and contact",
       blocks: [
         {
           kind: "p",
-          text: "New frameworks pass internal review and are updated when law, markets, or research change.",
-        },
-      ],
-    },
-    {
-      heading: "Contact",
-      blocks: [
-        {
-          kind: "p",
-          text: "Corrections and press: {contact}.",
+          text: "Report factual errors via {contact} or hello@lifedecisions.space. Material corrections are noted on the article. Full process: {editorialStandards}.",
         },
       ],
     },
@@ -375,27 +387,32 @@ const editorialTeam: TrustPageCopy = {
 const editorialStandards: TrustPageCopy = {
   metaTitle: "Editorial Standards",
   metaDescription:
-    "Accuracy, updates, AI disclosure, and correction standards for Life Decision Engine.",
+    "Accuracy, updates, AI disclosure, moderation, and correction standards for Life Decision Engine.",
   eyebrow: "Publisher",
   title: "Editorial Standards",
   subtitle:
-    "How we maintain trust for readers and advertising partners.",
+    "How we maintain trust for readers, experts, and advertising partners.",
   sections: [
     {
-      heading: "Accuracy",
+      heading: "Accuracy and sourcing",
       blocks: [
         {
           kind: "p",
-          text: "Articles rely on verified sources and editorial experience. Factual errors are corrected promptly and noted when the change is material.",
+          text: "Articles rely on verified sources, named frameworks, and editorial experience — not hype or anonymous anecdotes. Factual errors are corrected promptly; material changes are noted at the bottom of the article.",
         },
       ],
     },
     {
-      heading: "Updates",
+      heading: "Review cadence",
       blocks: [
         {
-          kind: "p",
-          text: "Major decision frameworks are reviewed at least annually, or sooner when rules or data change.",
+          kind: "ul",
+          items: [
+            "Major decision frameworks: reviewed at least annually.",
+            "Blog posts in active playbooks: re-read within 90 days.",
+            "Analyzer prompt templates: reviewed quarterly.",
+            "Trust and legal pages: reviewed when policy or law changes.",
+          ],
         },
       ],
     },
@@ -404,16 +421,25 @@ const editorialStandards: TrustPageCopy = {
       blocks: [
         {
           kind: "p",
-          text: "When AI assists drafting or reports, that is documented on {howWeUseAi}. A human editor reviews structure and safety boundaries.",
+          text: "When AI assists drafting or analyzer output, that is documented on {howWeUseAi}. A human editor reviews structure, claims, and safety boundaries before publishing. We do not present AI output as licensed professional advice.",
         },
       ],
     },
     {
-      heading: "Content policy",
+      heading: "Community and listings",
       blocks: [
         {
           kind: "p",
-          text: "Community, advertising, and tools follow {contentPolicy}.",
+          text: "Community posts and expert applications follow {contentPolicy} and {communityGuidelines}. Spam, harassment, and certainty-style medical/legal/financial advice are removed.",
+        },
+      ],
+    },
+    {
+      heading: "Advertising standards",
+      blocks: [
+        {
+          kind: "p",
+          text: "Display ads are labelled, consent-gated, and separated from editorial content. Affiliate links include disclosure. Details: {monetize}, {privacy}, {cookies}.",
         },
       ],
     },
@@ -422,7 +448,7 @@ const editorialStandards: TrustPageCopy = {
       blocks: [
         {
           kind: "p",
-          text: "Report errors via {contact} or hello@lifedecisions.space. We aim to respond within five business days.",
+          text: "Report errors via {contact} or hello@lifedecisions.space. We aim to respond within five business days and update both the live page and the underlying prompt or checklist when the error is systemic.",
         },
       ],
     },

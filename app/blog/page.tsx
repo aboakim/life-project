@@ -6,7 +6,7 @@ import BlogSearch, { type BlogSearchItem } from "@/components/blog/BlogSearch";
 import { getAllPosts, getAllTagSlugs, tagToSlug } from "@/lib/blog/posts";
 import { getSiteUrlString } from "@/lib/site-url";
 
-export const metadata: Metadata = {
+const BASE_METADATA: Metadata = {
   title: "Blog — Life Decision Engine",
   description:
     "Long-form guides and frameworks for major life decisions: career, relocation, relationships, money, psychology, bias, and risk — written to complement the structured analyzer on the homepage.",
@@ -18,6 +18,24 @@ export const metadata: Metadata = {
     type: "website",
   },
 };
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string | string[] }>;
+}): Promise<Metadata> {
+  const sp = await searchParams;
+  const rawQ = sp.q;
+  const q =
+    typeof rawQ === "string" ? rawQ.trim() : Array.isArray(rawQ) ? rawQ[0]?.trim() ?? "" : "";
+  if (q) {
+    return {
+      ...BASE_METADATA,
+      robots: { index: false, follow: true },
+    };
+  }
+  return BASE_METADATA;
+}
 
 function humaniseTag(slug: string): string {
   return slug

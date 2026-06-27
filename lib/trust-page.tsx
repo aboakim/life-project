@@ -12,6 +12,17 @@ export function makeTrustPage(id: TrustPageId, canonical: string) {
       title: copy.metaTitle,
       description: copy.metaDescription,
       alternates: { canonical },
+      openGraph: {
+        title: copy.metaTitle,
+        description: copy.metaDescription,
+        type: "website",
+        url: canonical,
+      },
+      twitter: {
+        card: "summary",
+        title: copy.metaTitle,
+        description: copy.metaDescription,
+      },
     };
   }
 
