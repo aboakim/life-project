@@ -3,6 +3,7 @@ import Link from "next/link";
 import MarketingPageShell from "@/components/layout/MarketingPageShell";
 import NewsletterCta from "@/components/blog/NewsletterCta";
 import BlogSearch, { type BlogSearchItem } from "@/components/blog/BlogSearch";
+import BlogArticleAdSlot from "@/components/blog/BlogArticleAdSlot";
 import { getAllPosts, getAllTagSlugs, tagToSlug } from "@/lib/blog/posts";
 import { getSiteUrlString } from "@/lib/site-url";
 
@@ -147,6 +148,8 @@ export default async function BlogIndexPage({
       ) : null}
 
       <BlogSearch posts={searchItems} initialQuery={initialQuery} />
+
+      <BlogArticleAdSlot placement="footer" className="mt-12" />
 
       <NewsletterCta className="mt-16" />
 

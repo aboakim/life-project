@@ -108,6 +108,18 @@ const nextConfig: NextConfig = {
         source: "/home/:path*",
         headers: [staticAssetCache],
       },
+      {
+        source: "/favicon-:size.png",
+        headers: [staticAssetCache],
+      },
+      {
+        source: "/logo-:size.png",
+        headers: [staticAssetCache],
+      },
+      {
+        source: "/apple-icon",
+        headers: [staticAssetCache],
+      },
       // Default: apply all security headers including CSP.
       {
         source: "/((?!api/stripe/webhook).*)",

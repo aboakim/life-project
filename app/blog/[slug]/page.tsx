@@ -8,6 +8,7 @@ import ReadingProgress from "@/components/blog/ReadingProgress";
 import AffiliateSuggestion from "@/components/monetization/AffiliateSuggestion";
 import AmazonAssociatesCta from "@/components/monetization/AmazonAssociatesCta";
 import DirectSponsorSlot from "@/components/monetization/DirectSponsorSlot";
+import BlogArticleAdSlot from "@/components/blog/BlogArticleAdSlot";
 import {
   type BlogBlock,
   type BlogPost,
@@ -17,6 +18,7 @@ import {
   canonicalBlogPathSegment,
   tagToSlug,
 } from "@/lib/blog/posts";
+import { splitBodyForAd } from "@/lib/blog/split-body-for-ad";
 import { getSiteUrlString } from "@/lib/site-url";
 
 /** Turn a heading string into a stable, URL-safe anchor id. */
@@ -59,6 +61,7 @@ export async function generateMetadata({
   const post = getPostBySlug(slug);
   if (!post) return { title: "Article not found" };
   const canonicalSlug = canonicalBlogPathSegment(slug);
+  const ogPath = `/blog/${canonicalSlug}/opengraph-image`;
   return {
     title: `${post.title} — Life Decision Engine`,
     description: post.description,
@@ -68,13 +71,23 @@ export async function generateMetadata({
       description: post.description,
       type: "article",
       publishedTime: post.publishedAt,
+      modifiedTime: post.updatedAt || post.publishedAt,
       authors: [post.author],
       tags: post.tags,
+      images: [
+        {
+          url: ogPath,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.description,
+      images: [ogPath],
     },
   };
 }
@@ -179,7 +192,7 @@ function buildArticleJsonLd(post: BlogPost): Record<string, unknown> {
      * Next.js OpenGraph route) so every post has a valid image
      * reference even though it isn't a per-post hero photo.
      */
-    image: [`${base}/opengraph-image`],
+    image: [`${base}/blog/${post.slug}/opengraph-image`],
     author: {
       "@type": "Organization",
       name: post.author,
@@ -255,6 +268,7 @@ export default async function BlogArticlePage({
 
   const related = getRelatedPosts(post, 3);
   const toc = buildToc(post.body);
+  const { before: bodyBeforeAd, after: bodyAfterAd } = splitBodyForAd(post.body);
   const tocByText = new Map(toc.map((t) => [t.text, t.id]));
   const resolveId = (text: string) => tocByText.get(text);
 
@@ -335,7 +349,13 @@ export default async function BlogArticlePage({
         <article className="min-w-0 max-w-3xl">
           <AmazonAssociatesCta variant="compact" className="mb-8 lg:mb-10" />
 
-          {post.body.map((b, i) => renderBlock(b, i, resolveId))}
+          {bodyBeforeAd.map((b, i) => renderBlock(b, i, resolveId))}
+
+          <BlogArticleAdSlot placement="inline" />
+
+          {bodyAfterAd.map((b, i) =>
+            renderBlock(b, i + bodyBeforeAd.length, resolveId),
+          )}
 
           <AffiliateSuggestion tags={post.tags} />
 
@@ -461,6 +481,8 @@ export default async function BlogArticlePage({
           </ul>
         </section>
       ) : null}
+
+      <BlogArticleAdSlot placement="footer" className="mt-12" />
 
       <NewsletterCta className="mt-16" />
     </MarketingPageShell>

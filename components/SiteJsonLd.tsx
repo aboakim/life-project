@@ -42,6 +42,7 @@ export default function SiteJsonLd() {
       "personal finance decisions",
       "decision psychology",
     ],
+    founder: { "@id": `${base}/#founder` },
   };
 
   const website = {
@@ -64,7 +65,19 @@ export default function SiteJsonLd() {
     },
   };
 
-  const graph = { "@context": "https://schema.org", "@graph": [organization, website] };
+  const founder = {
+    "@type": "Person",
+    "@id": `${base}/#founder`,
+    name: "Albert Akimyan",
+    jobTitle: "Founder & Editor",
+    url: `${base}/about`,
+    worksFor: { "@id": `${base}/#organization` },
+  };
+
+  const graph = {
+    "@context": "https://schema.org",
+    "@graph": [organization, website, founder],
+  };
 
   return (
     <script

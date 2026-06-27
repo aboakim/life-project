@@ -17,6 +17,7 @@ import SkipToContent from "@/components/SkipToContent";
 import DeferredVercelMetrics from "@/components/DeferredVercelMetrics";
 import LocaleRefreshBridge from "@/components/LocaleRefreshBridge";
 import { isRtlLocale } from "@/lib/i18n/locale";
+import { localeFontVariableClasses } from "@/lib/locale-fonts";
 import { getServerPageLocale } from "@/lib/i18n/trust-pages/server-locale";
 import { ADSENSE_CLIENT_ID } from "@/lib/adsense-config";
 import { getMetadataBase } from "@/lib/site-url";
@@ -45,7 +46,7 @@ const geistMono = Geist_Mono({
 const notoArmenian = Noto_Sans_Armenian({
   variable: "--font-arm",
   subsets: ["armenian"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "600", "700"],
   display: "swap",
   preload: false,
 });
@@ -53,7 +54,7 @@ const notoArmenian = Noto_Sans_Armenian({
 const notoSans = Noto_Sans({
   variable: "--font-noto",
   subsets: ["latin", "latin-ext", "cyrillic", "cyrillic-ext"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "600", "700"],
   display: "swap",
   preload: false,
 });
@@ -61,7 +62,7 @@ const notoSans = Noto_Sans({
 const notoArabic = Noto_Sans_Arabic({
   variable: "--font-ar",
   subsets: ["arabic"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "600", "700"],
   display: "swap",
   preload: false,
 });
@@ -158,6 +159,14 @@ export default async function RootLayout({
 }>) {
   const locale = await getServerPageLocale();
   const dir = isRtlLocale(locale) ? "rtl" : "ltr";
+  const fontVars = localeFontVariableClasses(locale, {
+    display: displaySans.variable,
+    geist: geistSans.variable,
+    mono: geistMono.variable,
+    arm: notoArmenian.variable,
+    noto: notoSans.variable,
+    ar: notoArabic.variable,
+  });
 
   return (
     <html lang={locale} dir={dir} suppressHydrationWarning>
@@ -187,7 +196,7 @@ export default async function RootLayout({
         />
       </head>
       <body
-        className={`${displaySans.variable} ${geistSans.variable} ${geistMono.variable} ${notoArmenian.variable} ${notoSans.variable} ${notoArabic.variable} font-sans text-base leading-relaxed antialiased md:text-[1.0625rem] lg:text-[1.125rem]`}
+        className={`${fontVars} font-sans text-base leading-relaxed antialiased md:text-[1.0625rem] lg:text-[1.125rem]`}
       >
         {/*
           Site-wide AdSense bootstrap (matches AdSense → Verify code snippet).

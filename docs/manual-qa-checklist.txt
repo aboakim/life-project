@@ -69,8 +69,20 @@
 8. PERFORMANCE
 --------------
 [x] PageSpeed մի անգամ, desktop ցածր էր, կոդում փոփոխություն կար
-[ ] Նույն էջը PSI deploy-ից հետո
+[x] Home static + WebP LCP + locale fonts (deploy e7b2afb+)
+[ ] Նույն էջը PSI deploy-ից հետո — target RES > 50
 [ ] Search Console Core Web Vitals
+
+
+10. ADSENSE RE-APPLY (deploy-ից հետո)
+-------------------------------------
+[ ] View-source /community — education HTML առաջին half-ում
+[ ] View-source /faq — FAQPage JSON-LD
+[ ] https://lifedecisions.space/ads.txt — 200 OK
+[ ] AdSense sites — միայն lifedecisions.space (preview հանել)
+[ ] Search Console — Submit sitemap, Inspect URL /
+[ ] AdSense → Fix issues → Request review
+[ ] Approval-ից հետո Vercel env: ADSENSE_SLOT_HOME, INLINE, FOOTER
 
 
 9. EDGE CASES (ՀԻՄԱ ՉԵՄ ԱՆԻ)
