@@ -2,14 +2,11 @@ import Link from "next/link";
 import { isRtlLocale, type AppLocale } from "@/lib/i18n/locale";
 import { getSolveSectionCopy } from "@/lib/i18n/home-solve-section";
 import { getUi } from "@/lib/i18n/ui";
+import HomeIconBadge from "@/components/home/HomeIconBadge";
 
 type Props = { locale: AppLocale };
 
-const ACCENTS = [
-  "from-[rgb(var(--accent))]/20 to-transparent",
-  "from-[rgb(var(--accent-2))]/20 to-transparent",
-  "from-[rgb(var(--accent-magenta))]/20 to-transparent",
-] as const;
+const FIX_ICONS = ["🔄", "🤝", "📋"] as const;
 
 export default function HomeWhatItFixesStatic({ locale }: Props) {
   const copy = getSolveSectionCopy(locale);
@@ -29,37 +26,36 @@ export default function HomeWhatItFixesStatic({ locale }: Props) {
         </p>
         <h2
           id="home-fixes-heading"
-          className="font-display mt-2 max-w-2xl text-[clamp(1.5rem,1rem+1.8vw,2.2rem)] font-extrabold tracking-tight text-[rgb(var(--ink))] [text-wrap:balance]"
+          className="font-display mt-2 max-w-2xl text-[clamp(1.65rem,1.05rem+2vw,2.35rem)] font-extrabold tracking-tight text-[rgb(var(--ink))] [text-wrap:balance]"
         >
           {copy.title}
         </h2>
-        <p className="mt-3 max-w-2xl text-base leading-relaxed text-[rgb(var(--ink-soft))]">
+        <p className="mt-3 max-w-2xl text-base leading-relaxed text-[rgb(var(--ink-soft))] sm:text-lg">
           {copy.intro}
         </p>
 
-        <ol className="mt-8 grid list-none gap-4 p-0 sm:grid-cols-3 sm:gap-5">
-          {copy.blocks.map((block, i) => (
-            <li key={block.label} className="h-full">
-              <article className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/[0.1] bg-[rgb(var(--surface-2))]/80 p-5">
-                <div
-                  className={`pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b ${ACCENTS[i % ACCENTS.length]}`}
-                  aria-hidden
-                />
-                <p className="relative text-[10px] font-bold uppercase tracking-[0.18em] text-[rgb(var(--accent-2))]">
-                  {block.label}
-                </p>
-                <p className="relative mt-3 text-sm leading-relaxed text-[rgb(var(--ink-soft))]">
-                  {block.problem}
-                </p>
-                <p className="relative mt-3 flex-1 text-base font-semibold leading-snug text-[rgb(var(--ink))] [text-wrap:pretty]">
-                  {block.fix}
-                </p>
-              </article>
-            </li>
-          ))}
-        </ol>
+        <div className="mt-8 overflow-hidden rounded-2xl border border-white/[0.1] bg-[rgb(var(--surface-2))]/60">
+          <ol className="grid list-none divide-white/[0.08] p-0 sm:grid-cols-3 sm:divide-x divide-y sm:divide-y-0">
+            {copy.blocks.map((block, i) => (
+              <li key={block.label} className="h-full">
+                <article className="relative flex h-full flex-col p-6 sm:p-7">
+                  <HomeIconBadge icon={FIX_ICONS[i] ?? "✦"} />
+                  <p className="mt-4 text-[11px] font-bold uppercase tracking-[0.16em] text-[rgb(var(--accent-2))] sm:text-xs">
+                    {block.label}
+                  </p>
+                  <p className="mt-3 text-[15px] leading-relaxed text-[rgb(var(--ink-soft))] sm:text-base">
+                    {block.problem}
+                  </p>
+                  <p className="mt-3 flex-1 text-base font-semibold leading-snug text-[rgb(var(--ink))] [text-wrap:pretty] sm:text-lg">
+                    {block.fix}
+                  </p>
+                </article>
+              </li>
+            ))}
+          </ol>
+        </div>
 
-        <p className="mt-8 text-center text-sm text-[rgb(var(--ink-soft))]">
+        <p className="mt-8 text-center text-sm text-[rgb(var(--ink-soft))] sm:text-[15px]">
           {t.homeDemoTitle}:{" "}
           <Link href="/analyze" className="font-medium text-[rgb(var(--accent-2))] hover:underline">
             {t.homeDemoExample1}

@@ -78,6 +78,13 @@ export type UIStrings = {
   sectionNavAnalyzer: string;
   sectionNavLanguage: string;
   sectionNavPrivacy: string;
+  /** Home news / blog strip */
+  sectionNavNews: string;
+  newsSectionEyebrow: string;
+  newsSectionTitle: string;
+  newsSectionSubtitle: string;
+  newsViewAll: string;
+  newsReadLabel: string;
   /** Main nav overflow — “More” menu trigger */
   navMore: string;
   /** Top nav — blog link */
@@ -192,6 +199,12 @@ const trustHowEn: Pick<
   | "sectionNavAnalyzer"
   | "sectionNavLanguage"
   | "sectionNavPrivacy"
+  | "sectionNavNews"
+  | "newsSectionEyebrow"
+  | "newsSectionTitle"
+  | "newsSectionSubtitle"
+  | "newsViewAll"
+  | "newsReadLabel"
   | "productSectionTitle"
   | "productSectionSubtitle"
   | "bentoCards"
@@ -304,6 +317,13 @@ const trustHowEn: Pick<
   sectionNavAnalyzer: "Analyzer",
   sectionNavLanguage: "Language",
   sectionNavPrivacy: "Privacy",
+  sectionNavNews: "News",
+  newsSectionEyebrow: "News & guides",
+  newsSectionTitle: "Latest decision frameworks",
+  newsSectionSubtitle:
+    "Fresh articles on career, relocation, money, and relationships—written to pair with the analyzer.",
+  newsViewAll: "All articles",
+  newsReadLabel: "Read article",
   productSectionTitle: "Everything in one structured flow",
   productSectionSubtitle:
     "One workspace for heavy forks—see outcomes, compare trade-offs, pick what fits.",
@@ -383,6 +403,24 @@ const trustHowEn: Pick<
   ],
 };
 
+/** English news strip — fallback for locales whose trust/how block omits it */
+const newsUiEn: Pick<
+  UIStrings,
+  | "sectionNavNews"
+  | "newsSectionEyebrow"
+  | "newsSectionTitle"
+  | "newsSectionSubtitle"
+  | "newsViewAll"
+  | "newsReadLabel"
+> = {
+  sectionNavNews: trustHowEn.sectionNavNews,
+  newsSectionEyebrow: trustHowEn.newsSectionEyebrow,
+  newsSectionTitle: trustHowEn.newsSectionTitle,
+  newsSectionSubtitle: trustHowEn.newsSectionSubtitle,
+  newsViewAll: trustHowEn.newsViewAll,
+  newsReadLabel: trustHowEn.newsReadLabel,
+};
+
 const trustHowHy: Pick<
   UIStrings,
   | "heroRibbon"
@@ -398,6 +436,12 @@ const trustHowHy: Pick<
   | "sectionNavAnalyzer"
   | "sectionNavLanguage"
   | "sectionNavPrivacy"
+  | "sectionNavNews"
+  | "newsSectionEyebrow"
+  | "newsSectionTitle"
+  | "newsSectionSubtitle"
+  | "newsViewAll"
+  | "newsReadLabel"
   | "productSectionTitle"
   | "productSectionSubtitle"
   | "bentoCards"
@@ -510,6 +554,13 @@ const trustHowHy: Pick<
   sectionNavAnalyzer: "Վերլուծիչ",
   sectionNavLanguage: "Լեզու",
   sectionNavPrivacy: "Գաղտնիություն",
+  sectionNavNews: "Նորություններ",
+  newsSectionEyebrow: "Նորություններ և ուղեցույց",
+  newsSectionTitle: "Վերջին որոշման շրջանակներ",
+  newsSectionSubtitle:
+    "Թարմ հոդվածներ կարիերայի, տեղափոխության, գումարի և հարաբերությունների մասին՝ զուգահեռ վերլուծիչի հետ։",
+  newsViewAll: "Բոլոր հոդվածները",
+  newsReadLabel: "Կարդալ հոդվածը",
   productSectionTitle: "Բոլորը մեկ կառուցված հոսքում",
   productSectionSubtitle:
     "Հանգիստ աշխատատարածք մեծ որոշումների համար՝ սցենարներ, հարթակներ, ժամանակացույց և միավոր։ Նման է այն գործիքներին, որոնցով արդյունաբերությունում են վերլուծում որոշումները։",
@@ -1595,5 +1646,6 @@ export function getUi(locale: AppLocale): UIStrings {
     ...homeI18n,
     ...trustBase,
     ...row,
+    ...(trustBase === trustHowEn ? {} : newsUiEn),
   } as UIStrings;
 }

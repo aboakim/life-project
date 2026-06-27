@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { isRtlLocale, type AppLocale } from "@/lib/i18n/locale";
 import { getUi } from "@/lib/i18n/ui";
+import HomeIconBadge from "@/components/home/HomeIconBadge";
 
 type Props = { locale: AppLocale };
+
+const GLANCE_ICONS = ["🗺️", "🌀", "✅"] as const;
 
 export default function HomeAtAGlanceStatic({ locale }: Props) {
   const t = getUi(locale);
@@ -22,7 +25,7 @@ export default function HomeAtAGlanceStatic({ locale }: Props) {
           </p>
           <h2
             id="home-overview-heading"
-            className="font-display mx-auto mt-3 max-w-3xl text-[clamp(1.65rem,1.1rem+2vw,2.45rem)] font-extrabold leading-[1.08] tracking-tight text-[rgb(var(--ink))] [text-wrap:balance]"
+            className="font-display mx-auto mt-3 max-w-3xl text-[clamp(1.75rem,1.15rem+2.2vw,2.55rem)] font-extrabold leading-[1.08] tracking-tight text-[rgb(var(--ink))] [text-wrap:balance]"
           >
             {t.atAGlanceTitle}
           </h2>
@@ -31,26 +34,23 @@ export default function HomeAtAGlanceStatic({ locale }: Props) {
           </p>
         </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-3 sm:gap-5">
-          {t.atAGlanceCards.map((card, i) => (
-            <article
-              key={card.title}
-              className="group relative overflow-hidden rounded-2xl border border-white/[0.12] bg-gradient-to-b from-white/[0.09] to-white/[0.03] p-5 shadow-[0_20px_50px_-32px_rgb(var(--accent)/0.35)] transition duration-300 hover:border-[rgb(var(--accent))]/30 hover:shadow-[0_24px_60px_-28px_rgb(var(--accent)/0.45)] sm:p-6"
-            >
-              <span
-                className="inline-flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-[rgb(var(--accent))]/25 to-[rgb(var(--accent-2))]/15 text-sm font-extrabold text-[rgb(var(--accent-2))] ring-1 ring-white/10"
-                aria-hidden
+        <div className="mt-10 overflow-hidden rounded-2xl border border-white/[0.12] bg-gradient-to-b from-white/[0.08] to-white/[0.02] shadow-[0_20px_50px_-32px_rgb(var(--accent)/0.35)]">
+          <div className="grid divide-white/[0.08] sm:grid-cols-3 sm:divide-x divide-y sm:divide-y-0">
+            {t.atAGlanceCards.map((card, i) => (
+              <article
+                key={card.title}
+                className="group flex flex-col p-6 sm:p-7"
               >
-                {i + 1}
-              </span>
-              <h3 className="font-display mt-4 text-lg font-bold leading-snug text-[rgb(var(--ink))]">
-                {card.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
-                {card.body}
-              </p>
-            </article>
-          ))}
+                <HomeIconBadge icon={GLANCE_ICONS[i] ?? "✦"} />
+                <h3 className="font-display mt-4 text-lg font-bold leading-snug text-[rgb(var(--ink))] sm:text-xl">
+                  {card.title}
+                </h3>
+                <p className="mt-2 flex-1 text-[15px] leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty] sm:text-base">
+                  {card.body}
+                </p>
+              </article>
+            ))}
+          </div>
         </div>
 
         <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">

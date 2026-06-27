@@ -6,6 +6,7 @@ import HomeWhatItFixesStatic from "@/components/home/HomeWhatItFixesStatic";
 import HomeProductBentoStatic from "@/components/home/HomeProductBentoStatic";
 import HomeTrustStatic from "@/components/home/HomeTrustStatic";
 import HomeHowItWorksStatic from "@/components/home/HomeHowItWorksStatic";
+import HomeNewsStatic from "@/components/home/HomeNewsStatic";
 import HomePublisherStatic from "@/components/home/HomePublisherStatic";
 import HomeSocialProofStatic from "@/components/home/HomeSocialProofStatic";
 import DeferredHomeStudio from "@/components/home/DeferredHomeStudio";
@@ -32,6 +33,7 @@ export default function Home() {
       <HomeTrustStatic locale={locale} />
       <HomePublisherStatic locale={locale} />
       <HomeHowItWorksStatic locale={locale} />
+      <HomeNewsStatic locale={locale} />
       <HomeSocialProofStatic locale={locale} />
       <DeferredHomeStudio />
     </main>

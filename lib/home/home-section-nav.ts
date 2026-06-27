@@ -8,6 +8,7 @@ export type HomeSectionNavLink = {
     | "section-product"
     | "section-trust"
     | "section-how"
+    | "section-news"
     | "section-workspace"
     | "section-language"
     | "section-privacy";
@@ -22,6 +23,7 @@ export function getHomeSectionNavProps(locale: AppLocale) {
     { id: "section-product", label: t.sectionNavProduct },
     { id: "section-trust", label: t.sectionNavTrust },
     { id: "section-how", label: t.sectionNavHow },
+    { id: "section-news", label: t.sectionNavNews },
     { id: "section-workspace", label: t.sectionNavAnalyzer },
     { id: "section-language", label: t.sectionNavLanguage },
     { id: "section-privacy", label: t.sectionNavPrivacy },
