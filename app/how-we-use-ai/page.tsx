@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import HowWeUseAiEducation from "@/lib/page-education/HowWeUseAiEducation";
 import HowWeUseAiPageClient from "./HowWeUseAiPageClient";
 
 export const metadata: Metadata = {
@@ -9,5 +10,10 @@ export const metadata: Metadata = {
 };
 
 export default function HowWeUseAiPage() {
-  return <HowWeUseAiPageClient />;
+  return (
+    <>
+      <HowWeUseAiPageClient />
+      <HowWeUseAiEducation />
+    </>
+  );
 }

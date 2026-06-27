@@ -6,5 +6,11 @@ import { getServerPageLocale } from "@/lib/i18n/trust-pages/server-locale";
 export default async function AnalyzePageEducation() {
   const locale = await getServerPageLocale();
   const copy = getAnalyzeEducationCopy(locale);
-  return <PublisherEducationView copy={copy} locale={locale} />;
+  return (
+    <PublisherEducationView
+      copy={copy}
+      locale={locale}
+      className="border-b border-white/[0.08] pb-12 sm:pb-16"
+    />
+  );
 }

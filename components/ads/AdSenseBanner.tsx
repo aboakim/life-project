@@ -5,6 +5,7 @@ import {
   ensureAdsbygoogleScript,
   scheduleIdle,
 } from "@/components/ads/ensure-adsbygoogle";
+import { readAdsenseClientId } from "@/lib/adsense-config";
 
 type Placement = "top" | "inline" | "footer";
 
@@ -58,7 +59,7 @@ export default function AdSenseBanner({
   format,
   label = "Advertisement",
 }: Props) {
-  const client = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
+  const client = readAdsenseClientId();
   const resolvedSlot = slot ?? pickSlot(placement);
   const pushed = useRef(false);
 

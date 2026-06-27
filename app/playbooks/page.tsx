@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PlaybooksEducation from "@/lib/page-education/PlaybooksEducation";
 import PlaybooksPageClient from "./PlaybooksPageClient";
 
 export const metadata: Metadata = {
@@ -9,5 +10,10 @@ export const metadata: Metadata = {
 };
 
 export default function PlaybooksPage() {
-  return <PlaybooksPageClient />;
+  return (
+    <>
+      <PlaybooksPageClient />
+      <PlaybooksEducation />
+    </>
+  );
 }

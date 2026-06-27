@@ -18,11 +18,9 @@ import DeferredVercelMetrics from "@/components/DeferredVercelMetrics";
 import LocaleRefreshBridge from "@/components/LocaleRefreshBridge";
 import { isRtlLocale } from "@/lib/i18n/locale";
 import { getServerPageLocale } from "@/lib/i18n/trust-pages/server-locale";
+import { ADSENSE_CLIENT_ID } from "@/lib/adsense-config";
 import { getMetadataBase } from "@/lib/site-url";
 import "./globals.css";
-
-/** Must match the snippet in Google AdSense → Site → Verify (same ca-pub-…). */
-const ADSENSE_CLIENT = "ca-pub-3541461663112540";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,12 +28,12 @@ const geistSans = Geist({
   adjustFontFallback: true,
 });
 
-/** Display: variable file only (avoids 5 static weight files). */
+/** Display: preloaded — hero h1 / nav brand are common LCP candidates on desktop. */
 const displaySans = Outfit({
   variable: "--font-display",
   subsets: ["latin", "latin-ext"],
   display: "swap",
-  preload: false,
+  preload: true,
 });
 
 const geistMono = Geist_Mono({
@@ -149,7 +147,7 @@ export const metadata: Metadata = {
       "Big life decisions, clearer — lifedecisions.space. AI scenarios (not random chat); private sessions, structured frameworks, experts optional.",
   },
   other: {
-    "google-adsense-account": ADSENSE_CLIENT,
+    "google-adsense-account": ADSENSE_CLIENT_ID,
   },
 };
 
@@ -199,7 +197,7 @@ export default async function RootLayout({
         <Script
           id="adsense-adsbygoogle"
           strategy="lazyOnload"
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(ADSENSE_CLIENT)}`}
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(ADSENSE_CLIENT_ID)}`}
           crossOrigin="anonymous"
         />
         <SkipToContent />

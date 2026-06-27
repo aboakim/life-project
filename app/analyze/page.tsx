@@ -13,6 +13,11 @@ export const metadata: Metadata = {
 export default function AnalyzePage() {
   return (
     <main id="main">
+      {/*
+        Publisher copy first in DOM so AdSense reviewers and crawlers see
+        substantial editorial HTML before the interactive analyzer shell.
+      */}
+      <AnalyzePageEducation />
       <Suspense
         fallback={
           <div className="min-h-[40vh] bg-[rgb(var(--surface))]" aria-hidden />
@@ -20,7 +25,6 @@ export default function AnalyzePage() {
       >
         <DecisionStudioShell focusLayout />
       </Suspense>
-      <AnalyzePageEducation />
     </main>
   );
 }

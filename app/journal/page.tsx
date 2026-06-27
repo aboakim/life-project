@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import JournalEducation from "@/lib/page-education/JournalEducation";
 import JournalPageClient from "./JournalPageClient";
 
 export const metadata: Metadata = {
@@ -9,5 +10,10 @@ export const metadata: Metadata = {
 };
 
 export default function JournalPage() {
-  return <JournalPageClient />;
+  return (
+    <>
+      <JournalPageClient />
+      <JournalEducation />
+    </>
+  );
 }

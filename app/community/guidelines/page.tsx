@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import CommunityGuidelinesEducation from "@/lib/page-education/CommunityGuidelinesEducation";
 import GuidelinesPageClient from "./GuidelinesPageClient";
 
 export const metadata: Metadata = {
@@ -9,5 +10,10 @@ export const metadata: Metadata = {
 };
 
 export default function CommunityGuidelinesPage() {
-  return <GuidelinesPageClient />;
+  return (
+    <>
+      <GuidelinesPageClient />
+      <CommunityGuidelinesEducation />
+    </>
+  );
 }

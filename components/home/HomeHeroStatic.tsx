@@ -1,13 +1,9 @@
 import Link from "next/link";
-import { cookies } from "next/headers";
-import {
-  LDE_LOCALE_COOKIE_NAME,
-  localeFromCookieValue,
-} from "@/lib/locale-cookie";
 import { isRtlLocale, type AppLocale } from "@/lib/i18n/locale";
 import { getUi } from "@/lib/i18n/ui";
 import { getPricingCopy } from "@/lib/i18n/pricing-page";
-import { HERO_LCP_IMAGE_URL, HERO_VIDEO_URL } from "@/lib/home/hero-slide-images";
+import { DEFAULT_LOCALE } from "@/lib/locale-default";
+import { HERO_LCP_IMAGE_URL, HERO_LCP_IMAGE_JPEG_URL, HERO_VIDEO_URL } from "@/lib/home/hero-slide-images";
 import HomeHeroVideoDeferred from "@/components/home/HomeHeroVideoDeferred";
 
 type Props = { locale?: AppLocale };
@@ -73,12 +69,8 @@ function ReportMock({
 /**
  * Server-rendered home hero — clear value prop + sample report preview.
  */
-export default async function HomeHeroStatic({ locale: localeProp }: Props = {}) {
-  const locale =
-    localeProp ??
-    localeFromCookieValue(
-      (await cookies()).get(LDE_LOCALE_COOKIE_NAME)?.value,
-    );
+export default function HomeHeroStatic({ locale: localeProp }: Props = {}) {
+  const locale = localeProp ?? DEFAULT_LOCALE;
   const t = getUi(locale);
   const pr = getPricingCopy(locale);
   const slide = t.heroSlides[0]!;
@@ -170,18 +162,26 @@ export default async function HomeHeroStatic({ locale: localeProp }: Props = {})
             <div className="home-hero-media-column relative isolate z-[1] space-y-4">
               <div className="home-hero-video-shell relative overflow-hidden rounded-2xl border border-white/[0.12] shadow-[0_20px_60px_-28px_rgb(var(--accent)/0.4)] max-md:border-white/[0.1] max-md:shadow-[0_10px_28px_-14px_rgb(0_0_0/0.55)]">
                 <div className="home-hero-video-shell__media relative aspect-[5/4] w-full overflow-hidden">
-                  {/* Poster under video — fast LCP; opaque shell blocks page wash (see globals.css) */}
-                  <img
-                    src={HERO_LCP_IMAGE_URL}
-                    alt=""
-                    aria-hidden
-                    decoding="async"
-                    fetchPriority="high"
-                    className="absolute inset-0 z-0 h-full w-full object-cover"
-                  />
+                  {/* Poster under video — fast LCP; WebP with JPEG fallback */}
+                  <picture className="absolute inset-0 z-0 block h-full w-full">
+                    <source
+                      srcSet={HERO_LCP_IMAGE_URL}
+                      type="image/webp"
+                    />
+                    <img
+                      src={HERO_LCP_IMAGE_JPEG_URL}
+                      alt=""
+                      aria-hidden
+                      decoding="sync"
+                      fetchPriority="high"
+                      width={840}
+                      height={672}
+                      className="h-full w-full object-cover"
+                    />
+                  </picture>
                   <HomeHeroVideoDeferred
                     src={HERO_VIDEO_URL}
-                    poster={HERO_LCP_IMAGE_URL}
+                    poster={HERO_LCP_IMAGE_JPEG_URL}
                     ariaLabel={slide.alt}
                   />
                   <div

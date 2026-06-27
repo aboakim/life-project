@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import FieldNotesEducation from "@/lib/page-education/FieldNotesEducation";
 import FieldNotesPageClient from "./FieldNotesPageClient";
 
 export const metadata: Metadata = {
@@ -9,5 +10,10 @@ export const metadata: Metadata = {
 };
 
 export default function FieldNotesPage() {
-  return <FieldNotesPageClient />;
+  return (
+    <>
+      <FieldNotesPageClient />
+      <FieldNotesEducation />
+    </>
+  );
 }

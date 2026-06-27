@@ -3,7 +3,8 @@
  * Mirrored via `node scripts/mirror-home-images.mjs` — no runtime Unsplash hop.
  */
 /** Smaller derivative for server-rendered home LCP (`scripts/optimize-hero-lcp.mjs`). */
-export const HERO_LCP_IMAGE_URL = "/hero/slide-0-lcp.jpg";
+export const HERO_LCP_IMAGE_URL = "/hero/slide-0-lcp.webp";
+export const HERO_LCP_IMAGE_JPEG_URL = "/hero/slide-0-lcp.jpg";
 
 /** Looping hero video on `/` (poster uses HERO_LCP_IMAGE_URL for fast first paint). */
 export const HERO_VIDEO_URL = "/hero/AI_Decisions.mp4";

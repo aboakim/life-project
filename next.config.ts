@@ -95,7 +95,19 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
   async headers() {
+    const staticAssetCache = {
+      key: "Cache-Control",
+      value: "public, max-age=31536000, immutable",
+    };
     return [
+      {
+        source: "/hero/:path*",
+        headers: [staticAssetCache],
+      },
+      {
+        source: "/home/:path*",
+        headers: [staticAssetCache],
+      },
       // Default: apply all security headers including CSP.
       {
         source: "/((?!api/stripe/webhook).*)",

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ChecklistsEducation from "@/lib/page-education/ChecklistsEducation";
 import ChecklistsPageClient from "./ChecklistsPageClient";
 
 export const metadata: Metadata = {
@@ -9,5 +10,10 @@ export const metadata: Metadata = {
 };
 
 export default function ChecklistsPage() {
-  return <ChecklistsPageClient />;
+  return (
+    <>
+      <ChecklistsPageClient />
+      <ChecklistsEducation />
+    </>
+  );
 }
