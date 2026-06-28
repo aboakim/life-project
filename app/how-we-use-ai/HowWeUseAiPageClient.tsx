@@ -48,6 +48,7 @@ export default function HowWeUseAiPageClient() {
 
   return (
     <MarketingPageShell
+      theme="guides"
       eyebrow={t.navHowAi}
       title={t.howAiTitle}
       subtitle={<p>{t.howAiLead}</p>}

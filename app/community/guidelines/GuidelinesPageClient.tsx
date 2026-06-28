@@ -42,6 +42,7 @@ export default function GuidelinesPageClient() {
 
   return (
     <MarketingPageShell
+      theme="community"
       eyebrow={g.eyebrow}
       title={g.title}
       subtitle={<p>{g.subtitle}</p>}

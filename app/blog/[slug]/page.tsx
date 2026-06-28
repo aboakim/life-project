@@ -277,6 +277,7 @@ export default async function BlogArticlePage({
 
   return (
     <MarketingPageShell
+      theme="blog"
       eyebrow={post.hero?.eyebrow ?? "Article"}
       title={post.title}
       subtitle={

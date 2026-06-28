@@ -28,10 +28,15 @@ import NavRoutePrefetch from "@/components/NavRoutePrefetch";
 const LOCALE_KEY = "lde-locale";
 
 const navLinkClass =
-  "shrink-0 whitespace-nowrap rounded-xl px-2.5 py-2 text-[rgb(var(--ink-soft))] transition-all duration-200 hover:bg-white/[0.08] hover:text-[rgb(var(--ink))] hover:shadow-[0_0_24px_-10px_rgb(var(--accent)/0.28)] sm:px-3";
+  "shrink-0 whitespace-nowrap rounded-xl px-2.5 py-2 text-[rgb(var(--ink-soft))] transition-all duration-200 hover:bg-white/[0.08] hover:text-[rgb(var(--ink))] hover:shadow-[0_0_24px_-10px_rgb(var(--page-accent,var(--accent))/0.28)] sm:px-3";
 
 const mobileNavLinkClass =
   "block rounded-xl px-3 py-3.5 text-base font-medium text-[rgb(var(--ink))] transition hover:bg-white/[0.08] active:bg-white/[0.1]";
+
+function isNavActive(pathname: string, href: string): boolean {
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
 
 type MoreLink = { href: string; label: string };
 
@@ -249,7 +254,8 @@ export default function GlobalNav() {
                   <Link
                     key={`${l.href}-${l.label}`}
                     href={l.href}
-                    className={`${mobileNavLinkClass} border-b border-white/[0.06] last:border-b-0`}
+                    className={`${mobileNavLinkClass} border-b border-white/[0.06] last:border-b-0${isNavActive(pathname, l.href) ? " nav-link-active" : ""}`}
+                    aria-current={isNavActive(pathname, l.href) ? "page" : undefined}
                     onClick={() => setMobileOpen(false)}
                   >
                     {l.label}
@@ -286,7 +292,7 @@ export default function GlobalNav() {
           onClick={() => setMobileOpen(false)}
         >
           <span
-            className="hidden size-9 shrink-0 rounded-xl bg-gradient-to-br from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] shadow-lg shadow-[rgb(var(--accent)/0.35)] sm:inline-block"
+            className="site-brand-mark hidden size-9 shrink-0 rounded-xl bg-gradient-to-br from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] shadow-lg shadow-[rgb(var(--accent)/0.35)] sm:inline-block"
             aria-hidden
           />
           <span className="min-w-0 truncate">{t.brand}</span>
@@ -300,7 +306,12 @@ export default function GlobalNav() {
           >
             <div className="flex min-w-0 flex-nowrap items-center justify-end gap-0.5 overflow-x-auto overscroll-x-contain scrollbar-none md:justify-end">
               {primaryLinks.map((l) => (
-                <Link key={l.href} href={l.href} className={navLinkClass}>
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className={`${navLinkClass}${isNavActive(pathname, l.href) ? " nav-link-active font-semibold" : ""}`}
+                  aria-current={isNavActive(pathname, l.href) ? "page" : undefined}
+                >
                   {l.label}
                 </Link>
               ))}

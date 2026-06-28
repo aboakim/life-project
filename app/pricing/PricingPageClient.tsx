@@ -84,6 +84,7 @@ export default function PricingPageClient() {
 
   return (
     <MarketingPageShell
+      theme="commerce"
       eyebrow={t.badgePlaceholder}
       title={t.pageTitle}
       subtitle={

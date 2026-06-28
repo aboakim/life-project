@@ -94,6 +94,7 @@ export default function RegisterExpertForm() {
 
   return (
     <MarketingPageShell
+      theme="experts"
       title={t.registerTitle}
       subtitle={
         <Fragment>

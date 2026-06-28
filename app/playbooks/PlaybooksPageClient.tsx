@@ -42,6 +42,7 @@ export default function PlaybooksPageClient() {
 
   return (
     <MarketingPageShell
+      theme="lab"
       eyebrow={p.eyebrow}
       title={p.title}
       subtitle={<p>{p.subtitle}</p>}

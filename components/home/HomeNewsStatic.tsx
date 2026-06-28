@@ -27,7 +27,7 @@ export default function HomeNewsStatic({ locale }: Props) {
     <section
       id="section-news"
       aria-labelledby="home-news-heading"
-      className="relative z-[1] home-section-scroll-mt px-4 py-10 sm:px-6 sm:py-14"
+      className="home-section-wash home-section-wash--news relative z-[1] home-section-scroll-mt px-4 py-10 sm:px-6 sm:py-14"
       dir={rtl ? "rtl" : undefined}
     >
       <div className="mx-auto max-w-6xl">

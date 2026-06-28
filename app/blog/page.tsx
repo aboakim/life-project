@@ -94,6 +94,7 @@ export default async function BlogIndexPage({
 
   return (
     <MarketingPageShell
+      theme="blog"
       eyebrow="Writing"
       title="Frameworks for the decisions that actually matter"
       subtitle={

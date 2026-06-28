@@ -95,6 +95,7 @@ export default async function TagPage({
 
   return (
     <MarketingPageShell
+      theme="blog"
       eyebrow={`Tag · ${label}`}
       title={`Articles tagged “${label}”`}
       subtitle={

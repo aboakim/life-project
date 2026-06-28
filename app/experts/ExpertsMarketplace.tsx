@@ -175,6 +175,7 @@ export default function ExpertsMarketplace() {
   return (
     <div className="font-sans antialiased">
       <MarketingPageShell
+        theme="experts"
         eyebrow={t.pageEyebrow}
         title={t.pageTitle}
         subtitle={t.pageSubtitle}

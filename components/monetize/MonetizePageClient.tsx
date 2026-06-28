@@ -41,6 +41,7 @@ export default function MonetizePageClient() {
 
   return (
     <MarketingPageShell
+      theme="commerce"
       eyebrow={t.navLabel}
       title={t.pageTitle}
       subtitle={t.pageSubtitle}

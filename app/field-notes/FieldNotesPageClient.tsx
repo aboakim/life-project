@@ -52,6 +52,7 @@ export default function FieldNotesPageClient() {
 
   return (
     <MarketingPageShell
+      theme="lab"
       eyebrow={nx.fieldNotesEyebrow}
       title={nx.fieldNotesTitle}
       subtitle={nx.fieldNotesSubtitle}

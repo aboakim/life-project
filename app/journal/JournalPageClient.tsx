@@ -100,6 +100,7 @@ export default function JournalPageClient() {
 
   return (
     <MarketingPageShell
+      theme="lab"
       eyebrow={t.navJournal}
       title={t.journalTitle}
       subtitle={<p>{t.journalSubtitle}</p>}

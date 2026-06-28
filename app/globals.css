@@ -599,8 +599,253 @@ body::before {
 .home-section-wash--results {
   --wash-color: rgb(var(--accent-sage) / 0.12);
 }
+.home-section-wash--solves {
+  --wash-color: rgb(var(--accent-magenta) / 0.11);
+}
 
-/* Hairline accent under global header — slow drift when motion is OK */
+/*
+ * Route page themes — scoped accents so each section feels distinct.
+ * `data-page-theme` is set on <html> before paint + on client navigations.
+ */
+:root {
+  --page-accent: var(--accent);
+  --page-accent-mid: var(--accent-2);
+  --page-accent-soft: var(--accent-magenta);
+  --page-wash: rgb(var(--accent-sage) / 0.1);
+}
+
+html[data-page-theme="home"] {
+  --page-accent: var(--accent);
+  --page-accent-mid: var(--accent-2);
+  --page-accent-soft: var(--accent-magenta);
+  --page-wash: rgb(var(--accent) / 0.08);
+}
+
+html[data-page-theme="product"] {
+  --page-accent: var(--accent-mint);
+  --page-accent-mid: var(--accent-2);
+  --page-accent-soft: var(--accent-sage);
+  --page-wash: rgb(var(--accent-mint) / 0.13);
+}
+
+html[data-page-theme="blog"] {
+  --page-accent: var(--accent-warm);
+  --page-accent-mid: var(--accent-coral);
+  --page-accent-soft: var(--accent-magenta);
+  --page-wash: rgb(var(--accent-warm) / 0.12);
+}
+
+html[data-page-theme="experts"] {
+  --page-accent: var(--accent-sage);
+  --page-accent-mid: var(--accent-mint);
+  --page-accent-soft: var(--accent-2);
+  --page-wash: rgb(var(--accent-sage) / 0.13);
+}
+
+html[data-page-theme="community"] {
+  --page-accent: var(--accent-sky);
+  --page-accent-mid: var(--accent-2);
+  --page-accent-soft: var(--accent);
+  --page-wash: rgb(var(--accent-sky) / 0.12);
+}
+
+html[data-page-theme="lab"] {
+  --page-accent: var(--accent-magenta);
+  --page-accent-mid: var(--accent-coral);
+  --page-accent-soft: var(--accent-warm);
+  --page-wash: rgb(var(--accent-magenta) / 0.11);
+}
+
+html[data-page-theme="commerce"] {
+  --page-accent: var(--accent);
+  --page-accent-mid: var(--accent-warm);
+  --page-accent-soft: var(--accent-coral);
+  --page-wash: rgb(var(--accent-warm) / 0.11);
+}
+
+html[data-page-theme="guides"] {
+  --page-accent: var(--accent-2);
+  --page-accent-mid: var(--accent-mint);
+  --page-accent-soft: var(--accent-sky);
+  --page-wash: rgb(var(--accent-2) / 0.11);
+}
+
+html[data-page-theme="trust"] {
+  --page-accent: var(--accent-dim);
+  --page-accent-mid: var(--accent);
+  --page-accent-soft: var(--accent-magenta);
+  --page-wash: rgb(var(--accent-dim) / 0.1);
+}
+
+/* Marketing shell — ambient wash + hero accents */
+.marketing-page-wash {
+  background-image: radial-gradient(
+    ellipse 92% 62% at 50% -6%,
+    var(--page-wash),
+    transparent 68%
+  );
+  background-repeat: no-repeat;
+}
+
+.marketing-page-hero-spine {
+  background: linear-gradient(
+    180deg,
+    rgb(var(--page-accent) / 0.95),
+    rgb(var(--page-accent-mid) / 0.88),
+    rgb(var(--page-accent-soft) / 0.78)
+  );
+}
+
+.marketing-page-hero-sheen {
+  background: linear-gradient(
+    120deg,
+    rgb(var(--page-accent) / 0.16),
+    transparent 40%,
+    rgb(var(--page-accent-mid) / 0.12),
+    transparent 65%,
+    rgb(var(--page-accent-soft) / 0.1)
+  );
+}
+
+.marketing-page-eyebrow {
+  color: rgb(var(--page-accent-mid));
+}
+
+.marketing-chrome-horizon .chrome-horizon-glow {
+  background: rgb(var(--page-accent) / 0.28) !important;
+}
+
+.marketing-chrome-horizon .chrome-horizon-sweep {
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgb(var(--page-accent-mid) / 0.58),
+    transparent
+  ) !important;
+}
+
+.marketing-chrome-horizon .chrome-horizon-dot-a {
+  background: rgb(var(--page-accent) / 0.72) !important;
+  box-shadow: 0 0 8px rgb(var(--page-accent) / 0.5) !important;
+}
+
+.marketing-chrome-horizon .chrome-horizon-dot-b {
+  background: rgb(var(--page-accent-mid) / 0.72) !important;
+  box-shadow: 0 0 8px rgb(var(--page-accent-mid) / 0.45) !important;
+}
+
+.marketing-chrome-horizon .chrome-horizon-dot-c {
+  background: rgb(var(--page-accent-soft) / 0.68) !important;
+  box-shadow: 0 0 8px rgb(var(--page-accent-soft) / 0.4) !important;
+}
+
+/* Tool / analyze publisher strip — ties education block to route theme */
+.tool-page-education {
+  border-top: 2px solid rgb(var(--page-accent) / 0.28);
+  background-image: linear-gradient(
+    180deg,
+    rgb(var(--page-accent) / 0.07),
+    transparent 160px
+  );
+}
+
+/* Nav active link — uses current page accent */
+.nav-link-active {
+  background: rgb(var(--page-accent) / 0.12) !important;
+  color: rgb(var(--ink)) !important;
+  box-shadow:
+    0 0 24px -10px rgb(var(--page-accent) / 0.38),
+    inset 0 0 0 1px rgb(var(--page-accent) / 0.22) !important;
+}
+
+/* Orb emphasis per route */
+html[data-page-theme="blog"] .orb-decor-warm,
+html[data-page-theme="blog"] .orb-decor-coral {
+  opacity: 1.35;
+}
+html[data-page-theme="blog"] .orb-decor-sage {
+  opacity: 0.35;
+}
+
+html[data-page-theme="experts"] .orb-decor-sage,
+html[data-page-theme="experts"] .orb-decor-mint {
+  opacity: 1.3;
+}
+html[data-page-theme="experts"] .orb-decor-coral {
+  opacity: 0.4;
+}
+
+html[data-page-theme="community"] .orb-decor-sky {
+  opacity: 1.4;
+}
+
+html[data-page-theme="product"] .orb-decor-mint,
+html[data-page-theme="product"] .orb-decor-sage {
+  opacity: 1.25;
+}
+
+html[data-page-theme="trust"] .orb-decor-accent,
+html[data-page-theme="trust"] .orb-decor-magenta {
+  opacity: 0.55;
+}
+html[data-page-theme="trust"] .orb-decor-sage {
+  opacity: 0.45;
+}
+
+html[data-page-theme="lab"] .orb-decor-magenta,
+html[data-page-theme="lab"] .orb-decor-coral {
+  opacity: 1.2;
+}
+
+html[data-page-theme="commerce"] .orb-decor-warm,
+html[data-page-theme="commerce"] .orb-decor-accent {
+  opacity: 1.2;
+}
+
+/* Header hairline follows page accent on inner routes */
+html[data-page-theme="product"] .site-header-edge,
+html[data-page-theme="blog"] .site-header-edge,
+html[data-page-theme="experts"] .site-header-edge,
+html[data-page-theme="community"] .site-header-edge,
+html[data-page-theme="lab"] .site-header-edge,
+html[data-page-theme="commerce"] .site-header-edge,
+html[data-page-theme="guides"] .site-header-edge,
+html[data-page-theme="trust"] .site-header-edge {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--page-accent) / 0.35) 22%,
+    rgb(var(--page-accent-mid) / 0.48) 50%,
+    rgb(var(--page-accent-soft) / 0.32) 78%,
+    transparent 100%
+  );
+  background-size: 220% 100%;
+}
+
+@media (max-width: 767px) {
+  .marketing-page-wash {
+    opacity: 0.65;
+  }
+}
+
+/* Brand mark in nav picks up route accent on inner pages */
+html[data-page-theme="product"] .site-brand-mark,
+html[data-page-theme="blog"] .site-brand-mark,
+html[data-page-theme="experts"] .site-brand-mark,
+html[data-page-theme="community"] .site-brand-mark,
+html[data-page-theme="lab"] .site-brand-mark,
+html[data-page-theme="commerce"] .site-brand-mark,
+html[data-page-theme="guides"] .site-brand-mark,
+html[data-page-theme="trust"] .site-brand-mark {
+  background-image: linear-gradient(
+    135deg,
+    rgb(var(--page-accent)) 0%,
+    rgb(var(--page-accent-mid)) 52%,
+    rgb(var(--page-accent-soft)) 100%
+  ) !important;
+  box-shadow: 0 0 28px -8px rgb(var(--page-accent) / 0.55) !important;
+}
+
 .site-header-edge {
   height: 1px;
   background: linear-gradient(

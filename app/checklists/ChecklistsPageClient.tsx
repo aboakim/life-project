@@ -122,6 +122,7 @@ export default function ChecklistsPageClient() {
 
   return (
     <MarketingPageShell
+      theme="lab"
       eyebrow={t.navChecklists}
       title={t.checklistsTitle}
       subtitle={<p>{t.checklistsSubtitle}</p>}

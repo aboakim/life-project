@@ -47,6 +47,7 @@ export default function CommunityPageClient() {
 
   return (
     <MarketingPageShell
+      theme="community"
       eyebrow="Community"
       title={t.pageTitle}
       subtitle={t.pageSubtitle}

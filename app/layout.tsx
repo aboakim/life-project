@@ -16,6 +16,8 @@ import ConsentBanner from "@/components/ConsentBanner";
 import SkipToContent from "@/components/SkipToContent";
 import DeferredVercelMetrics from "@/components/DeferredVercelMetrics";
 import LocaleRefreshBridge from "@/components/LocaleRefreshBridge";
+import PageThemeBridge from "@/components/layout/PageThemeBridge";
+import { PAGE_THEME_BOOTSTRAP_SCRIPT } from "@/lib/page-theme";
 import { isRtlLocale } from "@/lib/i18n/locale";
 import { localeFontVariableClasses } from "@/lib/locale-fonts";
 import { getServerPageLocale } from "@/lib/i18n/trust-pages/server-locale";
@@ -179,6 +181,9 @@ export default async function RootLayout({
           re-pushes the same defaults as a safety net.
         */}
         <script
+          dangerouslySetInnerHTML={{ __html: PAGE_THEME_BOOTSTRAP_SCRIPT }}
+        />
+        <script
           dangerouslySetInnerHTML={{
             __html: [
               "window.dataLayer = window.dataLayer || [];",
@@ -212,6 +217,7 @@ export default async function RootLayout({
         <SkipToContent />
         <SiteJsonLd />
         <LocaleRefreshBridge />
+        <PageThemeBridge />
         <GlobalNav />
         {children}
         <GlobalFooter />

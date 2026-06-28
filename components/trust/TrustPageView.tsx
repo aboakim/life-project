@@ -72,6 +72,7 @@ export default function TrustPageView({ copy, locale }: Props) {
 
   return (
     <MarketingPageShell
+      theme="trust"
       eyebrow={copy.eyebrow}
       title={copy.title}
       subtitle={<p>{copy.subtitle}</p>}
