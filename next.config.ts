@@ -25,7 +25,7 @@ const CSP = [
   "object-src 'none'",
   // Scripts we actually load today.
   "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com https://checkout.stripe.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://www.googletagmanager.com https://www.google-analytics.com https://www.googletagservices.com https://va.vercel-scripts.com",
-  "script-src-elem 'self' 'unsafe-inline' https://js.stripe.com https://checkout.stripe.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://www.googletagmanager.com https://www.google-analytics.com https://www.googletagservices.com https://va.vercel-scripts.com https://ep2.adtrafficquality.google",
+  "script-src-elem 'self' 'unsafe-inline' https://js.stripe.com https://checkout.stripe.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://www.googletagmanager.com https://www.google-analytics.com https://www.googletagservices.com https://va.vercel-scripts.com https://ep2.adtrafficquality.google https://n6wxm.com",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com data:",
   // AdSense serves creatives from several CDNs; allow the common ones.
