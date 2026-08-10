@@ -209,6 +209,15 @@ export default async function RootLayout({
   dangerouslySetInnerHTML={{
     __html: `(function(s){s.dataset.zone='11546283',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`,
   }}
+  />
+
+      <Script
+        id="media-net-vignette"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `(function(s){s.dataset.zone='11546678',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`,
+        }}
+
 />
         {/*
           Site-wide AdSense bootstrap (matches AdSense → Verify code snippet).
