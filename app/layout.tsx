@@ -203,6 +203,13 @@ export default async function RootLayout({
       <body
         className={`${fontVars} font-sans text-base leading-relaxed antialiased md:text-[1.0625rem] lg:text-[1.125rem]`}
       >
+      <Script
+  id="media-net"
+  strategy="afterInteractive"
+  dangerouslySetInnerHTML={{
+    __html: `(function(s){s.dataset.zone='11546283',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`,
+  }}
+/>
         {/*
           Site-wide AdSense bootstrap (matches AdSense → Verify code snippet).
           lazyOnload: after load + idle-friendly; Consent default in <head>
