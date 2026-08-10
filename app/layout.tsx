@@ -219,6 +219,13 @@ export default async function RootLayout({
         }}
 
 />
+        <Script
+          id="monetag-new"
+          src="https://quge5.com/88/tag.min.js"
+          data-zone="268879"
+          strategy="afterInteractive"
+          async
+/>
         {/*
           Site-wide AdSense bootstrap (matches AdSense → Verify code snippet).
           lazyOnload: after load + idle-friendly; Consent default in <head>
