@@ -32,7 +32,7 @@ const CSP = [
   "img-src 'self' data: blob: https: *.gstatic.com *.doubleclick.net *.googlesyndication.com *.google.com *.stripe.com",
   "connect-src 'self' https://api.stripe.com https://checkout.stripe.com https://m.stripe.network https://www.google-analytics.com https://region1.google-analytics.com https://pagead2.googlesyndication.com https://ep1.adtrafficquality.google https://ep2.adtrafficquality.google https://va.vercel-scripts.com https://vitals.vercel-insights.com",
   // Stripe and AdSense both load pages in frames.
-  "frame-src https://js.stripe.com https://hooks.stripe.com https://checkout.stripe.com https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com",
+  "frame-src https://js.stripe.com https://hooks.stripe.com https://checkout.stripe.com https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://ep2.adtrafficquality.google",
   "frame-ancestors 'none'",
   "upgrade-insecure-requests",
 ].join("; ");
