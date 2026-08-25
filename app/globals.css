@@ -1035,11 +1035,9 @@ html[data-page-theme="trust"] .site-brand-mark {
     0%,
     100% {
       opacity: 0.52;
-      filter: brightness(1);
     }
     50% {
       opacity: 1;
-      filter: brightness(1.28);
     }
   }
   .home-accent-hairline-breathe {
@@ -1086,11 +1084,9 @@ html[data-page-theme="trust"] .site-brand-mark {
     0%,
     100% {
       opacity: 0.82;
-      filter: brightness(1);
     }
     50% {
       opacity: 1;
-      filter: brightness(1.18);
     }
   }
   .home-hero-spine-breathe {
@@ -1136,11 +1132,9 @@ html[data-page-theme="trust"] .site-brand-mark {
     0%,
     100% {
       opacity: 0.82;
-      filter: brightness(1);
     }
     50% {
       opacity: 1;
-      filter: brightness(1.2);
     }
   }
   .home-live-badge-soft {

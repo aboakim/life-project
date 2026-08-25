@@ -205,7 +205,7 @@ export default async function RootLayout({
       >
       <Script
   id="media-net"
-  strategy="afterInteractive"
+  strategy="lazyOnload"
   dangerouslySetInnerHTML={{
     __html: `(function(s){s.dataset.zone='11546283',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`,
   }}
@@ -213,7 +213,7 @@ export default async function RootLayout({
 
       <Script
         id="media-net-vignette"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
         dangerouslySetInnerHTML={{
           __html: `(function(s){s.dataset.zone='11546678',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`,
         }}
@@ -223,7 +223,7 @@ export default async function RootLayout({
           id="monetag-new"
           src="https://quge5.com/88/tag.min.js"
           data-zone="268879"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           async
 />
         {/*

@@ -440,7 +440,9 @@ export default function DecisionStudio({
   }, []);
 
   useEffect(() => {
-    if (focusLayout) {
+    // Dedicated /analyze page: mount welcome promptly.
+    // Home embed (skipHero+focusLayout): keep idle deferral below.
+    if (focusLayout && !skipHero) {
       setDeferWelcomeMount(true);
       return;
     }
@@ -518,7 +520,7 @@ export default function DecisionStudio({
       clearScheduled();
       document.removeEventListener("DOMContentLoaded", kick);
     };
-  }, [focusLayout]);
+  }, [focusLayout, skipHero]);
 
   useEffect(() => {
     if (focusLayout) return;
@@ -925,8 +927,8 @@ export default function DecisionStudio({
         copy={delight}
       />
       <KonamiSurprise copy={delight} />
-      <OrbDecor />
-      <AmbientDriftLayer />
+      {!focusLayout ? <OrbDecor /> : null}
+      {!focusLayout ? <AmbientDriftLayer /> : null}
       {!focusLayout ? <LatticeSheen /> : null}
       {!focusLayout ? (
         <div className="relative z-[8] mx-auto max-w-6xl px-4 sm:px-6">
@@ -1047,7 +1049,8 @@ export default function DecisionStudio({
             : "mx-auto max-w-6xl max-md:pb-40 px-4 pb-32 pt-6 sm:px-6 sm:pt-8"
         }
       >
-        {focusLayout && (
+        {/* Analyze page chrome only — home uses skipHero+focusLayout (workspace only). */}
+        {focusLayout && !skipHero && (
           <section
             className="mb-8 rounded-[1.75rem] border-2 border-[rgb(var(--accent))]/40 bg-gradient-to-br from-[rgb(var(--accent))]/[0.12] via-white/[0.08] to-white/[0.02] p-5 shadow-[0_0_0_1px_rgba(255,255,255,0.06)_inset,0_24px_80px_-32px_rgb(var(--accent)/0.45)] sm:p-7"
             aria-labelledby="analyze-focus-h"

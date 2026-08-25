@@ -54,7 +54,7 @@ export default function HomeHeroVideoDeferred({ src, poster, ariaLabel }: Props)
       muted
       loop
       playsInline
-      preload="auto"
+      preload="metadata"
       aria-label={ariaLabel}
       className="home-hero-video-shell__video absolute inset-0 z-[1] h-full w-full object-cover"
     />

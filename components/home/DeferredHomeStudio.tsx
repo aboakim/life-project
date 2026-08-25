@@ -18,8 +18,8 @@ function shouldLoadOnIntent(target: EventTarget | null): boolean {
 }
 
 /**
- * Loads the ~300kB home studio chunk after idle or explicit intent (scroll to
- * analyzer / click Analyze) so FCP, LCP, and INP stay on server-rendered HTML.
+ * Loads the home analyzer after idle or intent. Uses focusLayout+skipHero so
+ * marketing sections (already SSR’d above) are not duplicated client-side.
  */
 export default function DeferredHomeStudio() {
   const [ready, setReady] = useState(false);
@@ -38,10 +38,10 @@ export default function DeferredHomeStudio() {
     };
 
     const onScroll = () => {
-      const el = document.getElementById("section-workspace");
+      const el = document.getElementById("section-workspace-slot");
       if (!el) return;
       const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight * 1.2) go();
+      if (rect.top < window.innerHeight * 1.15) go();
     };
 
     window.addEventListener("pointerdown", onIntent, { passive: true });
@@ -57,10 +57,10 @@ export default function DeferredHomeStudio() {
         cancelIdleCallback?: (handle: number) => void;
       };
       if (typeof w.requestIdleCallback === "function") {
-        const id = w.requestIdleCallback(go, { timeout: 4000 });
+        const id = w.requestIdleCallback(go, { timeout: 8000 });
         cancelScheduled = () => w.cancelIdleCallback?.(id);
       } else {
-        const t = window.setTimeout(go, 1200);
+        const t = window.setTimeout(go, 4500);
         cancelScheduled = () => window.clearTimeout(t);
       }
     };
@@ -71,16 +71,22 @@ export default function DeferredHomeStudio() {
       window.addEventListener("load", armIdle, { once: true });
     }
 
+    // Nudge once in case the slot is already near viewport.
+    onScroll();
+
     return () => {
       cancelled = true;
       cancelScheduled?.();
       window.removeEventListener("pointerdown", onIntent);
       window.removeEventListener("keydown", onIntent);
+      window.removeEventListener("scroll", onScroll);
       window.removeEventListener("load", armIdle);
     };
   }, [ready]);
 
-  if (!ready) return null;
-
-  return <DecisionStudioShell skipHero />;
+  return (
+    <div id="section-workspace-slot" className="min-h-[12rem]">
+      {ready ? <DecisionStudioShell skipHero focusLayout /> : null}
+    </div>
+  );
 }

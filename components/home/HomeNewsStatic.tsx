@@ -17,7 +17,7 @@ function formatDate(iso: string): string {
 export default function HomeNewsStatic({ locale }: Props) {
   const t = getUi(locale);
   const rtl = isRtlLocale(locale);
-  const posts = getAllPosts().slice(0, 6);
+  const posts = getAllPosts().slice(0, 4);
 
   if (posts.length === 0) return null;
 
@@ -51,21 +51,21 @@ export default function HomeNewsStatic({ locale }: Props) {
           </Link>
         </div>
 
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {featured ? (
             <Link
               href={`/blog/${featured.slug}`}
-              className="group relative col-span-1 overflow-hidden rounded-2xl border border-white/[0.12] shadow-[0_24px_60px_-28px_rgba(0,0,0,0.55)] ring-1 ring-white/[0.08] sm:col-span-2 lg:col-span-2 lg:row-span-2"
+              className="group relative col-span-1 overflow-hidden rounded-2xl border border-white/[0.12] shadow-[0_24px_60px_-28px_rgba(0,0,0,0.55)] ring-1 ring-white/[0.08] sm:col-span-2"
             >
-              <div className="relative aspect-[16/11] min-h-[240px] w-full sm:aspect-auto sm:min-h-[280px] lg:h-full lg:min-h-[420px]">
+              <div className="relative aspect-[16/10] w-full">
                 <Image
                   src={getBlogPostCover(featured.slug, featured.tags).src}
                   alt=""
                   fill
                   className="object-cover transition duration-500 group-hover:scale-[1.03]"
-                  sizes="(min-width: 1024px) 720px, (min-width: 640px) 90vw, 100vw"
-                  quality={72}
-                  priority={false}
+                  sizes="(min-width: 1024px) 720px, 90vw"
+                  quality={65}
+                  loading="lazy"
                 />
                 <div
                   className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/5"
@@ -79,7 +79,7 @@ export default function HomeNewsStatic({ locale }: Props) {
                     {" · "}
                     {featured.readingMinutes} min
                   </p>
-                  <h3 className="font-display mt-2 max-w-xl text-xl font-extrabold leading-snug text-white [text-wrap:balance] sm:text-2xl lg:text-3xl">
+                  <h3 className="font-display mt-2 max-w-xl text-xl font-extrabold leading-snug text-white [text-wrap:balance] sm:text-2xl">
                     {featured.title}
                   </h3>
                 </div>
@@ -102,7 +102,7 @@ export default function HomeNewsStatic({ locale }: Props) {
                     fill
                     className="object-cover transition duration-500 group-hover:scale-[1.04]"
                     sizes="(min-width: 1024px) 340px, (min-width: 640px) 45vw, 100vw"
-                    quality={68}
+                    quality={60}
                     loading="lazy"
                   />
                   <div

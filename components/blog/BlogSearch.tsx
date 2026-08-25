@@ -41,6 +41,7 @@ function formatDate(iso: string): string {
  */
 export default function BlogSearch({ posts, initialQuery = "" }: Props) {
   const [q, setQ] = useState(() => initialQuery.trim());
+  const [visible, setVisible] = useState(9);
 
   const filtered = useMemo(() => {
     const needle = q.trim().toLowerCase();
@@ -54,6 +55,8 @@ export default function BlogSearch({ posts, initialQuery = "" }: Props) {
       );
     });
   }, [q, posts]);
+
+  const shown = filtered.slice(0, visible);
 
   return (
     <>
@@ -77,7 +80,10 @@ export default function BlogSearch({ posts, initialQuery = "" }: Props) {
             id="blog-search-input"
             type="search"
             value={q}
-            onChange={(e) => setQ(e.target.value)}
+            onChange={(e) => {
+              setQ(e.target.value);
+              setVisible(9);
+            }}
             placeholder="Search articles by topic, keyword, or tag"
             className="w-full rounded-xl border border-white/10 bg-white/[0.04] py-2.5 pe-3 ps-9 text-sm text-[rgb(var(--ink))] placeholder:text-[rgb(var(--ink-soft))]/60 transition focus:border-[rgb(var(--accent))]/40 focus:bg-white/[0.06] focus:outline-none focus:ring-2 focus:ring-[rgb(var(--accent-2))]/40"
           />
@@ -85,7 +91,10 @@ export default function BlogSearch({ posts, initialQuery = "" }: Props) {
         {q ? (
           <button
             type="button"
-            onClick={() => setQ("")}
+            onClick={() => {
+              setQ("");
+              setVisible(9);
+            }}
             className="rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2 text-xs font-medium text-[rgb(var(--ink-soft))] transition hover:border-white/20 hover:text-[rgb(var(--ink))]"
           >
             Clear
@@ -97,8 +106,8 @@ export default function BlogSearch({ posts, initialQuery = "" }: Props) {
         className="mb-4 text-xs text-[rgb(var(--ink-soft))]/80"
         aria-live="polite"
       >
-        Showing {filtered.length} of {posts.length} article
-        {posts.length === 1 ? "" : "s"}
+        Showing {shown.length} of {filtered.length} article
+        {filtered.length === 1 ? "" : "s"}
         {q ? ` matching “${q}”` : ""}.
       </p>
 
@@ -107,7 +116,10 @@ export default function BlogSearch({ posts, initialQuery = "" }: Props) {
           No articles match that search.{" "}
           <button
             type="button"
-            onClick={() => setQ("")}
+            onClick={() => {
+              setQ("");
+              setVisible(9);
+            }}
             className="font-medium text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
           >
             Clear search
@@ -115,44 +127,57 @@ export default function BlogSearch({ posts, initialQuery = "" }: Props) {
           to see everything.
         </div>
       ) : (
-        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
-          {filtered.map((post) => {
-            const cover = getBlogPostCover(post.slug, post.tags);
-            return (
-              <li key={post.slug}>
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="group relative block overflow-hidden rounded-2xl border border-white/[0.1] shadow-[0_20px_50px_-28px_rgba(0,0,0,0.45)] ring-1 ring-white/[0.06] transition duration-300 hover:-translate-y-0.5 hover:border-[rgb(var(--accent))]/30"
-                >
-                  <div className="relative aspect-[4/3] w-full">
-                    <Image
-                      src={cover.src}
-                      alt=""
-                      fill
-                      className="object-cover transition duration-500 group-hover:scale-[1.04]"
-                      sizes="(min-width: 1024px) 340px, (min-width: 640px) 45vw, 100vw"
-                      quality={68}
-                      loading="lazy"
-                    />
-                    <div
-                      className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"
-                      aria-hidden
-                    />
-                    <div className="absolute inset-x-0 bottom-0 z-10 p-4 sm:p-5">
-                      <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-white/70">
-                        {formatDate(post.publishedAt)} · {post.readingMinutes}{" "}
-                        min
-                      </p>
-                      <h2 className="font-display mt-1.5 line-clamp-3 text-base font-bold leading-snug text-white [text-wrap:balance] sm:text-lg">
-                        {post.title}
-                      </h2>
+        <>
+          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
+            {shown.map((post) => {
+              const cover = getBlogPostCover(post.slug, post.tags);
+              return (
+                <li key={post.slug}>
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="group relative block overflow-hidden rounded-2xl border border-white/[0.1] shadow-[0_20px_50px_-28px_rgba(0,0,0,0.45)] ring-1 ring-white/[0.06] transition duration-300 hover:-translate-y-0.5 hover:border-[rgb(var(--accent))]/30"
+                  >
+                    <div className="relative aspect-[4/3] w-full">
+                      <Image
+                        src={cover.src}
+                        alt=""
+                        fill
+                        className="object-cover transition duration-500 group-hover:scale-[1.04]"
+                        sizes="(min-width: 1024px) 340px, (min-width: 640px) 45vw, 100vw"
+                        quality={60}
+                        loading="lazy"
+                      />
+                      <div
+                        className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"
+                        aria-hidden
+                      />
+                      <div className="absolute inset-x-0 bottom-0 z-10 p-4 sm:p-5">
+                        <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-white/70">
+                          {formatDate(post.publishedAt)} · {post.readingMinutes}{" "}
+                          min
+                        </p>
+                        <h2 className="font-display mt-1.5 line-clamp-3 text-base font-bold leading-snug text-white [text-wrap:balance] sm:text-lg">
+                          {post.title}
+                        </h2>
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+          {shown.length < filtered.length ? (
+            <div className="mt-8 flex justify-center">
+              <button
+                type="button"
+                onClick={() => setVisible((n) => n + 9)}
+                className="rounded-xl border border-white/[0.14] bg-white/[0.06] px-5 py-2.5 text-sm font-semibold text-[rgb(var(--ink))] transition hover:bg-white/[0.1]"
+              >
+                Load more
+              </button>
+            </div>
+          ) : null}
+        </>
       )}
     </>
   );
