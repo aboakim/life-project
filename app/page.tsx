@@ -11,17 +11,18 @@ import HomePublisherStatic from "@/components/home/HomePublisherStatic";
 import HomeSocialProofStatic from "@/components/home/HomeSocialProofStatic";
 import DeferredHomeStudio from "@/components/home/DeferredHomeStudio";
 import { HERO_LCP_IMAGE_URL } from "@/lib/home/hero-slide-images";
-import { DEFAULT_LOCALE } from "@/lib/locale-default";
+import { getServerPageLocale } from "@/lib/i18n/trust-pages/server-locale";
 
 /** LCP — small static JPEG in initial HTML (no client bundle). */
 preload(HERO_LCP_IMAGE_URL, { as: "image", fetchPriority: "high" });
 
-/** Edge-cacheable HTML; non-default locale re-fetched via LocaleRefreshBridge after hydration. */
-export const dynamic = "force-static";
-
-/** Static route — `?preset=` is applied client-side in DecisionStudio (no searchParams → faster prerender). */
-export default function Home() {
-  const locale = DEFAULT_LOCALE;
+/**
+ * Cookie-driven locale so nav language changes refresh home copy via
+ * LocaleRefreshBridge. Crawlers without `lde-locale` still get DEFAULT_LOCALE.
+ * `?preset=` is applied client-side in DecisionStudio (no searchParams).
+ */
+export default async function Home() {
+  const locale = await getServerPageLocale();
 
   return (
     <main id="main">

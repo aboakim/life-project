@@ -120,9 +120,20 @@ export default function GlobalNav() {
     if (raw === null || !isAppLocale(raw)) {
       localStorage.setItem(LOCALE_KEY, resolved);
     }
+    document.documentElement.lang = resolved;
+    document.documentElement.setAttribute(
+      "dir",
+      isRtlLocale(resolved) ? "rtl" : "ltr"
+    );
   }, []);
 
+  /** Skip first run so DEFAULT_LOCALE does not overwrite a saved cookie before hydrate. */
+  const skipLocalePersist = useRef(true);
   useEffect(() => {
+    if (skipLocalePersist.current) {
+      skipLocalePersist.current = false;
+      return;
+    }
     syncLocaleCookieClient(locale);
     document.documentElement.lang = locale;
     document.documentElement.setAttribute(

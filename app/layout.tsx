@@ -201,7 +201,7 @@ export default async function RootLayout({
         />
       </head>
       <body
-        className={`${fontVars} font-sans text-base leading-relaxed antialiased md:text-[1.0625rem] lg:text-[1.125rem]`}
+        className={`${fontVars} font-sans text-[1.0625rem] leading-relaxed antialiased md:text-[1.125rem] lg:text-[1.1875rem]`}
       >
       <Script
   id="media-net"

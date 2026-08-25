@@ -354,6 +354,11 @@ export default function DecisionStudio({
     if (raw === null || !isAppLocale(raw)) {
       localStorage.setItem(LOCALE_STORAGE_KEY, resolved);
     }
+    document.documentElement.lang = resolved;
+    document.documentElement.setAttribute(
+      "dir",
+      isRtlLocale(resolved) ? "rtl" : "ltr"
+    );
   }, []);
 
   useEffect(() => {
@@ -613,7 +618,14 @@ export default function DecisionStudio({
     presetApplied.current = true;
   }, [initialPreset, warmPresets]);
 
+  /** Skip first run: initial state is DEFAULT_LOCALE before hydrate from storage. */
+  const skipLocalePersist = useRef(true);
   useEffect(() => {
+    if (skipLocalePersist.current) {
+      skipLocalePersist.current = false;
+      return;
+    }
+    const prev = localStorage.getItem(LOCALE_STORAGE_KEY);
     localStorage.setItem(LOCALE_STORAGE_KEY, locale);
     syncLocaleCookieClient(locale);
     document.documentElement.lang = locale;
@@ -621,7 +633,8 @@ export default function DecisionStudio({
       "dir",
       isRtlLocale(locale) ? "rtl" : "ltr"
     );
-    dispatchLocaleChanged();
+    // Avoid re-broadcast when nav already applied the same locale.
+    if (prev !== locale) dispatchLocaleChanged();
   }, [locale]);
 
   const demoMode =

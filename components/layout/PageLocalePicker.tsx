@@ -1,13 +1,9 @@
 "use client";
 
-import {
-  LOCALE_OPTIONS,
-  type AppLocale,
-  isRtlLocale,
-} from "@/lib/i18n/locale";
+import { LOCALE_OPTIONS, type AppLocale } from "@/lib/i18n/locale";
 import LocaleFlag from "@/components/LocaleFlag";
 import { getUi } from "@/lib/i18n/ui";
-import { dispatchLocaleChanged } from "@/lib/locale-sync";
+import { applyClientLocaleChange } from "@/lib/locale-sync";
 
 type Props = {
   locale: AppLocale;
@@ -41,15 +37,8 @@ export default function PageLocalePicker({
               key={opt.value}
               type="button"
               onClick={() => {
+                applyClientLocaleChange(opt.value);
                 onChange(opt.value);
-                if (typeof document !== "undefined") {
-                  document.documentElement.lang = opt.value;
-                  document.documentElement.setAttribute(
-                    "dir",
-                    isRtlLocale(opt.value) ? "rtl" : "ltr"
-                  );
-                }
-                dispatchLocaleChanged();
               }}
               className={
                 active
