@@ -1,7 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { getBlogPostCover } from "@/lib/blog/post-cover";
 
 export type BlogSearchItem = {
   slug: string;
@@ -113,42 +115,43 @@ export default function BlogSearch({ posts, initialQuery = "" }: Props) {
           to see everything.
         </div>
       ) : (
-        <ul className="grid gap-5 sm:grid-cols-2">
-          {filtered.map((post) => (
-            <li
-              key={post.slug}
-              className="group relative flex flex-col rounded-2xl border border-white/[0.08] bg-gradient-to-b from-white/[0.05] to-transparent p-6 transition hover:-translate-y-0.5 hover:border-[rgb(var(--accent))]/25 hover:shadow-[0_20px_50px_-28px_rgb(var(--accent)/0.4)]"
-            >
-              <div className="flex flex-wrap items-center gap-2">
-                {post.tags.slice(0, 2).map((t) => (
-                  <span
-                    key={t}
-                    className="rounded-full bg-[rgb(var(--accent))]/12 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[rgb(var(--accent-2))]"
-                  >
-                    {t}
-                  </span>
-                ))}
-                <span className="text-[11px] text-[rgb(var(--ink-soft))]/80">
-                  {formatDate(post.publishedAt)} · {post.readingMinutes} min read
-                </span>
-              </div>
-              <h2 className="mt-4 text-lg font-semibold tracking-tight text-[rgb(var(--ink))] [text-wrap:balance]">
+        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
+          {filtered.map((post) => {
+            const cover = getBlogPostCover(post.slug, post.tags);
+            return (
+              <li key={post.slug}>
                 <Link
                   href={`/blog/${post.slug}`}
-                  className="after:absolute after:inset-0 hover:text-[rgb(var(--accent-2))]"
+                  className="group relative block overflow-hidden rounded-2xl border border-white/[0.1] shadow-[0_20px_50px_-28px_rgba(0,0,0,0.45)] ring-1 ring-white/[0.06] transition duration-300 hover:-translate-y-0.5 hover:border-[rgb(var(--accent))]/30"
                 >
-                  {post.title}
+                  <div className="relative aspect-[4/3] w-full">
+                    <Image
+                      src={cover.src}
+                      alt=""
+                      fill
+                      className="object-cover transition duration-500 group-hover:scale-[1.04]"
+                      sizes="(min-width: 1024px) 340px, (min-width: 640px) 45vw, 100vw"
+                      quality={68}
+                      loading="lazy"
+                    />
+                    <div
+                      className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"
+                      aria-hidden
+                    />
+                    <div className="absolute inset-x-0 bottom-0 z-10 p-4 sm:p-5">
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-white/70">
+                        {formatDate(post.publishedAt)} · {post.readingMinutes}{" "}
+                        min
+                      </p>
+                      <h2 className="font-display mt-1.5 line-clamp-3 text-base font-bold leading-snug text-white [text-wrap:balance] sm:text-lg">
+                        {post.title}
+                      </h2>
+                    </div>
+                  </div>
                 </Link>
-              </h2>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
-                {post.description}
-              </p>
-              <span className="mt-5 inline-flex items-center gap-1 text-xs font-semibold text-[rgb(var(--accent-2))]">
-                Read article
-                <span aria-hidden="true">→</span>
-              </span>
-            </li>
-          ))}
+              </li>
+            );
+          })}
         </ul>
       )}
     </>

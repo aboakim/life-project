@@ -1,27 +1,27 @@
+import Image from "next/image";
 import Link from "next/link";
 import { isRtlLocale, type AppLocale } from "@/lib/i18n/locale";
 import { getAllPosts } from "@/lib/blog/posts";
+import { getBlogPostCover } from "@/lib/blog/post-cover";
 import { getUi } from "@/lib/i18n/ui";
-import HomeIconBadge from "@/components/home/HomeIconBadge";
 
 type Props = { locale: AppLocale };
-
-const TOPIC_ICONS = ["📰", "🧭", "💼", "🏠"] as const;
 
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
-    year: "numeric",
   });
 }
 
 export default function HomeNewsStatic({ locale }: Props) {
   const t = getUi(locale);
   const rtl = isRtlLocale(locale);
-  const posts = getAllPosts().slice(0, 4);
+  const posts = getAllPosts().slice(0, 6);
 
   if (posts.length === 0) return null;
+
+  const [featured, ...rest] = posts;
 
   return (
     <section
@@ -31,20 +31,17 @@ export default function HomeNewsStatic({ locale }: Props) {
       dir={rtl ? "rtl" : undefined}
     >
       <div className="mx-auto max-w-6xl">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[rgb(var(--accent-warm))]/90">
               {t.newsSectionEyebrow}
             </p>
             <h2
               id="home-news-heading"
-              className="font-display mt-2 max-w-2xl text-[clamp(1.5rem,1rem+1.8vw,2.25rem)] font-extrabold tracking-tight text-[rgb(var(--ink))] [text-wrap:balance]"
+              className="font-display mt-2 max-w-xl text-[clamp(1.5rem,1rem+1.8vw,2.25rem)] font-extrabold tracking-tight text-[rgb(var(--ink))] [text-wrap:balance]"
             >
               {t.newsSectionTitle}
             </h2>
-            <p className="mt-3 max-w-2xl text-base leading-relaxed text-[rgb(var(--ink-soft))] sm:text-lg">
-              {t.newsSectionSubtitle}
-            </p>
           </div>
           <Link
             href="/blog"
@@ -54,45 +51,78 @@ export default function HomeNewsStatic({ locale }: Props) {
           </Link>
         </div>
 
-        <div className="mt-8 overflow-hidden rounded-2xl border border-white/[0.11] bg-gradient-to-br from-white/[0.05] to-transparent">
-          <ul className="divide-y divide-white/[0.08]">
-            {posts.map((post, i) => (
-              <li key={post.slug}>
-                <article className="group flex gap-4 p-5 transition hover:bg-white/[0.04] sm:gap-5 sm:p-6">
-                  <HomeIconBadge
-                    icon={TOPIC_ICONS[i % TOPIC_ICONS.length] ?? "📰"}
-                    className="mt-0.5 max-sm:hidden"
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
+          {featured ? (
+            <Link
+              href={`/blog/${featured.slug}`}
+              className="group relative col-span-1 overflow-hidden rounded-2xl border border-white/[0.12] shadow-[0_24px_60px_-28px_rgba(0,0,0,0.55)] ring-1 ring-white/[0.08] sm:col-span-2 lg:col-span-2 lg:row-span-2"
+            >
+              <div className="relative aspect-[16/11] min-h-[240px] w-full sm:aspect-auto sm:min-h-[280px] lg:h-full lg:min-h-[420px]">
+                <Image
+                  src={getBlogPostCover(featured.slug, featured.tags).src}
+                  alt=""
+                  fill
+                  className="object-cover transition duration-500 group-hover:scale-[1.03]"
+                  sizes="(min-width: 1024px) 720px, (min-width: 640px) 90vw, 100vw"
+                  quality={72}
+                  priority={false}
+                />
+                <div
+                  className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/5"
+                  aria-hidden
+                />
+                <div className="absolute inset-x-0 bottom-0 z-10 p-5 sm:p-7">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/75">
+                    <time dateTime={featured.publishedAt}>
+                      {formatDate(featured.publishedAt)}
+                    </time>
+                    {" · "}
+                    {featured.readingMinutes} min
+                  </p>
+                  <h3 className="font-display mt-2 max-w-xl text-xl font-extrabold leading-snug text-white [text-wrap:balance] sm:text-2xl lg:text-3xl">
+                    {featured.title}
+                  </h3>
+                </div>
+              </div>
+            </Link>
+          ) : null}
+
+          {rest.map((post) => {
+            const cover = getBlogPostCover(post.slug, post.tags);
+            return (
+              <Link
+                key={post.slug}
+                href={`/blog/${post.slug}`}
+                className="group relative overflow-hidden rounded-2xl border border-white/[0.12] shadow-[0_20px_50px_-28px_rgba(0,0,0,0.5)] ring-1 ring-white/[0.08] transition duration-300 hover:-translate-y-0.5 hover:border-[rgb(var(--accent))]/35"
+              >
+                <div className="relative aspect-[4/3] w-full">
+                  <Image
+                    src={cover.src}
+                    alt=""
+                    fill
+                    className="object-cover transition duration-500 group-hover:scale-[1.04]"
+                    sizes="(min-width: 1024px) 340px, (min-width: 640px) 45vw, 100vw"
+                    quality={68}
+                    loading="lazy"
                   />
-                  <div className="min-w-0 flex-1">
-                    <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[rgb(var(--accent-2))]/85 sm:text-[13px]">
+                  <div
+                    className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent"
+                    aria-hidden
+                  />
+                  <div className="absolute inset-x-0 bottom-0 z-10 p-4 sm:p-5">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-white/70">
                       <time dateTime={post.publishedAt}>
                         {formatDate(post.publishedAt)}
                       </time>
-                      {" · "}
-                      {post.readingMinutes} min
                     </p>
-                    <h3 className="font-display mt-2 text-lg font-bold leading-snug text-[rgb(var(--ink))] [text-wrap:balance] sm:text-xl">
-                      <Link
-                        href={`/blog/${post.slug}`}
-                        className="transition group-hover:text-[rgb(var(--accent-2))]"
-                      >
-                        {post.title}
-                      </Link>
+                    <h3 className="font-display mt-1.5 line-clamp-2 text-base font-bold leading-snug text-white [text-wrap:balance] sm:text-lg">
+                      {post.title}
                     </h3>
-                    <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-[rgb(var(--ink-soft))] sm:text-base">
-                      {post.description}
-                    </p>
-                    <Link
-                      href={`/blog/${post.slug}`}
-                      className="mt-3 inline-flex text-sm font-semibold text-[rgb(var(--accent-2))] underline-offset-4 hover:underline sm:text-[15px]"
-                    >
-                      {t.newsReadLabel} →
-                    </Link>
                   </div>
-                </article>
-              </li>
-            ))}
-          </ul>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>

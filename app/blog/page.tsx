@@ -96,13 +96,9 @@ export default async function BlogIndexPage({
     <MarketingPageShell
       theme="blog"
       eyebrow="Writing"
-      title="Frameworks for the decisions that actually matter"
+      title="Guides worth reading"
       subtitle={
-        <p>
-          Long-form essays on career changes, relocation, relationships, and
-          the psychology of big choices. Written to help you think clearly —
-          not to sell you certainty.
-        </p>
+        <p>Career, relocation, relationships, money — short cards, full articles inside.</p>
       }
     >
       <script
