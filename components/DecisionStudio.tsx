@@ -523,6 +523,18 @@ export default function DecisionStudio({
     };
   }, [focusLayout, skipHero]);
 
+  /** /analyze: land on the writing form immediately. */
+  useEffect(() => {
+    if (!focusLayout || skipHero) return;
+    const id = window.setTimeout(() => {
+      document
+        .getElementById("section-workspace")
+        ?.scrollIntoView({ block: "start" });
+      document.getElementById("decision-input")?.focus({ preventScroll: true });
+    }, 80);
+    return () => window.clearTimeout(id);
+  }, [focusLayout, skipHero]);
+
   useEffect(() => {
     if (focusLayout) return;
     const hash = window.location.hash.replace(/^#/, "");
@@ -863,13 +875,14 @@ export default function DecisionStudio({
     }, 30);
   }, []);
 
+  /** Open writing form immediately (no package gate). */
   const onAnalyzeCtaClick = useCallback(
     (e?: React.MouseEvent<HTMLElement>) => {
       e?.preventDefault();
       triggerMonetagOnAnalyzeClick();
-      setPackageModalOpen(true);
+      scrollToAnalyzer();
     },
-    [],
+    [scrollToAnalyzer],
   );
 
   const onPickFreePackage = useCallback(() => {
@@ -1052,101 +1065,30 @@ export default function DecisionStudio({
             : "mx-auto max-w-6xl max-md:pb-40 px-4 pb-32 pt-6 sm:px-6 sm:pt-8"
         }
       >
-        {/* Analyze page chrome only — home uses skipHero+focusLayout (workspace only). */}
+        {/* Compact analyze header — writing form follows immediately. */}
         {focusLayout && !skipHero && (
-          <section
-            className="mb-8 rounded-[1.75rem] border-2 border-[rgb(var(--accent))]/40 bg-gradient-to-br from-[rgb(var(--accent))]/[0.12] via-white/[0.08] to-white/[0.02] p-5 shadow-[0_0_0_1px_rgba(255,255,255,0.06)_inset,0_24px_80px_-32px_rgb(var(--accent)/0.45)] sm:p-7"
+          <header
+            className="mb-5 flex flex-wrap items-end justify-between gap-3 border-b border-white/[0.1] pb-4"
             aria-labelledby="analyze-focus-h"
           >
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[rgb(var(--accent-2))]">
-              {t.sectionNavAnalyzer}
-            </p>
-            <h1
-              id="analyze-focus-h"
-              className="font-display mt-2 text-[clamp(1.45rem,1.1rem+1.6vw,2.1rem)] font-extrabold tracking-tight text-[rgb(var(--ink))] [text-wrap:balance]"
-            >
-              {t.analyzePageTitle}
-            </h1>
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
-              {t.analyzePageSubtitle}
-            </p>
-            <p className="mt-4">
-              <Link
-                href="/"
-                className="text-sm font-semibold text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
-              >
-                ← {t.analyzeBackHome}
-              </Link>
-            </p>
-            <nav
-              className="mt-5 rounded-2xl border border-white/[0.12] bg-gradient-to-br from-white/[0.08] to-white/[0.03] p-3 sm:p-4"
-              aria-label={t.langLabel}
-            >
-              <p className="mb-2 text-xs font-medium text-[rgb(var(--ink-soft))]">
-                {t.langLabel}
+            <div className="min-w-0">
+              <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-[rgb(var(--accent-2))]">
+                {t.sectionNavAnalyzer}
               </p>
-              <div className="flex flex-wrap gap-2">
-                {LOCALE_OPTIONS.map((opt) => {
-                  const active = locale === opt.value;
-                  return (
-                    <button
-                      key={opt.value}
-                      type="button"
-                      onClick={() => setLocale(opt.value)}
-                      className={
-                        active
-                          ? "rounded-xl border border-[rgb(var(--accent))]/50 bg-gradient-to-r from-[rgb(var(--accent))]/25 to-[rgb(var(--accent-2))]/18 px-3 py-2 text-sm font-semibold text-white shadow-[0_0_24px_-8px_rgb(var(--accent))]"
-                          : "rounded-xl border border-white/[0.12] bg-white/[0.06] px-3 py-2 text-sm text-[rgb(var(--ink-soft))] transition hover:border-[rgb(var(--accent-2))]/30 hover:bg-white/[0.1] hover:text-[rgb(var(--ink))]"
-                      }
-                    >
-                      <LocaleFlag
-                        flagCode={opt.flagCode}
-                        className="me-1.5 h-3.5 w-5 opacity-90"
-                      />
-                      {opt.label}
-                    </button>
-                  );
-                })}
-              </div>
-            </nav>
-            <nav
-              className="mt-5 rounded-2xl border border-white/[0.1] bg-black/25 p-4"
-              aria-labelledby="analyze-tools-heading"
-            >
-              <p
-                id="analyze-tools-heading"
-                className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-[rgb(var(--accent-warm))]/90"
+              <h1
+                id="analyze-focus-h"
+                className="font-display mt-1 text-[clamp(1.25rem,1rem+1.2vw,1.75rem)] font-extrabold tracking-tight text-[rgb(var(--ink))] [text-wrap:balance]"
               >
-                {novelty.analyzeToolsEyebrow}
-              </p>
-              <ol className="mt-3 list-decimal space-y-2.5 ps-4 text-sm leading-relaxed text-[rgb(var(--ink-soft))] marker:font-semibold marker:text-[rgb(var(--accent-2))]">
-                <li>
-                  <Link
-                    href="/field-notes"
-                    className="font-semibold text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
-                  >
-                    {novelty.analyzeToolFieldNotes}
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/journal"
-                    className="font-semibold text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
-                  >
-                    {novelty.analyzeToolJournal}
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/checklists"
-                    className="font-semibold text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
-                  >
-                    {novelty.analyzeToolChecklists}
-                  </Link>
-                </li>
-              </ol>
-            </nav>
-          </section>
+                {t.analyzePageTitle}
+              </h1>
+            </div>
+            <Link
+              href="/"
+              className="shrink-0 text-sm font-semibold text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+            >
+              ← {t.analyzeBackHome}
+            </Link>
+          </header>
         )}
 
         {!focusLayout && (

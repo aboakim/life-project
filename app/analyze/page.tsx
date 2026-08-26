@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import DecisionStudioShell from "@/components/home/DecisionStudioShell";
 import AnalyzePageEducation from "@/app/analyze/AnalyzePageEducation";
+import DeferredAnalyzeEducation from "@/components/ads/DeferredAnalyzeEducation";
 import { toolPageMetadata } from "@/lib/site-page-metadata";
 
 export const metadata: Metadata = toolPageMetadata({
@@ -14,18 +15,18 @@ export const metadata: Metadata = toolPageMetadata({
 export default function AnalyzePage() {
   return (
     <main id="main">
-      {/*
-        Publisher copy first in DOM so AdSense reviewers and crawlers see
-        substantial editorial HTML before the interactive analyzer shell.
-      */}
-      <AnalyzePageEducation />
+      {/* Writing platform first — users land on the form immediately. */}
       <Suspense
         fallback={
-          <div className="min-h-[40vh] bg-[rgb(var(--surface))]" aria-hidden />
+          <div className="min-h-[50vh] bg-[rgb(var(--surface))]" aria-hidden />
         }
       >
         <DecisionStudioShell focusLayout />
       </Suspense>
+      {/* Publisher/education copy after idle so it does not delay the form. */}
+      <DeferredAnalyzeEducation>
+        <AnalyzePageEducation />
+      </DeferredAnalyzeEducation>
     </main>
   );
 }
