@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import SupportCta from "@/components/monetization/SupportCta";
+import AmazonAssociatesCta from "@/components/monetization/AmazonAssociatesCta";
+import { CONSENT_REOPEN_EVENT } from "@/components/ConsentBanner";
 import { getCommunityCopy } from "@/lib/i18n/community-page";
 import { getExpertsCopy } from "@/lib/i18n/experts-network";
 import { getSiteExtras } from "@/lib/i18n/site-extras";
@@ -115,6 +117,24 @@ export default function GlobalFooter() {
               {tn.footerDisclaimer}
             </p>
             <SupportCta className="mt-5" />
+            <AmazonAssociatesCta
+              variant="compact"
+              locale={locale}
+              className="mt-5"
+            />
+            <button
+              type="button"
+              className="mt-4 text-xs font-medium text-[rgb(var(--accent-2))] underline-offset-2 hover:underline"
+              onClick={() => {
+                try {
+                  window.dispatchEvent(new Event(CONSENT_REOPEN_EVENT));
+                } catch {
+                  /* ignore */
+                }
+              }}
+            >
+              {tn.cookieSettings}
+            </button>
           </div>
 
           {columns.map((col) => (

@@ -29,14 +29,18 @@ type Props = {
 };
 
 function pickSlot(placement: Placement): string | undefined {
+  const home = process.env.NEXT_PUBLIC_ADSENSE_SLOT_HOME?.trim();
+  const inline = process.env.NEXT_PUBLIC_ADSENSE_SLOT_INLINE?.trim();
+  const footer = process.env.NEXT_PUBLIC_ADSENSE_SLOT_FOOTER?.trim();
+  // Fall back to HOME so one approved unit still fills every placement.
   switch (placement) {
     case "inline":
-      return process.env.NEXT_PUBLIC_ADSENSE_SLOT_INLINE;
+      return inline || home || undefined;
     case "footer":
-      return process.env.NEXT_PUBLIC_ADSENSE_SLOT_FOOTER;
+      return footer || home || undefined;
     case "top":
     default:
-      return process.env.NEXT_PUBLIC_ADSENSE_SLOT_HOME;
+      return home || undefined;
   }
 }
 
@@ -92,7 +96,7 @@ export default function AdSenseBanner({
           }
         })();
       },
-      { idleTimeoutMs: 2200, fallbackDelayMs: 900 },
+      { idleTimeoutMs: 600, fallbackDelayMs: 350 },
     );
 
     return () => {

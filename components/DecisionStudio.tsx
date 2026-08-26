@@ -2164,6 +2164,11 @@ export default function DecisionStudio({
               </div>
             </section>
 
+            {/* High-visibility affiliate — early in results for conversion */}
+            <div className="mx-auto max-w-xl px-2">
+              <AmazonAssociatesCta variant="compact" locale={locale} />
+            </div>
+
             {(a.professionalGuidance ?? "").trim() ? (
               <section className="glass animate-fade-up rounded-3xl border border-amber-400/20 bg-gradient-to-br from-amber-500/[0.07] to-transparent p-6 sm:p-7">
                 <h2 className="text-lg font-semibold text-amber-50/95">

@@ -23,6 +23,8 @@ export type TrustNavCopy = {
   consentPrivacyLink: string;
   consentReject: string;
   consentAccept: string;
+  /** Footer control to reopen the cookie banner. */
+  cookieSettings: string;
 };
 
 const en: TrustNavCopy = {
@@ -50,6 +52,7 @@ const en: TrustNavCopy = {
   consentPrivacyLink: "Read our privacy policy",
   consentReject: "Reject non-essential",
   consentAccept: "Accept all",
+  cookieSettings: "Cookie settings",
 };
 
 const hy: TrustNavCopy = {
@@ -78,6 +81,7 @@ const hy: TrustNavCopy = {
   consentPrivacyLink: "Գաղտնիության քաղաքականությունը",
   consentReject: "Մերժել ոչ անհրաժեշտները",
   consentAccept: "Ընդունել բոլորը",
+  cookieSettings: "Cookie կարգավորումներ",
 };
 
 const ru: TrustNavCopy = {
@@ -106,6 +110,7 @@ const ru: TrustNavCopy = {
   consentPrivacyLink: "Политика конфиденциальности",
   consentReject: "Отклонить необязательные",
   consentAccept: "Принять все",
+  cookieSettings: "Настройки cookies",
 };
 
 const de: TrustNavCopy = {

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import MonetizePageClient from "@/components/monetize/MonetizePageClient";
 import MonetizeEducation from "@/lib/page-education/MonetizeEducation";
+import PageRevenueStrip from "@/components/monetization/PageRevenueStrip";
 import { toolPageMetadata } from "@/lib/site-page-metadata";
 
 export const metadata: Metadata = toolPageMetadata({
@@ -15,6 +16,11 @@ export default function MonetizePage() {
     <>
       <MonetizeEducation />
       <MonetizePageClient />
+      <PageRevenueStrip
+        className="pb-12"
+        adPlacement="footer"
+        showAmazon={false}
+      />
     </>
   );
 }

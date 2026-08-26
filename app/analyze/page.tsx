@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import DecisionStudioShell from "@/components/home/DecisionStudioShell";
 import AnalyzePageEducation from "@/app/analyze/AnalyzePageEducation";
 import DeferredAnalyzeEducation from "@/components/ads/DeferredAnalyzeEducation";
+import PageRevenueStrip from "@/components/monetization/PageRevenueStrip";
 import { toolPageMetadata } from "@/lib/site-page-metadata";
 
 export const metadata: Metadata = toolPageMetadata({
@@ -27,6 +28,7 @@ export default function AnalyzePage() {
       <DeferredAnalyzeEducation>
         <AnalyzePageEducation />
       </DeferredAnalyzeEducation>
+      <PageRevenueStrip className="pb-10" adPlacement="footer" />
     </main>
   );
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import HowWeUseAiEducation from "@/lib/page-education/HowWeUseAiEducation";
 import HowWeUseAiPageClient from "./HowWeUseAiPageClient";
+import PageRevenueStrip from "@/components/monetization/PageRevenueStrip";
 import { toolPageMetadata } from "@/lib/site-page-metadata";
 
 export const metadata: Metadata = toolPageMetadata({
@@ -15,6 +16,7 @@ export default function HowWeUseAiPage() {
     <>
       <HowWeUseAiEducation />
       <HowWeUseAiPageClient />
+      <PageRevenueStrip className="pb-12" adPlacement="footer" />
     </>
   );
 }

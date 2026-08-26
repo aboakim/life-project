@@ -1,5 +1,6 @@
 import Link from "next/link";
 import MarketingPageShell from "@/components/layout/MarketingPageShell";
+import PageRevenueStrip from "@/components/monetization/PageRevenueStrip";
 import TrustInlineText from "@/components/trust/TrustInlineText";
 import type { TrustBlock, TrustFaqItem, TrustPageCopy } from "@/lib/i18n/trust-pages/types";
 import { getTrustLinkLabels } from "@/lib/i18n/trust-pages/link-labels";
@@ -123,6 +124,7 @@ export default function TrustPageView({ copy, locale }: Props) {
             </Link>
           </p>
         ) : null}
+        <PageRevenueStrip locale={locale} className="mt-10 px-0" adPlacement="footer" />
       </div>
     </MarketingPageShell>
   );

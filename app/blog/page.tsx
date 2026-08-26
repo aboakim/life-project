@@ -4,6 +4,7 @@ import MarketingPageShell from "@/components/layout/MarketingPageShell";
 import NewsletterCta from "@/components/blog/NewsletterCta";
 import BlogSearch, { type BlogSearchItem } from "@/components/blog/BlogSearch";
 import BlogArticleAdSlot from "@/components/blog/BlogArticleAdSlot";
+import AmazonAssociatesCta from "@/components/monetization/AmazonAssociatesCta";
 import { getAllPosts, getAllTagSlugs, tagToSlug } from "@/lib/blog/posts";
 import { getSiteUrlString } from "@/lib/site-url";
 
@@ -120,6 +121,8 @@ export default async function BlogIndexPage({
         <span aria-hidden="true">/</span>
         <span className="text-[rgb(var(--ink))]/90">Blog</span>
       </nav>
+
+      <AmazonAssociatesCta variant="compact" className="mb-8" />
 
       {tagSlugs.length > 0 ? (
         <section aria-labelledby="blog-tags-heading" className="mb-8">

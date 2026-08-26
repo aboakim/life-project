@@ -11,6 +11,9 @@ import { MONETAG_CONSENT_EVENT } from "@/lib/monetag-config";
 
 const LOCALE_KEY = "lde-locale";
 
+/** Footer / settings can reopen the banner so users who rejected can Accept later. */
+export const CONSENT_REOPEN_EVENT = "lde-consent-reopen";
+
 /**
  * GDPR / AdSense-compliant consent banner.
  *
@@ -112,6 +115,19 @@ export default function ConsentBanner() {
       // If localStorage is blocked (Safari private mode, etc.), default to showing the banner.
       setDecision(null);
     }
+  }, []);
+
+  useEffect(() => {
+    function onReopen() {
+      try {
+        window.localStorage.removeItem(STORAGE_KEY);
+      } catch {
+        /* ignore */
+      }
+      setDecision(null);
+    }
+    window.addEventListener(CONSENT_REOPEN_EVENT, onReopen);
+    return () => window.removeEventListener(CONSENT_REOPEN_EVENT, onReopen);
   }, []);
 
   function accept() {

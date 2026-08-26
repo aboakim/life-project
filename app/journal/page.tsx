@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import JournalEducation from "@/lib/page-education/JournalEducation";
 import JournalPageClient from "./JournalPageClient";
+import PageRevenueStrip from "@/components/monetization/PageRevenueStrip";
 import { toolPageMetadata } from "@/lib/site-page-metadata";
 
 export const metadata: Metadata = toolPageMetadata({
@@ -15,6 +16,7 @@ export default function JournalPage() {
     <>
       <JournalEducation />
       <JournalPageClient />
+      <PageRevenueStrip className="pb-12" adPlacement="footer" />
     </>
   );
 }

@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
-import { scheduleIdle } from "@/components/ads/ensure-adsbygoogle";
 import {
   MONETAG_CONSENT_EVENT,
   MONETAG_CONSENT_STORAGE_KEY,
@@ -40,33 +39,26 @@ function injectZoneScript(zone: string, src: string): void {
   document.body.appendChild(s);
 }
 
-/** HTTPS Classic Push needs /sw.js (already in public/, zone 11474462). */
 function ensurePushServiceWorker(): void {
   if (typeof navigator === "undefined" || !("serviceWorker" in navigator)) return;
   void navigator.serviceWorker.register("/sw.js").catch(() => {
-    /* ignore — private mode / blocked */
+    /* ignore */
   });
 }
 
 function injectAllMonetagZones(): void {
   const inPage = monetagInPageZone();
-  if (inPage) {
-    injectZoneScript(inPage, "https://nap5k.com/tag.min.js");
-  }
+  if (inPage) injectZoneScript(inPage, "https://nap5k.com/tag.min.js");
 
   for (const zone of monetagExtraZones()) {
     injectZoneScript(zone, "https://nap5k.com/tag.min.js");
   }
 
   const vignette = monetagVignetteZone();
-  if (vignette) {
-    injectZoneScript(vignette, "https://n6wxm.com/vignette.min.js");
-  }
+  if (vignette) injectZoneScript(vignette, "https://n6wxm.com/vignette.min.js");
 
   const multi = monetagMultitagZone();
-  if (multi) {
-    injectZoneScript(multi, "https://quge5.com/88/tag.min.js");
-  }
+  if (multi) injectZoneScript(multi, "https://quge5.com/88/tag.min.js");
 
   const pushZone = monetagClassicPushZone();
   if (pushZone) {
@@ -81,8 +73,7 @@ function injectAllMonetagZones(): void {
 }
 
 /**
- * Loads Monetag on all public pages after cookie consent
- * (In-Page, Excited extras, Vignette, MultiTag, Classic Push, Onclick).
+ * Injects all Monetag formats ASAP after cookie Accept on public pages.
  */
 export default function MonetagLoader() {
   const pathname = usePathname() || "/";
@@ -98,34 +89,24 @@ export default function MonetagLoader() {
       if (cancelled || armed.current) return;
       if (!hasAdConsent()) return;
       if (!isMonetagPathAllowed(window.location.pathname)) return;
-
       armed.current = true;
-      scheduleIdle(
-        () => {
-          if (cancelled) return;
-          injectAllMonetagZones();
-        },
-        { idleTimeoutMs: 1200, fallbackDelayMs: 800 },
-      );
+      injectAllMonetagZones();
     };
 
-    const onConsent = () => tryLoad();
-    window.addEventListener(MONETAG_CONSENT_EVENT, onConsent);
-
-    const onScroll = () => {
-      window.setTimeout(tryLoad, 200);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true, once: true });
+    window.addEventListener(MONETAG_CONSENT_EVENT, tryLoad);
+    window.addEventListener("scroll", tryLoad, { passive: true, once: true });
     window.addEventListener("pointerdown", tryLoad, { once: true });
 
     if (hasAdConsent()) {
-      window.setTimeout(tryLoad, 900);
+      // Next tick — avoid blocking first paint, but don't wait seconds.
+      queueMicrotask(tryLoad);
+      window.setTimeout(tryLoad, 400);
     }
 
     return () => {
       cancelled = true;
-      window.removeEventListener(MONETAG_CONSENT_EVENT, onConsent);
-      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener(MONETAG_CONSENT_EVENT, tryLoad);
+      window.removeEventListener("scroll", tryLoad);
       window.removeEventListener("pointerdown", tryLoad);
     };
   }, [pathname]);

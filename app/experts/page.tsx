@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import ExpertsMarketplace from "./ExpertsMarketplace";
 import ExpertsPageEducation from "./ExpertsPageEducation";
+import PageRevenueStrip from "@/components/monetization/PageRevenueStrip";
 import { toolPageMetadata } from "@/lib/site-page-metadata";
 
 export const metadata: Metadata = toolPageMetadata({
@@ -22,6 +23,7 @@ export default function ExpertsPage() {
       >
         <ExpertsMarketplace />
       </Suspense>
+      <PageRevenueStrip className="pb-12" adPlacement="footer" />
     </>
   );
 }

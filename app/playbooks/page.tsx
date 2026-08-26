@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PlaybooksEducation from "@/lib/page-education/PlaybooksEducation";
 import PlaybooksPageClient from "./PlaybooksPageClient";
+import PageRevenueStrip from "@/components/monetization/PageRevenueStrip";
 import { toolPageMetadata } from "@/lib/site-page-metadata";
 
 export const metadata: Metadata = toolPageMetadata({
@@ -15,6 +16,7 @@ export default function PlaybooksPage() {
     <>
       <PlaybooksEducation />
       <PlaybooksPageClient />
+      <PageRevenueStrip className="pb-12" adPlacement="footer" />
     </>
   );
 }
