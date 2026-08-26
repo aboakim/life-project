@@ -48,9 +48,41 @@ function ensurePushServiceWorker(): void {
   });
 }
 
+function injectAllMonetagZones(): void {
+  const inPage = monetagInPageZone();
+  if (inPage) {
+    injectZoneScript(inPage, "https://nap5k.com/tag.min.js");
+  }
+
+  for (const zone of monetagExtraZones()) {
+    injectZoneScript(zone, "https://nap5k.com/tag.min.js");
+  }
+
+  const vignette = monetagVignetteZone();
+  if (vignette) {
+    injectZoneScript(vignette, "https://n6wxm.com/vignette.min.js");
+  }
+
+  const multi = monetagMultitagZone();
+  if (multi) {
+    injectZoneScript(multi, "https://quge5.com/88/tag.min.js");
+  }
+
+  const pushZone = monetagClassicPushZone();
+  if (pushZone) {
+    ensurePushServiceWorker();
+    injectZoneScript(pushZone, monetagClassicPushScriptSrc());
+  }
+
+  const onclickZone = monetagOnclickPopunderZone();
+  if (onclickZone) {
+    injectZoneScript(onclickZone, monetagOnclickPopunderScriptSrc());
+  }
+}
+
 /**
- * Loads Monetag formats when consent is accepted on content pages:
- * In-Page Push, Vignette, MultiTag, Classic Push, Onclick Popunder, extras.
+ * Loads Monetag on all public pages after cookie consent
+ * (In-Page, Excited extras, Vignette, MultiTag, Classic Push, Onclick).
  */
 export default function MonetagLoader() {
   const pathname = usePathname() || "/";
@@ -61,7 +93,6 @@ export default function MonetagLoader() {
     if (!isMonetagPathAllowed(pathname)) return;
 
     let cancelled = false;
-    let idleArmed = false;
 
     const tryLoad = () => {
       if (cancelled || armed.current) return;
@@ -72,40 +103,9 @@ export default function MonetagLoader() {
       scheduleIdle(
         () => {
           if (cancelled) return;
-
-          const inPage = monetagInPageZone();
-          if (inPage) {
-            injectZoneScript(inPage, "https://nap5k.com/tag.min.js");
-          }
-
-          for (const zone of monetagExtraZones()) {
-            injectZoneScript(zone, "https://nap5k.com/tag.min.js");
-          }
-
-          const vignette = monetagVignetteZone();
-          if (vignette) {
-            injectZoneScript(vignette, "https://n6wxm.com/vignette.min.js");
-          }
-
-          const multi = monetagMultitagZone();
-          if (multi) {
-            injectZoneScript(multi, "https://quge5.com/88/tag.min.js");
-          }
-
-          // Classic Push (browser notifications)
-          const pushZone = monetagClassicPushZone();
-          if (pushZone) {
-            ensurePushServiceWorker();
-            injectZoneScript(pushZone, monetagClassicPushScriptSrc());
-          }
-
-          // Onclick (Popunder)
-          const onclickZone = monetagOnclickPopunderZone();
-          if (onclickZone) {
-            injectZoneScript(onclickZone, monetagOnclickPopunderScriptSrc());
-          }
+          injectAllMonetagZones();
         },
-        { idleTimeoutMs: 5000, fallbackDelayMs: 3500 },
+        { idleTimeoutMs: 1200, fallbackDelayMs: 800 },
       );
     };
 
@@ -113,22 +113,20 @@ export default function MonetagLoader() {
     window.addEventListener(MONETAG_CONSENT_EVENT, onConsent);
 
     const onScroll = () => {
-      if (idleArmed) return;
-      idleArmed = true;
-      window.setTimeout(tryLoad, 1200);
+      window.setTimeout(tryLoad, 200);
     };
     window.addEventListener("scroll", onScroll, { passive: true, once: true });
+    window.addEventListener("pointerdown", tryLoad, { once: true });
 
     if (hasAdConsent()) {
-      window.setTimeout(() => {
-        if (!idleArmed) tryLoad();
-      }, 6000);
+      window.setTimeout(tryLoad, 900);
     }
 
     return () => {
       cancelled = true;
       window.removeEventListener(MONETAG_CONSENT_EVENT, onConsent);
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("pointerdown", tryLoad);
     };
   }, [pathname]);
 

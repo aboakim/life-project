@@ -208,7 +208,7 @@ export default async function RootLayout({
           Site-wide AdSense bootstrap (matches AdSense → Verify code snippet).
           lazyOnload: after load + idle-friendly; Consent default in <head>
           runs first. ensureAdsbygoogleScript skips if this tag already exists.
-          Monetag is NOT loaded globally — see MonetagLoader (consent + content pages only; no vignette).
+          Monetag: MonetagLoader after consent on public pages (not /admin|/api|/experts/register).
         */}
         <Script
           id="adsense-adsbygoogle"

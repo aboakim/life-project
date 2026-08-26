@@ -97,47 +97,13 @@ export function monetagEnabled(): boolean {
   );
 }
 
-const ALLOW_PREFIXES = [
-  "/",
-  "/blog",
-  "/monetize",
-  "/faq",
-  "/about",
-  "/field-notes",
-  "/playbooks",
-  "/checklists",
-  "/how-we-use-ai",
-  "/editorial-standards",
-  "/editorial-team",
-  "/cookies",
-  "/privacy",
-  "/terms",
-  "/disclaimer",
-  "/content-policy",
-  "/contact",
-  "/experts",
-  "/pricing",
-  "/community",
-] as const;
-
-const BLOCK_PREFIXES = [
-  "/analyze",
-  "/admin",
-  "/experts/register",
-  "/api",
-] as const;
+/** Sensitive surfaces only — Monetag runs on all other public pages (incl. /analyze). */
+const BLOCK_PREFIXES = ["/admin", "/experts/register", "/api"] as const;
 
 export function isMonetagPathAllowed(pathname: string): boolean {
   const path = pathname.split("?")[0] || "/";
   for (const blocked of BLOCK_PREFIXES) {
     if (path === blocked || path.startsWith(`${blocked}/`)) return false;
   }
-  for (const allowed of ALLOW_PREFIXES) {
-    if (allowed === "/") {
-      if (path === "/") return true;
-      continue;
-    }
-    if (path === allowed || path.startsWith(`${allowed}/`)) return true;
-  }
-  return false;
+  return true;
 }
