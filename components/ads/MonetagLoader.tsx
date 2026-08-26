@@ -8,6 +8,7 @@ import {
   MONETAG_CONSENT_STORAGE_KEY,
   isMonetagPathAllowed,
   monetagEnabled,
+  monetagExtraZones,
   monetagInPageZone,
   monetagMultitagZone,
   monetagVignetteZone,
@@ -65,6 +66,10 @@ export default function MonetagLoader() {
           const inPage = monetagInPageZone();
           if (inPage) {
             injectZoneScript(inPage, "https://nap5k.com/tag.min.js");
+          }
+
+          for (const zone of monetagExtraZones()) {
+            injectZoneScript(zone, "https://nap5k.com/tag.min.js");
           }
 
           const vignette = monetagVignetteZone();
