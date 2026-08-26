@@ -24,15 +24,16 @@ const CSP = [
   "form-action 'self' https://checkout.stripe.com",
   "object-src 'none'",
   // Scripts we actually load today (Stripe, Google, Vercel, Monetag In-Page Push hosts).
-  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com https://checkout.stripe.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://www.googletagmanager.com https://www.google-analytics.com https://www.googletagservices.com https://va.vercel-scripts.com https://nap5k.com https://n6wxm.com https://quge5.com https://tzegilo.com",
-  "script-src-elem 'self' 'unsafe-inline' https://js.stripe.com https://checkout.stripe.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://www.googletagmanager.com https://www.google-analytics.com https://www.googletagservices.com https://va.vercel-scripts.com https://ep2.adtrafficquality.google https://nap5k.com https://n6wxm.com https://quge5.com https://tzegilo.com",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com https://checkout.stripe.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://www.googletagmanager.com https://www.google-analytics.com https://www.googletagservices.com https://va.vercel-scripts.com https://nap5k.com https://n6wxm.com https://quge5.com https://tzegilo.com https://5gvci.com",
+  "script-src-elem 'self' 'unsafe-inline' https://js.stripe.com https://checkout.stripe.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://www.googletagmanager.com https://www.google-analytics.com https://www.googletagservices.com https://va.vercel-scripts.com https://ep2.adtrafficquality.google https://nap5k.com https://n6wxm.com https://quge5.com https://tzegilo.com https://5gvci.com",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com data:",
   // AdSense serves creatives from several CDNs; allow the common ones.
   "img-src 'self' data: blob: https: *.gstatic.com *.doubleclick.net *.googlesyndication.com *.google.com *.stripe.com",
-  "connect-src 'self' https://api.stripe.com https://checkout.stripe.com https://m.stripe.network https://www.google-analytics.com https://region1.google-analytics.com https://pagead2.googlesyndication.com https://ep1.adtrafficquality.google https://ep2.adtrafficquality.google https://va.vercel-scripts.com https://vitals.vercel-insights.com https://my.rtmark.net https://ldrws.com https://jhnwr.com https://nap5k.com https://n6wxm.com https://quge5.com https://tzegilo.com",
-  // Stripe, AdSense, Monetag vignette frames.
-  "frame-src https://js.stripe.com https://hooks.stripe.com https://checkout.stripe.com https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://ep2.adtrafficquality.google https://n6wxm.com",
+  "connect-src 'self' https://api.stripe.com https://checkout.stripe.com https://m.stripe.network https://www.google-analytics.com https://region1.google-analytics.com https://pagead2.googlesyndication.com https://ep1.adtrafficquality.google https://ep2.adtrafficquality.google https://va.vercel-scripts.com https://vitals.vercel-insights.com https://my.rtmark.net https://ldrws.com https://jhnwr.com https://nap5k.com https://n6wxm.com https://quge5.com https://tzegilo.com https://5gvci.com",
+  // Stripe, AdSense, Monetag vignette / push frames.
+  "frame-src https://js.stripe.com https://hooks.stripe.com https://checkout.stripe.com https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://ep2.adtrafficquality.google https://n6wxm.com https://5gvci.com",
+  "worker-src 'self' https://5gvci.com blob:",
   "frame-ancestors 'none'",
   "upgrade-insecure-requests",
 ].join("; ");

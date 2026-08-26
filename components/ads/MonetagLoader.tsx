@@ -7,10 +7,14 @@ import {
   MONETAG_CONSENT_EVENT,
   MONETAG_CONSENT_STORAGE_KEY,
   isMonetagPathAllowed,
+  monetagClassicPushScriptSrc,
+  monetagClassicPushZone,
   monetagEnabled,
   monetagExtraZones,
   monetagInPageZone,
   monetagMultitagZone,
+  monetagOnclickPopunderScriptSrc,
+  monetagOnclickPopunderZone,
   monetagVignetteZone,
 } from "@/lib/monetag-config";
 
@@ -25,7 +29,7 @@ function hasAdConsent(): boolean {
 }
 
 function injectZoneScript(zone: string, src: string): void {
-  if (!zone || typeof document === "undefined") return;
+  if (!zone || !src || typeof document === "undefined") return;
   if (document.querySelector(`script[${LOADED_MARK}="${zone}"]`)) return;
 
   const s = document.createElement("script");
@@ -36,11 +40,17 @@ function injectZoneScript(zone: string, src: string): void {
   document.body.appendChild(s);
 }
 
+/** HTTPS Classic Push needs /sw.js (already in public/, zone 11474462). */
+function ensurePushServiceWorker(): void {
+  if (typeof navigator === "undefined" || !("serviceWorker" in navigator)) return;
+  void navigator.serviceWorker.register("/sw.js").catch(() => {
+    /* ignore — private mode / blocked */
+  });
+}
+
 /**
- * Loads all Monetag formats (In-Page Push, Vignette, MultiTag) when:
- *  - ads consent is accepted
- *  - path is a content page (not /analyze, /admin, forms)
- *  - after idle (won't fight first paint)
+ * Loads Monetag formats when consent is accepted on content pages:
+ * In-Page Push, Vignette, MultiTag, Classic Push, Onclick Popunder, extras.
  */
 export default function MonetagLoader() {
   const pathname = usePathname() || "/";
@@ -80,6 +90,19 @@ export default function MonetagLoader() {
           const multi = monetagMultitagZone();
           if (multi) {
             injectZoneScript(multi, "https://quge5.com/88/tag.min.js");
+          }
+
+          // Classic Push (browser notifications)
+          const pushZone = monetagClassicPushZone();
+          if (pushZone) {
+            ensurePushServiceWorker();
+            injectZoneScript(pushZone, monetagClassicPushScriptSrc());
+          }
+
+          // Onclick (Popunder)
+          const onclickZone = monetagOnclickPopunderZone();
+          if (onclickZone) {
+            injectZoneScript(onclickZone, monetagOnclickPopunderScriptSrc());
           }
         },
         { idleTimeoutMs: 5000, fallbackDelayMs: 3500 },
