@@ -17,6 +17,7 @@ import SkipToContent from "@/components/SkipToContent";
 import DeferredVercelMetrics from "@/components/DeferredVercelMetrics";
 import LocaleRefreshBridge from "@/components/LocaleRefreshBridge";
 import PageThemeBridge from "@/components/layout/PageThemeBridge";
+import MonetagLoader from "@/components/ads/MonetagLoader";
 import { PAGE_THEME_BOOTSTRAP_SCRIPT } from "@/lib/page-theme";
 import { isRtlLocale } from "@/lib/i18n/locale";
 import { localeFontVariableClasses } from "@/lib/locale-fonts";
@@ -203,33 +204,11 @@ export default async function RootLayout({
       <body
         className={`${fontVars} font-sans text-[1.0625rem] leading-relaxed antialiased md:text-[1.125rem] lg:text-[1.1875rem]`}
       >
-      <Script
-  id="media-net"
-  strategy="lazyOnload"
-  dangerouslySetInnerHTML={{
-    __html: `(function(s){s.dataset.zone='11546283',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`,
-  }}
-  />
-
-      <Script
-        id="media-net-vignette"
-        strategy="lazyOnload"
-        dangerouslySetInnerHTML={{
-          __html: `(function(s){s.dataset.zone='11546678',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`,
-        }}
-
-/>
-        <Script
-          id="monetag-new"
-          src="https://quge5.com/88/tag.min.js"
-          data-zone="268879"
-          strategy="lazyOnload"
-          async
-/>
         {/*
           Site-wide AdSense bootstrap (matches AdSense → Verify code snippet).
           lazyOnload: after load + idle-friendly; Consent default in <head>
           runs first. ensureAdsbygoogleScript skips if this tag already exists.
+          Monetag is NOT loaded globally — see MonetagLoader (consent + content pages only; no vignette).
         */}
         <Script
           id="adsense-adsbygoogle"
@@ -245,6 +224,7 @@ export default async function RootLayout({
         {children}
         <GlobalFooter />
         <ConsentBanner />
+        <MonetagLoader />
         <GoogleAnalytics />
         <DeferredVercelMetrics />
       </body>

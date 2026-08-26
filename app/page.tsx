@@ -10,6 +10,7 @@ import HomeNewsStatic from "@/components/home/HomeNewsStatic";
 import HomePublisherStatic from "@/components/home/HomePublisherStatic";
 import HomeSocialProofStatic from "@/components/home/HomeSocialProofStatic";
 import DeferredHomeStudio from "@/components/home/DeferredHomeStudio";
+import ContentAdRegion from "@/components/ads/ContentAdRegion";
 import { HERO_LCP_IMAGE_URL } from "@/lib/home/hero-slide-images";
 import { getServerPageLocale } from "@/lib/i18n/trust-pages/server-locale";
 
@@ -35,6 +36,7 @@ export default async function Home() {
       <HomePublisherStatic locale={locale} />
       <HomeHowItWorksStatic locale={locale} />
       <HomeNewsStatic locale={locale} />
+      <ContentAdRegion placement="mid" className="px-4 sm:px-6" />
       <HomeSocialProofStatic locale={locale} />
       <DeferredHomeStudio />
     </main>

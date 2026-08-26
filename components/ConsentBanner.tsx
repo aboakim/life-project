@@ -7,6 +7,7 @@ import { isAppLocale, type AppLocale } from "@/lib/i18n/locale";
 import { readLocaleCookieClient } from "@/lib/locale-cookie";
 import { getTrustNav } from "@/lib/i18n/trust-nav";
 import { LOCALE_CHANGE_EVENT } from "@/lib/locale-sync";
+import { MONETAG_CONSENT_EVENT } from "@/lib/monetag-config";
 
 const LOCALE_KEY = "lde-locale";
 
@@ -126,6 +127,11 @@ export default function ConsentBanner() {
       analytics_storage: "granted",
     });
     setDecision("accepted");
+    try {
+      window.dispatchEvent(new Event(MONETAG_CONSENT_EVENT));
+    } catch {
+      /* ignore */
+    }
   }
 
   function reject() {
@@ -141,6 +147,11 @@ export default function ConsentBanner() {
       analytics_storage: "denied",
     });
     setDecision("rejected");
+    try {
+      window.dispatchEvent(new Event(MONETAG_CONSENT_EVENT));
+    } catch {
+      /* ignore */
+    }
   }
 
   if (decision !== null) return null;
