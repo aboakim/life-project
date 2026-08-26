@@ -40,7 +40,6 @@ import {
   LOCALE_CHANGE_EVENT,
   dispatchLocaleChanged,
 } from "@/lib/locale-sync";
-import { triggerMonetagOnAnalyzeClick } from "@/lib/monetag-analyze-offer";
 import {
   type InitialPreset,
   parsePresetQuery,
@@ -761,7 +760,6 @@ export default function DecisionStudio({
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!canSubmit) return;
-    triggerMonetagOnAnalyzeClick();
     if (!getStoredSubscriberId()) {
       setPreAnalysisEmailOpen(true);
       return;
@@ -882,7 +880,6 @@ export default function DecisionStudio({
   const onAnalyzeCtaClick = useCallback(
     (e?: React.MouseEvent<HTMLElement>) => {
       e?.preventDefault();
-      triggerMonetagOnAnalyzeClick();
       scrollToAnalyzer();
     },
     [scrollToAnalyzer],
