@@ -2,6 +2,7 @@ import Link from "next/link";
 import { isRtlLocale, type AppLocale } from "@/lib/i18n/locale";
 import { getUi } from "@/lib/i18n/ui";
 import { getHowFlowIntro, getHowFlowSteps } from "@/lib/home/home-how-flow";
+import AnalyzeCtaLink from "@/components/ads/AnalyzeCtaLink";
 
 type Props = { locale: AppLocale };
 
@@ -156,19 +157,19 @@ export default function HomeHowItWorksStatic({ locale }: Props) {
         </ol>
 
         <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-          <Link
+          <AnalyzeCtaLink
             href="/analyze"
             className="inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-8 py-3.5 text-base font-bold text-white shadow-lg shadow-[rgb(var(--accent)/0.28)] transition hover:brightness-110 sm:w-auto"
           >
             {t.heroCtaPrimary}
             <span aria-hidden>→</span>
-          </Link>
-          <Link
+          </AnalyzeCtaLink>
+          <AnalyzeCtaLink
             href="/analyze"
             className="inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl border border-white/[0.14] bg-white/[0.06] px-6 py-3 text-sm font-semibold text-[rgb(var(--ink))] transition hover:bg-white/[0.1] sm:w-auto"
           >
             {t.homeDemoCta}: {t.homeDemoExample2}
-          </Link>
+          </AnalyzeCtaLink>
         </div>
       </div>
     </section>

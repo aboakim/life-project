@@ -2,6 +2,7 @@ import Link from "next/link";
 import { isRtlLocale, type AppLocale } from "@/lib/i18n/locale";
 import { getUi } from "@/lib/i18n/ui";
 import HomeIconBadge from "@/components/home/HomeIconBadge";
+import AnalyzeCtaLink from "@/components/ads/AnalyzeCtaLink";
 
 type Props = { locale: AppLocale };
 
@@ -54,13 +55,13 @@ export default function HomeAtAGlanceStatic({ locale }: Props) {
         </div>
 
         <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-          <Link
+          <AnalyzeCtaLink
             href="/analyze"
             className="inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-8 py-3.5 text-base font-bold text-white shadow-lg shadow-[rgb(var(--accent)/0.28)] transition hover:brightness-110 sm:w-auto"
           >
             {t.heroCtaPrimary}
             <span aria-hidden>→</span>
-          </Link>
+          </AnalyzeCtaLink>
           <Link
             href="/blog"
             className="inline-flex min-h-[52px] w-full items-center justify-center rounded-2xl border border-white/[0.14] bg-white/[0.06] px-8 py-3.5 text-base font-semibold text-[rgb(var(--ink))] transition hover:bg-white/[0.1] sm:w-auto"
