@@ -139,14 +139,16 @@ export default function HomeHeroStatic({ locale: localeProp }: Props = {}) {
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                 <Link
                   href="/analyze"
-                  className="home-hero-cta inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-8 py-3.5 text-base font-bold text-white shadow-xl shadow-[rgb(var(--accent)/0.28)] transition hover:brightness-110 sm:w-auto"
+                  className="home-hero-cta inline-flex min-h-[64px] w-full items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-10 py-5 text-lg font-extrabold tracking-tight text-white shadow-[0_16px_48px_-12px_rgb(var(--accent)/0.55)] ring-1 ring-white/20 transition hover:brightness-110 motion-safe:hover:scale-[1.02] motion-safe:active:scale-[0.98] sm:min-h-[72px] sm:w-auto sm:px-12 sm:py-6 sm:text-xl"
                 >
                   {t.heroCtaPrimary}
-                  <span aria-hidden>→</span>
+                  <span aria-hidden className="text-xl sm:text-2xl">
+                    →
+                  </span>
                 </Link>
                 <Link
                   href="/experts"
-                  className="inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-2xl border border-white/[0.16] bg-white/[0.06] px-7 py-3.5 text-base font-semibold text-[rgb(var(--ink))] transition hover:bg-white/[0.1] sm:w-auto"
+                  className="inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-2xl border border-white/[0.16] bg-white/[0.06] px-6 py-3 text-sm font-semibold text-[rgb(var(--ink))] transition hover:bg-white/[0.1] sm:w-auto sm:text-base"
                 >
                   {t.heroCtaSecondary}
                 </Link>
