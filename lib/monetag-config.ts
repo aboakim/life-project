@@ -1,39 +1,44 @@
 /**
- * Monetag (ex-PropellerAds) — controlled loading.
- *
- * Defaults: In-Page Push only, never vignette/onclick globally.
- * Zone IDs can be overridden via env. Leave empty to disable that format.
+ * Monetag — all active zone formats (In-Page Push, Vignette, MultiTag).
+ * Zone IDs override via env; set a zone to empty string to disable that format only.
+ * Master kill switch: NEXT_PUBLIC_MONETAG_ENABLED=0
  */
 
 export const MONETAG_CONSENT_STORAGE_KEY = "lde.consent.v1";
 export const MONETAG_CONSENT_EVENT = "lde-consent-change";
 
-/** In-Page Push — corner notice; least disruptive Monetag format we use. */
+/** In-Page Push (nap5k.com/tag.min.js) */
 export function monetagInPageZone(): string {
-  return (
-    process.env.NEXT_PUBLIC_MONETAG_INPAGE_ZONE?.trim() ||
-    "11546283"
-  );
+  const v = process.env.NEXT_PUBLIC_MONETAG_INPAGE_ZONE;
+  if (v !== undefined) return v.trim();
+  return "11546283";
 }
 
-/**
- * Optional MultiTag / secondary zone (quge5). Empty = off.
- * Set NEXT_PUBLIC_MONETAG_MULTITAG_ZONE=268879 to enable.
- */
+/** Vignette banner (n6wxm.com/vignette.min.js) */
+export function monetagVignetteZone(): string {
+  const v = process.env.NEXT_PUBLIC_MONETAG_VIGNETTE_ZONE;
+  if (v !== undefined) return v.trim();
+  return "11546678";
+}
+
+/** MultiTag / secondary (quge5.com/88/tag.min.js) — covers extra formats in dashboard */
 export function monetagMultitagZone(): string {
-  return process.env.NEXT_PUBLIC_MONETAG_MULTITAG_ZONE?.trim() || "";
+  const v = process.env.NEXT_PUBLIC_MONETAG_MULTITAG_ZONE;
+  if (v !== undefined) return v.trim();
+  return "268879";
 }
 
 /** Master switch — set to "0" to disable all Monetag. */
 export function monetagEnabled(): boolean {
   const flag = process.env.NEXT_PUBLIC_MONETAG_ENABLED?.trim();
   if (flag === "0" || flag === "false") return false;
-  return Boolean(monetagInPageZone() || monetagMultitagZone());
+  return Boolean(
+    monetagInPageZone() || monetagVignetteZone() || monetagMultitagZone(),
+  );
 }
 
 /**
  * Content pages only — never analyzer focus, admin, or form-heavy flows.
- * In-Page Push still draws its own corner UI; we only choose *when* it can load.
  */
 const ALLOW_PREFIXES = [
   "/",
@@ -53,6 +58,9 @@ const ALLOW_PREFIXES = [
   "/disclaimer",
   "/content-policy",
   "/contact",
+  "/experts",
+  "/pricing",
+  "/community",
 ] as const;
 
 const BLOCK_PREFIXES = [

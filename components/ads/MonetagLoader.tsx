@@ -10,6 +10,7 @@ import {
   monetagEnabled,
   monetagInPageZone,
   monetagMultitagZone,
+  monetagVignetteZone,
 } from "@/lib/monetag-config";
 
 const LOADED_MARK = "data-lde-monetag-zone";
@@ -35,12 +36,10 @@ function injectZoneScript(zone: string, src: string): void {
 }
 
 /**
- * Loads Monetag only when:
+ * Loads all Monetag formats (In-Page Push, Vignette, MultiTag) when:
  *  - ads consent is accepted
  *  - path is a content page (not /analyze, /admin, forms)
- *  - after idle + short delay (won't fight first paint)
- *
- * Vignette / popunder scripts are intentionally not loaded.
+ *  - after idle (won't fight first paint)
  */
 export default function MonetagLoader() {
   const pathname = usePathname() || "/";
@@ -62,20 +61,20 @@ export default function MonetagLoader() {
       scheduleIdle(
         () => {
           if (cancelled) return;
+
           const inPage = monetagInPageZone();
           if (inPage) {
-            // In-Page Push (corner banner) — nap5k host used by Monetag zones.
-            injectZoneScript(
-              inPage,
-              "https://nap5k.com/tag.min.js",
-            );
+            injectZoneScript(inPage, "https://nap5k.com/tag.min.js");
           }
+
+          const vignette = monetagVignetteZone();
+          if (vignette) {
+            injectZoneScript(vignette, "https://n6wxm.com/vignette.min.js");
+          }
+
           const multi = monetagMultitagZone();
           if (multi) {
-            injectZoneScript(
-              multi,
-              "https://quge5.com/88/tag.min.js",
-            );
+            injectZoneScript(multi, "https://quge5.com/88/tag.min.js");
           }
         },
         { idleTimeoutMs: 5000, fallbackDelayMs: 3500 },
@@ -85,7 +84,6 @@ export default function MonetagLoader() {
     const onConsent = () => tryLoad();
     window.addEventListener(MONETAG_CONSENT_EVENT, onConsent);
 
-    // Wait for a bit of scroll so ads don't appear on first paint.
     const onScroll = () => {
       if (idleArmed) return;
       idleArmed = true;
@@ -93,7 +91,6 @@ export default function MonetagLoader() {
     };
     window.addEventListener("scroll", onScroll, { passive: true, once: true });
 
-    // Returning visitors who already consented + scrolled previously.
     if (hasAdConsent()) {
       window.setTimeout(() => {
         if (!idleArmed) tryLoad();
