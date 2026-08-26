@@ -171,7 +171,10 @@ const ANALYSIS_UI_MIN_MS = 0;
 function scrollSectionResultsIntoView() {
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      document.getElementById("section-results")?.scrollIntoView({
+      const el =
+        document.getElementById("results-main-heading") ??
+        document.getElementById("section-results");
+      el?.scrollIntoView({
         behavior: "instant",
         block: "start",
       });
@@ -1616,8 +1619,15 @@ export default function DecisionStudio({
             NEXT_PUBLIC_ADSENSE_SLOT_HOME is set (i.e. post-AdSense-approval). */}
         <AdSenseBanner placement="top" className="my-2" />
 
-        {/* Workspace: disclaimer + analyzer */}
-        <RevealOnScroll>
+        <div
+          className={
+            a
+              ? "flex flex-col gap-4"
+              : undefined
+          }
+        >
+        {/* Workspace: disclaimer + analyzer — below results once an answer exists */}
+        <RevealOnScroll className={a ? "order-2" : undefined}>
         <section
           id="section-workspace"
           className="home-section-wash home-section-wash--workspace scroll-mt-32 rounded-[1.85rem] px-3 pt-16 pb-1 sm:px-4 sm:pt-20"
@@ -2095,12 +2105,15 @@ export default function DecisionStudio({
 
         {/* Inline ad — between the analyzer form and the results panel. Renders
             only when NEXT_PUBLIC_ADSENSE_SLOT_INLINE is set. */}
-        <AdSenseBanner placement="inline" className="my-4" />
+        <AdSenseBanner
+          placement="inline"
+          className={`my-4${a ? " order-3" : ""}`}
+        />
 
         {a && (
           <section
             id="section-results"
-            className="home-section-wash home-section-wash--results scroll-mt-28 mt-8 space-y-6 rounded-[1.85rem] border-2 border-emerald-500/30 bg-gradient-to-b from-emerald-500/[0.07] to-transparent px-3 pt-8 sm:px-4"
+            className="home-section-wash home-section-wash--results order-1 scroll-mt-28 mt-8 space-y-6 rounded-[1.85rem] border-2 border-emerald-500/30 bg-gradient-to-b from-emerald-500/[0.07] to-transparent px-3 pt-8 sm:px-4"
             aria-labelledby="results-main-heading"
           >
             <div
@@ -2123,121 +2136,8 @@ export default function DecisionStudio({
                 {resultCheerLine}
               </p>
             ) : null}
-            <div className="mx-auto max-w-xl px-2">
-              <div className="overflow-hidden rounded-[1.35rem] border border-emerald-400/30 bg-gradient-to-b from-emerald-500/[0.14] via-black/40 to-black/55 p-[1px] shadow-[0_28px_70px_-40px_rgb(52_211_153/0.45)] backdrop-blur-md">
-                <div className="rounded-[1.3rem] bg-black/35 px-3 py-4 sm:px-5 sm:py-5">
-                  <AmazonAssociatesCta variant="compact" locale={locale} />
-                  <div
-                    className="relative my-5 flex items-center gap-3 sm:my-6"
-                    aria-hidden
-                  >
-                    <div className="h-px flex-1 bg-gradient-to-r from-transparent via-emerald-400/35 to-transparent" />
-                    <span className="home-emerald-dot-pulse flex size-2 shrink-0 rounded-full bg-emerald-400/70 shadow-[0_0_14px_rgb(52_211_153/0.65)] ring-4 ring-emerald-400/15" />
-                    <div className="h-px flex-1 bg-gradient-to-l from-transparent via-emerald-400/35 to-transparent" />
-              </div>
-                  <div
-                    className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-5"
-                    role="group"
-                    aria-label={t.resultFeedbackPrompt}
-                  >
-                    <span className="text-center text-[13px] font-semibold tracking-wide text-emerald-100/90">
-                      {t.resultFeedbackPrompt}
-                    </span>
-                    <div className="flex items-center gap-3">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setResultHelpful("up");
-                          try {
-                            window.localStorage.setItem(
-                              "lde-feedback-last",
-                              "up",
-                            );
-                          } catch {
-                            /* ignore */
-                          }
-                        }}
-                        className={`inline-flex size-12 items-center justify-center rounded-2xl border text-xl shadow-lg transition motion-safe:active:scale-95 ${
-                          resultHelpful === "up"
-                            ? "border-emerald-400/70 bg-gradient-to-b from-emerald-500/35 to-emerald-600/20 text-emerald-50 ring-2 ring-emerald-400/45"
-                            : "border-white/18 bg-white/[0.07] text-emerald-100/95 hover:border-emerald-400/40 hover:bg-emerald-500/15"
-                        }`}
-                        aria-pressed={resultHelpful === "up"}
-                      >
-                        <span aria-hidden>👍</span>
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setResultHelpful("down");
-                          try {
-                            window.localStorage.setItem(
-                              "lde-feedback-last",
-                              "down",
-                            );
-                          } catch {
-                            /* ignore */
-                          }
-                        }}
-                        className={`inline-flex size-12 items-center justify-center rounded-2xl border text-xl shadow-lg transition motion-safe:active:scale-95 ${
-                          resultHelpful === "down"
-                            ? "border-rose-400/55 bg-gradient-to-b from-rose-500/30 to-rose-700/20 text-rose-50 ring-2 ring-rose-400/35"
-                            : "border-white/18 bg-white/[0.07] text-rose-100/90 hover:border-rose-400/35 hover:bg-rose-500/15"
-                        }`}
-                        aria-pressed={resultHelpful === "down"}
-                      >
-                        <span aria-hidden>👎</span>
-                      </button>
-            </div>
-        </div>
-                  {resultHelpful ? (
-                    <p className="mt-4 text-center text-[12px] font-medium leading-relaxed text-emerald-200/95">
-                      {t.resultFeedbackThanks}
-                    </p>
-                  ) : null}
-                </div>
-              </div>
-            </div>
-            <TiltPlane
-              className="animate-fade-up block w-full"
-              innerClassName="rounded-2xl"
-              maxTilt={5}
-              floatZ={8}
-            >
-              <div className="flex flex-col gap-4 rounded-2xl border border-[rgb(var(--accent-2))]/35 bg-gradient-to-br from-[rgb(var(--accent))]/14 via-white/[0.04] to-transparent px-4 py-4 shadow-[0_16px_48px_-28px_rgb(var(--accent)/0.45)] sm:px-6">
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-                  <p className="max-w-2xl text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
-                    {pa.runAnotherHint}
-                  </p>
-                  <div className="flex w-full flex-col gap-2 sm:w-auto sm:min-w-0 sm:flex-row sm:items-center sm:gap-2">
-                    <ReadAloudReportButton
-                      text={readAloudText}
-                      locale={locale}
-                      labels={{
-                        readAloud: t.readAloud,
-                        stop: t.readAloudStop,
-                      }}
-                    />
-                    <button
-                      type="button"
-                      onClick={scrollToAnalyzer}
-                      className="shrink-0 rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-[rgb(var(--accent)/0.28)] transition hover:brightness-110"
-                    >
-                      {pa.runAnotherCta}
-                    </button>
-                  </div>
-                </div>
-                <div className="border-t border-white/[0.08] pt-4">
-                  <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[rgb(var(--accent-dim))]">
-                    {pa.runAnotherTrustTitle}
-                  </p>
-                  <p className="mt-2 max-w-3xl text-xs leading-relaxed text-[rgb(var(--ink-soft))]/90 [text-wrap:pretty]">
-                    {pa.runAnotherTrustBody}
-                  </p>
-                </div>
-              </div>
-            </TiltPlane>
 
+            {/* Answer first — summary + score at the top of results */}
             <section className="glass animate-fade-up rounded-3xl p-6 sm:p-7">
               <h2 className="text-lg font-semibold text-[rgb(var(--ink))]">
                 {t.sectionSummary}
@@ -2254,6 +2154,17 @@ export default function DecisionStudio({
                   {stakesLevel}/10
                 </span>
               </p>
+            </section>
+
+            <section className="glass animate-fade-up rounded-3xl p-6 sm:p-7">
+              <h2 className="text-lg font-semibold">{t.sectionScore}</h2>
+              <div className="mt-6 grid gap-8 sm:grid-cols-[auto,1fr] sm:items-start">
+                <ScoreCircle score={a.score} sublabel={t.scoreSublabel} />
+                <AnalysisBody
+                  value={a.scoreRationale}
+                  emptyLabel={t.analysisEmptyDetail}
+                />
+              </div>
             </section>
 
             {(a.professionalGuidance ?? "").trim() ? (
@@ -2591,17 +2502,6 @@ export default function DecisionStudio({
             </section>
 
             <section className="glass animate-fade-up rounded-3xl p-6 sm:p-7">
-              <h2 className="text-lg font-semibold">{t.sectionScore}</h2>
-              <div className="mt-6 grid gap-8 sm:grid-cols-[auto,1fr] sm:items-start">
-                <ScoreCircle score={a.score} sublabel={t.scoreSublabel} />
-                <AnalysisBody
-                  value={a.scoreRationale}
-                  emptyLabel={t.analysisEmptyDetail}
-                />
-              </div>
-            </section>
-
-            <section className="glass animate-fade-up rounded-3xl p-6 sm:p-7">
               <h2 className="text-lg font-semibold">{t.sectionTwin}</h2>
               <div className="mt-3">
                 <AnalysisBody
@@ -2610,6 +2510,122 @@ export default function DecisionStudio({
                 />
               </div>
             </section>
+
+            <TiltPlane
+              className="animate-fade-up block w-full"
+              innerClassName="rounded-2xl"
+              maxTilt={5}
+              floatZ={8}
+            >
+              <div className="flex flex-col gap-4 rounded-2xl border border-[rgb(var(--accent-2))]/35 bg-gradient-to-br from-[rgb(var(--accent))]/14 via-white/[0.04] to-transparent px-4 py-4 shadow-[0_16px_48px_-28px_rgb(var(--accent)/0.45)] sm:px-6">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+                  <p className="max-w-2xl text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty]">
+                    {pa.runAnotherHint}
+                  </p>
+                  <div className="flex w-full flex-col gap-2 sm:w-auto sm:min-w-0 sm:flex-row sm:items-center sm:gap-2">
+                    <ReadAloudReportButton
+                      text={readAloudText}
+                      locale={locale}
+                      labels={{
+                        readAloud: t.readAloud,
+                        stop: t.readAloudStop,
+                      }}
+                    />
+                    <button
+                      type="button"
+                      onClick={scrollToAnalyzer}
+                      className="shrink-0 rounded-2xl bg-gradient-to-r from-[rgb(var(--accent))] via-[rgb(var(--accent-2))] to-[rgb(var(--accent-magenta))] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-[rgb(var(--accent)/0.28)] transition hover:brightness-110"
+                    >
+                      {pa.runAnotherCta}
+                    </button>
+                  </div>
+                </div>
+                <div className="border-t border-white/[0.08] pt-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[rgb(var(--accent-dim))]">
+                    {pa.runAnotherTrustTitle}
+                  </p>
+                  <p className="mt-2 max-w-3xl text-xs leading-relaxed text-[rgb(var(--ink-soft))]/90 [text-wrap:pretty]">
+                    {pa.runAnotherTrustBody}
+                  </p>
+                </div>
+              </div>
+            </TiltPlane>
+
+            <div className="mx-auto max-w-xl px-2">
+              <div className="overflow-hidden rounded-[1.35rem] border border-emerald-400/30 bg-gradient-to-b from-emerald-500/[0.14] via-black/40 to-black/55 p-[1px] shadow-[0_28px_70px_-40px_rgb(52_211_153/0.45)] backdrop-blur-md">
+                <div className="rounded-[1.3rem] bg-black/35 px-3 py-4 sm:px-5 sm:py-5">
+                  <AmazonAssociatesCta variant="compact" locale={locale} />
+                  <div
+                    className="relative my-5 flex items-center gap-3 sm:my-6"
+                    aria-hidden
+                  >
+                    <div className="h-px flex-1 bg-gradient-to-r from-transparent via-emerald-400/35 to-transparent" />
+                    <span className="home-emerald-dot-pulse flex size-2 shrink-0 rounded-full bg-emerald-400/70 shadow-[0_0_14px_rgb(52_211_153/0.65)] ring-4 ring-emerald-400/15" />
+                    <div className="h-px flex-1 bg-gradient-to-l from-transparent via-emerald-400/35 to-transparent" />
+                  </div>
+                  <div
+                    className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-5"
+                    role="group"
+                    aria-label={t.resultFeedbackPrompt}
+                  >
+                    <span className="text-center text-[13px] font-semibold tracking-wide text-emerald-100/90">
+                      {t.resultFeedbackPrompt}
+                    </span>
+                    <div className="flex items-center gap-3">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setResultHelpful("up");
+                          try {
+                            window.localStorage.setItem(
+                              "lde-feedback-last",
+                              "up",
+                            );
+                          } catch {
+                            /* ignore */
+                          }
+                        }}
+                        className={`inline-flex size-12 items-center justify-center rounded-2xl border text-xl shadow-lg transition motion-safe:active:scale-95 ${
+                          resultHelpful === "up"
+                            ? "border-emerald-400/70 bg-gradient-to-b from-emerald-500/35 to-emerald-600/20 text-emerald-50 ring-2 ring-emerald-400/45"
+                            : "border-white/18 bg-white/[0.07] text-emerald-100/95 hover:border-emerald-400/40 hover:bg-emerald-500/15"
+                        }`}
+                        aria-pressed={resultHelpful === "up"}
+                      >
+                        <span aria-hidden>👍</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setResultHelpful("down");
+                          try {
+                            window.localStorage.setItem(
+                              "lde-feedback-last",
+                              "down",
+                            );
+                          } catch {
+                            /* ignore */
+                          }
+                        }}
+                        className={`inline-flex size-12 items-center justify-center rounded-2xl border text-xl shadow-lg transition motion-safe:active:scale-95 ${
+                          resultHelpful === "down"
+                            ? "border-rose-400/55 bg-gradient-to-b from-rose-500/30 to-rose-700/20 text-rose-50 ring-2 ring-rose-400/35"
+                            : "border-white/18 bg-white/[0.07] text-rose-100/90 hover:border-rose-400/35 hover:bg-rose-500/15"
+                        }`}
+                        aria-pressed={resultHelpful === "down"}
+                      >
+                        <span aria-hidden>👎</span>
+                      </button>
+                    </div>
+                  </div>
+                  {resultHelpful ? (
+                    <p className="mt-4 text-center text-[12px] font-medium leading-relaxed text-emerald-200/95">
+                      {t.resultFeedbackThanks}
+                    </p>
+                  ) : null}
+                </div>
+              </div>
+            </div>
 
             {result ? (
               <AnalysisResultTools
@@ -2649,6 +2665,7 @@ export default function DecisionStudio({
             </footer>
           </section>
         )}
+        </div>
 
         {/* Footer ad — between the premium CTA / results block and the privacy
             section. Renders only when NEXT_PUBLIC_ADSENSE_SLOT_FOOTER is set. */}
