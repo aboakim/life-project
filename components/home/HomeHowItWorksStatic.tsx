@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { isRtlLocale, type AppLocale } from "@/lib/i18n/locale";
 import { getUi } from "@/lib/i18n/ui";
 import { getHowFlowIntro, getHowFlowSteps } from "@/lib/home/home-how-flow";
