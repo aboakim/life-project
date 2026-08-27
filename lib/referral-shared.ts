@@ -20,3 +20,6 @@ export type ReferralStatusPayload = {
   freeNeeded: number;
   premiumNeeded: number;
 };
+
+/** Open package Free/Premium gate (DecisionStudio listens). */
+export const PACKAGE_GATE_EVENT = "lde-open-package-gate";

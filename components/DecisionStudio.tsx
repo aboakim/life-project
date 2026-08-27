@@ -85,6 +85,7 @@ import {
   getStoredReferralCode,
   isAnalyzeEntitledLocally,
 } from "@/lib/referral-storage";
+import { PACKAGE_GATE_EVENT } from "@/lib/referral-shared";
 
 const KonamiSurprise = dynamic(
   () => import("@/components/home/KonamiSurprise"),
@@ -410,6 +411,8 @@ export default function DecisionStudio({
   const [shareUnlockGoal, setShareUnlockGoal] = useState<"free" | "premium">(
     "free",
   );
+  /** After unlock: scroll to form (CTA) or run analysis (submit). */
+  const unlockIntentRef = useRef<"scroll" | "run">("scroll");
   /** Defer welcome modal until idle so LCP can paint hero first (mobile PSI). */
   const [deferWelcomeMount, setDeferWelcomeMount] = useState(false);
   useEffect(() => {
@@ -537,17 +540,48 @@ export default function DecisionStudio({
     };
   }, [focusLayout, skipHero]);
 
-  /** /analyze: land on the writing form immediately. */
+  /** /analyze or ?package=1: open package gate unless already unlocked. */
   useEffect(() => {
-    if (!focusLayout || skipHero) return;
-    const id = window.setTimeout(() => {
-      document
-        .getElementById("section-workspace")
-        ?.scrollIntoView({ block: "start" });
-      document.getElementById("decision-input")?.focus({ preventScroll: true });
-    }, 80);
-    return () => window.clearTimeout(id);
-  }, [focusLayout, skipHero]);
+    let cancelled = false;
+    const params = new URLSearchParams(window.location.search);
+    const forcePackage = params.get("package") === "1";
+    if (!focusLayout && !forcePackage) return;
+
+    void (async () => {
+      const status = await fetchReferralStatus();
+      if (cancelled) return;
+      const entitled =
+        Boolean(status?.freeUnlocked) ||
+        Boolean(status?.premiumUnlocked) ||
+        isAnalyzeEntitledLocally();
+      if (entitled) {
+        if (focusLayout || forcePackage) {
+          window.setTimeout(() => {
+            document
+              .getElementById("section-workspace")
+              ?.scrollIntoView({ block: "start" });
+            document
+              .getElementById("decision-input")
+              ?.focus({ preventScroll: true });
+          }, 80);
+        }
+        return;
+      }
+      unlockIntentRef.current = "scroll";
+      setPackageModalOpen(true);
+    })();
+
+    if (forcePackage) {
+      params.delete("package");
+      const q = params.toString();
+      const path = window.location.pathname;
+      window.history.replaceState({}, "", q ? `${path}?${q}` : path);
+    }
+
+    return () => {
+      cancelled = true;
+    };
+  }, [focusLayout]);
 
   useEffect(() => {
     if (focusLayout) return;
@@ -778,6 +812,7 @@ export default function DecisionStudio({
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!canSubmit) return;
+    unlockIntentRef.current = "run";
     void (async () => {
       const status = await fetchReferralStatus();
       const entitled =
@@ -906,11 +941,29 @@ export default function DecisionStudio({
     }, 30);
   }, []);
 
-  /** Open writing form immediately (no package gate). */
+  useEffect(() => {
+    function onGate() {
+      unlockIntentRef.current = "scroll";
+      if (isAnalyzeEntitledLocally()) {
+        scrollToAnalyzer();
+        return;
+      }
+      setPackageModalOpen(true);
+    }
+    window.addEventListener(PACKAGE_GATE_EVENT, onGate);
+    return () => window.removeEventListener(PACKAGE_GATE_EVENT, onGate);
+  }, [scrollToAnalyzer]);
+
+  /** Open package picker first; only scroll if already unlocked. */
   const onAnalyzeCtaClick = useCallback(
     (e?: React.MouseEvent<HTMLElement>) => {
       e?.preventDefault();
-      scrollToAnalyzer();
+      unlockIntentRef.current = "scroll";
+      if (isAnalyzeEntitledLocally()) {
+        scrollToAnalyzer();
+        return;
+      }
+      setPackageModalOpen(true);
     },
     [scrollToAnalyzer],
   );
@@ -918,12 +971,16 @@ export default function DecisionStudio({
   const continueAfterUnlock = useCallback(() => {
     setShareUnlockOpen(false);
     setPackageModalOpen(false);
+    if (unlockIntentRef.current === "scroll") {
+      scrollToAnalyzer();
+      return;
+    }
     if (!getStoredSubscriberId()) {
       setPreAnalysisEmailOpen(true);
       return;
     }
     void runAnalysis();
-  }, [runAnalysis]);
+  }, [runAnalysis, scrollToAnalyzer]);
 
   const onPickFreePackage = useCallback(() => {
     setPackageModalOpen(false);

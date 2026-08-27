@@ -62,7 +62,7 @@ export default function GlobalFooter() {
       {
         title: tn.footerColProduct,
         links: [
-          { href: "/analyze", label: ui.sectionNavAnalyzer },
+          { href: "/analyze?package=1", label: ui.sectionNavAnalyzer },
           { href: "/journal", label: sx.footerJournal },
           { href: "/checklists", label: sx.footerChecklists },
           { href: "/field-notes", label: nx.footerFieldNotes },

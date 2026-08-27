@@ -190,7 +190,7 @@ export default function GlobalNav() {
   ];
 
   const primaryLinks: MoreLink[] = [
-    { href: "/analyze", label: ec.navHome },
+    { href: "/analyze?package=1", label: ec.navHome },
     { href: "/experts", label: ec.navExperts },
     { href: "/community", label: cq.navLabel },
     { href: "/pricing", label: pr.navPricing },
