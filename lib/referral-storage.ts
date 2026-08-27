@@ -4,7 +4,7 @@ import {
   REFERRAL_FREE_HITS,
   REFERRAL_PREMIUM_HITS,
   type ReferralStatusPayload,
-} from "@/lib/referral";
+} from "@/lib/referral-shared";
 
 const CODE_KEY = "lde-referral-code";
 const FREE_KEY = "lde-referral-free-unlocked";

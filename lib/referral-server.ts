@@ -3,7 +3,7 @@ import {
   REFERRAL_FREE_HITS,
   REFERRAL_PREMIUM_HITS,
   type ReferralStatusPayload,
-} from "@/lib/referral";
+} from "@/lib/referral-shared";
 
 export async function getReferralStatus(
   code: string,

@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import SocialShareModal from "@/components/sharing/SocialShareModal";
 import type { PricingCopy } from "@/lib/i18n/pricing-page";
-import type { ReferralStatusPayload } from "@/lib/referral";
+import type { ReferralStatusPayload } from "@/lib/referral-shared";
 import {
   buildReferralShareUrl,
   ensureReferralCode,
