@@ -11,6 +11,8 @@ type Props = {
   onClose: () => void;
   /** Backdrop + panel sit above other modals (e.g. package picker at z-[95]). */
   elevated?: boolean;
+  /** Personal referral URL; defaults to site root. */
+  shareUrl?: string;
 };
 
 /** Opens the network’s share UI in a centered popup so the user stays on our site. */
@@ -154,6 +156,7 @@ export default function SocialShareModal({
   open,
   onClose,
   elevated = false,
+  shareUrl,
 }: Props) {
   const [siteUrl, setSiteUrl] = useState(getSiteUrlString);
   const [copied, setCopied] = useState(false);
@@ -167,10 +170,16 @@ export default function SocialShareModal({
       typeof navigator !== "undefined" &&
         typeof navigator.share === "function",
     );
+    if (shareUrl) {
+      setSiteUrl(shareUrl);
+      return;
+    }
     if (process.env.NODE_ENV === "development") {
       setSiteUrl(window.location.origin);
+    } else {
+      setSiteUrl(getSiteUrlString());
     }
-  }, []);
+  }, [shareUrl]);
 
   const fullText = useMemo(
     () => `${t.premiumShareBlurb} ${siteUrl}`.trim(),

@@ -6,12 +6,28 @@ import { parseLocale } from "@/lib/i18n/locale";
 import { fillDecisionAnalysisGaps } from "@/lib/analysis-gap-fill";
 import { analyzeWithOpenAI } from "@/lib/llm-analyze";
 import { rateLimitAllow } from "@/lib/rate-limit";
+import { normalizeReferralCode } from "@/lib/referral";
+import { getReferralStatus } from "@/lib/referral-server";
 import type { AnalyzeRequestBody, SuggestedDirectoryRole } from "@/lib/types";
 
 export const runtime = "nodejs";
 
 const RATE_WINDOW_MS = 10 * 60 * 1000;
 const RATE_MAX = 64;
+
+async function assertAnalyzeEntitled(
+  referralCode: string | undefined,
+): Promise<boolean> {
+  const code = normalizeReferralCode(referralCode);
+  if (!code) return false;
+  try {
+    const status = await getReferralStatus(code);
+    return Boolean(status?.freeUnlocked || status?.premiumUnlocked);
+  } catch (e) {
+    console.error("[analyze] referral status failed", e);
+    return false;
+  }
+}
 
 async function safeLoadMatchedExperts(role: SuggestedDirectoryRole) {
   try {
@@ -47,6 +63,14 @@ export async function POST(req: Request) {
     const ui = getUi(locale);
     const demoOpts = normalizeDemoOpts(body);
     const ip = getClientIp(req);
+
+    const entitled = await assertAnalyzeEntitled(body.referralCode);
+    if (!entitled) {
+      return NextResponse.json(
+        { error: "share_unlock_required" },
+        { status: 403 },
+      );
+    }
 
     // On shared/mobile IPs prefer graceful fallback over a hard 429.
     if (!rateLimitAllow(`analyze:${ip}`, RATE_MAX, RATE_WINDOW_MS)) {

@@ -54,4 +54,6 @@ export type AnalyzeRequestBody = {
   /** 1 = light, 10 = very heavy; optional, shapes prompts and the printed brief */
   stakesLevel?: number;
   language?: AppLocale;
+  /** Share-to-unlock referral code for free/premium entitlement. */
+  referralCode?: string;
 };

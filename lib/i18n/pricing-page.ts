@@ -39,6 +39,21 @@ export type PricingCopy = {
   shareReddit: string;
   shareInstagram: string;
   shareEmailSubject: string;
+  /** Package modal intro */
+  packageModalTitle: string;
+  packageModalLead: string;
+  /** Share-to-unlock gate */
+  shareUnlockFreeTitle: string;
+  shareUnlockFreeLead: string;
+  shareUnlockFreeNeeded: string;
+  shareUnlockPremiumTitle: string;
+  shareUnlockPremiumLead: string;
+  shareUnlockPremiumNeeded: string;
+  shareUnlockProgress: string;
+  shareUnlockRefresh: string;
+  shareUnlockDone: string;
+  shareUnlockClose: string;
+  shareUnlockError: string;
 };
 
 const hy: PricingCopy = {
@@ -50,7 +65,7 @@ const hy: PricingCopy = {
   freePrice: "0",
   freeDesc: "Սկսելու համար",
   freeBullets: [
-    "Վերլուծություններ (demo / կամ API-ով)",
+    "Վերլուծություն՝ 5 եզակի այցելուց հետո",
     "Մասնագետների ցանցում դիտում",
     "Գաղտնիության հիմնական շերտ",
   ],
@@ -73,7 +88,7 @@ const hy: PricingCopy = {
   checkoutCanceled: "Վճարումը չեղարկվեց։ Կարող եք կրկին փորձել ցանկացած ժամանակ։",
   premiumShareHeadline: "Կիսվեք — 1 ամիս Premium անվճար",
   premiumReferralDetail:
-    "Անվճար ամիս ստանալու համար պետք է ձեր հղումով կայք այցելեն նվազագույն 20 հոգի (ընկերներ, ծանոթներ)։ Նրանք պետք է բացեն հենց ձեր ուղարկած հղումը։",
+    "Premium բացելու համար գնեք բաժանորդագրությունը, կամ ձեր հղումով կայք այցելեն նվազագույն 20 հոգի։",
   ctaShare: "Կիսվել",
   premiumShareIntro:
     "Կիսվեք հղումով ցանկացած կայքից և բոլոր սոցցանցերում՝ Facebook, Instagram, X, LinkedIn, Telegram, WhatsApp, Reddit, Threads և այլն։",
@@ -91,6 +106,22 @@ const hy: PricingCopy = {
   shareInstagram: "Ինստագրամ",
   shareEmailSubject:
     "Կյանքի որոշումների AI — կայացրո՛ր լավ որոշումներ րոպեների մեջ",
+  packageModalTitle: "Ընտրեք փաթեթը վերլուծությունից առաջ",
+  packageModalLead:
+    "Անվճար՝ կիսվեք 5 հոգու հետ։ Premium՝ գնեք կամ կիսվեք 20 հոգու հետ։",
+  shareUnlockFreeTitle: "Կիսվեք 5 հոգու հետ՝ անվճար վերլուծության համար",
+  shareUnlockFreeLead:
+    "Ուղարկեք ձեր անձնական հղումը ընկերներին։ Երբ 5 տարբեր մարդ բացեն այն, անվճար վերլուծությունը կբացվի։",
+  shareUnlockFreeNeeded: "Պետք է 5 եզակի այցելու ձեր հղումով։",
+  shareUnlockPremiumTitle: "Կիսվեք 20 հոգու հետ՝ Premium բացելու համար",
+  shareUnlockPremiumLead:
+    "Ուղարկեք ձեր հղումը։ Երբ 20 տարբեր մարդ բացեն այն, Premium-ը կբացվի առանց վճարման։ Կամ գնեք փաթեթը։",
+  shareUnlockPremiumNeeded: "Պետք է 20 եզակի այցելու ձեր հղումով։",
+  shareUnlockProgress: "Այցելուներ՝ {count} / {needed}",
+  shareUnlockRefresh: "Ստուգել առաջընթացը",
+  shareUnlockDone: "Բացված է։ Կարող եք շարունակել վերլուծությունը։",
+  shareUnlockClose: "Փակել",
+  shareUnlockError: "Չհաջողվեց կապ հաստատել։ Փորձեք մի փոքր ուշ։",
 };
 
 const en: PricingCopy = {
@@ -102,7 +133,7 @@ const en: PricingCopy = {
   freePrice: "0",
   freeDesc: "Get started",
   freeBullets: [
-    "Analyses (demo and/or with API key)",
+    "Analysis after 5 unique visitors via your link",
     "Browse the expert network",
     "Core privacy messaging",
   ],
@@ -125,10 +156,10 @@ const en: PricingCopy = {
   checkoutCanceled: "Checkout was canceled. You can try again anytime.",
   premiumShareHeadline: "Share — 1 month of Premium free",
   premiumReferralDetail:
-    "To earn the free month, at least 20 people must visit the site through your link (friends, colleagues, etc.). They need to open the exact URL you send them.",
+    "Unlock Premium by subscribing, or when at least 20 people visit through your link.",
   ctaShare: "Share",
   premiumShareIntro:
-    "Share your link from any page on the site across socials: Facebook, Instagram, X, LinkedIn, Telegram, WhatsApp, Reddit, Threads, and more.",
+    "Share your personal link across socials: Facebook, Instagram, X, LinkedIn, Telegram, WhatsApp, Reddit, Threads, and more.",
   premiumShareBlurb:
     "Stop overthinking. Decide in seconds. Get instant clarity on any decision using AI-powered scenarios—not random chat.",
   copySiteLink: "Copy site link",
@@ -143,6 +174,22 @@ const en: PricingCopy = {
   shareInstagram: "Instagram",
   shareEmailSubject:
     "Life Decision Engine — Stop overthinking. Decide in seconds.",
+  packageModalTitle: "Choose a package before analysis",
+  packageModalLead:
+    "Free requires sharing with 5 people. Premium: subscribe or share with 20.",
+  shareUnlockFreeTitle: "Share with 5 people to unlock free analysis",
+  shareUnlockFreeLead:
+    "Send your personal link to friends. When 5 different people open it, free analysis unlocks.",
+  shareUnlockFreeNeeded: "Need 5 unique visitors through your link.",
+  shareUnlockPremiumTitle: "Share with 20 people to unlock Premium",
+  shareUnlockPremiumLead:
+    "Send your link. When 20 different people open it, Premium unlocks without paying — or subscribe instead.",
+  shareUnlockPremiumNeeded: "Need 20 unique visitors through your link.",
+  shareUnlockProgress: "Visitors: {count} / {needed}",
+  shareUnlockRefresh: "Check progress",
+  shareUnlockDone: "Unlocked. You can continue to analysis.",
+  shareUnlockClose: "Close",
+  shareUnlockError: "Could not reach the server. Try again shortly.",
 };
 
 const navPricingByLocale: Partial<Record<AppLocale, string>> = {

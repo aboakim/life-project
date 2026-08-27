@@ -3,6 +3,11 @@
 import { useEffect, useState } from "react";
 import SocialShareModal from "@/components/sharing/SocialShareModal";
 import type { PricingCopy } from "@/lib/i18n/pricing-page";
+import {
+  buildReferralShareUrl,
+  ensureReferralCode,
+  getStoredReferralCode,
+} from "@/lib/referral-storage";
 
 type Props = {
   open: boolean;
@@ -10,6 +15,8 @@ type Props = {
   onClose: () => void;
   onSelectFree: () => void;
   onSelectPremium: () => void;
+  /** Opens share-to-unlock for Premium (20 hits) without going to Stripe. */
+  onSelectPremiumShare: () => void;
 };
 
 export default function AnalyzePackageModal({
@@ -18,11 +25,20 @@ export default function AnalyzePackageModal({
   onClose,
   onSelectFree,
   onSelectPremium,
+  onSelectPremiumShare,
 }: Props) {
   const [shareOpen, setShareOpen] = useState(false);
+  const [shareUrl, setShareUrl] = useState<string | undefined>();
 
   useEffect(() => {
-    if (!open) setShareOpen(false);
+    if (!open) {
+      setShareOpen(false);
+      return;
+    }
+    void ensureReferralCode().then((s) => {
+      const code = s?.code ?? getStoredReferralCode();
+      if (code) setShareUrl(buildReferralShareUrl(code));
+    });
   }, [open]);
 
   if (!open) return null;
@@ -41,10 +57,10 @@ export default function AnalyzePackageModal({
             {t.navPricing}
           </p>
           <h3 className="mt-1 text-base font-bold leading-snug text-[rgb(var(--ink))] sm:mt-2 sm:text-xl">
-            Choose your package before analysis
+            {t.packageModalTitle}
           </h3>
           <p className="mt-1 text-xs leading-snug text-[rgb(var(--ink-soft))] sm:mt-2 sm:text-sm sm:leading-relaxed">
-            Compare both plans fully. Premium includes sharing/referral perks.
+            {t.packageModalLead}
           </p>
         </div>
         <div className="grid gap-3 md:grid-cols-2 md:gap-4">
@@ -113,7 +129,7 @@ export default function AnalyzePackageModal({
               </button>
               <button
                 type="button"
-                onClick={() => setShareOpen(true)}
+                onClick={onSelectPremiumShare}
                 className="inline-flex w-full items-center justify-center gap-1 rounded-xl border border-pink-300/40 bg-gradient-to-r from-fuchsia-500 via-pink-500 to-orange-400 px-1 py-2.5 text-[11px] font-bold leading-tight text-white shadow-[0_16px_44px_-20px_rgba(236,72,153,0.85)] transition hover:brightness-110 sm:gap-2 sm:rounded-2xl sm:px-3 sm:py-3 sm:text-sm"
               >
                 <span aria-hidden className="text-sm sm:text-base">
@@ -130,6 +146,7 @@ export default function AnalyzePackageModal({
         open={shareOpen}
         onClose={() => setShareOpen(false)}
         elevated
+        shareUrl={shareUrl}
       />
     </div>
   );

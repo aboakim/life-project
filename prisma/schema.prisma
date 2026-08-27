@@ -130,3 +130,28 @@ model SiteAccessLog {
 
   @@index([createdAt])
 }
+
+/// Share-to-unlock: owner of a personal ?ref=CODE link.
+model ReferralOwner {
+  id                 String    @id @default(cuid())
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  /// Public share code in ?ref=
+  code               String    @unique @db.VarChar(32)
+  freeUnlockedAt     DateTime?
+  premiumUnlockedAt  DateTime?
+  hits               ReferralHit[]
+}
+
+/// Unique visitor who opened someone's referral link (counts toward unlock).
+model ReferralHit {
+  id          String        @id @default(cuid())
+  createdAt   DateTime      @default(now())
+  code        String        @db.VarChar(32)
+  owner       ReferralOwner @relation(fields: [code], references: [code], onDelete: Cascade)
+  /// Stable visitor fingerprint (cookie + IP hash).
+  visitorKey  String        @db.VarChar(64)
+
+  @@unique([code, visitorKey])
+  @@index([code])
+}

@@ -18,6 +18,8 @@ import DeferredVercelMetrics from "@/components/DeferredVercelMetrics";
 import LocaleRefreshBridge from "@/components/LocaleRefreshBridge";
 import PageThemeBridge from "@/components/layout/PageThemeBridge";
 import MonetagLoader from "@/components/ads/MonetagLoader";
+import ReferralCapture from "@/components/referral/ReferralCapture";
+import { Suspense } from "react";
 import { PAGE_THEME_BOOTSTRAP_SCRIPT } from "@/lib/page-theme";
 import { isRtlLocale } from "@/lib/i18n/locale";
 import { localeFontVariableClasses } from "@/lib/locale-fonts";
@@ -225,6 +227,9 @@ export default async function RootLayout({
         <GlobalFooter />
         <ConsentBanner />
         <MonetagLoader />
+        <Suspense fallback={null}>
+          <ReferralCapture />
+        </Suspense>
         <GoogleAnalytics />
         <DeferredVercelMetrics />
       </body>

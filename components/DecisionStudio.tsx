@@ -77,6 +77,14 @@ import VoiceDictateButton from "@/components/home/VoiceDictateButton";
 import VoiceWhisperButton from "@/components/home/VoiceWhisperButton";
 import ReadAloudReportButton from "@/components/home/ReadAloudReportButton";
 import AnalyzePackageModal from "@/components/home/AnalyzePackageModal";
+import ShareToUnlockModal from "@/components/home/ShareToUnlockModal";
+import {
+  fetchReferralStatus,
+  getLocalFreeUnlocked,
+  getLocalPremiumUnlocked,
+  getStoredReferralCode,
+  isAnalyzeEntitledLocally,
+} from "@/lib/referral-storage";
 
 const KonamiSurprise = dynamic(
   () => import("@/components/home/KonamiSurprise"),
@@ -398,6 +406,10 @@ export default function DecisionStudio({
   const [whisperAvailable, setWhisperAvailable] = useState(false);
   const [mobileLensIdx, setMobileLensIdx] = useState(0);
   const [packageModalOpen, setPackageModalOpen] = useState(false);
+  const [shareUnlockOpen, setShareUnlockOpen] = useState(false);
+  const [shareUnlockGoal, setShareUnlockGoal] = useState<"free" | "premium">(
+    "free",
+  );
   /** Defer welcome modal until idle so LCP can paint hero first (mobile PSI). */
   const [deferWelcomeMount, setDeferWelcomeMount] = useState(false);
   useEffect(() => {
@@ -659,7 +671,7 @@ export default function DecisionStudio({
     process.env.NEXT_PUBLIC_DEMO_MODE === "1";
 
   const canSubmit = useMemo(() => decision.trim().length > 0, [decision]);
-  const formBusy = loading || preAnalysisEmailOpen;
+  const formBusy = loading || preAnalysisEmailOpen || packageModalOpen || shareUnlockOpen;
 
   const runAnalysis = useCallback(async () => {
     if (!canSubmit) return;
@@ -677,9 +689,15 @@ export default function DecisionStudio({
           constraints,
           language: locale,
           stakesLevel,
+          referralCode: getStoredReferralCode() ?? undefined,
         }),
       });
-      const data = (await res.json()) as ApiResponse;
+      const data = (await res.json()) as ApiResponse & { error?: string };
+      if (res.status === 403) {
+        setLoading(false);
+        setPackageModalOpen(true);
+        return;
+      }
       if (!res.ok) {
         const fallback = buildClientFallbackResult(
           decision,
@@ -760,11 +778,23 @@ export default function DecisionStudio({
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!canSubmit) return;
-    if (!getStoredSubscriberId()) {
-      setPreAnalysisEmailOpen(true);
-      return;
-    }
-    void runAnalysis();
+    void (async () => {
+      const status = await fetchReferralStatus();
+      const entitled =
+        Boolean(status?.freeUnlocked) ||
+        Boolean(status?.premiumUnlocked) ||
+        getLocalFreeUnlocked() ||
+        getLocalPremiumUnlocked();
+      if (!entitled) {
+        setPackageModalOpen(true);
+        return;
+      }
+      if (!getStoredSubscriberId()) {
+        setPreAnalysisEmailOpen(true);
+        return;
+      }
+      void runAnalysis();
+    })();
   }
 
   const a = result?.analysis;
@@ -885,14 +915,35 @@ export default function DecisionStudio({
     [scrollToAnalyzer],
   );
 
+  const continueAfterUnlock = useCallback(() => {
+    setShareUnlockOpen(false);
+    setPackageModalOpen(false);
+    if (!getStoredSubscriberId()) {
+      setPreAnalysisEmailOpen(true);
+      return;
+    }
+    void runAnalysis();
+  }, [runAnalysis]);
+
   const onPickFreePackage = useCallback(() => {
     setPackageModalOpen(false);
-    scrollToAnalyzer();
-  }, [scrollToAnalyzer]);
+    if (isAnalyzeEntitledLocally()) {
+      continueAfterUnlock();
+      return;
+    }
+    setShareUnlockGoal("free");
+    setShareUnlockOpen(true);
+  }, [continueAfterUnlock]);
 
   const onPickPremiumPackage = useCallback(() => {
     setPackageModalOpen(false);
     window.location.href = "/pricing";
+  }, []);
+
+  const onPickPremiumShare = useCallback(() => {
+    setPackageModalOpen(false);
+    setShareUnlockGoal("premium");
+    setShareUnlockOpen(true);
   }, []);
 
   const loadBriefFromHistory = useCallback(
@@ -926,6 +977,14 @@ export default function DecisionStudio({
         onClose={() => setPackageModalOpen(false)}
         onSelectFree={onPickFreePackage}
         onSelectPremium={onPickPremiumPackage}
+        onSelectPremiumShare={onPickPremiumShare}
+      />
+      <ShareToUnlockModal
+        open={shareUnlockOpen}
+        goal={shareUnlockGoal}
+        t={pr}
+        onClose={() => setShareUnlockOpen(false)}
+        onUnlocked={continueAfterUnlock}
       />
       <PreAnalysisEmailModal
         open={preAnalysisEmailOpen}
