@@ -8,6 +8,7 @@ import { readLocaleCookieClient } from "@/lib/locale-cookie";
 import { getTrustNav } from "@/lib/i18n/trust-nav";
 import { LOCALE_CHANGE_EVENT } from "@/lib/locale-sync";
 import { MONETAG_CONSENT_EVENT } from "@/lib/monetag-config";
+import { isGdprCountry } from "@/lib/ad-geo";
 
 const LOCALE_KEY = "lde-locale";
 
@@ -92,7 +93,6 @@ export default function ConsentBanner() {
       const saved = window.localStorage.getItem(STORAGE_KEY);
       if (saved === "accepted" || saved === "rejected") {
         setDecision(saved);
-        // Re-apply the previous choice to gtag so subsequent pageviews are tracked consistently.
         pushConsent(
           saved === "accepted"
             ? {
@@ -108,11 +108,36 @@ export default function ConsentBanner() {
                 analytics_storage: "denied",
               },
         );
-      } else {
-        setDecision(null);
+        return;
       }
+
+      // Outside GDPR (e.g. US): enable ads by default so inventory fills worldwide.
+      let geo = "";
+      try {
+        const m = document.cookie.match(/(?:^|; )lde-geo=([^;]*)/);
+        geo = m ? decodeURIComponent(m[1] ?? "").toUpperCase().slice(0, 2) : "";
+      } catch {
+        geo = "";
+      }
+      if (geo && !isGdprCountry(geo)) {
+        window.localStorage.setItem(STORAGE_KEY, "accepted");
+        pushConsent({
+          ad_storage: "granted",
+          ad_user_data: "granted",
+          ad_personalization: "granted",
+          analytics_storage: "granted",
+        });
+        setDecision("accepted");
+        try {
+          window.dispatchEvent(new Event(MONETAG_CONSENT_EVENT));
+        } catch {
+          /* ignore */
+        }
+        return;
+      }
+
+      setDecision(null);
     } catch {
-      // If localStorage is blocked (Safari private mode, etc.), default to showing the banner.
       setDecision(null);
     }
   }, []);

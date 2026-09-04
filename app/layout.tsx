@@ -21,6 +21,7 @@ import MonetagLoader from "@/components/ads/MonetagLoader";
 import ReferralCapture from "@/components/referral/ReferralCapture";
 import { Suspense } from "react";
 import { PAGE_THEME_BOOTSTRAP_SCRIPT } from "@/lib/page-theme";
+import { CONSENT_DEFAULT_BOOTSTRAP_SCRIPT } from "@/lib/ad-geo";
 import { isRtlLocale } from "@/lib/i18n/locale";
 import { localeFontVariableClasses } from "@/lib/locale-fonts";
 import { getServerPageLocale } from "@/lib/i18n/trust-pages/server-locale";
@@ -177,29 +178,16 @@ export default async function RootLayout({
     <html lang={locale} dir={dir} suppressHydrationWarning>
       <head>
         {/*
-          Google Consent Mode v2 default: denied for all ad/analytics storage
-          until the user actively accepts via <ConsentBanner />.
-          This MUST execute before any gtag / AdSense script so it takes effect
-          for the very first pageview. GA4 loader in GoogleAnalytics.tsx also
-          re-pushes the same defaults as a safety net.
+          Consent Mode v2: denied in GDPR/UK (unknown country too);
+          granted elsewhere (e.g. US) so AdSense/Monetag can fill without
+          waiting on Accept. Users can still Reject via the banner / footer.
         */}
         <script
           dangerouslySetInnerHTML={{ __html: PAGE_THEME_BOOTSTRAP_SCRIPT }}
         />
         <script
           dangerouslySetInnerHTML={{
-            __html: [
-              "window.dataLayer = window.dataLayer || [];",
-              "function gtag(){dataLayer.push(arguments);}",
-              "window.gtag = window.gtag || gtag;",
-              "gtag('consent','default',{",
-              "  ad_storage:'denied',",
-              "  ad_user_data:'denied',",
-              "  ad_personalization:'denied',",
-              "  analytics_storage:'denied',",
-              "  wait_for_update: 500",
-              "});",
-            ].join(""),
+            __html: CONSENT_DEFAULT_BOOTSTRAP_SCRIPT,
           }}
         />
       </head>

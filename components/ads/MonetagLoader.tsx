@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
+import { isGdprCountry } from "@/lib/ad-geo";
 import {
   MONETAG_CONSENT_EVENT,
   MONETAG_CONSENT_STORAGE_KEY,
@@ -19,9 +20,22 @@ import {
 
 const LOADED_MARK = "data-lde-monetag-zone";
 
-function hasAdConsent(): boolean {
+function readGeoCookie(): string {
   try {
-    return window.localStorage.getItem(MONETAG_CONSENT_STORAGE_KEY) === "accepted";
+    const m = document.cookie.match(/(?:^|; )lde-geo=([^;]*)/);
+    return m ? decodeURIComponent(m[1] ?? "").toUpperCase().slice(0, 2) : "";
+  } catch {
+    return "";
+  }
+}
+
+/** Monetag: blocked only on explicit Reject. Outside GDPR, loads without Accept. */
+function canLoadMonetag(): boolean {
+  try {
+    const v = window.localStorage.getItem(MONETAG_CONSENT_STORAGE_KEY);
+    if (v === "rejected") return false;
+    if (v === "accepted") return true;
+    return !isGdprCountry(readGeoCookie() || null);
   } catch {
     return false;
   }
@@ -73,7 +87,9 @@ function injectAllMonetagZones(): void {
 }
 
 /**
- * Injects all Monetag formats ASAP after cookie Accept on public pages.
+ * Injects Monetag worldwide after consent rules:
+ * - GDPR: only after Accept
+ * - US / other: load unless user Rejected
  */
 export default function MonetagLoader() {
   const pathname = usePathname() || "/";
@@ -87,7 +103,7 @@ export default function MonetagLoader() {
 
     const tryLoad = () => {
       if (cancelled || armed.current) return;
-      if (!hasAdConsent()) return;
+      if (!canLoadMonetag()) return;
       if (!isMonetagPathAllowed(window.location.pathname)) return;
       armed.current = true;
       injectAllMonetagZones();
@@ -97,11 +113,8 @@ export default function MonetagLoader() {
     window.addEventListener("scroll", tryLoad, { passive: true, once: true });
     window.addEventListener("pointerdown", tryLoad, { once: true });
 
-    if (hasAdConsent()) {
-      // Next tick — avoid blocking first paint, but don't wait seconds.
-      queueMicrotask(tryLoad);
-      window.setTimeout(tryLoad, 400);
-    }
+    window.setTimeout(tryLoad, canLoadMonetag() ? 200 : 400);
+    queueMicrotask(tryLoad);
 
     return () => {
       cancelled = true;

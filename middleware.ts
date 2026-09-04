@@ -1,5 +1,6 @@
 import { NextResponse, type NextFetchEvent, type NextRequest } from "next/server";
 
+import { GEO_COOKIE, normalizeCountryCode } from "@/lib/ad-geo";
 import { canonicalBlogPathSegment } from "@/lib/blog/slug-normalize";
 import {
   buildSiteAccessLogPayload,
@@ -101,7 +102,21 @@ export function middleware(request: NextRequest, event: NextFetchEvent) {
     }
   }
 
-  return NextResponse.next();
+  const res = NextResponse.next();
+  const country = normalizeCountryCode(
+    request.headers.get("x-vercel-ip-country") ??
+      request.headers.get("cf-ipcountry") ??
+      "",
+  );
+  if (country) {
+    res.cookies.set(GEO_COOKIE, country, {
+      path: "/",
+      maxAge: 60 * 60 * 24 * 7,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+    });
+  }
+  return res;
 }
 
 export const config = {
