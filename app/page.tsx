@@ -11,7 +11,6 @@ import HomePublisherStatic from "@/components/home/HomePublisherStatic";
 import HomeSocialProofStatic from "@/components/home/HomeSocialProofStatic";
 import DeferredHomeStudio from "@/components/home/DeferredHomeStudio";
 import ContentAdRegion from "@/components/ads/ContentAdRegion";
-import ExpertsRecruitBanner from "@/components/experts/ExpertsRecruitBanner";
 import { HERO_LCP_IMAGE_URL } from "@/lib/home/hero-slide-images";
 import { getServerPageLocale } from "@/lib/i18n/trust-pages/server-locale";
 
@@ -36,9 +35,6 @@ export default async function Home() {
       <HomeTrustStatic locale={locale} />
       <HomePublisherStatic locale={locale} />
       <HomeHowItWorksStatic locale={locale} />
-      <div className="px-4 py-8 sm:px-6 sm:py-10">
-        <ExpertsRecruitBanner locale={locale} />
-      </div>
       <HomeNewsStatic locale={locale} />
       <ContentAdRegion placement="mid" className="px-4 sm:px-6" />
       <HomeSocialProofStatic locale={locale} />

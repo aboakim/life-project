@@ -3,6 +3,7 @@ import { isRtlLocale, type AppLocale } from "@/lib/i18n/locale";
 import { getUi } from "@/lib/i18n/ui";
 import HomeIconBadge from "@/components/home/HomeIconBadge";
 import AnalyzeCtaLink from "@/components/ads/AnalyzeCtaLink";
+import ExpertsRecruitBanner from "@/components/experts/ExpertsRecruitBanner";
 
 type Props = { locale: AppLocale };
 
@@ -20,6 +21,12 @@ export default function HomeAtAGlanceStatic({ locale }: Props) {
       dir={rtl ? "rtl" : undefined}
     >
       <div className="mx-auto max-w-6xl">
+        <ExpertsRecruitBanner
+          locale={locale}
+          variant="spotlight"
+          className="mb-10 animate-fade-up"
+        />
+
         <div className="text-center">
           <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[rgb(var(--accent-2))]">
             {t.atAGlanceEyebrow}

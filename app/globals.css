@@ -1128,6 +1128,79 @@ html[data-page-theme="trust"] .site-brand-mark {
     opacity: 0.88;
   }
 
+  /* Expert recruit spotlight — eye-catching but calm */
+  @keyframes experts-recruit-glow {
+    0%,
+    100% {
+      box-shadow:
+        0 0 0 1px rgb(34 211 238 / 0.35),
+        0 28px 80px -40px rgb(34 211 238 / 0.65),
+        0 0 48px -12px rgb(124 92 255 / 0.35);
+    }
+    50% {
+      box-shadow:
+        0 0 0 1px rgb(34 211 238 / 0.55),
+        0 32px 90px -36px rgb(34 211 238 / 0.85),
+        0 0 64px -8px rgb(236 72 153 / 0.4);
+    }
+  }
+  @keyframes experts-recruit-shimmer {
+    0% {
+      transform: translateX(-120%) skewX(-18deg);
+    }
+    100% {
+      transform: translateX(220%) skewX(-18deg);
+    }
+  }
+  @keyframes experts-recruit-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+  @keyframes experts-recruit-badge-pulse {
+    0%,
+    100% {
+      opacity: 0.85;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.04);
+    }
+  }
+  .experts-recruit-spotlight {
+    animation:
+      experts-recruit-glow 3.6s ease-in-out infinite,
+      experts-recruit-float 5.5s ease-in-out infinite;
+  }
+  .experts-recruit-shimmer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      105deg,
+      transparent 35%,
+      rgb(255 255 255 / 0.14) 50%,
+      transparent 65%
+    );
+    animation: experts-recruit-shimmer 4.8s ease-in-out infinite;
+  }
+  .experts-recruit-live-badge {
+    animation: experts-recruit-badge-pulse 2.4s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .experts-recruit-spotlight,
+    .experts-recruit-shimmer::after,
+    .experts-recruit-live-badge {
+      animation: none !important;
+    }
+  }
+
   @keyframes home-live-badge-soft {
     0%,
     100% {

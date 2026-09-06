@@ -8,8 +8,8 @@ import { getSiteUrlString } from "@/lib/site-url";
 
 type Props = {
   locale: AppLocale;
-  /** Large home/experts hero strip vs compact inline. */
-  variant?: "hero" | "compact";
+  /** hero = default; compact = inline; spotlight = home “What this does” attention magnet */
+  variant?: "hero" | "compact" | "spotlight";
   className?: string;
 };
 
@@ -85,42 +85,69 @@ export default function ExpertsRecruitBanner({
     );
   }
 
+  const spotlight = variant === "spotlight";
+
   return (
     <aside
-      className={`relative mx-auto max-w-6xl overflow-hidden rounded-[1.85rem] border border-cyan-400/35 bg-gradient-to-br from-cyan-500/[0.18] via-[rgb(var(--accent))]/[0.12] to-[rgb(var(--accent-magenta))]/[0.1] px-5 py-7 shadow-[0_28px_80px_-48px_rgb(34_211_238/0.55)] ring-1 ring-inset ring-white/[0.08] sm:px-8 sm:py-9 ${className}`.trim()}
+      className={`experts-recruit-shimmer relative mx-auto max-w-6xl overflow-hidden rounded-[1.85rem] border border-cyan-300/45 bg-gradient-to-br from-cyan-400/[0.22] via-[rgb(var(--accent))]/[0.16] to-[rgb(var(--accent-magenta))]/[0.14] px-5 py-7 ring-1 ring-inset ring-white/[0.1] sm:px-8 sm:py-9 ${
+        spotlight
+          ? "experts-recruit-spotlight shadow-[0_32px_90px_-36px_rgb(34_211_238/0.75)]"
+          : "shadow-[0_28px_80px_-48px_rgb(34_211_238/0.55)]"
+      } ${className}`.trim()}
       aria-label={t.eyebrow}
     >
       <div
-        className="pointer-events-none absolute -end-16 -top-20 size-56 rounded-full bg-cyan-400/25 blur-3xl"
+        className="pointer-events-none absolute -end-16 -top-20 size-56 rounded-full bg-cyan-400/30 blur-3xl"
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute -start-10 bottom-0 size-40 rounded-full bg-[rgb(var(--accent-magenta))]/20 blur-3xl"
+        className="pointer-events-none absolute -start-10 bottom-0 size-40 rounded-full bg-[rgb(var(--accent-magenta))]/25 blur-3xl"
         aria-hidden
       />
       <div className="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
         <div className="min-w-0 max-w-2xl">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-cyan-100/95">
-            {t.eyebrow}
-          </p>
-          <h2 className="mt-2 font-display text-2xl font-extrabold tracking-tight text-[rgb(var(--ink))] [text-wrap:balance] sm:text-3xl">
+          <div className="flex flex-wrap items-center gap-2">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-cyan-100/95">
+              {t.eyebrow}
+            </p>
+            {spotlight ? (
+              <span className="experts-recruit-live-badge inline-flex items-center gap-1.5 rounded-full border border-emerald-400/40 bg-emerald-500/20 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-emerald-100">
+                <span
+                  className="size-1.5 rounded-full bg-emerald-300 shadow-[0_0_8px_rgb(110_231_183)]"
+                  aria-hidden
+                />
+                Live
+              </span>
+            ) : null}
+          </div>
+          <h2
+            className={`mt-2 font-display font-extrabold tracking-tight text-[rgb(var(--ink))] [text-wrap:balance] ${
+              spotlight
+                ? "text-[clamp(1.55rem,1.1rem+2vw,2.35rem)]"
+                : "text-2xl sm:text-3xl"
+            }`}
+          >
             {t.title}
           </h2>
-          <p className="mt-3 text-sm leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty] sm:text-[0.9375rem]">
+          <p
+            className={`mt-3 leading-relaxed text-[rgb(var(--ink-soft))] [text-wrap:pretty] ${
+              spotlight ? "text-[0.95rem] sm:text-base" : "text-sm sm:text-[0.9375rem]"
+            }`}
+          >
             {t.body}
           </p>
         </div>
         <div className="flex w-full shrink-0 flex-col gap-2.5 sm:max-w-xs">
           <Link
             href="/experts/register"
-            className="inline-flex min-h-[48px] items-center justify-center rounded-2xl bg-gradient-to-r from-cyan-500 via-[rgb(var(--accent))] to-[rgb(var(--accent-magenta))] px-5 py-3 text-sm font-bold text-white shadow-[0_16px_40px_-18px_rgb(34_211_238/0.7)] ring-1 ring-white/25 transition hover:brightness-110 motion-safe:hover:scale-[1.02] motion-safe:active:scale-[0.98]"
+            className="inline-flex min-h-[52px] items-center justify-center rounded-2xl bg-gradient-to-r from-cyan-400 via-[rgb(var(--accent))] to-[rgb(var(--accent-magenta))] px-5 py-3 text-sm font-bold text-white shadow-[0_16px_40px_-14px_rgb(34_211_238/0.85)] ring-1 ring-white/30 transition hover:brightness-110 motion-safe:hover:scale-[1.03] motion-safe:active:scale-[0.98]"
           >
             {t.ctaRegister}
           </Link>
           <button
             type="button"
             onClick={() => void onShare()}
-            className="inline-flex min-h-[44px] items-center justify-center rounded-2xl border border-white/20 bg-black/25 px-5 py-2.5 text-sm font-semibold text-[rgb(var(--ink))] backdrop-blur transition hover:bg-white/[0.08]"
+            className="inline-flex min-h-[48px] items-center justify-center rounded-2xl border border-cyan-200/30 bg-black/35 px-5 py-2.5 text-sm font-semibold text-[rgb(var(--ink))] backdrop-blur transition hover:border-cyan-200/50 hover:bg-white/[0.1]"
           >
             {copied ? t.shareCopied : t.ctaShare}
           </button>
