@@ -38,6 +38,10 @@ export type PricingCopy = {
   shareTelegram: string;
   shareReddit: string;
   shareInstagram: string;
+  shareThreads: string;
+  shareViber: string;
+  shareEmail: string;
+  shareSms: string;
   shareEmailSubject: string;
   /** Package modal intro */
   packageModalTitle: string;
@@ -91,7 +95,7 @@ const hy: PricingCopy = {
     "Premium բացելու համար գնեք բաժանորդագրությունը, կամ ձեր հղումով կայք այցելեն նվազագույն 20 հոգի։",
   ctaShare: "Կիսվել",
   premiumShareIntro:
-    "Կիսվեք հղումով ցանկացած կայքից և բոլոր սոցցանցերում՝ Facebook, Instagram, X, LinkedIn, Telegram, WhatsApp, Reddit, Threads և այլն։",
+    "Կիսվեք հղումով՝ WhatsApp, Viber, Telegram, Facebook, Instagram, Threads, X, LinkedIn, Reddit, էլ. փոստ, SMS։",
   premiumShareBlurb:
     "Կայացրո՛ւ լավ կյանքի որոշումներ րոպեների մեջ։ Համեմատի՛ր տարբերակները, տե՛ս արդյունքները, հստա՛ր որոշի՛ր. կառուցված վերլուծություն, ոչ պատահական chat։",
   copySiteLink: "Պատճենել կայքի հղումը",
@@ -104,6 +108,10 @@ const hy: PricingCopy = {
   shareTelegram: "Telegram",
   shareReddit: "Reddit",
   shareInstagram: "Ինստագրամ",
+  shareThreads: "Threads",
+  shareViber: "Viber",
+  shareEmail: "Էլ. փոստ",
+  shareSms: "SMS",
   shareEmailSubject:
     "Կյանքի որոշումների AI — կայացրո՛ր լավ որոշումներ րոպեների մեջ",
   packageModalTitle: "Ընտրեք փաթեթը վերլուծությունից առաջ",
@@ -159,7 +167,7 @@ const en: PricingCopy = {
     "Unlock Premium by subscribing, or when at least 20 people visit through your link.",
   ctaShare: "Share",
   premiumShareIntro:
-    "Share your personal link across socials: Facebook, Instagram, X, LinkedIn, Telegram, WhatsApp, Reddit, Threads, and more.",
+    "Share your link via WhatsApp, Viber, Telegram, Facebook, Instagram, Threads, X, LinkedIn, Reddit, email, or SMS.",
   premiumShareBlurb:
     "Stop overthinking. Decide in seconds. Get instant clarity on any decision using AI-powered scenarios—not random chat.",
   copySiteLink: "Copy site link",
@@ -172,6 +180,10 @@ const en: PricingCopy = {
   shareTelegram: "Telegram",
   shareReddit: "Reddit",
   shareInstagram: "Instagram",
+  shareThreads: "Threads",
+  shareViber: "Viber",
+  shareEmail: "Email",
+  shareSms: "SMS",
   shareEmailSubject:
     "Life Decision Engine — Stop overthinking. Decide in seconds.",
   packageModalTitle: "Choose a package before analysis",

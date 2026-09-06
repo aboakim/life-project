@@ -13,6 +13,10 @@ type Props = {
   elevated?: boolean;
   /** Personal referral URL; defaults to site root. */
   shareUrl?: string;
+  /** Overrides default pricing share blurb (e.g. expert recruit copy). */
+  shareBlurb?: string;
+  /** Optional dialog intro override. */
+  shareIntro?: string;
 };
 
 /** Opens the network’s share UI in a centered popup so the user stays on our site. */
@@ -129,6 +133,50 @@ function IconInstagram() {
   );
 }
 
+function IconThreads() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden>
+      <path
+        fill="currentColor"
+        d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.659 1.546 12.001c.046-3.658.896-6.439 2.495-8.49C5.845 1.205 8.598.024 12.179 0h.014c3.581.024 6.334 1.205 8.184 3.509C22.15 5.562 23 8.343 22.954 12.001c-.046 3.658-.896 6.439-2.495 8.49C18.655 22.795 15.902 23.976 12.321 24h-.135zm.014-21.75c-2.94.02-5.109.944-6.445 2.744C4.39 6.842 3.75 9.151 3.705 12c.045 2.85.685 5.158 2.05 7.006 1.336 1.8 3.505 2.724 6.445 2.744h.014c2.94-.02 5.109-.944 6.445-2.744 1.365-1.848 2.005-4.156 2.05-7.006-.045-2.849-.685-5.158-2.05-7.006C17.323 3.194 15.154 2.27 12.214 2.25h-.014z"
+      />
+    </svg>
+  );
+}
+
+function IconViber() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden>
+      <path
+        fill="currentColor"
+        d="M11.4 0C9.48.03 5.34.34 3.02 2.47 1.39 3.93.57 5.89.49 8.55c-.05 1.86.11 6.36.11 6.36s-.14 1.53.1 2.39c.24.85 1.42 2.63 3.22 3.48 1.8.85 3.67.53 3.67.53l.01 2.14s.02.66.34.8c.38.16.63-.04 1.68-.7 1.63-1.02 2.74-1.74 3.57-2.26 3.11.27 5.48-.34 6.48-.67 1.52-.5 3.38-2.12 3.68-5.21.04-.41.36-6.59.4-8.2C23.08 2.4 19.9.17 11.4 0zm.33 3.66c6.03.02 7.57 1.5 7.66 7.8-.02 1.03-.07 4.74-.1 5.3-.16 1.7-.98 2.58-1.88 2.88-.86.28-2.82.75-5.3.49l-.7-.06-1.09.69c-.5.32-1.2.76-1.83 1.16v-1.8l-.3-.1s-1.45.28-2.64-.28c-.98-.46-1.76-1.54-1.92-2.18-.16-.55-.07-1.72-.07-1.72s-.14-3.97-.1-5.42c.1-3.57 1.6-6.72 8.27-6.76z"
+      />
+    </svg>
+  );
+}
+
+function IconEmail() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden>
+      <path
+        fill="currentColor"
+        d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"
+      />
+    </svg>
+  );
+}
+
+function IconSms() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden>
+      <path
+        fill="currentColor"
+        d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"
+      />
+    </svg>
+  );
+}
+
 function IconLink() {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden>
@@ -157,6 +205,8 @@ export default function SocialShareModal({
   onClose,
   elevated = false,
   shareUrl,
+  shareBlurb,
+  shareIntro,
 }: Props) {
   const [siteUrl, setSiteUrl] = useState(getSiteUrlString);
   const [copied, setCopied] = useState(false);
@@ -164,6 +214,8 @@ export default function SocialShareModal({
 
   const zBackdrop = elevated ? "z-[100]" : "z-[95]";
   const zPanel = elevated ? "z-[101]" : "z-[96]";
+  const blurb = shareBlurb?.trim() || t.premiumShareBlurb;
+  const intro = shareIntro?.trim() || t.premiumShareIntro;
 
   useEffect(() => {
     setCanNativeShare(
@@ -182,14 +234,15 @@ export default function SocialShareModal({
   }, [shareUrl]);
 
   const fullText = useMemo(
-    () => `${t.premiumShareBlurb} ${siteUrl}`.trim(),
-    [siteUrl, t.premiumShareBlurb],
+    () => `${blurb} ${siteUrl}`.trim(),
+    [siteUrl, blurb],
   );
 
   const urls = useMemo(() => {
     const u = encodeURIComponent(siteUrl);
-    const title = encodeURIComponent(t.premiumShareBlurb);
+    const title = encodeURIComponent(blurb);
     const body = encodeURIComponent(fullText);
+    const subject = encodeURIComponent(t.shareEmailSubject);
     return {
       facebook: `https://www.facebook.com/sharer/sharer.php?u=${u}`,
       x: `https://twitter.com/intent/tweet?text=${body}`,
@@ -197,8 +250,12 @@ export default function SocialShareModal({
       whatsapp: `https://api.whatsapp.com/send?text=${body}`,
       telegram: `https://t.me/share/url?url=${u}&text=${title}`,
       reddit: `https://www.reddit.com/submit?url=${u}&title=${title}`,
+      threads: `https://www.threads.net/intent/post?text=${body}`,
+      viber: `viber://forward?text=${body}`,
+      email: `mailto:?subject=${subject}&body=${body}`,
+      sms: `sms:?&body=${body}`,
     };
-  }, [fullText, siteUrl, t.premiumShareBlurb]);
+  }, [blurb, fullText, siteUrl, t.shareEmailSubject]);
 
   const onCopy = useCallback(async () => {
     try {
@@ -215,13 +272,13 @@ export default function SocialShareModal({
     try {
       await navigator.share({
         title: t.shareEmailSubject,
-        text: t.premiumShareBlurb,
+        text: blurb,
         url: siteUrl,
       });
     } catch {
       /* absent or user cancelled */
     }
-  }, [siteUrl, t.premiumShareBlurb, t.shareEmailSubject]);
+  }, [blurb, siteUrl, t.shareEmailSubject]);
 
   const onInstagram = useCallback(async () => {
     try {
@@ -233,6 +290,21 @@ export default function SocialShareModal({
       /* ignore */
     }
   }, [fullText]);
+
+  const onViber = useCallback(async () => {
+    try {
+      window.location.href = urls.viber;
+    } catch {
+      /* fall through */
+    }
+    try {
+      await navigator.clipboard.writeText(fullText);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch {
+      /* ignore */
+    }
+  }, [fullText, urls.viber]);
 
   const rowClass =
     "inline-flex w-full items-center gap-3 rounded-xl border border-white/12 bg-white/[0.04] px-3 py-2.5 text-sm font-medium text-[rgb(var(--ink))] transition hover:border-white/22 hover:bg-white/[0.08]";
@@ -254,11 +326,11 @@ export default function SocialShareModal({
         className="absolute inset-0 bg-black/60 backdrop-blur-[2px]"
       />
       <div
-        className={`relative ${zPanel} w-full max-w-sm rounded-3xl border border-white/15 bg-[rgb(var(--surface))]/95 p-4 shadow-2xl shadow-black/45`}
+        className={`relative ${zPanel} flex max-h-[min(88vh,40rem)] w-full max-w-sm flex-col overflow-hidden rounded-3xl border border-white/15 bg-[rgb(var(--surface))]/95 p-4 shadow-2xl shadow-black/45`}
       >
-        <div className="mb-3 flex items-start justify-between gap-2">
+        <div className="mb-3 flex shrink-0 items-start justify-between gap-2">
           <p className="text-sm font-semibold leading-snug text-[rgb(var(--ink))] [text-wrap:pretty]">
-            {t.premiumShareIntro}
+            {intro}
           </p>
           <button
             type="button"
@@ -268,7 +340,7 @@ export default function SocialShareModal({
             ✕
           </button>
         </div>
-        <div className="space-y-2">
+        <div className="min-h-0 space-y-2 overflow-y-auto overscroll-contain pe-0.5">
           {canNativeShare ? (
             <button type="button" onClick={onNative} className={rowClass}>
               <IconBox className="bg-slate-600 text-white">
@@ -283,12 +355,69 @@ export default function SocialShareModal({
           <button
             type="button"
             className={rowClass}
+            onClick={() => openShareComposer(urls.whatsapp)}
+          >
+            <IconBox className="bg-[#25D366] text-white">
+              <IconWhatsApp />
+            </IconBox>
+            <span className="flex-1 text-start">{t.shareWhatsApp}</span>
+            <span aria-hidden className="text-[rgb(var(--ink-soft))]">
+              ↗
+            </span>
+          </button>
+          <button
+            type="button"
+            className={rowClass}
+            onClick={() => openShareComposer(urls.telegram)}
+          >
+            <IconBox className="bg-[#26A5E4] text-white">
+              <IconTelegram />
+            </IconBox>
+            <span className="flex-1 text-start">{t.shareTelegram}</span>
+            <span aria-hidden className="text-[rgb(var(--ink-soft))]">
+              ↗
+            </span>
+          </button>
+          <button type="button" onClick={onViber} className={rowClass}>
+            <IconBox className="bg-[#7360F2] text-white">
+              <IconViber />
+            </IconBox>
+            <span className="flex-1 text-start">{t.shareViber}</span>
+            <span aria-hidden className="text-[rgb(var(--ink-soft))]">
+              ↗
+            </span>
+          </button>
+          <button
+            type="button"
+            className={rowClass}
             onClick={() => openShareComposer(urls.facebook)}
           >
             <IconBox className="bg-[#1877F2] text-white">
               <IconFacebook />
             </IconBox>
             <span className="flex-1 text-start">{t.shareFacebook}</span>
+            <span aria-hidden className="text-[rgb(var(--ink-soft))]">
+              ↗
+            </span>
+          </button>
+          <button type="button" onClick={onInstagram} className={rowClass}>
+            <IconBox className="bg-gradient-to-br from-[#f09433] via-[#dc2743] to-[#bc1888] text-white">
+              <IconInstagram />
+            </IconBox>
+            <span className="flex-1 text-start">{t.shareInstagram}</span>
+            <span aria-hidden className="text-[rgb(var(--ink-soft))]">
+              ↗
+            </span>
+          </button>
+          <button
+            type="button"
+            className={rowClass}
+            onClick={() => openShareComposer(urls.threads)}
+          >
+            <IconBox className="bg-black text-white">
+              <IconThreads />
+            </IconBox>
+            <span className="flex-1 text-start">{t.shareThreads}</span>
             <span aria-hidden className="text-[rgb(var(--ink-soft))]">
               ↗
             </span>
@@ -322,32 +451,6 @@ export default function SocialShareModal({
           <button
             type="button"
             className={rowClass}
-            onClick={() => openShareComposer(urls.whatsapp)}
-          >
-            <IconBox className="bg-[#25D366] text-white">
-              <IconWhatsApp />
-            </IconBox>
-            <span className="flex-1 text-start">{t.shareWhatsApp}</span>
-            <span aria-hidden className="text-[rgb(var(--ink-soft))]">
-              ↗
-            </span>
-          </button>
-          <button
-            type="button"
-            className={rowClass}
-            onClick={() => openShareComposer(urls.telegram)}
-          >
-            <IconBox className="bg-[#26A5E4] text-white">
-              <IconTelegram />
-            </IconBox>
-            <span className="flex-1 text-start">{t.shareTelegram}</span>
-            <span aria-hidden className="text-[rgb(var(--ink-soft))]">
-              ↗
-            </span>
-          </button>
-          <button
-            type="button"
-            className={rowClass}
             onClick={() => openShareComposer(urls.reddit)}
           >
             <IconBox className="bg-[#FF4500] text-white">
@@ -358,15 +461,24 @@ export default function SocialShareModal({
               ↗
             </span>
           </button>
-          <button type="button" onClick={onInstagram} className={rowClass}>
-            <IconBox className="bg-gradient-to-br from-[#f09433] via-[#dc2743] to-[#bc1888] text-white">
-              <IconInstagram />
+          <a href={urls.email} className={rowClass}>
+            <IconBox className="bg-[#EA4335] text-white">
+              <IconEmail />
             </IconBox>
-            <span className="flex-1 text-start">{t.shareInstagram}</span>
+            <span className="flex-1 text-start">{t.shareEmail}</span>
             <span aria-hidden className="text-[rgb(var(--ink-soft))]">
               ↗
             </span>
-          </button>
+          </a>
+          <a href={urls.sms} className={rowClass}>
+            <IconBox className="bg-emerald-600 text-white">
+              <IconSms />
+            </IconBox>
+            <span className="flex-1 text-start">{t.shareSms}</span>
+            <span aria-hidden className="text-[rgb(var(--ink-soft))]">
+              ↗
+            </span>
+          </a>
           <button type="button" onClick={onCopy} className={rowClass}>
             <IconBox className="bg-gradient-to-br from-violet-500 to-teal-500 text-white">
               <IconLink />
@@ -378,7 +490,7 @@ export default function SocialShareModal({
           </button>
         </div>
         {copied ? (
-          <p className="mt-3 text-xs text-emerald-300/95" role="status">
+          <p className="mt-3 shrink-0 text-xs text-emerald-300/95" role="status">
             {t.siteLinkCopied}
           </p>
         ) : null}
