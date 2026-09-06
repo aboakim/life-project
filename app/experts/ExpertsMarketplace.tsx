@@ -10,6 +10,7 @@ import {
   roleLabel,
   type ExpertRoleKey,
 } from "@/lib/i18n/experts-network";
+import ExpertsRecruitBanner from "@/components/experts/ExpertsRecruitBanner";
 
 const EXPERT_ROLES: ExpertRoleKey[] = [
   "PSYCHOLOGIST",
@@ -185,6 +186,8 @@ export default function ExpertsMarketplace() {
           onChange={setLocale}
           className="mb-10 max-w-3xl"
         />
+
+        <ExpertsRecruitBanner locale={locale} className="mb-10" />
 
         <section
           className="glass card-glow rounded-[1.75rem] border border-white/[0.1] p-5 sm:p-6"

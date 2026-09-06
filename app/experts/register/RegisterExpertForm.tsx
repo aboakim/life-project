@@ -1,5 +1,6 @@
 "use client";
 
+import ExpertsRecruitBanner from "@/components/experts/ExpertsRecruitBanner";
 import { Fragment, useEffect, useState } from "react";
 import MarketingPageShell from "@/components/layout/MarketingPageShell";
 import PageLocalePicker from "@/components/layout/PageLocalePicker";
@@ -112,6 +113,8 @@ export default function RegisterExpertForm() {
         onChange={setLocale}
         className="mb-10 max-w-3xl"
       />
+
+      <ExpertsRecruitBanner locale={locale} className="mb-10" />
 
       <form
         onSubmit={onSubmit}

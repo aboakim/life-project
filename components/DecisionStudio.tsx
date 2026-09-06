@@ -13,6 +13,7 @@ import HeroVisualSlider from "@/components/home/HeroVisualSlider";
 import RevealOnScroll from "@/components/home/RevealOnScroll";
 import AdSenseBanner from "@/components/ads/AdSenseBanner";
 import AmazonAssociatesCta from "@/components/monetization/AmazonAssociatesCta";
+import ExpertsRecruitBanner from "@/components/experts/ExpertsRecruitBanner";
 import TiltPlane from "@/components/ui/TiltPlane";
 import { getExpertsCopy } from "@/lib/i18n/experts-network";
 import { getPricingCopy } from "@/lib/i18n/pricing-page";
@@ -1703,6 +1704,12 @@ export default function DecisionStudio({
         )}
 
         {!focusLayout && (
+          <div className="mb-8 px-1 sm:px-0">
+            <ExpertsRecruitBanner locale={locale} />
+          </div>
+        )}
+
+        {!focusLayout && (
           <div className="group relative mb-6 flex flex-col gap-4 overflow-hidden rounded-[1.35rem] border border-[rgb(var(--accent-2))]/35 bg-gradient-to-br from-[rgb(var(--accent))]/[0.14] via-white/[0.05] to-[rgb(var(--accent-magenta))]/[0.08] p-5 shadow-[0_24px_70px_-44px_rgb(var(--accent)/0.55)] ring-1 ring-inset ring-white/[0.07] backdrop-blur-sm sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:p-6">
             <div
               className="home-accent-hairline-breathe pointer-events-none absolute inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-[rgb(var(--accent-2))]/85 to-transparent"
@@ -2415,6 +2422,12 @@ export default function DecisionStudio({
                 </Link>
               </p>
             ) : null}
+
+            <ExpertsRecruitBanner
+              locale={locale}
+              variant="compact"
+              className="animate-fade-up"
+            />
 
             <section className="glass animate-fade-up rounded-3xl p-4 sm:p-7">
               <h2 className="text-lg font-semibold">{t.sectionDimensions}</h2>
